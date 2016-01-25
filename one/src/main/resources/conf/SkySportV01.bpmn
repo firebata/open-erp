@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/">
+  <process id="skysportProcess" name="Skysport process" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="projectCreateTask" name="新建项目" activiti:candidateGroups="DEV DEPT">
+      <extensionElements>
+        <activiti:formProperty id="projectId" name="项目id" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="creater" name="创建人" type="string" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="projectCreateApproveTask" name="项目审批" activiti:async="true" activiti:candidateGroups="DEV MAN">
+      <extensionElements>
+        <activiti:formProperty id="projectCreateApproved" name="是否批准该新建项目?" type="enum" required="true">
+          <activiti:value id="true" name="Approve"></activiti:value>
+          <activiti:value id="false" name="Reject"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="bomModifyTask" name="修改BOM" activiti:async="true"></userTask>
+    <exclusiveGateway id="exclusivegateway1" name="是否同意项目新建" ></exclusiveGateway>
+    <userTask id="projectModifyTask" name="修改项目" activiti:candidateGroups="DEV DEPT"></userTask>
+    <userTask id="bomApproveTask" name="审核BOM">
+	    <extensionElements>
+	        <activiti:formProperty id="bomApproved" name="是否批准bom内容?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	     </extensionElements>
+    </userTask>
+    <userTask id="quoteApproveTask" name="审核报价单">
+    	<extensionElements>
+	        <activiti:formProperty id="quoteApproved" name="是否批准报价单?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="bomDetailApproveTask" name="审核BOM详细">
+    	<extensionElements>
+	        <activiti:formProperty id="bomDetailApproved" name="是否批准BOM详细?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+
+    <userTask id="materialProduceNoticeApproveTask" name="审核面辅料生产通知单">
+    	<extensionElements>
+	        <activiti:formProperty id="materialProduceNoticeApproved" name="是否批准面辅料生产通知单?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <userTask id="labDipsApproveTask" name="色样审批">
+    	<extensionElements>
+	        <activiti:formProperty id="labDipsApproved" name="是否批准色样?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <userTask id="devSampleApproveTask" name="开发样审批">
+    	<extensionElements>
+	        <activiti:formProperty id="devSampleApproved" name="是否批准开发样?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>
+
+    <userTask id="costingApproveTask" name="成本核算审批">
+    	<extensionElements>
+	        <activiti:formProperty id="costingApproved" name="是否批准成本核算?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <exclusiveGateway id="exclusivegateway7" name="Exclusive Gateway"></exclusiveGateway>
+
+    <userTask id="devQuoteApproveTask" name="成衣报价审核">
+    	<extensionElements>
+	        <activiti:formProperty id="devQuoteApproved" name="是否批准成衣报价?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <exclusiveGateway id="exclusivegateway8" name="Exclusive Gateway"></exclusiveGateway>
+
+    <userTask id="finallyBomApproveTask" name="审核正式BOM">
+    	<extensionElements>
+	        <activiti:formProperty id="finallyBomApproved" name="是否批准正式BOM?" type="enum" required="true">
+	          <activiti:value id="true" name="Approve"></activiti:value>
+	          <activiti:value id="false" name="Reject"></activiti:value>
+	        </activiti:formProperty>
+	        <activiti:formProperty id="managerMotivation" name="Motivation" type="string"></activiti:formProperty>
+	    </extensionElements>
+    </userTask>
+
+    <userTask id="usertask14" name="修改正式BOM"></userTask>
+    <exclusiveGateway id="exclusivegateway9" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask15" name="生成运营相关资料"></userTask>
+    <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask16" name="重打色样"></userTask>
+    <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask17" name="重打开发样"></userTask>
+    <userTask id="usertask18" name="修改成本核算"></userTask>
+    <userTask id="usertask19" name="修改成衣报价"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+
+    <sequenceFlow id="flow4" sourceRef="startevent1" targetRef="projectCreateTask"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="projectCreateTask" targetRef="projectCreateApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="projectCreateApproveTask" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow7" name="不同意" sourceRef="exclusivegateway1" targetRef="projectModifyTask">
+    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectCreateApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="projectModifyTask" targetRef="projectCreateApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow9" name="同意" sourceRef="exclusivegateway1" targetRef="bomApproveTask">
+    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectCreateApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow10" sourceRef="bomApproveTask" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow11" name="同意" sourceRef="exclusivegateway2" targetRef="quoteApproveTask">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${bomApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow12" name="不同意" sourceRef="exclusivegateway2" targetRef="bomModifyTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${bomApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow14" sourceRef="bomModifyTask" targetRef="bomApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="quoteApproveTask" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow16" name="同意" sourceRef="exclusivegateway3" targetRef="bomDetailApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${quoteApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow17" name="不同意" sourceRef="exclusivegateway3" targetRef="bomModifyTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${quoteApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow18" sourceRef="bomDetailApproveTask" targetRef="exclusivegateway4"></sequenceFlow>
+    <sequenceFlow id="flow19" name="同意" sourceRef="exclusivegateway4" targetRef="materialProduceNoticeApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${bomDetailApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow20" sourceRef="exclusivegateway4" targetRef="bomModifyTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${bomDetailApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="devSampleApproveTask" targetRef="exclusivegateway6"></sequenceFlow>
+    <sequenceFlow id="flow25" name="同意" sourceRef="exclusivegateway6" targetRef="costingApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${devSampleApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow26" sourceRef="costingApproveTask" targetRef="exclusivegateway7"></sequenceFlow>
+    <sequenceFlow id="flow27" name="同意" sourceRef="exclusivegateway7" targetRef="devQuoteApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${costingApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow28" sourceRef="devQuoteApproveTask" targetRef="exclusivegateway8"></sequenceFlow>
+    <sequenceFlow id="flow29" name="同意" sourceRef="exclusivegateway8" targetRef="finallyBomApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${devQuoteApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow30" sourceRef="finallyBomApproveTask" targetRef="exclusivegateway9"></sequenceFlow>
+    <sequenceFlow id="flow31" name="同意" sourceRef="exclusivegateway9" targetRef="usertask15">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${finallyBomApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow32" sourceRef="usertask15" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow33" sourceRef="materialProduceNoticeApproveTask" targetRef="exclusivegateway10">
+    </sequenceFlow>
+    <sequenceFlow id="flow34" name="同意" sourceRef="exclusivegateway10" targetRef="labDipsApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${materialProduceNoticeApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow36" sourceRef="usertask16" targetRef="labDipsApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow37" sourceRef="labDipsApproveTask" targetRef="exclusivegateway11"></sequenceFlow>
+    <sequenceFlow id="flow38" name="同意" sourceRef="exclusivegateway11" targetRef="devSampleApproveTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${labDipsApproved == 'true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow39" name="不同意" sourceRef="exclusivegateway11" targetRef="usertask16">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${labDipsApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow40" sourceRef="exclusivegateway10" targetRef="bomModifyTask">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${materialProduceNoticeApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+     <sequenceFlow id="flow41" name="不同意" sourceRef="exclusivegateway6" targetRef="usertask17">
+     	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${devSampleApproved == 'false'}]]></conditionExpression>
+     </sequenceFlow>
+    <sequenceFlow id="flow42" sourceRef="usertask17" targetRef="devSampleApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow43" name="不同意" sourceRef="exclusivegateway7" targetRef="usertask18">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${costingApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow44" sourceRef="usertask18" targetRef="costingApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow45" sourceRef="usertask19" targetRef="devQuoteApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow46" name="不同意" sourceRef="exclusivegateway8" targetRef="usertask19">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${devQuoteApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow47" sourceRef="usertask14" targetRef="finallyBomApproveTask"></sequenceFlow>
+    <sequenceFlow id="flow48" name="不同意" sourceRef="exclusivegateway9" targetRef="usertask14">
+    	<conditionExpression xsi:type="tFormalExpression"><![CDATA[${finallyBomApproved == 'false'}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_skysportProcess">
+    <bpmndi:BPMNPlane bpmnElement="skysportProcess" id="BPMNPlane_skysportProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="30.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="projectCreateTask" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="100.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="projectCreateApproveTask" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="440.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="projectModifyTask" id="BPMNShape_usertask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="408.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bomModifyTask" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="572.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="quoteApproveTask" id="BPMNShape_usertask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="860.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="3150.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bomApproveTask" id="BPMNShape_usertask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="572.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="750.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1020.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bomDetailApproveTask" id="BPMNShape_usertask7">
+        <omgdc:Bounds height="55.0" width="105.0" x="1110.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="1270.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="materialProduceNoticeApproveTask" id="BPMNShape_usertask8">
+        <omgdc:Bounds height="55.0" width="151.0" x="1370.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="labDipsApproveTask" id="BPMNShape_usertask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="1650.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="devSampleApproveTask" id="BPMNShape_usertask10">
+        <omgdc:Bounds height="55.0" width="105.0" x="1900.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway6" id="BPMNShape_exclusivegateway6">
+        <omgdc:Bounds height="40.0" width="40.0" x="2040.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="costingApproveTask" id="BPMNShape_usertask11">
+        <omgdc:Bounds height="55.0" width="105.0" x="2140.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway7" id="BPMNShape_exclusivegateway7">
+        <omgdc:Bounds height="40.0" width="40.0" x="2320.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="devQuoteApproveTask" id="BPMNShape_usertask12">
+        <omgdc:Bounds height="55.0" width="105.0" x="2450.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway8" id="BPMNShape_exclusivegateway8">
+        <omgdc:Bounds height="40.0" width="40.0" x="2620.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="finallyBomApproveTask" id="BPMNShape_usertask13">
+        <omgdc:Bounds height="55.0" width="105.0" x="2720.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask14" id="BPMNShape_usertask14">
+        <omgdc:Bounds height="55.0" width="105.0" x="2720.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway9" id="BPMNShape_exclusivegateway9">
+        <omgdc:Bounds height="40.0" width="40.0" x="2890.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask15" id="BPMNShape_usertask15">
+        <omgdc:Bounds height="55.0" width="105.0" x="3000.0" y="280.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway10" id="BPMNShape_exclusivegateway10">
+        <omgdc:Bounds height="40.0" width="40.0" x="1560.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask16" id="BPMNShape_usertask16">
+        <omgdc:Bounds height="55.0" width="105.0" x="1650.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway11" id="BPMNShape_exclusivegateway11">
+        <omgdc:Bounds height="40.0" width="40.0" x="1800.0" y="287.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask17" id="BPMNShape_usertask17">
+        <omgdc:Bounds height="55.0" width="105.0" x="1900.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask18" id="BPMNShape_usertask18">
+        <omgdc:Bounds height="55.0" width="105.0" x="2140.0" y="163.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask19" id="BPMNShape_usertask19">
+        <omgdc:Bounds height="55.0" width="105.0" x="2450.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="65.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="100.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="205.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="385.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="440.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="460.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="460.0" y="225.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="461.0" y="261.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="408.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="332.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="332.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="480.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="572.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="489.0" y="290.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="677.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="750.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="790.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="800.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="770.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="769.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="677.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="781.0" y="185.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="624.0" y="225.0"></omgdi:waypoint>
+        <omgdi:waypoint x="624.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="965.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1020.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="1060.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1110.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1070.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="1040.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1040.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="677.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="1215.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1270.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="1310.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1370.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1320.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="1290.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1289.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="677.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="2005.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2040.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="2080.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2140.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="2090.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="2245.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2320.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="2360.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2450.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="2370.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="2555.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2620.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="2660.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2720.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="2670.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow30" id="BPMNEdge_flow30">
+        <omgdi:waypoint x="2825.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2890.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="2930.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3000.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="2940.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow32" id="BPMNEdge_flow32">
+        <omgdi:waypoint x="3105.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3150.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
+        <omgdi:waypoint x="1521.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1560.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
+        <omgdi:waypoint x="1600.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1650.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1610.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow36" id="BPMNEdge_flow36">
+        <omgdi:waypoint x="1702.0" y="225.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1702.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow37" id="BPMNEdge_flow37">
+        <omgdi:waypoint x="1755.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1800.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="1840.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1900.0" y="307.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="1850.0" y="307.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow39" id="BPMNEdge_flow39">
+        <omgdi:waypoint x="1820.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1820.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1755.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="1820.0" y="248.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow40" id="BPMNEdge_flow40">
+        <omgdi:waypoint x="1580.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1580.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="677.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow41" id="BPMNEdge_flow41">
+        <omgdi:waypoint x="2060.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2060.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2005.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="2060.0" y="248.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow42" id="BPMNEdge_flow42">
+        <omgdi:waypoint x="1952.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1952.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow43" id="BPMNEdge_flow43">
+        <omgdi:waypoint x="2340.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2340.0" y="190.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2245.0" y="190.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="2340.0" y="248.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow44" id="BPMNEdge_flow44">
+        <omgdi:waypoint x="2192.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2192.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow45" id="BPMNEdge_flow45">
+        <omgdi:waypoint x="2502.0" y="225.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2502.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow46" id="BPMNEdge_flow46">
+        <omgdi:waypoint x="2640.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2639.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2555.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="2641.0" y="248.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow47" id="BPMNEdge_flow47">
+        <omgdi:waypoint x="2772.0" y="225.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2772.0" y="280.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow48" id="BPMNEdge_flow48">
+        <omgdi:waypoint x="2910.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2910.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2825.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="2910.0" y="248.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

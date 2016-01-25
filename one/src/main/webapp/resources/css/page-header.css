@@ -1,0 +1,46 @@
+.page-content {
+    background-color: #ffffff;
+    position: relative;
+    margin: 0;
+    padding: 8px 20px 24px;
+}
+
+.page-header {
+    margin: 0 0 12px;
+    border-bottom: 1px dotted #e2e2e2;
+    padding-bottom: 16px;
+    padding-top: 7px;
+}
+
+.page-header h1 {
+    padding: 0;
+    margin: 0 8px;
+    font-size: 24px;
+    font-weight: lighter;
+    color: #2679b5;
+}
+
+.page-header h1 small {
+    margin: 0 6px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #8089a0;
+}
+
+.bom-info {
+    border: #f4f4f4 1px solid;
+    margin: 0 auto;
+}
+
+.placeholder {
+    color: grey;
+}
+
+select option:first-child {
+    color: grey;
+    display: none;
+}
+
+select option {
+    color: #555;
+}

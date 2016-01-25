@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.permission.ResourceInfoManageMapper">
+
+    <sql id="searchInfoSql">
+        id AS id,
+        resource_id AS natrualkey,
+        resource_name AS name,
+        resource_desc AS resourceDesc,
+        del_flag AS delFlag,
+        update_time AS updateTime,
+        remark AS remark,
+        pid AS parentId
+    </sql>
+
+
+    <select id="queryInfo" resultType="ResourceInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM t_qx_resources
+        WHERE resource_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_qx_resources where del_flag=0
+    </select>
+
+
+
+    <select id="searchInfos" resultType="ResourceInfo">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM t_qx_resources
+        WHERE del_flag=0
+    </select>
+
+    <update id="updateInfo">
+        update t_qx_resources
+        set
+          resource_desc=#{resourceDesc},
+          remark=#{remark},
+          resource_name=#{name}
+        WHERE
+           resource_id =#{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert
+        into
+            t_qx_resources (resource_id,resource_name,resource_desc,remark)
+        values
+           (#{natrualkey},#{name},#{resourceDesc},#{remark})
+    </insert>
+
+    <update id="del">
+        update t_qx_resources
+        set  del_flag=1
+        where resource_id =#{natrualkey}
+    </update>
+
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+          resource_id AS natrualkey,
+          resource_name AS name
+        from t_qx_resources
+        where del_flag=0
+        <if test="resource_name!=null and resource_name!=''">and upper(resource_name) like concat('%',#{name},'%')</if>
+    </select>
+
+
+    
+    
+
+
+</mapper>

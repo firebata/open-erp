@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="skysport" default="all">
+
+
+    <property file="skysport.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="700m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/*.rbc/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.bundle/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.tox/**"/>
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.war"/>
+        <include name="*.ear"/>
+        <include name="*.apk"/>
+        <include name="*.zip"/>
+        <include name="*.swc"/>
+        <include name="*.ane"/>
+        <include name="*.egg"/>
+        <include name="*.jar"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+        <exclude name="**/?*.aj"/>
+    </patternset>
+
+    <!-- JDK definitions -->
+
+    <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+    <path id="jdk.classpath.1.8">
+        <fileset dir="${jdk.home.1.8}">
+            <include name="jre/lib/charsets.jar"/>
+            <include name="jre/lib/deploy.jar"/>
+            <include name="jre/lib/javaws.jar"/>
+            <include name="jre/lib/jce.jar"/>
+            <include name="jre/lib/jfr.jar"/>
+            <include name="jre/lib/jfxswt.jar"/>
+            <include name="jre/lib/jsse.jar"/>
+            <include name="jre/lib/management-agent.jar"/>
+            <include name="jre/lib/plugin.jar"/>
+            <include name="jre/lib/resources.jar"/>
+            <include name="jre/lib/rt.jar"/>
+            <include name="jre/lib/ext/access-bridge-64.jar"/>
+            <include name="jre/lib/ext/cldrdata.jar"/>
+            <include name="jre/lib/ext/dnsns.jar"/>
+            <include name="jre/lib/ext/jaccess.jar"/>
+            <include name="jre/lib/ext/jfxrt.jar"/>
+            <include name="jre/lib/ext/localedata.jar"/>
+            <include name="jre/lib/ext/nashorn.jar"/>
+            <include name="jre/lib/ext/sunec.jar"/>
+            <include name="jre/lib/ext/sunjce_provider.jar"/>
+            <include name="jre/lib/ext/sunmscapi.jar"/>
+            <include name="jre/lib/ext/sunpkcs11.jar"/>
+            <include name="jre/lib/ext/zipfs.jar"/>
+        </fileset>
+    </path>
+
+    <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+    <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+    <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+
+
+    <!-- Project Libraries -->
+
+    <path id="library.maven:_aopalliance:aopalliance:1.0.classpath">
+        <pathelement location="${path.variable.maven_repository}/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+    </path>
+
+    <path id="library.maven:_com.alibaba:druid:1.0.2.classpath">
+        <pathelement location="${path.variable.maven_repository}/com/alibaba/druid/1.0.2/druid-1.0.2.jar"/>
+    </path>
+
+    <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.5.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.5.2/jackson-annotations-2.5.2.jar"/>
+    </path>
+
+    <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.5.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.5.2/jackson-core-2.5.2.jar"/>
+    </path>
+
+    <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.5.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.5.2/jackson-databind-2.5.2.jar"/>
+    </path>
+
+    <path id="library.maven:_com.fasterxml.uuid:java-uuid-generator:3.1.4.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/com/fasterxml/uuid/java-uuid-generator/3.1.4/java-uuid-generator-3.1.4.jar"/>
+    </path>
+
+    <path id="library.maven:_com.thoughtworks.xstream:xstream:1.4.8.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/com/thoughtworks/xstream/xstream/1.4.8/xstream-1.4.8.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-codec:commons-codec:1.10.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-dbcp:commons-dbcp:1.4.classpath">
+        <pathelement location="${path.variable.maven_repository}/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-fileupload:commons-fileupload:1.3.1.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-io:commons-io:2.4.classpath">
+        <pathelement location="${path.variable.maven_repository}/commons-io/commons-io/2.4/commons-io-2.4.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-logging:commons-logging:1.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+    </path>
+
+    <path id="library.maven:_commons-pool:commons-pool:1.5.4.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar"/>
+    </path>
+
+    <path id="library.maven:_javax.activation:activation:1.1.classpath">
+        <pathelement location="${path.variable.maven_repository}/javax/activation/activation/1.1/activation-1.1.jar"/>
+    </path>
+
+    <path id="library.maven:_javax.mail:mail:1.4.1.classpath">
+        <pathelement location="${path.variable.maven_repository}/javax/mail/mail/1.4.1/mail-1.4.1.jar"/>
+    </path>
+
+    <path id="library.maven:_joda-time:joda-time:2.6.classpath">
+        <pathelement location="${path.variable.maven_repository}/joda-time/joda-time/2.6/joda-time-2.6.jar"/>
+    </path>
+
+    <path id="library.maven:_jstl:jstl:1.2.classpath">
+        <pathelement location="${path.variable.maven_repository}/jstl/jstl/1.2/jstl-1.2.jar"/>
+    </path>
+
+    <path id="library.maven:_junit:junit:4.12.classpath">
+        <pathelement location="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"/>
+    </path>
+
+    <path id="library.maven:_log4j:log4j:1.2.9.classpath">
+        <pathelement location="${path.variable.maven_repository}/log4j/log4j/1.2.9/log4j-1.2.9.jar"/>
+    </path>
+
+    <path id="library.maven:_mysql:mysql-connector-java:5.1.29.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar"/>
+    </path>
+
+    <path id="library.maven:_net.tanesha.recaptcha4j:recaptcha4j:0.0.7.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/net/tanesha/recaptcha4j/recaptcha4j/0.0.7/recaptcha4j-0.0.7.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-bpmn-converter:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-bpmn-converter/5.17.0/activiti-bpmn-converter-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-bpmn-model:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-bpmn-model/5.17.0/activiti-bpmn-model-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-engine:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-engine/5.17.0/activiti-engine-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-image-generator:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-image-generator/5.17.0/activiti-image-generator-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-process-validation:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-process-validation/5.17.0/activiti-process-validation-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.activiti:activiti-spring:5.17.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/activiti/activiti-spring/5.17.0/activiti-spring-5.17.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.commons:commons-email:1.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/apache/commons/commons-email/1.2/commons-email-1.2.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.commons:commons-lang3:3.4.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.poi:poi-ooxml-schemas:3.12.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/apache/poi/poi-ooxml-schemas/3.12/poi-ooxml-schemas-3.12.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.poi:poi-ooxml:3.12.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/apache/poi/poi-ooxml/3.12/poi-ooxml-3.12.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.poi:poi:3.12.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/apache/poi/poi/3.12/poi-3.12.jar"/>
+    </path>
+
+    <path id="library.maven:_org.apache.xmlbeans:xmlbeans:2.6.0.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar"/>
+    </path>
+
+    <path id="library.maven:_org.aspectj:aspectjweaver:1.8.5.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar"/>
+    </path>
+
+    <path id="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar"/>
+    </path>
+
+    <path id="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar"/>
+    </path>
+
+    <path id="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
+    </path>
+
+    <path id="library.maven:_org.mockito:mockito-core:1.10.19.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar"/>
+    </path>
+
+    <path id="library.maven:_org.mybatis:mybatis-spring:1.2.2.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar"/>
+    </path>
+
+    <path id="library.maven:_org.mybatis:mybatis:3.2.4.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/mybatis/mybatis/3.2.4/mybatis-3.2.4.jar"/>
+    </path>
+
+    <path id="library.maven:_org.objenesis:objenesis:2.1.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/objenesis/objenesis/2.1/objenesis-2.1.jar"/>
+    </path>
+
+    <path id="library.maven:_org.slf4j:jcl-over-slf4j:1.7.6.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/slf4j/jcl-over-slf4j/1.7.6/jcl-over-slf4j-1.7.6.jar"/>
+    </path>
+
+    <path id="library.maven:_org.slf4j:slf4j-api:1.6.6.classpath">
+        <pathelement location="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.6.6/slf4j-api-1.6.6.jar"/>
+    </path>
+
+    <path id="library.maven:_org.slf4j:slf4j-log4j12:1.6.6.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/slf4j/slf4j-log4j12/1.6.6/slf4j-log4j12-1.6.6.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-aop:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-aspects:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-aspects/4.1.6.RELEASE/spring-aspects-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-beans:4.0.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-beans/4.0.6.RELEASE/spring-beans-4.0.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-context-support:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-context-support/4.1.6.RELEASE/spring-context-support-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-context:4.0.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-context/4.0.6.RELEASE/spring-context-4.0.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-core:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-expression:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-jdbc:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-jdbc/4.1.6.RELEASE/spring-jdbc-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-orm:4.0.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-orm/4.0.6.RELEASE/spring-orm-4.0.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-oxm:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-oxm/4.1.6.RELEASE/spring-oxm-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-test:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-test/4.1.6.RELEASE/spring-test-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-tx:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-tx/4.1.6.RELEASE/spring-tx-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-web:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-web/4.1.6.RELEASE/spring-web-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_org.springframework:spring-webmvc:4.1.6.release.classpath">
+        <pathelement
+                location="${path.variable.maven_repository}/org/springframework/spring-webmvc/4.1.6.RELEASE/spring-webmvc-4.1.6.RELEASE.jar"/>
+    </path>
+
+    <path id="library.maven:_stax:stax-api:1.0.1.classpath">
+        <pathelement location="${path.variable.maven_repository}/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+    </path>
+
+    <path id="library.maven:_taglibs:standard:1.1.2.classpath">
+        <pathelement location="${path.variable.maven_repository}/taglibs/standard/1.1.2/standard-1.1.2.jar"/>
+    </path>
+
+    <path id="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath">
+        <pathelement location="${path.variable.maven_repository}/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"/>
+    </path>
+
+    <path id="library.maven:_xpp3:xpp3_min:1.1.4c.classpath">
+        <pathelement location="${path.variable.maven_repository}/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar"/>
+    </path>
+
+
+    <!-- Global Libraries -->
+
+    <path id="library.commonjar.classpath">
+        <pathelement location="${path.variable.maven_repository}/hamcrest-core-1.3.jar"/>
+        <pathelement location="${path.variable.maven_repository}/jasper-el.jar"/>
+        <pathelement location="${path.variable.maven_repository}/jasper.jar"/>
+        <pathelement location="${path.variable.maven_repository}/jsp-api.jar"/>
+        <pathelement location="${path.variable.maven_repository}/junit-4.12.jar"/>
+        <pathelement location="${path.variable.maven_repository}/servlet-api.jar"/>
+    </path>
+
+
+    <!-- Application Server Libraries -->
+    <!-- Register Custom Compiler Taskdefs -->
+    <property name="javac2.home" value="${idea.home}/lib"/>
+    <path id="javac2.classpath">
+        <pathelement location="${javac2.home}/javac2.jar"/>
+        <pathelement location="${javac2.home}/jdom.jar"/>
+        <pathelement location="${javac2.home}/asm-all.jar"/>
+        <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+    </path>
+    <target name="register.custom.compilers">
+        <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+        <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions"
+                 classpathref="javac2.classpath"/>
+    </target>
+
+    <!-- Modules -->
+
+    <import file="${basedir}/../skysport/module_skysport.xml"/>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean"
+            depends="clean.module.skysport, clean.artifact.ot:war_exploded, clean.artifact.skysport:war_exploded"
+            description="cleanup all"/>
+
+    <target name="build.modules" depends="init, clean, compile.module.skysport" description="build all modules"/>
+
+    <target name="init.artifacts">
+        <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+        <property name="artifact.output.ot:war_exploded" value="${basedir}/classes/artifacts/ot_war_exploded"/>
+        <property name="artifact.output.skysport:war" value="${basedir}/../skysport/target"/>
+        <property name="artifact.output.skysport:war_exploded" value="${basedir}/../skysport/target/skysport"/>
+        <mkdir dir="${artifacts.temp.dir}"/>
+        <property name="temp.jar.path.skysport.war" value="${artifacts.temp.dir}/skysport.war"/>
+    </target>
+
+    <target name="clean.artifact.ot:war_exploded" description="clean ot:war exploded artifact output">
+        <delete dir="${artifact.output.ot:war_exploded}"/>
+    </target>
+
+    <target name="clean.artifact.skysport:war_exploded" description="clean skysport:war exploded artifact output">
+        <delete dir="${artifact.output.skysport:war_exploded}"/>
+    </target>
+
+    <target name="artifact.ot:war_exploded" depends="init.artifacts"
+            description="Build &#39;ot:war exploded&#39; artifact">
+        <mkdir dir="${artifact.output.ot:war_exploded}"/>
+        <mkdir dir="${artifact.output.ot:war_exploded}/WEB-INF"/>
+        <mkdir dir="${artifact.output.ot:war_exploded}/WEB-INF/classes"/>
+        <copy todir="${artifact.output.ot:war_exploded}/WEB-INF/classes">
+            <fileset dir="${ot.output.dir}"/>
+        </copy>
+    </target>
+
+    <target name="artifact.skysport:war" depends="init.artifacts, artifact.skysport:war_exploded"
+            description="Build &#39;skysport:war&#39; artifact">
+        <property name="artifact.temp.output.skysport:war" value="${artifacts.temp.dir}/skysport_war"/>
+        <mkdir dir="${artifact.temp.output.skysport:war}"/>
+        <zip destfile="${temp.jar.path.skysport.war}">
+            <zipfileset dir="${artifact.output.skysport:war_exploded}"/>
+        </zip>
+        <copy file="${temp.jar.path.skysport.war}" tofile="${artifact.temp.output.skysport:war}/skysport.war"/>
+    </target>
+
+    <target name="artifact.skysport:war_exploded" depends="init.artifacts, compile.module.skysport"
+            description="Build &#39;skysport:war exploded&#39; artifact">
+        <mkdir dir="${artifact.output.skysport:war_exploded}"/>
+        <mkdir dir="${artifact.output.skysport:war_exploded}/WEB-INF"/>
+        <mkdir dir="${artifact.output.skysport:war_exploded}/WEB-INF/classes"/>
+        <copy todir="${artifact.output.skysport:war_exploded}/WEB-INF/classes">
+            <fileset dir="${skysport.output.dir}"/>
+        </copy>
+        <mkdir dir="${artifact.output.skysport:war_exploded}/WEB-INF/lib"/>
+        <copy file="${path.variable.maven_repository}/net/tanesha/recaptcha4j/recaptcha4j/0.0.7/recaptcha4j-0.0.7.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/recaptcha4j-0.0.7.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-engine/5.17.0/activiti-engine-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-engine-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-bpmn-converter/5.17.0/activiti-bpmn-converter-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-bpmn-converter-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-bpmn-model/5.17.0/activiti-bpmn-model-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-bpmn-model-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-process-validation/5.17.0/activiti-process-validation-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-process-validation-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-image-generator/5.17.0/activiti-image-generator-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-image-generator-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/commons/commons-email/1.2/commons-email-1.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-email-1.2.jar"/>
+        <copy file="${path.variable.maven_repository}/javax/mail/mail/1.4.1/mail-1.4.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/mail-1.4.1.jar"/>
+        <copy file="${path.variable.maven_repository}/javax/activation/activation/1.1/activation-1.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activation-1.1.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-beans/4.0.6.RELEASE/spring-beans-4.0.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-beans-4.0.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/joda-time/joda-time/2.6/joda-time-2.6.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/joda-time-2.6.jar"/>
+        <copy file="${path.variable.maven_repository}/org/slf4j/jcl-over-slf4j/1.7.6/jcl-over-slf4j-1.7.6.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jcl-over-slf4j-1.7.6.jar"/>
+        <copy file="${path.variable.maven_repository}/org/activiti/activiti-spring/5.17.0/activiti-spring-5.17.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/activiti-spring-5.17.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-context/4.0.6.RELEASE/spring-context-4.0.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-context-4.0.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-orm/4.0.6.RELEASE/spring-orm-4.0.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-orm-4.0.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-dbcp-1.4.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-pool/commons-pool/1.5.4/commons-pool-1.5.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-pool-1.5.4.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-core-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-logging-1.2.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-web/4.1.6.RELEASE/spring-web-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-web-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-oxm/4.1.6.RELEASE/spring-oxm-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-oxm-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-tx/4.1.6.RELEASE/spring-tx-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-tx-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-jdbc/4.1.6.RELEASE/spring-jdbc-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-jdbc-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-webmvc/4.1.6.RELEASE/spring-webmvc-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-webmvc-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-expression-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-aop-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/aopalliance-1.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-context-support/4.1.6.RELEASE/spring-context-support-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-context-support-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-test/4.1.6.RELEASE/spring-test-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-test-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/springframework/spring-aspects/4.1.6.RELEASE/spring-aspects-4.1.6.RELEASE.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/spring-aspects-4.1.6.RELEASE.jar"/>
+        <copy file="${path.variable.maven_repository}/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/aspectjweaver-1.8.5.jar"/>
+        <copy file="${path.variable.maven_repository}/com/thoughtworks/xstream/xstream/1.4.8/xstream-1.4.8.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/xstream-1.4.8.jar"/>
+        <copy file="${path.variable.maven_repository}/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/xmlpull-1.1.3.1.jar"/>
+        <copy file="${path.variable.maven_repository}/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/xpp3_min-1.1.4c.jar"/>
+        <copy file="${path.variable.maven_repository}/taglibs/standard/1.1.2/standard-1.1.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/standard-1.1.2.jar"/>
+        <copy file="${path.variable.maven_repository}/jstl/jstl/1.2/jstl-1.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jstl-1.2.jar"/>
+        <copy file="${path.variable.maven_repository}/org/mybatis/mybatis/3.2.4/mybatis-3.2.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/mybatis-3.2.4.jar"/>
+        <copy file="${path.variable.maven_repository}/org/mybatis/mybatis-spring/1.2.2/mybatis-spring-1.2.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/mybatis-spring-1.2.2.jar"/>
+        <copy file="${path.variable.maven_repository}/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/mysql-connector-java-5.1.29.jar"/>
+        <copy file="${path.variable.maven_repository}/com/alibaba/druid/1.0.2/druid-1.0.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/druid-1.0.2.jar"/>
+        <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.5.2/jackson-databind-2.5.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jackson-databind-2.5.2.jar"/>
+        <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.5.2/jackson-core-2.5.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jackson-core-2.5.2.jar"/>
+        <copy file="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.5.2/jackson-annotations-2.5.2.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jackson-annotations-2.5.2.jar"/>
+        <copy file="${path.variable.maven_repository}/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jackson-core-asl-1.9.13.jar"/>
+        <copy file="${path.variable.maven_repository}/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-lang3-3.4.jar"/>
+        <copy file="${path.variable.maven_repository}/log4j/log4j/1.2.9/log4j-1.2.9.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/log4j-1.2.9.jar"/>
+        <copy file="${path.variable.maven_repository}/org/slf4j/slf4j-api/1.6.6/slf4j-api-1.6.6.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/slf4j-api-1.6.6.jar"/>
+        <copy file="${path.variable.maven_repository}/org/slf4j/slf4j-log4j12/1.6.6/slf4j-log4j12-1.6.6.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/slf4j-log4j12-1.6.6.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-io/commons-io/2.4/commons-io-2.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-io-2.4.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-fileupload/commons-fileupload/1.3.1/commons-fileupload-1.3.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-fileupload-1.3.1.jar"/>
+        <copy file="${path.variable.maven_repository}/com/fasterxml/uuid/java-uuid-generator/3.1.4/java-uuid-generator-3.1.4.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/java-uuid-generator-3.1.4.jar"/>
+        <copy file="${path.variable.maven_repository}/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/commons-codec-1.10.jar"/>
+        <copy file="${path.variable.maven_repository}/junit/junit/4.12/junit-4.12.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/junit-4.12.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/poi/poi-ooxml-schemas/3.12/poi-ooxml-schemas-3.12.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/poi-ooxml-schemas-3.12.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/poi/poi-ooxml/3.12/poi-ooxml-3.12.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/poi-ooxml-3.12.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/poi/poi/3.12/poi-3.12.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/poi-3.12.jar"/>
+        <copy file="${path.variable.maven_repository}/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/xmlbeans-2.6.0.jar"/>
+        <copy file="${path.variable.maven_repository}/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+        <copy file="${path.variable.maven_repository}/org/mockito/mockito-core/1.10.19/mockito-core-1.10.19.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/mockito-core-1.10.19.jar"/>
+        <copy file="${path.variable.maven_repository}/org/objenesis/objenesis/2.1/objenesis-2.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/objenesis-2.1.jar"/>
+        <copy file="${path.variable.maven_repository}/stax/stax-api/1.0.1/stax-api-1.0.1.jar"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/lib/stax-api-1.0.1.jar"/>
+        <mkdir dir="${artifact.output.skysport:war_exploded}/META-INF"/>
+        <copy file="${basedir}/../skysport/target/skysport/META-INF/MANIFEST.MF"
+              tofile="${artifact.output.skysport:war_exploded}/META-INF/MANIFEST.MF"/>
+        <copy todir="${artifact.output.skysport:war_exploded}">
+            <fileset dir="${basedir}/../skysport/src/main/webapp"/>
+        </copy>
+        <mkdir dir="${artifact.output.skysport:war_exploded}/WEB-INF"/>
+        <copy file="${basedir}/../skysport/src/main/webapp/WEB-INF/web.xml"
+              tofile="${artifact.output.skysport:war_exploded}/WEB-INF/web.xml"/>
+    </target>
+
+    <target name="build.all.artifacts"
+            depends="artifact.ot:war_exploded, artifact.skysport:war, artifact.skysport:war_exploded"
+            description="Build all artifacts">
+        <mkdir dir="${artifact.output.skysport:war}"/>
+        <copy todir="${artifact.output.skysport:war}">
+            <fileset dir="${artifact.temp.output.skysport:war}"/>
+        </copy>
+
+        <!-- Delete temporary files -->
+        <delete dir="${artifacts.temp.dir}"/>
+    </target>
+
+    <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.BomManageMapper">
+    <sql id="searchInfoSql">
+		a.id AS id,
+		a.project_id AS projectId,
+		a.bom_id AS natrualkey,
+		a.bom_name AS name,
+		a.customer_id AS customerId,
+		a.area_id AS areaId,
+		a.sex_id AS sexId,
+		a.series_id AS seriesId,
+		a.collectionNum AS collectionNum,
+		a.main_color AS mainColor,
+		a.fabrics_end_date AS fabricsEndDate,
+		a.accessories_end_date AS accessoriesEndDate,
+		a.preoffer_date AS preOfferDate,
+		a.cloth_received_date AS clothReceivedDate,
+		a.offer_amount AS offerAmount,
+		a.del_flag AS delFlag,
+		a.update_time AS updateTime,
+		a.remark AS remark
+	</sql>
+
+    <select id="queryInfo" resultType="BomInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_kf_bominfo a
+        WHERE a.bom_id =#{natrualkey}
+        limit 1
+    </select>
+
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_kf_bominfo where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_kf_bominfo where del_flag=0
+        <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
+            and project_id like concat('%',#{bomInfo.projectId},'%')
+        </if>
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+    </select>
+
+
+    <select id="searchInfos" resultType="BomInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_bominfo a
+        WHERE a.del_flag=0
+        <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
+            and project_id like concat('%',#{bomInfo.projectId},'%')
+        </if>
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
+        </if>
+        limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
+
+    </select>
+
+    <update id="updateInfo">
+		update
+			t_kf_bominfo
+		set
+			fabrics_end_date =#{fabricsEndDate},
+			accessories_end_date =#{accessoriesEndDate},
+			preoffer_date =#{preOfferDate},
+			cloth_received_date =#{clothReceivedDate},
+			offer_amount =#{offerAmount},
+			remark=#{remark}
+		WHERE
+			bom_id =#{natrualkey}
+	</update>
+
+    <insert id="addBatch" parameterType="list">
+        insert into
+        t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.projectId},#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
+        </foreach>
+    </insert>
+
+    <insert id="add">
+		insert into
+		t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+		values (#{projectId},#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
+	</insert>
+
+    <select id="selectAllBomSexAndMainColor" resultType="BomInfo">
+		SELECT
+		<include refid="searchInfoSql"/>
+		from
+			t_kf_bominfo a
+		where a.project_id= #{projectId} and a.del_flag =0
+	</select>
+
+    <update id="del">
+		update t_kf_bominfo
+		set  del_flag=1
+		where bom_id =#{natrualkey}
+	</update>
+
+
+    <update id="delDetail">
+		update t_kf_fabrics_detail
+		set  del_flag=1
+		where bom_id =#{natrualkey}
+	</update>
+
+    <update id="delDosage">
+		update t_kf_material_unit_dosage
+		set  del_flag=1
+		where material_id =#{natrualkey}
+	</update>
+
+    <update id="delSp">
+		update t_kf_material_spinfo
+		set  del_flag=1
+		where material_id =#{natrualkey}
+	</update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+		select case when  bom_id is NULL then 0 else bom_id end from t_kf_bominfo   ORDER BY id DESC LIMIT 1
+	</select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+		select
+			bom_id AS natrualkey,
+			bom_name AS name
+		from t_kf_bominfo
+		where del_flag=0 and bom_name like concat('%',#{name},'%')
+	</select>
+
+
+    <delete id="delByProjectId">
+		update t_kf_bominfo
+		set  del_flag=1
+		where project_id =#{projectId}
+	</delete>
+
+    <select id="queryBomIds" resultType="String">
+        select
+        bom_id AS bomId
+        from t_kf_bominfo
+        where del_flag=0 and project_id IN
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </select>
+
+
+
+	<delete id="delBomNotInThisIds">
+		update    t_kf_bominfo set del_flag =1
+		where bom_id NOT IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+</mapper>

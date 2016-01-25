@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.QuotedInfoMapper">
+    <sql id="searchInfoSql">
+		a.id AS id,
+		a.project_id As projectId,
+		a.project_item_id AS projectItemId,
+		a.bom_id AS bomId,
+		a.sp_id AS spId,
+		a.main_fabric_ids AS mainFabricIds,
+		a.main_fabric_descs AS mainFabricDescs,
+		a.euro_exchange_rates AS euroExchangeRates,
+		a.factory_offer AS factoryOffer,
+		a.factory_margins AS factoryMargins,
+		a.exchange_costs AS exchangeCosts,
+		a.rates AS rates,
+		a.euro_price AS euroPrice,
+		a.lp_price AS lpPrice,
+		a.commission AS commission,
+		a.quoted_price AS quotedPrice,
+		a.del_flag AS delFlag,
+		a.update_time AS updateTime,
+		a.remark AS remark,
+		a.costing AS costing
+	</sql>
+
+
+    <sql id="searchIdsSql">
+        c.parent_project_id As projectId,
+        c.project_id AS projectItemId,
+        b.bom_id AS bomId
+    </sql>
+
+    <select id="queryIds" resultType="QuotedInfo">
+        SELECT
+            <include refid="searchIdsSql"/>
+        FROM t_kf_bominfo b,t_kf_project_item c
+        where b.project_id = c.project_id and b.bom_id =#{bomId}
+    </select>
+
+    <select id="queryInfo" resultType="QuotedInfo">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM t_kf_pre_quote a
+        where a.bom_id = #{bomId}
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+
+
+    </select>
+
+    <select id="queryListByProjectItemIds" resultType="QuotedInfo">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM t_kf_pre_quote a
+        WHERE  a.project_item_id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <!--,t_kf_bominfo b,t_kf_project_item c
+        where a.bom_id = b.bom_id and b.project_id = c.project_item_id
+        and c.project_item_id IN
+            <foreach collection="list" item="item" index="index" separator=",">
+               (#{item})
+            </foreach>-->
+
+    </select>
+
+    <select id="searchInfos" resultType="QuotedInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_pre_quote a,t_jc_customer b
+        WHERE a.del_flag=0 and a.customer_id = b.customer_id
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            area_name like concat('%',#{searchValue},'%') or
+            area_id like concat('%',#{searchValue},'%') or
+            customer_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+		update
+		  t_kf_pre_quote a
+		set
+            a.sp_id =#{spId},
+            a.main_fabric_ids =#{mainFabricIds},
+            a.main_fabric_descs =#{mainFabricDescs},
+            a.euro_exchange_rates =#{euroExchangeRates},
+            a.factory_offer =#{factoryOffer},
+            a.factory_margins =#{factoryMargins},
+            a.exchange_costs =#{exchangeCosts},
+            a.rates =#{rates},
+            a.euro_price =#{euroPrice},
+            a.lp_price =#{lpPrice},
+            a.commission =#{commission},
+            a.quoted_price =#{quotedPrice},
+            a.costing = #{costing}
+		WHERE a.bom_id =#{bomId}
+	</update>
+
+    <insert id="add">
+		insert into
+		t_kf_pre_quote (project_id,project_item_id,bom_id,sp_id,main_fabric_ids,main_fabric_descs,factory_offer,factory_margins,exchange_costs,euro_exchange_rates,rates,euro_price,lp_price,commission,quoted_price,costing,step,remark)
+		values (#{projectId},#{projectItemId},#{bomId},#{spId},#{mainFabricIds},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
+	</insert>
+
+    <update id="del">
+		update t_kf_pre_quote
+		set  del_flag=1
+		where bom_id =#{bomId}
+	</update>
+
+</mapper>

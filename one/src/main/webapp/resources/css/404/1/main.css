@@ -1,0 +1,1085 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+     -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: #323232;
+    background-image:url("../img/background.png");
+    background-repeat:no-repeat;
+    background-position:top;     
+    font-size: 1em;
+    line-height: 1;
+}
+
+a {
+    color: #fff;
+    text-decoration:underline;
+}
+
+a:visited {
+    color: #fff;
+}
+
+a:hover {
+    color: #fff;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+
+
+    @font-face {
+      font-family: 'PreloLight';
+      src: url('../assets/fonts/PreloLight.eot');
+      src: url('../assets/fonts/PreloLight.eot?#iefix') format('embedded-opentype'),
+           url('../assets/fonts/PreloLight.woff') format('woff'),
+           url('../assets/fonts/PreloLight.ttf') format('truetype'),
+           url('../assets/fonts/PreloLight.svg#wf') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'PreloLighteloMedium';
+      src: url('../assets/fonts/PreloMedium.eot');
+      src: url('../assets/fonts/PreloMedium.eot?#iefix') format('embedded-opentype'),
+           url('../assets/fonts/PreloMedium.woff') format('woff'),
+           url('../assets/fonts/PreloMedium.ttf') format('truetype'),
+           url('../assets/fonts/PreloMedium.svg#wf') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'PreloBook';
+      src: url('../assets/fonts/PreloBook.eot');
+      src: url('../assets/fonts/PreloBook.eot?#iefix') format('embedded-opentype'),
+           url('../assets/fonts/PreloBook.woff') format('woff'),
+           url('../assets/fonts/PreloBook.ttf') format('truetype'),
+           url('../assets/fonts/PreloBook.svg#wf') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'PreloBold';
+      src: url('../assets/fonts/PreloBold.eot');
+      src: url('../assets/fonts/PreloBold.eot?#iefix') format('embedded-opentype'),
+           url('../assets/fonts/PreloBold.woff') format('woff'),
+           url('../assets/fonts/PreloBold.ttf') format('truetype'),
+           url('../assets/fonts/PreloBold.svg#wf') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }      
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.wrapper {
+    width:100%;
+    max-width:1024px;
+    margin: 0 auto;
+    position:relative;
+
+}
+
+#header {
+    height:100px; /* Temporary for blocking out */
+    min-width: 1024px;
+    /*background: #444;*/
+    position:relative;
+    overflow:hidden;
+
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden; 
+
+
+}
+
+
+.logo {
+
+    width: 108px;
+    height: 29px;
+    bottom:37px;
+
+    background: url('../img/spritesheet.png') no-repeat;
+
+    margin:0 0 0 40px;
+    padding:0;
+
+
+    text-indent: -999em;
+    letter-spacing: -999em;
+    overflow: hidden;
+
+    position:absolute;
+
+}
+
+.strapline {
+
+    left:160px;
+    bottom: 32px;
+    font-family: "PreloLight";
+    font-size: 22px;
+    line-height:24px;
+
+    color: #fff;
+    position: absolute;
+
+    -webkit-font-smoothing: subpixel-antialiased;
+
+}
+
+#tickround {
+
+    min-width:350px;
+
+    font-family: "PreloLight";
+    font-size: 22px;
+    line-height:24px;
+
+    left:301px;
+    bottom:0px;
+    color: #ffd100;
+    float:left;
+    position:absolute;
+
+}
+
+#carousel {
+    width:100%;
+    min-width:1024px;
+    height: 470px; /* Temporary for blocking out */
+
+    background: #000;
+    margin-bottom:10px;
+
+    position:relative;
+}
+
+/* Fix for RoyalSlider to work on iOS5 */
+.rsWebkit3d .rsSlide {
+    -webkit-transform: translateZ(0);
+}
+
+.rsImg{
+  position:absolute;
+  right:0;
+}
+
+.rsImg.right{
+  left:0;
+}
+
+.sliderCaption {
+    width:338px;
+    min-height:76px;
+    padding: 18px 20px;
+
+    background:#323232;
+    position:absolute;
+    top: 50%;
+    margin: -56px 0px 0px 50px;
+}
+
+.sliderCaption.right{
+    margin: -56px 50px 0px 0px;
+    left:auto;
+    right:0;
+}
+
+#globalCaption {
+
+    font-family: "PreloBook";
+    font-size:38px;
+    line-height:40px;
+
+    background: #323232;
+    padding:20px 160px;
+    margin-bottom:10px;
+    display:none;
+
+    -webkit-transition: background-color 1s ease-in-out;
+    -moz-transition: background-color 1s ease-in-out;
+    -ms-transition: background-color 1s ease-in-out;
+    -o-transition: background-color 1s ease-in-out;
+    transition: background-color 1s ease-in-out;
+
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden; 
+
+
+}
+
+.projectTitle,
+#globalCaption h2 {    
+    font-family: "PreloBook";
+    font-weight: normal;
+    padding:0;
+    margin:0;
+    font-size:38px;
+    line-height:40px;
+    color:#fff;
+
+/*    -webkit-transition: opacity 0.5s ease-in; 
+    -moz-transition: opacity 0.5s ease-in; 
+    -ms-transition: opacity 0.5s ease-in; 
+    -o-transition: opacity 0.5s ease-in; 
+    transition: opacity 0.5s ease-in; 
+
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden; 
+*/
+
+}
+
+.projectStrapline,
+#globalCaption p {
+    font-family: "PreloBook";
+    padding:0;
+    margin:0;
+
+    font-size:16px;
+    line-height:18px;
+    color:#fff;
+
+/*    -webkit-transition: opacity 0.5s ease-in; 
+    -moz-transition: opacity 0.5s ease-in; 
+    -ms-transition: opacity 0.5s ease-in; 
+    -o-transition: opacity 0.5s ease-in; 
+    transition: opacity 0.5s ease-in; */
+
+}
+
+.fadeInStyle{
+    opacity:1;
+}
+
+.fadeOutStyle{
+    opacity:0;
+}
+
+.sliderLogo {
+    position:absolute;
+    left:0;
+    bottom:0;
+    margin: 0 50px 30px 50px;
+}
+
+.sliderLogo.right {
+    left:auto;
+    right: 0;
+}
+
+#about, .hiddenForm{
+    min-width:704px;
+
+    background: #f78465;
+
+    font-family: "PreloBook";
+    font-size:16px;
+    line-height:18px;
+
+    padding: 50px 160px 100px 160px;
+
+    overflow:hidden;
+
+
+}
+
+#about{
+    margin-bottom:10px;
+}
+
+#about h2, #about h3, .hiddenForm h2, .hiddenForm h3 {
+    font-family: "PreloBold";
+    font-weight: normal;
+    font-size:16px;
+    line-height:18px;
+    padding:0;
+    margin:0;
+    color: #fffa91;
+}
+
+#about p, .hiddenForm p {
+    margin:0;
+    padding:0;
+    color: #fff;
+
+}
+
+.intro {
+
+    width:550px;
+    font-family: "PreloLight";
+    font-size: 30px;
+    margin:40px 0;
+    padding:0;
+    line-height: 30px;
+    color: #fff;
+
+}
+
+.aboutPanel {
+    width:320px;
+    padding-right:30px;
+    margin-bottom: 40px;
+    float:left;
+
+}
+
+
+#contact {
+    background: #444;
+    /*margin-bottom:10px;*/
+
+    font-family: "PreloBook";
+    font-size:16px;
+    line-height:18px;
+    color: #fff;
+
+    padding: 50px 160px 100px 160px;
+    /*margin-bottom:95px;*/
+
+    overflow:hidden;
+
+}
+
+#contact h2, #contact h3{
+    font-family: "PreloBold";
+    font-weight: normal;
+    font-size:16px;
+    line-height:18px;
+    padding:0;
+    margin:0;
+    margin-bottom:40px;
+    color: #f99700;
+}
+
+#contact p{
+    margin:0;
+    padding:0;
+    padding-bottom:24px;
+}
+
+#contact img{
+    padding-top: 11px;
+
+}
+
+.contactContent {
+    position:relative;
+    width:100%;
+    overflow:hidden;
+}
+
+.contactPanel {
+    margin:0;padding:0;
+    width:320px;
+    padding-right:30px;
+    margin-bottom: 40px;
+
+    position:relative;
+    left:0px;bottom:0px;
+}
+
+.monster {
+    position:absolute;
+    left:auto;right:0px;
+    /*padding-bottom:24px;*/
+}
+
+.hiddenForm{
+    margin-top:10px;   
+}
+
+
+/* Email Button */
+
+#emailBtn
+{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../img/spritesheet.png") no-repeat -100px -50px;
+  margin-right:10px;
+}
+
+#emailBtn:hover
+{ 
+  background-position: -150px -50px;
+}
+
+#emailBtn span{
+  position: absolute;
+  top: -999em;
+}
+
+#faceBookBtn{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../img/spritesheet.png") no-repeat 0 -100px;
+  margin-right:10px;
+}
+
+#faceBookBtn:hover{
+    background-position: -50px -100px;
+}
+
+#faceBookBtn span{
+  position: absolute;
+  top: -999em;
+}
+
+#twitterBtn{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../img/spritesheet.png") no-repeat 0 -50px;
+  margin-right:10px;
+}
+
+#twitterBtn:hover{
+    background-position: -50px -50px;
+}
+
+#twitterBtn span{
+  position: absolute;
+  top: -999em;
+}
+
+.subscribeBtn{
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background: url("../img/spritesheet.png") no-repeat -100px -100px;
+  margin-right:10px;
+  text-indent: -9999;
+}
+
+.subscribeBtn:hover{
+    background-position: -202px -100px;
+}
+
+.subscribeBtn span{
+  position: absolute;
+  top: -999em;
+}
+
+#button{
+    text-indent: -9999;
+}
+
+
+
+#hidden_content{
+    display:none;
+}
+
+
+
+address{
+    padding: 15px 0 15px 0;
+    color:#ffffff;
+}
+
+
+/* Email Button end */
+
+.monsterImage{
+    float:left;
+    clear: both;
+    width:338px;
+    height:177px;
+    display:block;
+    background: url("../img/monster.png") no-repeat top left;
+}
+
+/* Span created to stop Apple linking the phone no. */
+.telephone a{
+    text-decoration:none;
+}
+
+
+.orange {color:#f99700;}
+
+
+.message404 {
+    font-family: "PreloLight";
+    color:#fff;
+    font-size: 22px;
+    line-height:24px;
+
+    text-align:center;
+    margin-top:20px;
+}
+
+
+.monster404 {
+    background-image:url("../img/404-image.png");
+    background-repeat:no-repeat;
+    width:610px;
+    height:316px;
+    display: block;
+    float: left;
+}
+
+
+
+.panel404 {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 610px;
+   height: 316px;
+   margin-top: -158px;
+   margin-left: -305px;
+}
+
+/* Email Newsletter Subscription Form */
+
+.formContainer{
+    padding: 0 0 0 0;
+    width: 400px;
+    text-align: center;
+    float: left;
+    display: inline-block;
+}
+
+.subscriptionForm{
+    width: 430px;
+    text-align: left;
+    line-height: 46px;
+    clear: both;
+     
+
+}
+
+label{
+    display: inline-block;
+    font-family: "PreloBook";   
+    font-weight: normal;
+    font-size:16px;
+    line-height:36px;
+    padding:0;
+    margin:0;
+    color: #fffa91;
+    float: left;
+    
+}
+
+.subscriptionForm input{
+    vertical-align: top;
+    display: block;
+    width: 280px;
+    float: right;
+    padding: 4px 6px 4px 6px;
+    border: none;
+    color: #6a6a6a;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+}
+
+.subscriptionForm input:focus, textarea{ 
+    outline: none !important;
+    -moz-box-shadow: 0px 0px 6px 1px #fffa91;
+    -webkit-box-shadow: 0px 0px 6px 1px #fffa91;
+    box-shadow: 0px 0px 6px 1px #fffa91;
+}
+
+.subscriptionForm p{
+    margin: 0;
+    padding: 0;
+}
+
+button.formButtonA{
+    display: inline-block;
+    float: right;
+    padding: 10px 15px 10px 15px;
+    background-color: #ef7161;
+    font-family: "PreloBook";
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+}
+
+button.formButtonB{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 15px 10px 15px;
+    background-color: #ef7161;
+    font-family: "PreloBook";
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+}
+
+button.formButtonC{
+    display: inline-block;
+    float: right;
+    padding: 10px 15px 10px 15px;
+    background-color: #ef7161;
+    font-family: "PreloBook";
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+}
+
+.rf{
+    float:left;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: -10px;
+}
+
+.subscribedPanel {
+    padding-right:30px;
+    margin-bottom: 40px;
+    float:none;
+}
+
+.cButton{
+    display: inline-block;
+    padding: 10px 15px 10px 15px;
+    font-family: "PreloBook";
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+}
+
+.returnA{  
+    margin: 40px 0 0 0;  
+    background-color: #ef7161;
+    vertical-align: bottom;
+   
+}
+
+.returnB{  
+    background-color: #ef7161;
+    vertical-align: bottom;
+}
+
+.returnC{  
+    background-color: #ef7161;
+    vertical-align: bottom;
+}
+
+.secondaryIntro{
+    color: #ffffff;
+    margin: -15px 0 0 0;
+    padding: 0 0 30px 0;
+}
+
+.unsubscribe{
+    background-color: #ef7161;
+    margin-bottom: 40px;  
+}
+
+
+.unsubscribeForm{ 
+    padding: 10px 0 0 0;   
+    color: #ffffff;
+}
+
+.unsubscribeForm textarea{
+    margin: 10px 0 0px 0;
+    width: 300px;
+    float: left;
+    clear: both;
+    padding: 4px 6px 4px 6px;
+    border: none;
+    color: #6a6a6a;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+}
+
+.unsubscribeForm input{
+    margin: 10px 10px 10px 0;
+}
+
+
+
+.buttonContainer{
+    display: block;
+    float: none;
+    width: 704px;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/* Prevent callout */
+
+.nocallout {
+    -webkit-touch-callout: none;
+}
+
+.pressed {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* A hack for HTML5 contenteditable attribute on mobile */
+
+textarea[contenteditable] {
+    -webkit-appearance: none;
+}
+
+/* A workaround for S60 3.x and 5.0 devices which do not animated gif images if
+   they have been set as display: none */
+
+.gifhidden {
+    position: absolute;
+    left: -100%;
+}
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 0;
+    direction: ltr;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+}
+
+.ir br {
+    display: none;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/**
+ * Clearfix helper
+ * Used to contain floats: h5bp.com/q
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+    Media Queries
+   ========================================================================== */
+
+    /* Retina */
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-webkit-min-device-pixel-ratio: 2) {
+
+        .logo, 
+        #faceBookBtn,
+        #emailBtn,
+        #twitterBtn {
+            background-image: url('../img/spritesheet@2x.png');
+            -webkit-background-size: 300px 300px;
+            -moz-background-size: 300px 300px;
+            -o-background-size: 300px 300px;
+            background-size: 300px 300px;
+        }
+
+        .monsterImage{
+            background: url("../img/monster@2x.png") no-repeat top left;
+            -webkit-background-size:338px 177px;
+            -moz-background-size:338px 177px;
+            -o-background-size:338px 177px;
+            background-size:338px 177px;
+        }
+
+        .monster404 {
+            background:url("../img/404-image@2x.png");
+            background-repeat:no-repeat;
+            -webkit-background-size:610px 316px;
+            -moz-background-size:610px 316px;
+            -o-background-size:610px 316px;
+            background-size:610px 316px;
+        }        
+    
+    }
+
+    /* Smaller than standard 960 (devices and browsers) */
+    @media only screen and (max-width: 959px) {}
+
+    /* Tablet Portrait size to standard 960 (devices and browsers) */
+    @media only screen and (min-width: 768px) and (max-width: 959px) and (max-device-width:959px){
+
+        .wrapper {
+            min-width:768px;
+            max-width:959px;
+            margin: 0 auto;
+        }
+
+        #header {
+            min-width:0;
+        }
+
+        #carousel {
+            min-width:0;
+            margin-bottom:1px;
+        }
+
+        .sliderCaption {
+            display:none;
+        }
+
+        #globalCaption {
+            display:block;
+        }
+
+        #about {
+            min-width:0;
+            background: #f78465;
+            padding: 50px 160px 100px 160px;
+            margin-bottom:10px;
+        }
+
+        .intro {
+
+            width:475px;
+            font-family: "PreloLight";
+            font-size: 30px;
+            margin:40px 0;
+            padding:0;
+            line-height: 30px;
+            color: #fff;
+
+        }
+
+        #contact {
+            background: #444444;
+            /*margin-bottom:10px;*/
+
+        }
+
+        .monster {
+            position:relative;
+            left:auto;right:0px;
+            /*padding-bottom:24px;*/
+        }
+
+
+
+    }
+
+    /* All Mobile Sizes (devices and browser) */
+    @media only screen and (max-width: 767px) and (max-device-width:767px){
+        .wrapper {            
+            max-width:767px;
+            margin: 0 auto;
+        }
+
+        #header {
+            height:90px;
+            min-width:0;
+        }
+
+        .logo {
+            bottom:32px;
+            margin:0 0 0 20px;
+        }
+
+        #carousel {
+            min-width:0;
+            background: #000;
+            margin-bottom:1px;
+            height:215px;
+        }
+
+        .strapline {
+            display:none;
+        }
+
+        .sliderCaption {
+            display:none;
+        }
+
+        .sliderLogo {
+            margin:20px;
+        }
+
+        #globalCaption {
+            padding:20px 20px;
+            display:block;
+            min-height:80px;
+        }
+
+        #about {
+            min-width:0;
+            padding: 50px 2px 100px 20px;
+        }
+
+        .intro {
+
+            max-width:280px;
+            font-family: "PreloLight";
+            font-size: 30px;
+            margin:40px 0;
+            padding:0;
+            line-height: 30px;
+            color: #fff;
+
+        }
+
+        .aboutPanel {
+            width:auto;
+            padding-right:30px;
+            margin: 0 20px 40px 0;
+            float:left;
+
+        }
+
+        #contact {
+            min-width:0;
+            background: #444;
+            padding: 50px 2px 100px 20px;
+        }
+
+        .monster {
+            position:static;
+            /*left:auto;right:0px;*/
+            padding-bottom:24px;
+        }
+
+        .monsterImage{
+            width:280px;
+            height:147px;
+            background-size: 280px 147px;
+        }
+
+    }
+
+
+    @media only screen and (min-width: 481px) and (max-width: 767px) {
+
+        #carousel {
+            min-height:320px;
+        }
+
+        .intro {
+            max-width:475px;        
+        }
+
+    }
+
+
+    /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+    @media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+    /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+    @media only screen and (max-width: 479px) {}
+
+

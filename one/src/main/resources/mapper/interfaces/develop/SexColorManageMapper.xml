@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.SexColorManageMapper">
+
+    <sql id="searchInfoSql">
+		a.id AS id,
+		a.project_id AS projectId,
+		a.main_color_ids AS mainColorNames,
+		a.sex_name AS sexName,
+		a.sex_id_child AS sexIdChild,
+		a.del_flag AS delFlag,
+		a.update_time AS updateTime,
+		a.remark AS remark
+	</sql>
+
+    <select id="queryInfo" resultType="SexColor">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_kf_project_item_sex_color a
+        WHERE a.project_id =#{natrualkey}
+        limit 1
+    </select>
+
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_kf_project_item_sex_color where del_flag=0
+	</select>
+
+
+    <select id="searchInfos" resultType="SexColor">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM
+          t_kf_project_item_sex_color a
+        WHERE
+          a.del_flag=0
+          and a.project_id =#{natrualkey}
+    </select>
+
+	<select id="searchInfos2" resultType="SexColor">
+		SELECT
+		<include refid="searchInfoSql"/>
+		FROM
+		t_kf_project_item_sex_color a
+		WHERE
+		a.del_flag=0
+		and a.project_id =#{natrualkey}
+	</select>
+
+
+	<update id="updateInfo">
+		update
+			t_kf_project_item_sex_color
+		set
+			main_color_ids =#{mainColorNames},
+			sex_name =#{sexName},
+			sex_id_child =#{sexIdChild}
+		WHERE
+			project_id =#{natrualkey}
+	</update>
+
+    <insert id="addBatch" parameterType="list">
+        insert into
+        t_kf_project_item_sex_color (project_id,main_color_ids,sex_name,sex_id_child)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.projectId},#{item.mainColorNames},#{item.sexName},#{item.sexIdChild})
+        </foreach>
+    </insert>
+
+    <insert id="add">
+		insert into
+		    t_kf_project_item_sex_color (project_id,main_color_ids,sex_name,sex_id_child)
+		values
+		    (#{item.projectId},#{item.mainColorNames},#{item.sexName},#{item.sexIdChild})
+	</insert>
+
+    <select id="selectAllBomSexAndMainColor" resultType="SexColor">
+        SELECT
+          <include refid="searchInfoSql"/>
+        from
+          t_kf_project_item_sex_color a
+        where
+          a.project_id= #{projectId} and a.del_flag =0
+    </select>
+
+    <update id="del">
+		update
+		  t_kf_project_item_sex_color
+		set
+		  del_flag=1
+		where
+		  project_id =#{natrualkey}
+	</update>
+
+
+    <delete id="delByProjectId">
+		update
+		  t_kf_project_item_sex_color
+		set
+		  del_flag=1
+		where
+		  project_id =#{projectId}
+	</delete>
+
+
+
+
+</mapper>
