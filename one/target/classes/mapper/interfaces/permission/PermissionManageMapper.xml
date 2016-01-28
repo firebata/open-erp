@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.permission.PermissionManageMapper">
+
+    <delete id="delRoleInfoByUserId">
+            DELETE from t_qx_role_user where user_id =#{userId}
+        </delete>
+
+    <update id="addBatchRoleUser">
+        insert into t_qx_role_user(user_id,role_id) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.userId},#{item.roleId})
+        </foreach>
+    </update>
+
+    <select id="queryRoleUsers" resultType="com.skysport.core.bean.permission.RoleUser">
+      select role_id AS roleId,user_id AS userId    from t_qx_role_user where  user_id =#{userId}
+    </select>
+
+
+    <delete id="delResourceInfoByRoleId">
+        DELETE from t_qx_role_resources where role_id =#{roleId}
+    </delete>
+
+
+    <update id="addBatchResourceRole">
+        insert into t_qx_role_resources(role_id,resource_id) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId},#{item.resourceId})
+        </foreach>
+    </update>
+
+
+    <select id="queryResourceRoles" resultType="com.skysport.core.bean.permission.ResourceRole">
+        select resource_id AS resourceId,role_id AS roleId    from t_qx_role_resources where  role_id =#{roleId}
+    </select>
+
+
+</mapper>

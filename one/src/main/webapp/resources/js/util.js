@@ -16,7 +16,7 @@
         basepath: getContextPath,
         select2s: select2s,
         initSelect2s: initSelect2s,
-        initSelect2sByArr:initSelect2sByArr
+        initSelect2sByArr: initSelect2sByArr
     });
 
 
@@ -127,11 +127,13 @@
      * @returns {Object}  Json
      */
     function strToJson(str) {
+
         str = str.replace(/&/g, "','");
         str = str.replace(/=/g, "':'");
         str = "({'" + str + "'})";
         var obj = eval(str);
         return obj;
+
     }
 
     /**
@@ -140,11 +142,15 @@
      * @returns {boolean}
      */
     function strIsEmpty(input) {
-        return input == undefined || $.trim(input) == ''
+
+        return input == undefined || $.trim(input) == '';
+
     }
 
     function isFun(input) {
+
         return input != undefined && $.isFunction(input);
+
     }
 
     /**
@@ -153,33 +159,21 @@
      * @returns {boolean}
      */
     function strIsNotEmpty(input) {
+
         return !strIsEmpty(input);
+
     }
 
     /**
      * 初始化select2列表
      * @param _data 表单对象
      */
-    function initSelect2sByArr(_fieldId, _id, _name, _arr) {
-        if (_fieldId == null || _id == null || _name == null || _arr == null) {
-            console.error("init select2 error:_id or _name is null or undefined");
-            return;
-        }
-        var id = null;
-        var text = null;
-        var $element = $('#' + _fieldId).select2(); // the select element you are working with
-        for (var idx = 0; idx <_arr.length; idx++) {
-            var _data = _arr[idx];
-            Object.keys(_data).map(function (key) {
-                if (key == _id) {
-                    id = _data[key];
-                }
-                else if (key == _name) {
-                    //text =  '<table><tr><td bgcolor="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + _data[key] + '</td></tr></table>'
-                    text = _data[key];
-                }
-            });
-            var option = new Option(text, id, true, true);
+    function initSelect2sByArr($element,items) {
+
+        for(var idx=0;idx<items.length;idx++){
+            var item = items[idx];
+            var option = new Option(item.text, item.id, true, true);
+            // Append it to the select
             $element.append(option);
         }
         $element.trigger('change');
@@ -190,6 +184,7 @@
      * @param _data 表单对象
      */
     function initSelect2s(_fieldId, _id, _name, _data) {
+
         if (_fieldId == null || _id == null || _name == null || _data == null) {
             console.error("init select2 error:_id or _name is null or undefined");
             return;
@@ -233,10 +228,11 @@
      * @param _searchInputPlaceholder
      * @param _templateResult
      */
-    function select2s(_selectId, _url, _placeholder, _searchInputPlaceholder,_queryInitData,_templateResult) {
+    function select2s($element, _url, _placeholder, _searchInputPlaceholder, _queryInitData, _templateResult) {
 
 
-        if (_url == null || _selectId == null) {
+
+        if (_url == null) {
             console.error("the url or _selectClass is null or undefined");
             return;
         }
@@ -245,13 +241,13 @@
         //_templateResult = _templateResult == null ? function () {
         //} : _templateResult;
         $.fn.select2.defaults.set("width", "style");
-        $('#' + _selectId).select2({
+        $element.select2({
             placeholder: _placeholder,
             searchInputPlaceholder: _searchInputPlaceholder,
             //maximumSelectionLength: 1,
             minimumInputLength: 2,//最少输入两个字符才能搜索
             language: "zh-CN",
-            allowClear: true,
+            //allowClear: true,
             width: '100%',
             ajax: {
                 url: _url,
@@ -275,9 +271,6 @@
                     return {
                         results: data
                     };
-                },
-                initSelection: function (element, callback) {
-                    callback(_queryInitData());
                 }
                 //cache: true
             },
@@ -288,6 +281,9 @@
                 return m;
             }
         });
+
+        initSelect2sByArr($element,_queryInitData());
+
     }
 
 

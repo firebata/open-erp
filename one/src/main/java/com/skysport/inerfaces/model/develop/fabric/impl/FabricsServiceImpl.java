@@ -83,6 +83,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     fabricsManageDao.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
                     fabricsManageDao.updateSp(fabricsJoinInfo.getMaterialSpInfo());
                     kFMaterialPositionService.del(fabricId);//删除物料位置信息
+                    kFMaterialPantoneService.del(fabricId);//删除物料位置信息
                 }
                 //无id，新增
                 else {

@@ -12,98 +12,6 @@
         accessoriesItems: buildAccessoriesItems
     });
 
-    /**
-     *刷新时，暂存信息
-     * @param index
-     * @returns {{}}
-     */
-    function getAccessoriesItem(index) {
-
-        var accessoriesInfo = {};//fula基本信息
-        accessoriesInfo.spId = $("#spIdF" + index).val();
-        accessoriesInfo.yearCode = $("#yearCodeF" + index).val();
-        accessoriesInfo.classicId = $("#classicIdF" + index).val();
-        accessoriesInfo.pantoneId = $("#pantoneIdF" + index).val();
-        accessoriesInfo.productTypeId = $("#productTypeIdF" + index).val();
-        var positionIds = $("#positionIdsF" + index).val();
-        var materialPositions = [];
-        if (null != positionIds && positionIds.length > 0) {
-            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
-                var materialPosition = {"positionId": positionIds[idx]};
-                materialPositions.push(materialPosition)
-            }
-        }
-        accessoriesInfo.positionIds = materialPositions;
-
-        accessoriesInfo.materialTypeId = $("#materialTypeIdF" + index).val();
-        accessoriesInfo.techRequired = $("#techRequiredF" + index).val();
-        accessoriesInfo.width = $("#widthF" + index).val();
-        accessoriesInfo.length = $("#lengthF" + index).val();
-        accessoriesInfo.nameNum = index;
-        accessoriesInfo.accessoriesId = $("#accessoriesId" + index).val();
-
-        accessoriesInfo.orderCount = $("#orderCountF" + index).val();
-        accessoriesInfo.attritionRate = $("#attritionRateF" + index).val();
-        accessoriesInfo.unitPrice = $("#unitPriceF" + index).val();
-        accessoriesInfo.totalAmount = $("#totalAmountF" + index).val();
-        accessoriesInfo.totalPrice = $("#totalPriceF" + index).val();
-
-        accessoriesInfo.unitId = $("#unitIdF" + index).val();
-        accessoriesInfo.unitAmount = $("#unitAmountF" + index).val();
-        return accessoriesInfo;
-    }
-
-    /**
-     * 保存时，获取信息
-     * @param index
-     * @returns {{}}
-     */
-    function buildAccessoriesItem(index) {
-        var accessoriesItem = {};
-
-        var accessoriesInfo = {};//fula基本信息
-        accessoriesInfo.spId = $("#spIdF" + index).val();
-        accessoriesInfo.yearCode = $("#yearCodeF" + index).val();
-        accessoriesInfo.classicId = $("#classicIdF" + index).val();
-        accessoriesInfo.pantoneId = $("#pantoneIdF" + index).val();
-        accessoriesInfo.productTypeId = $("#productTypeIdF" + index).val();
-        var positionIds = $("#positionIdsF" + index).val();
-        var materialPositions = [];
-        if (null != positionIds && positionIds.length > 0) {
-            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
-                var materialPosition = {"positionId": positionIds[idx]};
-                materialPositions.push(materialPosition)
-            }
-        }
-        accessoriesInfo.positionIds = materialPositions;
-
-        accessoriesInfo.materialTypeId = $("#materialTypeIdF" + index).val();
-        accessoriesInfo.techRequired = $("#techRequiredF" + index).val();
-        accessoriesInfo.width = $("#widthF" + index).val();
-        accessoriesInfo.length = $("#lengthF" + index).val();
-        accessoriesInfo.nameNum = index;
-        accessoriesInfo.accessoriesId = $("#accessoriesId" + index).val();
-
-        var materialSpInfo = {};//包材用量信息
-        materialSpInfo.orderCount = $("#orderCountF" + index).val();
-        materialSpInfo.attritionRate = $("#attritionRateF" + index).val();
-        materialSpInfo.unitPrice = $("#unitPriceF" + index).val();
-        materialSpInfo.totalAmount = $("#totalAmountF" + index).val();
-        materialSpInfo.totalPrice = $("#totalPriceF" + index).val();
-        materialSpInfo.accessoriesId = accessoriesInfo.accessoriesId;
-
-        var materialUnitDosage = {};//包材单位用量
-        materialUnitDosage.unitId = $("#unitIdF" + index).val();
-        materialUnitDosage.unitAmount = $("#unitAmountF" + index).val();
-        materialUnitDosage.accessoriesId = accessoriesInfo.accessoriesId;
-
-        accessoriesItem.accessoriesInfo = accessoriesInfo;
-        accessoriesItem.materialSpInfo = materialSpInfo;
-        accessoriesItem.materialUnitDosage = materialUnitDosage;
-
-        return accessoriesItem;
-    }
-
 
     /**
      * 辅料信息
@@ -112,8 +20,8 @@
     function buildAccessoriesItems() {
         var size = $("div[id^=accessoriesAllInfoId]").length;
         var accessoriesItems = [];
-        for (var index = 1; index <= size; index++) {
-            var accessoriesItem = buildAccessoriesItem(index);
+        for (var idx = 1; idx <= size; idx++) {
+            var accessoriesItem = buildAccessoriesItem(idx);
             accessoriesItems.push(accessoriesItem);
         }
         return accessoriesItems
@@ -121,8 +29,8 @@
 
 
     function initAccessories(accessories) {
-        for (var index = 0; index < accessories.length; index++) {
-            addAccessories(accessories[index]);
+        for (var idx = 0; idx < accessories.length; idx++) {
+            addAccessories(accessories[idx]);
         }
     }
 
@@ -131,8 +39,8 @@
      * 启动表单校验监听
      * @param _id 当前表单序号
      */
-    var startBootstrapValidatorListner = function (_id) {
-        $('#accessoriesFormId' + _id).bootstrapValidator({
+    var startBootstrapValidatorListner = function (idNum) {
+        $('#accessoriesFormId' + idNum).bootstrapValidator({
             //live: 'disabled',
             message: 'This value is not valid',
             feedbackIcons: {
@@ -142,17 +50,17 @@
             },
             fields: fieldsDesc
         }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-            console.log("辅料_" + _id + "验证成功");
-            saveAccessoriesFun(_id);
+            console.log("辅料_" + idNum + "验证成功");
+            saveAccessoriesFun(idNum);
         });
     }
 
     /**
-     * 初始化辅料nextIdNum的表单信息
-     * @param nextIdNum 辅料序号
+     * 初始化辅料idNum的表单信息
+     * @param idNum 辅料序号
      * @param _accessoriesInfo 辅料表单值
      */
-    function initAccessoriesFields(nextIdNum, _accessoriesInfo) {
+    function initAccessoriesFields(idNum, _accessoriesInfo) {
 
         //保存值
         var accessoriesInfo = $.extend({}, _accessoriesInfo);
@@ -173,17 +81,26 @@
                         positionIds.push(arr[idx].positionId);
                     }
                 }
-                $('#positionIds' + "F" + nextIdNum).selectpicker("val", positionIds);
+                $('#positionIds' + "F" + idNum).selectpicker("val", positionIds);
                 //$('#sexIds').val(arr);
             }
             else {
                 //下拉框
-                $("#" + key + "F" + nextIdNum).val(_accessoriesInfo[key]);
+                $("#" + key + "F" + idNum).val(_accessoriesInfo[key]);
             }
 
         });
 
+
+        var pantoneIdsArr = _accessoriesInfo["pantoneIds"];
+        if (pantoneIdsArr != null) {
+            var _pantoneIdsArr = $.turnPantoneInfoToSelect2Option(pantoneIdsArr);
+            var $id = $('#pantoneIdsF' + idNum);
+            $.reloadPantoneId($id, _pantoneIdsArr);
+        }
+
     }
+
 
     /**
      * 添加辅料
@@ -200,43 +117,9 @@
 
         var size = $("div[id^=accessoriesAllInfoId]").length;
 
-        var nextIdNum = size + 1;
+        var idNum = size + 1;
 
-        var data = {
-            "accessories": [
-                {
-                    "currenId": nextIdNum,
-                    "accessoriesDivId": "accessoriesDivId" + nextIdNum,
-                    "accessoriesTitleId": "accessoriesTitleId" + nextIdNum,
-                    "accessoriesIdF": "accessoriesIdF" + nextIdNum,
-                    "accessoriesTitleName": title_type + nextIdNum,
-                    "accessoriesEyeId": "accessoriesEyeId" + nextIdNum,
-                    "accessoriesTrashId": "accessoriesTrashId" + nextIdNum,
-                    "accessoriesRepeatId": "accessoriesRepeatId" + nextIdNum,
-                    "accessoriesCopyId": "accessoriesCopyId" + nextIdNum,
-                    "accessoriesFormId": "accessoriesFormId" + nextIdNum,
-                    "accessoriesAllInfoId": "accessoriesAllInfoId" + nextIdNum,
-                    "accessoriesDetailId": "accessoriesDetailId" + nextIdNum,
-                    "materialTypeIdF": "materialTypeIdF" + nextIdNum,
-                    "spIdF": "spIdF" + nextIdNum,
-                    "yearCodeF": "yearCodeF" + nextIdNum,
-                    "classicIdF": "classicIdF" + nextIdNum,
-                    "pantoneIdF": "pantoneIdF" + nextIdNum,
-                    "productTypeIdF": "productTypeIdF" + nextIdNum,
-                    "techRequiredF": "techRequiredF" + nextIdNum,
-                    "lengthF": "lengthF" + nextIdNum,
-                    "widthF": "widthF" + nextIdNum,
-                    "unitIdF": "unitIdF" + nextIdNum,
-                    "positionIdsF": "positionIdsF" + nextIdNum,
-                    "unitAmountF": "unitAmountF" + nextIdNum,
-                    "orderCountF": "orderCountF" + nextIdNum,
-                    "attritionRateF": "attritionRateF" + nextIdNum,
-                    "unitPriceF": "unitPriceF" + nextIdNum,
-                    "totalAmountF": "totalAmountF" + nextIdNum,
-                    "totalPriceF": "totalPriceF" + nextIdNum
-                }
-            ]
-        };
+        var data = buildMyTemplateData(idNum);
 
         var myTemplate = Handlebars.compile($("#accessories-template").html());
         $("#accessoriesItemInfo").append(myTemplate(data));
@@ -245,14 +128,15 @@
         $("span[id^=accessoriesEyeId]").removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
 
         //加载下拉列表数据,付初始值
-        reloadAccessoriesDetailSelectData(nextIdNum, function () {
-            if (accessoriesInfo != undefined) {
-
-                initAccessoriesFields(nextIdNum, accessoriesInfo);
+        reloadAccessoriesDetailSelectData(idNum, function () {
+            if (accessoriesInfo != null) {
+                initAccessoriesFields(idNum, accessoriesInfo);
                 //表单字段监听
-                startBootstrapValidatorListner(nextIdNum);
-
-
+                startBootstrapValidatorListner(idNum);
+            }
+            else {
+                var $id = $('#pantoneIdsF' + idNum);
+                $.reloadPantoneId($id, []);
             }
         });
 
@@ -261,48 +145,44 @@
 
 
     //删除辅料
-    function deleteFraicById(index) {
-        bom.accessories.splice(index - 1, 1);
+    function deleteFraicById(idNum) {
+        bom.accessories.splice(idNum - 1, 1);
     }
 
     /**
      * 克隆辅料
      * @param _this
-     * @param index
+     * @param idNum
      */
-    function copyAccessories(_this, index) {
-        var accessoriesItem = getAccessoriesItem(index);
+    function copyAccessories(_this, idNum) {
+        var accessoriesItem = getAccessoriesItem(idNum);
         accessoriesItem.accessoriesId = null;
         addAccessories(accessoriesItem);
 
     }
 
-    var deleteFun = function (id) {
+    var deleteFun = function (idNum) {
         //当前辅料id
-        var curId = id;
         var accessoriesArrLength = $("div[id^=accessoriesAllInfoId]").length;
         //删除当前辅料和之后的所有辅料
-        for (var index = curId; index <= accessoriesArrLength; index++) {
+        for (var idx = idNum; idx <= accessoriesArrLength; idx++) {
             //$("div[id^=accessoriesAllInfoId]")
-            $("#accessoriesDivId" + index).remove();
+            $("#accessoriesDivId" + idx).remove();
             //保存当前节点之后的数据
-            if (index >= curId) {
-
-                if (index == curId) {
-                    deleteFraicById(index);
+            if (idx >= idNum) {
+                if (idx == idNum) {
+                    deleteFraicById(idx);
                 }
-
-
-                var formDataStr = $("#accessoriesFormId" + (index + 1)).serialize();
+                var formDataStr = $("#accessoriesFormId" + (idx + 1)).serialize();
                 if (formDataStr != '') {
-                    saveAccessoriesById(index, formDataStr);
+                    saveAccessoriesById(idx, formDataStr);
                 }
 
             }
         }
         //重新生成辅料
         var maxAccessoriesId = accessoriesArrLength - 1;
-        for (var index = curId; index <= maxAccessoriesId; index++) {
+        for (var idx = idNum; idx <= maxAccessoriesId; idx++) {
             addAccessories();
         }
 
@@ -311,52 +191,50 @@
 
     }
 
-    var doDel = function (result, id) {
+    var doDel = function (result, idNum) {
         if (result) {
-            deleteFun(id);
+            deleteFun(idNum);
         }
     }
 
-    var trashAccessoriesSelect = function (_this, id) {
-        var saveFlag = bom.accessories[id - 1].saveFlag;
+    var trashAccessoriesSelect = function (_this, idNum) {
+        var saveFlag = bom.accessories[idNum - 1].saveFlag;
         if (saveFlag == true) {
-            bootbox.confirm("辅料_" + id + "已保存，确定要删除", function (result) {
-                doDel(result, id);
+            bootbox.confirm("辅料_" + idNum + "已保存，确定要删除", function (result) {
+                doDel(result, idNum);
             });
         }
         else {
-            deleteFun(id);
+            deleteFun(idNum);
         }
 
     }
 
-    var saveAccessories = function (_this, id) {
-        $('#accessoriesFormId' + id).bootstrapValidator('validate');
+    var saveAccessories = function (_this, idNum) {
+        $('#accessoriesFormId' + idNum).bootstrapValidator('validate');
     }
 
-    var saveAccessoriesFun = function (id) {
-        var formDataStr = $("#accessoriesFormId" + id).serialize();
-        saveAccessoriesById(id, formDataStr);
-
-
-        bom.accessories[id - 1].saveFlag = true;//已保存
+    var saveAccessoriesFun = function (idNum) {
+        var formDataStr = $("#accessoriesFormId" + idNum).serialize();
+        saveAccessoriesById(idNum, formDataStr);
+        bom.accessories[idNum - 1].saveFlag = true;//已保存
 
     }
 
 
-    var saveAccessoriesById = function (id, formDataStr) {
+    var saveAccessoriesById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
-        bom.accessories[id - 1] = jsonObj;
-        if (!$("#accessoriesAllInfoId" + id).is(':hidden')) {
-            bom.accessories[id - 1].showFlag = true;//是否显示
+        bom.accessories[idNum - 1] = jsonObj;
+        if (!$("#accessoriesAllInfoId" + idNum).is(':hidden')) {
+            bom.accessories[idNum - 1].showFlag = true;//是否显示
         }
-        bom.accessories[id - 1].currenId = id;//当前序号
+        bom.accessories[idNum - 1].currenId = idNum;//当前序号
 
         $.sendRestFulAjax(saveAccessoriesFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doAccessoriesSuccess_info(data, id);
+            _doAccessoriesSuccess_info(data, idNum);
         });
 
-    }
+    };
 
 
     /**
@@ -364,10 +242,10 @@
      * @param _this
      * @param id
      */
-    var showOrHideAccessories = function (_this, id) {
-        var accessoriesEyeId = "#accessoriesEyeId" + id;
-        var accessoriesTrashId = "#accessoriesTrashId" + id;
-        $("#accessoriesAllInfoId" + id).toggle(300,
+    var showOrHideAccessories = function (_this, idNum) {
+        var accessoriesEyeId = "#accessoriesEyeId" + idNum;
+        var accessoriesTrashId = "#accessoriesTrashId" + idNum;
+        $("#accessoriesAllInfoId" + idNum).toggle(300,
             function () {
                 if ($(this).is(':hidden')) {
                     $(accessoriesEyeId).removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
@@ -379,75 +257,79 @@
                 }
             }
         );
-    }
+    };
 
     /**
      * 当后台的基础信息修改后，点击刷新，可以刷新cookies信息
      */
-    var refreshAccessoriesSelect = function (_this, index) {
-        var accessoriesItem = getAccessoriesItem(index);
-        reloadBomSelect(index, function () {
-            initAccessoriesFields(index, accessoriesItem);
+    var refreshAccessoriesSelect = function (_this, idNum) {
+        var accessoriesItem = getAccessoriesItem(idNum);
+        reloadBomSelect(idNum, function () {
+            initAccessoriesFields(idNum, accessoriesItem);
         });
+        ;
+        $.reloadPantoneId($id, accessoriesItem['pantoneIds']);
     }
 
 
-    var reloadBomSelect = function (id, callback) {
+    var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
-            _doAccessoriesSuccess_info(data, id, callback);
+            _doAccessoriesSuccess_info(data, idNum, callback);
         });
     }
 
     //第一次初始化下拉列表
-    var reloadAccessoriesDetailSelectData = function (id, callback) {
-        reloadBomSelect(id, callback);
+    var reloadAccessoriesDetailSelectData = function (idNum, callback) {
+        reloadBomSelect(idNum, callback);
     }
 
 
     //cookie重新赋值，给下拉列表赋值
-    var _doAccessoriesSuccess_info = function (_data, id, callback) {
+    var _doAccessoriesSuccess_info = function (_data, idNum, callback) {
         //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
-        initAccessoriesSelect(_data, id, callback);
+        initAccessoriesSelect(_data, idNum, callback);
     }
 
     //给下拉列表赋值
-    var initAccessoriesSelect = function (_data, id, callback) {
-        console.info("加载辅料" + id + "的下拉列表");
-        var idNum = id;
+    var initAccessoriesSelect = function (_data, idNum, callback) {
+        console.info("加载辅料" + idNum + "的下拉列表");
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 
         //材料类别
         var materialTypeIdItems = data["materialTypeItems"];
-        $("#materialTypeIdF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#materialTypeIdF" + idNum));
+        var $materialTypeIdF = $("#materialTypeIdF" + idNum);
+        $materialTypeIdF.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($materialTypeIdF);
         $.each(materialTypeIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
-                .appendTo($("#materialTypeIdF" + idNum));
+                .appendTo($materialTypeIdF);
         });
 
 
         //供应商
         var spItems = data["spItems"];
-        $("#spIdF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#spIdF" + idNum));
+        var $spIdF = $("#spIdF" + idNum);
+        $spIdF.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($spIdF);
         $.each(spItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
-                .appendTo($("#spIdF" + idNum));
+                .appendTo($spIdF);
         });
 
         //年份
         var yearCodeItems = data["yearItems"];
-        $("#yearCodeF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#yearCodeF" + idNum));
+        var $yearCodeF = $("#yearCodeF" + idNum);
+        $yearCodeF.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($yearCodeF);
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
-                .appendTo($("#yearCodeF" + idNum));
+                .appendTo($yearCodeF);
         });
 
 
@@ -464,35 +346,38 @@
 
         //品名列表
         var productTypeIdItems = data["productTypeItems"];
-        $("#productTypeIdF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#productTypeIdF" + idNum));
+        var $productTypeIdF = $("#productTypeIdF" + idNum);
+        $productTypeIdF.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($productTypeIdF);
         $.each(productTypeIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
-                .appendTo($("#productTypeIdF" + idNum));
+                .appendTo($productTypeIdF);
         });
 
 
         //物料位置列表
         var positionItems = data["positionItems"];
-        $("#positionIdsF" + idNum).empty();
+        var $positionIdsF = $("#positionIdsF" + idNum);
+        $positionIdsF.empty();
         $.each(positionItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#positionIdsF" + idNum));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($positionIdsF);
         });
-        $('#positionIdsF' + idNum).selectpicker({noneSelectedText: '请选择...'});
-        $('#positionIdsF' + idNum).selectpicker('refresh');
+        $positionIdsF.selectpicker({noneSelectedText: '请选择...'});
+        $positionIdsF.selectpicker('refresh');
 
 
         // 用量单位列表
         var unitIdItems = data["unitItems"];
-        $("#unitIdF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#unitIdF" + idNum));
+        var $unitIdF = $("#unitIdF" + idNum);
+        $unitIdF.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($unitIdF);
         $.each(unitIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
-                .appendTo($("#unitIdF" + idNum));
+                .appendTo($unitIdF);
         });
 
         if ($.isFunction(callback)) {
@@ -559,7 +444,7 @@
                 }
             }
         },
-        pantoneIdF: {
+        pantoneIdsF: {
             validators: {
                 notEmpty: {
                     message: '颜色为必填项'
@@ -631,6 +516,164 @@
         }
 
     };
+
+
+    var buildMyTemplateData = function (idNum) {
+        var data = {
+            "accessories": [
+                {
+                    "currenId": idNum,
+                    "accessoriesDivId": "accessoriesDivId" + idNum,
+                    "accessoriesTitleId": "accessoriesTitleId" + idNum,
+                    "accessoriesIdF": "accessoriesIdF" + idNum,
+                    "accessoriesTitleName": title_type + idNum,
+                    "accessoriesEyeId": "accessoriesEyeId" + idNum,
+                    "accessoriesTrashId": "accessoriesTrashId" + idNum,
+                    "accessoriesRepeatId": "accessoriesRepeatId" + idNum,
+                    "accessoriesCopyId": "accessoriesCopyId" + idNum,
+                    "accessoriesFormId": "accessoriesFormId" + idNum,
+                    "accessoriesAllInfoId": "accessoriesAllInfoId" + idNum,
+                    "accessoriesDetailId": "accessoriesDetailId" + idNum,
+                    "materialTypeIdF": "materialTypeIdF" + idNum,
+                    "spIdF": "spIdF" + idNum,
+                    "yearCodeF": "yearCodeF" + idNum,
+                    "classicIdF": "classicIdF" + idNum,
+                    "pantoneIdsF": "pantoneIdsF" + idNum,
+                    "productTypeIdF": "productTypeIdF" + idNum,
+                    "techRequiredF": "techRequiredF" + idNum,
+                    "lengthF": "lengthF" + idNum,
+                    "widthF": "widthF" + idNum,
+                    "unitIdF": "unitIdF" + idNum,
+                    "positionIdsF": "positionIdsF" + idNum,
+                    "unitAmountF": "unitAmountF" + idNum,
+                    "orderCountF": "orderCountF" + idNum,
+                    "attritionRateF": "attritionRateF" + idNum,
+                    "unitPriceF": "unitPriceF" + idNum,
+                    "totalAmountF": "totalAmountF" + idNum,
+                    "totalPriceF": "totalPriceF" + idNum
+                }
+            ]
+        };
+
+        return data;
+    }
+
+
+    /**
+     * 保存时，获取信息
+     * @param idNum
+     * @returns {{}}
+     */
+    function buildAccessoriesItem(idNum) {
+        var accessoriesItem = {};
+
+        var accessoriesInfo = {};//fula基本信息
+        accessoriesInfo.spId = $("#spIdF" + idNum).val();
+        accessoriesInfo.yearCode = $("#yearCodeF" + idNum).val();
+        accessoriesInfo.classicId = $("#classicIdF" + idNum).val();
+        accessoriesInfo.productTypeId = $("#productTypeIdF" + idNum).val();
+
+        var pantoneIds = $("#pantoneIdsF" + idNum).val();
+        var materialPantoneIds = [];
+        if (null != pantoneIds && pantoneIds.length > 0) {
+            //noinspection JSDuplicatedDeclaration
+            for (var idx = 0, len = pantoneIds.length; idx < len; idx++) {
+                var materialPantoneId = {"pantoneId": pantoneIds[idx]};
+                materialPantoneIds.push(materialPantoneId)
+            }
+        }
+        accessoriesInfo.pantoneIds = materialPantoneIds;
+
+        var positionIds = $("#positionIdsF" + idNum).val();
+        var materialPositions = [];
+        if (null != positionIds && positionIds.length > 0) {
+            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
+                var materialPosition = {"positionId": positionIds[idx]};
+                materialPositions.push(materialPosition)
+            }
+        }
+        accessoriesInfo.positionIds = materialPositions;
+
+
+
+
+
+
+
+        accessoriesInfo.materialTypeId = $("#materialTypeIdF" + idNum).val();
+        accessoriesInfo.techRequired = $("#techRequiredF" + idNum).val();
+        accessoriesInfo.width = $("#widthF" + idNum).val();
+        accessoriesInfo.length = $("#lengthF" + idNum).val();
+        accessoriesInfo.nameNum = idNum;
+        accessoriesInfo.accessoriesId = $("#accessoriesId" + idNum).val();
+
+        var materialSpInfo = {};//包材用量信息
+        materialSpInfo.orderCount = $("#orderCountF" + idNum).val();
+        materialSpInfo.attritionRate = $("#attritionRateF" + idNum).val();
+        materialSpInfo.unitPrice = $("#unitPriceF" + idNum).val();
+        materialSpInfo.totalAmount = $("#totalAmountF" + idNum).val();
+        materialSpInfo.totalPrice = $("#totalPriceF" + idNum).val();
+        materialSpInfo.accessoriesId = accessoriesInfo.accessoriesId;
+
+        var materialUnitDosage = {};//包材单位用量
+        materialUnitDosage.unitId = $("#unitIdF" + idNum).val();
+        materialUnitDosage.unitAmount = $("#unitAmountF" + idNum).val();
+        materialUnitDosage.accessoriesId = accessoriesInfo.accessoriesId;
+
+        accessoriesItem.accessoriesInfo = accessoriesInfo;
+        accessoriesItem.materialSpInfo = materialSpInfo;
+        accessoriesItem.materialUnitDosage = materialUnitDosage;
+
+        return accessoriesItem;
+    }
+
+
+    /**
+     *刷新时，暂存信息
+     * @param idNum
+     * @returns {{}}
+     */
+    function getAccessoriesItem(idNum) {
+
+        var accessoriesInfo = {};//fula基本信息
+        accessoriesInfo.spId = $("#spIdF" + idNum).val();
+        accessoriesInfo.yearCode = $("#yearCodeF" + idNum).val();
+        accessoriesInfo.classicId = $("#classicIdF" + idNum).val();
+        accessoriesInfo.productTypeId = $("#productTypeIdF" + idNum).val();
+
+        //颜色多选
+        var pantoneIds = $("#pantoneIdsF" + idNum).select2('data');
+        accessoriesInfo.pantoneIds = pantoneIds;
+
+
+        var positionIds = $("#positionIdsF" + idNum).val();
+        var materialPositions = [];
+        if (null != positionIds && positionIds.length > 0) {
+            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
+                var materialPosition = {"positionId": positionIds[idx]};
+                materialPositions.push(materialPosition)
+            }
+        }
+        accessoriesInfo.positionIds = materialPositions;
+
+        accessoriesInfo.materialTypeId = $("#materialTypeIdF" + idNum).val();
+        accessoriesInfo.techRequired = $("#techRequiredF" + idNum).val();
+        accessoriesInfo.width = $("#widthF" + idNum).val();
+        accessoriesInfo.length = $("#lengthF" + idNum).val();
+        accessoriesInfo.nameNum = idNum;
+        accessoriesInfo.accessoriesId = $("#accessoriesId" + idNum).val();
+
+        accessoriesInfo.orderCount = $("#orderCountF" + idNum).val();
+        accessoriesInfo.attritionRate = $("#attritionRateF" + idNum).val();
+        accessoriesInfo.unitPrice = $("#unitPriceF" + idNum).val();
+        accessoriesInfo.totalAmount = $("#totalAmountF" + idNum).val();
+        accessoriesInfo.totalPrice = $("#totalPriceF" + idNum).val();
+
+        accessoriesInfo.unitId = $("#unitIdF" + idNum).val();
+        accessoriesInfo.unitAmount = $("#unitAmountF" + idNum).val();
+        return accessoriesInfo;
+    }
+
 
     /**
      * 面板内容初始化

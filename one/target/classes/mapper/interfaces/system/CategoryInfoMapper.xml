@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.CategoryManageMapper">
+    <sql id="searchInfoSql">
+		id AS id,
+		category_id AS natrualkey,
+		category_name AS name,
+		parent_category_id AS parentCategoryId,
+		level_id AS levelId,
+		remark AS remark,
+		update_time AS updateTime
+	</sql>
+    <select id="queryInfo" resultType="CategoryInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_jc_category
+        WHERE category_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_jc_category where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_jc_category where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            category_id like concat('%',#{searchValue},'%') or
+            category_name like concat('%',#{searchValue},'%') or
+            level_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="CategoryInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_jc_category
+        WHERE del_flag=0
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            category_id like concat('%',#{searchValue},'%') or
+            category_name like concat('%',#{searchValue},'%') or
+            level_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+		update t_jc_category 	set
+		category_name=#{name},
+		level_id = #{levelId},
+		parent_category_id=#{parentCategoryId},
+		remark=#{remark}
+		WHERE category_id =#{natrualkey}
+	</update>
+
+    <insert id="add">
+		insert into
+		t_jc_category (category_id,category_name,level_id,parent_category_id,remark)
+		values (#{natrualkey},#{name},#{levelId},#{parentCategoryId},#{remark})
+	</insert>
+
+    <update id="del">
+		update t_jc_category
+		set  del_flag=1
+		where category_id =#{natrualkey}
+	</update>
+
+    <select id="queryCurrentSeqNo" resultType="String">
+        select case when  category_id is NULL then 0 else category_id end from t_jc_category    ORDER BY id DESC LIMIT 1
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+          category_id AS natrualkey,
+          category_name AS name
+        from t_jc_category
+        where del_flag=0 and level_id=#{name}
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectListByLevelId" resultType="CommonBean">
+        select
+        category_id AS natrualkey,
+        category_name AS name
+        from t_jc_category
+        where del_flag=0 and level_id=#{levelId}
+    </select>
+
+
+
+
+    <select id="searchChildCategoryByCategoryId" resultType="CategoryInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM t_jc_category
+        WHERE del_flag=0
+        <if test="categoryId!=null and categoryId!=''">
+            and parent_category_id =#{categoryId}
+        </if>
+    </select>
+
+
+</mapper>

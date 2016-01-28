@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 命名空间 -->
+    <typeAliases>
+        <typeAlias alias="CommonBean" type="com.skysport.core.bean.system.SelectItem2"/>
+        <typeAlias alias="LogInfo" type="com.skysport.core.bean.Log"/>
+        <typeAlias alias="SpInfo" type="com.skysport.inerfaces.bean.info.SpInfo"/>
+        <typeAlias alias="Dictionary" type="com.skysport.core.bean.system.DictionaryInfo"/>
+        <typeAlias alias="PantoneInfo" type="com.skysport.inerfaces.bean.info.PantoneInfo"/>
+        <typeAlias alias="CustomerInfo" type="com.skysport.inerfaces.bean.info.CustomerInfo"/>
+        <typeAlias alias="AreaInfo" type="com.skysport.inerfaces.bean.info.AreaInfo"/>
+        <typeAlias alias="SeriesInfo" type="com.skysport.inerfaces.bean.info.SeriesInfo"/>
+        <typeAlias alias="FactoryInfo" type="com.skysport.inerfaces.bean.info.FactoryInfo"/>
+        <typeAlias alias="MaterialClassicInfo" type="com.skysport.inerfaces.bean.info.MaterialClassicInfo"/>
+        <typeAlias alias="MaterialTypeInfo" type="com.skysport.inerfaces.bean.info.MaterialTypeInfo"/>
+        <typeAlias alias="ProductTypeInfo" type="com.skysport.inerfaces.bean.info.ProductTypeInfo"/>
+        <typeAlias alias="SexInfo" type="com.skysport.inerfaces.bean.info.SexInfo"/>
+        <typeAlias alias="YearConfInfo" type="com.skysport.inerfaces.bean.info.YearConfInfo"/>
+        <typeAlias alias="DyeInfo" type="com.skysport.inerfaces.bean.info.DyeInfo"/>
+        <!--物料-->
+        <typeAlias alias="BondingLaminationCoatingInfo" type="com.skysport.inerfaces.bean.info.BondingLaminationCoatingInfo"/>
+        <typeAlias alias="ColorOfMembraneCoatingInfo" type="com.skysport.inerfaces.bean.info.ColorOfMembraneCoatingInfo"/>
+        <typeAlias alias="FinishInfo" type="com.skysport.inerfaces.bean.info.FinishInfo"/>
+        <typeAlias alias="MaterialOfMembraneCoatingInfo" type="com.skysport.inerfaces.bean.info.MaterialOfMembraneCoatingInfo"/>
+        <typeAlias alias="MembraneThicknessInfo" type="com.skysport.inerfaces.bean.info.MembraneThicknessInfo"/>
+        <typeAlias alias="SpecificationInfo" type="com.skysport.inerfaces.bean.info.SpecificationInfo"/>
+        <typeAlias alias="WaterVapourPermeabilityInfo" type="com.skysport.inerfaces.bean.info.WaterVapourPermeabilityInfo"/>
+        <typeAlias alias="WorkmanshipOfBondingLaminatingCoatingInfo" type="com.skysport.inerfaces.bean.info.WorkmanshipOfBondingLaminatingCoatingInfo"/>
+        <typeAlias alias="FabricsInfo" type="com.skysport.inerfaces.bean.develop.FabricsInfo"/>
+        <typeAlias alias="CategoryInfo" type="com.skysport.inerfaces.bean.info.CategoryInfo"/>
+        <typeAlias alias="MaterialPositionInfo" type="com.skysport.inerfaces.bean.info.MaterialPositionInfo"/>
+        <typeAlias alias="MaterialUnitInfo" type="com.skysport.inerfaces.bean.info.MaterialUnitInfo"/>
+        <!--DEVELOP 开发-->
+        <typeAlias alias="BomInfo" type="com.skysport.inerfaces.bean.develop.BomInfo"/>
+        <typeAlias alias="ProjectBomInfo" type="com.skysport.inerfaces.bean.develop.ProjectBomInfo"/>
+        <typeAlias alias="ProjectInfo" type="com.skysport.inerfaces.bean.develop.ProjectInfo"/>
+        <typeAlias alias="ProjectQueryForm" type="com.skysport.inerfaces.form.develop.ProjectQueryForm"/>
+        <typeAlias alias="BomQueryForm" type="com.skysport.inerfaces.form.develop.BomQueryForm"/>
+        <typeAlias alias="ProjectCategoryInfo" type="com.skysport.inerfaces.bean.develop.ProjectCategoryInfo"/>
+        <typeAlias alias="MainColor" type="com.skysport.inerfaces.bean.info.MainColor"/>
+        <typeAlias alias="FabricInfo" type="com.skysport.inerfaces.bean.develop.FabricsInfo"/>
+        <typeAlias alias="QuotedInfo" type="com.skysport.inerfaces.bean.develop.QuotedInfo"/>
+        <typeAlias alias="AccessoriesInfo" type="com.skysport.inerfaces.bean.develop.AccessoriesInfo"/>
+        <typeAlias alias="KFPackaging" type="com.skysport.inerfaces.bean.develop.KFPackaging"/>
+        <typeAlias alias="FactoryQuoteInfo" type="com.skysport.inerfaces.bean.develop.FactoryQuoteInfo"/>
+        <typeAlias alias="KFMaterialPosition" type="com.skysport.inerfaces.bean.develop.KFMaterialPosition"/>
+        <typeAlias alias="KFMaterialPantone" type="com.skysport.inerfaces.bean.develop.KFMaterialPantone"/>
+        <typeAlias alias="SexColor" type="com.skysport.inerfaces.bean.develop.SexColor"/>
+        <!--权限管理-->
+        <typeAlias alias="UserInfo" type="com.skysport.core.bean.permission.UserInfo"/>
+        <typeAlias alias="RoleInfo" type="com.skysport.core.bean.permission.RoleInfo"/>
+        <typeAlias alias="ResourceInfo" type="com.skysport.core.bean.permission.ResourceInfo"/>
+        <typeAlias alias="DepartmentInfo" type="com.skysport.inerfaces.bean.system.dept.DepartmentInfo"/>
+
+    </typeAliases>
+
+    <!-- 映射map-->
+    <mappers>
+    </mappers>
+</configuration>

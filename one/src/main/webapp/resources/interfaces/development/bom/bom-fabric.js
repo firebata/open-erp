@@ -12,7 +12,9 @@
 
     $.extend({
         initFabric: initFabric,
-        fabricItems: fabricItems
+        fabricItems: fabricItems,
+        turnPantoneInfoToSelect2Option: turnPantoneInfoToSelect2Option,
+        reloadPantoneId: reloadPantoneId
     });
 
 
@@ -27,19 +29,19 @@
     }
 
     /**
-     * 切换
+     * 切换复合材料
      * @param blcIdVal
      * @param _idNum
      * @param f
      */
-    function showOrHideCompositeDiv(blcIdVal, _idNum, f) {
+    function showOrHideCompositeDiv(blcIdVal, _idNum, callback) {
 
         if (blcIdVal === 'A1') {
             $("#compositeDiv" + _idNum).show();
         } else {
             $("#compositeDiv" + _idNum).hide();
         }
-        f();
+        callback();
 
     }
 
@@ -103,19 +105,19 @@
         for (var idx = 0; idx < pantoneIdsArr.length; idx++) {
             var pantone = pantoneIdsArr[idx];
             var _pantone = {};
-            _pantone.id = pantone.pantoneId;
-            _pantone.text = pantone.pantoneName;
+            _pantone.id = pantone.pantoneId == null ? pantone.id : pantone.pantoneId;
+            _pantone.text = pantone.pantoneName == null ? pantone.text : pantone.pantoneName;
             _pantoneIdsArr.push(_pantone);
         }
         return _pantoneIdsArr;
     }
 
     /**
-     * 初始化面料nextIdNum的表单信息
-     * @param nextIdNum 面料序号
+     * 初始化面料idNum的表单信息
+     * @param idNum 面料序号
      * @param _fabricInfo 面料表单值
      */
-    function initFabricFields(nextIdNum, _fabricInfo) {
+    function initFabricFields(idNum, _fabricInfo) {
 
         //保存值
         var fabricInfo = $.extend({}, _fabricInfo);
@@ -126,11 +128,11 @@
         Object.keys(_fabricInfo).map(function (key) {
 
             //下拉框
-            $("#" + key + nextIdNum).val(_fabricInfo[key]);
+            $("#" + key + idNum).val(_fabricInfo[key]);
 
             //复合与单布选项特殊处理
             if (key === 'blcId') {
-                showOrHideCompositeDiv(_fabricInfo[key], nextIdNum, function () {
+                showOrHideCompositeDiv(_fabricInfo[key], idNum, function () {
                 });
             }
             //处理位置多选
@@ -143,27 +145,23 @@
                         positionIds.push(arr[idx].positionId);
                     }
                 }
-                $('#positionIds' + nextIdNum).selectpicker("val", positionIds);
+                $('#positionIds' + idNum).selectpicker("val", positionIds);
                 //$('#sexIds').val(arr);
             }
 
 
-            ////面料颜色
-            //if (key == 'pantoneIds') {
-            //    var arr = _fabricInfo[key];
-            //    initPantoneField(nextIdNum, arr);
-            //}
 
         });
 
 
         //初始供应商信息
-        initSpSelect(nextIdNum, _fabricInfo);
+        initSpSelect(idNum, _fabricInfo);
 
         var pantoneIdsArr = _fabricInfo["pantoneIds"];
         if (pantoneIdsArr != null) {
             var _pantoneIdsArr = turnPantoneInfoToSelect2Option(pantoneIdsArr);
-            reloadPantoneId(nextIdNum, _pantoneIdsArr);
+            var $id = $('#pantoneIds' + idNum);
+            reloadPantoneId($id, _pantoneIdsArr);
         }
 
 
@@ -171,13 +169,13 @@
 
     /**
      *初始供应商信息
-     * @param nextIdNum
+     * @param idNum
      * @param _fabricInfo
      */
-    function initSpSelect(nextIdNum, _fabricInfo) {
+    function initSpSelect(idNum, _fabricInfo) {
 
-        var materialTypeIdVal = $("materialTypeId" + nextIdNum).val();
-        var idNum = nextIdNum;
+        var materialTypeIdVal = $("materialTypeId" + idNum).val();
+        var idNum = idNum;
         reloadSpSelect(materialTypeIdVal, idNum, function () {
             $("#spId" + idNum).val(_fabricInfo['spId']);
         });
@@ -199,9 +197,9 @@
 
         var size = $("div[id^=fabricAllInfoId]").length;
 
-        var nextIdNum = size + 1;
+        var idNum = size + 1;
 
-        var data = buildMyTemplateData(nextIdNum);
+        var data = buildMyTemplateData(idNum);
 
         var myTemplate = Handlebars.compile($("#fabric-template").html());
         $("#fabricsItemInfo").append(myTemplate(data));
@@ -210,8 +208,8 @@
         $("span[id^=fabricEyeId]").removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
 
         //加载下拉列表数据,
-        reloadFabricDetailSelectData(nextIdNum, function () {
-            callbackInitFabricFields(nextIdNum, fabricInfo);
+        reloadFabricDetailSelectData(idNum, function () {
+            callbackInitFabricFields(idNum, fabricInfo);
         });
 
 
@@ -219,45 +217,42 @@
 
     /**
      * 赋初始值
-     * @param nextIdNum
+     * @param idNum
      * @param fabricInfo
      */
-    var callbackInitFabricFields = function (nextIdNum, fabricInfo) {
+    var callbackInitFabricFields = function (idNum, fabricInfo) {
 
         if (fabricInfo != null) {
-            initFabricFields(nextIdNum, fabricInfo);
+            initFabricFields(idNum, fabricInfo);
             //表单字段监听
-            startBootstrapValidatorListner(nextIdNum);
-
+            startBootstrapValidatorListner(idNum);
+        } else {
+            var $id = $('#pantoneIds' + idNum);
+            reloadPantoneId($id, []);
         }
-
     };
 
 
     //删除面料
-    function deleteFraicById(index) {
-        bom.fabricItems.splice(index - 1, 1);
+    function deleteFraicById(idNum) {
+        bom.fabricItems.splice(idNum - 1, 1);
     }
 
     /**
      * 克隆面料
      * @param _this
-     * @param index
+     * @param idNum
      */
-    function copyFabric(_this, index) {
+    function copyFabric(_this, idNum) {
 
-        var fabricItem = getFabricItem(index);
+        var fabricItem = getFabricItem(idNum);
         fabricItem.fabricId = null;
         addFabric(fabricItem);
-
-        //if (bom.fabricItems[index] == undefined || $.trim(bom.fabricItems[index]) == '') {
-        //    bootbox.alert("请先保存面料_" + index);
-        //}
     }
 
-    var deleteFun = function (id) {
+    var deleteFun = function (idNum) {
         //当前面料id
-        var curId = id;
+        var curId = idNum;
         var fabricArrLength = $("div[id^=fabricAllInfoId]").length;
         //删除当前面料和之后的所有面料
         for (var index = curId; index <= fabricArrLength; index++) {
@@ -289,45 +284,43 @@
 
     };
 
-    var doDel = function (result, id) {
+    var doDel = function (result, idNum) {
         if (result) {
-            deleteFun(id);
+            deleteFun(idNum);
         }
     };
 
-    var trashFabricSelect = function (_this, id) {
+    var trashFabricSelect = function (_this, idNum) {
         var saveFlag = bom.fabricItems[id - 1].saveFlag;
         if (saveFlag == true) {
-            bootbox.confirm("面料_" + id + "已保存，确定要删除", function (result) {
-                doDel(result, id);
+            bootbox.confirm("面料_" + idNum + "已保存，确定要删除", function (result) {
+                doDel(result, idNum);
             });
         }
         else {
-            deleteFun(id);
+            deleteFun(idNum);
         }
 
     };
 
 
-    var saveFabricFun = function (id) {
-        var formDataStr = $("#fabricFormId" + id).serialize();
-        saveFabricById(id, formDataStr);
-
-
-        bom.fabricItems[id - 1].saveFlag = true;//已保存
+    var saveFabricFun = function (idNum) {
+        var formDataStr = $("#fabricFormId" + idNum).serialize();
+        saveFabricById(idNum, formDataStr);
+        bom.fabricItems[idNum - 1].saveFlag = true;//已保存
 
     };
 
 
-    var saveFabricById = function (id, formDataStr) {
+    var saveFabricById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
-        bom.fabricItems[id - 1] = jsonObj;
-        if (!$("#fabricAllInfoId" + id).is(':hidden')) {
-            bom.fabricItems[id - 1].showFlag = true;//是否显示
+        bom.fabricItems[idNum - 1] = jsonObj;
+        if (!$("#fabricAllInfoId" + idNum).is(':hidden')) {
+            bom.fabricItems[idNum - 1].showFlag = true;//是否显示
         }
-        bom.fabricItems[id - 1].currenId = id;//当前序号
+        bom.fabricItems[idNum - 1].currenId = idNum;//当前序号
         $.sendRestFulAjax(saveFabricFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doFabricSuccess_info(data, id);
+            _doFabricSuccess_info(data, idNum);
         });
     };
 
@@ -335,12 +328,12 @@
     /**
      * 显示或者展示div
      * @param _this
-     * @param id
+     * @param idNum
      */
-    var showOrHideFabric = function (_this, id) {
-        var fabricEyeId = "#fabricEyeId" + id;
-        var fabricTrashId = "#fabricTrashId" + id;
-        $("#fabricAllInfoId" + id).toggle(300,
+    var showOrHideFabric = function (_this, idNum) {
+        var fabricEyeId = "#fabricEyeId" + idNum;
+        var fabricTrashId = "#fabricTrashId" + idNum;
+        $("#fabricAllInfoId" + idNum).toggle(300,
             function () {
                 if ($(this).is(':hidden')) {
                     $(fabricEyeId).removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
@@ -357,67 +350,53 @@
     /**
      * 当后台的基础信息修改后，点击刷新，可以刷新cookies信息
      */
-    var refreshFabricSelect = function (_this, index) {
-        var fabricItem = getFabricItem(index);
-        reloadBomSelect(index, function () {
-            initFabricFields(index, fabricItem);
+    var refreshFabricSelect = function (_this, idNum) {
+        var fabricItem = getFabricItem(idNum);
+        reloadBomSelect(idNum, function () {
+            initFabricFields(idNum, fabricItem);
         });
-
-        reloadPantoneId(index, fabricItem['pantoneIds']);
+        var $id = $('#pantoneIds' + idNum);
+        reloadPantoneId($id, fabricItem['pantoneIds']);
     };
 
-    function initPantoneField(_index, pantoneIdsArr) {
-        $.initSelect2sByArr('pantoneIds' + _index, 'pantoneId', 'pantoneName', pantoneIdsArr);
-    }
+    //function initPantoneField(_index, pantoneIdsArr) {
+    //    $.initSelect2sByArr('pantoneIds' + _index, 'pantoneId', 'pantoneName', pantoneIdsArr);
+    //}
 
     /**
      * 刷新面料颜色
      * @param index
      * @param _pantoneIds
      */
-    function reloadPantoneId(index, _pantoneIds) {
-        $.select2s('pantoneIds' + index, _pantoneSelectURL, 'Pantone not selected', 'Please, select pantone', function () {
+    function reloadPantoneId(_$id, _pantoneIds) {
+        $.select2s(_$id, _pantoneSelectURL, 'Pantone not selected', 'Please, select pantone', function () {
+            console.info("pantoneIdsF:" + _pantoneIds);
             return _pantoneIds;
         });
         //callback();
     }
 
-    var reloadBomSelect = function (id, callback) {
+    var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
-            _doFabricSuccess_info(data, id, callback);
+            _doFabricSuccess_info(data, idNum, callback);
         });
     };
 
     //第一次初始化下拉列表
     var reloadFabricDetailSelectData = function (id, callback) {
         reloadBomSelect(id, callback);
-
-        //reloadPantoneId(id, function () {
-        //    initPantoneField(id, null);
-        //});
-
-        //if ($.cookie('systemBaseMaps') == undefined) {
-        //    //第一次初始化下拉列表，存放到cookies中
-        //    $.sendRestFulAjax(path + "/system/baseinfo/bom_select", null, 'GET', 'json', function (data) {
-        //        _doFabricSuccess_info(data, id);
-        //    });
-        //}
-        //else {
-        //    //第二次，直接从cookies中读取
-        //    initFabricSelect(nextIdNum);
-        //}
     };
 
 
     //cookie重新赋值，给下拉列表赋值
-    var _doFabricSuccess_info = function (_data, id, callback) {
+    var _doFabricSuccess_info = function (_data, idNum, callback) {
         //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
-        initFabricSelect(_data, id, callback);
+        initFabricSelect(_data, idNum, callback);
     };
 
     //给下拉列表赋值
-    var initFabricSelect = function (_data, id, callback) {
-        var idNum = id;
+    var initFabricSelect = function (_data, _idNum, callback) {
+        var idNum = _idNum;
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 
         //材料类别
@@ -731,85 +710,86 @@
         }
     };
 
-    var buildMyTemplateData = function (nextIdNum) {
+
+    var buildMyTemplateData = function (idNum) {
         var data = {
             "fabric": [
                 {
-                    "currenId": nextIdNum,
-                    "fabricDivId": "fabricDivId" + nextIdNum,
-                    "fabricTitleId": "fabricTitleId" + nextIdNum,
-                    "fabricId": "fabricId" + nextIdNum,
-                    "fabricTitleName": "面料_" + nextIdNum,
-                    "fabricEyeId": "fabricEyeId" + nextIdNum,
-                    "fabricTrashId": "fabricTrashId" + nextIdNum,
-                    "fabricRepeatId": "fabricRepeatId" + nextIdNum,
-                    "fabricCopyId": "fabricCopyId" + nextIdNum,
-                    "fabricFormId": "fabricFormId" + nextIdNum,
-                    "fabricAllInfoId": "fabricAllInfoId" + nextIdNum,
-                    "fabricDetailId": "fabricDetailId" + nextIdNum,
-                    "materialTypeId": "materialTypeId" + nextIdNum,
-                    "spId": "spId" + nextIdNum,
-                    "yearCode": "yearCode" + nextIdNum,
-                    "classicId": "classicId" + nextIdNum,
-                    "pantoneIds": "pantoneIds" + nextIdNum,
-                    "productTypeId": "productTypeId" + nextIdNum,
-                    "specificationId": "specificationId" + nextIdNum,
-                    "dyeId": "dyeId" + nextIdNum,
-                    "finishId": "finishId" + nextIdNum,
-                    "blcId": "blcId" + nextIdNum,
+                    "currenId": idNum,
+                    "fabricDivId": "fabricDivId" + idNum,
+                    "fabricTitleId": "fabricTitleId" + idNum,
+                    "fabricId": "fabricId" + idNum,
+                    "fabricTitleName": "面料_" + idNum,
+                    "fabricEyeId": "fabricEyeId" + idNum,
+                    "fabricTrashId": "fabricTrashId" + idNum,
+                    "fabricRepeatId": "fabricRepeatId" + idNum,
+                    "fabricCopyId": "fabricCopyId" + idNum,
+                    "fabricFormId": "fabricFormId" + idNum,
+                    "fabricAllInfoId": "fabricAllInfoId" + idNum,
+                    "fabricDetailId": "fabricDetailId" + idNum,
+                    "materialTypeId": "materialTypeId" + idNum,
+                    "spId": "spId" + idNum,
+                    "yearCode": "yearCode" + idNum,
+                    "classicId": "classicId" + idNum,
+                    "pantoneIds": "pantoneIds" + idNum,
+                    "productTypeId": "productTypeId" + idNum,
+                    "specificationId": "specificationId" + idNum,
+                    "dyeId": "dyeId" + idNum,
+                    "finishId": "finishId" + idNum,
+                    "blcId": "blcId" + idNum,
 
-                    "compositeDiv": "compositeDiv" + nextIdNum,
-                    "compositeClassicId": "compositeClassicId" + nextIdNum,
-                    "compositePantoneId": "compositePantoneId" + nextIdNum,
-                    "compositeProductTypeId": "compositeProductTypeId" + nextIdNum,
-                    "compositeSpecificationId": "compositeSpecificationId" + nextIdNum,
-                    "compositeDyeId": "compositeDyeId" + nextIdNum,
-                    "compositeFinishId": "compositeFinishId" + nextIdNum,
+                    "compositeDiv": "compositeDiv" + idNum,
+                    "compositeClassicId": "compositeClassicId" + idNum,
+                    "compositePantoneId": "compositePantoneId" + idNum,
+                    "compositeProductTypeId": "compositeProductTypeId" + idNum,
+                    "compositeSpecificationId": "compositeSpecificationId" + idNum,
+                    "compositeDyeId": "compositeDyeId" + idNum,
+                    "compositeFinishId": "compositeFinishId" + idNum,
 
-                    "momcId": "momcId" + nextIdNum,
-                    "comocId": "comocId" + nextIdNum,
-                    "wvpId": "wvpId" + nextIdNum,
-                    "mtId": "mtId" + nextIdNum,
-                    "woblcId": "woblcId" + nextIdNum,
-                    "isShow": "isShow" + nextIdNum,
-                    "unitId": "unitId" + nextIdNum,
-                    "positionIds": "positionIds" + nextIdNum,
-                    "unitAmount": "unitAmount" + nextIdNum,
-                    "orderCount": "orderCount" + nextIdNum,
-                    "attritionRate": "attritionRate" + nextIdNum,
-                    "unitPrice": "unitPrice" + nextIdNum,
-                    "totalAmount": "totalAmount" + nextIdNum,
-                    "totalPrice": "totalPrice" + nextIdNum
+                    "momcId": "momcId" + idNum,
+                    "comocId": "comocId" + idNum,
+                    "wvpId": "wvpId" + idNum,
+                    "mtId": "mtId" + idNum,
+                    "woblcId": "woblcId" + idNum,
+                    "isShow": "isShow" + idNum,
+                    "unitId": "unitId" + idNum,
+                    "positionIds": "positionIds" + idNum,
+                    "unitAmount": "unitAmount" + idNum,
+                    "orderCount": "orderCount" + idNum,
+                    "attritionRate": "attritionRate" + idNum,
+                    "unitPrice": "unitPrice" + idNum,
+                    "totalAmount": "totalAmount" + idNum,
+                    "totalPrice": "totalPrice" + idNum
                 }
             ]
         };
         return data;
     };
 
-    function getFabricItem(index) {
+    function getFabricItem(idNum) {
 
         var fabricsInfo = {};//面料基本信息
 
-        fabricsInfo.spId = $("#spId" + index).val();
-        fabricsInfo.yearCode = $("#yearCode" + index).val();
-        fabricsInfo.classicId = $("#classicId" + index).val();
-        fabricsInfo.pantoneIds = $("#pantoneIds" + index).val();
-        fabricsInfo.productTypeId = $("#productTypeId" + index).val();
+        fabricsInfo.spId = $("#spId" + idNum).val();
+        fabricsInfo.yearCode = $("#yearCode" + idNum).val();
+        fabricsInfo.classicId = $("#classicId" + idNum).val();
+        fabricsInfo.pantoneIds = $("#pantoneIds" + idNum).val();
+        fabricsInfo.productTypeId = $("#productTypeId" + idNum).val();
 
         //颜色多选
-        var pantoneIds = $("#pantoneIds" + index).val();
-        var materialPantoneIds = [];
-        if (null != pantoneIds && pantoneIds.length > 0) {
-            //noinspection JSDuplicatedDeclaration
-            for (var idx = 0, len = pantoneIds.length; idx < len; idx++) {
-                var materialPantoneId = {"pantoneId": pantoneIds[idx]};
-                materialPantoneIds.push(materialPantoneId)
-            }
-        }
-        fabricsInfo.pantoneIds = materialPantoneId;
+        var pantoneIds = $("#pantoneIds" + idNum).select2('data');
+        //var materialPantoneIds = [];
+        //if (null != pantoneIds && pantoneIds.length > 0) {
+        //    //noinspection JSDuplicatedDeclaration
+        //    for (var idx = 0, len = pantoneIds.length; idx < len; idx++) {
+        //        var materialPantoneId = {"pantoneId": pantoneIds[idx]};
+        //        materialPantoneIds.push(materialPantoneId)
+        //    }
+        //}
+        fabricsInfo.pantoneIds = pantoneIds;
 
         //位置多选
-        var positionIds = $("#positionIds" + index).val();
+        var positionIds = $("#positionIds" + idNum).val();
         var materialPositions = [];
         if (null != positionIds && positionIds.length > 0) {
             for (var idx = 0, len = positionIds.length; idx < len; idx++) {
@@ -819,35 +799,35 @@
         }
 
         fabricsInfo.positionIds = materialPositions;
-        fabricsInfo.materialTypeId = $("#materialTypeId" + index).val();
-        fabricsInfo.nameNum = index;
-        fabricsInfo.fabricId = $("#fabricId" + index).val();
-        fabricsInfo.isShow = $("#isShow" + index).val();
-        fabricsInfo.compositeClassicId = $("#compositeClassicId" + index).val();
-        fabricsInfo.compositePantoneId = $("#compositePantoneId" + index).val();
-        fabricsInfo.compositeProductTypeId = $("#compositeProductTypeId" + index).val();
+        fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
+        fabricsInfo.nameNum = idNum;
+        fabricsInfo.fabricId = $("#fabricId" + idNum).val();
+        fabricsInfo.isShow = $("#isShow" + idNum).val();
+        fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();
+        fabricsInfo.compositePantoneId = $("#compositePantoneId" + idNum).val();
+        fabricsInfo.compositeProductTypeId = $("#compositeProductTypeId" + idNum).val();
 
-        fabricsInfo.specificationId = $("#specificationId" + index).val();
-        fabricsInfo.dyeId = $("#dyeId" + index).val();
-        fabricsInfo.finishId = $("#finishId" + index).val();
-        fabricsInfo.compositeSpecificationId = $("#compositeSpecificationId" + index).val();
-        fabricsInfo.compositeDyeId = $("#compositeDyeId" + index).val();
-        fabricsInfo.compositeFinishId = $("#compositeFinishId" + index).val();
-        fabricsInfo.blcId = $("#blcId" + index).val();
-        fabricsInfo.momcId = $("#momcId" + index).val();
-        fabricsInfo.comocId = $("#comocId" + index).val();
-        fabricsInfo.wvpId = $("#wvpId" + index).val();
-        fabricsInfo.mtId = $("#mtId" + index).val();
-        fabricsInfo.woblcId = $("#woblcId" + index).val();
+        fabricsInfo.specificationId = $("#specificationId" + idNum).val();
+        fabricsInfo.dyeId = $("#dyeId" + idNum).val();
+        fabricsInfo.finishId = $("#finishId" + idNum).val();
+        fabricsInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
+        fabricsInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
+        fabricsInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
+        fabricsInfo.blcId = $("#blcId" + idNum).val();
+        fabricsInfo.momcId = $("#momcId" + idNum).val();
+        fabricsInfo.comocId = $("#comocId" + idNum).val();
+        fabricsInfo.wvpId = $("#wvpId" + idNum).val();
+        fabricsInfo.mtId = $("#mtId" + idNum).val();
+        fabricsInfo.woblcId = $("#woblcId" + idNum).val();
 
-        fabricsInfo.orderCount = $("#orderCount" + index).val();
-        fabricsInfo.attritionRate = $("#attritionRate" + index).val();
-        fabricsInfo.unitPrice = $("#unitPrice" + index).val();
-        fabricsInfo.totalAmount = $("#totalAmount" + index).val();
-        fabricsInfo.totalPrice = $("#totalPrice" + index).val();
+        fabricsInfo.orderCount = $("#orderCount" + idNum).val();
+        fabricsInfo.attritionRate = $("#attritionRate" + idNum).val();
+        fabricsInfo.unitPrice = $("#unitPrice" + idNum).val();
+        fabricsInfo.totalAmount = $("#totalAmount" + idNum).val();
+        fabricsInfo.totalPrice = $("#totalPrice" + idNum).val();
 
-        fabricsInfo.unitId = $("#unitId" + index).val();
-        fabricsInfo.unitAmount = $("#unitAmount" + index).val();
+        fabricsInfo.unitId = $("#unitId" + idNum).val();
+        fabricsInfo.unitAmount = $("#unitAmount" + idNum).val();
 
 
         return fabricsInfo;
@@ -856,18 +836,18 @@
 
     /**
      * 获取每个面料的详细信息
-     * @param index
+     * @param idNum
      */
-    function buildFabricItem(index) {
+    function buildFabricItem(idNum) {
         var fabricItem = {};
         var fabricsInfo = {};//面料基本信息
-        fabricsInfo.spId = $("#spId" + index).val();
-        fabricsInfo.yearCode = $("#yearCode" + index).val();
-        fabricsInfo.classicId = $("#classicId" + index).val();
-        fabricsInfo.pantoneIds = $("#pantoneIds" + index).val();
-        fabricsInfo.productTypeId = $("#productTypeId" + index).val();
+        fabricsInfo.spId = $("#spId" + idNum).val();
+        fabricsInfo.yearCode = $("#yearCode" + idNum).val();
+        fabricsInfo.classicId = $("#classicId" + idNum).val();
+        fabricsInfo.pantoneIds = $("#pantoneIds" + idNum).val();
+        fabricsInfo.productTypeId = $("#productTypeId" + idNum).val();
 
-        var pantoneIds = $("#pantoneIds" + index).val();
+        var pantoneIds = $("#pantoneIds" + idNum).val();
         var materialPantoneIds = [];
         if (null != pantoneIds && pantoneIds.length > 0) {
             //noinspection JSDuplicatedDeclaration
@@ -878,7 +858,9 @@
         }
         fabricsInfo.pantoneIds = materialPantoneIds;
 
-        var positionIds = $("#positionIds" + index).val();
+
+
+        var positionIds = $("#positionIds" + idNum).val();
         var materialPositions = [];
         if (null != positionIds && positionIds.length > 0) {
             for (var idx = 0, len = positionIds.length; idx < len; idx++) {
@@ -888,40 +870,40 @@
         }
 
         fabricsInfo.positionIds = materialPositions;
-        fabricsInfo.materialTypeId = $("#materialTypeId" + index).val();
-        fabricsInfo.nameNum = index;
-        fabricsInfo.fabricId = $("#fabricId" + index).val();
-        fabricsInfo.isShow = $("#isShow" + index).val();
-        fabricsInfo.compositeClassicId = $("#compositeClassicId" + index).val();
-        fabricsInfo.compositePantoneId = $("#compositePantoneId" + index).val();
-        fabricsInfo.compositeProductTypeId = $("#compositeProductTypeId" + index).val();
+        fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
+        fabricsInfo.nameNum = idNum;
+        fabricsInfo.fabricId = $("#fabricId" + idNum).val();
+        fabricsInfo.isShow = $("#isShow" + idNum).val();
+        fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();
+        fabricsInfo.compositePantoneId = $("#compositePantoneId" + idNum).val();
+        fabricsInfo.compositeProductTypeId = $("#compositeProductTypeId" + idNum).val();
 
         var fabricsDetailInfo = {};//面料描述信息
-        fabricsDetailInfo.specificationId = $("#specificationId" + index).val();
-        fabricsDetailInfo.dyeId = $("#dyeId" + index).val();
-        fabricsDetailInfo.finishId = $("#finishId" + index).val();
-        fabricsDetailInfo.compositeSpecificationId = $("#compositeSpecificationId" + index).val();
-        fabricsDetailInfo.compositeDyeId = $("#compositeDyeId" + index).val();
-        fabricsDetailInfo.compositeFinishId = $("#compositeFinishId" + index).val();
-        fabricsDetailInfo.blcId = $("#blcId" + index).val();
-        fabricsDetailInfo.momcId = $("#momcId" + index).val();
-        fabricsDetailInfo.comocId = $("#comocId" + index).val();
-        fabricsDetailInfo.wvpId = $("#wvpId" + index).val();
-        fabricsDetailInfo.mtId = $("#mtId" + index).val();
-        fabricsDetailInfo.woblcId = $("#woblcId" + index).val();
+        fabricsDetailInfo.specificationId = $("#specificationId" + idNum).val();
+        fabricsDetailInfo.dyeId = $("#dyeId" + idNum).val();
+        fabricsDetailInfo.finishId = $("#finishId" + idNum).val();
+        fabricsDetailInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
+        fabricsDetailInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
+        fabricsDetailInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
+        fabricsDetailInfo.blcId = $("#blcId" + idNum).val();
+        fabricsDetailInfo.momcId = $("#momcId" + idNum).val();
+        fabricsDetailInfo.comocId = $("#comocId" + idNum).val();
+        fabricsDetailInfo.wvpId = $("#wvpId" + idNum).val();
+        fabricsDetailInfo.mtId = $("#mtId" + idNum).val();
+        fabricsDetailInfo.woblcId = $("#woblcId" + idNum).val();
         fabricsDetailInfo.fabricId = fabricsInfo.fabricId;
 
         var materialSpInfo = {};//面料用量信息
-        materialSpInfo.orderCount = $("#orderCount" + index).val();
-        materialSpInfo.attritionRate = $("#attritionRate" + index).val();
-        materialSpInfo.unitPrice = $("#unitPrice" + index).val();
-        materialSpInfo.totalAmount = $("#totalAmount" + index).val();
-        materialSpInfo.totalPrice = $("#totalPrice" + index).val();
+        materialSpInfo.orderCount = $("#orderCount" + idNum).val();
+        materialSpInfo.attritionRate = $("#attritionRate" + idNum).val();
+        materialSpInfo.unitPrice = $("#unitPrice" + idNum).val();
+        materialSpInfo.totalAmount = $("#totalAmount" + idNum).val();
+        materialSpInfo.totalPrice = $("#totalPrice" + idNum).val();
         materialSpInfo.fabricId = fabricsInfo.fabricId;
 
         var materialUnitDosage = {};//面料单位用量
-        materialUnitDosage.unitId = $("#unitId" + index).val();
-        materialUnitDosage.unitAmount = $("#unitAmount" + index).val();
+        materialUnitDosage.unitId = $("#unitId" + idNum).val();
+        materialUnitDosage.unitAmount = $("#unitAmount" + idNum).val();
         materialUnitDosage.fabricId = fabricsInfo.fabricId;
         fabricItem.fabricsInfo = fabricsInfo;
         fabricItem.fabricsDetailInfo = fabricsDetailInfo;
@@ -935,9 +917,9 @@
      */
     function monitorSelectChange() {
 
-        var _id = $(this).attr('name');
+        var _name = $(this).attr('name');
         //选择复合时，显示响应的
-        if (_id == 'blcId') {
+        if (_name == 'blcId') {
             var blcIdVal = $(this).val();
             var thisId = $(this).attr('id');
             var idNum = thisId.substring(5);
@@ -946,7 +928,7 @@
             });
         }
         //选择材料类别
-        else if (_id == 'materialTypeId') {
+        else if (_name == 'materialTypeId') {
             var materialTypeIdVal = $(this).val();
             var thisId = $(this).attr('id');
             //noinspection JSDuplicatedDeclaration

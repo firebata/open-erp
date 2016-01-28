@@ -79,7 +79,6 @@
                                    <%--class="col-xs-10 col-sm-12"/>--%>
                             <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds" placeholder="颜色"    id="{{pantoneIds}}"></select>
                         </div>
-
                         <label class="col-xs-2  control-label" for="{{productTypeId}}"> 品名 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{productTypeId}}" name="productTypeId"
@@ -290,30 +289,20 @@
                     </div>
 
                     <div class="form-group">
-
-                        <label class="col-xs-2  control-label"
-                               for="{{totalAmount}}" data-toggle="tooltip" title="各色总数量 * 单位用量"> 各色总用量 </label>
-
+                        <label class="col-xs-2  control-label"     for="{{totalAmount}}" data-toggle="tooltip" title="各色总数量 * 单位用量"> 各色总用量 </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{totalAmount}}" name="totalAmount" placeholder="各色总用量"
-                                   class="col-xs-10 col-sm-12"/>
+                            <input type="text" id="{{totalAmount}}" name="totalAmount" placeholder="各色总用量"      class="col-xs-10 col-sm-12"/>
                         </div>
-
                     </div>
 
                     <div class="form-group">
-
                         <label class="col-xs-2  control-label" for="{{unitPrice}}"> 单价 </label>
-
                         <div class="col-xs-3">
-                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价"
-                                   class="col-xs-10 col-sm-12"/>
+                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价"          class="col-xs-10 col-sm-12"/>
                         </div>
                         <label class="col-xs-2  control-label" for="{{totalPrice}}"> 总价 </label>
-
                         <div class="col-xs-3">
-                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价"
-                                   class="col-xs-10 col-sm-12"/>
+                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价"        class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>
                 </div>

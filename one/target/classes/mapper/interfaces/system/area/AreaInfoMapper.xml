@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.AreaManageMapper">
+    <sql id="searchInfoSql">
+		a.id AS id,
+		a.area_id AS natrualkey,
+		a.area_name AS name,
+		a.customer_id AS customerId,
+		b.name AS customerName,
+		a.del_flag AS delFlag,
+		a.update_time AS updateTime,
+		a.remark AS remark
+	</sql>
+    <select id="queryInfo" resultType="AreaInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_jc_area a,t_jc_customer b
+        WHERE a.area_id =#{natrualkey} and a.customer_id = b.customer_id
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_jc_area where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_jc_area where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            area_name like concat('%',#{searchValue},'%') or
+            area_id like concat('%',#{searchValue},'%') or
+            customer_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="AreaInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_jc_area a,t_jc_customer b
+        WHERE a.del_flag=0 and a.customer_id = b.customer_id
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            area_name like concat('%',#{searchValue},'%') or
+            area_id like concat('%',#{searchValue},'%') or
+            customer_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+		update t_jc_area 	set
+		area_name=#{name},
+		customer_id=#{customerId},
+		remark=#{remark}
+		WHERE area_id =#{natrualkey}
+	</update>
+
+    <insert id="add">
+		insert into
+		t_jc_area (area_id,customer_id,area_name,remark)
+		values (#{natrualkey},#{customerId},#{name},#{remark})
+	</insert>
+
+    <update id="del">
+		update t_jc_area
+		set  del_flag=1
+		where area_id =#{natrualkey}
+	</update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+		select case when  area_id is NULL then 0 else area_id end from t_jc_area    ORDER BY id DESC LIMIT 1
+	</select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        area_id AS natrualkey,
+        area_name AS name
+        from t_jc_area
+        where del_flag=0
+        <if test="name!=null and name!=''">
+            and area_name like concat('%',#{name},'%')
+        </if>
+
+    </select>
+
+</mapper>

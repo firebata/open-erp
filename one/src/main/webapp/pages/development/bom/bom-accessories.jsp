@@ -72,10 +72,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{pantoneIdF}}"> 颜色 </label>
+                        <label class="col-xs-2  control-label" for="{{pantoneIdsF}}"> 颜色 </label>
 
                         <div class="col-xs-3">
-                            <input type="text" id="{{pantoneIdF}}" name="pantoneId" placeholder="颜色"   class="col-xs-10 col-sm-12"/>
+                            <%--<input type="text" id="{{pantoneIdF}}" name="pantoneId" placeholder="颜色"   class="col-xs-10 col-sm-12"/>--%>
+                            <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds" placeholder="颜色"    id="{{pantoneIdsF}}"></select>
                         </div>
                         <label class="col-xs-2  control-label" for="{{productTypeIdF}}"> 品名 </label>
 

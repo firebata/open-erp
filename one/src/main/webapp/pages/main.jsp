@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="base/path.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -13,11 +13,12 @@
     <meta name="keywords" content="skysport,翊凯"/>
     <meta name="description" content="skysport,翊凯"/>
     <jsp:include page="base/hb-headc.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"     id="main-ace-style"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
 </head>
 
 <body class="no-skin">
-<%@ include file="top.jsp"%>
+<%@ include file="top.jsp" %>
 <div class="main-container" id="main-container">
     <script type="text/javascript">
         try {
@@ -76,21 +77,19 @@
 <!-- basic scripts -->
 
 
-
-
 </body>
 </html>
 <jsp:include page="base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" language="javascript">
 
     $(function () {
-
 //				//等待iframe加载完成，才
         $("#mainIframe").load(function () {
             $("#mainIframe").height($(window.frames["mainIframe"]).contents().height());
         });
-    });
 
+
+    });
 
 </script>
 <!--控制菜单显示-->

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.CustomerManageMapper">
+    <sql id="searchInfoSql">
+		id AS id,
+		customer_id AS natrualkey,
+		email1 AS email,
+		email2 AS email2,
+		name AS name,
+		full_name AS fullName,
+		cor_time AS corTime,
+		address AS address,
+		contact AS contact,
+		tel AS tel,
+		phone AS phone,
+		skype_account AS skypeAccount,
+		del_flag AS delFlag,
+		update_time AS updateTime,
+		remark AS remark
+	</sql>
+    <select id="queryInfo" resultType="CustomerInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_jc_customer
+        WHERE customer_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_jc_customer where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_jc_customer where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            name like concat('%',#{searchValue},'%') or
+            full_name like concat('%',#{searchValue},'%') or
+            contact like concat('%',#{searchValue},'%') or
+            page_no like concat('%',#{searchValue},'%') or
+            email1 like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="CustomerInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_jc_customer
+        WHERE del_flag=0
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            name like concat('%',#{searchValue},'%') or
+            full_name like concat('%',#{searchValue},'%') or
+            contact like concat('%',#{searchValue},'%') or
+            page_no like concat('%',#{searchValue},'%') or
+            email1 like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+		update t_jc_customer 	set
+		email1=#{email},
+		email2=#{email2},
+		name=#{name},
+		full_name=#{fullName},
+		cor_time=#{corTime},
+		address=#{address},
+		contact=#{contact},
+		tel=#{tel},
+		phone=#{phone},
+		skype_account=#{skypeAccount},
+		remark=#{remark}
+		WHERE customer_id =#{natrualkey}
+	</update>
+
+    <insert id="add">
+		insert into
+		t_jc_customer (customer_id,email1,email2,name,full_name,cor_time,address,contact,tel,phone,skype_account,remark)
+		values (#{natrualkey},#{email},#{email2},#{name},#{fullName},#{corTime},#{address},#{contact},#{tel},#{phone},#{skypeAccount},#{remark})
+	</insert>
+
+    <update id="del">
+		update t_jc_customer
+		set  del_flag=1
+		where customer_id =#{natrualkey}
+	</update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+		select case when customer_id is NULL then 0 else customer_id end from t_jc_customer    ORDER BY id DESC LIMIT 1
+	</select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        customer_id AS natrualkey,
+        name AS name
+        from t_jc_customer
+        where del_flag=0
+        <if test="name!=null and name!=''">and upper(name) like concat('%',#{name},'%')</if>
+    </select>
+
+</mapper>

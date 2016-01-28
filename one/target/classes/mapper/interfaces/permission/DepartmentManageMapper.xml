@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.system.DepartmentManageMapper">
+
+    <sql id="searchDepartmentSql">
+        id AS id,
+        dept_id AS natrualkey,
+        dept_name AS name,
+        dept_admin AS deptAdmin,
+        dept_admin_candidate AS deptAcminCandidate,
+        buss_licen AS bussLicen,
+        city_code AS cityCode,
+        country_code AS countryCode,
+        parent_id AS parentId,
+        remark AS remark
+    </sql>
+
+    <select id="queryInfo" resultType="DepartmentInfo">
+        select
+          <include refid="searchDepartmentSql"/>
+        FROM
+          t_qx_department
+        WHERE
+          dept_id =#{natrualkey}
+          limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_qx_department
+        WHERE
+          del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_qx_department
+        WHERE
+          del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            dept_id like concat('%',#{searchValue},'%') or
+            dept_name	like concat('%',#{searchValue},'%') or
+            dept_admin like concat('%',#{searchValue},'%') or
+            dept_admin_candidate like	concat('%',#{searchValue},'%') or
+            parent_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="DepartmentInfo">
+        SELECT
+          <include refid="searchDepartmentSql" />
+        FROM
+          t_qx_department
+        WHERE
+          del_flag=0
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            dept_id like concat('%',#{searchValue},'%') or
+            dept_name	like concat('%',#{searchValue},'%') or
+            dept_admin like concat('%',#{searchValue},'%') or
+            dept_admin_candidate like	concat('%',#{searchValue},'%') or
+            parent_id like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+    </select>
+
+    <update id="updateInfo">
+        update
+            t_qx_department
+        set
+            dept_name=#{name},
+            dept_admin=#{deptAdmin},
+            dept_admin_candidate=#{deptAcminCandidate},
+            city_code=#{cityCode},
+            country_code=#{countryCode},
+            parent_id=#{parentId},
+            remark=#{remark},
+            buss_licen=#{bussLicen}
+        WHERE
+            dept_id =#{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert into
+          t_qx_department (dept_id,dept_name,dept_admin,dept_admin_candidate,city_code,country_code,buss_licen,parent_id,remark)
+        values
+          (#{natrualkey},#{name},#{deptAdmin},#{deptAcminCandidate},#{cityCode},#{countryCode},#{bussLicen},#{parentId},#{remark})
+    </insert>
+
+    <update id="del">
+        update
+          t_qx_department
+        set
+          del_flag=1
+        where
+          dept_id =#{natrualkey}
+    </update>
+
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+          dept_id AS natrualkey,
+          dept_name AS name
+        from
+          t_qx_department
+        where
+           del_flag=0
+        <if test="name!=null and name != ''">
+            and upper(dept_name) like concat('%',#{name},'%')
+        </if>
+    </select>
+
+
+</mapper>

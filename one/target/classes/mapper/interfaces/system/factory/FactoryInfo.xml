@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.FactoryManageMapper">
+    <sql id="searchInfoSql">
+        id AS id,
+        factory_id AS natrualkey,
+        email AS email,
+        factory_name AS name,
+        factory_fullname AS factoryFullname,
+        factory_address AS factoryAddress,
+        factory_contact AS factoryContact,
+        factory_legal AS factoryLegal,
+        factory_tel1 AS factoryTel1,
+        factory_license AS factoryLicense,
+        cooperation_time AS cooperationTime,
+        del_flag AS delFlag,
+        update_time AS updateTime,
+        remark AS remark
+    </sql>
+    <select id="queryInfo" resultType="FactoryInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_jc_factory
+        WHERE factory_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM   t_jc_factory where del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_jc_factory where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            factory_name like concat('%',#{searchValue},'%') or
+            factory_contact like concat('%',#{searchValue},'%') or
+            email like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+    </select>
+
+    <select id="searchInfos" resultType="FactoryInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_jc_factory
+        WHERE del_flag=0
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            factory_name like concat('%',#{searchValue},'%') or
+            factory_contact like concat('%',#{searchValue},'%') or
+            email like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+        update t_jc_factory 	set
+        email=#{email},
+        factory_name=#{name},
+        factory_fullname=#{factoryFullname},
+        factory_address=#{factoryAddress},
+        factory_contact=#{factoryContact},
+        factory_legal=#{factoryLegal},
+        factory_tel1=#{factoryTel1},
+        factory_license=#{factoryLicense},
+        cooperation_time=#{cooperationTime},
+        remark=#{remark}
+        WHERE factory_id =#{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert into  t_jc_factory (factory_id,email,factory_name,factory_fullname,factory_address,factory_contact,factory_legal,factory_tel1,factory_license,cooperation_time,remark)
+        values (#{natrualkey},#{email},#{name},#{factoryFullname},#{factoryAddress},#{factoryContact},#{factoryLegal},#{factoryTel1},#{factoryLicense},#{cooperationTime},#{remark})
+    </insert>
+
+    <update id="del">
+        update t_jc_factory
+        set  del_flag=1
+        where factory_id =#{natrualkey}
+    </update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+        select case when  factory_id is NULL then 0 else factory_id end from t_jc_factory    ORDER BY id DESC LIMIT 1
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        factory_id AS natrualkey,
+        factory_name AS name
+        from t_jc_factory
+        where del_flag=0
+        <if test="name!=null and name!=''">
+            and upper(factory_name) like concat('%',#{name},'%')
+        </if>
+    </select>
+
+</mapper>

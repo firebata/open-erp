@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.ProjectItemManageMapper">
+    <sql id="searchInfoSql">
+		a.id AS id,
+		a.project_id AS natrualkey,
+		a.parent_project_id AS parentProjectId,
+		a.project_name AS name,
+		a.year_code AS yearCode,
+		a.customer_id AS customerId,
+		a.area_id AS areaId,
+		a.series_id AS seriesId,
+		a.creater AS creater,
+		date_format(a.create_time,'%Y-%m-%d') AS createTime,
+		a.version AS version,
+		a.sample_delivery AS sampleDelivery,
+		a.is_need_swatch AS isNeedSwatch,
+		a.is_need_preoffer AS isNeedPreOffer,
+		a.need_preoffer_date AS needPreOfferDate,
+		a.sketch_received_date AS sketchReceivedDate,
+		a.file_location AS fileLocation,
+		b.category_a_id AS categoryAid,
+		b.category_a_name AS categoryAname,
+		b.category_b_id AS categoryBid,
+		b.category_b_name AS categoryBname,
+		b.collection_number AS collectionNumber,
+		b.main_color_ids AS mainColorNames,
+		b.sex_ids AS sexIds,
+		a.del_flag AS delFlag,
+		a.update_time AS updateTime,
+		a.remark AS remark
+	</sql>
+
+    <select id="queryInfo" resultType="ProjectBomInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_kf_project_item a LEFT  JOIN  t_kf_project_item_bom_baseinfo b
+        on a.project_id =#{natrualkey} and a.project_id = b.project_id
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_kf_project_item where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM
+        t_kf_project_item where del_flag=0
+		<if test="projectBomInfo.yearCode !=null and projectBomInfo.yearCode != '' and projectBomInfo.yearCode != '-1'">
+			and year_code=#{projectBomInfo.yearCode}
+		</if>
+		<if test="projectBomInfo.customerId !=null and projectBomInfo.customerId != '' and projectBomInfo.customerId != '-1'">
+			and customer_id=#{projectBomInfo.customerId}
+		</if>
+		<if test="projectBomInfo.areaId !=null and projectBomInfo.areaId != '' and projectBomInfo.areaId != '-1'">
+			and area_id=#{projectBomInfo.areaId}
+		</if>
+		<if test="projectBomInfo.seriesId !=null and projectBomInfo.seriesId != '' and projectBomInfo.seriesId != '-1'">
+			and series_id=#{projectBomInfo.seriesId}
+		</if>
+		<if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+				project_name like concat('%',#{dataTablesInfo.searchValue},'%') OR
+				remark like concat('%',#{dataTablesInfo.searchValue},'%')
+			)
+        </if>
+    </select>
+
+    <select id="searchInfos" resultType="ProjectBomInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_project_item a LEFT  JOIN  t_kf_project_item_bom_baseinfo b
+        ON  a.del_flag=0 and a.project_id = b.project_id
+		<if test="projectBomInfo.yearCode !=null and projectBomInfo.yearCode != '' and projectBomInfo.yearCode != '-1'">
+			and year_code=#{projectBomInfo.yearCode}
+		</if>
+		<if test="projectBomInfo.customerId !=null and projectBomInfo.customerId != '' and projectBomInfo.customerId != '-1'">
+			and customer_id=#{projectBomInfo.customerId}
+		</if>
+		<if test="projectBomInfo.areaId !=null and projectBomInfo.areaId != '' and projectBomInfo.areaId != '-1'">
+			and area_id=#{projectBomInfo.areaId}
+		</if>
+		<if test="projectBomInfo.seriesId !=null and projectBomInfo.seriesId != '' and projectBomInfo.seriesId != '-1'">
+			and series_id=#{projectBomInfo.seriesId}
+		</if>
+        <if test="dataTablesInfo.searchValue!=null and dataTablesInfo.searchValue != ''">
+            and (
+				a.project_name like concat('%',#{dataTablesInfo.searchValue},'%') OR
+				a.remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY a.update_time desc, ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
+        </if>
+		<if  test="dataTablesInfo.orderColumn == null or dataTablesInfo.orderColumn == ''">
+			ORDER BY a.update_time desc
+		</if>
+        limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
+
+    </select>
+
+    <update id="updateInfo">
+		update
+			t_kf_project_item
+		set
+			version =#{version},
+			remark=#{remark}
+		WHERE
+			project_id =#{natrualkey}
+	</update>
+
+    <update id="updateBomInfo">
+		update
+			t_kf_project_item_bom_baseinfo
+		set
+			collection_number =#{collectionNumber},
+			main_color_ids =#{mainColorNames},
+			sex_ids =#{sexIds},
+			remark=#{remark}
+		WHERE
+			project_id =#{natrualkey}
+	</update>
+
+    <insert id="add">
+		insert into
+		t_kf_project_item (seq_no,project_id,parent_project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
+		values (#{seqNo},#{natrualkey},#{parentProjectId},#{name},#{yearCode},#{customerId},#{areaId},#{seriesId},#{creater},#{version},#{sampleDelivery},#{isNeedSwatch},#{isNeedPreOffer},#{needPreOfferDate},#{sketchReceivedDate},#{fileLocation},#{remark})
+	</insert>
+
+	<insert id="addBatch" parameterType="list">
+		insert into
+			t_kf_project_item (seq_no,project_id,parent_project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.seqNo},#{item.natrualkey},#{item.parentProjectId},#{item.name},#{item.yearCode},#{item.customerId},#{item.areaId},#{item.seriesId},#{item.creater},#{item.version},#{item.sampleDelivery},#{item.isNeedSwatch},#{item.isNeedPreOffer},#{item.needPreOfferDate},#{item.sketchReceivedDate},#{item.fileLocation},#{item.remark})
+		</foreach>
+	</insert>
+
+	<insert id="addBomInfo">
+		insert into
+		t_kf_project_item_bom_baseinfo (project_id,project_name,category_a_id,category_a_name,category_b_id,category_b_name,collection_number,main_color_ids,sex_ids,remark)
+		values (#{natrualkey},#{name},#{categoryAid},#{categoryAname},#{categoryBid},#{categoryBname},#{collectionNumber},#{mainColorNames},#{sexIds},#{remark})
+	</insert>
+
+
+	<insert id="addBatchBomInfo">
+		insert into
+		t_kf_project_item_bom_baseinfo (project_id,project_name,category_a_id,category_a_name,category_b_id,category_b_name,collection_number,main_color_ids,sex_ids,remark)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			 (#{item.natrualkey},#{item.name},#{item.categoryAid},#{item.categoryAname},#{item.categoryBid},#{item.categoryBname},#{item.collectionNumber},#{item.mainColorNames},#{item.sexIds},#{item.remark})
+		</foreach>
+	</insert>
+
+
+
+    <update id="del">
+		update t_kf_project_item
+		set  del_flag=1
+		where project_id =#{natrualkey}
+	</update>
+
+
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+		select
+			project_id AS natrualkey,
+			project_name AS name
+		from t_kf_project_item
+		where del_flag=0 and project_name like concat('%',#{name},'%')
+	</select>
+
+</mapper>

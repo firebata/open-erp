@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper">
+
+    <sql id="searchInfoSql">
+        a.id AS id,
+        a.pantone_id As pantoneId,
+        ifnull(b.zh_name,b.en_name) AS pantoneName,
+        a.material_id AS materialId,
+        a.del_flag AS delFlag,
+        a.update_time AS updateTime,  
+        a.remark AS remark
+    </sql>
+
+    <sql id="searchIdsSql">
+        a.pantone_id AS pantoneId
+    </sql>
+
+    <select id="queryIds" resultType="KFMaterialPantone">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_material_pantone a,t_jc_pantone b
+        WHERE a.material_id =#{materialId} and a.pantone_id = b.pantone_id AND a.del_flag=0 AND b.del_flag=0
+    </select>
+
+    <select id="queryInfo" resultType="KFMaterialPantone">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_material_pantone a
+        WHERE a.material_id = #{materialId}
+    </select>
+
+
+    <update id="updateInfo">
+        UPDATE
+        t_kf_material_pantone a
+        SET
+        a.pantone_id =#{pantoneId},
+        a.pantone_name =#{pantoneName},
+        a.remark = #{remark}
+        WHERE a.material_id =#{materialId}
+    </update>
+
+    <insert id="addBatch">
+        INSERT INTO t_kf_material_pantone (pantone_id,pantone_name,material_id,remark)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.pantoneId},#{item.pantoneName},#{item.materialId},#{item.remark})
+        </foreach>
+
+    </insert>
+
+
+    <insert id="add">
+        INSERT INTO t_kf_material_pantone (pantone_id,pantone_name,material_id,remark)
+        VALUES
+        (#{pantoneId},#{pantoneName},#{materialId},#{remark})
+    </insert>
+
+    <update id="del">
+        UPDATE t_kf_material_pantone
+        SET  del_flag=1
+        WHERE material_id =#{materialId}
+    </update>
+
+</mapper>

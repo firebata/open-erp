@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.FactoryQuotedInfoMapper">
+
+    <sql id="searchInfoSql">
+        id AS id,
+        factory_quote_id AS factoryQuoteId,
+        sp_id AS spId,
+        offer_amount AS offerAmount,
+        quote_ref AS quoteReference,
+        fabrics_end_date AS fabricsEndDate,
+        accessories_end_date AS accessoriesEndDate,
+        preoffer_date AS preOfferDate,
+        cloth_received_date AS clothReceivedDate,
+        factory_offer AS factoryOffer,
+        factory_margins AS factoryMargins,
+        costing AS costing,
+        bom_id AS bomId,
+        euro_price AS euroPrice,
+        del_flag AS delFlag,
+        update_time AS updateTime,
+        remark AS remark
+    </sql>
+
+
+    <select id="selectAlId" resultType="String">
+      select factory_quote_id
+      from t_kf_factory_quote a
+       WHERE
+        a.bom_id = #{bomId} and a.del_flag=0
+    </select>
+
+    <delete id="deleteByIds">
+        DELETE from t_kf_factory_quote
+        where factory_quote_id IN
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+
+
+    <select id="queryInfo" resultType="FactoryQuoteInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_kf_factory_quote
+        WHERE bom_id =#{bomId}
+        limit 1
+    </select>
+
+    <update id="updateInfo">
+        update
+            t_kf_factory_quote
+        set
+            sp_id = #{spId},
+            offer_amount = #{offerAmount},
+            quote_ref = #{quoteReference},
+            fabrics_end_date = #{fabricsEndDate},
+            accessories_end_date = #{accessoriesEndDate},
+            preoffer_date = #{preOfferDate},
+            cloth_received_date = #{clothReceivedDate},
+            factory_offer = #{factoryOffer},
+            factory_margins = #{factoryMargins},
+            costing = #{costing},
+            euro_price  = #{euroPrice},
+            bom_id = #{bomId},
+            del_flag  = #{delFlag}
+        WHERE
+            factory_quote_id =#{factoryQuoteId}
+    </update>
+
+    <insert id="add">
+        insert into  t_kf_factory_quote (bom_id,sp_id,offer_amount,quote_ref,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,factory_offer,factory_margins,costing,remark,name_num,euro_price,factory_quote_id)
+        values (#{bomId},#{spId},#{offerAmount},#{quoteReference},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{factoryOffer},#{factoryMargins},#{costing},#{remark},#{nameNum},#{euroPrice},#{factoryQuoteId})
+    </insert>
+
+
+    <update id="del">
+        update t_kf_factory_quote
+        set  del_flag=1
+        where bom_id =#{bomId}
+    </update>
+
+
+    <select id="queryFactoryQuoteInfoList" resultType="FactoryQuoteInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM
+        t_kf_factory_quote a
+        WHERE
+        a.bom_id = #{bomId} and a.del_flag=0
+        ORDER BY a.name_num ASC
+    </select>
+
+</mapper>
