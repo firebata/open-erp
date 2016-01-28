@@ -13,53 +13,6 @@
     });
 
 
-    function buildPackagingItem(index) {
-        var packagingItem = {};
-
-        var kfPackaging = {};//基本信息
-        kfPackaging.spId = $("#spIdP" + index).val();
-        kfPackaging.yearCode = $("#yearCodeP" + index).val();
-        kfPackaging.classicId = $("#classicIdP" + index).val();
-        kfPackaging.pantoneId = $("#pantoneIdP" + index).val();
-        kfPackaging.productTypeId = $("#productTypeIdP" + index).val();
-
-        var positionIds = $("#positionIdsP" + index).val();
-        var materialPositions = [];
-        if (null != positionIds && positionIds.length > 0) {
-            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
-                var materialPosition = {"positionId": positionIds[idx]};
-                materialPositions.push(materialPosition)
-            }
-        }
-        kfPackaging.positionIds = materialPositions;
-
-        kfPackaging.materialTypeId = $("#materialTypeIdP" + index).val();
-        kfPackaging.techRequired = $("#techRequiredP" + index).val();
-        kfPackaging.width = $("#widthP" + index).val();
-        kfPackaging.length = $("#lengthP" + index).val();
-        kfPackaging.nameNum = index;
-        kfPackaging.packagingId = $("#packagingIdP" + index).val();
-
-        var materialSpInfo = {};//包材用量信息
-        materialSpInfo.orderCount = $("#orderCountP" + index).val();
-        materialSpInfo.attritionRate = $("#attritionRateP" + index).val();
-        materialSpInfo.unitPrice = $("#unitPriceP" + index).val();
-        materialSpInfo.totalAmount = $("#totalAmountP" + index).val();
-        materialSpInfo.totalPrice = $("#totalPriceP" + index).val();
-        materialSpInfo.packagingId = kfPackaging.packagingId;
-
-        var materialUnitDosage = {};//包材单位用量
-        materialUnitDosage.unitId = $("#unitIdP" + index).val();
-        materialUnitDosage.unitAmount = $("#unitAmountP" + index).val();
-        materialUnitDosage.packagingId = kfPackaging.packagingId;
-
-        packagingItem.kfPackaging = kfPackaging;
-        packagingItem.materialSpInfo = materialSpInfo;
-        packagingItem.materialUnitDosage = materialUnitDosage;
-        return packagingItem;
-    }
-
-
     /**
      * 包材信息
      * @returns {Array}
@@ -67,16 +20,16 @@
     function buildPackagingItems() {
         var size = $("div[id^=packagingAllInfoId]").length;
         var packagingItems = [];
-        for (var index = 1; index <= size; index++) {
-            var packagingItem = buildPackagingItem(index);
+        for (var idx = 1; idx <= size; idx++) {
+            var packagingItem = buildPackagingItem(idx);
             packagingItems.push(packagingItem);
         }
         return packagingItems;
     }
 
     function initPackaging(packagings) {
-        for (var index = 0; index < packagings.length; index++) {
-            addPackaging(packagings[index]);
+        for (var idx = 0; idx < packagings.length; idx++) {
+            addPackaging(packagings[idx]);
         }
     }
 
@@ -96,17 +49,17 @@
             },
             fields: fieldsDesc
         }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-            console.log(title_type + _id + "验证成功");
+            console.log(title_type + _id + "验证成功" + e);
             savePackagingFun(_id);
         });
-    }
+    };
 
     /**
-     * 初始化包材nextIdNum的表单信息
-     * @param nextIdNum 包材序号
+     * 初始化包材idNum的表单信息
+     * @param idNum 包材序号
      * @param _packagingInfo 包材表单值
      */
-    function initPackagingFields(nextIdNum, _packagingInfo) {
+    function initPackagingFields(idNum, _packagingInfo) {
 
         //保存值
         var packagingInfo = $.extend({}, _packagingInfo);
@@ -125,67 +78,73 @@
                         positionIds.push(arr[idx].positionId);
                     }
                 }
-                $('#positionIds' + "P" + nextIdNum).selectpicker("val", positionIds);
+                $('#positionIds' + "P" + idNum).selectpicker("val", positionIds);
                 //$('#sexIds').val(arr);
             }
             else {
                 //下拉框
-                $("#" + key + "P" + nextIdNum).val(_packagingInfo[key]);
+                $("#" + key + "P" + idNum).val(_packagingInfo[key]);
             }
 
         });
 
+
+        var pantoneIdsArr = _packagingInfo["pantoneIds"];
+        if (pantoneIdsArr != null) {
+            var _pantoneIdsArr = $.turnPantoneInfoToSelect2Option(pantoneIdsArr);
+            var $id = $('#pantoneIdsP' + idNum);
+            $.reloadPantoneId($id, _pantoneIdsArr);
+        }
+
     }
 
+    var buildMyTemplateData = function (idNum) {
+        return {
+            "packaging": [
+                {
+                    "currenId": idNum,
+                    "packagingDivId": "packagingDivId" + idNum,
+                    "packagingTitleId": "packagingTitleId" + idNum,
+                    "packagingIdP": "packagingIdP" + idNum,
+                    "packagingTitleName": title_type + idNum,
+                    "packagingEyeId": "packagingEyeId" + idNum,
+                    "packagingTrashId": "packagingTrashId" + idNum,
+                    "packagingRepeatId": "packagingRepeatId" + idNum,
+                    "packagingCopyId": "packagingCopyId" + idNum,
+                    "packagingFormId": "packagingFormId" + idNum,
+                    "packagingAllInfoId": "packagingAllInfoId" + idNum,
+                    "packagingDetailId": "packagingDetailId" + idNum,
+                    "materialTypeIdP": "materialTypeIdP" + idNum,
+                    "spIdP": "spIdP" + idNum,
+                    "yearCodeP": "yearCodeP" + idNum,
+                    "classicIdP": "classicIdP" + idNum,
+                    "pantoneIdsP": "pantoneIdsP" + idNum,
+                    "productTypeIdP": "productTypeIdP" + idNum,
+                    "techRequiredP": "techRequiredP" + idNum,
+                    "lengthP": "lengthP" + idNum,
+                    "widthP": "widthP" + idNum,
+                    "unitIdP": "unitIdP" + idNum,
+                    "positionIdsP": "positionIdsP" + idNum,
+                    "unitAmountP": "unitAmountP" + idNum,
+                    "orderCountP": "orderCountP" + idNum,
+                    "attritionRateP": "attritionRateP" + idNum,
+                    "unitPriceP": "unitPriceP" + idNum,
+                    "totalAmountP": "totalAmountP" + idNum,
+                    "totalPriceP": "totalPriceP" + idNum
+                }
+            ]
+        };
+    };
     /**
      * 添加包材
      */
     var addPackaging = function (packagingInfo) {
 
-        //if (packagingInfo == undefined){
-        //    packagingInfo = packaging;
-        //}
-
-
         var size = $("div[id^=packagingAllInfoId]").length;
 
-        var nextIdNum = size + 1;
+        var idNum = size + 1;
 
-        var data = {
-            "packaging": [
-                {
-                    "currenId": nextIdNum,
-                    "packagingDivId": "packagingDivId" + nextIdNum,
-                    "packagingTitleId": "packagingTitleId" + nextIdNum,
-                    "packagingIdP": "packagingIdP" + nextIdNum,
-                    "packagingTitleName": title_type + nextIdNum,
-                    "packagingEyeId": "packagingEyeId" + nextIdNum,
-                    "packagingTrashId": "packagingTrashId" + nextIdNum,
-                    "packagingRepeatId": "packagingRepeatId" + nextIdNum,
-                    "packagingCopyId": "packagingCopyId" + nextIdNum,
-                    "packagingFormId": "packagingFormId" + nextIdNum,
-                    "packagingAllInfoId": "packagingAllInfoId" + nextIdNum,
-                    "packagingDetailId": "packagingDetailId" + nextIdNum,
-                    "materialTypeIdP": "materialTypeIdP" + nextIdNum,
-                    "spIdP": "spIdP" + nextIdNum,
-                    "yearCodeP": "yearCodeP" + nextIdNum,
-                    "classicIdP": "classicIdP" + nextIdNum,
-                    "pantoneIdP": "pantoneIdP" + nextIdNum,
-                    "productTypeIdP": "productTypeIdP" + nextIdNum,
-                    "techRequiredP": "techRequiredP" + nextIdNum,
-                    "lengthP": "lengthP" + nextIdNum,
-                    "widthP": "widthP" + nextIdNum,
-                    "unitIdP": "unitIdP" + nextIdNum,
-                    "positionIdsP": "positionIdsP" + nextIdNum,
-                    "unitAmountP": "unitAmountP" + nextIdNum,
-                    "orderCountP": "orderCountP" + nextIdNum,
-                    "attritionRateP": "attritionRateP" + nextIdNum,
-                    "unitPriceP": "unitPriceP" + nextIdNum,
-                    "totalAmountP": "totalAmountP" + nextIdNum,
-                    "totalPriceP": "totalPriceP" + nextIdNum
-                }
-            ]
-        };
+        var data = buildMyTemplateData(idNum);
 
         var myTemplate = Handlebars.compile($("#packaging-template").html());
         $("#packagingItemInfo").append(myTemplate(data));
@@ -195,128 +154,125 @@
         $("span[id^=packagingEyeId]").removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
 
         //加载下拉列表数据,付初始值
-        reloadPackagingDetailSelectData(nextIdNum, function () {
+        reloadPackagingDetailSelectData(idNum, function () {
             if (packagingInfo != undefined) {
 
-
-                initPackagingFields(nextIdNum, packagingInfo);
-
+                initPackagingFields(idNum, packagingInfo);
                 //表单字段监听
-                startBootstrapValidatorListner(nextIdNum);
-
+                startBootstrapValidatorListner(idNum);
+            } else {
+                var $id = $('#pantoneIdsP' + idNum);
+                $.reloadPantoneId($id, []);
             }
         });
 
 
-    }
+    };
 
 
     //删除包材
-    function deletePackagingById(index) {
-        bom.packagings.splice(index - 1, 1);
+    function deletePackagingById(idNum) {
+        bom.packagings.splice(idNum - 1, 1);
     }
 
-    function copyPackaging(_this, index) {
-        var packagingItem = getPackagingItem(index);
+    function copyPackaging(_this, idNum) {
+        var packagingItem = getPackagingItem(idNum);
         packagingItem.packagingId = null;
         addPackaging(packagingItem);
 
-        //if (bom.packagings[index] == undefined || $.trim(bom.packagings[index]) == '') {
-        //    bootbox.alert("请先保存包材_" + index);
-        //}
     }
 
-    var deleteFun = function (id) {
-        //当前包材id
-        var curId = id;
-        var packagingArrLength = $("div[id^=packagingAllInfoId]").length;
+    var deleteFun = function (idNum) {
+        //当前包材idNum
+        var $packagingAllInfoId = $("div[id^=packagingAllInfoId]");
+        var packagingArrLength = $packagingAllInfoId.length;
         //删除当前包材和之后的所有包材
-        for (var index = curId; index <= packagingArrLength; index++) {
+        //noinspection JSDuplicatedDeclaration
+        for (var idx = idNum; idx <= packagingArrLength; idx++) {
             //$("div[id^=packagingAllInfoId]")
 
-            $("#packagingDivId" + index).remove();
+            $("#packagingDivId" + idx).remove();
 
             //保存当前节点之后的数据
-            if (index >= curId) {
+            if (idx >= idNum) {
 
-                if (index == curId) {
-                    deletePackagingById(index);
+                if (idx == idNum) {
+                    deletePackagingById(idx);
                 }
 
 
-                var formDataStr = $("#packagingFormId" + (index + 1)).serialize();
+                var formDataStr = $("#packagingFormId" + (idx + 1)).serialize();
                 if (formDataStr != '') {
-                    savePackagingById(index, formDataStr);
+                    savePackagingById(idx, formDataStr);
                 }
 
             }
         }
         //重新生成包材
         var maxPackagingId = packagingArrLength - 1;
-        for (var index = curId; index <= maxPackagingId; index++) {
-            addPackaging();
-        }
+        //循环增加包材
+        for (var idx = idNum; idx <= maxPackagingId; idx++) addPackaging();
 
-        $("div[id^=packagingAllInfoId]").hide(); //全部隐藏
+        $packagingAllInfoId.hide(); //全部隐藏
 
 
-    }
+    };
 
-    var doDel = function (result, id) {
+    var doDel = function (result, idNum) {
         if (result) {
-            deleteFun(id);
+            deleteFun(idNum);
         }
-    }
+    };
 
-    var trashPackagingSelect = function (_this, id) {
-        var saveFlag = bom.packagings[id - 1].saveFlag;
+    var trashPackagingSelect = function (_this, idNum) {
+        var saveFlag = bom.packagings[idNum - 1].saveFlag;
         if (saveFlag == true) {
-            bootbox.confirm(title_type + id + "已保存，确定要删除", function (result) {
-                doDel(result, id);
+            bootbox.confirm(title_type + idNum + "已保存，确定要删除", function (result) {
+                doDel(result, idNum);
             });
         }
         else {
-            deleteFun(id);
+            deleteFun(idNum);
         }
 
-    }
+    };
 
-    var savePackaging = function (_this, id) {
-        $('#packagingFormId' + id).bootstrapValidator('validate');
-    }
+    var savePackaging = function (_this, idNum) {
+        $('#packagingFormId' + idNum).bootstrapValidator('validate');
+    };
 
-    var savePackagingFun = function (id) {
-        var formDataStr = $("#packagingFormId" + id).serialize();
-        savePackagingById(id, formDataStr);
-
-
-        bom.packagings[id - 1].saveFlag = true;//已保存
-
-    }
+    var savePackagingFun = function (idNum) {
+        var formDataStr = $("#packagingFormId" + idNum).serialize();
+        savePackagingById(idNum, formDataStr);
 
 
-    var savePackagingById = function (id, formDataStr) {
+        bom.packagings[idNum - 1].saveFlag = true;//已保存
+
+    };
+
+
+    var savePackagingById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
-        bom.packagings[id - 1] = jsonObj;
-        if (!$("#packagingAllInfoId" + id).is(':hidden')) {
-            bom.packagings[id - 1].showFlag = true;//是否显示
+        bom.packagings[idNum - 1] = jsonObj;
+        if (!$("#packagingAllInfoId" + idNum).is(':hidden')) {
+            bom.packagings[idNum - 1].showFlag = true;//是否显示
         }
-        bom.packagings[id - 1].currenId = id;//当前序号
+        bom.packagings[idNum - 1].currenId = idNum;//当前序号
         $.sendRestFulAjax(savePackagingFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doPackagingSuccess_info(data, id);
+            _doPackagingSuccess_info(data, idNum);
         });
-    }
+    };
 
 
     /**
      * 显示或者展示div
      * @param _this
-     * @param id
+     * @param idNum
      */
-    var showOrHidePackaging = function (_this, id) {
-        var packagingEyeId = "#packagingEyeId" + id;
-        var packagingTrashId = "#packagingTrashId" + id;
-        $("#packagingAllInfoId" + id).toggle(300,
+    var showOrHidePackaging = function (_this, idNum) {
+        var packagingEyeId = "#packagingEyeId" + idNum;
+        var packagingTrashId = "#packagingTrashId" + idNum;
+        $("#packagingAllInfoId" + idNum).toggle(300,
             function () {
                 if ($(this).is(':hidden')) {
                     $(packagingEyeId).removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
@@ -328,96 +284,44 @@
                 }
             }
         );
-    }
+    };
 
-
-    /**
-     * 包材信息
-     * @returns {Array}
-     */
-    function getPackagingItem(index) {
-
-        var kfPackaging = {};//基本信息
-
-        kfPackaging.spId = $("#spIdP" + index).val();
-        kfPackaging.yearCode = $("#yearCodeP" + index).val();
-        kfPackaging.classicId = $("#classicIdP" + index).val();
-        kfPackaging.pantoneId = $("#pantoneIdP" + index).val();
-        kfPackaging.productTypeId = $("#productTypeIdP" + index).val();
-
-        var positionIds = $("#positionIdsP" + index).val();
-        var materialPositions = [];
-        if (null != positionIds && positionIds.length > 0) {
-            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
-                var materialPosition = {"positionId": positionIds[idx]};
-                materialPositions.push(materialPosition)
-            }
-        }
-        kfPackaging.positionIds = materialPositions;
-
-        kfPackaging.materialTypeId = $("#materialTypeIdP" + index).val();
-        kfPackaging.techRequired = $("#techRequiredP" + index).val();
-        kfPackaging.width = $("#widthP" + index).val();
-        kfPackaging.length = $("#lengthP" + index).val();
-        kfPackaging.nameNum = index;
-        kfPackaging.packagingId = $("#packagingIdP" + index).val();
-
-        kfPackaging.orderCount = $("#orderCountP" + index).val();
-        kfPackaging.attritionRate = $("#attritionRateP" + index).val();
-        kfPackaging.unitPrice = $("#unitPriceP" + index).val();
-        kfPackaging.totalAmount = $("#totalAmountP" + index).val();
-        kfPackaging.totalPrice = $("#totalPriceP" + index).val();
-
-        kfPackaging.unitId = $("#unitIdP" + index).val();
-        kfPackaging.unitAmount = $("#unitAmountP" + index).val();
-
-        return kfPackaging;
-    }
 
     /**
      * 当后台的基础信息修改后，点击刷新，
      */
-    var refreshPackagingSelect = function (_this, id) {
-        var packagingItem = getPackagingItem(id);
-        reloadBomSelect(id, function () {
-            initPackagingFields(id, packagingItem);
+    var refreshPackagingSelect = function (_this, idNum) {
+        var packagingItem = getPackagingItem(idNum);
+        reloadBomSelect(idNum, function () {
+            initPackagingFields(idNum, packagingItem);
         });
-    }
+        var $id = $('#pantoneIdsP' + idNum);
+        $.reloadPantoneId($id, packagingItem['pantoneIds']);
+    };
 
 
-    var reloadBomSelect = function (id, callback) {
+    var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
-            _doPackagingSuccess_info(data, id, callback);
+            _doPackagingSuccess_info(data, idNum, callback);
         });
-    }
+    };
 
     //第一次初始化下拉列表
-    var reloadPackagingDetailSelectData = function (id, callback) {
-        reloadBomSelect(id, callback);
+    var reloadPackagingDetailSelectData = function (idNum, callback) {
+        reloadBomSelect(idNum, callback);
 
-        //if ($.cookie('systemBaseMaps') == undefined) {
-        //    //第一次初始化下拉列表，存放到cookies中
-        //    $.sendRestFulAjax(path + "/system/baseinfo/bom_select", null, 'GET', 'json', function (data) {
-        //        _doPackagingSuccess_info(data, id);
-        //    });
-        //}
-        //else {
-        //    //第二次，直接从cookies中读取
-        //    initPackagingSelect(nextIdNum);
-        //}
-    }
+    };
 
 
     //cookie重新赋值，给下拉列表赋值
-    var _doPackagingSuccess_info = function (_data, id, callback) {
+    var _doPackagingSuccess_info = function (_data, idNum, callback) {
         //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
-        initPackagingSelect(_data, id, callback);
-    }
+        initPackagingSelect(_data, idNum, callback);
+    };
 
     //给下拉列表赋值
-    var initPackagingSelect = function (_data, id, callback) {
-        console.info("加载包材" + id + "的下拉列表");
-        var idNum = id;
+    var initPackagingSelect = function (_data, idNum, callback) {
+        console.info("加载包材" + idNum + "的下拉列表");
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 
         //材料类别
@@ -492,7 +396,7 @@
             callback();
         }
 
-    }
+    };
 
     /**
      *
@@ -517,7 +421,7 @@
         saveFlag: false,//是否已保存
         delFlag: false,//是否已删除
         currenId: 0 //包材下标
-    }
+    };
     /**
      * 新增/修改校验字段描述
      * @returns {{name: {validators: {notEmpty: {message: string}}}, customerId: {validators: {notEmpty: {message: string}}}}}
@@ -626,18 +530,120 @@
     };
 
     /**
+     *
+     * @param idNum
+     * @returns {{}}
+     */
+    function getPackagingItem(idNum) {
+
+        var kfPackaging = {};//基本信息
+        kfPackaging.spId = $("#spIdP" + idNum).val();
+        kfPackaging.yearCode = $("#yearCodeP" + idNum).val();
+        kfPackaging.classicId = $("#classicIdP" + idNum).val();
+        //kfPackaging.pantoneIds = $("#pantoneIdsP" + idNum).val();
+        kfPackaging.productTypeId = $("#productTypeIdP" + idNum).val();
+        //颜色多选
+        var pantoneIds = $("#pantoneIdsP" + idNum).select2('data');
+        kfPackaging.pantoneIds = pantoneIds;
+
+        var positionIds = $("#positionIdsP" + idNum).val();
+        var materialPositions = [];
+        if (null != positionIds && positionIds.length > 0) {
+            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
+                var materialPosition = {"positionId": positionIds[idx]};
+                materialPositions.push(materialPosition)
+            }
+        }
+
+        kfPackaging.positionIds = materialPositions;
+        kfPackaging.materialTypeId = $("#materialTypeIdP" + idNum).val();
+        kfPackaging.techRequired = $("#techRequiredP" + idNum).val();
+        kfPackaging.width = $("#widthP" + idNum).val();
+        kfPackaging.length = $("#lengthP" + idNum).val();
+        kfPackaging.nameNum = idNum;
+        kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
+        kfPackaging.orderCount = $("#orderCountP" + idNum).val();
+        kfPackaging.attritionRate = $("#attritionRateP" + idNum).val();
+        kfPackaging.unitPrice = $("#unitPriceP" + idNum).val();
+        kfPackaging.totalAmount = $("#totalAmountP" + idNum).val();
+        kfPackaging.totalPrice = $("#totalPriceP" + idNum).val();
+        kfPackaging.unitId = $("#unitIdP" + idNum).val();
+        kfPackaging.unitAmount = $("#unitAmountP" + idNum).val();
+
+        return kfPackaging;
+    }
+
+
+    /**
+     *
+     * @param idNum
+     * @returns {{}}
+     */
+    function buildPackagingItem(idNum) {
+        var packagingItem = {};
+
+        var kfPackaging = {};//基本信息
+        kfPackaging.spId = $("#spIdP" + idNum).val();
+        kfPackaging.yearCode = $("#yearCodeP" + idNum).val();
+        kfPackaging.classicId = $("#classicIdP" + idNum).val();
+        //kfPackaging.pantoneId = $("#pantoneIdsP" + idNum).val();
+        kfPackaging.productTypeId = $("#productTypeIdP" + idNum).val();
+
+        //颜色多选
+        var pantoneIds = $("#pantoneIdsP" + idNum).val();
+        var materialPantoneIds = [];
+        if (null != pantoneIds && pantoneIds.length > 0) {
+            for (var idx = 0, len = pantoneIds.length; idx < len; idx++) {
+                var materialPantone = {"pantoneId": pantoneIds[idx]};
+                materialPantoneIds.push(materialPantone)
+            }
+        }
+        kfPackaging.pantoneIds = materialPantoneIds;
+
+
+        var positionIds = $("#positionIdsP" + idNum).val();
+        var materialPositions = [];
+        if (null != positionIds && positionIds.length > 0) {
+            for (var idx = 0, len = positionIds.length; idx < len; idx++) {
+                var materialPosition = {"positionId": positionIds[idx]};
+                materialPositions.push(materialPosition)
+            }
+        }
+        kfPackaging.positionIds = materialPositions;
+        kfPackaging.materialTypeId = $("#materialTypeIdP" + idNum).val();
+        kfPackaging.techRequired = $("#techRequiredP" + idNum).val();
+        kfPackaging.width = $("#widthP" + idNum).val();
+        kfPackaging.length = $("#lengthP" + idNum).val();
+        kfPackaging.nameNum = idNum;
+        kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
+
+        var materialSpInfo = {};//包材用量信息
+        materialSpInfo.orderCount = $("#orderCountP" + idNum).val();
+        materialSpInfo.attritionRate = $("#attritionRateP" + idNum).val();
+        materialSpInfo.unitPrice = $("#unitPriceP" + idNum).val();
+        materialSpInfo.totalAmount = $("#totalAmountP" + idNum).val();
+        materialSpInfo.totalPrice = $("#totalPriceP" + idNum).val();
+        materialSpInfo.packagingId = kfPackaging.packagingId;
+
+        var materialUnitDosage = {};//包材单位用量
+        materialUnitDosage.unitId = $("#unitIdP" + idNum).val();
+        materialUnitDosage.unitAmount = $("#unitAmountP" + idNum).val();
+        materialUnitDosage.packagingId = kfPackaging.packagingId;
+
+        packagingItem.kfPackaging = kfPackaging;
+        packagingItem.materialSpInfo = materialSpInfo;
+        packagingItem.materialUnitDosage = materialUnitDosage;
+        return packagingItem;
+    }
+
+    /**
      * 面板内容初始化
      */
     $(document).ready(function () {
 
-        //$("#bomDescDetail").hide();
-
-        //第一步，页面加载时，加载所有数据/分步加载数据
-
         //页面加载时，包材全部隐藏
         $("div[id^=packagingAllInfoId]").hide();
 
-        //点击添加包材
         $("#imgAddPackaging").click(function () {
             addPackaging();
             //赋初始化值：保存标志，显示标志
@@ -649,8 +655,8 @@
     var bom = {
         projectId: "",//项目id
         bomId: "",//BOMId
-        packagings: [],//所有包材
-    }
+        packagings: []//所有包材
+    };
     window.savePackaging = savePackaging;
     window.refreshPackagingSelect = refreshPackagingSelect;
     window.trashPackagingSelect = trashPackagingSelect;

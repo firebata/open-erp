@@ -267,7 +267,7 @@
         reloadBomSelect(idNum, function () {
             initAccessoriesFields(idNum, accessoriesItem);
         });
-        ;
+        var $id = $('#pantoneIdsF' + idNum);
         $.reloadPantoneId($id, accessoriesItem['pantoneIds']);
     }
 
@@ -593,13 +593,6 @@
             }
         }
         accessoriesInfo.positionIds = materialPositions;
-
-
-
-
-
-
-
         accessoriesInfo.materialTypeId = $("#materialTypeIdF" + idNum).val();
         accessoriesInfo.techRequired = $("#techRequiredF" + idNum).val();
         accessoriesInfo.width = $("#widthF" + idNum).val();

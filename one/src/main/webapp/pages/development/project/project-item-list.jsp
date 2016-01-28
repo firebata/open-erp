@@ -25,7 +25,6 @@
                 <thead>
                 <tr>
                     <th>选择</th>
-                    <th>项目编号</th>
                     <th>项目名称</th>
                     <th>客户</th>
                     <th>区域</th>

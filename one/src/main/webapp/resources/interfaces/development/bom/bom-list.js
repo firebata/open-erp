@@ -8,8 +8,6 @@
      * @returns {*[]}
      */
     var columnsName = [
-        {"data": "natrualkey"},
-        {"data": "projectId"},
         {"data": "name"},
         {"data": "mainColor"},
         {"data": "sexId"},

@@ -12,7 +12,6 @@
     var columnsName = function () {
         var columnsName = [
             {"data": null},
-            {"data": "natrualkey"},
             {"data": "name"},
             {"data": "customerId"},
             {"data": "areaId"},
