@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.project.helper;
 
+import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
@@ -55,16 +56,16 @@ public class ProjectManageHelper {
         //年份
         String name = getYearName(t);
         stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
-        //客户
-        name = getCustomerName(t);
-        stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
+//        stringBuilder.append(CharConstant.BLANK);
+//        //客户
+//        name = getCustomerName(t);
+//        stringBuilder.append(name);
+//        stringBuilder.append(CharConstant.BLANK);
         //系列
         name = getSeriesName(t);
         stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
-        stringBuilder.append(t.getSeqNo());
+//        stringBuilder.append(CharConstant.BLANK);
+//        stringBuilder.append(t.getSeqNo());
         return stringBuilder.toString();
     }
 
@@ -145,14 +146,30 @@ public class ProjectManageHelper {
     public static void turnIdToName(List<ProjectBomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
             for (ProjectBomInfo projectBomInfo : infos) {
-                projectBomInfo.setAreaId(getAreaName(projectBomInfo));
-                projectBomInfo.setSeriesId(getSeriesName(projectBomInfo));
-                projectBomInfo.setCustomerId(getCustomerName(projectBomInfo));
-                projectBomInfo.setYearCode(getYearName(projectBomInfo));
+                exchange(projectBomInfo);
             }
         }
+    }
+
+    /**
+     * 转换项目中的id为name
+     *
+     * @param infos
+     */
+    public static void turnIdToNameInPorject(List<ProjectInfo> infos) {
+        if (null != infos && !infos.isEmpty()) {
+            for (ProjectInfo projectInfo : infos) {
+                exchange(projectInfo);
+            }
+        }
+    }
 
 
+    private static void exchange(ProjectBomInfo projectBomInfo) {
+        projectBomInfo.setAreaId(getAreaName(projectBomInfo));
+        projectBomInfo.setSeriesId(getSeriesName(projectBomInfo));
+        projectBomInfo.setCustomerId(getCustomerName(projectBomInfo));
+        projectBomInfo.setYearCode(getYearName(projectBomInfo));
     }
 
     /**
@@ -212,10 +229,11 @@ public class ProjectManageHelper {
     /**
      * 组装子项目信息
      *
-     * @param info ProjectInfo
+     * @param info     ProjectInfo
+     * @param userInfo
      * @return
      */
-    public static List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info) {
+    public static List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, UserInfo userInfo) {
         List<ProjectBomInfo> projectBomInfos = new ArrayList<>();
         List<ProjectCategoryInfo> projectCategoryInfos = info.getCategoryInfos();
 
@@ -241,6 +259,7 @@ public class ProjectManageHelper {
                 projectBomInfo.setCategoryBid(categoryInfo.getCategoryBid());
                 projectBomInfo.setParentProjectId(info.getNatrualkey());
                 projectBomInfos.add(projectBomInfo);
+                projectBomInfo.setCreater(userInfo.getAliases());
                 seq++;
             }
         }
@@ -253,15 +272,15 @@ public class ProjectManageHelper {
         //年份
         String name = getYearName(info);
         stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
+//        stringBuilder.append(CharConstant.BLANK);
         //系列
         name = getSeriesName(info);
         stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
+//        stringBuilder.append(CharConstant.BLANK);
         //二级分类
         name = getCategoryName(categoryInfo);
         stringBuilder.append(name);
-        stringBuilder.append(CharConstant.BLANK);
+//        stringBuilder.append(CharConstant.BLANK);
 
         return stringBuilder.toString();
     }

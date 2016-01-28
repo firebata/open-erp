@@ -143,6 +143,7 @@ public class SexAction extends BaseAction<String, Object, SexInfo> {
     @SystemControllerLog(description = "删除性别属性")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         sexManageService.del(natrualKey);
+        SexManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

@@ -5,10 +5,10 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.DyeInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.DyeServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -142,6 +142,7 @@ public class DyeAction extends BaseAction<String, Object, DyeInfo> {
     @SystemControllerLog(description = "删除染色方式")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         dyeService.del(natrualKey);
+        DyeServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

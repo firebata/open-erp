@@ -142,6 +142,7 @@ public class ProductTypeAction extends BaseAction<String, Object, ProductTypeInf
     @SystemControllerLog(description = "删除品名")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         productTypeManageService.del(natrualKey);
+        ProductTypeManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

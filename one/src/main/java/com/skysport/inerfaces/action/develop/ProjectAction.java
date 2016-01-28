@@ -7,6 +7,7 @@ import com.skysport.core.constant.DictionaryKeyConstant;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
+import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.commons.lang3.StringUtils;
@@ -136,8 +137,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
         }
         int draw = Integer.parseInt(request.getParameter("draw"));
         List<ProjectInfo> infos = projectManageService.searchInfos(queryForm);
-
-//        ProjectManageHelper.turnIdToName(infos);
+        ProjectManageHelper.turnIdToNameInPorject(infos);
 
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
 

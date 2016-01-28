@@ -142,6 +142,7 @@ public class MembraneThicknessAction extends BaseAction<String, Object, Membrane
     @SystemControllerLog(description = "删除膜的厚度")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         membraneThicknessService.del(natrualKey);
+        MembraneThicknessServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

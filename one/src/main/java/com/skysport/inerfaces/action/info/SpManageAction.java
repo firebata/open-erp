@@ -138,6 +138,7 @@ public class SpManageAction extends BaseAction<String, Object, SpInfo> {
     @SystemControllerLog(description = "删除供应商")
     public Map<String, Object> del(@PathVariable String spId) {
         spManageService.del(spId);
+        SpInfoHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

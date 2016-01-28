@@ -93,6 +93,7 @@ public class CategoryManageAction extends BaseAction<String, Object, CategoryInf
     public Map<String, Object> edit(CategoryInfo info, HttpServletRequest request) {
         categoryManageService.edit(info);
         CategoryManageServiceHelper.SINGLETONE.refreshSelect();
+
         return rtnSuccessResultMap("更新成功");
     }
 
@@ -137,6 +138,7 @@ public class CategoryManageAction extends BaseAction<String, Object, CategoryInf
     @SystemControllerLog(description = "删除品类级别")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         categoryManageService.del(natrualKey);
+        CategoryManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

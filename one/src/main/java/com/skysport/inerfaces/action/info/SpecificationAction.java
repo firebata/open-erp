@@ -142,6 +142,7 @@ public class SpecificationAction extends BaseAction<String, Object, Specificatio
     @SystemControllerLog(description = "删除纱支密度")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         specificationService.del(natrualKey);
+        SpecificationServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

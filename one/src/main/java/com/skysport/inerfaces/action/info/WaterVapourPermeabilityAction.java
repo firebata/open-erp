@@ -142,6 +142,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<String, Object, Wa
     @SystemControllerLog(description = "删除透湿程度")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         waterVapourPermeabilityService.del(natrualKey);
+        WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

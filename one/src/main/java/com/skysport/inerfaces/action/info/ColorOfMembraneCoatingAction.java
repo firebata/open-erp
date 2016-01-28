@@ -5,10 +5,10 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.ColorOfMembraneCoatingInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.ColorOfMembraneCoatingServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -141,6 +141,7 @@ public class ColorOfMembraneCoatingAction extends BaseAction<String, Object, Col
     @SystemControllerLog(description = "删除膜或涂层的颜色")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         colorOfMembraneCoatingService.del(natrualKey);
+        ColorOfMembraneCoatingServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

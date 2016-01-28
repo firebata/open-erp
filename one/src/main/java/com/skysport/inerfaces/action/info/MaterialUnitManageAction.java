@@ -137,6 +137,7 @@ public class MaterialUnitManageAction extends BaseAction<String, Object, Materia
     @SystemControllerLog(description = "删除物料单位")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         materialUnitService.del(natrualKey);
+        MaterialUnitServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

@@ -141,6 +141,7 @@ public class MaterialTypeAction extends BaseAction<String, Object, MaterialTypeI
     @SystemControllerLog(description = "删除材料类别")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         materialTypeManageService.del(natrualKey);
+        MaterialTypeManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

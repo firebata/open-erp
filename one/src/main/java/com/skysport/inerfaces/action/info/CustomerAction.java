@@ -140,6 +140,7 @@ public class CustomerAction extends BaseAction<String, Object, CustomerInfo> {
     @SystemControllerLog(description = "删除客户信息")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         customerManageService.del(natrualKey);
+        CustomerManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

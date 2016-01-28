@@ -1,4 +1,5 @@
 /**
+ * 项目新增/修改处理模块
  * Created by zhangjh on 2015/7/14.
  */
 (function () {
@@ -11,10 +12,8 @@
     var listURL = path + "/development/project/list";
     var searchSecondURL = path + "/system/category/searchSecond/";
     var infoCategoryURL = path + "/development/project-category/infoCategory/";
-    $(function () {
-        reloadDetailSelectData();
-        $("#projectForm").on("change", "select", cb);
-    })
+    var qrAreaURL = path + "/system/area/select2";
+
 
     //第一次初始化下拉列表
     var reloadDetailSelectData = function () {
@@ -35,6 +34,14 @@
 
     }
 
+    function initArea() {
+        var customerId = _data[0].customerId;
+        //初始化区域id
+        initAreaId(customerId, function () {
+            $("#areaId").val(_data["areaId"]);
+        });
+    }
+
     /**
      * 初始化表单
      * @param _data
@@ -48,21 +55,11 @@
 
 
             $("#" + key).val(_data[key]);
-            if (key == 'categoryAid') {
-                //
-                //var categoryAid = _data[key];
-                //initCategoryB(categoryAid);
 
-                //var arr = _data[key].split(',');
-                //$('#categoryBid').selectpicker('val', arr);
-            }
-            else {
-                //下拉框
-                //$("#" + key).val(_data[key]);
-            }
         });
 
         initCategory();
+        //initArea(_data);
 
     }
 
@@ -77,7 +74,7 @@
         if (_data === '' || _data.length === 0) return;
         var categoryAid = _data[0].categoryAid;
         $("#categoryAid").val(_data[0].categoryAid);
-
+        //*初始化二级品类
         initCategoryB(categoryAid, function () {
             selectCategoryB(_data);
         });
@@ -253,20 +250,48 @@
 
 
     /**
-     * 回调函数
+     * 回调函数：监听下拉变化
      */
-    function cb() {
-        if ($(this).attr('id') === 'categoryAid') {
+    function monitorSelectChange() {
+
+        var _id = $(this).attr('id');
+        if (_id === 'categoryAid') {
             var categoryAid = $(this).val();
             initCategoryB(categoryAid, function () {
 
             });
         }
+        else if (_id === 'customerId') {
+            var customerId = $(this).val();
+            initAreaId(customerId, function () {
+
+            });
+        }
+
+
+    }
+
+    /**
+     *
+     * @param customerId 客户id
+     * @param callback 回调函数：为区域赋初始值
+     */
+    function initAreaId(customerId, callback) {
+        $.sendRestFulAjax(qrAreaURL, {'keyword': customerId}, 'GET', 'json', function (_data) {
+            var $areaId = $("#areaId");
+            $areaId.empty();
+            $("<option></option>").val('').text("请选择...").appendTo($areaId);
+            $.each(_data["items"], function (key, value) {
+                $("<option></option>").val(value["natrualkey"]).text(value["name"]).appendTo($areaId);
+            });
+            callback();
+        });
     }
 
     /**
      * 根据一级品类id的改变，查询二级品类id
      * @param categoryAid
+     * @param callback 为二级品类赋初始值
      */
     function initCategoryB(categoryAid, callback) {
 
@@ -311,5 +336,12 @@
 
     $.saveProject = saveProject;
 
+    $(function () {
+
+        reloadDetailSelectData();
+
+        $("#projectForm").on("change", "select", monitorSelectChange);
+
+    })
 
 }());

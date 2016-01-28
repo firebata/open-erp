@@ -168,9 +168,9 @@
      * 初始化select2列表
      * @param _data 表单对象
      */
-    function initSelect2sByArr($element,items) {
+    function initSelect2sByArr($element, items) {
 
-        for(var idx=0;idx<items.length;idx++){
+        for (var idx = 0; idx < items.length; idx++) {
             var item = items[idx];
             var option = new Option(item.text, item.id, true, true);
             // Append it to the select
@@ -220,16 +220,15 @@
 
 
     /**
-     *  elect2的重载方法
-     *  注意：下拉列表的key名字为：natrualkey;name的名字为name
-     * @param _selectId
-     * @param _url
+     *
+     * @param $element select节点
+     * @param _url ajax url
      * @param _placeholder
      * @param _searchInputPlaceholder
-     * @param _templateResult
+     * @param _queryInitData  初始化数据：数组，格式 [{id:id:text:text},{id:id:text:text}...]
+     * @param _templateResult 选中的txt做进一步修饰，如增加颜色等
      */
     function select2s($element, _url, _placeholder, _searchInputPlaceholder, _queryInitData, _templateResult) {
-
 
 
         if (_url == null) {
@@ -282,7 +281,7 @@
             }
         });
 
-        initSelect2sByArr($element,_queryInitData());
+        initSelect2sByArr($element, _queryInitData());
 
     }
 

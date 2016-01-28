@@ -40,24 +40,13 @@ var fieldsDesc =
  * @param _data 表单对象
  */
 function initSelect(_data) {
-    $.initSelect2s('customerId', 'customerId', 'customerName', _data);
-    //
-    //
-    //var id = null;
-    //var text = null;
-    //Object.keys(_data).map(function (key) {
-    //    if (key == 'customerId') {
-    //        id = _data[key];
-    //    }
-    //    else if (key == 'customerName') {
-    //        //text =  '<table><tr><td bgcolor="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + _data[key] + '</td></tr></table>'
-    //        text = _data[key];
-    //    }
-    //});
-    //var $element = $('#customerId').select2(); // the select element you are working with
-    //var option = new Option(text, id, true, true);
-    //$element.append(option);
-    //$element.trigger('change');
+    var $element = $("#customerId");
+    var path = $.basepath();
+    $.select2s($element, path + '/system/customer/select', 'Customer not selected', 'Please, select customer', function () {
+        return [{"id": _data["customerId"], "text": _data["customerName"]}];
+    });
+    //$.initSelect2s('customerId', 'customerId', 'customerName', _data);
+
 }
 
 /**
@@ -69,10 +58,8 @@ var resetSelect = function () {
 
 
 $(function () {
-    var path = $.basepath();
-    $('#myModal').on('shown.bs.modal', function (e) {
-        $.select2s('customerId', path + '/system/customer/select', 'Customer not selected', 'Please, select customer');
-    });
+
+
 
     $('#resetBtn').click(function () {
         $('.js-data-example-ajax').select2({
@@ -85,15 +72,7 @@ $(function () {
 
 })
 
-function formatState(state) {
-    if (!state.id) {
-        return state.text;
-    }
-    var $state = $(
-        '<table><tr><td bgcolor="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + state.text + '</td></tr></table>'
-    );
-    return $state;
-}
+
 
 
 

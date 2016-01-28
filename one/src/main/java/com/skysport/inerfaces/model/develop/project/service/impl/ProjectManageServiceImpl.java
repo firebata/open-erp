@@ -57,10 +57,10 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
     @Override
     public void add(ProjectInfo info) {
-
+        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
-
+        info.setCreater(userInfo.getAliases());
         //组装项目品类信息
         info = ProjectManageHelper.buildProjectCategoryInfo(info);
 
@@ -70,14 +70,14 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         //增加项目的品类信息
         projectCategoryManageService.addBatch(info.getCategoryInfos());
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info);
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
 
         //启动流程
-        startWorkFlow(info);
+        startWorkFlow(info, userInfo);
 
     }
 
@@ -85,10 +85,11 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
      * 启动开发流程
      *
      * @param info
+     * @param userInfo
      */
-    private void startWorkFlow(ProjectInfo info) {
+    private void startWorkFlow(ProjectInfo info, UserInfo userInfo) {
         String projectId = info.getNatrualkey() == null ? info.getProjectId() : info.getNatrualkey();
-        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
+
         String userId = userInfo.getNatrualkey();
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("projectId", projectId);
@@ -110,6 +111,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
             throw new SkySportException(DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getCode(), DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getMsg());
         }
 
+        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
         //判断bom有没有生成，如果bom已生成，不能修改项目信息
 //        if(){
 //            throw new SkySportException("100001","bom已生成，不能修改项目信息");
@@ -127,7 +129,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //增加项目的品类信息
         projectCategoryManageService.addBatch(info.getCategoryInfos());
 
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info);
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
         projectItemManageService.addBatch(projectBomInfos);

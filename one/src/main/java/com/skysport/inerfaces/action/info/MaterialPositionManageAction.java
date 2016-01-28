@@ -137,6 +137,7 @@ public class MaterialPositionManageAction extends BaseAction<String, Object, Mat
     @SystemControllerLog(description = "删除物料位置")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         materialPositionService.del(natrualKey);
+        MaterialPositionServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

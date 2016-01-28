@@ -178,9 +178,7 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
         List<ProjectBomInfo> infos = projectItemManageService.searchInfos(queryForm);
 
         ProjectManageHelper.turnIdToName(infos);
-
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
-
 
         return resultMap;
     }

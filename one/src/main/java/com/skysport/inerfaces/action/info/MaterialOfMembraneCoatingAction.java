@@ -5,10 +5,10 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.MaterialOfMembraneCoatingInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.MaterialOfMembraneCoatingServicHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -129,7 +128,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<String, Object, 
     @SystemControllerLog(description = "删除膜或涂层的材质")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         materialOfMembraneCoatingService.del(natrualKey);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        MaterialOfMembraneCoatingServicHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

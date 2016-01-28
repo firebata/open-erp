@@ -138,6 +138,7 @@ public class YearConfManageAction extends BaseAction<String, Object, YearConfInf
     @SystemControllerLog(description = "删除年份")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         yearConfManageService.del(natrualKey);
+        YearConfManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

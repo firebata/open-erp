@@ -141,6 +141,7 @@ public class AreaAction extends BaseAction<String, Object, AreaInfo> {
     @SystemControllerLog(description = "删除区域信息")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         areaManageService.del(natrualKey);
+        AreaManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 
@@ -152,8 +153,22 @@ public class AreaAction extends BaseAction<String, Object, AreaInfo> {
     @RequestMapping(value = "/select", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> querySelectList(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        List<SelectItem2> commonBeans = areaManageService.querySelectList(name);
+        String keyword = request.getParameter("keyword");
+        List<SelectItem2> commonBeans = areaManageService.querySelectList(keyword);
+        return rtSelectResultMap(commonBeans);
+    }
+
+    /**
+     * 通过父id查找所有的子列表
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/select2", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> querySelectList2(HttpServletRequest request) {
+        String keyword = request.getParameter("keyword");
+        List<SelectItem2> commonBeans = areaManageService.querySelectListByParentId(keyword);
         return rtSelectResultMap(commonBeans);
     }
 

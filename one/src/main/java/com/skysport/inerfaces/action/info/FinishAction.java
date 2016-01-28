@@ -142,6 +142,7 @@ public class FinishAction extends BaseAction<String, Object, FinishInfo> {
     @SystemControllerLog(description = "删除后整理")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         finishService.del(natrualKey);
+        FinishServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

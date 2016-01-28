@@ -53,4 +53,5 @@ public interface ICommonService<T> {
     void updateBatch(List<T> infos);
 
 
+    List<SelectItem2> querySelectListByParentId(String keyword);
 }

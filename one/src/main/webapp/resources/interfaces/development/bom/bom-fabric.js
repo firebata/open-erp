@@ -150,7 +150,6 @@
             }
 
 
-
         });
 
 
@@ -376,6 +375,21 @@
         //callback();
     }
 
+    /**
+     * 对选中的结果进行额外处理后显示
+     * @param state
+     * @returns {*}
+     */
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        var $state = $(
+            '<table><tr><td bgcolor="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + state.text + '</td></tr></table>'
+        );
+        return $state;
+    }
+
     var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
             _doFabricSuccess_info(data, idNum, callback);
@@ -401,195 +415,195 @@
 
         //材料类别
         var materialTypeIdItems = data["materialTypeItems"];
-        var materialTypeId = "#materialTypeId" + idNum;
-        $(materialTypeId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(materialTypeId));
+        var $materialTypeId = $("#materialTypeId" + idNum);
+        $materialTypeId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($materialTypeId);
         $.each(materialTypeIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(materialTypeId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($materialTypeId);
         });
 
         //供应商
         var spItems = data["spItems"];
-        var spId = "#spId" + idNum;
-        $(spId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(spId));
+        var $spId = $("#spId" + idNum);
+        $spId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($spId);
         //$.each(spItems, function (i, item) {
         //    $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(spId));
         //});
 
         //年份
         var yearCodeItems = data["yearItems"];
-        var yearCode = "#yearCode" + idNum;
-        $(yearCode).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(yearCode));
+        var $yearCode = $("#yearCode" + idNum);
+        $yearCode.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($yearCode);
         $.each(yearCodeItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(yearCode));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($yearCode);
         });
 
         //材质列表
         var classicIdItems = data["fabricClassicItems"];
-        var classicId = "#classicId" + idNum;
-        $(classicId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(classicId));
+        var $classicId = $("#classicId" + idNum);
+        $classicId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($classicId);
         $.each(classicIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(classicId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($classicId);
         });
 
         //品名列表
         var productTypeIdItems = data["productTypeItems"];
-        var productTypeId = "#productTypeId" + idNum;
-        $(productTypeId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(productTypeId));
+        var $productTypeId = ("#productTypeId" + idNum);
+        $productTypeId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($productTypeId);
         $.each(productTypeIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(productTypeId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($productTypeId);
         });
 
         //纱支密度列表
         var specificationIdItems = data["specficationItems"];
-        var specificationId = "#specificationId" + idNum;
-        $(specificationId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(specificationId));
+        var $specificationId = $("#specificationId" + idNum);
+        $specificationId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($specificationId);
         $.each(specificationIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(specificationId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($specificationId);
         });
 
         //染色方式列表
         //noinspection JSDuplicatedDeclaration
         var dyeIdItems = data["dyeItems"];
-        var dyeId = "#dyeId" + idNum;
-        $(dyeId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(dyeId));
+        var $dyeId = $("#dyeId" + idNum);
+        $dyeId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($dyeId);
         $.each(dyeIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(dyeId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($dyeId);
         });
 
         //后整理列表
         var finishIdItems = data["finishItems"];
-        var finishId = "#finishId" + idNum;
-        $(finishId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(finishId));
+        var $finishId = $("#finishId" + idNum);
+        $finishId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($finishId);
         $.each(finishIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(finishId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($finishId);
         });
 
         //复合或涂层列表
         var blcIdItems = data["blcItems"];
-        var blcId = "#blcId" + idNum;
-        $(blcId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(blcId));
+        var $blcId = $("#blcId" + idNum);
+        $blcId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($blcId);
         $.each(blcIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(blcId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($blcId);
         });
 
         //材质列表
         var classicIdItems = data["fabricClassicItems"];
-        var compositeClassicId = "#compositeClassicId" + idNum;
-        $(compositeClassicId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(compositeClassicId));
+        var $compositeClassicId = $("#compositeClassicId" + idNum);
+        $compositeClassicId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($compositeClassicId);
         $.each(classicIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(compositeClassicId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeClassicId);
         });
 
 
         //品名列表
         var productTypeIdItems = data["productTypeItems"];
-        var compositeProductTypeId = "#compositeProductTypeId" + idNum;
-        $(compositeProductTypeId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(compositeProductTypeId));
+        var $compositeProductTypeId = $("#compositeProductTypeId" + idNum);
+        $compositeProductTypeId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($compositeProductTypeId);
         $.each(productTypeIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(compositeProductTypeId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeProductTypeId);
         });
 
 
         //纱支密度列表
         var specificationIdItems = data["specficationItems"];
-        var compositeSpecificationId = "#compositeSpecificationId" + idNum;
-        $(compositeSpecificationId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(compositeSpecificationId));
+        var $compositeSpecificationId = $("#compositeSpecificationId" + idNum);
+        $compositeSpecificationId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($compositeSpecificationId);
         $.each(specificationIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(compositeSpecificationId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeSpecificationId);
         });
 
         //染色方式列表
         var dyeIdItems = data["dyeItems"];
-        var compositeDyeId = "#compositeDyeId" + idNum;
-        $(compositeDyeId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(compositeDyeId));
+        var $compositeDyeId = $("#compositeDyeId" + idNum);
+        $compositeDyeId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($compositeDyeId);
         $.each(dyeIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(compositeDyeId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeDyeId);
         });
 
         //后整理列表
         var finishIdItems = data["finishItems"];
-        var compositeFinishId = "#compositeFinishId" + idNum;
-        $(compositeFinishId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(compositeFinishId));
+        var $compositeFinishId = $("#compositeFinishId" + idNum);
+        $compositeFinishId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($compositeFinishId);
         $.each(finishIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(compositeFinishId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeFinishId);
         });
 
         //膜或涂层的材质列表
         var mcIdItems = data["momcItems"];
-        var momcId = "#momcId" + idNum;
-        $(momcId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(momcId));
+        var $momcId = $("#momcId" + idNum);
+        $momcId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($momcId);
         $.each(mcIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(momcId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($momcId);
         });
 
         //膜或涂层的颜色列表
         var comcIdItems = data["comocItems"];
-        var comocId = "#comocId" + idNum;
-        $(comocId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(comocId));
+        var $comocId = $("#comocId" + idNum);
+        $comocId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($comocId);
         $.each(comcIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(comocId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($comocId);
         });
 
         //透湿程度列表
         var wvpIdItems = data["wvpItems"];
-        var wvpId = "#wvpId" + idNum;
-        $(wvpId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(wvpId));
+        var $wvpId = $("#wvpId" + idNum);
+        $wvpId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($wvpId);
         $.each(wvpIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(wvpId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($wvpId);
         });
 
         //膜的厚度列表
         var mtIdItems = data["mtItems"];
-        var mtId = "#mtId" + idNum;
-        $(mtId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(mtId));
+        var $mtId = $("#mtId" + idNum);
+        $mtId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($mtId);
         $.each(mtIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(mtId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($mtId);
         });
 
         // 贴膜或涂层工艺列表
         var woblcIdItems = data["wblcItems"];
-        var woblcId = "#woblcId" + idNum;
-        $(woblcId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(woblcId));
+        var $woblcId = $("#woblcId" + idNum);
+        $woblcId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($woblcId);
         $.each(woblcIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(woblcId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($woblcId);
         });
 
         //物料位置列表
         var positionItems = data["positionItems"];
-        var positionIds = "#positionIds" + idNum;
-        $(positionIds).empty();
+        var $positionIds = $('#positionIds' + idNum);
+        $positionIds.empty();
         $.each(positionItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(positionIds));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($positionIds);
         });
-        $('#positionIds' + idNum).selectpicker({noneSelectedText: '请选择...'});
-        $('#positionIds' + idNum).selectpicker('refresh');
+        $positionIds.selectpicker({noneSelectedText: '请选择...'});
+        $positionIds.selectpicker('refresh');
 
         // 用量单位列表
         var unitIdItems = data["unitItems"];
-        var unitId = "#unitId" + idNum;
-        $(unitId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(unitId));
+        var $unitId = $("#unitId" + idNum);
+        $unitId.empty();
+        $("<option></option>").val('').text("请选择...").appendTo($unitId);
         $.each(unitIdItems, function (i, item) {
-            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(unitId));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($unitId);
         });
 
         if ($.isFunction(callback)) {
@@ -857,7 +871,6 @@
             }
         }
         fabricsInfo.pantoneIds = materialPantoneIds;
-
 
 
         var positionIds = $("#positionIds" + idNum).val();

@@ -141,6 +141,7 @@ public class FactoryManageAction extends BaseAction<String, Object, FactoryInfo>
     @SystemControllerLog(description = "")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         factoryManageService.del(natrualKey);
+        FactoryManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

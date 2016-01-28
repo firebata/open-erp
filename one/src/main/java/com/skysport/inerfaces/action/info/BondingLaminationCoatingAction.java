@@ -140,6 +140,7 @@ public class BondingLaminationCoatingAction extends BaseAction<String, Object, B
     @SystemControllerLog(description = "删除复合或涂层信息")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         bondingLaminationCoatingService.del(natrualKey);
+        BondingLaminationCoatingServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

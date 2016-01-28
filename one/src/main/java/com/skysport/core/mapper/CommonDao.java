@@ -32,4 +32,6 @@ public interface CommonDao<T> {
     void addBatch(List<T> infos);
 
     void updateBatch(List<T> infos);
+
+    List<SelectItem2> querySelectListByParentId(@Param(value = "parentId")String parentId);
 }

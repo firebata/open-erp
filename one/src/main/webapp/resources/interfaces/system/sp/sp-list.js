@@ -1,5 +1,4 @@
 var table;
-var editFlag = false;
 $(function () {
 
     $('#start_date').datetimepicker();

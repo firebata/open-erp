@@ -141,6 +141,7 @@ public class SeriesAction extends BaseAction<String, Object, SeriesInfo> {
     @SystemControllerLog(description = "删除系列")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         seriesManageService.del(natrualKey);
+        SeriesManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

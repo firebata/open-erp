@@ -75,4 +75,9 @@ public class CommonServiceImpl<T> implements ICommonService<T> {
     public void updateBatch(List<T> infos) {
         commonDao.updateBatch(infos);
     }
+
+    @Override
+    public List<SelectItem2> querySelectListByParentId(String parentId) {
+        return commonDao.querySelectListByParentId(parentId);
+    }
 }

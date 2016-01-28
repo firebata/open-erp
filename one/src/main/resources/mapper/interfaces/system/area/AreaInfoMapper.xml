@@ -97,4 +97,19 @@
 
     </select>
 
+
+    <!--信息下拉列表-->
+    <select id="querySelectListByParentId" resultType="CommonBean">
+        select
+        area_id AS natrualkey,
+        area_name AS name
+        from t_jc_area
+        where del_flag=0
+        <if test="parentId!=null and parentId!=''">
+            and customer_id =#{parentId}
+        </if>
+
+    </select>
+
+
 </mapper>

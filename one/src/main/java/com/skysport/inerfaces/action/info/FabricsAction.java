@@ -5,10 +5,10 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -144,6 +144,7 @@ public class FabricsAction extends BaseAction<String, Object, FabricsInfo> {
     @SystemControllerLog(description = "")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         fabricsManageService.del(natrualKey);
+        FabricsServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 
