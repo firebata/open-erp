@@ -3,7 +3,6 @@
  * @returns {*[]}
  */
 var columnsName = [
-    {"data": "natrualkey"},
     {"data": "name"},
     {"data": "fullName"},
     {"data": "address"},

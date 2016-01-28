@@ -7,15 +7,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/oekotex/edit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/oekotex/list.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-packaging.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-packaging.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-item-list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-item-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-accessories.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-accessories.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-packaging.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-packaging.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-list.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/area/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/area/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/category/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/category/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/customer/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/customer/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/fabrics/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/fabrics/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/factory/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/factory/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/blc/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/blc/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/bom-material-list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/bom-material-list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/comoc/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/comoc/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/dye/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/dye/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/finish/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/finish/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/momc/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/momc/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/mt/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/mt/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/position/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/position/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/specification/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/specification/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/unit/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/unit/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wblc/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wblc/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wvp/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wvp/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_classic/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_classic/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_type/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_type/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/pantone/list2.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/pantone/list2.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/product_type/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/product_type/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/series/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/series/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/sex/list.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/sex/list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/sp/list2.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/sp/list2.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/area/area.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/area/area.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/category/category.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/category/category.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer-list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer-list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer2.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer2.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/fabrics/fabrics.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/fabrics/fabrics.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/factory/factory.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/factory/factory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/blc/blc.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/blc/blc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/comoc/comoc.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/comoc/comoc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/dye/dye.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/dye/dye.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/finish/finish.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/finish/finish.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/material_list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/material_list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/momc/momc.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/momc/momc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/mt/mt.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/mt/mt.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/position/material-position.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/position/material-position.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/specification/specification.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/specification/specification.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/unit/material-unit.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/unit/material-unit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wblc/wblc.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wblc/wblc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wvp/wvp.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wvp/wvp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_classic/material_classic.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_classic/material_classic.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_type/material_type.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_type/material_type.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/product_type/product_type.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/product_type/product_type.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/series/series.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/series/series.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sex/sex.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sex/sex.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp-list.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp-list.js" />
     </list>
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,72 +82,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bom-packaging.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-packaging.js">
+      <file leaf-file-name="list.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/year_conf/list.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.559322">
-              <caret line="600" column="43" selection-start-line="600" selection-start-column="43" selection-end-line="600" selection-end-column="43" />
+            <state vertical-scroll-proportion="-2.7142856">
+              <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-item-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-item-list.jsp">
+      <file leaf-file-name="sp-list.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp-list.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.535714">
-              <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.48387095">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-list.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.7142856">
-              <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bom-list.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33868092">
-              <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project-list.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-list.js">
+      <file leaf-file-name="sp.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-item-list.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-list.js">
+      <file leaf-file-name="list2.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/sp/list2.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+            <state vertical-scroll-proportion="-0.6785714">
+              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bom-list.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js">
+      <file leaf-file-name="year_conf.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/year_conf/year_conf.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-              <folding />
+              <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,22 +147,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/one/pom.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-fabric.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-accessories.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/js/util.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-fabric.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/main.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-packaging.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-accessories.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-packaging.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-list.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-list.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-list.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-item-list.jsp" />
         <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js" />
         <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/area/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/category/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/customer/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/fabrics/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/factory/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/blc/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/comoc/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/dye/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/finish/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/momc/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/mt/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/position/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/specification/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/unit/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wblc/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wvp/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material/bom-material-list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_classic/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/material_type/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/pantone/list2.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/product_type/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/series/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/sex/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/sp/list2.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/area/area.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/category/category.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer-list.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer2.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/fabrics/fabrics.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/factory/factory.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/blc/blc.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/comoc/comoc.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/dye/dye.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/finish/finish.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/momc/momc.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/mt/mt.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/position/material-position.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/specification/specification.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/unit/material-unit.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wblc/wblc.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wvp/wvp.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/material_list.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_classic/material_classic.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_type/material_type.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/product_type/product_type.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/series/series.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sex/sex.js" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/system/year_conf/list.jsp" />
+        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp-list.js" />
       </list>
     </option>
   </component>
@@ -373,11 +433,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
+              <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -411,37 +467,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
+              <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skysport" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
+              <option name="myItemId" value="year_conf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -464,74 +494,146 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skysport" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="development" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skysport" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="year_conf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1285,16 +1387,16 @@
       <workItem from="1453770834692" duration="7930000" />
       <workItem from="1453857238280" duration="8098000" />
       <workItem from="1453873972795" duration="14272000" />
-      <workItem from="1453943295770" duration="12447000" />
+      <workItem from="1453943295770" duration="14130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55406000" />
+    <option name="totallyTimeSpent" value="57089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1317,7 +1419,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3376206" sideWeight="0.8055556" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3376206" sideWeight="0.8055556" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1351,49 +1453,55 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/product_type/ProductTypeInfo.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/mt/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="24" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/product_type/ProductTypeInfo.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/position/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/idap/IdapMapper.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/specification/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/conf/jdbc.properties">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/unit/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/skysport.properties">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wblc/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/sky.iml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/wvp/list.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/pom.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/bom-material-add.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1401,319 +1509,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="67" selection-start-line="66" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/one.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skysport.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/sky.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="67" selection-start-line="66" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/one.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skysport.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1410614">
-          <caret line="67" column="67" selection-start-line="66" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/skysport.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="47" selection-start-line="2" selection-start-column="47" selection-end-line="2" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/sky.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/one.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57848835">
-          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/conf/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16814159">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/idap/IdapMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39041096">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/product_type/ProductTypeInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="24" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/js/select2.full.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5506" column="61" selection-start-line="5506" selection-start-column="61" selection-end-line="5506" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/impl/PantoneManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding>
-            <element signature="e#1575#1576#0" expanded="false" />
-            <element signature="e#1622#1623#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/ICommonService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="69" selection-start-line="85" selection-start-column="69" selection-end-line="85" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/login.jsp">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material/bom-material-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
+          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material_classic/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.25">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/material_type/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/pantone/edit2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/net/DualStackPlainSocketImpl.java">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/pantone/list2.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0242424">
-          <caret line="282" column="22" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-accessories.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6785714">
-          <caret line="78" column="153" selection-start-line="78" selection-start-column="142" selection-end-line="78" selection-end-column="153" />
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/permission/role-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#614#615#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#1186#1187#0" expanded="true" />
-            <element signature="e#1225#1226#0" expanded="true" />
-            <element signature="e#1267#1268#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-            <element signature="e#1370#1371#0" expanded="true" />
-            <element signature="e#1424#1425#0" expanded="true" />
-            <element signature="e#1480#1481#0" expanded="true" />
-            <element signature="e#1521#1522#0" expanded="true" />
-            <element signature="e#1576#1577#0" expanded="true" />
-            <element signature="e#1628#1629#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1757#1758#0" expanded="true" />
-            <element signature="e#1814#1815#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1915#1916#0" expanded="true" />
-            <element signature="e#1959#1960#0" expanded="true" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/js/util.js">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/permission/user-list.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="230" column="13" selection-start-line="230" selection-start-column="13" selection-end-line="230" selection-end-column="13" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/product_type/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.428571">
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/series/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.142858">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/sex/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/area/area.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.7142856">
-          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/category/category.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="61" selection-start-line="142" selection-start-column="40" selection-end-line="142" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="87" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/impl/AccessoriesServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="33" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFMaterialPantoneMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.142858">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
-            <marker date="1453288327598" expanded="true" signature="670:878" placeholder="SELECT FROM t_kf_material_pantone" />
-            <marker date="1453288327598" expanded="true" signature="961:1089" placeholder="SELECT FROM t_kf_material_pantone" />
-            <marker date="1453288327598" expanded="true" signature="1143:1341" placeholder="UPDATE t_kf_... " />
-            <marker date="1453288327598" expanded="true" signature="1714:1869" placeholder="INSERT INTO t_kf_material_pantone... " />
-            <marker date="1453288327598" expanded="true" signature="1915:2008" placeholder="UPDATE t_kf_... " />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="222" column="34" selection-start-line="222" selection-start-column="34" selection-end-line="222" selection-end-column="34" />
-          <folding>
-            <marker date="1453282110322" expanded="true" signature="958:1095" placeholder="select FROM t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="1175:1231" placeholder="SELECT COUNT... t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="1743:2287" placeholder="SELECT FROM t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="2340:2990" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="3042:3188" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="3237:3488" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="3534:3983" placeholder="insert into t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="4032:4155" placeholder="insert into t_kf_material_unit_dosage... " />
-            <marker date="1453282110322" expanded="true" signature="4202:4426" placeholder="insert into t_kf_material_spinfo... " />
-            <marker date="1453282110322" expanded="true" signature="4474:4565" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="4649:4760" placeholder="SELECT acces... t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="5085:5182" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="5231:5326" placeholder="update t_kf_... " />
-            <marker date="1453282110322" expanded="true" signature="5407:5527" placeholder="select case t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="7837:9006" placeholder="SELECT a.acc... t_kf_accessories" />
-            <marker date="1453282110322" expanded="true" signature="9108:9933" placeholder="SELECT e.bom... t_kf_accessories" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-fabric.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9830508">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFPackagingManageMapper.xml">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/customer/customer-list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-48.535713">
-          <caret line="286" column="9" selection-start-line="286" selection-start-column="9" selection-end-line="286" selection-end-column="9" />
-          <folding>
-            <marker date="1453282110336" expanded="true" signature="951:1084" placeholder="select FROM t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="1164:1218" placeholder="SELECT COUNT... t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="1722:2262" placeholder="SELECT FROM t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="2315:2959" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="3012:3158" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="3208:3459" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="3505:3948" placeholder="insert into t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="3997:4120" placeholder="insert into t_kf_material_unit_dosage... " />
-            <marker date="1453282110336" expanded="true" signature="4167:4391" placeholder="insert into t_kf_material_spinfo... " />
-            <marker date="1453282110336" expanded="true" signature="4439:4526" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="4608:4715" placeholder="SELECT packa... t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="5034:5131" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="5180:5273" placeholder="update t_kf_... " />
-            <marker date="1453282110336" expanded="true" signature="5354:5468" placeholder="select case t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="7760:8940" placeholder="SELECT a.pac... t_kf_packaging" />
-            <marker date="1453282110336" expanded="true" signature="9032:9848" placeholder="SELECT e.bom... t_kf_packaging" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/AccessoriesInfo.java">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/dept/dept.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1721,82 +1633,274 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-fabric.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.785714">
-          <caret line="79" column="165" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="165" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-accessories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8474574">
-          <caret line="97" column="19" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-packaging.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9195403">
-          <caret line="73" column="153" selection-start-line="73" selection-start-column="142" selection-end-line="73" selection-end-column="153" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-packaging.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.559322">
-          <caret line="600" column="43" selection-start-line="600" selection-start-column="43" selection-end-line="600" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-list.js">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/fabrics/fabrics.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-          <folding />
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-item-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.535714">
-          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-list.js">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/factory/factory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-          <folding />
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/blc/blc.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/comoc/comoc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/dye/dye.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/finish/finish.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/momc/momc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/mt/mt.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/position/material-position.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/specification/specification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/unit/material-unit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wblc/wblc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/wvp/wvp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material/material_list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_classic/material_classic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/material_type/material_type.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/pantone/pantone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-list.jsp">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/pantone/pantone-list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.7142856">
-          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp">
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/permission/resource-role.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33868092">
-          <caret line="28" column="23" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/product_type/product_type.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/series/series.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sex/sex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48387095">
+          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/year_conf/year_conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/year_conf/list.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7142856">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/pages/system/sp/list2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6785714">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/sp/sp-list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48387095">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding />
         </state>
       </provider>

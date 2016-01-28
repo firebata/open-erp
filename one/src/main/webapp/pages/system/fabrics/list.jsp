@@ -25,7 +25,6 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>面料编号</th>
                     <th>项目编号</th>
                     <th>BOM编号</th>
                     <th>面料名称</th>

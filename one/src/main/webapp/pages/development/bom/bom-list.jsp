@@ -38,8 +38,6 @@
         <!-- tbody是必须的 -->
       </table>
 
-
-
     </div>
     <!-- Button trigger modal -->
   </div>

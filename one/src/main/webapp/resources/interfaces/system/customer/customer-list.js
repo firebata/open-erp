@@ -15,7 +15,6 @@ $(function () {
         },
         serverSide: true,
         columns: [
-            {"data": "natrualkey"},
             {"data": "name"},
             {"data": "fullName"},
             {"data": "address"},

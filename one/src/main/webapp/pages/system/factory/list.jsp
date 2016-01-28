@@ -25,7 +25,6 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>编号</th>
                     <th>名称</th>
                     <th>联系人</th>
                     <th>联系电话</th>

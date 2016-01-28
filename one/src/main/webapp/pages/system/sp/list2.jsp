@@ -26,7 +26,6 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>供应商编号</th>
                     <th>供应商名称</th>
                     <th>供应商类型</th>
                     <th>电话号码</th>

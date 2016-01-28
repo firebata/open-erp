@@ -25,7 +25,6 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>编号</th>
                     <th>客户简称</th>
                     <th>客户全称</th>
                     <th>地址</th>

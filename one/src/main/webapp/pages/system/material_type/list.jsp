@@ -25,7 +25,6 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>系统编号</th>
                     <th>类型编码</th>
                     <th>名称</th>
                     <th>级别</th>

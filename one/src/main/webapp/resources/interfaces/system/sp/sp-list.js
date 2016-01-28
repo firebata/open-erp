@@ -14,7 +14,6 @@ $(function () {
         },
         serverSide: true,
         columns: [
-            {"data": "spId"},
             {"data": "name"},
             {"data": "type"},
             {"data": "tel"},
@@ -25,7 +24,7 @@ $(function () {
         order: [[ 0, "desc" ]],/*默认第一列倒序*/
         columnDefs: [
             {
-                targets: 6,
+                targets: 5,
                 render: function (data, type, row, meta) {
                     var context =
                     {
