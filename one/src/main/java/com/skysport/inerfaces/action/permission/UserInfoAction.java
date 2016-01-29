@@ -88,10 +88,10 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "编辑用户信息")
-    public Map<String, Object> edit(UserInfo userinfoInfo) throws Exception {
-        String pwd = SecurityUtil.encrypt(userinfoInfo.getPassword());
-        userinfoInfo.setPassword(pwd);
-        userInfoService.edit(userinfoInfo);
+    public Map<String, Object> edit(UserInfo userInfo) throws Exception {
+        String pwd = SecurityUtil.encrypt(userInfo.getPassword());
+        userInfo.setPassword(pwd);
+        userInfoService.edit(userInfo);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("code", "0");
         resultMap.put("message", "更新成功");
@@ -135,11 +135,11 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "增加用户信息")
-    public Map<String, Object> add(UserInfo userinfoInfo) throws Exception {
+    public Map<String, Object> add(UserInfo userInfo) throws Exception {
         //设置ID
-        userinfoInfo.setNatrualkey(PrimaryKeyUtils.getUUID());
-        UserInfoHelper.SINGLETONE.encrptPwd(userinfoInfo);
-        userInfoService.add(userinfoInfo);
+        userInfo.setNatrualkey(PrimaryKeyUtils.getUUID());
+        UserInfoHelper.SINGLETONE.encrptPwd(userInfo);
+        userInfoService.add(userInfo);
         return rtnSuccessResultMap("新增成功");
 
     }
@@ -153,8 +153,8 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     @SystemControllerLog(description = "查询用户信息")
     public UserInfo info(@PathVariable String natrualKey) {
-        UserInfo userinfoInfo = userInfoService.queryInfoByNatrualKey(natrualKey);
-        return userinfoInfo;
+        UserInfo userInfo = userInfoService.queryInfoByNatrualKey(natrualKey);
+        return userInfo;
     }
 
     /**
@@ -186,6 +186,25 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     public Map<String, String> queryUserType(HttpServletRequest request) {
         Map<String, String> resultMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.USER_TYPE);
+        return resultMap;
+    }
+
+    /**
+     * 此方法描述的是：修改用户密码
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:35:09
+     */
+    @RequestMapping(value = "/chgpwd", method = RequestMethod.POST)
+    @ResponseBody
+    @SystemControllerLog(description = "修改用户密码")
+    public Map<String, Object> chgpwd(UserInfo userInfo) throws Exception {
+        String pwd = SecurityUtil.encrypt(userInfo.getPassword().trim());
+        userInfo.setPassword(pwd);
+        userInfoService.chgpwd(userInfo);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("code", "0");
+        resultMap.put("message", "更新成功");
         return resultMap;
     }
 

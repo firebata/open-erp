@@ -110,4 +110,12 @@
         <if test="name!=null and name!=''">and upper(name) like concat('%',#{name},'%')</if>
     </select>
 
+    <!--修改用户密码-->
+    <update id="chgpwd">
+        update t_qx_user
+        set
+        user_pwd = #{password}
+        where user_id= #{natrualkey}
+    </update>
+
 </mapper>

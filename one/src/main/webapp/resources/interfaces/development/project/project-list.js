@@ -57,7 +57,7 @@
                         var context =
                         {
                             func: [
-                                {"name": "修改", "fn": "$.editProject(\'" + data.natrualkey + "\')", "type": "primary"},
+                                {"name": "更新", "fn": "$.editProject(\'" + data.natrualkey + "\')", "type": "primary"},
                                 {"name": "删除", "fn": "del(\'" + data.natrualkey + "\')", "type": "danger"}
                             ]
                         };

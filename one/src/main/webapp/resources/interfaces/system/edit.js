@@ -14,6 +14,7 @@ var info = function (_natrualkey) {
  * @private
  */
 var _doSuccess_info = function (_data) {
+
     var data = _data;
     Object.keys(data).map(function (key) {
         $('#defaultForm input').filter(function () {

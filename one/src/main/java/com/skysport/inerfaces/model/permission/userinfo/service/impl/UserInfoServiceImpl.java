@@ -24,4 +24,8 @@ public class UserInfoServiceImpl extends CommonServiceImpl<UserInfo> implements 
         commonDao = userInfoManageMapper;
     }
 
+    @Override
+    public void chgpwd(UserInfo userInfo) {
+        userInfoManageMapper.chgpwd(userInfo);
+    }
 }

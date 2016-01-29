@@ -22,7 +22,7 @@
         </div>
         <!-- Button trigger modal -->
     </div>
-
+    <%@ include file="chgpwd.jsp" %>
 </div>
 <jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->

@@ -9,4 +9,5 @@ import com.skysport.core.model.common.ICommonService;
  */
 public interface IUserInfoService extends ICommonService<UserInfo> {
 
+    void chgpwd(UserInfo userInfo);
 }

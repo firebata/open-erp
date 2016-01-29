@@ -38,8 +38,8 @@
             //$("[name='" + key + "']").val(sexColor[key]);
             $("#" + key + sexColor["sexIdChild"]).val(sexColor[key]);
 
-            //初始化色组
-            if (sexColor["mainColorNames"] != undefined && sexColor["mainColorNames"] != null) {
+            //初始化色组:undefined/null/空字符串
+            if (sexColor["mainColorNames"]) {
                 var mainColors = sexColor["mainColorNames"].split(",");
                 var $tag_obj = $('#mainColorNames' + sexColor["sexIdChild"]).data('tag');
                 $.each(mainColors, function (n, value) {

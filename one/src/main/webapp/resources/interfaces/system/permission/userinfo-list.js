@@ -5,8 +5,11 @@
     "use strict";
     var path = $.basepath();
     var searchUrl = path + "/system/userinfo/search";
+    var chgPWDURL = path + "/system/userinfo/chgpwd";
+    var _0URL = path + "/system/permission/user-tab/0";
     $.extend({
-        userinfo: userinfo
+        userinfo: userinfo,
+        chgpwd: chgpwd //改密码
     });
 
     var columnsName = [
@@ -20,15 +23,47 @@
         {"data": null}
     ];
 
-    var table;
+
+    $("#savePWD").on("click", function () {
+        //执行表单监听
+        $('#defaultForm').bootstrapValidator('validate');
+    });
+
+    /**
+     * 改密码
+     */
+    function dealChgPwd() {
+
+
+        //启动表单校验监听
+        $('#defaultForm').bootstrapValidator({
+            //live: 'disabled',
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: pwdFiled
+        }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
+            var $form = $(e.target);
+            var data = $form.serialize();
+            $.sendRestFulAjax(chgPWDURL, data, null, null, _doSuccess_save);
+        });
+    }
+
     $(function () {
+
+
+        //处理改密
+        dealChgPwd();
 
         var tpl = $("#userInfotpl").html();
         //预编译模板
         var template = Handlebars.compile(tpl);
         var indexOpreation = columnsName.length - 1;
 
-        table = $('#userInfoExample').DataTable({
+        $('#userInfoExample').DataTable({
             ajax: {
                 url: searchUrl
             },
@@ -42,7 +77,8 @@
                         var context =
                         {
                             func: [
-                                {"name": "修改", "fn": "$.userinfo(\'" + data.natrualkey + "\')", "type": "primary"},
+                                {"name": "更新", "fn": "$.userinfo(\'" + data.natrualkey + "\')", "type": "primary"},
+                                {"name": "改密", "fn": "$.chgpwd(\'" + data.natrualkey + "\')", "type": "warning"},
                                 {"name": "删除", "fn": "$.userDel(\'" + data.natrualkey + "\')", "type": "danger"}
                             ]
                         };
@@ -83,6 +119,43 @@
     function userinfo(userId) {
         window.location.href = path + "/system/userinfo/add/" + userId;
     }
+
+
+    /**
+     * 显示改密页面
+     * @param _userId 用户id
+     */
+    function chgpwd(_userId) {
+        $("#password").empty();
+        $("#natrualkey").val(_userId);
+        $("#chgpwdModal").modal("show");
+    }
+
+
+    var pwdFiled =
+    {
+        password: {
+            validators: {
+                notEmpty: {
+                    message: '请输入密码'
+                }
+            }
+        }
+    };
+
+
+    /**
+     *
+     * @private
+     */
+    function _doSuccess_save() {
+        var length = $(".modal-backdrop").length;
+        for (var index = 0; index < length; index++) {
+            $("#chgpwdModal").modal('hide');//移除模态框遮罩层
+        }
+        window.location.href = _0URL;
+    }
+
 
 }(jQuery));
 

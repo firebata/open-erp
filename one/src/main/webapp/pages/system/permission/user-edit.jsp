@@ -53,25 +53,6 @@
                                        class="col-xs-10 col-sm-12"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-7  col-sm-4  control-label" for="password"> 用户密码</label>
-
-                            <div class="col-xs-12 col-sm-4">
-                                <input type="text" id="password" name="password" placeholder="用户密码"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label class="col-xs-7  col-sm-4  control-label" for="rptUserPwd"> 密码确认</label>
-
-                            <div class="col-xs-12 col-sm-4">
-                                <input type="text" id="rptUserPwd" name="rptUserPwd" placeholder="密码确认"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label class="col-xs-7  col-sm-4  control-label" for="userType"> 用户类型</label>
@@ -101,15 +82,6 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            <label class="col-xs-7  col-sm-4  control-label" for="cooperationTime"> 合作时间</label>
-
-                            <div class="col-xs-12 col-sm-4">
-                                <input type="text" id="cooperationTime" name="cooperationTime" placeholder="合作时间"
-                                       class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>
-                            </div>
-                        </div>
 
 
                     </div>

@@ -7,13 +7,13 @@
     var newURL = path + "/system/userinfo/new";
     var user_infoURL = path + "/system/userinfo/info/";
     var editURL = path + "/system/userinfo/edit";
-    var _0URL =  path + "/system/permission/user-tab/0";
-    var usertypeURL =path + "/system/userinfo/usertype";
+    var _0URL = path + "/system/permission/user-tab/0";
+    var usertypeURL = path + "/system/userinfo/usertype";
     var fileUploadURL = path + "/system/userinfo/add/fileUpload";
+
     $.extend({
         saveuserinfo: saveuserinfo
     });
-
 
     var fieldsDesc =
     {
@@ -79,7 +79,7 @@
             url = editURL;
         }
         $.sendRestFulAjax(url, formDataStr, 'POST', 'json', function () {
-            window.location.href =_0URL;
+            window.location.href = _0URL;
         });
 
     }
@@ -111,9 +111,10 @@
         //用户类型
         $.sendRestFulAjax(usertypeURL, null, 'GET', 'json', initSelect);
 
+
         //上传文件控制
         $("#fileLocation").fileinput({
-            showCaption: false,
+            //showCaption: false,
             uploadUrl: fileUploadURL, // server upload action
             initialPreview: [
                 "<img src='http://himg.bdimg.com/sys/portrait/item/ee0d6f696463674e08' class='file-preview-image' alt='Desert' title='Desert'>"

@@ -12,4 +12,6 @@ import org.springframework.stereotype.Component;
 public interface UserInfoManageMapper extends CommonDao<UserInfo> {
 
     UserInfo queryInfoByUserInfoName(String userName);
+
+    void chgpwd(UserInfo userInfo);
 }

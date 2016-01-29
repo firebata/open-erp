@@ -37,7 +37,6 @@
         </div>
         <!-- Button trigger modal -->
     </div>
-
     <%@ include file="edit.jsp" %>
 </div>
 <jsp:include page="../../base/footCommon.jsp"></jsp:include>

@@ -86,9 +86,10 @@
 
 
             if (key == 'sexIds') {
-                var arr = _data[key].split(',');
-                $('#sexIds').selectpicker("val", arr);
-                //$('#sexIds').val(arr);
+                if (null != _data[key]) {
+                    var arr = _data[key].split(',');
+                    $('#sexIds').selectpicker("val", arr);
+                }
             }
             else {
 

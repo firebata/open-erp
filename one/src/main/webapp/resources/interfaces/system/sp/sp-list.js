@@ -28,7 +28,7 @@ $(function () {
                     var context =
                     {
                         func: [
-                            {"name": "修改", "fn": "info(\'" + data.spId + "\')", "type": "primary"},
+                            {"name": "更新", "fn": "info(\'" + data.spId + "\')", "type": "primary"},
                             {"name": "删除", "fn": "del(\'" + data.spId + "\')", "type": "danger"}
                         ]
                     };

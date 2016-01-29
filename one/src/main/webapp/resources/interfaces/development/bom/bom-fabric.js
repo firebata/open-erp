@@ -451,7 +451,7 @@
 
         //品名列表
         var productTypeIdItems = data["productTypeItems"];
-        var $productTypeId = ("#productTypeId" + idNum);
+        var $productTypeId = $("#productTypeId" + idNum);
         $productTypeId.empty();
         $("<option></option>").val('').text("请选择...").appendTo($productTypeId);
         $.each(productTypeIdItems, function (i, item) {
