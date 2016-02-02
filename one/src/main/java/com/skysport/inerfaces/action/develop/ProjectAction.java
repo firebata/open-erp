@@ -44,7 +44,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     /**
      * 此方法描述的是：展示list页面	 *
      *
-     * @author: zhangjh
+     *   @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
     @RequestMapping(value = "/list")

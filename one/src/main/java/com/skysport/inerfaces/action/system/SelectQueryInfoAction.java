@@ -2,7 +2,7 @@ package com.skysport.inerfaces.action.system;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.instance.SystemBaseInfo;
-import com.skysport.inerfaces.model.SelectInfoHelper;
+import com.skysport.inerfaces.utils.SelectInfoHelper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

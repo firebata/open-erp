@@ -19,9 +19,7 @@ public class SeqCreateUtils {
     public static String newRrojectSeq(String seriesId) {
         StringBuilder projectSeqNo = new StringBuilder();
         long randomNum = java.util.concurrent.ThreadLocalRandom.current().nextInt(1000, 10000);
-        java.util.Date current = new java.util.Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("ddMMyyssmmHHSSS");
-        String timestamp = sdf.format(current);
+        String timestamp = DateUtils.SINGLETONE.format(DateUtils.YYYYMMDDHHMMSS);
         projectSeqNo.append(randomNum).append(timestamp).append(seriesId);
         return projectSeqNo.toString();
     }
@@ -34,9 +32,7 @@ public class SeqCreateUtils {
     public static String newBomSeq() {
         StringBuilder projectSeqNo = new StringBuilder();
         long randomNum = java.util.concurrent.ThreadLocalRandom.current().nextInt(10, 100);
-        java.util.Date current = new java.util.Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyMMddHHmmssSSS");
-        String timestamp = sdf.format(current);
+        String timestamp = DateUtils.SINGLETONE.format(DateUtils.YYYYMMDDHHMMSS);
         projectSeqNo.append(timestamp).append(randomNum);
         return projectSeqNo.toString();
     }

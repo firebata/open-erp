@@ -116,9 +116,9 @@
         $("#fileLocation").fileinput({
             //showCaption: false,
             uploadUrl: fileUploadURL, // server upload action
-            initialPreview: [
-                "<img src='http://himg.bdimg.com/sys/portrait/item/ee0d6f696463674e08' class='file-preview-image' alt='Desert' title='Desert'>"
-            ]
+            //initialPreview: [
+            //    "<img src='http://himg.bdimg.com/sys/portrait/item/ee0d6f696463674e08' class='file-preview-image' alt='Desert' title='Desert'>"
+            //]
         });
 
 

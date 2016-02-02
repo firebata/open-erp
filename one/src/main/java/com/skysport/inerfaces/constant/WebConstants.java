@@ -7,6 +7,7 @@ import java.io.File;
  * Created by zhangjh on 2015/7/14.
  */
 public interface WebConstants extends TableNameConstants {
+
     String CURRENT_USER = "current_user";
     String FILE_SEPRITER = File.separator;
 
@@ -71,4 +72,8 @@ public interface WebConstants extends TableNameConstants {
     int NO_NEED_TRANSFORM_COLUMN_NAME = 1;
 
     String MATERIALTYPEITEMS = "materialTypeItems";
+
+    String FILE_TXT = "txt";
+    String FILE_IMG = "img";
+    String FILE_OTHER = "other";
 }
