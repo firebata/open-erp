@@ -290,7 +290,7 @@
     };
 
     var trashFabricSelect = function (_this, idNum) {
-        var saveFlag = bom.fabricItems[id - 1].saveFlag;
+        var saveFlag = bom.fabricItems[idNum - 1].saveFlag;
         if (saveFlag == true) {
             bootbox.confirm("面料_" + idNum + "已保存，确定要删除", function (result) {
                 doDel(result, idNum);

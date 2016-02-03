@@ -11,7 +11,7 @@ public enum FileUtils {
 
     SINGLETONE;
 
-    static String[] imgsArr = new String[]{"BMP", "WBMP", "JPEG", "JPG", "PNG", "TIF", "GIF", "PSD", "ICO", "PCX", "TGA", "JP2", "PDF"};
+    static String[] imgsArr = new String[]{"BMP", "JPEG", "JPG", "PNG", "TIF", "GIF", "ICO"};
 
     /**
      * 文件名格式

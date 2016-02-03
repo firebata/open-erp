@@ -76,12 +76,12 @@ public class KFPackaging extends SelectItem {
     /**
      * 长
      */
-    private String length;
+    private BigDecimal length;
 
     /**
      * 宽
      */
-    private String width;
+    private BigDecimal width;
 
 
     private String description;
@@ -310,19 +310,19 @@ public class KFPackaging extends SelectItem {
         this.techRequired = techRequired;
     }
 
-    public String getLength() {
+    public BigDecimal getLength() {
         return length;
     }
 
-    public void setLength(String length) {
+    public void setLength(BigDecimal length) {
         this.length = length;
     }
 
-    public String getWidth() {
+    public BigDecimal getWidth() {
         return width;
     }
 
-    public void setWidth(String width) {
+    public void setWidth(BigDecimal width) {
         this.width = width;
     }
 

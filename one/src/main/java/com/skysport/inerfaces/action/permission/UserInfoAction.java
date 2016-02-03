@@ -5,29 +5,23 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.CharConstant;
 import com.skysport.core.constant.DictionaryKeyConstant;
 import com.skysport.core.instance.DictionaryInfo;
-import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.core.utils.SecurityUtil;
-import com.skysport.inerfaces.bean.basic.InitialPreviewConfig;
-import com.skysport.inerfaces.bean.basic.InitialPreviewExtra;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.permission.userinfo.helper.UserInfoHelper;
 import com.skysport.inerfaces.model.permission.userinfo.service.IUserInfoService;
-import com.skysport.inerfaces.utils.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +64,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     @SystemControllerLog(description = "查询用户信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
+
         // HashMap<String, String> paramMap = convertToMap(params);
         DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.USERINFO_TABLE_COLULMN, request);
         // 总记录数
@@ -105,69 +100,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
         return resultMap;
     }
 
-    /**
-     * @param fileLocation
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/add/fileUpload", method = RequestMethod.POST)
-    @ResponseBody
-    @SystemControllerLog(description = "上传附件")
-    public Map<String, Object> upload(@RequestParam("fileLocation") MultipartFile[] fileLocation, HttpServletRequest request) {
-        List<String> fileUrls = new ArrayList<>();
-        List<InitialPreviewConfig> configs = new ArrayList<>();
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        try {
-            String yyyymm = DateUtils.SINGLETONE.getYyyyMm();
-            String separator = File.separator;
-            for (MultipartFile file : fileLocation) {
 
-                // 判断文件是否为空
-                if (!file.isEmpty()) {
-                    InitialPreviewConfig config = new InitialPreviewConfig();
-
-                    String fileName = file.getOriginalFilename();
-//                    String newFileName = FileUtils.SINGLETONE.buildNewFileName();
-                    StringBuilder contextPath = new StringBuilder(request.getSession().getServletContext().getRealPath("/"));
-                    //文件保存路径
-                    String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.') + 1);
-                    String pathType = FileUtils.SINGLETONE.getPathType(suffix);
-                    String pathInPathType = DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, pathType);
-                    String absoluteDirectory = contextPath.toString() + new StringBuilder().append(separator).append("files").append(separator).append(pathInPathType).append(separator).append(yyyymm).append(separator).toString();
-                    File targetFile = new File(absoluteDirectory, fileName);
-                    String newFileNameId = PrimaryKeyUtils.getUUID();
-                    if (targetFile.exists()) {
-
-                        String relativeDirectory = new StringBuilder().append(separator).append("files").append(separator).append(pathInPathType).append(separator).append(yyyymm).append(separator).toString();
-                        fileUrls.add("<img src='/sky" + new StringBuilder().append(relativeDirectory).append(newFileNameId).append(CharConstant.POINT).append(suffix).toString() + "' class='file-preview-image' alt='Desert' title='Desert'>");
-                        targetFile = new File(contextPath.toString() + relativeDirectory, newFileNameId + CharConstant.POINT + suffix);
-                    } else {
-                        targetFile.mkdirs();
-                        String relativeDirectory = new StringBuilder().append(separator).append("files").append(separator).append(pathInPathType).append(separator).append(yyyymm).append(separator).append(fileName).toString();
-                        fileUrls.add("<img src='/sky" + relativeDirectory.toString() + "' class='file-preview-image' alt='Desert' title='Desert'>");
-                    }
-                    config.setCaption(fileName);
-                    config.setWidth("120px");
-                    config.setUrl("/files/del");
-                    config.setKey(newFileNameId);
-                    InitialPreviewExtra extra = new InitialPreviewExtra();
-                    extra.setId(newFileNameId);
-                    config.setExtra(extra);
-
-                    // 转存文件
-                    file.transferTo(targetFile);
-                }
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            resultMap.put("error", e.getMessage());
-        }
-
-        resultMap.put("initialPreview", fileUrls);
-        resultMap.put("initialPreviewConfig", configs);
-        // 重定向
-        return resultMap;
-    }
 
     /**
      * 此方法描述的是：

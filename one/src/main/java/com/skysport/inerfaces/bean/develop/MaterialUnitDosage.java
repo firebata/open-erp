@@ -2,6 +2,8 @@ package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.core.bean.CommonVo;
 
+import java.math.BigDecimal;
+
 /**
  * 类说明:物料单位用量
  * Created by zhangjh on 2015/7/2.
@@ -16,7 +18,7 @@ public class MaterialUnitDosage implements CommonVo {
     private String bomId;
     private String materialId;
     private String unitId;
-    private String unitAmount;
+    private BigDecimal unitAmount;
 
     public MaterialUnitDosage() {
         super();
@@ -94,11 +96,11 @@ public class MaterialUnitDosage implements CommonVo {
         this.unitId = unitId;
     }
 
-    public String getUnitAmount() {
+    public BigDecimal getUnitAmount() {
         return unitAmount;
     }
 
-    public void setUnitAmount(String unitAmount) {
+    public void setUnitAmount(BigDecimal unitAmount) {
         this.unitAmount = unitAmount;
     }
 }

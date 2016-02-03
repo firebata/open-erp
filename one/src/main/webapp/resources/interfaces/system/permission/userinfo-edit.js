@@ -9,7 +9,7 @@
     var editURL = path + "/system/userinfo/edit";
     var _0URL = path + "/system/permission/user-tab/0";
     var usertypeURL = path + "/system/userinfo/usertype";
-    var fileUploadURL = path + "/system/userinfo/add/fileUpload";
+    var fileUploadURL = path + "/files/upload";
 
     $.extend({
         saveuserinfo: saveuserinfo
@@ -121,15 +121,37 @@
             //]
         });
 
+        $("#fileLocation").on("filepredelete", predeleteCallback);
 
+        $("#fileLocation").on("filepredelete", function (jqXHR) {
+            var abort = true;
+
+           bootbox.confirm("Are you sure you want to delete this file?",function(result){
+
+                abort = result;
+            });
+
+            return abort; // you can also send any data/object that you can receive on `filecustomerror` event
+        });
     })
 
+    function predeleteCallback(){
+
+    }
+
+    function confirm(msg){
+        bootbox.confirm("Are you sure you want to delete this file?",function(result){
+
+        });
+    }
 
     function callback() {
+
         var natrualkey = $("#natrualkey").val();
         if (natrualkey != '') {
             $.sendRestFulAjax(user_infoURL + natrualkey, null, 'GET', 'json', initFormFields);
         }
+
     }
 
     function initFormFields(_data) {

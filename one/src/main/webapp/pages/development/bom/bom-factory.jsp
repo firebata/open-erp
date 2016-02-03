@@ -132,7 +132,7 @@
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{quoteReference}}"
                                     name="quoteReference" placeholder="报价参考">
-                                <option>请选择...</option>
+                                <option value="">请选择...</option>
                                 <option value="0">不参考</option>
                                 <option value="1">参考</option>
                             </select>
