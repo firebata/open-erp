@@ -105,49 +105,64 @@
         doSaveAction();
     });
 
+    /**
+     * response
+     * @param response
+     * @param f
+     */
+    function dealUploadedFile(response, $element, callback) {
+        var configArr = response["initialPreviewConfig"];
+        for (var idx = 0; idx < configArr.length; idx++) {
+            $("#" + configArr[idx]['extra']['id']).remove();
+            var ahref = '<li><a href=\"' + configArr[idx]['extra']['url'] + '\" class=\"blue\" id=\"' + configArr[idx]['extra']['id'] + '\" target=\"_blank\">' + configArr[idx]['caption'] + '</a></li>';
+            $element.append(ahref);
+        }
+
+    }
 
     $(function () {
 
         //用户类型
         $.sendRestFulAjax(usertypeURL, null, 'GET', 'json', initSelect);
 
-
         //上传文件控制
         $("#fileLocation").fileinput({
             //showCaption: false,
+            'previewFileType': 'any',
             uploadUrl: fileUploadURL, // server upload action
             //initialPreview: [
             //    "<img src='http://himg.bdimg.com/sys/portrait/item/ee0d6f696463674e08' class='file-preview-image' alt='Desert' title='Desert'>"
             //]
         });
 
-        $("#fileLocation").on("filepredelete", predeleteCallback);
+        $('#fileLocation').on('fileuploaded', function (event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            console.log('File uploaded triggered');
 
-        $("#fileLocation").on("filepredelete", function (jqXHR) {
-            var abort = true;
-
-           bootbox.confirm("Are you sure you want to delete this file?",function(result){
-
-                abort = result;
+            dealUploadedFile(response, $("#avatarsList"), function () {
             });
 
-            return abort; // you can also send any data/object that you can receive on `filecustomerror` event
         });
+
+
+        //    $("#fileLocation").on("filepredelete", function (jqXHR) {
+        //        jqXHR.preventDefault();
+        //        var abort = true;
+        //
+        //       var aa =bootbox.confirm("Are you sure you want to delete this file?",function(result){
+        //
+        //            abort = result;
+        //        });
+        //
+        //        return abort; // you can also send any data/object that you can receive on `filecustomerror` event
+        //    });
     })
-
-    function predeleteCallback(){
-
-    }
-
-    function confirm(msg){
-        bootbox.confirm("Are you sure you want to delete this file?",function(result){
-
-        });
-    }
 
     function callback() {
 
         var natrualkey = $("#natrualkey").val();
+
         if (natrualkey != '') {
             $.sendRestFulAjax(user_infoURL + natrualkey, null, 'GET', 'json', initFormFields);
         }

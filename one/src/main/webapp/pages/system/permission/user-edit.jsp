@@ -83,20 +83,27 @@
                         </div>
 
 
-
                     </div>
                 </div>
-                <div id="accessoriesInfo" class="row">
+                <div id="avatars" class="row">
                     <h5 class="header smaller lighter blue">
                         头像信息
                     </h5>
 
                     <div class="row">
                         <label class="col-xs-7  col-sm-4  control-label">上传头像</label>
-
                         <div class="col-xs-12 col-sm-4">
                             <input id="fileLocation" type="file" class="file-loading col-xs-12 col-sm-4"
                                    name="fileLocation">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
+                        <div class="col-xs-12 col-sm-4" >
+                            <ul id="avatarsList">
+
+                            </ul>
                         </div>
                     </div>
                 </div>
