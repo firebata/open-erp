@@ -98,14 +98,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
-                        <div class="col-xs-12 col-sm-4" >
-                            <ul id="avatarsList">
-
-                            </ul>
-                        </div>
-                    </div>
                 </div>
                 <hr/>
                 <div id="userBtnInfo" class="row">
@@ -125,5 +117,4 @@
 </html>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/system/permission/userinfo-edit.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/system/permission/userinfo-edit.js?v=<%=version%>"></script>

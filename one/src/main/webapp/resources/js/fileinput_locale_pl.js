@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinput.locales.pl = {
+    $.fn.fileinputLocales['pl'] = {
         fileSingle: 'plik',
         filePlural: 'pliki',
         browseLabel: 'Przeglądaj &hellip;',
@@ -21,9 +21,13 @@
         cancelTitle: 'Anuluj wysyłanie',
         uploadLabel: 'Wgraj',
         uploadTitle: 'Wgraj zaznaczone pliki',
-        msgSizeTooLarge: 'Plik o nazwie "{name}" (<b>{size} KB</b>) przekroczył maksymalną dopuszczalną wielkość pliku wynoszącą <b>{maxSize} KB</b>. Proszę ponowić próbę wysłania pliku!',
-        msgFilesTooLess: 'Musisz wybrać przynajmniej <b>{n}</b> {files} do wgrania. Proszę spróbować jeszcze raz wgrać pliki!',
-        msgFilesTooMany: 'Liczba plików wybranych do wgrania w liczbie <b>({n})</b>, przekracza maksymalny dozwolony limit wynoszący <b>{m}</b>. Proszę spróbować ponownie!',
+        msgNo: 'Nie',
+        msgCancelled: 'Odwołany',
+        msgZoomTitle: 'Pokaż szczegóły',
+        msgZoomModalHeading: 'Szczegółowe Podgląd',
+        msgSizeTooLarge: 'Plik o nazwie "{name}" (<b>{size} KB</b>) przekroczył maksymalną dopuszczalną wielkość pliku wynoszącą <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Musisz wybrać przynajmniej <b>{n}</b> {files} do wgrania.',
+        msgFilesTooMany: 'Liczba plików wybranych do wgrania w liczbie <b>({n})</b>, przekracza maksymalny dozwolony limit wynoszący <b>{m}</b>.',
         msgFileNotFound: 'Plik "{name}" nie istnieje!',
         msgFileSecured: 'Ustawienia zabezpieczeń uniemożliwiają odczyt pliku "{name}".',
         msgFileNotReadable: 'Plik "{name}" nie jest plikiem do odczytu.',
@@ -31,13 +35,26 @@
         msgFilePreviewError: 'Wystąpił błąd w czasie odczytu pliku "{name}".',
         msgInvalidFileType: 'Nieznny typ pliku "{name}". Tylko następujące rodzaje plików "{types}", są obsługiwane.',
         msgInvalidFileExtension: 'Złe rozszerzenie dla pliku "{name}". Tylko następujące rozszerzenia plików "{extensions}", są obsługiwane.',
-        msgValidationError: 'Błąd podczas przesyłania pliku.',
+        msgUploadAborted: 'Plik przesyłanie zostało przerwane',
+        msgValidationError: 'Błąd walidacji',
         msgLoading: 'Wczytywanie pliku {index} z {files} &hellip;',
         msgProgress: 'Wczytywanie pliku {index} z {files} - {name} - {percent}% zakończone.',
         msgSelected: '{n} {files} zaznaczonych',
         msgFoldersNotAllowed: 'Metodą przeciągnij i upuść, można przenosić tylko pliki. Pominięto {n} katalogów.',
-        dropZoneTitle: 'Przeciągnij i upuść pliki tu &hellip;'
+        msgImageWidthSmall: 'Szerokość pliku obrazu "{name}" musi być co najmniej {size} px.',
+        msgImageHeightSmall: 'Wysokość pliku obrazu "{name}" musi być co najmniej {size} px.',
+        msgImageWidthLarge: 'Szerokość pliku obrazu "{name}" nie może przekraczać {size} px.',
+        msgImageHeightLarge: 'Wysokość pliku obrazu "{name}" nie może przekraczać {size} px.',
+        msgImageResizeError: 'Nie udało się uzyskać wymiary obrazu, aby zmienić rozmiar.',
+        msgImageResizeException: 'Błąd podczas zmiany rozmiaru obrazu.<pre>{errors}</pre>',
+        dropZoneTitle: 'Przeciągnij i upuść pliki tu &hellip;',
+        fileActionSettings: {
+            removeTitle: 'Usuń plik',
+            uploadTitle: 'przesyłanie pliku',
+            indicatorNewTitle: 'Jeszcze nie przesłanych',
+            indicatorSuccessTitle: 'Dodane',
+            indicatorErrorTitle: 'Prześlij błąd',
+            indicatorLoadingTitle: 'Zamieszczanie ...'
+        }
     };
-
-    $.extend($.fn.fileinput.defaults, $.fn.fileinput.locales.pl);
 })(window.jQuery);

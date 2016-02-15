@@ -146,18 +146,19 @@
         });
 
 
-        //    $("#fileLocation").on("filepredelete", function (jqXHR) {
-        //        jqXHR.preventDefault();
-        //        var abort = true;
-        //
-        //       var aa =bootbox.confirm("Are you sure you want to delete this file?",function(result){
-        //
-        //            abort = result;
-        //        });
-        //
-        //        return abort; // you can also send any data/object that you can receive on `filecustomerror` event
-        //    });
+        $("#fileLocation").on("filepredelete", function (jqXHR) {
+            jqXHR.preventDefault();
+            var abort = true;
+
+            var aa = bootbox.confirm("Are you sure you want to delete this file?", function (result) {
+
+                abort = result;
+            });
+
+            return abort; // you can also send any data/object that you can receive on `filecustomerror` event
+        });
     })
+
 
     function callback() {
 
@@ -192,17 +193,3 @@
 
 
 }(jQuery));
-
-
-
-
-
-
-
-
-
-
-
-
-
-

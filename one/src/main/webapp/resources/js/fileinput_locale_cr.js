@@ -1,5 +1,5 @@
 /*!
- * FileInput Serbian Translations
+ * FileInput Croatian Translations
  *
  * This file must be loaded after 'fileinput.js'. Patterns in braces '{}', or
  * any HTML markup tags in the messages must not be converted or translated.
@@ -12,7 +12,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinput.locales.sr = {
+    $.fn.fileinputLocales['cr'] = {
         fileSingle: 'datoteka',
         filePlural: 'datoteke',
         browseLabel: 'Izaberi &hellip;',
@@ -22,9 +22,13 @@
         cancelTitle: 'Prekini trenutno otpremanje',
         uploadLabel: 'Otpremi',
         uploadTitle: 'Otpremi označene datoteke',
-        msgSizeTooLarge: 'Datoteka "{name}" (<b>{size} KB</b>) prekoračuje maksimalnu dozvoljenu veličinu datoteke od <b>{maxSize} KB</b>. Molimo pokušajte ponovo!',
-        msgFilesTooLess: 'Morate odabrati najmanje <b>{n}</b> {files} za otpremanje. Molimo pokušajte ponovo!',
-        msgFilesTooMany: 'Broj datoteka označenih za otpremanje <b>({n})</b> prekoračuje maksimalni dozvoljeni limit od <b>{m}</b>. Molimo pokušajte ponovo!',
+        msgNo: 'Ne',
+        msgCancelled: 'Otkazan',
+        msgZoomTitle: 'Pregledavati pojedinosti',
+        msgZoomModalHeading: 'Detaljni pregled',
+        msgSizeTooLarge: 'Datoteka "{name}" (<b>{size} KB</b>) prekoračuje maksimalnu dozvoljenu veličinu datoteke od <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Morate odabrati najmanje <b>{n}</b> {files} za otpremanje.',
+        msgFilesTooMany: 'Broj datoteka označenih za otpremanje <b>({n})</b> prekoračuje maksimalni dozvoljeni limit od <b>{m}</b>.',
         msgFileNotFound: 'Datoteka "{name}" nije pronađena!',
         msgFileSecured: 'Datoteku "{name}" nije moguće pročitati zbog bezbednosnih ograničenja.',
         msgFileNotReadable: 'Datoteku "{name}" nije moguće pročitati.',
@@ -32,13 +36,26 @@
         msgFilePreviewError: 'Došlo je do greške prilikom čitanja datoteke "{name}".',
         msgInvalidFileType: 'Datoteka "{name}" je pogrešnog formata. Dozvoljeni formati su "{types}".',
         msgInvalidFileExtension: 'Ekstenzija datoteke "{name}" nije dozvoljena. Dozvoljene ekstenzije su "{extensions}".',
-        msgValidationError: 'Greška prilikom otpremanja fajla',
+        msgUploadAborted: 'Prijenos datoteka je prekinut',
+        msgValidationError: 'Provjera pogrešaka',
         msgLoading: 'Učitavanje datoteke {index} od {files} &hellip;',
         msgProgress: 'Učitavanje datoteke {index} od {files} - {name} - {percent}% završeno.',
         msgSelected: '{n} {files} je označeno',
         msgFoldersNotAllowed: 'Moguće je prevlačiti samo datoteke! Preskočeno je {n} fascikla.',
-        dropZoneTitle: 'Prevucite datoteke ovde &hellip;'
+        msgImageWidthSmall: 'Širina slikovnu datoteku "{name}" moraju biti najmanje {size} px.',
+        msgImageHeightSmall: 'Visina slikovnu datoteku "{name}" moraju biti najmanje {size} px.',
+        msgImageWidthLarge: 'Širina slikovnu datoteku "{name}" ne može prelaziti {size} px.',
+        msgImageHeightLarge: 'Visina slikovnu datoteku "{name}" ne može prelaziti {size} px.',
+        msgImageResizeError: 'Nije mogao dobiti dimenzije slike na veličinu.',
+        msgImageResizeException: 'Greška prilikom promjene veličine slike.<pre>{errors}</pre>',
+        dropZoneTitle: 'Prevucite datoteke ovde &hellip;',
+        fileActionSettings: {
+            removeTitle: 'Uklonite datoteku',
+            uploadTitle: 'Postavi datoteku',
+            indicatorNewTitle: 'Još nije učitao',
+            indicatorSuccessTitle: 'Preneseno',
+            indicatorErrorTitle: 'Postavi Greška',
+            indicatorLoadingTitle: 'Prijenos ...'
+        }
     };
-
-    $.extend($.fn.fileinput.defaults, $.fn.fileinput.locales.sr);
 })(window.jQuery);

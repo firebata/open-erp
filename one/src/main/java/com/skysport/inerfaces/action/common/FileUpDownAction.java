@@ -93,41 +93,41 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
 
                         String relativeDirectory = new StringBuilder().append(separator).append("files").append(separator).append(pathInPathType).append(separator).append(yyyymm).append(separator).toString();
                         newFileLocation = new StringBuilder(contextPath).append(relativeDirectory).append(newFileNameId).append(CharConstant.POINT).append(suffix).toString();
-//                        if (pathType.equals(WebConstants.FILE_TXT)) {
-//                            String txt = "<div class='file-preview-text' title='NOTES.txt'>" +
-//                                    newFileLocation +
-//                                    "<span class='wrap-indicator' onclick='$(\"#show-detailed-text\").modal(\"show\")' title='NOTES.txt'>[…]</span>" +
-//                                    "</div>";
-//                            fileUrls.add(txt);
-//                        } else if (pathType.equals(WebConstants.FILE_IMG)) {
-//                            fileUrls.add("<img src='" + newFileLocation + "' class='file-preview-image' alt='Desert' title='Desert'>");
-//                        } else {
-//                            String other = "<div class='file-preview-text'>" +
-//                                    "<h2><i class='glyphicon glyphicon-file'></i></h2>" +
-//                                    newFileLocation + "</div>";
-//                            fileUrls.add(other);
-//                        }
+                        if (pathType.equals(WebConstants.FILE_TXT)) {
+                            String txt = "<div class='file-preview-text' title='NOTES.txt'>" +
+                                    newFileLocation +
+                                    "<span class='wrap-indicator' onclick='$(\"#show-detailed-text\").modal(\"show\")' title='NOTES.txt'>[…]</span>" +
+                                    "</div>";
+                            fileUrls.add(txt);
+                        } else if (pathType.equals(WebConstants.FILE_IMG)) {
+                            fileUrls.add("<img src='" + newFileLocation + "' class='file-preview-image' alt='Desert' title='Desert'>");
+                        } else {
+                            String other = "<div class='file-preview-text'>" +
+                                    "<h2><i class='glyphicon glyphicon-file'></i></h2>" +
+                                    newFileLocation + "</div>";
+                            fileUrls.add(other);
+                        }
 
                         targetFile = new File(realPath.toString() + relativeDirectory, newFileNameId + CharConstant.POINT + suffix);
                     } else {
                         targetFile.mkdirs();
                         newFileLocation = new StringBuilder(contextPath).append(separator).append("files").append(separator).append(pathInPathType).append(separator).append(yyyymm).append(separator).append(fileName).toString();
-//                        if (pathType.equals(WebConstants.FILE_TXT)) {
-////                            String txt = "<div class='file-preview-text' title='" + relativeDirectory.toString() + "'>" +
-////                                    "<span class='wrap-indicator' onclick='$(\"#show-detailed-text\").modal(\"show\")' title='NOTES.txt'>[…]</span>" +
-////                                    "</div>";
-//////                            fileUrls.add(txt);
-////
-////                            resultMap.put("initialPreview", txt);
-//                        } else if (pathType.equals(WebConstants.FILE_IMG)) {
-//                            fileUrls.add("<img src='" + relativeDirectory.toString() + "' class='file-preview-image' alt='Desert' title='Desert'>");
-//                        } else {
-//                            String other = "<div class='file-preview-text'>" +
-//                                    "<h2><i class='glyphicon glyphicon-file'></i></h2>" +
-//                                    relativeDirectory.toString() + "</div>";
-//                            fileUrls.add(other);
-//
-//                        }
+                        if (pathType.equals(WebConstants.FILE_TXT)) {
+                            String txt = "<div class='file-preview-text' title='" + newFileLocation.toString() + "'>" +
+                                    "<span class='wrap-indicator' onclick='$(\"#show-detailed-text\").modal(\"show\")' title='NOTES.txt'>[…]</span>" +
+                                    "</div>";
+//                            fileUrls.add(txt);
+
+                            resultMap.put("initialPreview", txt);
+                        } else if (pathType.equals(WebConstants.FILE_IMG)) {
+                            fileUrls.add("<img src='" + newFileLocation.toString() + "' class='file-preview-image' alt='Desert' title='Desert'>");
+                        } else {
+                            String other = "<div class='file-preview-text'>" +
+                                    "<h2><i class='glyphicon glyphicon-file'></i></h2>" +
+                                    newFileLocation.toString() + "</div>";
+                            fileUrls.add(other);
+
+                        }
                     }
 
                     config.setCaption(fileName);
@@ -149,7 +149,7 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
             resultMap.put("error", e.getMessage());
         }
 
-//        resultMap.put("initialPreview", fileUrls);
+        resultMap.put("initialPreview", fileUrls);
         resultMap.put("initialPreviewConfig", configs);
         // 重定向
         return resultMap;

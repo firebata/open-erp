@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.fileinput.locales.pt= {
+    $.fn.fileinputLocales['pt'] = {
         fileSingle: 'ficheiro',
         filePlural: 'ficheiros',
         browseLabel: 'Procurar &hellip;',
@@ -21,9 +21,13 @@
         cancelTitle: 'Abortar carregamento ',
         uploadLabel: 'Carregar',
         uploadTitle: 'Carregar ficheiros seleccionados',
-        msgSizeTooLarge: 'Ficheiro "{name}" (<b>{size} KB</b>) excede o tamanho máximo permido de <b>{maxSize} KB</b>. Por favor carregue de novo!',
-        msgFilesTooLess: 'Deve seleccionar pelo menos <b>{n}</b> {files} para fazer upload. Por favor carregue de novo!',
-        msgFilesTooMany: 'Número máximo de ficheiros seleccionados <b>({n})</b> excede o limite máximo de <b>{m}</b>. Por favor carregue de novo!',
+        msgNo: 'Não',
+        msgCancelled: 'Cancelado',
+        msgZoomTitle: 'Ver detalhes',
+        msgZoomModalHeading: 'Pré-visualização detalhada',
+        msgSizeTooLarge: 'Ficheiro "{name}" (<b>{size} KB</b>) excede o tamanho máximo permido de <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Deve seleccionar pelo menos <b>{n}</b> {files} para fazer upload.',
+        msgFilesTooMany: 'Número máximo de ficheiros seleccionados <b>({n})</b> excede o limite máximo de <b>{m}</b>.',
         msgFileNotFound: 'Ficheiro "{name}" não encontrado!',
         msgFileSecured: 'Restrições de segurança preventem a leitura do ficheiro "{name}".',
         msgFileNotReadable: 'Ficheiro "{name}" não pode ser lido.',
@@ -31,13 +35,26 @@
         msgFilePreviewError: 'Ocorreu um erro ao ler o ficheiro "{name}".',
         msgInvalidFileType: 'Tipo inválido para o ficheiro "{name}". Apenas ficheiros "{types}" são suportados.',
         msgInvalidFileExtension: 'Extensão inválida para o ficheiro "{name}". Apenas ficheiros "{extensions}" são suportados.',
-        msgValidationError: 'Erro de carregamento de ficheiro',
+        msgUploadAborted: 'O upload do arquivo foi abortada',
+        msgValidationError: 'Erro de validação',
         msgLoading: 'A carregar ficheiro {index} de {files} &hellip;',
         msgProgress: 'A carregar ficheiro {index} de {files} - {name} - {percent}% completo.',
         msgSelected: '{n} {files} seleccionados',
         msgFoldersNotAllowed: 'Arrastar e largar ficheiros apenas! {n} pasta(s) ignoradas.',
-        dropZoneTitle: 'Arrastar e largar ficheiros aqui &hellip;'
+        msgImageWidthSmall: 'Largura do arquivo de imagem "{name}" deve ser pelo menos {size} px.',
+        msgImageHeightSmall: 'Altura do arquivo de imagem "{name}" deve ser pelo menos {size} px.',
+        msgImageWidthLarge: 'Largura do arquivo de imagem "{name}" não pode exceder {size} px.',
+        msgImageHeightLarge: 'Altura do arquivo de imagem "{name}" não pode exceder {size} px.',
+        msgImageResizeError: 'Could not get the image dimensions to resize.',
+        msgImageResizeException: 'Erro ao redimensionar a imagem.<pre>{errors}</pre>',
+        dropZoneTitle: 'Arrastar e largar ficheiros aqui &hellip;',
+        fileActionSettings: {
+            removeTitle: 'Remover arquivo',
+            uploadTitle: 'Carregar arquivo',
+            indicatorNewTitle: 'Ainda não carregou',
+            indicatorSuccessTitle: 'Carregado',
+            indicatorErrorTitle: 'Carregar Erro',
+            indicatorLoadingTitle: 'A carregar ...'
+        }
     };
-
-    $.extend($.fn.fileinput.defaults, $.fn.fileinput.locales.pt);
 })(window.jQuery);
