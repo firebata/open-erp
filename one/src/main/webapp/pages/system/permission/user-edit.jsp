@@ -93,11 +93,17 @@
                     <div class="row">
                         <label class="col-xs-7  col-sm-4  control-label">上传头像</label>
                         <div class="col-xs-12 col-sm-4">
-                            <input id="fileLocation" type="file" class="file-loading col-xs-12 col-sm-4"
-                                   name="fileLocation">
+                            <input id="fileLocation" type="file" multiple class="file-loading col-xs-12 col-sm-4"    name="fileLocation">
                         </div>
                     </div>
+                    <div class="row">
+                        <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
+                        <div class="col-xs-12 col-sm-4" >
+                            <ul id="avatarsList">
 
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <hr/>
                 <div id="userBtnInfo" class="row">

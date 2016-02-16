@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.common.UploadFileInfoMapper">
+    <sql id="searchInfoSql">
+        id AS id,
+        uid AS natrualkey,
+        file_name AS name,
+        new_file_name AS newFileName,
+        suffix AS suffix,
+        file_path AS filePath,
+        file_url AS fileUrl,
+        del_url AS delUrl,
+        del_flag AS delFlag,
+        callback_url AS callbackUrl,
+        type AS type,
+        buss_id AS bussId,
+        operator AS operator,
+        update_time AS updateTime,
+        remark AS remark,
+        status AS status
+    </sql>
+    <!--查询文件记录信息-->
+    <select id="queryInfo" resultType="UserInfo">
+        select
+          <include refid="searchInfoSql"/>
+        FROM
+          t_sys_file_records
+        WHERE
+          buss_id =#{natrualkey} and del_flag=0
+          limit 1
+    </select>
+
+    <select id="queryInfoByUserInfoName" resultType="UserInfo">
+        select
+          <include refid="searchInfoSql"/>
+        FROM
+          t_sys_file_records
+        WHERE
+          file_name =#{fileName} and del_flag=0
+    </select>
+
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_sys_file_records
+        where del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM t_sys_file_records where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            file_name like concat('%',#{searchValue},'%') or
+            type like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="UserInfo">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM
+          t_sys_file_records
+        WHERE
+        del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            file_name like concat('%',#{searchValue},'%') or
+            type like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+    </select>
+
+    <update id="updateInfo">
+        update
+            t_sys_file_records
+        set
+            type= #{type},
+            buss_id = #{bussId},
+            operator = #{operator},
+            status =#{status}
+        WHERE
+            status =#{status}
+            and uid IN
+            <foreach item="idItem" collection="list" open="(" separator="," close=")">
+                #{idItem}
+            </foreach>
+    </update>
+
+    <insert id="add">
+        insert into
+            t_sys_file_records (uid,file_name,new_file_name,suffix,file_path,file_url,del_url,remark,callback_url,type,buss_id,operator,update_time,status)
+        values
+            (#{natrualkey},#{fileName},#{newFileName},#{suffix},#{filePath},#{fileUrl},#{delUrl},#{remark},#{callbackUrl},#{type},#{bussId},#{operator},#{updateTime},#{status})
+    </insert>
+
+
+    <insert id="addBatch" parameterType="list">
+        insert into
+            t_sys_file_records(uid,file_name,new_file_name,suffix,file_path,file_url,del_url,remark,callback_url,type,buss_id,operator,update_time,status)
+        values
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{item.natrualkey},#{item.fileName},#{item.newFileName},#{item.suffix},#{item.filePath},#{item.fileUrl},#{item.delUrl},#{item.remark},#{item.callbackUrl},#{item.type},#{item.bussId},#{item.operator},#{item.updateTime},#{item.status})
+            </foreach>
+    </insert>
+
+    <!--根据业务id删除数据-->
+    <update id="del">
+        update t_sys_file_records
+        set  del_flag=1
+        where buss_id =#{bussId}
+    </update>
+
+
+</mapper>

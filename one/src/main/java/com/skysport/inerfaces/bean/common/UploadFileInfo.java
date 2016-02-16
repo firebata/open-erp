@@ -7,16 +7,20 @@ import com.skysport.core.bean.system.SelectItem;
  * Created by zhangjh on 2016/2/3.
  */
 public class UploadFileInfo extends SelectItem {
+
     private String id;
     private String uid;
-    private String newFileName;
-    private String filePath;
     private String fileName;
-    private int type;
+    private String newFileName;
+    private String suffix;
+    private String filePath;
+    private String fileUrl;
+    private String delUrl;
+    private String type;
     private String bussId;
     private String operator;
     private String callbackUrl;
-
+    private String status;
     private int delFlag;
     private String remark;
     private String updateTime;
@@ -63,11 +67,11 @@ public class UploadFileInfo extends SelectItem {
         this.fileName = fileName;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -123,5 +127,37 @@ public class UploadFileInfo extends SelectItem {
     @Override
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+    public String getDelUrl() {
+        return delUrl;
+    }
+
+    public void setDelUrl(String delUrl) {
+        this.delUrl = delUrl;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

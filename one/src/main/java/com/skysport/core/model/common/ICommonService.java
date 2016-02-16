@@ -48,7 +48,7 @@ public interface ICommonService<T> {
 
     List<SelectItem2> querySelectList(String name);
 
-    void addBatch(List<T> bomInfos);
+    void addBatch(List<T> infos);
 
     void updateBatch(List<T> infos);
 

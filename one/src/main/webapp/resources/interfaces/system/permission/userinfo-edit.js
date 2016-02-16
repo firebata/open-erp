@@ -102,6 +102,7 @@
         },
         fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
+        $('#fileLocation').fileinput('upload');
         doSaveAction();
     });
 
@@ -114,7 +115,7 @@
         var configArr = response["initialPreviewConfig"];
         for (var idx = 0; idx < configArr.length; idx++) {
             $("#" + configArr[idx]['extra']['id']).remove();
-            var ahref = '<li><a href=\"' + configArr[idx]['extra']['url'] + '\" class=\"blue\" id=\"' + configArr[idx]['extra']['id'] + '\" target=\"_blank\">' + configArr[idx]['caption'] + '</a></li>';
+            var ahref = '<li  id=\"' + configArr[idx]['extra']['id'] + '\"><a href=\"' + configArr[idx]['extra']['url'] + '\" class=\"blue\" target=\"_blank\">' + configArr[idx]['caption'] + '</a></li>';
             $element.append(ahref);
         }
 
@@ -128,11 +129,11 @@
         //上传文件控制
         $("#fileLocation").fileinput({
             //showCaption: false,
+            language: "zh",
             'previewFileType': 'any',
+            allowedFileExtensions: ["jpg", "png", "gif", "xls", "xlsx", "pdf", "jpeg"],
+            //allowedPreviewTypes: ["jpg", "png", "gif", "jpeg"],
             uploadUrl: fileUploadURL, // server upload action
-            //initialPreview: [
-            //    "<img src='http://himg.bdimg.com/sys/portrait/item/ee0d6f696463674e08' class='file-preview-image' alt='Desert' title='Desert'>"
-            //]
         });
 
         $('#fileLocation').on('fileuploaded', function (event, data, previewId, index) {
@@ -147,16 +148,18 @@
 
 
         $("#fileLocation").on("filepredelete", function (jqXHR) {
-            jqXHR.preventDefault();
             var abort = true;
-
-            var aa = bootbox.confirm("Are you sure you want to delete this file?", function (result) {
-
-                abort = result;
-            });
-
+            if (confirm("是否删除该资源?")) {
+                abort = false;
+            }
             return abort; // you can also send any data/object that you can receive on `filecustomerror` event
         });
+
+        $('#fileLocation').on('filedeleted', function(event, key) {
+            console.log('Key = ' + key);
+            $("#" + key).remove();
+        });
+
     })
 
 

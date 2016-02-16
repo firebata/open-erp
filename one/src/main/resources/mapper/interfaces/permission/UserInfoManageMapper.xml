@@ -85,8 +85,8 @@
 
     <insert id="add">
         insert into
-        t_qx_user (user_id,user_name,user_pwd,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
-        values (#{natrualkey},#{name},#{password},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
+        t_qx_user (user_id,user_name,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
+        values (#{natrualkey},#{name},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
     </insert>
 
     <update id="del">

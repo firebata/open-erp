@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface IAccessoriesService extends ICommonService<AccessoriesInfo> {
 
-
     void updateBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo);
 
     List<AccessoriesInfo> queryAccessoriesList(String bomId);
