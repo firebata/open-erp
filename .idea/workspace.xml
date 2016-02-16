@@ -6,22 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/common/UploadFileInfoMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/common/uploadfile/IUploadFileInfoService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/common/uploadfile/impl/UploadFileInfoServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/thread/UploadFileThread.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/common/UploadInfoManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/ICommonService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/ICommonService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/common/UploadFileInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/common/UploadFileInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/IAccessoriesService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/IAccessoriesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/permission/UserInfoManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/permission/UserInfoManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/pages/system/permission/user-edit.jsp" afterPath="$PROJECT_DIR$/one/src/main/webapp/pages/system/permission/user-edit.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/permission/userinfo-edit.js" afterPath="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/system/permission/userinfo-edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/permission/UserInfoManageMapper.xml" afterPath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/permission/UserInfoManageMapper.xml" />
-    </list>
+    <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="" />
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,8 +32,8 @@
       <file leaf-file-name="FileUpDownAction.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20619947">
-              <caret line="173" column="56" selection-start-line="173" selection-start-column="56" selection-end-line="173" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.79514825">
+              <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2181#2197#0" expanded="true" />
@@ -1116,12 +1101,12 @@
       <workItem from="1455500835455" duration="11258000" />
       <workItem from="1455520714803" duration="7070000" />
       <workItem from="1455529013834" duration="4313000" />
-      <workItem from="1455584860523" duration="24941000" />
+      <workItem from="1455584860523" duration="25036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="238890000" />
+    <option name="totallyTimeSpent" value="238985000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1658,8 +1643,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20619947">
-          <caret line="173" column="56" selection-start-line="173" selection-start-column="56" selection-end-line="173" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.79514825">
+          <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2181#2197#0" expanded="true" />
