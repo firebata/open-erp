@@ -76,4 +76,15 @@ public interface WebConstants extends TableNameConstants {
     String FILE_TXT = "txt";
     String FILE_IMG = "img";
     String FILE_OTHER = "other";
+
+    String FILE_IN_PROCESS = "0";//文件暂存对象
+    String FILE_IN_FINISH = "1";//文件为删除
+
+
+    String FILE_KIND_USER = "1";//用户头像
+    String FILE_KIND_SP = "2";//用户头像
+    String FILE_KIND_PROJECT = "3";//项目附件
+    String FILE_KIND_PROJECT_ITEM = "4";//子项目附件
+
+
 }

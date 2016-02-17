@@ -16,7 +16,8 @@
         basepath: getContextPath,
         select2s: select2s,
         initSelect2s: initSelect2s,
-        initSelect2sByArr: initSelect2sByArr
+        initSelect2sByArr: initSelect2sByArr,
+        createDownloadLink:createDownloadLink
     });
 
 
@@ -207,7 +208,10 @@
         $element.trigger('change');
     }
 
-
+    function createDownloadLink(filepath) {
+        var tj = jQuery.noConflict();
+        window.location.href = filepath;
+    }
     var formatRepo = function (repo) {
         if (repo.loading) return repo.text;
         var markup = repo.name + '-' + repo.natrualkey;

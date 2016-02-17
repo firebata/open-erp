@@ -176,8 +176,8 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-        accessories_id AS natrualkey,
-        accessories_name AS name
+            accessories_id AS natrualkey,
+            accessories_name AS name
         from t_kf_accessories
         where del_flag=0
         <if test="name!=null and name!=''">
@@ -216,7 +216,7 @@
     </resultMap>
 
     <select id="queryAccessoriesList" resultMap="infosMap">
-      SELECT
+    SELECT
         a.accessories_id AS accessoriesId,
         a.accessories_name AS accessoriessName,
         a.material_type_id AS materialTypeId,

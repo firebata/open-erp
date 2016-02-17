@@ -8,6 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明:
@@ -21,5 +22,15 @@ public class UploadFileInfoServiceImpl extends CommonServiceImpl<UploadFileInfo>
     @Override
     public void afterPropertiesSet() throws Exception {
         commonDao = uploadFileInfoMapper;
+    }
+
+    @Override
+    public void del(String bussId, String status) {
+        uploadFileInfoMapper.del(bussId, status);
+    }
+
+    @Override
+    public List<UploadFileInfo> queryListByBussId(String bussId, String status) {
+        return uploadFileInfoMapper.queryListByBussId(bussId, status);
     }
 }

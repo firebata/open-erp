@@ -9,15 +9,16 @@ import com.skysport.core.constant.DictionaryKeyConstant;
 import com.skysport.core.instance.DictionaryInfo;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.core.utils.SecurityUtil;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
+import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.permission.userinfo.helper.UserInfoHelper;
 import com.skysport.inerfaces.model.permission.userinfo.service.IUserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -38,6 +39,8 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @Resource(name = "userInfoService")
     private IUserInfoService userInfoService;
 
+    @Resource(name = "uploadFileInfoService")
+    private IUploadFileInfoService uploadFileInfoService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -90,16 +93,19 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "编辑用户信息")
-    public Map<String, Object> edit(UserInfo userInfo) throws Exception {
-        String pwd = SecurityUtil.encrypt(userInfo.getPassword());
-        userInfo.setPassword(pwd);
+    public Map<String, Object> edit(@RequestBody UserInfo userInfo, HttpServletRequest request) throws Exception {
+//        String pwd = SecurityUtil.encrypt(userInfo.getPassword());
+//        userInfo.setPassword(pwd);
         userInfoService.edit(userInfo);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("code", "0");
-        resultMap.put("message", "更新成功");
-        return resultMap;
-    }
 
+        //删除文件记录表的status状态为1的数据
+        uploadFileInfoService.del(userInfo.getNatrualkey(), WebConstants.FILE_IN_FINISH);
+        //回写文件记录表的status状态为1
+        UploadFileHelper.SINGLETONE.updateFileRecords(userInfo, request, userInfo.getNatrualkey(), uploadFileInfoService);
+
+        return rtnSuccessResultMap("更新成功");
+
+    }
 
 
     /**
@@ -111,11 +117,18 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "增加用户信息")
-    public Map<String, Object> add(UserInfo userInfo) throws Exception {
+    public Map<String, Object> add(UserInfo userInfo, HttpServletRequest request) throws Exception {
+
+        String userId = PrimaryKeyUtils.getUUID();
         //设置ID
-        userInfo.setNatrualkey(PrimaryKeyUtils.getUUID());
-        UserInfoHelper.SINGLETONE.encrptPwd(userInfo);
+        userInfo.setNatrualkey(userId);
+
+//        UserInfoHelper.SINGLETONE.encrptPwd(userInfo);
+
         userInfoService.add(userInfo);
+
+        UploadFileHelper.SINGLETONE.updateFileRecords(userInfo, request, userId, uploadFileInfoService);
+
         return rtnSuccessResultMap("新增成功");
 
     }
@@ -131,6 +144,13 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     public UserInfo info(@PathVariable String natrualKey) {
 
         UserInfo userInfo = userInfoService.queryInfoByNatrualKey(natrualKey);
+        if (null != userInfo) {
+            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
+            Map<String, Object> fileinfosMap = new HashMap<>();
+            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            userInfo.setFileinfosMap(fileinfosMap);
+        }
+
         return userInfo;
     }
 
@@ -142,18 +162,22 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     @SystemControllerLog(description = "删除用户")
     public Map<String, Object> del(@PathVariable String natrualKey) {
+
         userInfoService.del(natrualKey);
         return rtnSuccessResultMap("删除成功");
+
     }
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> querySelectList(HttpServletRequest request) {
+
         String name = request.getParameter("name");
         List<SelectItem2> commonBeans = userInfoService.querySelectList(name);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("items", commonBeans);
         resultMap.put("total_count", commonBeans.size());
+
         return resultMap;
 
     }
@@ -162,8 +186,11 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @RequestMapping(value = "/usertype", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> queryUserType(HttpServletRequest request) {
+
         Map<String, String> resultMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.USER_TYPE);
         return resultMap;
+
+
     }
 
     /**
@@ -176,13 +203,12 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     @SystemControllerLog(description = "修改用户密码")
     public Map<String, Object> chgpwd(UserInfo userInfo) throws Exception {
+
         String pwd = SecurityUtil.encrypt(userInfo.getPassword().trim());
         userInfo.setPassword(pwd);
         userInfoService.chgpwd(userInfo);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("code", "0");
-        resultMap.put("message", "更新成功");
-        return resultMap;
+        return rtnSuccessResultMap("密码更新成功");
+
     }
 
 

@@ -1,9 +1,13 @@
 package com.skysport.core.bean.permission;
 
 import com.skysport.core.bean.system.SelectItem;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * 说明:
+ * 说明:用户信息
  * Created by zhangjh on 2015/8/17.
  */
 public class UserInfo extends SelectItem {
@@ -45,6 +49,12 @@ public class UserInfo extends SelectItem {
     private String updateTime;
 
     private int isAdmin;
+
+    private List<UploadFileInfo> fileInfos;
+    /**
+     * 存放初始化文件上传控件中的信息
+     */
+    private Map<String, Object> fileinfosMap;
 
     @Override
     public String getId() {
@@ -204,4 +214,21 @@ public class UserInfo extends SelectItem {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    public List<UploadFileInfo> getFileInfos() {
+        return fileInfos;
+    }
+
+    public void setFileInfos(List<UploadFileInfo> fileInfos) {
+        this.fileInfos = fileInfos;
+    }
+
+    public Map<String, Object> getFileinfosMap() {
+        return fileinfosMap;
+    }
+
+    public void setFileinfosMap(Map<String, Object> fileinfosMap) {
+        this.fileinfosMap = fileinfosMap;
+    }
+
 }

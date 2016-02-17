@@ -7,6 +7,7 @@ package com.skysport.inerfaces.bean.basic;
 public class InitialPreviewExtra {
     private String id;
     private String url;
+    private String bussId;
 
     public String getId() {
         return id;
@@ -22,5 +23,13 @@ public class InitialPreviewExtra {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getBussId() {
+        return bussId;
+    }
+
+    public void setBussId(String bussId) {
+        this.bussId = bussId;
     }
 }

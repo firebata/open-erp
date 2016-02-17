@@ -3,7 +3,6 @@ package com.skysport.inerfaces.model.permission.userinfo.helper;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.constant.DictionaryKeyConstant;
 import com.skysport.core.instance.DictionaryInfo;
-import com.skysport.core.utils.SecurityUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -50,14 +49,5 @@ public enum UserInfoHelper {
         }
     }
 
-    /**
-     * 加密用户密码
-     *
-     * @param userinfoInfo
-     */
-    public void encrptPwd(UserInfo userinfoInfo) throws Exception {
-        String pwd = userinfoInfo.getPassword();
-        userinfoInfo.setPassword(SecurityUtil.encrypt(pwd));
-    }
 
 }

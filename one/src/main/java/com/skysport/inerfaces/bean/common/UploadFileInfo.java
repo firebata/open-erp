@@ -24,6 +24,7 @@ public class UploadFileInfo extends SelectItem {
     private int delFlag;
     private String remark;
     private String updateTime;
+    private String pathType;
 
     @Override
     public String getId() {
@@ -159,5 +160,13 @@ public class UploadFileInfo extends SelectItem {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPathType() {
+        return pathType;
+    }
+
+    public void setPathType(String pathType) {
+        this.pathType = pathType;
     }
 }
