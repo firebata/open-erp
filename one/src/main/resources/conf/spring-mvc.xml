@@ -87,4 +87,13 @@
         <!-- 1MB -->
     </bean>
 
+    <!--配置异常映射路径,ajax提示 -->
+    <bean id="exceptionResolver" class="com.skysport.core.exception.PlatformMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.skysport.core.exception.BusinessException">errorpage/errorpage</prop>
+                <prop key="java.lang.Exception">errorpage/404</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

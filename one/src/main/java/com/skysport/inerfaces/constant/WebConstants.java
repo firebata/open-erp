@@ -28,8 +28,8 @@ public interface WebConstants extends TableNameConstants {
     String CLOTH_MATERIAL_TYPE_ID = "C";//成衣
 
 
-    int PROJECT_CAN_EDIT = 0;
-    int PROJECT_CANOT_EDIT = 1;
+    int PROJECT_CAN_EDIT = 0;//可以修改
+    int PROJECT_CANOT_EDIT = 1;//不可以修改
 
     String FILE_PATH = "file_path";
     String BASE_PATH = "base_path";

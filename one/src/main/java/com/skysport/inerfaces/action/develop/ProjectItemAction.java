@@ -156,7 +156,6 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @SystemControllerLog(description = "查询子项目信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
 
-
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(DictionaryKeyConstant.PROJECT_TABLE_COLULMN, request));
@@ -174,12 +173,10 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
             recordsFiltered = projectItemManageService.listFilteredInfosCounts(queryForm);
         }
         int draw = Integer.parseInt(request.getParameter("draw"));
-
         List<ProjectBomInfo> infos = projectItemManageService.searchInfos(queryForm);
 
         ProjectManageHelper.turnIdToName(infos);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
-
         return resultMap;
     }
 

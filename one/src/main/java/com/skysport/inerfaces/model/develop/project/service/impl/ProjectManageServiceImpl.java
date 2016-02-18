@@ -1,25 +1,26 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
-import com.skysport.core.action.BaseController;
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.model.workflow.InstanceService;
-import com.skysport.core.exception.SkySportException;
+import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.workflow.InstanceService;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.constant.develop.DevelopmentReturnConstant;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.mapper.develop.ProjectManageMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectCategoryManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,11 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
     @Override
     public void add(ProjectInfo info) {
-        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        //读取session中的用户
+        UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
         info.setCreater(userInfo.getAliases());
@@ -105,13 +110,17 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Override
     public void edit(ProjectInfo info) {
 
-        ProjectInfo infoInDb = super.queryInfoByNatrualKey(info.getNatrualkey());
+//        ProjectInfo infoInDb = super.queryInfoByNatrualKey(info.getNatrualkey());
 
-        if (infoInDb.getStatus() == WebConstants.PROJECT_CANOT_EDIT) {
-            throw new SkySportException(DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getCode(), DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getMsg());
-        }
+//        if (infoInDb.getStatus() == WebConstants.PROJECT_CANOT_EDIT) {
+//            throw new SkySportException(DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getCode(), DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getMsg());
+//        }
 
-        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        //读取session中的用户
+        UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+//        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
         //判断bom有没有生成，如果bom已生成，不能修改项目信息
 //        if(){
 //            throw new SkySportException("100001","bom已生成，不能修改项目信息");

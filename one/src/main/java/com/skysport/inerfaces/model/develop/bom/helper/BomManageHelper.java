@@ -29,6 +29,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 public class BomManageHelper extends ExcelCreateHelper {
+
     static Logger logger = Logger.getLogger(BomManageHelper.class);
 
     /**
@@ -44,9 +45,15 @@ public class BomManageHelper extends ExcelCreateHelper {
 
     /**
      * 自动生成Bom信息，并保存DB
+     * 修改子项目，处理bom的方式：
+     * 已知数据库中子项目所有的款式（简称内部集合）和页面传入的所有款式(简称外部集合)；
+     * 则，需要修改的bom为：内部集合 与 外部集合的交集
+     * 需要新增的bom为：外部集合 - 交集；
+     * 需要删除的bom为:内部集合 - 交集；
      *
-     * @param bomManageService BomManageService
-     * @param info             项目信息
+     * @param bomManageService BomManageService bom处理服务
+     * @param info             子项目信息
+     * @author zhangjh
      */
     public static void autoCreateBomInfoAndSave(IBomManageService bomManageService, IncrementNumber incrementNumber, ProjectBomInfo info) {
 
@@ -58,78 +65,173 @@ public class BomManageHelper extends ExcelCreateHelper {
         String seriesId = info.getSeriesId();
 //        String categoryAid = info.getCategoryAid();
 //        String categoryBid = info.getCategoryBid();
-
         List<BomInfo> bomInfos = new ArrayList();
         List<BomInfo> needUpdateBomInfos = new ArrayList();
         List<BomInfo> allStyles = bomManageService.selectAllBomSexAndMainColor(projectId.trim());
 
+        //获取需要更新的bom列表
+        //交集
+        List<BomInfo> intersection = getIntersection(sexColors, allStyles);
+
+
+        //获取需要删除的bom列表
+        List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles, incrementNumber, info, projectId, customerId, areaId, seriesId);
+
+
+        List<BomInfo> needAddBomList = getNeedAddBomList(intersection, sexColors, incrementNumber, info, projectId, customerId, areaId, seriesId);
+        //获取需要新增的bom列表
 
         for (SexColor sexColor : sexColors) {
-
             String sexId = sexColor.getSexIdChild();
             String[] mainColors = sexColor.getMainColorNames().split(CharConstant.COMMA);
 //            String[] sexIds = info.getSexIds().split(CharConstant.COMMA);
-
             //删除bom
             delBom(allStyles, mainColors, sexId, bomManageService, projectId);
 
             for (String mainColor : mainColors) {
 
-                BomInfo bomInfo = new BomInfo();
+                BomInfo bomInfo = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+//                String styleId = sexId + mainColor;
+                boolean isStyleEqualed = isStyleEqualed(sexId, mainColor, allStyles);
 
-                String kind_name = buildKindName(info);
-
-                String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.BOM_SEQ_NO_LENGTH);
-
-                String categoryBId = info.getCategoryBid();
-
-                List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popProject("categoryBItems");
-                categoryBId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, categoryBId);
-
-                //性别属性
-                selectItem2s = SystemBaseInfo.SINGLETONE.popProject("sexItems");
-                String sexName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, sexId);
-
-                String bomName = sexName + categoryBId;
-
-//                //年份+客户+地域+系列+NNN
-//                String bomId = kind_name + seqNo;
-
-                String bomId = SeqCreateUtils.newBomSeq();
-                bomInfo.setMainColor(mainColor);
-                bomInfo.setSexId(sexId);
-                bomInfo.setProjectId(projectId);
-                bomInfo.setCustomerId(customerId);
-                bomInfo.setAreaId(areaId);
-                bomInfo.setSeriesId(seriesId);
-                bomInfo.setCollectionNum(seqNo);//款式
-                bomInfo.setBomId(bomId);
-//                    bomInfo.setOfferAmount();
-                bomInfo.setNatrualkey(bomId);
-                bomInfo.setBomName(bomName);
-                bomInfo.setName(bomName);
-
-                String styleId = sexId + mainColor;
-
-                if (allStyles.contains(styleId)) {
+                if (isStyleEqualed) {
                     needUpdateBomInfos.add(bomInfo);
                 } else {
                     bomInfos.add(bomInfo);
                 }
-
-
             }
         }
-
-
         //保存bom
         if (!bomInfos.isEmpty()) {
             bomManageService.addBatch(bomInfos);
         }
         //更新bom
         bomManageService.updateBatch(needUpdateBomInfos);
+    }
+
+    /**
+     * @param intersection
+     * @param sexColors
+     * @param incrementNumber
+     * @param info
+     * @param projectId
+     * @param customerId
+     * @param areaId
+     * @param seriesId        @return 需要增加的bom集合
+     */
+    private static List<BomInfo> getNeedAddBomList(List<BomInfo> intersection, List<SexColor> sexColors, IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+        List<BomInfo> needAddBomList = new ArrayList<>();
+        for (SexColor sexColor : sexColors) {
+            String sexId = sexColor.getSexIdChild();
+            String[] mainColors = sexColor.getMainColorNames().split(CharConstant.COMMA);
+            for (String mainColor : mainColors) {
+                for (BomInfo bomInfo : intersection) {
+                    if (!compareStyle(sexId, mainColor, bomInfo)) { //差集
+                        BomInfo bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+                        needAddBomList.add(bomInfoTemp);
+                    }
+                }
+            }
+        }
+        return needAddBomList;
+    }
+
+    /**
+     * @param intersection
+     * @param allStyles
+     * @param incrementNumber
+     * @param info
+     * @param projectId
+     * @param customerId
+     * @param areaId
+     * @param seriesId        @return 需要删除的bom集合
+     */
+    private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles, IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+        List<BomInfo> needDelBomList = new ArrayList<>();
+
+        for (BomInfo dbBomInfo : allStyles) {
+            for (BomInfo intersectionBomInfo : intersection) {
+                String sexId = dbBomInfo.getSexId();
+                String mainColor = dbBomInfo.getMainColor();
+                if (!compareStyle(sexId, mainColor, intersectionBomInfo)) {
+                    needDelBomList.add(dbBomInfo);
+                }
+            }
+        }
+        return needDelBomList;
+    }
+
+    /**
+     * @param sexColors
+     * @param allStyles
+     * @return bom交集
+     */
+    private static List<BomInfo> getIntersection(List<SexColor> sexColors, List<BomInfo> allStyles) {
+        List<BomInfo> intersection = new ArrayList<>();
+        for (SexColor sexColor : sexColors) {
+            String sexId = sexColor.getSexIdChild();
+            String[] mainColors = sexColor.getMainColorNames().split(CharConstant.COMMA);
+            for (String mainColor : mainColors) {
+                for (BomInfo bominfo : allStyles) {
+                    if ((sexId + mainColor).equals(bominfo.getSexId() + bominfo.getMainColor())) {//性别颜色相同则认为款式相同
+                        intersection.add(bominfo);
+                    }
+                }
+
+            }
+        }
+        return intersection;
+    }
+
+    private static BomInfo createBomInfo(IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId, String sexId, String mainColor) {
+        BomInfo bomInfo = new BomInfo();
+        String kind_name = buildKindName(info);
+        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.BOM_SEQ_NO_LENGTH);
+        String categoryBId = info.getCategoryBid();
+        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popProject("categoryBItems");
+        categoryBId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, categoryBId);
+        //性别属性
+        selectItem2s = SystemBaseInfo.SINGLETONE.popProject("sexItems");
+        String sexName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, sexId);
+        String bomName = sexName + categoryBId;
+//                //年份+客户+地域+系列+NNN
+//                String bomId = kind_name + seqNo;
+        String bomId = SeqCreateUtils.newBomSeq();
+        bomInfo.setMainColor(mainColor);
+        bomInfo.setSexId(sexId);
+        bomInfo.setProjectId(projectId);
+        bomInfo.setCustomerId(customerId);
+        bomInfo.setAreaId(areaId);
+        bomInfo.setSeriesId(seriesId);
+        bomInfo.setCollectionNum(seqNo);//款式
+        bomInfo.setBomId(bomId);
+//                    bomInfo.setOfferAmount();
+        bomInfo.setNatrualkey(bomId);
+        bomInfo.setBomName(bomName);
+        bomInfo.setName(bomName);
+        return bomInfo;
+    }
+
+    /**
+     * 判断样式是否相同
+     *
+     * @param sexId
+     * @param mainColor
+     * @param allStyles
+     * @return
+     */
+    private static boolean isStyleEqualed(String sexId, String mainColor, List<BomInfo> allStyles) {
+        boolean result = false;
+        for (BomInfo bomInfo : allStyles) {
+            if (compareStyle(sexId, mainColor, bomInfo)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
 
     }
+
 
     /**
      * 删除BOM
@@ -150,7 +252,7 @@ public class BomManageHelper extends ExcelCreateHelper {
         List<String> tempStyles = new ArrayList();
         for (String mainColor : mainColors) {
             for (BomInfo bomInfo : allStyles) {
-                if (mainColor.equals(bomInfo.getMainColor()) && sexId.equals(bomInfo.getSexId())) {
+                if (compareStyle(sexId, mainColor, bomInfo)) {
                     tempStyles.add(bomInfo.getNatrualkey().trim());
                 }
             }
@@ -163,6 +265,18 @@ public class BomManageHelper extends ExcelCreateHelper {
         }
 
 
+    }
+
+    /**
+     * 比较颜色和性别
+     *
+     * @param sexId
+     * @param mainColor
+     * @param bomInfo
+     * @return
+     */
+    private static boolean compareStyle(String sexId, String mainColor, BomInfo bomInfo) {
+        return mainColor.equals(bomInfo.getMainColor()) && sexId.equals(bomInfo.getSexId());
     }
 
     public static String buildKindName(ProjectBomInfo info) {

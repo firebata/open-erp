@@ -162,13 +162,13 @@
                                         id="sexIds" multiple placeholder="性别属性">"
                                 </select>
                             </div>
-                            <label class="col-xs-2  control-label"
-                                   for="collectionNumber"> 款式数量 </label>
+                            <%--<label class="col-xs-2  control-label"--%>
+                            <%--for="collectionNumber"> 款式数量 </label>--%>
 
-                            <div class="col-xs-3">
-                                <input type="text" id="collectionNumber" name="collectionNumber" placeholder="款式数量"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
+                            <%--<div class="col-xs-3">--%>
+                            <%--<input type="text" id="collectionNumber" name="collectionNumber" placeholder="款式数量"--%>
+                            <%--class="col-xs-10 col-sm-12"/>--%>
+                            <%--</div>--%>
 
                         </div>
 

@@ -102,33 +102,27 @@
         <!--update-->
         <!--t_sys_file_records-->
         <!--set-->
-          <!--type= #{type},-->
-          <!--buss_id = #{bussId},-->
-          <!--operator = #{operator},-->
-          <!--status =#{status}-->
+        <!--type= #{type},-->
+        <!--buss_id = #{bussId},-->
+        <!--operator = #{operator},-->
+        <!--status =#{status}-->
         <!--WHERE-->
         <!--status =#{status}-->
         <!--and uid IN-->
         <!--<foreach item="idItem" collection="list" open="(" separator="," close=")">-->
-            <!--#{idItem}-->
+        <!--#{idItem}-->
         <!--</foreach>-->
 
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update
-                t_sys_file_records
+            t_sys_file_records
             <set>
-                type= #{item.type}
-            </set>
-            <set>
-                buss_id = #{item.bussId}
-            </set>
-            <set>
+                type= #{item.type},
+                buss_id = #{item.bussId},
                 operator = #{item.operator},
-            </set>
-            <set>
                 status =#{item.status}
             </set>
-            where id = ${item.uid}
+            where uid = #{item.uid}
         </foreach>
 
 
