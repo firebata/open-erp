@@ -63,50 +63,34 @@ public class BomManageHelper extends ExcelCreateHelper {
         String customerId = info.getCustomerId();
         String areaId = info.getAreaId();
         String seriesId = info.getSeriesId();
-//        String categoryAid = info.getCategoryAid();
-//        String categoryBid = info.getCategoryBid();
-        List<BomInfo> bomInfos = new ArrayList();
-        List<BomInfo> needUpdateBomInfos = new ArrayList();
         List<BomInfo> allStyles = bomManageService.selectAllBomSexAndMainColor(projectId.trim());
 
         //获取需要更新的bom列表
         //交集
         List<BomInfo> intersection = getIntersection(sexColors, allStyles);
 
-
         //获取需要删除的bom列表
         List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles, incrementNumber, info, projectId, customerId, areaId, seriesId);
 
-
+        //需要增加的bom列表
         List<BomInfo> needAddBomList = getNeedAddBomList(intersection, sexColors, incrementNumber, info, projectId, customerId, areaId, seriesId);
+
+
+        if (!needDelBomList.isEmpty()) {
+            //删除
+            bomManageService.delBomInThisIds(needDelBomList);
+        }
+        if (!intersection.isEmpty()) {
+            //更新bom
+            bomManageService.updateBatch(intersection);
+        }
         //获取需要新增的bom列表
-
-        for (SexColor sexColor : sexColors) {
-            String sexId = sexColor.getSexIdChild();
-            String[] mainColors = sexColor.getMainColorNames().split(CharConstant.COMMA);
-//            String[] sexIds = info.getSexIds().split(CharConstant.COMMA);
-            //删除bom
-            delBom(allStyles, mainColors, sexId, bomManageService, projectId);
-
-            for (String mainColor : mainColors) {
-
-                BomInfo bomInfo = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
-//                String styleId = sexId + mainColor;
-                boolean isStyleEqualed = isStyleEqualed(sexId, mainColor, allStyles);
-
-                if (isStyleEqualed) {
-                    needUpdateBomInfos.add(bomInfo);
-                } else {
-                    bomInfos.add(bomInfo);
-                }
-            }
+        if (!needAddBomList.isEmpty()) {
+            //新增bom
+            bomManageService.addBatch(needAddBomList);
         }
-        //保存bom
-        if (!bomInfos.isEmpty()) {
-            bomManageService.addBatch(bomInfos);
-        }
-        //更新bom
-        bomManageService.updateBatch(needUpdateBomInfos);
+
+
     }
 
     /**
@@ -125,11 +109,25 @@ public class BomManageHelper extends ExcelCreateHelper {
             String sexId = sexColor.getSexIdChild();
             String[] mainColors = sexColor.getMainColorNames().split(CharConstant.COMMA);
             for (String mainColor : mainColors) {
-                for (BomInfo bomInfo : intersection) {
-                    if (!compareStyle(sexId, mainColor, bomInfo)) { //差集
-                        BomInfo bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
-                        needAddBomList.add(bomInfoTemp);
+                BomInfo bomInfoTemp = null;
+                if (intersection.isEmpty()) {//没有交集，数据库中子项目所有的bom
+                    bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+                } else {
+                    boolean isNeedAdd = true;
+                    for (BomInfo bomInfo : intersection) {
+                        //交集中的bom不需要新增
+                        if (compareStyle(sexId, mainColor, bomInfo)) { //差集
+                            isNeedAdd = false;
+                            break;
+                        }
                     }
+
+                    if (isNeedAdd) {
+                        bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+                    }
+                }
+                if (null != bomInfoTemp) {
+                    needAddBomList.add(bomInfoTemp);
                 }
             }
         }
@@ -149,15 +147,27 @@ public class BomManageHelper extends ExcelCreateHelper {
     private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles, IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
         List<BomInfo> needDelBomList = new ArrayList<>();
 
-        for (BomInfo dbBomInfo : allStyles) {
-            for (BomInfo intersectionBomInfo : intersection) {
-                String sexId = dbBomInfo.getSexId();
-                String mainColor = dbBomInfo.getMainColor();
-                if (!compareStyle(sexId, mainColor, intersectionBomInfo)) {
+        if (intersection.isEmpty()) {//没有交集，删除数据库中子项目所有的bom
+            needDelBomList = allStyles;
+        } else {
+            for (BomInfo dbBomInfo : allStyles) {
+                boolean isNeedDel = true;
+                for (BomInfo intersectionBomInfo : intersection) {
+                    String sexId = dbBomInfo.getSexId();
+                    String mainColor = dbBomInfo.getMainColor();
+                    //交集中的bom不需要删除
+                    if (compareStyle(sexId, mainColor, intersectionBomInfo)) {
+                        isNeedDel = false;
+                        break;
+                    }
+                }
+                if (isNeedDel) {
                     needDelBomList.add(dbBomInfo);
                 }
             }
         }
+
+
         return needDelBomList;
     }
 

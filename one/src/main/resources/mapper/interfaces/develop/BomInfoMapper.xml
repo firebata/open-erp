@@ -89,7 +89,8 @@
 
     <insert id="addBatch" parameterType="list">
         insert into
-        t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+        t_kf_bominfo
+        (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.projectId},#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
@@ -103,12 +104,12 @@
 	</insert>
 
     <select id="selectAllBomSexAndMainColor" resultType="BomInfo">
-		SELECT
-		<include refid="searchInfoSql"/>
-		from
-			t_kf_bominfo a
-		where a.project_id= #{projectId} and a.del_flag =0
-	</select>
+        SELECT
+        <include refid="searchInfoSql"/>
+        from
+        t_kf_bominfo a
+        where a.project_id= #{projectId} and a.del_flag =0
+    </select>
 
     <update id="del">
 		update t_kf_bominfo
@@ -167,13 +168,20 @@
     </select>
 
 
+    <delete id="delBomNotInThisIds">
+        update t_kf_bominfo set del_flag =1
+        where bom_id NOT IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item.natrualkey}
+        </foreach>
+    </delete>
 
-	<delete id="delBomNotInThisIds">
-		update    t_kf_bominfo set del_flag =1
-		where bom_id NOT IN
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</delete>
+    <delete id="delBomInThisIds">
+        update t_kf_bominfo set del_flag =1
+        where bom_id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item.natrualkey}
+        </foreach>
+    </delete>
 
 </mapper>

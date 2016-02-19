@@ -25,8 +25,8 @@ public class UploadFileInfoServiceImpl extends CommonServiceImpl<UploadFileInfo>
     }
 
     @Override
-    public void del(String bussId, String status) {
-        uploadFileInfoMapper.del(bussId, status);
+    public void del(String uid, String status) {
+        uploadFileInfoMapper.del(uid, status);
     }
 
     @Override

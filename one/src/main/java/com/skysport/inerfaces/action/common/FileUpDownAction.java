@@ -45,6 +45,9 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
     IUploadFileInfoService uploadFileInfoService;
 
     /**
+     * 由文件id删除文件记录表中的记录
+     *
+     * @param config
      * @param request
      * @return
      */
@@ -52,12 +55,9 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     @SystemControllerLog(description = "删除文件")
     public Map<String, Object> delete(InitialPreviewConfig config, HttpServletRequest request) {
-
         String key = config.getKey();
-
-
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        return resultMap;
+        uploadFileInfoService.del(key,WebConstants.FILE_IN_FINISH);
+        return rtnSuccessResultMap("文件删除成功");
     }
 
     /**

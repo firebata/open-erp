@@ -25,4 +25,7 @@ public interface BomManageMapper extends CommonDao<BomInfo> {
     List<BomInfo> selectAllBomSexAndMainColor(String projectId);
 
     void delBomNotInThisIds(List<String> tempStyles);
+
+    void delBomInThisIds(List<BomInfo> needDelBomList);
 }
+

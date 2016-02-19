@@ -135,6 +135,11 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
     }
 
     @Override
+    public void delBomInThisIds(List<BomInfo> needDelBomList) {
+        bomManageMapper.delBomInThisIds(needDelBomList);
+    }
+
+    @Override
     public void updateBatch(List<BomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
             for (BomInfo bomInfo : infos) {

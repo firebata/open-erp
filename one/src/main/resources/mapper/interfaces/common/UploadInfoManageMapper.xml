@@ -152,7 +152,7 @@
         set
           del_flag=1
         where
-          buss_id =#{bussId} and status = #{status}
+          uid =#{uid} and status = #{status}
     </update>
 
 

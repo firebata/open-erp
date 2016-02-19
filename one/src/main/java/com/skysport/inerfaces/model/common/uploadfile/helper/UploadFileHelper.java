@@ -83,20 +83,20 @@ public enum UploadFileHelper {
      * @param fileKind
      * @param operator
      */
-    public void updateFileStatus(List<UploadFileInfo> fileInfos, String bussId, String fileKind, String operator) {
+    public void updateFileStatus(List<UploadFileInfo> fileInfos, String bussId, String fileKind, String operator, String status) {
         for (UploadFileInfo uploadFileInfo : fileInfos) {
             uploadFileInfo.setBussId(bussId);
             uploadFileInfo.setType(fileKind);
             uploadFileInfo.setOperator(operator);
+            uploadFileInfo.setStatus(status);
         }
     }
 
-    public void updateFileRecords(UserInfo userInfo, HttpServletRequest request, String userId,IUploadFileInfoService uploadFileInfoService) {
+    public void updateFileRecords(UserInfo userInfo, HttpServletRequest request, String userId, IUploadFileInfoService uploadFileInfoService) {
         if (null != userInfo.getFileInfos()) {
             HttpSession session = request.getSession();
             UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
-
-            UploadFileHelper.SINGLETONE.updateFileStatus(userInfo.getFileInfos(), userId, WebConstants.FILE_KIND_USER, user.getAliases());
+            updateFileStatus(userInfo.getFileInfos(), userId, WebConstants.FILE_KIND_USER, user.getAliases(), WebConstants.FILE_IN_FINISH);
             //回写文件记录表的status状态为1
             uploadFileInfoService.updateBatch(userInfo.getFileInfos());
         }

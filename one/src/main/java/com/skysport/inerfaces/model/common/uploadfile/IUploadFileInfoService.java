@@ -12,12 +12,12 @@ import java.util.List;
 public interface IUploadFileInfoService extends ICommonService<UploadFileInfo> {
 
     /**
-     * 删除业务id对应的所有文件记录
+     * 删除指定文件
      *
-     * @param bussId 业务id
+     * @param uid    uid
      * @param status 文件中间状态
      */
-    void del(String bussId, String status);
+    void del(String uid, String status);
 
     /**
      * 查询业务id的所有文件记录

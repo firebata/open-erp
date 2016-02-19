@@ -109,7 +109,7 @@
         },
         fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-        $('#fileLocation').fileinput('upload');
+        $('#fileLocation').fileinput('upload');//批量提交
         isSubmit = "Y";
     });
 
@@ -123,18 +123,12 @@
         for (var idx = 0; idx < initialPreviewConfig.length; idx++) {
             $("#" + initialPreviewConfig[idx]['extra']['id']).remove();
             var ahref = '<li  id=\"' + initialPreviewConfig[idx]['extra']['id'] + '\"><a href=\"' + initialPreviewConfig[idx]['extra']['url'] + '\"  download=\"' + initialPreviewConfig[idx]["caption"] + '\" class=\"blue\" target=\"_blank\">' + initialPreviewConfig[idx]['caption'] + '</a></li>';
-
-            // var ahref = '<li  id=\"' + initialPreviewConfig[idx]['extra']['id'] + '\"><a href=\"javascript:$.createDownloadLink(\'' + initialPreviewConfig[idx]['extra']['url'] + '\')\"  download=\"'+initialPreviewConfig[idx]["caption"]+'\" class=\"blue\" target=\"_blank\">' + initialPreviewConfig[idx]['caption'] + '</a></li>';
             $element.append(ahref);
         }
-
+        callback();
     }
 
-    $(function () {
-
-        //用户类型
-        $.sendRestFulAjax(usertypeURL, null, 'GET', 'json', initSelect);
-
+    function initFileLocation(initialPreview, initialPreviewConfig) {
         //上传文件控制
         $("#fileLocation").fileinput({
             //showCaption: false,
@@ -142,9 +136,21 @@
             'previewFileType': 'any',
             'uploadAsync': false,
             allowedFileExtensions: ["jpg", "png", "gif", "xls", "xlsx", "pdf", "jpeg"],
+            initialPreview: initialPreview,
+            initialPreviewConfig: initialPreviewConfig,
             //allowedPreviewTypes: ["jpg", "png", "gif", "jpeg"],
             uploadUrl: fileUploadURL, // server upload action
         });
+    }
+
+    $(function () {
+
+        //用户类型
+        $.sendRestFulAjax(usertypeURL, null, 'GET', 'json', initSelect);
+
+        //initFileLocation(null, null);
+
+
 
         $('#fileLocation').on('fileuploaded', function (event, data, previewId, index) {
             var form = data.form, files = data.files, extra = data.extra,
@@ -159,14 +165,11 @@
 
 
         $("#fileLocation").on("filepredelete", function (jqXHR) {
-
             var abort = true;
             if (confirm("是否删除该资源?")) {
                 abort = false;
             }
             return abort; // you can also send any data/object that you can receive on `filecustomerror` event
-
-
         });
 
 
@@ -187,8 +190,6 @@
                 doSaveAction();
             }
         });
-
-
     })
 
     /**
@@ -208,7 +209,7 @@
         });
     }
 
-    function callback() {
+    function initSelectCallback() {
 
         var natrualkey = $("#natrualkey").val();
 
@@ -225,22 +226,27 @@
             $("#" + key).val(_data[key]);
         });
 
-
-        initFileLocation(_data["fileinfosMap"])
+        loadFile(_data["fileinfosMap"])
     }
 
 
-    function initFileLocation(fileinfosMap) {
+    function loadFile(fileinfosMap) {
 
         var initialPreview = fileinfosMap["initialPreview"];
         var initialPreviewConfig = fileinfosMap["initialPreviewConfig"];
-        $("#fileLocation").fileinput({
-            initialPreview: initialPreview,
-            initialPreviewConfig: initialPreviewConfig
-        });
+        initFileLocation(initialPreview, initialPreviewConfig);
+        //$("#fileLocation").fileinput({
+        //    initialPreview: initialPreview,
+        //    initialPreviewConfig: initialPreviewConfig
+        //});
 
     }
 
+
+    /**
+     *
+     * @param data
+     */
     var initSelect = function (data) {
 
         $("#userType").empty();
@@ -251,7 +257,8 @@
                 .text(value)
                 .appendTo($("#userType"));
         });
-        callback();
+
+        initSelectCallback();
     }
 
 
