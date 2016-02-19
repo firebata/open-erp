@@ -70,7 +70,7 @@
     }
 
     var initCategoryFields = function (_data) {
-        console.info("_data:" + _data);
+        //console.info("_data:" + _data);
         if (_data === '' || _data.length === 0) return;
         var categoryAid = _data[0].categoryAid;
         $("#categoryAid").val(_data[0].categoryAid);

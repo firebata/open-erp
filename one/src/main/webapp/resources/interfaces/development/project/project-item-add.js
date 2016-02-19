@@ -76,7 +76,7 @@
      */
     var initFormFields = function (_data) {
 
-        console.info("the info of project:" + _data);
+        //console.info("the info of project:" + _data);
 
         Object.keys(_data).map(function (key) {
 

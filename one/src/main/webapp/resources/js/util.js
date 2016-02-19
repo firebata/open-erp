@@ -17,7 +17,9 @@
         select2s: select2s,
         initSelect2s: initSelect2s,
         initSelect2sByArr: initSelect2sByArr,
-        createDownloadLink:createDownloadLink
+        createDownloadLink: createDownloadLink,
+        loadFileInput: loadFileInput,//初始化文件上传插件内容
+        fileInputAddListenr: fileInputAddListenr,//上传插件动作监控
     });
 
 
@@ -212,6 +214,7 @@
         var tj = jQuery.noConflict();
         window.location.href = filepath;
     }
+
     var formatRepo = function (repo) {
         if (repo.loading) return repo.text;
         var markup = repo.name + '-' + repo.natrualkey;
@@ -289,5 +292,127 @@
 
     }
 
+    /**
+     * response
+     * @param response
+     * @param f
+     */
+    function dealUploadedFile($fileListLi, initialPreviewConfig, callback) {
+
+        for (var idx = 0; idx < initialPreviewConfig.length; idx++) {
+            $("#" + initialPreviewConfig[idx]['extra']['id']).remove();
+            var ahref = '<li  id=\"' + initialPreviewConfig[idx]['extra']['id'] + '\"><a href=\"' + initialPreviewConfig[idx]['extra']['url'] + '\"  download=\"' + initialPreviewConfig[idx]["caption"] + '\" class=\"blue\" target=\"_blank\">' + initialPreviewConfig[idx]['caption'] + '</a></li>';
+            $fileListLi.append(ahref);
+        }
+        callback();
+    }
+
+    /**
+     * 初始化上传插件
+     * @param $fileInput
+     * @param initialPreview
+     * @param initialPreviewConfig
+     * @param fileUploadURL
+     */
+    function initFileLocation($fileInput, initialPreview, initialPreviewConfig, fileUploadURL) {
+        //上传文件控制
+        $fileInput.fileinput({
+            //showCaption: false,
+            overwriteInitial:false,//是否覆盖initial preview content
+            language: "zh",
+            'previewFileType': 'any',
+            'uploadAsync': false,
+            allowedFileExtensions: ["jpg", "png", "gif", "xls", "xlsx", "pdf", "jpeg"],
+            initialPreview: initialPreview,
+            initialPreviewConfig: initialPreviewConfig,
+            //allowedPreviewTypes: ["jpg", "png", "gif", "jpeg"],
+            uploadUrl: fileUploadURL, // server upload action
+        });
+
+    }
+
+    /**
+     * 初始化上传插件
+     * @param $fileInput
+     * @param fileinfosMap
+     * @param fileUploadURL
+     */
+    function loadFileInput($fileInput, $fileListLi,fileinfosMap, fileUploadURL) {
+        if (fileinfosMap == null) {
+            fileinfosMap = {"initialPreview": [], initialPreviewConfig: []}
+        }
+        var initialPreview = fileinfosMap["initialPreview"];
+        var initialPreviewConfig = fileinfosMap["initialPreviewConfig"];
+        initFileLocation($fileInput, initialPreview, initialPreviewConfig, fileUploadURL);
+        dealUploadedFile($fileListLi, initialPreviewConfig, function () {
+        });
+        //$fileInput.fileinput({
+        //    initialPreview: initialPreview,
+        //    initialPreviewConfig: initialPreviewConfig
+        //});
+
+    }
+
+
+    /**
+     * 构造文件上传记录
+     * @param response
+     */
+    function buildUploadFileInfos($fileListLi, response, uploadFileInfos) {
+        var initialPreviewConfigs = response["initialPreviewConfig"];
+        for (var idx = 0; idx < initialPreviewConfigs.length; idx++) {
+            var initialPreviewConfig = initialPreviewConfigs[idx];
+            var uid = initialPreviewConfig['extra']['id'];
+            var uploadFileInfo = {};
+            uploadFileInfo.uid = uid;
+            uploadFileInfos.push(uploadFileInfo);
+        }
+        dealUploadedFile($fileListLi, initialPreviewConfigs, function () {
+        });
+    }
+
+
+    function fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction) {
+
+        $fileInput.on('fileuploaded', function (event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            buildUploadFileInfos($fileListLi, response, uploadFileInfos);
+            var initialPreviewConfig = response["initialPreviewConfig"];
+            dealUploadedFile($fileListLi, initialPreviewConfig, function () {
+            });
+
+        });
+
+
+        $fileInput.on("filepredelete", function (jqXHR) {
+            var abort = true;
+            if (confirm("是否删除该资源?")) {
+                abort = false;
+            }
+            return abort; // you can also send any data/object that you can receive on `filecustomerror` event
+        });
+
+
+        $fileInput.on('filedeleted', function (event, key) {
+            $("#" + key).remove();
+        });
+
+        $fileInput.on('filebatchuploadcomplete', function (event, files, extra) {
+            console.log('File batch upload complete');
+        });
+
+        /**
+         * 批量上传成功后'uploadAsync':false
+         */
+        $fileInput.on('filebatchuploadsuccess', function (event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            buildUploadFileInfos($fileListLi, response, uploadFileInfos);
+            if (getIsSubmitAction() == 'Y') {
+                doSaveAction();
+            }
+        });
+    }
 
 }(jQuery));

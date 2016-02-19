@@ -1,3 +1,5 @@
+<%@ page import="com.skysport.core.bean.permission.UserInfo" %>
+<%@ page import="com.skysport.inerfaces.constant.WebConstants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="navbar navbar-default" id="navbar">
     <script type="text/javascript">
@@ -293,7 +295,7 @@
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="<%=path %>/resources/avatars/user.jpg" alt="${username}'s Photo"/>
+                        <img class="nav-user-photo" src="<%=((UserInfo) session.getAttribute(WebConstants.CURRENT_USER)).getImgUrl() %>" alt="${username}'s Photo"/>
 								<span class="user-info">
 									<small>Welcome,</small>
 									${username}

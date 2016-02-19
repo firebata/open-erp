@@ -108,7 +108,7 @@
                 <hr/>
                 <div id="userBtnInfo" class="row">
                     <div class="col-xs-offset-6 col-xs-9">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveuserinfo()">保存
+                        <button type="button" class="btn btn-info btn-md" id="sbt" onclick="javascript:$.saveuserinfo()">保存
                         </button>
                     </div>
                 </div>

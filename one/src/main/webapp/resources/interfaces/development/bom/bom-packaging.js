@@ -321,7 +321,7 @@
 
     //给下拉列表赋值
     var initPackagingSelect = function (_data, idNum, callback) {
-        console.info("加载包材" + idNum + "的下拉列表");
+        //console.info("加载包材" + idNum + "的下拉列表");
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 
         //材料类别

@@ -369,7 +369,7 @@
      */
     function reloadPantoneId(_$id, _pantoneIds) {
         $.select2s(_$id, _pantoneSelectURL, 'Pantone not selected', 'Please, select pantone', function () {
-            console.info("pantoneIdsF:" + _pantoneIds);
+            //console.info("pantoneIdsF:" + _pantoneIds);
             return _pantoneIds;
         });
         //callback();

@@ -63,7 +63,7 @@
         } else {
             var treeObj = $.fn.zTree.getZTreeObj("ResourceRoleTree");
             var selectRoles = treeObj.getCheckedNodes(true);
-            console.info("selectRoles:" + selectRoles);
+            //console.info("selectRoles:" + selectRoles);
             var roleUser = {};
             roleUser.roleId = roleId;
             roleUser.zTreeNodes = selectRoles;
@@ -104,7 +104,7 @@
     function initZTree(_data) {
         var zNodes = _data;
         var tem = JSON.stringify(zNodes);
-        console.info("tem:" + tem);
+        //console.info("tem:" + tem);
         $.fn.zTree.init($("#ResourceRoleTree"), setting, zNodes);
         setCheck();
     }

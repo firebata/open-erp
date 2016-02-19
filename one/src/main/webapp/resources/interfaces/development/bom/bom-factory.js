@@ -318,7 +318,7 @@
 
     //给下拉列表赋值
     var initFactorySelect = function (_data, id, callback) {
-        console.info("加载包材" + id + "的下拉列表");
+        //console.info("加载包材" + id + "的下拉列表");
         var idNum = id;
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 

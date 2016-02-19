@@ -64,7 +64,7 @@
         } else {
             var treeObj = $.fn.zTree.getZTreeObj("roleUserTree");
             var selectRoles = treeObj.getCheckedNodes(true);
-            console.info("selectRoles:" + selectRoles);
+            //console.info("selectRoles:" + selectRoles);
             var roleUser = {};
             roleUser.userId = userId;
             roleUser.zTreeNodes = selectRoles;

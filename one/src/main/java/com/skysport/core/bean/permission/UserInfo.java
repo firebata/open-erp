@@ -56,6 +56,16 @@ public class UserInfo extends SelectItem {
      */
     private Map<String, Object> fileinfosMap;
 
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     @Override
     public String getId() {
         return id;

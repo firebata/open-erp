@@ -93,7 +93,7 @@ public enum UploadFileHelper {
     }
 
     public void updateFileRecords(UserInfo userInfo, HttpServletRequest request, String userId, IUploadFileInfoService uploadFileInfoService) {
-        if (null != userInfo.getFileInfos()) {
+        if (null != userInfo.getFileInfos() && !userInfo.getFileInfos().isEmpty()) {
             HttpSession session = request.getSession();
             UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
             updateFileStatus(userInfo.getFileInfos(), userId, WebConstants.FILE_KIND_USER, user.getAliases(), WebConstants.FILE_IN_FINISH);
