@@ -1,6 +1,9 @@
 package com.skysport.inerfaces.bean.develop;
 
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类说明:项目的BOM信息
@@ -24,6 +27,12 @@ public class ProjectBomInfo extends ProjectBaseInfo {
     private String remark;
     private String updateTime;
     private int delFlag;
+
+    private List<UploadFileInfo> fileInfos;
+    /**
+     * 存放初始化文件上传控件中的信息
+     */
+    private Map<String, Object> fileinfosMap;
 
     @Override
     public String getId() {
@@ -157,5 +166,21 @@ public class ProjectBomInfo extends ProjectBaseInfo {
     public ProjectBomInfo clone() throws CloneNotSupportedException {
         ProjectBomInfo projectBomInfo = (ProjectBomInfo) super.clone();
         return projectBomInfo;
+    }
+
+    public List<UploadFileInfo> getFileInfos() {
+        return fileInfos;
+    }
+
+    public void setFileInfos(List<UploadFileInfo> fileInfos) {
+        this.fileInfos = fileInfos;
+    }
+
+    public Map<String, Object> getFileinfosMap() {
+        return fileinfosMap;
+    }
+
+    public void setFileinfosMap(Map<String, Object> fileinfosMap) {
+        this.fileinfosMap = fileinfosMap;
     }
 }

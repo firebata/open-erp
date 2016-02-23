@@ -10,11 +10,10 @@
     var project_listURL = path + "/development/project_item/list";
     var project_newURL = path + "/development/project_item/new";
     var project_editURL = path + "/development/project_item/edit";
-
-    $(function () {
-        reloadDetailSelectData();
-        initTags();
-    })
+    var uploadFileInfos = [];
+    var $fileInput = $("#fileLocation");
+    var $fileListLi = $("#filesList");
+    var fileUploadURL = path + "/files/upload";
 
 
     //第一次初始化下拉列表
@@ -101,8 +100,14 @@
                 }
             }
         });
+
+        $.loadFileInput($fileInput, $fileListLi, _data["fileinfosMap"], fileUploadURL);
+
+
         //初始化性别属性，再初始化性别属性和颜色
         $.initSexColors(_data["sexColors"]);
+
+
 
     }
 
@@ -198,18 +203,6 @@
         $('#projectForm').bootstrapValidator('validate');
     }
 
-    $(document).ready(function () {
-        multiselect();
-    });
-
-    var multiselect = function () {
-        //$('#sexIds').multiselect({
-        //    onDropdownHide: function(event) {
-        //        alert('Dropdown closed.');
-        //    }
-        //});
-    }
-
 
     var doSaveAction = function () {
         //var $tag_obj = $('#mainColorNames').data('tag');
@@ -251,7 +244,7 @@
         projectItemInfo.sexColors = sexColors;
         var sexIdsSelect = $("#sexIds").val();
         projectItemInfo.sexIds = sexIdsSelect.join(",");
-
+        projectItemInfo.fileInfos = uploadFileInfos;
         $.sendJsonAjax(url, projectItemInfo, function () {
             window.location.href = project_listURL;
         })
@@ -263,96 +256,93 @@
      * 新增/修改校验字段描述
      * @returns {{name: {validators: {notEmpty: {message: string}}}, customerId: {validators: {notEmpty: {message: string}}}}}
      */
-    var fieldsDesc = function () {
-        var fieldsDesc =
-        {
-            yearCode: {
-                validators: {
-                    notEmpty: {
-                        message: '年份为必填项'
-                    }
-                }
-            },
-            customerId: {
-                validators: {
-                    notEmpty: {
-                        message: '客户为必填项'
-                    }
-                }
-            },
-            areaId: {
-                validators: {
-                    notEmpty: {
-                        message: '区域为必填项'
-                    }
-                }
-            },
-            seriesId: {
-                validators: {
-                    notEmpty: {
-                        message: '区域为必填项'
-                    }
-                }
-            },
-            //sampleDelivery: {
-            //    validators: {
-            //        notEmpty: {
-            //            message: '样品交付日期为必填项'
-            //        }
-            //    }
-            //},
-            //needPreOfferDate: {
-            //    validators: {
-            //        notEmpty: {
-            //            message: '预报价日期为必填项'
-            //        }
-            //    }
-            //},
-            categoryAid: {
-                validators: {
-                    notEmpty: {
-                        message: '品类一级名称为必填项'
-                    }
-                }
-            },
-            categoryBid: {
-                validators: {
-                    notEmpty: {
-                        message: '品类二级名称为必填项'
-                    }
-                }
-            },
-            sexIds: {
-                validators: {
-                    notEmpty: {
-                        message: '性别属性为必填项'
-                    }
-                }
-            },
-            collectionNumber: {
-                validators: {
-                    notEmpty: {
-                        message: '款式数量为必填项'
-                    }
-                }
-            },
-            mainColorNames: {
-                validators: {
-                    notEmpty: {
-                        message: '性别属性为必填项'
-                    }
+    var fieldsDesc =
+    {
+        yearCode: {
+            validators: {
+                notEmpty: {
+                    message: '年份为必填项'
                 }
             }
-            //,
-            //sketchReceivedDate: {
-            //    validators: {
-            //        notEmpty: {
-            //            message: '产品描述收到时间为必填项'
-            //        }
-            //    }
-            //}
+        },
+        customerId: {
+            validators: {
+                notEmpty: {
+                    message: '客户为必填项'
+                }
+            }
+        },
+        areaId: {
+            validators: {
+                notEmpty: {
+                    message: '区域为必填项'
+                }
+            }
+        },
+        seriesId: {
+            validators: {
+                notEmpty: {
+                    message: '区域为必填项'
+                }
+            }
+        },
+        //sampleDelivery: {
+        //    validators: {
+        //        notEmpty: {
+        //            message: '样品交付日期为必填项'
+        //        }
+        //    }
+        //},
+        //needPreOfferDate: {
+        //    validators: {
+        //        notEmpty: {
+        //            message: '预报价日期为必填项'
+        //        }
+        //    }
+        //},
+        categoryAid: {
+            validators: {
+                notEmpty: {
+                    message: '品类一级名称为必填项'
+                }
+            }
+        },
+        categoryBid: {
+            validators: {
+                notEmpty: {
+                    message: '品类二级名称为必填项'
+                }
+            }
+        },
+        sexIds: {
+            validators: {
+                notEmpty: {
+                    message: '性别属性为必填项'
+                }
+            }
+        },
+        collectionNumber: {
+            validators: {
+                notEmpty: {
+                    message: '款式数量为必填项'
+                }
+            }
+        },
+        mainColorNames: {
+            validators: {
+                notEmpty: {
+                    message: '性别属性为必填项'
+                }
+            }
         }
-        return fieldsDesc;
+        //,
+        //sketchReceivedDate: {
+        //    validators: {
+        //        notEmpty: {
+        //            message: '产品描述收到时间为必填项'
+        //        }
+        //    }
+        //}
     }
 
 
@@ -365,9 +355,13 @@
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
-        fields: fieldsDesc()
+        fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-        doSaveAction();
+        $fileInput.fileinput('upload');//批量提交
+        var hasExtraData = $.isEmptyObject($fileInput.fileinput("getExtraData"));
+        if (hasExtraData) {
+            doSaveAction();
+        }
     });
 
 
@@ -397,6 +391,18 @@
         sketchReceivedDate: "",
         fileLocation: []
     }
+
+    function getIsSubmitAction() {
+        return isSubmitAction;
+    }
+
+
+    $(function () {
+        reloadDetailSelectData();
+        initTags();
+        $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
+    })
+
 
     $.saveProject = saveProject;
 

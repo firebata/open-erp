@@ -82,7 +82,7 @@ public interface WebConstants extends TableNameConstants {
 
 
     String FILE_KIND_USER = "1";//用户头像
-    String FILE_KIND_SP = "2";//用户头像
+    String FILE_KIND_SP = "2";//供应商头像
     String FILE_KIND_PROJECT = "3";//项目附件
     String FILE_KIND_PROJECT_ITEM = "4";//子项目附件
 

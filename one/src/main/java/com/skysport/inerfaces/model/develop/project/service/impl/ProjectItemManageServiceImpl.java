@@ -1,14 +1,17 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
 import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.UpDownUtils;
-import com.skysport.inerfaces.bean.info.MainColor;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.bean.info.MainColor;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.mapper.develop.ProjectItemManageMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
+import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
@@ -21,6 +24,8 @@ import com.skysport.inerfaces.model.info.main_color.IMainColorService;
 import com.skysport.inerfaces.model.info.main_color.helper.MainColorHelper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +70,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Resource(name = "sexColorService")
     private ISexColorService sexColorService;
+
+    @Resource(name = "uploadFileInfoService")
+    private IUploadFileInfoService uploadFileInfoService;
 
     @Override
     public void afterPropertiesSet() {
@@ -123,6 +131,10 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 //        String name = ProjectManageHelper.buildProjectName(info);
 //        info.setName(name);
 //        info.setProjectName(name);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+        List<UploadFileInfo> fileInfos = info.getFileInfos();
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 
         //更新t_project表
         super.edit(info);

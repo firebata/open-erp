@@ -6,9 +6,12 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
+import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
+import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
@@ -49,6 +52,9 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
 
+    @Resource(name = "uploadFileInfoService")
+    private IUploadFileInfoService uploadFileInfoService;
+
     /**
      * 此方法描述的是：展示list页面	 *
      *
@@ -80,41 +86,6 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     }
 
 
-    /**
-     * 上传文件 用@RequestParam注解来指定表单上的file为MultipartFile
-     *
-     * @param fileLocation
-     * @return
-     */
-    @RequestMapping(value = "/add/{natrualKey}", method = RequestMethod.POST)
-    @ResponseBody
-    @SystemControllerLog(description = "增加子项目")
-    public Map<String, Object> add(@RequestParam("fileLocation") MultipartFile[] fileLocation, HttpServletRequest request) {
-
-
-        for (MultipartFile file : fileLocation) {
-            String filePath = "D:\\work\\project\\upload\\skysport\\project\\" + file.getOriginalFilename();
-            // 判断文件是否为空
-            try {
-                // 文件保存路径
-                // String uploadDir = request.getSession().getServletContext().getRealPath("/") + "upload/";
-                File emptyFile = new File(filePath);
-                if (!emptyFile.exists()) {
-                    emptyFile.createNewFile();
-                }
-                // 转存文件
-                file.transferTo(emptyFile);
-            } catch (Exception e) {
-                logger.error("保存上传文件异常", e);
-            }
-
-
-        }
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-
-        // 重定向
-        return resultMap;
-    }
 
 
     /**
@@ -236,8 +207,14 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @SystemControllerLog(description = "查询子项目")
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
-
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
+
+        if (null != info) {
+            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
+            Map<String, Object> fileinfosMap = new HashMap<>();
+            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            info.setFileinfosMap(fileinfosMap);
+        }
         return info;
     }
 

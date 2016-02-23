@@ -92,13 +92,14 @@ public enum UploadFileHelper {
         }
     }
 
-    public void updateFileRecords(UserInfo userInfo, HttpServletRequest request, String userId, IUploadFileInfoService uploadFileInfoService) {
-        if (null != userInfo.getFileInfos() && !userInfo.getFileInfos().isEmpty()) {
+
+    public void updateFileRecords(List<UploadFileInfo> fileInfos, HttpServletRequest request, String bussId, IUploadFileInfoService uploadFileInfoService, String fileKind) {
+        if (null != fileInfos && !fileInfos.isEmpty()) {
             HttpSession session = request.getSession();
             UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
-            updateFileStatus(userInfo.getFileInfos(), userId, WebConstants.FILE_KIND_USER, user.getAliases(), WebConstants.FILE_IN_FINISH);
+            updateFileStatus(fileInfos, bussId, fileKind, user.getAliases(), WebConstants.FILE_IN_FINISH);
             //回写文件记录表的status状态为1
-            uploadFileInfoService.updateBatch(userInfo.getFileInfos());
+            uploadFileInfoService.updateBatch(fileInfos);
         }
     }
 }

@@ -195,14 +195,22 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label"
-                               for="fileLocation"> 附件上传 </label>
+                        <label class="col-xs-2  control-label" for="fileLocation"> 附件上传 </label>
 
                         <div class="col-xs-10">
-                            <input id="fileLocation" class="file" type="file" name="fileLocation" multiple
-                                   data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
+                            <input id="fileLocation" type="file" multiple class="file-loading col-xs-12"
+                                   name="fileLocation">
                         </div>
 
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
+                        <div class="col-xs-12 col-sm-4">
+                            <ul id="filesList">
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -229,10 +237,3 @@
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/project/project-item-add.js"></script>
 <script type="text/javascript"
         src="<%=path%>/resources/interfaces/development/project/project-item-sexcolor.js"></script>
-<script>
-    $("#fileLocation").fileinput({
-        uploadUrl: path + "/development/project_item/fileUpload", // server upload action
-        uploadAsync: true,
-        maxFileCount: 5
-    });
-</script>

@@ -4,9 +4,13 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
+import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
+import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
@@ -14,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -41,10 +44,13 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
 
+    @Resource(name = "uploadFileInfoService")
+    private IUploadFileInfoService uploadFileInfoService;
+
     /**
      * 此方法描述的是：展示list页面	 *
      *
-     *   @author: zhangjh
+     * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
     @RequestMapping(value = "/list")
@@ -71,41 +77,6 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
         mav.addObject("natrualkey", natrualKey);
 
         return mav;
-    }
-
-
-    /**
-     * 上传文件 用@RequestParam注解来指定表单上的file为MultipartFile
-     *
-     * @param fileLocation
-     * @return
-     */
-    @RequestMapping(value = "/add/{natrualKey}", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> upload(@RequestParam("fileLocation") MultipartFile[] fileLocation, HttpServletRequest request) {
-
-//        for (MultipartFile file : fileLocation) {
-//            // 判断文件是否为空
-//            if (!file.isEmpty()) {
-//                try {
-//                    // 文件保存路径
-////                    String uploadDir = request.getSession().getServletContext().getRealPath("/") + "upload/";
-//                    String filePath = "D:\\work\\project\\upload\\skysport\\project\\" + file.getOriginalFilename();
-//                    File emptyFile = new File(filePath);
-//                    if (!emptyFile.exists()) {
-//                        emptyFile.createNewFile();
-//                    }
-//                    // 转存文件
-//                    file.transferTo(emptyFile);
-//                } catch (Exception e) {
-//                    logger.error("保存上传文件异常", e);
-//                }
-//            }
-//
-//        }
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        // 重定向
-        return resultMap;
     }
 
 
@@ -154,7 +125,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "修改主项目信息")
-    public Map<String, Object> edit(ProjectInfo info) {
+    public Map<String, Object> edit(@RequestBody ProjectInfo info) {
         projectManageService.edit(info);
         return rtnSuccessResultMap("更新成功");
     }
@@ -170,9 +141,9 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @ResponseBody
     @SystemControllerLog(description = "新增主项目信息")
     public Map<String, Object> add(ProjectInfo info, HttpServletRequest request) {
-        requestThreadLocal.set(request);
         //保存项目信息
         projectManageService.add(info);
+
 
         return rtnSuccessResultMap("新增成功");
     }
@@ -198,6 +169,12 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @SystemControllerLog(description = "查询主项目信息")
     public ProjectInfo info(@PathVariable String natrualKey) {
         ProjectInfo info = projectManageService.queryInfoByNatrualKey(natrualKey);
+        if (null != info) {
+            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
+            Map<String, Object> fileinfosMap = new HashMap<>();
+            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            info.setFileinfosMap(fileinfosMap);
+        }
         return info;
 
     }

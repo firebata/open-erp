@@ -4,11 +4,14 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.model.workflow.InstanceService;
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.mapper.develop.ProjectManageMapper;
+import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
+import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectCategoryManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
@@ -46,6 +49,9 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Resource(name = "devlopmentInstanceServiceImpl")
     private InstanceService devlopmentInstanceServiceImpl;
 
+    @Resource(name = "uploadFileInfoService")
+    private IUploadFileInfoService uploadFileInfoService;
+
     @Override
     public void afterPropertiesSet() {
         commonDao = projectManageMapper;
@@ -63,6 +69,8 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //读取session中的用户
         UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
+        List<UploadFileInfo> fileInfos = info.getFileInfos();
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
         info.setCreater(userInfo.getAliases());
@@ -80,6 +88,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //增加子项目
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
+
 
         //启动流程
         startWorkFlow(info, userInfo);
@@ -110,6 +119,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Override
     public void edit(ProjectInfo info) {
 
+
 //        ProjectInfo infoInDb = super.queryInfoByNatrualKey(info.getNatrualkey());
 
 //        if (infoInDb.getStatus() == WebConstants.PROJECT_CANOT_EDIT) {
@@ -120,6 +130,10 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         HttpSession session = request.getSession();
         //读取session中的用户
         UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+
+        List<UploadFileInfo> fileInfos = info.getFileInfos();
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+
 //        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
         //判断bom有没有生成，如果bom已生成，不能修改项目信息
 //        if(){
@@ -144,6 +158,8 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         projectItemManageService.addBatch(projectBomInfos);
 
         projectItemManageService.addBatchBomInfo(projectBomInfos);
+
+
     }
 
     @Override

@@ -100,8 +100,9 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
 
         //删除文件记录表的status状态为1的数据
         uploadFileInfoService.del(userInfo.getNatrualkey(), WebConstants.FILE_IN_FINISH);
+        List<UploadFileInfo> fileInfos = userInfo.getFileInfos();
         //回写文件记录表的status状态为1
-        UploadFileHelper.SINGLETONE.updateFileRecords(userInfo, request, userInfo.getNatrualkey(), uploadFileInfoService);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, userInfo.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_USER);
 
         return rtnSuccessResultMap("更新成功");
 
@@ -127,7 +128,8 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
 
         userInfoService.add(userInfo);
 
-        UploadFileHelper.SINGLETONE.updateFileRecords(userInfo, request, userId, uploadFileInfoService);
+        List<UploadFileInfo> fileInfos = userInfo.getFileInfos();
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, userId, uploadFileInfoService, WebConstants.FILE_KIND_USER);
 
         return rtnSuccessResultMap("新增成功");
 

@@ -12,9 +12,8 @@
     var fileUploadURL = path + "/files/upload";
     var uploadFileInfos = [];
     var isSubmitAction = "N";//是否点击的
-    var IsSubmited = {"isSubmited": false};//是否提交过
     var $fileInput = $("#fileLocation");
-    var $fileListLi = $("#avatarsList");
+    var $fileListLi = $("#filesList");
     $.extend({
         saveuserinfo: saveuserinfo
     });
@@ -76,6 +75,7 @@
     var doSaveAction = function () {
 
         var formDataStr = $("#userinfoForm").serialize();
+        formDataStr = decodeURIComponent(formDataStr);
         var natrualkey = $("#natrualkey").val();
         var url;
         if (natrualkey == '' || natrualkey == 'null') {
@@ -113,8 +113,8 @@
         fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
         $fileInput.fileinput('upload');//批量提交
-        var hasExtraData = !$.isEmptyObject($fileInput.fileinput("getExtraData"));
-        if (!hasExtraData) {
+        var hasExtraData = $.isEmptyObject($fileInput.fileinput("getExtraData"));
+        if (hasExtraData) {
             doSaveAction();
         }
         isSubmitAction = "Y";

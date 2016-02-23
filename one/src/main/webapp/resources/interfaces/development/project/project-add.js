@@ -13,6 +13,10 @@
     var searchSecondURL = path + "/system/category/searchSecond/";
     var infoCategoryURL = path + "/development/project-category/infoCategory/";
     var qrAreaURL = path + "/system/area/select2";
+    var uploadFileInfos = [];
+    var $fileInput = $("#fileLocation");
+    var $fileListLi = $("#filesList");
+    var fileUploadURL = path + "/files/upload";
 
 
     //第一次初始化下拉列表
@@ -34,13 +38,13 @@
 
     }
 
-    function initArea() {
-        var customerId = _data[0].customerId;
-        //初始化区域id
-        initAreaId(customerId, function () {
-            $("#areaId").val(_data["areaId"]);
-        });
-    }
+    //function initArea() {
+    //    var customerId = _data[0].customerId;
+    //    //初始化区域id
+    //    initAreaId(customerId, function () {
+    //        $("#areaId").val(_data["areaId"]);
+    //    });
+    //}
 
     /**
      * 初始化表单
@@ -59,6 +63,8 @@
         });
 
         initCategory();
+
+        $.loadFileInput($fileInput, $fileListLi, _data["fileinfosMap"], fileUploadURL);
         //initArea(_data);
 
     }
@@ -164,10 +170,10 @@
         project.categoryAid = '';
         project.categoryBid = '';
         //project.collectionNumber = '';
-
-        var formDataStr = $("#projectForm").serialize();
+        var categoryBid = $("#categoryBid").val();
+        var formDataStr = $("#projectForm").serialize() + "&categoryBid=" + categoryBid;
         //var formDataJson = $.strToJson(formDataStr);
-
+        formDataStr = decodeURIComponent(formDataStr);
         var natrualkey = $("#natrualkey").val();
         var url;
         if (natrualkey === '' || natrualkey === 'null') {
@@ -175,11 +181,12 @@
         } else {
             url = editURL;
         }
-
-        var categoryBid = $("#categoryBid").val();
-        $.sendRestFulAjax(url, formDataStr + "&categoryBid=" + categoryBid, 'POST', 'json', function () {
+        var projectInfo = $.strToJson(formDataStr);
+        projectInfo.fileInfos = uploadFileInfos;
+        $.sendJsonAjax(url, projectInfo, function () {
+            //$.sendRestFulAjax(saveUrl,bominfo, 'POST', 'json', function () {
             window.location.href = listURL;
-        });
+        })
     }
 
 
@@ -245,7 +252,11 @@
         },
         fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-        doSaveAction();
+        $fileInput.fileinput('upload');//批量提交
+        var hasExtraData = $.isEmptyObject($fileInput.fileinput("getExtraData"));
+        if (hasExtraData) {
+            doSaveAction();
+        }
     });
 
 
@@ -334,7 +345,14 @@
         fileLocation: []
     }
 
-    $.saveProject = saveProject;
+
+
+
+
+    function getIsSubmitAction() {
+        return isSubmitAction;
+    }
+
 
     $(function () {
 
@@ -342,6 +360,8 @@
 
         $("#projectForm").on("change", "select", monitorSelectChange);
 
+        $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
     })
 
+    $.saveProject = saveProject;
 }());

@@ -99,20 +99,6 @@
     </select>
 
     <update id="updateBatch">
-        <!--update-->
-        <!--t_sys_file_records-->
-        <!--set-->
-        <!--type= #{type},-->
-        <!--buss_id = #{bussId},-->
-        <!--operator = #{operator},-->
-        <!--status =#{status}-->
-        <!--WHERE-->
-        <!--status =#{status}-->
-        <!--and uid IN-->
-        <!--<foreach item="idItem" collection="list" open="(" separator="," close=")">-->
-        <!--#{idItem}-->
-        <!--</foreach>-->
-
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update
             t_sys_file_records
@@ -124,8 +110,6 @@
             </set>
             where uid = #{item.uid}
         </foreach>
-
-
     </update>
 
     <insert id="add">

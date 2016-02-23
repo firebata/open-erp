@@ -318,7 +318,7 @@
         //上传文件控制
         $fileInput.fileinput({
             //showCaption: false,
-            overwriteInitial:false,//是否覆盖initial preview content
+            overwriteInitial: false,//是否覆盖initial preview content
             language: "zh",
             'previewFileType': 'any',
             'uploadAsync': false,
@@ -337,7 +337,7 @@
      * @param fileinfosMap
      * @param fileUploadURL
      */
-    function loadFileInput($fileInput, $fileListLi,fileinfosMap, fileUploadURL) {
+    function loadFileInput($fileInput, $fileListLi, fileinfosMap, fileUploadURL) {
         if (fileinfosMap == null) {
             fileinfosMap = {"initialPreview": [], initialPreviewConfig: []}
         }
@@ -378,9 +378,9 @@
             var form = data.form, files = data.files, extra = data.extra,
                 response = data.response, reader = data.reader;
             buildUploadFileInfos($fileListLi, response, uploadFileInfos);
-            var initialPreviewConfig = response["initialPreviewConfig"];
-            dealUploadedFile($fileListLi, initialPreviewConfig, function () {
-            });
+            //var initialPreviewConfig = response["initialPreviewConfig"];
+            //dealUploadedFile($fileListLi, initialPreviewConfig, function () {
+            //});
 
         });
 
@@ -415,4 +415,13 @@
         });
     }
 
+    $(function () {
+        $.ajaxSetup({
+            beforeSend: beforeSend
+        });
+    })
+
+    function beforeSend(xhr) {
+        console.log("ajax提交...");
+    }
 }(jQuery));

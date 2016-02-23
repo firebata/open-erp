@@ -1,6 +1,9 @@
 package com.skysport.inerfaces.bean.develop;
 
+import com.skysport.inerfaces.bean.common.UploadFileInfo;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类说明:
@@ -18,6 +21,7 @@ public class ProjectInfo extends ProjectBomInfo {
      * 是否可编辑
      */
     private int canEdit;
+
 
     public List<ProjectCategoryInfo> getCategoryInfos() {
         return categoryInfos;
