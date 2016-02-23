@@ -23,15 +23,16 @@ public class InitSystemInfoListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        // spring 上下文
-//        ApplicationContext appContext = WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext());
         //初始化工作流
         SkySportAppContext.repositoryService = SpringContextHolder.getBean("repositoryService");
         SkySportAppContext.runtimeService = SpringContextHolder.getBean("runtimeService");
         SkySportAppContext.taskService = SpringContextHolder.getBean("taskService");
         SkySportAppContext.historyService = SpringContextHolder.getBean("historyService");
+
         //初始化系统基础信息
         SystemInitHelper.SINGLETONE.init();
+
+
     }
 
 }
