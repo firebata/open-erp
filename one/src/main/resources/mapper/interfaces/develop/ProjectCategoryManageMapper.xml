@@ -25,7 +25,6 @@
 
     </select>
 
-
     <select id="searchInfos" resultType="ProjectCategoryInfo">
 		select
 		<include refid="searchInfoSql"/>
@@ -42,20 +41,17 @@
 			project_id =#{projectId}
 	</update>
 
-
     <insert id="add">
 		insert into
 		t_kf_project_category (project_id,category_a_id,category_b_id)
 		values (#{projectId},#{categoryAid},#{categoryBid})
 	</insert>
 
-
     <update id="del">
 		update t_kf_project_category
 		set  del_flag=1
 		where project_id =#{projectId}
 	</update>
-
 
     <select id="queryCurrentSeqNo" resultType="String">
 
@@ -66,13 +62,15 @@
 
 	</select>
 
-
 	<select id="queryProjectCategoryInfo" resultType="ProjectCategoryInfo">
 		select
-		<include refid="searchInfoSql"/>
-		FROM t_kf_project_category
-		WHERE  del_flag=0 and project_id =#{projectId}
+			<include refid="searchInfoSql"/>
+		FROM
+			t_kf_project_category
+		WHERE
+			del_flag=0 and project_id =#{projectId}
 	</select>
+
 	<insert id="addBatch" parameterType="list">
 		insert into
 			t_kf_project_category (project_id,category_a_id,category_b_id)
@@ -81,8 +79,6 @@
 			(#{item.projectId},#{item.categoryAid},#{item.categoryBid})
 		</foreach>
 	</insert>
-
-
 
 
 

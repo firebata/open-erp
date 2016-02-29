@@ -20,13 +20,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
@@ -240,50 +238,4 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
         return rtSelectResultMap(commonBeans);
     }
 
-    /**
-     * 上传文件 用@RequestParam注解来指定表单上的file为MultipartFile
-     *
-     * @param files
-     * @return
-     */
-    @RequestMapping("fileUpload")
-    @SystemControllerLog(description = "上传子项目相关附件信息")
-    public String fileUpload(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
-        for (MultipartFile file : files) {
-            // 判断文件是否为空
-            if (!file.isEmpty()) {
-                try {
-                    // 文件保存路径
-                    String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"
-                            + file.getOriginalFilename();
-                    // 转存文件
-                    file.transferTo(new File(filePath));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        // 重定向
-        return "redirect:/list.html";
-    }
-
-
-    /**
-     * 读取上传文件中得所有文件并返回
-     *
-     * @return
-     */
-    @RequestMapping("file-list")
-    @SystemControllerLog(description = "")
-    public ModelAndView list(HttpServletRequest request) {
-        String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/";
-        ModelAndView mav = new ModelAndView("list");
-        File uploadDest = new File(filePath);
-        String[] fileNames = uploadDest.list();
-        for (int i = 0; i < fileNames.length; i++) {
-            //打印出文件名
-            System.out.println(fileNames[i]);
-        }
-        return mav;
-    }
 }

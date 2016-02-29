@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +56,10 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @ResponseBody
     @SystemControllerLog(description = "打开主项目列表页面")
     public ModelAndView search() {
+
         ModelAndView mav = new ModelAndView("/development/project/project-list");
+
+
         return mav;
     }
 
@@ -140,11 +142,9 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "新增主项目信息")
-    public Map<String, Object> add(ProjectInfo info, HttpServletRequest request) {
+    public Map<String, Object> add(@RequestBody ProjectInfo info, HttpServletRequest request) {
         //保存项目信息
         projectManageService.add(info);
-
-
         return rtnSuccessResultMap("新增成功");
     }
 
@@ -198,27 +198,6 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
         String name = request.getParameter("name");
         List<SelectItem2> commonBeans = projectManageService.querySelectList(name);
         return rtSelectResultMap(commonBeans);
-    }
-
-
-    /**
-     * 读取上传文件中得所有文件并返回
-     *
-     * @return
-     */
-    @RequestMapping("file-list")
-    public ModelAndView list(HttpServletRequest request) {
-        String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/";
-        ModelAndView mav = new ModelAndView("list");
-        File uploadDest = new File(filePath);
-        String[] fileNames = uploadDest.list();
-        for (int i = 0; i < fileNames.length; i++) {
-
-            //打印出文件名
-//            System.out.println(fileNames[i]);
-
-        }
-        return mav;
     }
 
 
