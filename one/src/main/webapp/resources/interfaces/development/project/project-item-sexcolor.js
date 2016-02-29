@@ -111,8 +111,6 @@
                 }
             }
         }
-
-
     }
 
     function newSexColorDiv(sexId) {

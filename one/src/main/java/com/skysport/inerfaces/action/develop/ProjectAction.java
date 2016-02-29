@@ -58,8 +58,6 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     public ModelAndView search() {
 
         ModelAndView mav = new ModelAndView("/development/project/project-list");
-
-
         return mav;
     }
 

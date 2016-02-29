@@ -66,14 +66,17 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     public void add(ProjectInfo info) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
+
         //读取session中的用户
         UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+        logger.info("info=====>" + info);
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
         info.setCreater(userInfo.getAliases());
+
         //组装项目品类信息
         info = ProjectManageHelper.buildProjectCategoryInfo(info);
 
@@ -89,10 +92,8 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
 
-
         //启动流程
         startWorkFlow(info, userInfo);
-
     }
 
     /**

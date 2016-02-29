@@ -16,9 +16,6 @@
                    placeholder="输入色组 ..."/>
             <!-- /section:plugins/input.tag-input -->
         </div>
-
-
-
     </div>
 
     {{/each}}

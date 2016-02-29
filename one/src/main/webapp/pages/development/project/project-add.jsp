@@ -121,6 +121,10 @@
                         </div>
 
                     </div>
+                    <!--性别-->
+                    <div id="categoryDivAll">
+                        <%@ include file="project-category.jsp" %>
+                    </div>
                 </div>
                 <div id="accessoriesInfo">
                     <h5 class="header smaller lighter blue">

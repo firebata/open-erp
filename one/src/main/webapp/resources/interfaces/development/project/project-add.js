@@ -76,15 +76,31 @@
     }
 
     var initCategoryFields = function (_data) {
-        //console.info("_data:" + _data);
-        if (_data === '' || _data.length === 0) return;
-        var categoryAid = _data[0].categoryAid;
-        $("#categoryAid").val(_data[0].categoryAid);
-        //*初始化二级品类
-        initCategoryB(categoryAid, function () {
-            selectCategoryB(_data);
-        });
 
+        selectCategoryA(_data);
+
+        /*
+         //console.info("_data:" + _data);
+         if (_data === '' || _data.length === 0) return;
+         var categoryAid = _data[0].categoryAid;
+         $("#categoryAid").val(_data[0].categoryAid);
+         //!*初始化二级品类
+         initCategoryB(categoryAid, function () {
+         selectCategoryB(_data);
+         });
+         */
+
+
+
+    }
+
+
+    var selectCategoryA = function (_data) {
+        var categoryAids = [];
+        for (var index = 0; index < _data.length; index++) {
+            categoryAids.push(_data[index].categoryAid);
+        }
+        $('#categoryAid').selectpicker("val", categoryAids)
     }
 
     var selectCategoryB = function (_data) {
@@ -144,15 +160,7 @@
 
         //一级品类
         var categoryAItems = data["categoryAItems"];
-        $("#categoryAid").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#categoryAid"));
-        $.each(categoryAItems, function (i, item) {
-            $("<option></option>")
-                .val(item["natrualkey"])
-                .text(item["name"])
-                .appendTo($("#categoryAid"));
-        });
-
+        initCategoryA(categoryAItems)
 
     }
 
@@ -261,6 +269,37 @@
 
 
     /**
+     *
+     * @param categoryAId
+     */
+    function newCategoryDiv(categoryAId) {
+
+        var data = {
+            "category": [
+                {
+                    "categoryDivId": "categoryDivId" + categoryAId,
+                    "categoryAIdChild": "categoryAIdChild" + categoryAId,
+                    "categoryAName": "categoryAName" + categoryAId,
+                    "categoryBid": "categoryBid" + categoryAId
+                }
+            ]
+        };
+
+        var luoxiaomei = $("#category-template").html();
+        var myTemplate = Handlebars.compile(luoxiaomei);
+        $("#categoryDivAll").append(myTemplate(data));
+
+        //*初始化二级品类
+        initCategoryB(categoryAid, function () {
+            selectCategoryB(_data);
+        });
+
+    }
+
+
+
+
+    /**
      * 回调函数：监听下拉变化
      */
     function monitorSelectChange() {
@@ -268,9 +307,10 @@
         var _id = $(this).attr('id');
         if (_id === 'categoryAid') {
             var categoryAid = $(this).val();
-            initCategoryB(categoryAid, function () {
-
-            });
+            newCategoryDiv(categoryAid);
+            //initCategoryB(categoryAid, function () {
+            //
+            //});
         }
         else if (_id === 'customerId') {
             var customerId = $(this).val();
@@ -299,6 +339,21 @@
         });
     }
 
+
+    function initCategoryA(categoryAItems) {
+        $("#categoryAid").empty();
+
+        $.each(categoryAItems, function (i, item) {
+            $("<option></option>")
+                .val(item["natrualkey"])
+                .text(item["name"])
+                .appendTo($("#categoryAid"));
+        });
+        $('#categoryAid').selectpicker({noneSelectedText: '请选择...'});
+        $('#categoryAid').selectpicker('refresh');
+    }
+
+
     /**
      * 根据一级品类id的改变，查询二级品类id
      * @param categoryAid
@@ -322,8 +377,6 @@
             $('#categoryBid').selectpicker('refresh');
             callback();
         });
-
-
     }
 
 
@@ -344,9 +397,6 @@
         sketchReceivedDate: "",
         fileLocation: []
     }
-
-
-
 
 
     function getIsSubmitAction() {

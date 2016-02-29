@@ -183,4 +183,27 @@ public class ProjectBomInfo extends ProjectBaseInfo {
     public void setFileinfosMap(Map<String, Object> fileinfosMap) {
         this.fileinfosMap = fileinfosMap;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectBomInfo{" +
+                "id='" + id + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", parentProjectId='" + parentProjectId + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", categoryAid='" + categoryAid + '\'' +
+                ", categoryAname='" + categoryAname + '\'' +
+                ", categoryBid='" + categoryBid + '\'' +
+                ", categoryBname='" + categoryBname + '\'' +
+                ", collectionNumber=" + collectionNumber +
+                ", mainColorNames='" + mainColorNames + '\'' +
+                ", sexColors=" + sexColors +
+                ", sexIds='" + sexIds + '\'' +
+                ", remark='" + remark + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", delFlag=" + delFlag +
+                ", fileInfos=" + fileInfos +
+                ", fileinfosMap=" + fileinfosMap +
+                '}';
+    }
 }
