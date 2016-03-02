@@ -106,7 +106,6 @@
 			customer_id=#{customerId},
 			area_id =#{areaId},
 			series_id =#{seriesId},
-			creater =#{creater},
 			version =#{version},
 			sample_delivery =#{sampleDelivery},
 			is_need_swatch =#{isNeedSwatch},

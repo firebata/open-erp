@@ -56,7 +56,7 @@ public class ProjectManageHelper {
         //年份
         String name = getYearName(t);
         stringBuilder.append(name);
-//        stringBuilder.append(CharConstant.BLANK);
+        stringBuilder.append(CharConstant.BLANK);
 //        //客户
 //        name = getCustomerName(t);
 //        stringBuilder.append(name);
@@ -204,22 +204,10 @@ public class ProjectManageHelper {
      * @param info
      */
     public static ProjectInfo buildProjectCategoryInfo(ProjectInfo info) {
-
-        String categoryAid = info.getCategoryAid();
-        String categoryBid = info.getCategoryBid();
-        if (StringUtils.isEmpty(categoryBid)) {
-            throw new SkySportException("100002", "没有选择二级品类");
-        }
-
-        String[] categoryBidsArr = categoryBid.split(CharConstant.COMMA);
-        List<ProjectCategoryInfo> categoryInfos = new ArrayList<>();
-        for (String bID : categoryBidsArr) {
-            ProjectCategoryInfo categoryInfo = new ProjectCategoryInfo();
+        List<ProjectCategoryInfo> categoryInfos = info.getCategoryInfos();
+        for (ProjectCategoryInfo categoryInfo : categoryInfos) {
             categoryInfo.setProjectId(info.getNatrualkey());
             categoryInfo.setProjectName(info.getName());
-            categoryInfo.setCategoryAid(categoryAid);
-            categoryInfo.setCategoryBid(bID);
-            categoryInfos.add(categoryInfo);
         }
         info.setCategoryInfos(categoryInfos);
         return info;
@@ -272,11 +260,11 @@ public class ProjectManageHelper {
         //年份
         String name = getYearName(info);
         stringBuilder.append(name);
-//        stringBuilder.append(CharConstant.BLANK);
+        stringBuilder.append(CharConstant.BLANK);
         //系列
         name = getSeriesName(info);
         stringBuilder.append(name);
-//        stringBuilder.append(CharConstant.BLANK);
+        stringBuilder.append(CharConstant.BLANK);
         //二级分类
         name = getCategoryName(categoryInfo);
         stringBuilder.append(name);

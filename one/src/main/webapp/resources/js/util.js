@@ -59,19 +59,30 @@
      * @param _dataType 数据类型
      * @param _doSuccess 成功回调函数
      */
-    function sendRestFulAjax(_url, _data, _type, _dataType, _doSuccess) {
+    function sendRestFulAjax(_url, _data, _type, _dataType, _doSuccess, async) {
         var type = strIsEmpty(_type) ? 'POST' : _type;
         //var dataType = _type == "undefined" || $.trim(_dataType) == '' ? 'json' : _dataType;
         var sf = strIsEmpty(_doSuccess) ? doSucess : _doSuccess;
+        var async = strIsEmpty(async) ? true : async;
         $.ajax({
             url: _url,
             data: _data,
             type: type,
             //dataType: dataType,
             success: sf,
+            async: async,
             error: doNotSucess
         });
     }
+
+
+    Array.prototype.contains = function (needle) {
+        for (var i in this) {
+            if (this[i] == needle) return true;
+        }
+        return false;
+    }
+
 
     /**
      *
@@ -146,7 +157,7 @@
      */
     function strIsEmpty(input) {
 
-        return input == undefined || $.trim(input) == '';
+        return input == undefined || input == null || $.trim(input) == '';
 
     }
 

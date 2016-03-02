@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.action.develop;
 
-import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
 import com.skysport.inerfaces.model.develop.project.service.IProjectCategoryManageService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,11 @@ public class ProjectCategoryAction {
     @RequestMapping(value = "/infoCategory/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
     public List<ProjectCategoryInfo> queryProjectCategoryInfo(@PathVariable String natrualKey) {
-        List<ProjectCategoryInfo> categoryInfos = projectCategoryManageService.queryProjectCategoryInfo(natrualKey);
+
+        List<ProjectCategoryInfo> categoryInfos = new ArrayList<>();
+        if (StringUtils.isNotBlank(natrualKey) && !"null".equals(natrualKey)) {
+            categoryInfos = projectCategoryManageService.queryProjectCategoryInfo(natrualKey);
+        }
         return categoryInfos;
     }
 

@@ -2,10 +2,10 @@
 <script id="category-template" type="text/x-handlebars-template">
     {{#each category}}
     <div class="form-group" id="{{categoryDivId}}">
-        <label class="col-xs-2  control-label" for="{{categoryAName}}">一级品类</label>
+        <label class="col-xs-2  control-label" for="{{categoryAname}}">一级品类</label>
         <div class="col-xs-3">
-            <input type="hidden" id="{{categoryAIdChild}}" name="categoryAIdChild"/>
-            <input type="text" id="{{categoryAName}}" name="categoryAName" readonly="readonly" class="col-xs-10 col-sm-12"/>
+            <input type="hidden" id="{{categoryAidChild}}" name="categoryAidChild"/>
+            <input type="text" id="{{categoryAname}}" name="categoryAname" readonly="readonly" class="col-xs-10 col-sm-12"/>
         </div>
 
         <label class="col-xs-2  control-label" for="{{categoryBid}}"> 二级品类 </label>

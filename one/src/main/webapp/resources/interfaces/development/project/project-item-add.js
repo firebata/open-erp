@@ -243,6 +243,7 @@
             sexColor.mainColorNames = tagValues;
             sexColors.push(sexColor);
         }
+
         projectItemInfo.sexColors = sexColors;
         var sexIdsSelect = $("#sexIds").val();
         projectItemInfo.sexIds = sexIdsSelect.join(",");

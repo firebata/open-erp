@@ -149,7 +149,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //删除项目相关的所有信息
         projectManageMapper.delInfoAboutProject(info.getNatrualkey());
 
-        info = ProjectManageHelper.buildProjectCategoryInfo(info);
+//        info = ProjectManageHelper.buildProjectCategoryInfo(info);
         //增加项目的品类信息
         projectCategoryManageService.addBatch(info.getCategoryInfos());
 

@@ -109,17 +109,10 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="categoryAid"> 品类一级名称 </label>
-
                         <div class="col-xs-3">
-                            <select class="col-xs-12" data-style="btn-info" id="categoryAid" name="categoryAid"                        placeholder="品类一级名称">
+                            <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"    id="categoryAid" multiple placeholder="品类一级名称">"
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="categoryBid"> 品类二级名称 </label>
-                        <div class="col-xs-3">
-                            <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"             id="categoryBid" multiple placeholder="品类二级名称">"
-                            </select>
-                        </div>
-
                     </div>
                     <!--性别-->
                     <div id="categoryDivAll">

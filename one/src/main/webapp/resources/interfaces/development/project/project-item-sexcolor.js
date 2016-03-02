@@ -6,6 +6,7 @@
     $.extend({
         initSexColors: initSexColors
     });
+
     $(function () {
 
         //监听价格变动
@@ -95,6 +96,7 @@
             for (var index1 = 0, len1 = sexIds.length; index1 < len1; index1++) {
                 if (sexIds[index1] === sexId) {
                     isHave = true;
+                    break;
                 }
             }
 

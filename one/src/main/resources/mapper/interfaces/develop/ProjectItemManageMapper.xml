@@ -65,16 +65,16 @@
         ON a.project_id = b.project_id
         where a.del_flag = 0 AND b.del_flag =0
         <if test="projectBomInfo.yearCode !=null and projectBomInfo.yearCode != '' and projectBomInfo.yearCode != '-1'">
-            and b.year_code=#{projectBomInfo.yearCode}
+            and a.year_code=#{projectBomInfo.yearCode}
         </if>
         <if test="projectBomInfo.customerId !=null and projectBomInfo.customerId != '' and projectBomInfo.customerId != '-1'">
-            and b.customer_id=#{projectBomInfo.customerId}
+            and a.customer_id=#{projectBomInfo.customerId}
         </if>
         <if test="projectBomInfo.areaId !=null and projectBomInfo.areaId != '' and projectBomInfo.areaId != '-1'">
-            and b.area_id=#{projectBomInfo.areaId}
+            and a.area_id=#{projectBomInfo.areaId}
         </if>
         <if test="projectBomInfo.seriesId !=null and projectBomInfo.seriesId != '' and projectBomInfo.seriesId != '-1'">
-            and b.series_id=#{projectBomInfo.seriesId}
+            and a.series_id=#{projectBomInfo.seriesId}
         </if>
         <if test="dataTablesInfo.searchValue!=null and dataTablesInfo.searchValue != ''">
             and (
