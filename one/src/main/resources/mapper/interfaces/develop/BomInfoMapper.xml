@@ -34,36 +34,64 @@
 
 
     <select id="listInfosCounts" resultType="Integer">
-		SELECT COUNT(*) FROM
-		t_kf_bominfo where del_flag=0
+		SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b
+        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
 	</select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_kf_bominfo where del_flag=0
+        SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b
+        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
-            and project_id like concat('%',#{bomInfo.projectId},'%')
+            and a.project_id like concat('%',#{bomInfo.projectId},'%')
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             and (
-            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            a.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            b.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.remark like concat('%',#{dataTablesInfo.searchValue},'%')   or
+            b.remark like concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
     </select>
 
 
+    <sql id="searchInfoSql2">
+        a.id AS id,
+        a.project_id AS projectId,
+        a.bom_id AS natrualkey,
+        a.bom_name AS name,
+        a.customer_id AS customerId,
+        a.area_id AS areaId,
+        a.sex_id AS sexId,
+        a.series_id AS seriesId,
+        a.collectionNum AS collectionNum,
+        a.main_color AS mainColor,
+        a.fabrics_end_date AS fabricsEndDate,
+        a.accessories_end_date AS accessoriesEndDate,
+        a.preoffer_date AS preOfferDate,
+        a.cloth_received_date AS clothReceivedDate,
+        a.offer_amount AS offerAmount,
+        a.del_flag AS delFlag,
+        a.update_time AS updateTime,
+        a.remark AS remark,
+        b.project_name AS projectName
+    </sql>
+
+
     <select id="searchInfos" resultType="BomInfo">
         SELECT
-        <include refid="searchInfoSql"/>
-        FROM t_kf_bominfo a
-        WHERE a.del_flag=0
+          <include refid="searchInfoSql2"/>
+        FROM t_kf_bominfo a,t_kf_project_item b
+        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
-            and project_id like concat('%',#{bomInfo.projectId},'%')
+            and a.project_id like concat('%',#{bomInfo.projectId},'%')
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             and (
-            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+              a.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+              b.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+              a.remark like concat('%',#{dataTablesInfo.searchValue},'%')   or
+              b.remark like concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
         <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
@@ -90,7 +118,7 @@
     <insert id="addBatch" parameterType="list">
         insert into
         t_kf_bominfo
-        (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+            (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.projectId},#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
@@ -99,7 +127,7 @@
 
     <insert id="add">
 		insert into
-		t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+		    t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
 		values (#{projectId},#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
 	</insert>
 

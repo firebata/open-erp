@@ -26,6 +26,7 @@
       <table id="example" class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
+          <th>项目名称</th>
           <th>BOM名称</th>
           <th>主颜色</th>
           <th>性别属性</th>

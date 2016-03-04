@@ -8,6 +8,7 @@
      * @returns {*[]}
      */
     var columnsName = [
+        {"data": "projectName"},
         {"data": "name"},
         {"data": "mainColor"},
         {"data": "sexId"},
@@ -15,8 +16,9 @@
         {"data": "remark"},
         {"data": null}
     ];
-
-    var mHtml = '<div class="dataTables_length col-xs-4" id="projectId_example_length"><label>项目编号&nbsp;    <input name="projectId" id="projectId" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>';
+   /* var mHtml = '<div class="dataTables_length col-xs-4" id="projectId_example_length"><label>子项目编号&nbsp;    <input name="projectId" id="projectId" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>';
+*/
+    var mHtml = '';
     var table;
     $(function () {
 

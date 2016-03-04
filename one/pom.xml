@@ -18,7 +18,7 @@
 
     <properties>
         <spring.version>4.1.6.RELEASE</spring.version>
-        <activiti.version>5.17.0</activiti.version>
+        <activiti.version>5.19.0</activiti.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.2.4</mybatis.version>
         <!-- log4j日志文件管理包版本 -->
