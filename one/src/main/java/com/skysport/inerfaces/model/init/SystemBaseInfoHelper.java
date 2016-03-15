@@ -8,10 +8,10 @@ import com.skysport.inerfaces.model.info.material_classic.MaterialClassicManageS
 import com.skysport.inerfaces.model.info.material_type.MaterialTypeManageServiceHelper;
 import com.skysport.inerfaces.model.info.product_type.ProductTypeManageServiceHelper;
 import com.skysport.inerfaces.model.info.series.SeriesManageServiceHelper;
+import com.skysport.inerfaces.model.info.service.helper.PantoneManageServiceHelper;
 import com.skysport.inerfaces.model.info.sex.SexManageServiceHelper;
 import com.skysport.inerfaces.model.info.sp.helper.SpInfoHelper;
 import com.skysport.inerfaces.model.info.year_conf.YearConfManageServiceHelper;
-import org.springframework.context.ApplicationContext;
 
 /**
  * 类说明:
@@ -29,6 +29,7 @@ public enum SystemBaseInfoHelper {
 
         //年份列表
         YearConfManageServiceHelper.SINGLETONE.refreshSelect();
+
         //客户信息
         CustomerManageServiceHelper.SINGLETONE.refreshSelect();
 
@@ -47,17 +48,13 @@ public enum SystemBaseInfoHelper {
         //供应商列表
         SpInfoHelper.SINGLETONE.refreshSelect();
 
-
-
         //材质列表
         MaterialClassicManageServiceHelper.SINGLETONE.refreshSelect();
 
         //品类级别
         CategoryManageServiceHelper.SINGLETONE.refreshSelect();
-//        // 颜色列表
-//        PantoneManageServiceImpl pantoneManageService = (PantoneManageServiceImpl) appContext.getBean("pantoneManageService");
-//        List<SelectItem> pantoneItems = pantoneManageService.querySelectList("");
-//        SystemBaseInfo.SINGLETONE.pushBom("pantoneItems", pantoneItems);
+        //patone
+        PantoneManageServiceHelper.SINGLETONE.refreshSelect();
 
         // 品名列表
         ProductTypeManageServiceHelper.SINGLETONE.refreshSelect();
@@ -91,7 +88,7 @@ public enum SystemBaseInfoHelper {
         WorkmanshipOfBondingLaminatingCoatingServiceHelper.SINGLETONE.refreshSelect();
 
         // 物料位置列表
-        MaterialPositionServiceHelper.SINGLETONE.refreshSelect();
+        PositionServiceHelper.SINGLETONE.refreshSelect();
 
         //
         MaterialUnitServiceHelper.SINGLETONE.refreshSelect();

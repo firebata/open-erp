@@ -4,6 +4,7 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KFPackaging;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.PackagingManageMapper;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,9 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
             //包材id存在，修改；包材id不存在则新增
             for (KFPackagingJoinInfo packagingJoinInfo : packagingItems) {
                 String packagingId = packagingJoinInfo.getKfPackaging().getPackagingId();
+                MaterialSpInfo materialSpInfo = packagingJoinInfo.getMaterialSpInfo();
+                BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
+                materialSpInfo.setTotalPrice(totalPrice);
                 //有id，更新
                 if (StringUtils.isNotBlank(packagingId)) {
                     setPackagingId(packagingJoinInfo, packagingId, bomId);

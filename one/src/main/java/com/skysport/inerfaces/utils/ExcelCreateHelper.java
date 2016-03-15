@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.utils;
 
+import com.skysport.core.utils.ReflectionUtils;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -57,16 +57,18 @@ public class ExcelCreateHelper {
         if (null != objects && !objects.isEmpty()) {
             Row row;
             Cell cell;
-            count = objects.size()+count;
+            count = objects.size() + count;
             for (short rownum = (short) 1; rownum <= objects.size(); rownum++) {
                 Object object = objects.get(rownum - 1);
                 Class clazz = object.getClass();
                 row = sheet.createRow(rownum + startIndex);
-                for (short cellnum = (short) 0; cellnum < WebConstants.BOM_DETAIL_FIELD.length; cellnum++) {
-                    logger.info("the method name is :" + "get" + WebConstants.BOM_DETAIL_FIELD[cellnum]);
-                    Method m3 = clazz.getDeclaredMethod("get" + WebConstants.BOM_DETAIL_FIELD[cellnum]);
+                for (short cellnum = (short) 0; cellnum < WebConstants.BOM_DETAIL_FIELD_ADVANCED.length; cellnum++) {
+                    logger.info("the method name is :" + "get" + WebConstants.BOM_DETAIL_FIELD_ADVANCED[cellnum]);
                     cell = row.createCell(cellnum);
-                    cell.setCellValue(createHelper.createRichTextString((String) m3.invoke(object)));
+                    String cellValue = (String) ReflectionUtils.invokeMethod(object, "get" + WebConstants.BOM_DETAIL_FIELD_ADVANCED[cellnum], null, null);
+                    cell.setCellValue(createHelper.createRichTextString(cellValue));
+//                    Method m3 = clazz.getDeclaredMethod("get" + WebConstants.BOM_DETAIL_FIELD_ADVANCED[cellnum]);
+//                    cell.setCellValue(createHelper.createRichTextString((String) m3.invoke(object);));
                     cell.setCellStyle(style);
                     sheet.autoSizeColumn(cellnum, true);//设置自适应宽度
                 }

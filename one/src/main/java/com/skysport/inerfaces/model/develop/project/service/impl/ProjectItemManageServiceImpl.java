@@ -1,8 +1,10 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
+import com.skysport.core.constant.CharConstant;
 import com.skysport.core.instance.DictionaryInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.*;
@@ -22,6 +24,7 @@ import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageSe
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import com.skysport.inerfaces.model.info.main_color.IMainColorService;
 import com.skysport.inerfaces.model.info.main_color.helper.MainColorHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -33,10 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 类说明:
@@ -204,48 +204,86 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         projectItemManageMapper.addBatchBomInfo(info);
     }
 
+    /**
+     * 导出bom详细表
+     *
+     * @param request
+     * @param response
+     * @param natrualkeys
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws UnsupportedEncodingException
+     */
     @Override
     public void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, UnsupportedEncodingException {
 
-        List<String> itemIds = Arrays.asList(natrualkeys.split(","));
+        List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
+
+        StringBuilder bomDetailExcelName = new StringBuilder();
+        bomDetailExcelName.append(DateUtils.SINGLETONE.getYyyyMmdd());
+        bomDetailExcelName.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_DETAIL_CN_NAME);
+
+        Set<String> seriesNameSet = new HashSet<String>();
+        Set<String> bomNameSet = new HashSet<>();
 
         //所有bomid
-        List<String> bomIds = bomManageService.queryBomIds(itemIds);
+//        List<String> bomIds = bomManageService.queryBomIds(itemIds);
+        //所有bomid
+        List<BomInfo> bomInfos = bomManageService.queryBomInfosByProjectItemIds(itemIds);
 
-
-        if (!bomIds.isEmpty()) {
+        if (!bomInfos.isEmpty()) {
 
             List<BomInfoDetail> bomInfoDetails = new ArrayList<>();
 
-            for (String bomId : bomIds) {
+
+            for (BomInfo bomInfo : bomInfos) {
+                String bomId = bomInfo.getNatrualkey();
+
+                String seriesName = bomInfo.getSeriesName();
+                seriesNameSet.add(CharConstant.HORIZONTAL_LINE + seriesName);//去重复
+                String bomName = bomInfo.getName();
+
+                if (bomNameSet.isEmpty()) {
+                    bomNameSet.add(bomName);
+                } else if (bomNameSet.size() < 3) {
+                    bomNameSet.add(WebConstants.AND + bomName);
+                }
+
+
                 //所有面料
-                List<FabricsInfo> fabricIds = fabricsManageService.queryAllFabricByBomId(bomId);
+                List<FabricsInfo> fabricsInfos = fabricsManageService.queryAllFabricByBomId(bomId);
+
                 //将id转成name
-                BomManageHelper.translateIdToNameInFabrics(fabricIds, WebConstants.FABRIC_ID_EXCHANGE_BOM);
+                BomManageHelper.translateIdToNameInFabrics(fabricsInfos, seriesName, WebConstants.FABRIC_ID_EXCHANGE_BOM);
+
 
                 //所有辅料
                 List<AccessoriesInfo> accessoriesInfos = accessoriesService.queryAllAccessoriesByBomId(bomId);
-                BomManageHelper.translateIdToNameInAccessoriesInfos(accessoriesInfos);
+                BomManageHelper.translateIdToNameInAccessoriesInfos(accessoriesInfos, seriesName);
 
                 //所有包材
-                List<KFPackaging> packagings = packagingService.queryPackagingByBomId(bomId);
-                BomManageHelper.translateIdToNameInPackagings(packagings);
+                List<KFPackaging> kfPackagings = packagingService.queryPackagingByBomId(bomId);
+                BomManageHelper.translateIdToNameInPackagings(kfPackagings, seriesName);
 
 
-                BomInfoDetail bomInfoDetail = BomManageHelper.buildBomInfoDetail(fabricIds, accessoriesInfos, packagings);
+                BomInfoDetail bomInfoDetail = BomManageHelper.buildBomInfoDetail(fabricsInfos, accessoriesInfos, kfPackagings);
 
                 bomInfoDetails.add(bomInfoDetail);
 
             }
 
 
-            LocalDate today = LocalDate.now();
-            int year = today.getYear();
+            String year = DateUtils.SINGLETONE.getYyyy();
             String ctxPath = new StringBuilder().append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
                     .append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
 
 
-            String fileName = itemIds.get(0) + "-面辅料详细.xls";
+            bomDetailExcelName.append(StringUtils.join(seriesNameSet.toArray(), ""));
+            bomDetailExcelName.append(StringUtils.join(bomNameSet.toArray(), ""));
+            bomDetailExcelName.append(WebConstants.SUFFIX_EXCEL);
+            String fileName = bomDetailExcelName.toString();
+
 
             //完整文件路径
             String downLoadPath = ctxPath + File.separator + fileName;

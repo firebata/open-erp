@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.pantone.helper;
 
+import com.skysport.core.constant.CharConstant;
 import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 
 import java.util.List;
@@ -24,5 +25,29 @@ public enum KFMaterialPantoneServiceHelper {
             }
         }
 
+    }
+
+    /**
+     * @param kfMaterialPantones
+     * @return
+     */
+    public String turnIdsToNames(List<KFMaterialPantone> kfMaterialPantones) {
+        StringBuilder patones = new StringBuilder();
+//        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popBom("patonesItems");
+//        if (null == selectItem2s || selectItem2s.isEmpty()) {
+//            return patones.toString();
+//        }
+        for (int idx = 0, len = kfMaterialPantones.size(); idx < len; idx++) {
+            KFMaterialPantone pantone = kfMaterialPantones.get(idx);
+//            String pantoneId = pantone.getPantoneId();
+            String pantoneName = pantone.getPantoneName();
+//            String pantoneName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, pantoneId);
+            if (idx == 0) {
+                patones.append(pantoneName);
+            } else {
+                patones.append(CharConstant.FORWARD_SLASH).append(pantoneName);
+            }
+        }
+        return patones.toString();
     }
 }

@@ -12,17 +12,16 @@ import java.util.Date;
  */
 public enum DateUtils {
     SINGLETONE;
+    public final static String YYYYMMDD = "yyyyMMdd";
     public final static String YYYY_MM_DD = "yyyy-mm-dd";
     public final static String YYYYMMDDHHMMSS = "yyyyMMddhhmmss";
 
-    /**
-     * 获取当前日子
-     *
-     * @return
-     */
-    public String getNowDate() {
+
+
+
+    public String getYyyy() {
         LocalDate today = LocalDate.now();
-        return today.toString();
+        return String.valueOf(today.getYear());
     }
 
     public String getYyyyMm() {
@@ -32,6 +31,20 @@ public enum DateUtils {
         if (month < 10) yyyymm = today.getYear() + CharConstant.ZERO + today.getMonthValue();
         else yyyymm = today.getYear() + CharConstant.EMPTY + today.getMonthValue();
         return yyyymm;
+
+    }
+
+    public String getYyyyMmdd() {
+        LocalDate today = LocalDate.now();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        String yyyymmdd;
+        if (month < 10) {
+            yyyymmdd = today.getYear() + CharConstant.ZERO + today.getMonthValue() + day;
+        } else {
+            yyyymmdd = today.getYear() + CharConstant.EMPTY + today.getMonthValue() + day;
+        }
+        return yyyymmdd;
 
     }
 

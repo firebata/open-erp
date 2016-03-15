@@ -9,6 +9,7 @@ import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.PantoneInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.service.IPantoneManageService;
+import com.skysport.inerfaces.model.info.service.helper.PantoneManageServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -92,6 +93,7 @@ public class PantoneManageAction extends BaseAction<String, Object, PantoneInfo>
     public Map<String, Object> edit(PantoneInfo pantoneInfo, HttpServletRequest request,
                                     HttpServletResponse respones) {
         pantoneManageService.edit(pantoneInfo);
+        PantoneManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("更新成功");
     }
 
@@ -110,6 +112,7 @@ public class PantoneManageAction extends BaseAction<String, Object, PantoneInfo>
         //设置ID
         pantoneInfo.setPantoneId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.PANTONE_INFO, incrementNumber));
         pantoneManageService.add(pantoneInfo);
+        PantoneManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");
     }
 
@@ -136,6 +139,7 @@ public class PantoneManageAction extends BaseAction<String, Object, PantoneInfo>
     @SystemControllerLog(description = "删除PANTONE")
     public Map<String, Object> del(@PathVariable String pantoneId) {
         pantoneManageService.del(pantoneId);
+        PantoneManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

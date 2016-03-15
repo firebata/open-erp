@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.bom.impl;
 
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
-import com.skysport.inerfaces.mapper.info.BomManageMapper;
+import com.skysport.inerfaces.mapper.info.BomInfoManageMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
@@ -23,8 +23,8 @@ import java.util.List;
 @Service("bomManageService")
 public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements IBomManageService, InitializingBean {
 
-    @Resource(name = "bomManageMapper")
-    private BomManageMapper bomManageMapper;
+    @Resource(name = "bomInfoManageMapper")
+    private BomInfoManageMapper bomInfoManageMapper;
 
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
@@ -47,17 +47,17 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = bomManageMapper;
+        commonDao = bomInfoManageMapper;
     }
 
     @Override
     public int listFilteredInfosCounts(BomQueryForm bomQueryForm) {
-        return bomManageMapper.listFilteredInfosCounts(bomQueryForm);
+        return bomInfoManageMapper.listFilteredInfosCounts(bomQueryForm);
     }
 
     @Override
     public List<BomInfo> searchInfos(BomQueryForm bomQueryForm) {
-        return bomManageMapper.searchInfos(bomQueryForm);
+        return bomInfoManageMapper.searchInfos(bomQueryForm);
     }
 
     @Override
@@ -115,35 +115,41 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     @Override
     public void delByProjectId(String projectId) {
-        bomManageMapper.delByProjectId(projectId);
+        bomInfoManageMapper.delByProjectId(projectId);
     }
 
     @Override
     public List<String> queryBomIds(List<String> projectItemIds) {
 
-        return bomManageMapper.queryBomIds(projectItemIds);
+        return bomInfoManageMapper.queryBomIds(projectItemIds);
     }
 
     @Override
     public List<BomInfo> selectAllBomSexAndMainColor(String projectId) {
-        return bomManageMapper.selectAllBomSexAndMainColor(projectId);
+        return bomInfoManageMapper.selectAllBomSexAndMainColor(projectId);
     }
 
     @Override
     public void delBomNotInThisIds(List<String> tempStyles) {
-        bomManageMapper.delBomNotInThisIds(tempStyles);
+        bomInfoManageMapper.delBomNotInThisIds(tempStyles);
     }
 
     @Override
     public void delBomInThisIds(List<BomInfo> needDelBomList) {
-        bomManageMapper.delBomInThisIds(needDelBomList);
+        bomInfoManageMapper.delBomInThisIds(needDelBomList);
+    }
+
+
+    @Override
+    public List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds) {
+        return  bomInfoManageMapper.queryBomInfosByProjectItemIds(itemIds);
     }
 
     @Override
     public void updateBatch(List<BomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
             for (BomInfo bomInfo : infos) {
-                bomManageMapper.updateInfo(bomInfo);
+                bomInfoManageMapper.updateInfo(bomInfo);
             }
         }
 

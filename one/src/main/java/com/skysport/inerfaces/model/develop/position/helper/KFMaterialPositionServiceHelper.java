@@ -1,8 +1,13 @@
 package com.skysport.inerfaces.model.develop.position.helper;
 
+import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.constant.CharConstant;
+import com.skysport.core.instance.SystemBaseInfo;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 说明:
@@ -24,5 +29,32 @@ public enum KFMaterialPositionServiceHelper {
             }
         }
 
+    }
+
+    public String turnIdsToNames(List<KFMaterialPosition> kfMaterialPositions) {
+
+        StringBuilder positions = new StringBuilder();
+        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popBom("positionItems");
+        if (selectItem2s.isEmpty()) {
+            return positions.toString();
+        }
+        Set<String> positionIds = new HashSet<>();
+        for (int idx = 0, len = kfMaterialPositions.size(); idx < len; idx++) {
+            KFMaterialPosition position = kfMaterialPositions.get(idx);
+            String positionId = position.getPositionId();
+            positionIds.add(positionId);
+        }
+        int idx = 0;
+        for (String positionId : positionIds) {
+            String positionName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, positionId);
+            if (idx == 0) {
+                positions.append(positionName);
+            } else {
+                positions.append(CharConstant.FORWARD_SLASH).append(positionName);
+            }
+            idx++;
+        }
+
+        return positions.toString();
     }
 }

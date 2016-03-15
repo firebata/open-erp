@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
  * 类说明:
  * Created by zhangjh on 2015/7/2.
  */
-@Component("materialPositionManageDao")
-public interface MaterialPositionManageDao extends CommonDao<MaterialPositionInfo> {
+@Component("positionManageDao")
+public interface PositionInfoMapper extends CommonDao<MaterialPositionInfo> {
 }

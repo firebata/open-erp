@@ -30,4 +30,13 @@ public interface IBomManageService extends ICommonService<BomInfo> {
     void delBomNotInThisIds(List<String> tempStyles);
 
     void delBomInThisIds(List<BomInfo> needDelBomList);
+
+    /**
+     * 通过子项目名查询所有bom信息
+     *
+     * @param itemIds
+     * @return
+     */
+    List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
+
 }

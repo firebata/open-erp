@@ -3,6 +3,7 @@ package com.skysport.inerfaces.model.develop.fabric.impl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.FabricsManageMapper;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,8 @@ import java.util.List;
  */
 @Service("fabricsManageService")
 public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implements IFabricsService, InitializingBean {
-    @Resource(name = "fabricsManageDao")
-    private FabricsManageMapper fabricsManageDao;
+    @Resource(name = "fabricsManageMapper")
+    private FabricsManageMapper fabricsManageMapper;
 
     @Resource(name = "incrementNumber")
     private IncrementNumber incrementNumber;
@@ -41,17 +43,17 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = fabricsManageDao;
+        commonDao = fabricsManageMapper;
     }
 
     @Override
     public List<FabricsInfo> queryFabricByBomId(String bomId) {
-        return fabricsManageDao.queryFabricByBomId(bomId);
+        return fabricsManageMapper.queryFabricByBomId(bomId);
     }
 
     @Override
     public List<FabricsInfo> queryFabricList(String natrualKey) {
-        return fabricsManageDao.queryFabricList(natrualKey);
+        return fabricsManageMapper.queryFabricList(natrualKey);
     }
 
     /**
@@ -74,14 +76,17 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
             for (FabricsJoinInfo fabricsJoinInfo : fabricItems) {
 
                 String fabricId = fabricsJoinInfo.getFabricsInfo().getFabricId();
+                MaterialSpInfo materialSpInfo  = fabricsJoinInfo.getMaterialSpInfo();
+                BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
+                materialSpInfo.setTotalPrice(totalPrice);
 
                 //有id，更新
                 if (StringUtils.isNotBlank(fabricId)) {
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
-                    fabricsManageDao.updateInfo(fabricsJoinInfo.getFabricsInfo());
-                    fabricsManageDao.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
-                    fabricsManageDao.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
-                    fabricsManageDao.updateSp(fabricsJoinInfo.getMaterialSpInfo());
+                    fabricsManageMapper.updateInfo(fabricsJoinInfo.getFabricsInfo());
+                    fabricsManageMapper.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
+                    fabricsManageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
+                    fabricsManageMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
                     kFMaterialPositionService.del(fabricId);//删除物料位置信息
                     kFMaterialPantoneService.del(fabricId);//删除物料位置信息
                 }
@@ -92,13 +97,13 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     //年份+客户+地域+系列+NNN
                     fabricId = kind_name + seqNo;
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
-                    fabricsManageDao.add(fabricsJoinInfo.getFabricsInfo());
+                    fabricsManageMapper.add(fabricsJoinInfo.getFabricsInfo());
                     //新增面料详细
-                    fabricsManageDao.addDetail(fabricsJoinInfo.getFabricsDetailInfo());
+                    fabricsManageMapper.addDetail(fabricsJoinInfo.getFabricsDetailInfo());
                     //新增面料用量
-                    fabricsManageDao.addDosage(fabricsJoinInfo.getMaterialUnitDosage());
+                    fabricsManageMapper.addDosage(fabricsJoinInfo.getMaterialUnitDosage());
                     //新增面料供应商信息
-                    fabricsManageDao.addSp(fabricsJoinInfo.getMaterialSpInfo());
+                    fabricsManageMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());
                 }
 
                 //保存物料位置信息
@@ -120,7 +125,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
     @Override
     public List<FabricsInfo> queryAllFabricByBomId(String bomId) {
-        return fabricsManageDao.queryAllFabricByBomId(bomId);
+        return fabricsManageMapper.queryAllFabricByBomId(bomId);
     }
 
     /**
@@ -169,11 +174,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
      * @param bomId       String
      */
     private void deleteFabircsByIds(List<FabricsJoinInfo> fabricItems, String bomId) {
-        List<String> allFabricIds = fabricsManageDao.selectAllFabricId(bomId);
+        List<String> allFabricIds = fabricsManageMapper.selectAllFabricId(bomId);
         List<String> needToSaveFabricId = buildNeedSaveFabricId(fabricItems);
         allFabricIds.removeAll(needToSaveFabricId);
         if (null != allFabricIds && !allFabricIds.isEmpty()) {
-            fabricsManageDao.deleteFabircsByIds(allFabricIds);
+            fabricsManageMapper.deleteFabircsByIds(allFabricIds);
         }
 
     }

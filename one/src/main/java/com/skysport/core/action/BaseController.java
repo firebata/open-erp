@@ -1,8 +1,8 @@
 package com.skysport.core.action;
 
 import com.skysport.core.bean.BaseResp;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class BaseController<T> {
 
-    protected transient Log logger = LogFactory.getLog(getClass());
+    private transient Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     public static ThreadLocal<HttpServletRequest> requestThreadLocal = new ThreadLocal<HttpServletRequest>();
 

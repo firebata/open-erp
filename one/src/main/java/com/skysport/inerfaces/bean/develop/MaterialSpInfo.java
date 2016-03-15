@@ -2,6 +2,8 @@ package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.core.bean.CommonVo;
 
+import java.math.BigDecimal;
+
 /**
  * 类说明:物料供应商信息
  * Created by zhangjh on 2015/7/2.
@@ -13,11 +15,11 @@ public class MaterialSpInfo implements CommonVo {
     private int delFlag;
     private String materialId;
     private String spId;
-    private Float orderCount;
-    private Float attritionRate;
-    private Float unitPrice;
-    private Float totalAmount;
-    private Float totalPrice;
+    private BigDecimal orderCount;
+    private BigDecimal attritionRate;
+    private BigDecimal unitPrice;
+    private BigDecimal totalAmount;
+    private BigDecimal totalPrice;
 
     public MaterialSpInfo() {
         super();
@@ -79,43 +81,43 @@ public class MaterialSpInfo implements CommonVo {
         this.spId = spId;
     }
 
-    public Float getOrderCount() {
+    public BigDecimal getOrderCount() {
         return orderCount;
     }
 
-    public void setOrderCount(Float orderCount) {
+    public void setOrderCount(BigDecimal orderCount) {
         this.orderCount = orderCount;
     }
 
-    public Float getAttritionRate() {
+    public BigDecimal getAttritionRate() {
         return attritionRate;
     }
 
-    public void setAttritionRate(Float attritionRate) {
+    public void setAttritionRate(BigDecimal attritionRate) {
         this.attritionRate = attritionRate;
     }
 
-    public Float getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Float unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public Float getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Float totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Float getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Float totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

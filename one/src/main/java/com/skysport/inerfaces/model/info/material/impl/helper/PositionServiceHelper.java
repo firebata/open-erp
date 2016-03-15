@@ -11,7 +11,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/7.
  */
-public enum MaterialPositionServiceHelper {
+public enum PositionServiceHelper {
     SINGLETONE;
 
     public void refreshSelect() {

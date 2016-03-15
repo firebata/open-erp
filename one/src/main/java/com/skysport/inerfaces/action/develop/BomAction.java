@@ -106,7 +106,7 @@ public class BomAction extends BaseAction<String, Object, BomInfo> {
         int draw = Integer.parseInt(request.getParameter("draw"));
 
         List<BomInfo> infos = bomManageService.searchInfos(bomQueryForm);
-        BomManageHelper.turnIdToName(infos);
+        BomManageHelper.turnSexIdToName(infos);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
 
         return resultMap;

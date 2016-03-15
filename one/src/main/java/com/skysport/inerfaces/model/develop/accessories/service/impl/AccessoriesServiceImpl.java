@@ -4,6 +4,7 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.AccessoriesManageMapper;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +66,10 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
             //面料id存在，修改；面料id不存在则新增
             for (AccessoriesJoinInfo accessoriesJoinInfo : accessoriesItems) {
                 String accessoriesId = accessoriesJoinInfo.getAccessoriesInfo().getAccessoriesId();
+
+                MaterialSpInfo materialSpInfo = accessoriesJoinInfo.getMaterialSpInfo();
+                BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
+                materialSpInfo.setTotalPrice(totalPrice);
                 //有id，更新
                 if (StringUtils.isNotBlank(accessoriesId)) {
 

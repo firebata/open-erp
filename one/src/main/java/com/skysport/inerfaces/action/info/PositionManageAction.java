@@ -9,7 +9,7 @@ import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.MaterialPositionInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.inerfaces.model.info.material.impl.helper.MaterialPositionServiceHelper;
+import com.skysport.inerfaces.model.info.material.impl.helper.PositionServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/position")
-public class MaterialPositionManageAction extends BaseAction<String, Object, MaterialPositionInfo> {
+public class PositionManageAction extends BaseAction<String, Object, MaterialPositionInfo> {
     @Resource(name = "materialPositionService")
     private ICommonService materialPositionService;
 
@@ -91,7 +91,7 @@ public class MaterialPositionManageAction extends BaseAction<String, Object, Mat
     public Map<String, Object> edit(MaterialPositionInfo info, HttpServletRequest request) {
         materialPositionService.edit(info);
 
-        MaterialPositionServiceHelper.SINGLETONE.refreshSelect();
+        PositionServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("更新成功");
     }
 
@@ -111,7 +111,7 @@ public class MaterialPositionManageAction extends BaseAction<String, Object, Mat
         info.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.T_MATERIAL_POSITION_INFO, currentNo, incrementNumber));
         materialPositionService.add(info);
 
-        MaterialPositionServiceHelper.SINGLETONE.refreshSelect();
+        PositionServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");
     }
 
@@ -137,7 +137,7 @@ public class MaterialPositionManageAction extends BaseAction<String, Object, Mat
     @SystemControllerLog(description = "删除物料位置")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         materialPositionService.del(natrualKey);
-        MaterialPositionServiceHelper.SINGLETONE.refreshSelect();
+        PositionServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 

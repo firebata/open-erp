@@ -251,8 +251,32 @@
     </select>
 
 
-    <select id="queryAllAccessoriesByBomId" resultType="AccessoriesInfo" >
+
+    <resultMap id="infosMap2" type="AccessoriesInfo">
+        <result column="accessoriesId" property="accessoriesId"/>
+        <result column="accessoriessName" property="accessoriessName"/>
+        <result column="bomName" property="bomName"/>
+        <result column="spId" property="spId"/>
+        <result column="productTypeId" property="productTypeId"/>
+        <result column="pantoneId" property="pantoneId"/>
+        <result column="unitId" property="unitId"/>
+        <result column="unitAmount" property="unitAmount"/>
+        <result column="orderCount" property="orderCount"/>
+        <result column="totalAmount" property="totalAmount"/>
+        <result column="classicId" property="classicId"/>
+        <result column="techRequired" property="techRequired"/>
+        <result column="length" property="length"/>
+        <result column="width" property="width"/>
+        <result column="unitPrice" property="unitPrice"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+    </resultMap>
+
+    <select id="queryAllAccessoriesByBomId"  resultMap="infosMap2">
           SELECT
+            a.accessories_id AS accessoriesId,
+            a.accessories_name AS accessoriessName,
             e.bom_name AS bomName,
             a.accessories_id AS accessoriesId,
             a.sp_id AS spId,
@@ -265,7 +289,9 @@
             a.classic_id AS classicId ,
             a.tech_required AS techRequired,
             a.length AS length,
-            a.width  AS width
+            a.width  AS width,
+            d.unit_price AS unitPrice,
+            d.total_price AS totalPrice
         FROM
             t_kf_accessories a INNER JOIN
             t_kf_material_unit_dosage c INNER JOIN

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 类说明:
+ * 类说明:bom信息查询
  * Created by zhangjh on 2015/7/13.
  */
-@Component("bomManageMapper")
-public interface BomManageMapper extends CommonDao<BomInfo> {
+@Component("bomInfoManageMapper")
+public interface BomInfoManageMapper extends CommonDao<BomInfo> {
 
     int listFilteredInfosCounts(BomQueryForm bomQueryForm);
 
@@ -27,5 +27,7 @@ public interface BomManageMapper extends CommonDao<BomInfo> {
     void delBomNotInThisIds(List<String> tempStyles);
 
     void delBomInThisIds(List<BomInfo> needDelBomList);
+
+    List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
 }
 

@@ -2,19 +2,23 @@ package com.skysport.inerfaces.model.develop.quoted.service.impl;
 
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
+import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,10 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 说明:
@@ -98,19 +99,41 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
     @Override
     public void download(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException {
 
-        LocalDate today = LocalDate.now();
-        int year = today.getYear();
-        List<String> itemIds = Arrays.asList(natrualkeys.split(","));
+        String year = DateUtils.SINGLETONE.getYyyy();
+        List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
         List<QuotedInfo> quotedInfos = quotedInfoMapper.queryListByProjectItemIds(itemIds);
 
+        StringBuilder bomQuoteName = new StringBuilder();
+        bomQuoteName.append(DateUtils.SINGLETONE.getYyyyMmdd());
+        bomQuoteName.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_QUOTE_CN_NAME);
+
+        Set<String> seriesNameSet = new HashSet<String>();
+        Set<String> bomNameSet = new HashSet<>();
+
+
         //所有bomid
-        List<String> bomIds = bomManageService.queryBomIds(itemIds);
+//        List<String> bomIds = bomManageService.queryBomIds(itemIds);
+        List<BomInfo> bomInfos = bomManageService.queryBomInfosByProjectItemIds(itemIds);
         List<FabricsInfo> fabricsInfosAll = new ArrayList<>();
-        if (!bomIds.isEmpty()) {
-            for (String bomId : bomIds) {
+        if (!bomInfos.isEmpty()) {
+            for (BomInfo bomInfo : bomInfos) {
+
+
+                String bomId = bomInfo.getNatrualkey();
+
+                String seriesName = bomInfo.getSeriesName();
+                seriesNameSet.add(CharConstant.HORIZONTAL_LINE + seriesName);//去重复
+                String bomName = bomInfo.getName();
+
+                if (bomNameSet.isEmpty()) {
+                    bomNameSet.add(bomName);
+                } else if (bomNameSet.size() < 3) {
+                    bomNameSet.add(WebConstants.AND + bomName);
+                }
+
                 //所有面料
                 List<FabricsInfo> fabricsInfos = fabricsManageService.queryAllFabricByBomId(bomId);
-                BomManageHelper.translateIdToNameInFabrics(fabricsInfos, WebConstants.FABRIC_ID_EXCHANGE_QUOTED);//将id转成name
+                BomManageHelper.translateIdToNameInFabrics(fabricsInfos, seriesName, WebConstants.FABRIC_ID_EXCHANGE_QUOTED);//将id转成name
                 fabricsInfosAll.addAll(fabricsInfos);
             }
         }
@@ -137,8 +160,11 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         String ctxPath = new StringBuilder().append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
                 .append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
 
+        bomQuoteName.append(StringUtils.join(seriesNameSet.toArray(), ""));
+        bomQuoteName.append(StringUtils.join(bomNameSet.toArray(), ""));
+        bomQuoteName.append(WebConstants.SUFFIX_EXCEL);
 
-        String fileName = itemIds.get(0) + "-报价表.xls";
+        String fileName = bomQuoteName.toString();
 
         //完整文件路径
         String downLoadPath = ctxPath + File.separator + fileName;

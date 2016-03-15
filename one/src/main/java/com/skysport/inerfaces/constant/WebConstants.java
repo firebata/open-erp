@@ -45,7 +45,9 @@ public interface WebConstants extends TableNameConstants {
     //BOM表头
     String[] BOM_DETAIL_TITILE = {"Style", "Supplier", "Item", "Description", "Color", "Unit", "Q'TY", "CON'S", "NEED", "REMARKS"};
     String[] BOM_DETAIL_FIELD = {"BomName", "SpId", "ProductTypeId", "Description", "PantoneId", "UnitId", "OrderCount", "UnitAmount", "TotalAmount", "Remark"};
-
+    //BOM增强表头
+    String[] BOM_DETAIL_TITILE_ADVANCED = {"Series", "Style", "Supplier", "Item", "Description", "Color", "Position", "Unit", "UnitPrice(￥)","Q'TY",  "CON'S", "Need", "TotalPrice(￥)", "Remarks"};
+    String[] BOM_DETAIL_FIELD_ADVANCED = {"SeriesName", "BomName", "SpId", "ProductTypeId", "Description", "PantoneId", "PositionId", "UnitId", "UnitPrice", "OrderCount", "UnitAmount", "TotalAmount", "TotalPrice", "Remark"};
 
     int FABRIC_ID_EXCHANGE_QUOTED = 0;
 
@@ -85,6 +87,14 @@ public interface WebConstants extends TableNameConstants {
     String FILE_KIND_SP = "2";//供应商头像
     String FILE_KIND_PROJECT = "3";//项目附件
     String FILE_KIND_PROJECT_ITEM = "4";//子项目附件
+
+    String BOM_DETAIL_CN_NAME="面辅料详细";
+    String BOM_QUOTE_CN_NAME="报价表";
+
+    String AND = " and ";
+    String OR =" or ";
+
+    String SUFFIX_EXCEL =".xls";
 
 
 }
