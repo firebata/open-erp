@@ -1,4 +1,4 @@
-package com.skysport.core.instance;
+package com.skysport.core.cache;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.CharConstant;
@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 类说明:
+ * 类说明:系统基础信息缓存
  * Created by zhangjh on 2015/7/6.
  */
-public enum SystemBaseInfo {
+public enum SystemBaseInfoCachedMap {
 
     SINGLETONE;
     

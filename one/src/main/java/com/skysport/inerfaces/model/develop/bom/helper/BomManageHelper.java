@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.bom.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.CharConstant;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.*;
@@ -202,11 +202,11 @@ public class BomManageHelper extends ExcelCreateHelper {
         String kind_name = buildKindName(info);
         String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.BOM_SEQ_NO_LENGTH);
         String categoryBId = info.getCategoryBid();
-        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popProject("categoryBItems");
-        categoryBId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, categoryBId);
+        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popProject("categoryBItems");
+        categoryBId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, categoryBId);
         //性别属性
-        selectItem2s = SystemBaseInfo.SINGLETONE.popProject("sexItems");
-        String sexName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, sexId);
+        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popProject("sexItems");
+        String sexName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, sexId);
         String bomName = sexName + categoryBId;
 //                //年份+客户+地域+系列+NNN
 //                String bomId = kind_name + seqNo;
@@ -257,9 +257,9 @@ public class BomManageHelper extends ExcelCreateHelper {
     }
 
     private static String getSexName(BomInfo bomInfo) {
-        List<SelectItem2> items = SystemBaseInfo.SINGLETONE.popProject("sexItems");
+        List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popProject("sexItems");
         String id = bomInfo.getSexId();
-        return SystemBaseInfo.SINGLETONE.getName(items, id);
+        return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
     }
 
     /**
@@ -311,16 +311,16 @@ public class BomManageHelper extends ExcelCreateHelper {
                 StringBuilder stringBuilder = new StringBuilder();
 
                 String spId = fabricsInfo.getSpId();
-                selectItem2s = SystemBaseInfo.SINGLETONE.popBom("spItems");
-                spId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, spId);
+                selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+                spId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
                 fabricsInfo.setSpId(spId);
 
 
                 //材质列表
                 String classicId = fabricsInfo.getClassicId();
                 if (StringUtils.isNotBlank(classicId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("fabricClassicItems");
-                    classicId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, classicId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+                    classicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, classicId);
                     stringBuilder.append(classicId);
                 }
 
@@ -329,8 +329,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //品名列表
                 String productTypeId = fabricsInfo.getProductTypeId();
                 if (StringUtils.isNotBlank(productTypeId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("productTypeItems");
-                    String productTypeName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, productTypeId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+                    String productTypeName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, productTypeId);
 //                    stringBuilder.append(CharConstant.COMMA).append(productTypeName);
                     fabricsInfo.setProductTypeId(productTypeName);
                 }
@@ -339,8 +339,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //纱支密度列表
                 String specificationId = fabricsInfo.getSpecificationId();
                 if (StringUtils.isNotBlank(specificationId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("specficationItems");
-                    specificationId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, specificationId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
+                    specificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, specificationId);
                     if (stringBuilder.length() == 0) {
                         stringBuilder.append(specificationId);
                     } else {
@@ -355,8 +355,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //染色方式列表
                 String dyeId = fabricsInfo.getDyeId();
                 if (StringUtils.isNotBlank(dyeId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("dyeItems");
-                    dyeId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, dyeId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
+                    dyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, dyeId);
                     stringBuilder.append(CharConstant.COMMA).append(dyeId);
                 }
 
@@ -365,8 +365,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //后整理列表
                 String finishId = fabricsInfo.getFinishId();
                 if (StringUtils.isNotBlank(finishId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("finishItems");
-                    finishId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, finishId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
+                    finishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, finishId);
                     stringBuilder.append(CharConstant.COMMA).append(finishId);
                 }
 //              fabricsInfo.setFinishId(finishId);
@@ -374,11 +374,11 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //复合或涂层列表
                 String blcId = fabricsInfo.getBlcId();
                 if (StringUtils.isNotBlank(blcId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("blcItems");
-                    blcId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, blcId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("blcItems");
+                    blcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, blcId);
                     stringBuilder.append(CharConstant.COMMA).append(blcId);
                 }
-//                fabricsInfo.setBlcId(SystemBaseInfo.SINGLETONE.getName(selectItem2s, blcId));
+//                fabricsInfo.setBlcId(SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, blcId));
 
 
                 if (blcId.equals("A1")) {
@@ -386,8 +386,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                     //材质列表
                     String compositeClassicId = fabricsInfo.getCompositeClassicId();
                     if (StringUtils.isNotBlank(compositeClassicId)) {
-                        selectItem2s = SystemBaseInfo.SINGLETONE.popBom("fabricClassicItems");
-                        compositeClassicId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, compositeClassicId);
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+                        compositeClassicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeClassicId);
                         stringBuilder.append(CharConstant.COMMA).append(compositeClassicId);
                     }
 
@@ -396,8 +396,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                     //品名列表
                     String compositeProductTypeId = fabricsInfo.getCompositeProductTypeId();
                     if (StringUtils.isNotBlank(compositeProductTypeId)) {
-                        selectItem2s = SystemBaseInfo.SINGLETONE.popBom("productTypeItems");
-                        compositeProductTypeId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, compositeProductTypeId);
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+                        compositeProductTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeProductTypeId);
                         stringBuilder.append(CharConstant.COMMA).append(compositeProductTypeId);
                     }
 
@@ -406,8 +406,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                     //纱支密度列表
                     String compositeSpecificationId = fabricsInfo.getCompositeSpecificationId();
                     if (StringUtils.isNotBlank(compositeSpecificationId)) {
-                        selectItem2s = SystemBaseInfo.SINGLETONE.popBom("specficationItems");
-                        compositeSpecificationId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, compositeSpecificationId);
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
+                        compositeSpecificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeSpecificationId);
                         stringBuilder.append(CharConstant.COMMA).append(compositeSpecificationId);
                     }
 
@@ -417,8 +417,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                     //染色方式列表
                     String compositeDyeId = fabricsInfo.getCompositeDyeId();
                     if (StringUtils.isNotBlank(compositeDyeId)) {
-                        selectItem2s = SystemBaseInfo.SINGLETONE.popBom("dyeItems");
-                        compositeDyeId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, compositeDyeId);
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
+                        compositeDyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeDyeId);
                         stringBuilder.append(CharConstant.COMMA).append(compositeDyeId);
                     }
 
@@ -427,8 +427,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                     //后整理列表
                     String compositeFinishId = fabricsInfo.getCompositeFinishId();
                     if (StringUtils.isNotBlank(compositeFinishId)) {
-                        selectItem2s = SystemBaseInfo.SINGLETONE.popBom("finishItems");
-                        compositeFinishId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, compositeFinishId);
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
+                        compositeFinishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeFinishId);
                         stringBuilder.append(CharConstant.COMMA).append(compositeFinishId);
                     }
 
@@ -438,8 +438,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //膜或涂层的材质列表
                 String momcId = fabricsInfo.getMomcId();
                 if (StringUtils.isNotBlank(momcId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("momcItems");
-                    momcId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, momcId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("momcItems");
+                    momcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, momcId);
                     stringBuilder.append(CharConstant.COMMA).append(momcId);
                 }
 
@@ -449,8 +449,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //膜或涂层的颜色列表
                 String comocId = fabricsInfo.getComocId();
                 if (StringUtils.isNotBlank(comocId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("comocItems");
-                    comocId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, comocId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("comocItems");
+                    comocId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, comocId);
                     stringBuilder.append(CharConstant.COMMA).append(comocId);
                 }
 
@@ -459,8 +459,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //透湿程度列表
                 String wvpId = fabricsInfo.getWvpId();
                 if (StringUtils.isNotBlank(wvpId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("wvpItems");
-                    wvpId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, wvpId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wvpItems");
+                    wvpId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, wvpId);
                     stringBuilder.append(CharConstant.COMMA).append(wvpId);
                 }
 
@@ -469,8 +469,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //膜的厚度列表
                 String mtId = fabricsInfo.getMtId();
                 if (StringUtils.isNotBlank(mtId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("mtItems");
-                    mtId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, mtId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("mtItems");
+                    mtId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, mtId);
                     stringBuilder.append(CharConstant.COMMA).append(mtId);
                 }
 
@@ -479,8 +479,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 // 贴膜或涂层工艺列表
                 String woblcId = fabricsInfo.getWoblcId();
                 if (StringUtils.isNotBlank(woblcId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("wblcItems");
-                    woblcId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, woblcId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wblcItems");
+                    woblcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, woblcId);
                     stringBuilder.append(CharConstant.COMMA).append(woblcId);
                 }
 
@@ -490,8 +490,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 // 用量单位列表
                 String unitId = fabricsInfo.getUnitId();
                 if (StringUtils.isNotBlank(unitId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("unitItems");
-                    unitId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, unitId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("unitItems");
+                    unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
                     fabricsInfo.setUnitId(unitId);
                 }
 
@@ -527,8 +527,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 accessoriesInfo.setPantoneId(patoneIds);
                 accessoriesInfo.setPositionId(positionIds);
                 if (StringUtils.isNotBlank(spId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("spItems");
-                    spId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, spId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+                    spId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
                     accessoriesInfo.setSpId(spId);
                 }
 
@@ -536,8 +536,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //材质列表
                 String classicId = accessoriesInfo.getClassicId();
                 if (StringUtils.isNotBlank(classicId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("fabricClassicItems");
-                    classicId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, classicId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+                    classicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, classicId);
                     stringBuilder.append(classicId);
 //                fabricsInfo.setClassicId(classicId);
                 }
@@ -546,8 +546,8 @@ public class BomManageHelper extends ExcelCreateHelper {
 //                //品名列表
                 String productTypeId = accessoriesInfo.getProductTypeId();
                 if (StringUtils.isNotBlank(productTypeId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("productTypeItems");
-                    productTypeId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, productTypeId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+                    productTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, productTypeId);
 //                    stringBuilder.append(CharConstant.COMMA).append(productTypeId);
                     accessoriesInfo.setProductTypeId(productTypeId);
                 }
@@ -576,8 +576,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 // 用量单位列表
                 String unitId = accessoriesInfo.getUnitId();
                 if (StringUtils.isNotBlank(unitId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("unitItems");
-                    unitId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, unitId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("unitItems");
+                    unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
                     accessoriesInfo.setUnitId(unitId);
                 }
 
@@ -613,8 +613,8 @@ public class BomManageHelper extends ExcelCreateHelper {
 
                 String spId = packaging.getSpId();
                 if (StringUtils.isNotBlank(spId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("spItems");
-                    spId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, spId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+                    spId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
                     packaging.setSpId(spId);
                 }
 
@@ -622,8 +622,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 //材质列表
                 String classicId = packaging.getClassicId();
                 if (StringUtils.isNotBlank(classicId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("fabricClassicItems");
-                    classicId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, classicId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+                    classicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, classicId);
                     stringBuilder.append(classicId);
 //                fabricsInfo.setClassicId(classicId);
                 }
@@ -632,8 +632,8 @@ public class BomManageHelper extends ExcelCreateHelper {
 //                //品名列表
                 String productTypeId = packaging.getProductTypeId();
                 if (StringUtils.isNotBlank(productTypeId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("productTypeItems");
-                    productTypeId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, productTypeId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+                    productTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, productTypeId);
                     packaging.setProductTypeId(productTypeId);
 //                    stringBuilder.append(productTypeId);
                 }
@@ -660,8 +660,8 @@ public class BomManageHelper extends ExcelCreateHelper {
                 // 用量单位列表
                 String unitId = packaging.getUnitId();
                 if (StringUtils.isNotBlank(unitId)) {
-                    selectItem2s = SystemBaseInfo.SINGLETONE.popBom("unitItems");
-                    unitId = SystemBaseInfo.SINGLETONE.getName(selectItem2s, unitId);
+                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("unitItems");
+                    unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
                     packaging.setUnitId(unitId);
                 }
 

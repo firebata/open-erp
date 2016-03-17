@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.sp.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.bean.info.SpInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.utils.SelectInfoHelper;
@@ -22,7 +22,7 @@ public enum SpInfoHelper {
     public void refreshSelect() {
         SpManageServiceImpl spManageService = SpringContextHolder.getBean("spManageService");
         List<SelectItem2> spItems = spManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("spItems", spItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("spItems", spItems);
     }
 
     /**

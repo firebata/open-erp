@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.constant.CharConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.inerfaces.bean.basic.InitialPreviewConfig;
@@ -85,7 +85,7 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
                     StringBuilder realPath = new StringBuilder(request.getSession().getServletContext().getRealPath("/"));
                     String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf('.') + 1);
                     String pathType = FileUtils.SINGLETONE.getPathType(suffix);
-                    String pathInPathType = DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, pathType);
+                    String pathInPathType = DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, pathType);
 
                     //新文件名
                     String newFileNameId = PrimaryKeyUtils.getUUID();

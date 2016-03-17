@@ -2,7 +2,7 @@ package com.skysport.core.action;
 
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.inerfaces.constant.WebConstants;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,7 +80,7 @@ public class BaseAction<K, V, T> extends BaseController<T> {
         String tableColumnName = pageColumnName;
 
         if (isNeedTransformColumn == WebConstants.NEED_TRANSFORM_COLUMN_NEME) {
-            tableColumnName = DictionaryInfo.SINGLETONE.getDictionaryValue(type, pageColumnName);
+            tableColumnName = DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(type, pageColumnName);
         }
 
         String orderDir = request.getParameter("order[0][dir]");

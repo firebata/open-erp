@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.MaterialOfMembraneCoatingInfo;
@@ -66,7 +66,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<String, Object, 
     @SystemControllerLog(description = "查询膜或涂层的材质列表信息")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.MOMC_TABLE_COLUMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.MOMC_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = materialOfMembraneCoatingService.listInfosCounts();
         int recordsFiltered = recordsTotal;

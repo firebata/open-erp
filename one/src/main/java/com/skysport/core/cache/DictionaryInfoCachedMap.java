@@ -1,18 +1,20 @@
-package com.skysport.core.instance;
+package com.skysport.core.cache;
 
+import com.skysport.core.bean.system.DictionaryVo;
 import com.skysport.core.constant.CommonConstant;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 系统初始化类
+ * 数据字典缓存
  *
  * @author: zhangjh
  * @version:2015年5月6日 下午3:45:15
  */
-public enum DictionaryInfo {
+public enum DictionaryInfoCachedMap {
 
     /**
      * 数据字典单例类
@@ -45,7 +47,7 @@ public enum DictionaryInfo {
      *
      * @param dictionary 数据字段对象
      */
-    public void initDictionaryMap(com.skysport.core.bean.system.DictionaryInfo dictionary) {
+    public void initDictionaryMap(DictionaryVo dictionary) {
         if (dictionary != null) {
             String type = dictionary.getType();
             String keyName = dictionary.getKeyName();
@@ -82,5 +84,33 @@ public enum DictionaryInfo {
         }
         return value;
     }
+
+    /**
+     * @param type
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public String getDictionaryValue(String type, String key, String defaultValue) {
+        String configValue = getDictionaryValue(type, key);
+        if (StringUtils.isBlank(configValue)) {
+            configValue = String.valueOf(defaultValue);
+        }
+        return configValue;
+    }
+//    /**
+//     * @param <T>
+//     * @param type
+//     * @param key
+//     * @param defaultValue
+//     * @return
+//     */
+//    public <T> T getDictionaryValue(String type, String key, T defaultValue) {
+//        String configValue = getDictionaryValue(type, key);
+//        if (StringUtils.isBlank(configValue)) {
+//            configValue = String.valueOf(defaultValue);
+//        }
+//        return (T) configValue;
+//    }
 
 }

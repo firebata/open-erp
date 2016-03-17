@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.mapper.system;
 
-import com.skysport.inerfaces.bean.system.dept.DepartmentInfo;
 import com.skysport.core.mapper.CommonDao;
+import com.skysport.inerfaces.bean.system.DepartmentInfo;
 import org.springframework.stereotype.Component;
 
 /**

@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.service.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.service.impl.PantoneManageServiceImpl;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public enum PantoneManageServiceHelper {
     public void refreshSelect() {
         PantoneManageServiceImpl pantoneManageService = SpringContextHolder.getBean("pantoneManageService");
         List<SelectItem2> patonesItems = pantoneManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushProject("patonesItems", patonesItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushProject("patonesItems", patonesItems);
     }
 
 }

@@ -4,7 +4,7 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
@@ -79,9 +79,9 @@ public class ProjectManageHelper {
         List<SelectItem2> items;
         String id;
         String name;
-        items = SystemBaseInfo.SINGLETONE.popBom("customerItems");
+        items = SystemBaseInfoCachedMap.SINGLETONE.popBom("customerItems");
         id = t.getCustomerId();
-        name = SystemBaseInfo.SINGLETONE.getName(items, id);
+        name = SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
         return name;
     }
 
@@ -95,9 +95,9 @@ public class ProjectManageHelper {
         List<SelectItem2> items;
         String id;
         String name;
-        items = SystemBaseInfo.SINGLETONE.popBom("seriesItems");
+        items = SystemBaseInfoCachedMap.SINGLETONE.popBom("seriesItems");
         id = t.getSeriesId();
-        name = SystemBaseInfo.SINGLETONE.getName(items, id);
+        name = SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
         return name;
     }
 
@@ -108,9 +108,9 @@ public class ProjectManageHelper {
      * @return
      */
     private static String getCategoryName(ProjectCategoryInfo categoryInfo) {
-        List<SelectItem2> items = SystemBaseInfo.SINGLETONE.popProject("categoryBItems");
+        List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popProject("categoryBItems");
         String id = categoryInfo.getCategoryBid();
-        return SystemBaseInfo.SINGLETONE.getName(items, id);
+        return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
     }
 
     /**
@@ -120,9 +120,9 @@ public class ProjectManageHelper {
      * @return
      */
     private static String getYearName(ProjectBomInfo t) {
-        List<SelectItem2> items = SystemBaseInfo.SINGLETONE.popBom("yearItems");
+        List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popBom("yearItems");
         String id = t.getYearCode();
-        return SystemBaseInfo.SINGLETONE.getName(items, id);
+        return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
     }
 
     /**
@@ -132,9 +132,9 @@ public class ProjectManageHelper {
      * @return
      */
     private static String getAreaName(ProjectBomInfo t) {
-        List<SelectItem2> items = SystemBaseInfo.SINGLETONE.popBom("areaItems");
+        List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popBom("areaItems");
         String id = t.getAreaId();
-        return SystemBaseInfo.SINGLETONE.getName(items, id);
+        return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
     }
 
 

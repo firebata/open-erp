@@ -1,6 +1,6 @@
 package com.skysport.core.model.resp;
 
-import com.skysport.core.bean.BaseResp;
+import com.skysport.core.bean.BaseRespVo;
 import com.skysport.core.constant.CommonConstant;
 
 /**
@@ -9,20 +9,20 @@ import com.skysport.core.constant.CommonConstant;
  */
 public enum BaseRespHelper {
     SINGLETONE;
-    BaseResp successResp = new BaseResp();
+    BaseRespVo successResp = new BaseRespVo();
 
     {
         successResp.setReturn_code(CommonConstant.RETURN_SUCCESS);
         successResp.setResult_code(CommonConstant.RESULT_SUCCESS);
     }
 
-    public BaseResp dealSucess() {
+    public BaseRespVo dealSucess() {
         return successResp;
     }
 
 
-    public BaseResp dealFail(String return_code, String return_msg, String result_code, String err_code, String err_code_des) {
-        BaseResp resp = new BaseResp();
+    public BaseRespVo dealFail(String return_code, String return_msg, String result_code, String err_code, String err_code_des) {
+        BaseRespVo resp = new BaseRespVo();
 
         resp.setReturn_code(return_code);
         resp.setReturn_msg(return_msg);

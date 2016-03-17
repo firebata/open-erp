@@ -1,4 +1,4 @@
-package com.skysport.inerfaces.bean.system.dept;
+package com.skysport.inerfaces.bean.system;
 
 import com.skysport.core.bean.system.SelectItem;
 

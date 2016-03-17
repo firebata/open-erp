@@ -1,6 +1,6 @@
 package com.skysport.core.mapper;
 
-import com.skysport.core.bean.system.DictionaryInfo;
+import com.skysport.core.bean.system.DictionaryVo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,5 +11,5 @@ import java.util.List;
  */
 @Component("dictionaryMapper")
 public interface DictionaryMapper {
-    List<DictionaryInfo> searchDictionary();
+    List<DictionaryVo> searchDictionary();
 }

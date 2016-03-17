@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.model.permission.userinfo.helper;
 
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.constant.DictionaryKeyConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 
 import java.util.List;
 import java.util.Map;
@@ -22,10 +22,10 @@ public enum UserInfoHelper {
      */
     public void turnSomeIdToNameInList(List<UserInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
-            Map<String, String> userTypeMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.USER_TYPE);
-            Map<String, String> lockflagMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.LOCK_FLAG);
-            Map<String, String> isonlinePMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.IS_ONLINE);
-            Map<String, String> islimitMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.IS_LIMIT);
+            Map<String, String> userTypeMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.USER_TYPE);
+            Map<String, String> lockflagMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.LOCK_FLAG);
+            Map<String, String> isonlinePMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.IS_ONLINE);
+            Map<String, String> islimitMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.IS_LIMIT);
 
             for (UserInfo userInfo : infos) {
 

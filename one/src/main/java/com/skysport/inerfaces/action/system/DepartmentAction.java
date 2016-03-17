@@ -1,11 +1,12 @@
 package com.skysport.inerfaces.action.system;
+
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.utils.PrimaryKeyUtils;
-import com.skysport.inerfaces.bean.system.dept.DepartmentInfo;
+import com.skysport.inerfaces.bean.system.DepartmentInfo;
 import com.skysport.inerfaces.model.system.dept.service.IDepartmentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -57,7 +59,7 @@ public class DepartmentAction extends BaseAction<String, Object, DepartmentInfo>
     @ResponseBody
     @SystemControllerLog(description = "查询部门信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.DEPT_TABLE_COLUMN_NAME, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.DEPT_TABLE_COLUMN_NAME, request);
 //        DataTablesInfo dataTablesInfo = buildQueryDataTableInfo(request);
         // 总记录数
         int recordsTotal = departmentService.listInfosCounts();

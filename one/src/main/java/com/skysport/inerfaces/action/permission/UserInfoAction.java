@@ -5,8 +5,8 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.core.utils.SecurityUtil;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
@@ -69,7 +69,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
 
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.USERINFO_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLULMN, request);
         // 总记录数
         int recordsTotal = userInfoService.listInfosCounts();
         int recordsFiltered = recordsTotal;
@@ -189,7 +189,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @ResponseBody
     public Map<String, String> queryUserType(HttpServletRequest request) {
 
-        Map<String, String> resultMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.USER_TYPE);
+        Map<String, String> resultMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.USER_TYPE);
         return resultMap;
 
 

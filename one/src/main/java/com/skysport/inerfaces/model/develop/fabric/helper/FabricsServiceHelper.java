@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.fabric.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.develop.fabric.impl.FabricsServiceImpl;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public enum FabricsServiceHelper {
     public void refreshSelect() {
         FabricsServiceImpl fabricsManageService = SpringContextHolder.getBean("fabricsManageService");
         List<SelectItem2> fabricsItems = fabricsManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("fabricsItems", fabricsItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("fabricsItems", fabricsItems);
     }
 
 

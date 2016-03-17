@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.category;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.category.impl.CategoryManageServiceImpl;
 
@@ -19,7 +19,7 @@ public enum CategoryManageServiceHelper {
         CategoryManageServiceImpl categoryManageService = SpringContextHolder.getBean("categoryManageService");
         List<SelectItem2> categoryAItems = categoryManageService.querySelectListByLevelId(WebConstants.CATEGORY_A_LEVEL);
         List<SelectItem2> categoryBItems = categoryManageService.querySelectListByLevelId(WebConstants.CATEGORY_B_LEVEL);
-        SystemBaseInfo.SINGLETONE.pushProject("categoryAItems", categoryAItems);
-        SystemBaseInfo.SINGLETONE.pushProject("categoryBItems", categoryBItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushProject("categoryAItems", categoryAItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushProject("categoryBItems", categoryBItems);
     }
 }

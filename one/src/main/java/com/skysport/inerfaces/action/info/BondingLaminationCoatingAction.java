@@ -4,11 +4,10 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.BondingLaminationCoatingInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.BondingLaminationCoatingServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -66,7 +65,7 @@ public class BondingLaminationCoatingAction extends BaseAction<String, Object, B
     @SystemControllerLog(description = "查询复合或涂层信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.BLC_TABLE_COLUMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.BLC_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = bondingLaminationCoatingService.listInfosCounts();
         int recordsFiltered = recordsTotal;

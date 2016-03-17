@@ -3,7 +3,7 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
@@ -93,7 +93,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
 
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
-        queryForm.setDataTablesInfo(convertToDataTableQrInfo(DictionaryKeyConstant.PROJECT_TABLE_COLULMN, request));
+        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
         ProjectBomInfo bomInfo = new ProjectBomInfo();
         bomInfo.setYearCode(request.getParameter("yearCode"));
         bomInfo.setCustomerId(request.getParameter("customerId"));

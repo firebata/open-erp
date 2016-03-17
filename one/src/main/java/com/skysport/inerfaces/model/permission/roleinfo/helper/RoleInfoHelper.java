@@ -3,8 +3,8 @@ package com.skysport.inerfaces.model.permission.roleinfo.helper;
 import com.skysport.core.bean.permission.RoleInfo;
 import com.skysport.core.bean.permission.RoleUser;
 import com.skysport.core.bean.permission.ZTreeNode;
-import com.skysport.core.constant.DictionaryKeyConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public enum RoleInfoHelper {
      * @param roleInfos
      */
     public void turnSomeIdToNameInList(List<RoleInfo> roleInfos) {
-        Map<String, String> resultMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.DEPT_TYPE);
+        Map<String, String> resultMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.DEPT_TYPE);
 
         if (null != roleInfos && !roleInfos.isEmpty()) {
             for (RoleInfo roleInfo : roleInfos) {

@@ -4,7 +4,7 @@ package com.skysport.core.bean;
  * 类说明:基础返回信息
  * Created by zhangjh on 2015/7/13.
  */
-public class BaseResp {
+public class BaseRespVo {
 
     /**
      * SUCCESS/FAIL

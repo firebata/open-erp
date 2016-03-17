@@ -6,7 +6,7 @@ package com.skysport.core.constant;
  * @author: zhangjh
  * @version:2015年5月6日 下午5:24:55
  */
-public interface CommonConstant extends CharConstant, NumberConstant, DictionaryKeyConstant {
+public interface CommonConstant extends CharConstant, NumberConstant{
     /**
      *
      */

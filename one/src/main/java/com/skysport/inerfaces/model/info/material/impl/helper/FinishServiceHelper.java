@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.material.impl.FinishServiceImpl;
 
 import java.util.List;
@@ -17,6 +17,6 @@ public enum FinishServiceHelper {
     public void refreshSelect() {
         FinishServiceImpl finishService = SpringContextHolder.getBean("finishService");
         List<SelectItem2> finishItems = finishService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("finishItems", finishItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("finishItems", finishItems);
     }
 }

@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.series;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.series.impl.SeriesManageServiceImpl;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public enum SeriesManageServiceHelper {
     public void refreshSelect() {
         SeriesManageServiceImpl seriesManageService = SpringContextHolder.getBean("seriesManageService");
         List<SelectItem2> seriesItems = seriesManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("seriesItems", seriesItems);
-        SystemBaseInfo.SINGLETONE.pushProject("seriesItems", seriesItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("seriesItems", seriesItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushProject("seriesItems", seriesItems);
     }
 }

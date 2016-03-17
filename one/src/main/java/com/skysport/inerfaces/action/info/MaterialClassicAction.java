@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.MaterialClassicInfo;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -68,7 +68,7 @@ public class MaterialClassicAction extends BaseAction<String, Object, MaterialCl
     @SystemControllerLog(description = "查询材质类别信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.MATERIAL_CLASSIC_TABLE_COLUMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.MATERIAL_CLASSIC_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = materialClassicManageService.listInfosCounts();
         int recordsFiltered = recordsTotal;

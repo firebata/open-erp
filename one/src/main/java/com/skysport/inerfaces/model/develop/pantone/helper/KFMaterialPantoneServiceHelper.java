@@ -33,7 +33,7 @@ public enum KFMaterialPantoneServiceHelper {
      */
     public String turnIdsToNames(List<KFMaterialPantone> kfMaterialPantones) {
         StringBuilder patones = new StringBuilder();
-//        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popBom("patonesItems");
+//        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("patonesItems");
 //        if (null == selectItem2s || selectItem2s.isEmpty()) {
 //            return patones.toString();
 //        }
@@ -41,7 +41,7 @@ public enum KFMaterialPantoneServiceHelper {
             KFMaterialPantone pantone = kfMaterialPantones.get(idx);
 //            String pantoneId = pantone.getPantoneId();
             String pantoneName = pantone.getPantoneName();
-//            String pantoneName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, pantoneId);
+//            String pantoneName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, pantoneId);
             if (idx == 0) {
                 patones.append(pantoneName);
             } else {

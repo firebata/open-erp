@@ -1,6 +1,6 @@
 package com.skysport.core.action;
 
-import com.skysport.core.bean.BaseResp;
+import com.skysport.core.bean.BaseRespVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +18,7 @@ public class BaseController<T> {
 
     public static ThreadLocal<HttpServletRequest> requestThreadLocal = new ThreadLocal<HttpServletRequest>();
 
-    protected <T> Map<String, Object> buildCallBackMap(BaseResp resp, T t) {
+    protected <T> Map<String, Object> buildCallBackMap(BaseRespVo resp, T t) {
         Map<String, Object> rtnMap = new HashMap<>();
         rtnMap.put("resp", resp);
         rtnMap.put("data", t);

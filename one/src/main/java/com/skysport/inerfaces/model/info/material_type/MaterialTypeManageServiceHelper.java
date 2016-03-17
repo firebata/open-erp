@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material_type;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material_type.impl.MaterialTypeManageServiceImpl;
 
@@ -19,6 +19,6 @@ public enum MaterialTypeManageServiceHelper {
         //材料类别
         MaterialTypeManageServiceImpl materialTypeManageService = SpringContextHolder.getBean("materialTypeManageService");
         List<SelectItem2> materialTypeItems = materialTypeManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom(WebConstants.MATERIALTYPEITEMS, materialTypeItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.MATERIALTYPEITEMS, materialTypeItems);
     }
 }

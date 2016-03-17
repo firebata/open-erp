@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.material.impl.ColorOfMembraneCoatingServiceImpl;
 
 import java.util.List;
@@ -17,6 +17,6 @@ public enum ColorOfMembraneCoatingServiceHelper {
     public void refreshSelect() {
         ColorOfMembraneCoatingServiceImpl colorOfMembraneCoatingService = SpringContextHolder.getBean("colorOfMembraneCoatingService");
         List<SelectItem2> comocItems = colorOfMembraneCoatingService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("comocItems", comocItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("comocItems", comocItems);
     }
 }

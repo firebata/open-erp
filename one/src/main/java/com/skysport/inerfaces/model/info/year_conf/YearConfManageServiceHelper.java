@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.year_conf;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.year_conf.impl.YearConfManageServiceImpl;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public enum YearConfManageServiceHelper {
     public void refreshSelect() {
         YearConfManageServiceImpl yearConfManageService = SpringContextHolder.getBean("yearConfManageService");
         List<SelectItem2> yearItems = yearConfManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("yearItems", yearItems);
-        SystemBaseInfo.SINGLETONE.pushProject("yearItems", yearItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("yearItems", yearItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushProject("yearItems", yearItems);
     }
 }

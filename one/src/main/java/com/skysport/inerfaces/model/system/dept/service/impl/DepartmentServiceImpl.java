@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.model.system.dept.service.impl;
 
-import com.skysport.inerfaces.bean.system.dept.DepartmentInfo;
-import com.skysport.inerfaces.mapper.system.DepartmentManageMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.inerfaces.bean.system.DepartmentInfo;
+import com.skysport.inerfaces.mapper.system.DepartmentManageMapper;
 import com.skysport.inerfaces.model.system.dept.service.IDepartmentService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.action.system;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.utils.SelectInfoHelper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class SelectQueryInfoAction {
     @RequestMapping(value = "/bom_select")
     @ResponseBody
     public Map<String, List<SelectItem2>> bomSelectItem2() {
-        Map<String, List<SelectItem2>> systemBaseMaps = SystemBaseInfo.SINGLETONE.rtnBomInfoMap();
+        Map<String, List<SelectItem2>> systemBaseMaps = SystemBaseInfoCachedMap.SINGLETONE.rtnBomInfoMap();
         return systemBaseMaps;
     }
 
@@ -43,7 +43,7 @@ public class SelectQueryInfoAction {
     @RequestMapping(value = "/project_select")
     @ResponseBody
     public Map<String, List<SelectItem2>> projectSelectItem2() {
-        Map<String, List<SelectItem2>> systemBaseMaps = SystemBaseInfo.SINGLETONE.rtnProjectInfoMap();
+        Map<String, List<SelectItem2>> systemBaseMaps = SystemBaseInfoCachedMap.SINGLETONE.rtnProjectInfoMap();
         return systemBaseMaps;
     }
 

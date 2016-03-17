@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.utils;
 
-import com.skysport.core.constant.DictionaryKeyConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.model.seqno.helper.IncrementNumberHelper;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 
@@ -33,14 +33,14 @@ public enum BuildSeqNoHelper {
         int nextVal = incrementNumber.nextVal(kind_name);
         int length = defaultLength;
         if (defaultLength == 0) {
-            length = Integer.parseInt(DictionaryInfo.SINGLETONE.getDictionaryValue(DictionaryKeyConstant.SEQ_NO_LENGTH, kind_name));
+            length = Integer.parseInt(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.SEQ_NO_LENGTH, kind_name));
         }
         String fullSeqNo = IncrementNumberHelper.SINGLETONE.formatSeqNo(length, nextVal);
         return fullSeqNo;
     }
 
     public String getNextSeqNo(String kind_name, String currentSeqNo, IncrementNumber incrementNumber) {
-        int length = Integer.parseInt(DictionaryInfo.SINGLETONE.getDictionaryValue(DictionaryKeyConstant.SEQ_NO_LENGTH, kind_name));
+        int length = Integer.parseInt(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.SEQ_NO_LENGTH, kind_name));
         String nextVal = incrementNumber.nextVal(kind_name, length, currentSeqNo);
         return nextVal;
     }

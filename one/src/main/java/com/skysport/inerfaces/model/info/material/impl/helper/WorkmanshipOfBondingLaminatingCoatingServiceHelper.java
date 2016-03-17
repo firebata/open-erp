@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.material.impl.WorkmanshipOfBondingLaminatingCoatingServiceImpl;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public enum WorkmanshipOfBondingLaminatingCoatingServiceHelper {
     public void refreshSelect() {
         WorkmanshipOfBondingLaminatingCoatingServiceImpl workmanshipOfBondingLaminatingCoatingService = SpringContextHolder.getBean("workmanshipOfBondingLaminatingCoatingService");
         List<SelectItem2> wblcItems = workmanshipOfBondingLaminatingCoatingService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("wblcItems", wblcItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("wblcItems", wblcItems);
     }
 
 }

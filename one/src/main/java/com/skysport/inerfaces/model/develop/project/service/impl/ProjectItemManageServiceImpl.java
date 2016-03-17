@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
 import com.skysport.core.constant.CharConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.DateUtils;
@@ -275,8 +275,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
 
             String year = DateUtils.SINGLETONE.getYyyy();
-            String ctxPath = new StringBuilder().append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
-                    .append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+            String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
+                    .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
 
 
             bomDetailExcelName.append(StringUtils.join(seriesNameSet.toArray(), ""));

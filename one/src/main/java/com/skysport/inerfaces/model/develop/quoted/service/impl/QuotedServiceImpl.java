@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.develop.quoted.service.impl;
 
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
-import com.skysport.core.instance.DictionaryInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -57,7 +57,23 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      */
     @Override
     public void updateOrAdd(QuotedInfo quotedInfo) {
+
         DecimalFormat df = new DecimalFormat("0.0000");
+
+        //计算报价:欧元价+包装费+C% .Remark:150527 2015年度新开发项目 - 价格分析.xlsx
+        //%C= (欧元价+包装费) * 0.05 （0.05是佣金）
+        //所以报价=(欧元价+包装费) * 1.05
+        if (quotedInfo.getLpPrice() == null) {
+            quotedInfo.setLpPrice(new BigDecimal(0));
+        }
+
+        Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
+        BigDecimal commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(commissionValue));
+        BigDecimal quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
+
+        quotedInfo.setCommission(new BigDecimal(df.format(commission)));
+        quotedInfo.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
+
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfo1 = queryInfoByNatrualKey(quotedInfo.getBomId());
         if (null == quotedInfo1) {
@@ -69,19 +85,8 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
                 quotedInfoMapper.add(quotedInfo);
             }
         } else {
-            //计算报价:欧元价+包装费+C%
-            //%C= (欧元价+包装费)*0.05
-            //所以报价=(欧元价+包装费)*1.05
-            if (quotedInfo.getLpPrice() == null) {
-                quotedInfo.setLpPrice(new BigDecimal(0));
-            }
-
-            BigDecimal commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(0.05));
-            BigDecimal quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
-
-            quotedInfo.setCommission(new BigDecimal(df.format(commission)));
-            quotedInfo.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
-
+            quotedInfo.setProjectId(quotedInfo1.getProjectId());
+            quotedInfo.setProjectItemId(quotedInfo1.getProjectItemId());
             quotedInfoMapper.updateInfo(quotedInfo);
 
 
@@ -157,8 +162,8 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         }
 
 
-        String ctxPath = new StringBuilder().append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
-                .append(DictionaryInfo.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+        String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
+                .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
 
         bomQuoteName.append(StringUtils.join(seriesNameSet.toArray(), ""));
         bomQuoteName.append(StringUtils.join(bomNameSet.toArray(), ""));

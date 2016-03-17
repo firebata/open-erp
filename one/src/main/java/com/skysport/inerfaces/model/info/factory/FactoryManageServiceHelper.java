@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.factory;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 
 import java.util.List;
 
@@ -16,6 +16,6 @@ public enum FactoryManageServiceHelper {
     public void refreshSelect() {
         FactoryManageServiceImpl factoryManageService = SpringContextHolder.getBean("factoryManageService");
         List<SelectItem2> factoryItems = factoryManageService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("factoryItems", factoryItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("factoryItems", factoryItems);
     }
 }

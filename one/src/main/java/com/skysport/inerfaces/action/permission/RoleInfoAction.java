@@ -5,8 +5,8 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.RoleInfo;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.inerfaces.model.permission.roleinfo.helper.RoleInfoHelper;
 import com.skysport.inerfaces.model.permission.roleinfo.service.IRoleInfoService;
@@ -68,7 +68,7 @@ public class RoleInfoAction extends BaseAction<String, Object, RoleInfo> {
     @SystemControllerLog(description = "查询角色列表信息")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.USERINFO_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLULMN, request);
         // 总记录数
         int recordsTotal = roleInfoService.listInfosCounts();
         int recordsFiltered = recordsTotal;
@@ -157,7 +157,7 @@ public class RoleInfoAction extends BaseAction<String, Object, RoleInfo> {
     @RequestMapping(value = "/deptinfo", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, String> deptinfo(HttpServletRequest request) {
-        Map<String, String> resultMap = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.DEPT_TYPE);
+        Map<String, String> resultMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.DEPT_TYPE);
         return resultMap;
 
     }
@@ -175,7 +175,7 @@ public class RoleInfoAction extends BaseAction<String, Object, RoleInfo> {
     @ResponseBody
     @SystemControllerLog(description = "")
     public Map<String, Object> queryAllSelectItems() {
-//        Map<String, String> deptTypeItems = DictionaryInfo.SINGLETONE.getValueMapByTypeKey(DictionaryKeyConstant.DEPT_TYPE);
+//        Map<String, String> deptTypeItems = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.DEPT_TYPE);
         List<SelectItem2> commonBeans = departmentService.querySelectList(null);
         DataTablesInfo dataTablesInfo = new DataTablesInfo();
         List<RoleInfo> roleInfosItems = roleInfoService.searchInfos(dataTablesInfo);

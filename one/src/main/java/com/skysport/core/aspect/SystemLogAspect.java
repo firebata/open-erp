@@ -1,6 +1,6 @@
 package com.skysport.core.aspect;
 
-import com.skysport.core.bean.Log;
+import com.skysport.core.bean.LogInfo;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.init.SpringContextHolder;
 import com.skysport.core.model.log.LogService;
@@ -84,7 +84,7 @@ public class SystemLogAspect {
             logger.info("请求人:" + username);
             logger.info("请求IP:" + ip);
             //*========数据库日志=========*//
-            Log log = SpringContextHolder.getBean("ilog");
+            LogInfo log = SpringContextHolder.getBean("ilog");
             log.setNatrualkey(PrimaryKeyUtils.getUUID());
             log.setDescription(description);
             log.setMethod(method);
@@ -140,7 +140,7 @@ public class SystemLogAspect {
             logger.info("请求IP:" + ip);
             logger.info("请求参数:" + params);
                /*==========数据库日志=========*/
-            Log log = SpringContextHolder.getBean("ilog");
+            LogInfo log = SpringContextHolder.getBean("ilog");
             log.setNatrualkey(PrimaryKeyUtils.getUUID());
             log.setDescription(description);
             log.setExceptionCode(e.getClass().getName());

@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.utils;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 
 import java.util.List;
 import java.util.Map;
@@ -21,11 +21,11 @@ public class SelectInfoHelper {
     public static List<SelectItem2> findSelectItemsByItemsName(String itemsName) {
 
         List<SelectItem2> selectItems;
-        Map<String, List<SelectItem2>> bomBaseMaps = SystemBaseInfo.SINGLETONE.rtnBomInfoMap();
+        Map<String, List<SelectItem2>> bomBaseMaps = SystemBaseInfoCachedMap.SINGLETONE.rtnBomInfoMap();
         selectItems = bomBaseMaps.get(itemsName);
 
         if (null == selectItems) {
-            bomBaseMaps = SystemBaseInfo.SINGLETONE.rtnProjectInfoMap();
+            bomBaseMaps = SystemBaseInfoCachedMap.SINGLETONE.rtnProjectInfoMap();
             selectItems = bomBaseMaps.get(itemsName);
         }
         return selectItems;

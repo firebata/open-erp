@@ -1,8 +1,7 @@
 package com.skysport.core.model.init.helper;
 
-import com.skysport.core.instance.DictionaryInfo;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.inerfaces.model.init.SystemBaseInfoHelper;
-import org.springframework.context.ApplicationContext;
 
 /**
  * 系统启动，加载初始化信息
@@ -25,7 +24,7 @@ public enum SystemInitHelper {
     }
 
     public String getVersion() {
-        return DictionaryInfo.SINGLETONE.getDictionaryValue("version", "version");
+        return DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue("version", "version");
     }
 
 }

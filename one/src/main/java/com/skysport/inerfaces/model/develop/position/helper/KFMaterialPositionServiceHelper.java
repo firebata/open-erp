@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.position.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.constant.CharConstant;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
 
 import java.util.HashSet;
@@ -34,7 +34,7 @@ public enum KFMaterialPositionServiceHelper {
     public String turnIdsToNames(List<KFMaterialPosition> kfMaterialPositions) {
 
         StringBuilder positions = new StringBuilder();
-        List<SelectItem2> selectItem2s = SystemBaseInfo.SINGLETONE.popBom("positionItems");
+        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("positionItems");
         if (selectItem2s.isEmpty()) {
             return positions.toString();
         }
@@ -46,7 +46,7 @@ public enum KFMaterialPositionServiceHelper {
         }
         int idx = 0;
         for (String positionId : positionIds) {
-            String positionName = SystemBaseInfo.SINGLETONE.getName(selectItem2s, positionId);
+            String positionName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, positionId);
             if (idx == 0) {
                 positions.append(positionName);
             } else {

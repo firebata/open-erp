@@ -6,9 +6,9 @@
     <!-- 命名空间 -->
     <typeAliases>
         <typeAlias alias="CommonBean" type="com.skysport.core.bean.system.SelectItem2"/>
-        <typeAlias alias="LogInfo" type="com.skysport.core.bean.Log"/>
+        <typeAlias alias="LogInfo" type="com.skysport.core.bean.LogInfo"/>
         <typeAlias alias="SpInfo" type="com.skysport.inerfaces.bean.info.SpInfo"/>
-        <typeAlias alias="Dictionary" type="com.skysport.core.bean.system.DictionaryInfo"/>
+        <typeAlias alias="Dictionary" type="com.skysport.core.bean.system.DictionaryVo"/>
         <typeAlias alias="PantoneInfo" type="com.skysport.inerfaces.bean.info.PantoneInfo"/>
         <typeAlias alias="CustomerInfo" type="com.skysport.inerfaces.bean.info.CustomerInfo"/>
         <typeAlias alias="AreaInfo" type="com.skysport.inerfaces.bean.info.AreaInfo"/>

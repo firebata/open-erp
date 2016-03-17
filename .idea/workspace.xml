@@ -7,49 +7,107 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/ReflectionUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/helper/PantoneManageServiceHelper.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/BomInfoMapper.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DictionaryAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/DictionaryInfo.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/DictionaryKeyConstant.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseController.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CharConstant.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CharConstant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/DateUtils.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/DateUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/aspect/SystemLogAspect.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/aspect/SystemLogAspect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/CommonVo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/CommonVo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CommonConstant.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CommonConstant.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/DictionaryMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/DictionaryMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/LogInfoMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/LogInfoMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/DictionaryHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/DictionaryHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/SystemInitHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/SystemInitHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/service/IDictionaryService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/service/IDictionaryService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/service/impl/DictionaryServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/service/impl/DictionaryServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/log/LogService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/log/LogService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/log/impl/LogServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/log/impl/LogServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/resp/BaseRespHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/resp/BaseRespHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CategoryManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CategoryManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CustomerAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CustomerAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/DyeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/DyeAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FabricsAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FabricsAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FactoryManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FactoryManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FinishAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FinishAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialClassicAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialClassicAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialOfMembraneCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialOfMembraneCoatingAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialTypeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialTypeAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MembraneThicknessAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MembraneThicknessAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/AccessoriesInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/AccessoriesInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/BomInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/BomInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/FabricsInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/FabricsInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/KFPackaging.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/KFPackaging.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialSpInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialSpInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ProductTypeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ProductTypeAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SeriesAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SeriesAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SexAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SexAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpecificationAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpecificationAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WaterVapourPermeabilityAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WaterVapourPermeabilityAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WorkmanshipOfBondingLaminatingCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WorkmanshipOfBondingLaminatingCoatingAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/YearConfManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/YearConfManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/RoleInfoAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/RoleInfoAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/UserInfoAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/UserInfoAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SelectQueryInfoAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SelectQueryInfoAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SysLogAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SysLogAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/FabricsManageMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/FabricsManageMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/impl/AccessoriesServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/impl/AccessoriesServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/system/DepartmentManageMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/system/DepartmentManageMapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/packaging/service/impl/PackagingServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/packaging/service/impl/PackagingServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/helper/FabricsServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/helper/FabricsServiceHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/pantone/helper/KFMaterialPantoneServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/pantone/helper/KFMaterialPantoneServiceHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/position/helper/KFMaterialPositionServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/position/helper/KFMaterialPositionServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/MaterialPositionServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/MaterialPositionServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/init/SystemBaseInfoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/init/SystemBaseInfoHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/ExcelCreateHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/ExcelCreateHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/FabricsManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/FabricsManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFPackagingManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFPackagingManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/material/MaterialPositionInfoMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/material/MaterialPositionInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml" afterPath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/FabricsManageMapper.xml" afterPath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/FabricsManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/KFPackagingManageMapper.xml" afterPath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/develop/KFPackagingManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/system/material/MaterialPositionInfoMapper.xml" afterPath="$PROJECT_DIR$/one/target/classes/mapper/interfaces/system/material/MaterialPositionInfoMapper.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialPositionManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/BomManageMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/BomInfoManageMapper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/material/MaterialPositionManageDao.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/material/PositionInfoMapper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MaterialPositionServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/PositionServiceHelper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/BomInfoMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/area/helper/AreaManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/area/helper/AreaManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/category/CategoryManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/category/CategoryManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/customer/helper/CustomerManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/customer/helper/CustomerManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/factory/FactoryManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/factory/FactoryManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/BondingLaminationCoatingServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/BondingLaminationCoatingServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/ColorOfMembraneCoatingServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/ColorOfMembraneCoatingServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/DyeServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/DyeServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/FinishServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/FinishServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MaterialOfMembraneCoatingServicHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MaterialOfMembraneCoatingServicHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MaterialUnitServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MaterialUnitServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MembraneThicknessServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/MembraneThicknessServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/PositionServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/PositionServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/SpecificationServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/SpecificationServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/WaterVapourPermeabilityServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/WaterVapourPermeabilityServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/WorkmanshipOfBondingLaminatingCoatingServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/WorkmanshipOfBondingLaminatingCoatingServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material_classic/MaterialClassicManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material_classic/MaterialClassicManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material_type/MaterialTypeManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material_type/MaterialTypeManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/product_type/ProductTypeManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/product_type/ProductTypeManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/series/SeriesManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/series/SeriesManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/helper/PantoneManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/helper/PantoneManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sex/SexManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sex/SexManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sp/helper/SpInfoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sp/helper/SpInfoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/year_conf/YearConfManageServiceHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/year_conf/YearConfManageServiceHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/roleinfo/helper/RoleInfoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/roleinfo/helper/RoleInfoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/userinfo/helper/UserInfoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/userinfo/helper/UserInfoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/IDepartmentService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/IDepartmentService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/impl/DepartmentServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/impl/DepartmentServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/FileUtils.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/FileUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/SelectInfoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/SelectInfoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/mybatis-config.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/mybatis-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/conf/applicationContext.xml" afterPath="$PROJECT_DIR$/one/target/classes/conf/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/target/classes/conf/mybatis-config.xml" afterPath="$PROJECT_DIR$/one/target/classes/conf/mybatis-config.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseReq.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseReqVo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseResp.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseRespVo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/Log.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/LogInfo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/DictionaryInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/DictionaryVo.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/DictionaryInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/DictionaryInfoCachedMap.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/SystemBaseInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/SystemBaseInfoCachedMap.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/dept/DepartmentInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/DepartmentInfo.java" />
     </list>
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,74 +131,100 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectItemAction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="96" column="30" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="QuotedServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3569061">
-              <caret line="107" column="97" selection-start-line="107" selection-start-column="97" selection-end-line="107" selection-end-column="97" />
+            <state vertical-scroll-proportion="-18.758621">
+              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DateUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/DateUtils.java">
+      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/ArrayList.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+              <caret line="106" column="22" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#54151#0" expanded="true" />
+                <element signature="e#15414#15415#0" expanded="true" />
+                <element signature="e#15459#15460#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="List.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/List.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="110" column="38" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BomManageServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+      <file leaf-file-name="Collection.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Collection.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="36" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="36" />
+              <caret line="143" column="46" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FabricsServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java">
+      <file leaf-file-name="Iterable.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/Iterable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="79" column="56" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="56" />
+              <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectItemManageServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
+      <file leaf-file-name="Objects.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Objects.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="257" column="48" selection-start-line="257" selection-start-column="48" selection-end-line="257" selection-end-column="48" />
+              <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BomManageHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java">
+      <file leaf-file-name="Float.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/Float.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="286" column="63" selection-start-line="286" selection-start-column="63" selection-end-line="286" selection-end-column="63" />
+              <caret line="449" column="24" selection-start-line="449" selection-start-column="24" selection-end-line="449" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DictionaryInfoCachedMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/DictionaryInfoCachedMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="106" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+                <element signature="e#734#735#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharConstant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CharConstant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,27 +233,7 @@
         <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="181" selection-start-line="48" selection-start-column="181" selection-end-line="48" selection-end-column="181" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FabricsInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/FabricsInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MaterialInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -198,34 +262,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-item-add.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-category.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/project/project-add.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/js/util.js" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/project/project-add.js" />
-        <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectCategoryAction.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/pages/development/bom/bom-list.jsp" />
-        <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-list.js" />
-        <option value="$PROJECT_DIR$/one/pom.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/BomInfoMapper.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/BomManageMapper.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/BomInfoManageMapper.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/BomInfo.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseController.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/KFPackaging.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/AccessoriesInfo.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/DateUtils.java" />
-        <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/ReflectionUtils.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/ExcelCreateHelper.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/FabricsManageMapper.java" />
         <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/FabricsManageMapper.xml" />
         <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml" />
         <option value="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFPackagingManageMapper.xml" />
@@ -247,7 +283,35 @@
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/impl/AccessoriesServiceImpl.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/packaging/service/impl/PackagingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/dept/DepartmentInfo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/IDepartmentService.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/impl/DepartmentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/system/DepartmentManageMapper.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DictionaryAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/SystemBaseInfo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/DictionaryInfoCachedMap.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/SystemBaseInfoCachedMap.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/LogInfo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/CommonVo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseReq.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseReqVo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseResp.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseRespVo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/DictionaryInfo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/DictionaryVo.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/DictionaryKeyConstant.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/userinfo/helper/UserInfoHelper.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CommonConstant.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/FileUtils.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/DictionaryInfoCachedMap.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java" />
       </list>
     </option>
@@ -273,7 +337,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="width" value="1932" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
     <option name="height" value="1066" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -337,6 +402,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -355,10 +422,154 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inerfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inerfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inerfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="info" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="one" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skysport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1138,11 +1349,15 @@
       <workItem from="1458004639171" duration="8882000" />
       <workItem from="1458019190419" duration="21123000" />
       <workItem from="1458041452329" duration="655000" />
+      <workItem from="1458091858590" duration="599000" />
+      <workItem from="1458113067927" duration="573000" />
+      <workItem from="1458114865149" duration="7272000" />
+      <workItem from="1458178367040" duration="6951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="473717000" />
+    <option name="totallyTimeSpent" value="489112000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1154,37 +1369,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1932" height="1066" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27867097" sideWeight="0.3696581" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49358973" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2926045" sideWeight="0.0826226" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.491453" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28724545" sideWeight="0.5788913" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31156316" sideWeight="0.4957265" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22809829" sideWeight="0.48445874" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16204691" sideWeight="0.48445874" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14529915" sideWeight="0.51028806" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14529915" sideWeight="0.51554126" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="1.0" sideWeight="0.9173774" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16559829" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2636656" sideWeight="0.9173774" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28724545" sideWeight="0.5788913" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4619507" sideWeight="0.77132195" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1203,28 +1418,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java</url>
-          <line>96</line>
-          <properties />
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java</url>
-          <line>101</line>
+          <line>108</line>
           <properties />
-          <option name="timeStamp" value="115" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="118" />
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="120" />
+      <option name="time" value="125" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
@@ -1247,358 +1450,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="30" selection-start-line="155" selection-start-column="22" selection-end-line="155" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/time/LocalDate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2009" column="18" selection-start-line="2009" selection-start-column="18" selection-end-line="2009" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/jre/lib/rt.jar!/sun/nio/ch/WindowsSelectorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.357143">
-          <caret line="461" column="27" selection-start-line="461" selection-start-column="27" selection-end-line="461" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7586207">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="71" selection-start-line="153" selection-start-column="71" selection-end-line="153" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/FabricsManageMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/ReflectionUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/ExcelCreateHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/BomInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/IFabricsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/AccessoriesInfoManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="13.464286">
-          <caret line="256" column="71" selection-start-line="256" selection-start-column="71" selection-end-line="256" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFMaterialPositionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.071429">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/FabricsManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4712644">
-          <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/develop/KFMaterialPositionMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/instance/SystemBaseInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/AbstractStringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="15" selection-start-line="77" selection-start-column="15" selection-end-line="77" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CharConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="24" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/KFMaterialPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/helper/PositionServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="56" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/IPantoneManageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/series/SeriesManageServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sex/SexManageServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="29" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="141" column="56" selection-start-line="141" selection-start-column="56" selection-end-line="141" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/pantone/PantoneInfoMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.827586">
-          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/info/material/PositionInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/material/impl/MaterialPositionServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding>
-            <element signature="e#796#797#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/impl/PantoneManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="44" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="44" />
-          <folding>
-            <element signature="e#1697#1698#0" expanded="true" />
-            <element signature="e#1758#1759#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/sp/helper/SpInfoHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/pantone/helper/KFMaterialPantoneServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFMaterialPantoneMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.091954">
-          <caret line="13" column="26" selection-start-line="7" selection-start-column="5" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/develop/KFMaterialPantoneMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/position/helper/KFMaterialPositionServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/system/material/MaterialPositionInfoMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7142856">
-          <caret line="4" column="73" selection-start-line="4" selection-start-column="73" selection-end-line="4" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/init/SystemBaseInfoHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="54" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/info/service/helper/PantoneManageServiceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/KFPackagingManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.75">
-          <caret line="300" column="39" selection-start-line="300" selection-start-column="39" selection-end-line="300" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/join/FabricsJoinInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/packaging/service/impl/PackagingServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="57" selection-start-line="69" selection-start-column="57" selection-end-line="69" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialSpInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/accessories/service/impl/AccessoriesServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="71" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/fabric/impl/FabricsServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="56" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="36" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/FabricsInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/develop/MaterialInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="181" selection-start-line="48" selection-start-column="181" selection-end-line="48" selection-end-column="181" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="286" column="63" selection-start-line="286" selection-start-column="63" selection-end-line="286" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1609,8 +1460,247 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/DateUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.020994475">
           <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/webapp/resources/interfaces/development/bom/bom-add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/helper/QuotedServiceHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="42" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/QuotedInfoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7142856">
+          <caret line="4" column="62" selection-start-line="4" selection-start-column="62" selection-end-line="4" selection-end-column="62" />
+          <folding>
+            <marker date="1454636271860" expanded="true" signature="1081:1244" placeholder="SELECT FROM t_kf_bominfo" />
+            <marker date="1454636271860" expanded="true" signature="1320:1433" placeholder="SELECT FROM t_kf_pre_quote" />
+            <marker date="1454636271860" expanded="true" signature="2287:2941" placeholder="SELECT FROM t_kf_pre_quote" />
+            <marker date="1454636271860" expanded="true" signature="2989:3609" placeholder="update t_kf_... " />
+            <marker date="1454636271860" expanded="true" signature="3646:4136" placeholder="insert into t_kf_pre_quote" />
+            <marker date="1454636271860" expanded="true" signature="4173:4237" placeholder="update t_kf_... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/develop/QuotedInfoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/IQuotedService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="33" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
+          <folding>
+            <element signature="e#1370#1371#0" expanded="false" />
+            <element signature="e#1424#1425#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/DepartmentInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/IDepartmentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/system/dept/service/impl/DepartmentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/system/DepartmentManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="79" selection-start-line="32" selection-start-column="65" selection-end-line="32" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DictionaryAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="74" selection-start-line="9" selection-start-column="74" selection-end-line="9" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/system/DictionaryInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/SystemBaseInfoCachedMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/CommonVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/resp/BaseRespHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseReqVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/BaseRespVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/LogInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/validate/ValidataParamResultVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/SelectItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/SelectItem2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/system/DictionaryVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/Authentication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/NumberConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/userinfo/helper/UserInfoHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2881356">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1618,15 +1708,167 @@
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="30" selection-start-line="96" selection-start-column="22" selection-end-line="96" selection-end-column="30" />
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CommonConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/ExcelCreateHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="27" selection-start-line="119" selection-start-column="27" selection-end-line="119" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="449" column="24" selection-start-line="449" selection-start-column="24" selection-end-line="449" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/StringBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.753769">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20976#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/constant/CharConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/lang/Iterable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/Collection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="46" selection-start-line="143" selection-start-column="46" selection-end-line="143" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="38" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="22" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#54151#0" expanded="true" />
+            <element signature="e#15414#15415#0" expanded="true" />
+            <element signature="e#15459#15460#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/core/cache/DictionaryInfoCachedMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="106" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/QuotedServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3569061">
-          <caret line="107" column="97" selection-start-line="107" selection-start-column="97" selection-end-line="107" selection-end-column="97" />
+        <state vertical-scroll-proportion="-18.758621">
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
         </state>
       </provider>

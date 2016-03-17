@@ -6,19 +6,19 @@ package com.skysport.core.bean;
  */
 public interface CommonVo {
 
-    public String getId();
+    String getId();
 
-    public void setId(String id);
+    void setId(String id);
 
-    public int getDelFlag();
+    int getDelFlag();
 
-    public void setDelFlag(int delFlag);
+    void setDelFlag(int delFlag);
 
-    public String getUpdateTime();
+    String getUpdateTime();
 
-    public void setUpdateTime(String updateTime);
+    void setUpdateTime(String updateTime);
 
-    public String getRemark();
+    String getRemark();
 
-    public void setRemark(String remark);
+    void setRemark(String remark);
 }

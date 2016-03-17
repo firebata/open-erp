@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Created by zhangjh on 2016/1/11.
  */
 @Component("ilog")
-public class Log extends SelectItem {
+public class LogInfo extends SelectItem {
     private String id;
     private String description;
 

@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.init.SpringContextHolder;
-import com.skysport.core.instance.SystemBaseInfo;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.material.impl.MaterialPositionServiceImpl;
 
 import java.util.List;
@@ -17,6 +17,6 @@ public enum PositionServiceHelper {
     public void refreshSelect() {
         MaterialPositionServiceImpl materialPositionService = SpringContextHolder.getBean("materialPositionService");
         List<SelectItem2> positionItems = materialPositionService.querySelectList(null);
-        SystemBaseInfo.SINGLETONE.pushBom("positionItems", positionItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom("positionItems", positionItems);
     }
 }

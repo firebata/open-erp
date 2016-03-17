@@ -2,7 +2,7 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
@@ -91,7 +91,7 @@ public class BomAction extends BaseAction<String, Object, BomInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         BomQueryForm bomQueryForm = new BomQueryForm();
-        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(DictionaryKeyConstant.PROJECT_TABLE_COLULMN, request));
+        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
         BomInfo bomInfo = new BomInfo();
         bomQueryForm.setBomInfo(bomInfo);
         BomManageHelper.buildBomQueryForm(bomQueryForm, request);

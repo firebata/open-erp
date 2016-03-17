@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.query.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.DictionaryKeyConstant;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.CategoryInfo;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -67,7 +67,7 @@ public class CategoryManageAction extends BaseAction<String, Object, CategoryInf
     @SystemControllerLog(description = "查询品类级别信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(DictionaryKeyConstant.CATEGORY_TABLE_COLUMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.CATEGORY_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = categoryManageService.listInfosCounts();
         int recordsFiltered = recordsTotal;
