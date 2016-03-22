@@ -53,7 +53,7 @@
         <typeAlias alias="UserInfo" type="com.skysport.core.bean.permission.UserInfo"/>
         <typeAlias alias="RoleInfo" type="com.skysport.core.bean.permission.RoleInfo"/>
         <typeAlias alias="ResourceInfo" type="com.skysport.core.bean.permission.ResourceInfo"/>
-        <typeAlias alias="DepartmentInfo" type="com.skysport.inerfaces.bean.system.dept.DepartmentInfo"/>
+        <typeAlias alias="DepartmentInfo" type="com.skysport.inerfaces.bean.system.DepartmentInfo"/>
         <!--COMMON-->
         <typeAlias alias="UploadFileInfo" type="com.skysport.inerfaces.bean.common.UploadFileInfo"/>
 
