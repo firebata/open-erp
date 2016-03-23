@@ -2,13 +2,12 @@ package com.skysport.inerfaces.action.info;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.DyeInfo;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material.impl.helper.DyeServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;

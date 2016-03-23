@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.model.info.service;
 
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.PantoneInfo;
 

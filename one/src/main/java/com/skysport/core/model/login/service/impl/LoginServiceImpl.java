@@ -6,10 +6,13 @@ import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.core.model.login.service.IUserService;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,13 +36,12 @@ public class LoginServiceImpl implements ILoginService {
      * 6，返回成功
      *
      * @param user    用户登录输入信息
-     * @param request
      * @return
      */
     @Override
-    public ModelAndView login(UserInfo user, HttpServletRequest request) throws Exception {
+    public ModelAndView login(UserInfo user) throws Exception {
 
-
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         UserInfo userInDB = userService.queryInfoByUserInfoName(user.getUsername());
         //判断用户是否存在
         String msg = judgeLoginInfo(userInDB, user);

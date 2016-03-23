@@ -1,6 +1,6 @@
 package com.skysport.core.model.common;
 
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 
 import java.util.List;

@@ -3,10 +3,8 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
-import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
@@ -21,14 +19,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -208,9 +204,7 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
 
         if (null != info) {
-            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
-            Map<String, Object> fileinfosMap = new HashMap<>();
-            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            Map<String, Object> fileinfosMap =  UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService,natrualKey);
             info.setFileinfosMap(fileinfosMap);
         }
         return info;

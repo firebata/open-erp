@@ -3,7 +3,7 @@ package com.skysport.inerfaces.action.permission;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.RoleInfo;
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.cache.DictionaryInfoCachedMap;

@@ -3,9 +3,8 @@ package com.skysport.inerfaces.action.permission;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.core.utils.SecurityUtil;
@@ -102,7 +101,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
         uploadFileInfoService.del(userInfo.getNatrualkey(), WebConstants.FILE_IN_FINISH);
         List<UploadFileInfo> fileInfos = userInfo.getFileInfos();
         //回写文件记录表的status状态为1
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, userInfo.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_USER);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, userInfo.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_USER);
 
         return rtnSuccessResultMap("更新成功");
 
@@ -120,16 +119,16 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @SystemControllerLog(description = "增加用户信息")
     public Map<String, Object> add(UserInfo userInfo, HttpServletRequest request) throws Exception {
 
-        String userId = PrimaryKeyUtils.getUUID();
+        String uid = PrimaryKeyUtils.getUUID();
         //设置ID
-        userInfo.setNatrualkey(userId);
+        userInfo.setNatrualkey(uid);
 
 //        UserInfoHelper.SINGLETONE.encrptPwd(userInfo);
 
         userInfoService.add(userInfo);
 
         List<UploadFileInfo> fileInfos = userInfo.getFileInfos();
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, userId, uploadFileInfoService, WebConstants.FILE_KIND_USER);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, uid, uploadFileInfoService, WebConstants.FILE_KIND_USER);
 
         return rtnSuccessResultMap("新增成功");
 
@@ -147,9 +146,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
 
         UserInfo userInfo = userInfoService.queryInfoByNatrualKey(natrualKey);
         if (null != userInfo) {
-            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
-            Map<String, Object> fileinfosMap = new HashMap<>();
-            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             userInfo.setFileinfosMap(fileinfosMap);
         }
 

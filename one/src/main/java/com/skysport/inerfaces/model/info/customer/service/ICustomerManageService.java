@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.model.info.customer.service;
 
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.inerfaces.bean.info.CustomerInfo;
 
 import java.util.List;

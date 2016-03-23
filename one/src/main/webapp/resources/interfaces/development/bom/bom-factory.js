@@ -4,17 +4,26 @@
 (function ($) {
 
     "use strict";
+
     var path = $.basepath();
     var title_type = "成衣厂_";
     var saveFactoryFunURL = path + "/development/bom/saveFactoryFun";
     var bom_selectURL = path + "/system/baseinfo/bom_select";
+    var fileUploadURL = path + "/files/upload";
+    //var $fileListLi = $("#filesList");
+    //var sketchUrlUidUploadFileInfos = [];
+    var specificationUrlUidUploadFileInfos = [];
+    var isSubmitAction = 'N';
+
     $.extend({
         initFactory: initFactory,
         factoryQuoteInfos: buildFactoryQuoteInfos
     });
 
     function buildFactoryQuoteInfo(index) {
+
         var factoryQuoteInfo = {};
+
         factoryQuoteInfo.factoryQuoteId = $("#factoryQuoteId" + index).val();
         factoryQuoteInfo.offerAmount = $("#offerAmount" + index).val();
         factoryQuoteInfo.fabricsEndDate = $("#fabricsEndDate" + index).val();
@@ -27,6 +36,53 @@
         factoryQuoteInfo.factoryOffer = $("#factoryOffer" + index).val();
         factoryQuoteInfo.factoryMargins = $("#factoryMargins" + index).val();
         factoryQuoteInfo.nameNum = index;
+
+        var productionInstruction = {};
+        productionInstruction.productionInstructionId = $("productionInstructionId" + index).val();
+        productionInstruction.cropRequirements = $("cropRequirements" + index).val();
+        productionInstruction.offerAmount = $("#offerAmount" + index).val();
+        productionInstruction.spId = $("#spIdC" + index).val();
+        productionInstruction.clothReceivedDate = $("#clothReceivedDate" + index).val();
+        productionInstruction.qualityRequirements = $("qualityRequirements" + index).val();
+        productionInstruction.finishPressingRequirements = $("finishPressingRequirements" + index).val();
+        productionInstruction.spcialTech = $("spcialTech" + index).val();
+        productionInstruction.packingRequirements = $("packingRequirements" + index).val();
+        productionInstruction.overstitch = $("overstitch" + index).val();
+        productionInstruction.overstitchSpace = $("overstitchSpace" + index).val();
+        productionInstruction.blindstitch = $("blindstitch" + index).val();
+        productionInstruction.blindstitchSpace = $("blindstitchSpace" + index).val();
+        productionInstruction.overlock = $("overlock" + index).val();
+        productionInstruction.overlockSpace = $("overlockSpace" + index).val();
+        productionInstruction.trademarkCode = $("trademarkCode" + index).val();
+        productionInstruction.trademarkRemark = $("trademarkRemark" + index).val();
+        productionInstruction.scaleRemark = $("scaleRemark" + index).val();
+        productionInstruction.rinsingMarksCode = $("rinsingMarksCode" + index).val();
+        productionInstruction.rinsingMarksRemark = $("rinsingMarksRemark" + index).val();
+        productionInstruction.sketchUrlUid = $("sketchUrlUid" + index).val();
+        productionInstruction.specificationUrlUid = $("specificationUrlUid" + index).val();
+        //上传文件
+        var sketchUrlUidUploadFileInfos = [];
+        var specificationUrlUidUploadFileInfos = [];
+
+        try {
+            var initialPreviewConfigs = $("#sketchUrlUid" + index).fileinput().data()["fileinput"].ajaxRequests[0].responseJSON.initialPreviewConfig;//上传文件返回的数据
+            $.buildUploadedFileInfos(sketchUrlUidUploadFileInfos, initialPreviewConfigs);
+        } catch (e) {
+
+        }
+
+        try {
+            var initialPreviewConfigs = $("#specificationUrlUid" + index).fileinput().data()["fileinput"].ajaxRequests[0].responseJSON.initialPreviewConfig;//上传文件返回的数据
+            $.buildUploadedFileInfos(specificationUrlUidUploadFileInfos, initialPreviewConfigs);
+        } catch (e) {
+
+        }
+
+        productionInstruction.sketchUrlUidUploadFileInfos = sketchUrlUidUploadFileInfos;
+        productionInstruction.specificationUrlUidUploadFileInfos = specificationUrlUidUploadFileInfos;
+        //
+        factoryQuoteInfo.productionInstruction = productionInstruction;
+
         return factoryQuoteInfo;
     }
 
@@ -96,6 +152,19 @@
 
         });
 
+        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
+        $.loadFileInput($sketchUrlUid, null, _factoryInfo["productionInstruction"]["sketchUrlUidFileinfosMap"], fileUploadURL);
+        $.fileInputAddListenr(null, $sketchUrlUid, null, function () {}, getIsSubmitAction);
+
+        var $specificationUrlUid = $("#specificationUrlUid" + nextIdNum);
+        $.loadFileInput($specificationUrlUid, null, _factoryInfo["productionInstruction"]["specificationUrlUidFileinfosMap"], fileUploadURL);
+
+        $.fileInputAddListenr(null, $specificationUrlUid, null, function () {}, getIsSubmitAction);
+
+    }
+
+    function getIsSubmitAction() {
+        return isSubmitAction;
     }
 
     /**
@@ -108,6 +177,7 @@
         var data = {
             "factory": [
                 {
+
                     "currenId": nextIdNum,
                     "factoryDivId": "factoryDivId" + nextIdNum,
                     "factoryTitleId": "factoryTitleId" + nextIdNum,
@@ -130,9 +200,31 @@
                     "factoryOffer": "factoryOffer" + nextIdNum,
                     "factoryMargins": "factoryMargins" + nextIdNum,
                     //"lpPrice": "lpPrice" + nextIdNum,
-                    "euroPrice": "euroPrice" + nextIdNum
+                    "euroPrice": "euroPrice" + nextIdNum,
+
                     //"exchangeCosts": "exchangeCosts" + nextIdNum,
                     //"costing": "costing" + nextIdNum
+
+                    "productionInstructionDetailId": "productionInstructionDetailId" + nextIdNum,
+                    "productionInstructionTitleName": "productionInstructionTitleName" + nextIdNum,
+                    "cropRequirements": "cropRequirements" + nextIdNum,
+                    "qualityRequirements": "qualityRequirements" + nextIdNum,
+                    "finishPressingRequirements": "finishPressingRequirements" + nextIdNum,
+                    "spcialTech": "spcialTech" + nextIdNum,
+                    "packingRequirements": "packingRequirements" + nextIdNum,
+                    "overstitch": "overstitch" + nextIdNum,
+                    "overstitchSpace": "overstitchSpace" + nextIdNum,
+                    "blindstitch": "blindstitch" + nextIdNum,
+                    "blindstitchSpace": "blindstitchSpace" + nextIdNum,
+                    "overlock": "overlock" + nextIdNum,
+                    "overlockSpace": "overlockSpace" + nextIdNum,
+                    "trademarkCode": "trademarkCode" + nextIdNum,
+                    "trademarkRemark": "trademarkRemark" + nextIdNum,
+                    "scaleRemark": "scaleRemark" + nextIdNum,
+                    "rinsingMarksCode": "rinsingMarksCode" + nextIdNum,
+                    "rinsingMarksRemark": "rinsingMarksRemark" + nextIdNum,
+                    "sketchUrlUid": "sketchUrlUid" + nextIdNum,
+                    "specificationUrlUid": "specificationUrlUid" + nextIdNum
                 }
             ]
         };

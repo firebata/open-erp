@@ -1,4 +1,4 @@
-package com.skysport.core.bean.query;
+package com.skysport.core.bean.page;
 
 /**
  * jquery.datatables传到后台的信息

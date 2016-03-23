@@ -1,4 +1,5 @@
 package com.skysport.inerfaces.bean.develop;
+
 import java.math.BigDecimal;
 
 /**
@@ -13,7 +14,7 @@ public class FactoryQuoteInfo {
     private int id;
 
     /**
-     * 工厂报价
+     * 工厂报价id
      */
     private String factoryQuoteId;
 
@@ -66,7 +67,7 @@ public class FactoryQuoteInfo {
      * 工厂报价利润率
      */
     private BigDecimal factoryMargins;
-    
+
     /**
      * 序号
      */
@@ -84,6 +85,8 @@ public class FactoryQuoteInfo {
     private BigDecimal costing;
 
     private String bomId;
+
+    private KfProductionInstructionEntity productionInstruction;
 
     public BigDecimal getCosting() {
         return costing;
@@ -227,5 +230,13 @@ public class FactoryQuoteInfo {
 
     public void setNameNum(String nameNum) {
         this.nameNum = nameNum;
+    }
+
+    public KfProductionInstructionEntity getProductionInstruction() {
+        return productionInstruction;
+    }
+
+    public void setProductionInstruction(KfProductionInstructionEntity productionInstruction) {
+        this.productionInstruction = productionInstruction;
     }
 }

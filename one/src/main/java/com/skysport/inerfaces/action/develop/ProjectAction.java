@@ -1,10 +1,7 @@
 package com.skysport.inerfaces.action.develop;
-
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -19,12 +16,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +51,6 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @ResponseBody
     @SystemControllerLog(description = "打开主项目列表页面")
     public ModelAndView search() {
-
         ModelAndView mav = new ModelAndView("/development/project/project-list");
         return mav;
     }
@@ -73,10 +67,9 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     public ModelAndView add(@PathVariable String natrualKey) {
 
         ModelAndView mav = new ModelAndView("/development/project/project-add");
-
         mav.addObject("natrualkey", natrualKey);
-
         return mav;
+
     }
 
 
@@ -111,9 +104,8 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
         ProjectManageHelper.turnIdToNameInPorject(infos);
 
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
-
-
         return resultMap;
+
     }
 
     /**
@@ -126,7 +118,9 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @ResponseBody
     @SystemControllerLog(description = "修改主项目信息")
     public Map<String, Object> edit(@RequestBody ProjectInfo info) {
+
         projectManageService.edit(info);
+
         return rtnSuccessResultMap("更新成功");
     }
 
@@ -168,9 +162,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     public ProjectInfo info(@PathVariable String natrualKey) {
         ProjectInfo info = projectManageService.queryInfoByNatrualKey(natrualKey);
         if (null != info) {
-            List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
-            Map<String, Object> fileinfosMap = new HashMap<>();
-            UploadFileHelper.SINGLETONE.buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
+            Map<String, Object> fileinfosMap =  UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService,natrualKey);
             info.setFileinfosMap(fileinfosMap);
         }
         return info;

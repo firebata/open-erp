@@ -64,6 +64,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
     @Override
     public void add(ProjectInfo info) {
+
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
 
@@ -71,8 +72,9 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
         logger.info("info=====>" + info);
+
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
         info.setCreater(userInfo.getAliases());
@@ -133,7 +135,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 
 //        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
         //判断bom有没有生成，如果bom已生成，不能修改项目信息

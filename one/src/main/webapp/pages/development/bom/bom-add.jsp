@@ -9,6 +9,7 @@
     <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
     <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
     <jsp:include page="../../base/headResources.jsp"></jsp:include>
+    <jsp:include page="../../base/upload.jsp"></jsp:include>
     <script language="javascript" type="text/javascript"   src="<%=path%>/resources/My97DatePicker/WdatePicker.js"></script>
     <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
     <link rel="stylesheet" href="<%=path%>/resources/css/font-awesome.min.css"/>
@@ -268,6 +269,8 @@
 
 
 </html>
+<script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
+<script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>

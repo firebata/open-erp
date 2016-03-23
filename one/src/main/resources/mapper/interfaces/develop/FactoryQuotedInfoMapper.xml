@@ -24,7 +24,6 @@
         remark AS remark
     </sql>
 
-
     <select id="selectAlId" resultType="String">
       select factory_quote_id
       from t_kf_factory_quote a
@@ -33,19 +32,47 @@
     </select>
 
     <delete id="deleteByIds">
-        DELETE from t_kf_factory_quote
+        update t_kf_factory_quote set del_flag=1
+        where factory_quote_id IN
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+        ;
+        update t_kf_production_instruction set del_flag=1
         where factory_quote_id IN
         <foreach item="idItem" collection="list" open="(" separator="," close=")">
             #{idItem}
         </foreach>
     </delete>
 
-
     <select id="queryInfo" resultType="FactoryQuoteInfo">
         select
         <include refid="searchInfoSql"/>
         FROM t_kf_factory_quote
-        WHERE bom_id =#{bomId}
+        WHERE bom_id =#{bomId} and del_flag=0
+        limit 1
+    </select>
+
+
+    <select id="queryProjectAndBomInfoByFactoryQuoteId" resultType="KfProductionInstructionEntity">
+        SELECT
+            a.project_name AS projectItemName,
+            b.bom_name AS bomName,
+            b.main_color AS colorName,
+            d.sp_name AS spName
+        FROM
+            t_kf_project_item a,
+            t_kf_bominfo b,
+            t_kf_factory_quote c,
+            t_jc_supplier d
+        WHERE
+            c.factory_quote_id =#{factoryQuoteId}
+        AND a.project_id = b.project_id
+        AND b.bom_id = c.bom_id
+        AND c.sp_id = d.sp_id
+        AND c.del_flag = 0
+        AND a.del_flag = 0
+        AND b.del_flag = 0
         limit 1
     </select>
 
@@ -70,9 +97,40 @@
             factory_quote_id =#{factoryQuoteId}
     </update>
 
+    <update id="updateProductionInstruction">
+        update
+        t_kf_production_instruction
+        set
+        crop_requirements    = #{cropRequirements},
+        quality_requirements     = #{qualityRequirements},
+        overstitch               = #{overstitch},
+        overstitch_space         = #{overstitchSpace},
+        blindstitch               = #{blindstitch},
+        blindstitch_space          = #{blindstitchSpace},
+        overlock                  = #{overlock},
+        overlock_space              = #{overlockSpace},
+        finish_pressing_requirements= #{finishPressingRequirements},
+        spcial_tech                 = #{spcialTech},
+        packing_requirements        = #{packingRequirements},
+        trademark_code              = #{trademarkCode},
+        trademark_remark            = #{trademarkRemark},
+        scale_code                  = #{scaleCode},
+        scale_remark                = #{scaleRemark},
+        rinsing_marks_code          = #{rinsingMarksCode},
+        rinsing_marks_remark        = #{rinsingMarksRemark}
+        WHERE
+        factory_quote_id =#{factoryQuoteId}
+    </update>
+
     <insert id="add">
         insert into  t_kf_factory_quote (bom_id,sp_id,offer_amount,quote_ref,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,factory_offer,factory_margins,costing,remark,name_num,euro_price,factory_quote_id)
         values (#{bomId},#{spId},#{offerAmount},#{quoteReference},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{factoryOffer},#{factoryMargins},#{costing},#{remark},#{nameNum},#{euroPrice},#{factoryQuoteId})
+    </insert>
+
+    <insert id="addProductionInstruction">
+        insert into
+        t_kf_production_instruction(uid,factory_quote_id,bom_id,project_item_name,bom_name,sp_id,color_name,offer_amout,rop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements)
+        values(#{uid},#{factoryQuoteId},#{bomId},#{projectItemName},#{bomName},#{spId},#{colorName},#{offerAmout},#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
     </insert>
 
 

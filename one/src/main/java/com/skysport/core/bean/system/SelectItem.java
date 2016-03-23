@@ -6,7 +6,7 @@ import com.skysport.core.bean.CommonVo;
  * 下拉列表
  * Created by zhangjh on 2015/6/8.
  */
-public abstract class SelectItem implements CommonVo , Cloneable{
+public abstract class SelectItem implements CommonVo, Cloneable {
     private String natrualkey;
     private String name;
 
@@ -27,7 +27,7 @@ public abstract class SelectItem implements CommonVo , Cloneable{
     }
 
     public SelectItem() {
-
+        super();
     }
 
     public SelectItem(String natrualkey, String name) {

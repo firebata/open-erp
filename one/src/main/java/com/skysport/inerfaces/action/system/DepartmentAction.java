@@ -2,7 +2,7 @@ package com.skysport.inerfaces.action.system;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.bean.query.DataTablesInfo;
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.utils.PrimaryKeyUtils;

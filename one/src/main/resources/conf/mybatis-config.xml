@@ -49,6 +49,7 @@
         <typeAlias alias="KFMaterialPosition" type="com.skysport.inerfaces.bean.develop.KFMaterialPosition"/>
         <typeAlias alias="KFMaterialPantone" type="com.skysport.inerfaces.bean.develop.KFMaterialPantone"/>
         <typeAlias alias="SexColor" type="com.skysport.inerfaces.bean.develop.SexColor"/>
+        <typeAlias alias="KfProductionInstructionEntity" type="com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity"/>
         <!--权限管理-->
         <typeAlias alias="UserInfo" type="com.skysport.core.bean.permission.UserInfo"/>
         <typeAlias alias="RoleInfo" type="com.skysport.core.bean.permission.RoleInfo"/>

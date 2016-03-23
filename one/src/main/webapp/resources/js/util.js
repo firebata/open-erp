@@ -5,6 +5,7 @@
  */
 (function ($) {
     "use strict";
+
     //扩展常用方法
     $.extend({
         sendRestFulAjax: sendRestFulAjax,//ajax
@@ -20,6 +21,7 @@
         createDownloadLink: createDownloadLink,
         loadFileInput: loadFileInput,//初始化文件上传插件内容
         fileInputAddListenr: fileInputAddListenr,//上传插件动作监控
+        buildUploadedFileInfos: buildUploadedFileInfos//已上传的文件信息
     });
 
 
@@ -162,9 +164,7 @@
     }
 
     function isFun(input) {
-
         return input != undefined && $.isFunction(input);
-
     }
 
     /**
@@ -354,9 +354,13 @@
         }
         var initialPreview = fileinfosMap["initialPreview"];
         var initialPreviewConfig = fileinfosMap["initialPreviewConfig"];
+
         initFileLocation($fileInput, initialPreview, initialPreviewConfig, fileUploadURL);
-        dealUploadedFile($fileListLi, initialPreviewConfig, function () {
-        });
+        if (null != $fileListLi) {
+            dealUploadedFile($fileListLi, initialPreviewConfig, function () {
+            });
+        }
+
         //$fileInput.fileinput({
         //    initialPreview: initialPreview,
         //    initialPreviewConfig: initialPreviewConfig
@@ -364,6 +368,25 @@
 
     }
 
+    /**
+     * 解析上传成功的文件信息
+     * @param uploadFileInfos
+     * @param initialPreviewConfigs
+     */
+    function buildUploadedFileInfos(uploadFileInfos, initialPreviewConfigs) {
+
+        //null != uploadFileInfos 在bom详细表单起作用
+        if (null != initialPreviewConfigs && null != uploadFileInfos) {
+            for (var idx = 0; idx < initialPreviewConfigs.length; idx++) {
+                var initialPreviewConfig = initialPreviewConfigs[idx];
+                var uid = initialPreviewConfig['extra']['id'];
+                var uploadFileInfo = {};
+                uploadFileInfo.uid = uid;
+                uploadFileInfos.push(uploadFileInfo);
+            }
+        }
+
+    }
 
     /**
      * 构造文件上传记录
@@ -371,29 +394,17 @@
      */
     function buildUploadFileInfos($fileListLi, response, uploadFileInfos) {
         var initialPreviewConfigs = response["initialPreviewConfig"];
-        for (var idx = 0; idx < initialPreviewConfigs.length; idx++) {
-            var initialPreviewConfig = initialPreviewConfigs[idx];
-            var uid = initialPreviewConfig['extra']['id'];
-            var uploadFileInfo = {};
-            uploadFileInfo.uid = uid;
-            uploadFileInfos.push(uploadFileInfo);
+
+        buildUploadedFileInfos(uploadFileInfos, initialPreviewConfigs);
+
+        if (null != $fileListLi) {
+            dealUploadedFile($fileListLi, initialPreviewConfigs, function () {
+            });
         }
-        dealUploadedFile($fileListLi, initialPreviewConfigs, function () {
-        });
     }
 
 
     function fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction) {
-
-        $fileInput.on('fileuploaded', function (event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra,
-                response = data.response, reader = data.reader;
-            buildUploadFileInfos($fileListLi, response, uploadFileInfos);
-            //var initialPreviewConfig = response["initialPreviewConfig"];
-            //dealUploadedFile($fileListLi, initialPreviewConfig, function () {
-            //});
-
-        });
 
 
         $fileInput.on("filepredelete", function (jqXHR) {
@@ -412,6 +423,20 @@
         $fileInput.on('filebatchuploadcomplete', function (event, files, extra) {
             console.log('File batch upload complete');
         });
+
+
+        $fileInput.on('fileuploaded', function (event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+
+            buildUploadFileInfos($fileListLi, response, uploadFileInfos);
+
+            //var initialPreviewConfig = response["initialPreviewConfig"];
+            //dealUploadedFile($fileListLi, initialPreviewConfig, function () {
+            //});
+
+        });
+
 
         /**
          * 批量上传成功后'uploadAsync':false

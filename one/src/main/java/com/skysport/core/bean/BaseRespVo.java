@@ -11,25 +11,30 @@ public class BaseRespVo {
      * 此字段是通信标识，非交易标识，交易是否成功需要查看trade_state来判断
      */
     private String return_code;
+
     /**
      * 返回信息，如非空，为错误原因
      * 签名失败
      * 参数格式校验错误
      */
     private String return_msg;
+
     /**
      * 业务结果
      * SUCCESS/FAIL
      */
     private String result_code;
+
     /**
      * 错误代码
      */
     private String err_code;
+
     /**
      * 结果信息描述
      */
     private String err_code_des;
+
 
     public String getReturn_code() {
         return return_code;

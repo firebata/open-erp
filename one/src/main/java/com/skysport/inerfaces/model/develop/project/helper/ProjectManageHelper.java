@@ -157,11 +157,13 @@ public class ProjectManageHelper {
      * @param infos
      */
     public static void turnIdToNameInPorject(List<ProjectInfo> infos) {
+
         if (null != infos && !infos.isEmpty()) {
             for (ProjectInfo projectInfo : infos) {
                 exchange(projectInfo);
             }
         }
+
     }
 
 

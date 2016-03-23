@@ -1,7 +1,7 @@
 package com.skysport.core.action;
 
-import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.annotation.SystemControllerLog;
+import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.springframework.context.annotation.Scope;
@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
 @Scope("prototype")
@@ -32,25 +31,20 @@ public class LoginAction {
      * 6，返回成功
      *
      * @param user
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(value = "/login")
     @ResponseBody
     @SystemControllerLog(description = "用户登录")
-    public ModelAndView login(UserInfo user, HttpServletRequest request,
-                              HttpServletResponse response) throws Exception {
-
-        return loginService.login(user, request);
+    public ModelAndView login(UserInfo user) throws Exception {
+        return loginService.login(user);
 
     }
 
     @RequestMapping(value = "/loginout")
     @ResponseBody
     @SystemControllerLog(description = "用户登出")
-    public ModelAndView loginout(UserInfo user, HttpServletRequest request,
-                                 HttpServletResponse response) throws Exception {
+    public ModelAndView loginout(HttpServletRequest request) throws Exception {
         request.getSession().removeAttribute(WebConstants.CURRENT_USER);
         return new ModelAndView("login");
     }

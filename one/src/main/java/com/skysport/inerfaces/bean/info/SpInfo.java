@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.bean.info;
 
-import com.skysport.core.bean.query.PageInfo;
+import com.skysport.core.bean.page.PageInfo;
 
 /**
  * 供应商信息

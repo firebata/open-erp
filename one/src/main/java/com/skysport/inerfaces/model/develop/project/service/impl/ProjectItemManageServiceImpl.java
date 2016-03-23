@@ -134,7 +134,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, request, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 
         //更新t_project表
         super.edit(info);

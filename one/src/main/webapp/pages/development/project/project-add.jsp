@@ -133,11 +133,9 @@
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2  control-label"            for="fileLocation"> 附件上传 </label>
-
                         <div class="col-xs-10">
                             <input id="fileLocation" type="file" multiple class="file-loading col-xs-12"    name="fileLocation">
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
