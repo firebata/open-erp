@@ -68,11 +68,13 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         }
 
         Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
-        BigDecimal commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(commissionValue));
-        BigDecimal quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
-
-        quotedInfo.setCommission(new BigDecimal(df.format(commission)));
-        quotedInfo.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
+        BigDecimal commission, quotedPrice;
+        if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getLpPrice()) {
+            commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(commissionValue));
+            quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
+            quotedInfo.setCommission(new BigDecimal(df.format(commission)));
+            quotedInfo.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
+        }
 
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfo1 = queryInfoByNatrualKey(quotedInfo.getBomId());

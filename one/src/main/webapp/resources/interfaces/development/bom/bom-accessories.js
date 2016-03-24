@@ -230,9 +230,9 @@
         }
         bom.accessories[idNum - 1].currenId = idNum;//当前序号
 
-        $.sendRestFulAjax(saveAccessoriesFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doAccessoriesSuccess_info(data, idNum);
-        });
+        //$.sendRestFulAjax(saveAccessoriesFunURL, jsonObj, 'GET', 'json', function (data) {
+        //    _doAccessoriesSuccess_info(data, idNum);
+        //});
 
     };
 

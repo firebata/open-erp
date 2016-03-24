@@ -258,9 +258,9 @@
             bom.packagings[idNum - 1].showFlag = true;//是否显示
         }
         bom.packagings[idNum - 1].currenId = idNum;//当前序号
-        $.sendRestFulAjax(savePackagingFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doPackagingSuccess_info(data, idNum);
-        });
+        //$.sendRestFulAjax(savePackagingFunURL, jsonObj, 'GET', 'json', function (data) {
+        //    _doPackagingSuccess_info(data, idNum);
+        //});
     };
 
 

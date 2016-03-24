@@ -56,7 +56,7 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
     @SystemControllerLog(description = "删除文件")
     public Map<String, Object> delete(InitialPreviewConfig config, HttpServletRequest request) {
         String key = config.getKey();
-        uploadFileInfoService.del(key,WebConstants.FILE_IN_FINISH);
+        uploadFileInfoService.del(key, WebConstants.FILE_IN_FINISH);
         return rtnSuccessResultMap("文件删除成功");
     }
 
@@ -113,7 +113,7 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
 //                    thread.start();
 //                    thread.join();
 
-                    uploadFileInfoService.addBatch(uploadFileInfos);
+
                     File targetFile = new File(realPath.toString() + filePath, newFileName);
                     targetFile.mkdirs();
                     // 转存文件
@@ -121,6 +121,7 @@ public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
 
                 }
             }
+            uploadFileInfoService.addBatch(uploadFileInfos);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             resultMap.put("error", e.getMessage());

@@ -73,13 +73,14 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
         if (null != factoryQuoteInfos) {
             //工厂报价id存在，修改；工厂报价id不存在则新增
             for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
+
                 factoryQuoteInfo.setBomId(bomId);
                 String quoteInfoId = factoryQuoteInfo.getFactoryQuoteId();
-                factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
+
                 //有id，更新
                 if (StringUtils.isNotBlank(quoteInfoId)) {
+                    factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
                     factoryQuotedInfoMapper.updateInfo(factoryQuoteInfo);
-
                     factoryQuotedInfoMapper.updateProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }
                 //无id，新增
@@ -95,16 +96,19 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
 
                     factoryQuotedInfoMapper.add(factoryQuoteInfo);
 
-
+                    factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
                     //项目信息
                     KfProductionInstructionEntity productionInstructionEntity = factoryQuotedInfoMapper.queryProjectAndBomInfoByFactoryQuoteId(quoteInfoId);
 
                     factoryQuoteInfo.getProductionInstruction().setUid(uid);
                     factoryQuoteInfo.getProductionInstruction().setProductionInstructionId(uid);
-                    factoryQuoteInfo.getProductionInstruction().setSpName(productionInstructionEntity.getSpName());
-                    factoryQuoteInfo.getProductionInstruction().setProjectItemName(productionInstructionEntity.getProjectItemName());
-                    factoryQuoteInfo.getProductionInstruction().setColorName(productionInstructionEntity.getColorName());
-                    factoryQuoteInfo.getProductionInstruction().setBomName(productionInstructionEntity.getBomName());
+                    if (null != productionInstructionEntity) {
+                        factoryQuoteInfo.getProductionInstruction().setSpName(productionInstructionEntity.getSpName());
+                        factoryQuoteInfo.getProductionInstruction().setProjectItemName(productionInstructionEntity.getProjectItemName());
+                        factoryQuoteInfo.getProductionInstruction().setColorName(productionInstructionEntity.getColorName());
+                        factoryQuoteInfo.getProductionInstruction().setBomName(productionInstructionEntity.getBomName());
+                    }
+
                     factoryQuoteInfo.getProductionInstruction().setBomId(bomId);
 
 

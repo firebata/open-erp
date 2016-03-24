@@ -318,9 +318,9 @@
             bom.fabricItems[idNum - 1].showFlag = true;//是否显示
         }
         bom.fabricItems[idNum - 1].currenId = idNum;//当前序号
-        $.sendRestFulAjax(saveFabricFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doFabricSuccess_info(data, idNum);
-        });
+        //$.sendRestFulAjax(saveFabricFunURL, jsonObj, 'GET', 'json', function (data) {
+        //    _doFabricSuccess_info(data, idNum);
+        //});
     };
 
 

@@ -20,6 +20,11 @@
         factoryQuoteInfos: buildFactoryQuoteInfos
     });
 
+    /**
+     *
+     * @param index
+     * @returns {{}}
+     */
     function buildFactoryQuoteInfo(index) {
 
         var factoryQuoteInfo = {};
@@ -156,10 +161,12 @@
         });
 
         var productionInstruction = _factoryInfo["productionInstruction"];
-        Object.keys(productionInstruction).map(function (key_2) {//遍历工艺单信息
-            $("#" + key_2 + nextIdNum).val(productionInstruction[key_2]);
-        });
+        if (null != productionInstruction) {
+            Object.keys(productionInstruction).map(function (key_2) {//遍历工艺单信息
+                $("#" + key_2 + nextIdNum).val(productionInstruction[key_2]);
+            });
 
+        }
         initFileInput(nextIdNum, _factoryInfo);
 
     }
@@ -170,15 +177,17 @@
      * @param _factoryInfo
      */
     function initFileInput(nextIdNum, _factoryInfo) {
-        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
+
+
         var sketchUrlUidFileinfosMap = null;
         var specificationUrlUidFileinfosMap = null;
 
-        if (null != _factoryInfo) {
+        if (null != _factoryInfo && null != _factoryInfo["productionInstruction"]) {
             sketchUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["sketchUrlUidFileinfosMap"];
             specificationUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["specificationUrlUidFileinfosMap"];
         }
 
+        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
         $.loadFileInput($sketchUrlUid, null, sketchUrlUidFileinfosMap, fileUploadURL);
         $.fileInputAddListenr(null, $sketchUrlUid, null, function () {
         }, getIsSubmitAction);
@@ -188,6 +197,8 @@
 
         $.fileInputAddListenr(null, $specificationUrlUid, null, function () {
         }, getIsSubmitAction);
+
+
     }
 
 
@@ -284,19 +295,19 @@
 
 
     //删除包材
-    function deleteFactoryById(index) {
-        bom.factoryItems.splice(index - 1, 1);
+    function deleteFactoryById(idNum) {
+        bom.factoryItems.splice(idNum - 1, 1);
     }
 
-    function copyFactory(index) {
-        if (bom.factoryItems[index] == undefined || $.trim(bom.factoryItems[index]) == '') {
-            bootbox.alert("请先保存包材_" + index);
+    function copyFactory(idNum) {
+        if (bom.factoryItems[idNum] == undefined || $.trim(bom.factoryItems[idNum]) == '') {
+            bootbox.alert("请先保存包材_" + idNum);
         }
     }
 
-    var deleteFun = function (id) {
-        //当前包材id
-        var curId = id;
+    var deleteFun = function (idNum) {
+        //当前包材idNum
+        var curId = idNum;
         var factoryArrLength = $("div[id^=factoryAllInfoId]").length;
         //删除当前包材和之后的所有包材
         for (var index = curId; index <= factoryArrLength; index++) {
@@ -330,48 +341,48 @@
 
     }
 
-    var doDel = function (result, id) {
+    var doDel = function (result, idNum) {
         if (result) {
-            deleteFun(id);
+            deleteFun(idNum);
         }
     }
 
-    var trashFactorySelect = function (_this, id) {
-        var saveFlag = bom.factoryItems[id - 1].saveFlag;
+    var trashFactorySelect = function (_this, idNum) {
+        var saveFlag = bom.factoryItems[idNum - 1].saveFlag;
         if (saveFlag == true) {
-            bootbox.confirm("包材_" + id + "已保存，确定要删除", function (result) {
-                doDel(result, id);
+            bootbox.confirm("包材_" + idNum + "已保存，确定要删除", function (result) {
+                doDel(result, idNum);
             });
         }
         else {
-            deleteFun(id);
+            deleteFun(idNum);
         }
 
     }
 
-    var saveFactory = function (_this, id) {
-        $('#factoryFormId' + id).bootstrapValidator('validate');
+    var saveFactory = function (_this, idNum) {
+        $('#factoryFormId' + idNum).bootstrapValidator('validate');
     }
 
-    var saveFactoryFun = function (id) {
-        var formDataStr = $("#factoryFormId" + id).serialize();
-        saveFactoryById(id, formDataStr);
+    var saveFactoryFun = function (idNum) {
+        var formDataStr = $("#factoryFormId" + idNum).serialize();
+        saveFactoryById(idNum, formDataStr);
 
 
-        bom.factoryItems[id - 1].saveFlag = true;//已保存
+        bom.factoryItems[idNum - 1].saveFlag = true;//已保存
 
     }
 
 
-    var saveFactoryById = function (id, formDataStr) {
+    var saveFactoryById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
-        bom.factoryItems[id - 1] = jsonObj;
-        if (!$("#factoryAllInfoId" + id).is(':hidden')) {
-            bom.factoryItems[id - 1].showFlag = true;//是否显示
+        bom.factoryItems[idNum - 1] = jsonObj;
+        if (!$("#factoryAllInfoId" + idNum).is(':hidden')) {
+            bom.factoryItems[idNum - 1].showFlag = true;//是否显示
         }
-        bom.factoryItems[id - 1].currenId = id;//当前序号
+        bom.factoryItems[idNum - 1].currenId = idNum;//当前序号
         $.sendRestFulAjax(saveFactoryFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doFactorySuccess_info(data, id);
+            _doFactorySuccess_info(data, idNum);
         });
     }
 
@@ -379,12 +390,12 @@
     /**
      * 显示或者展示div
      * @param _this
-     * @param id
+     * @param idNum
      */
-    var showOrHideFactory = function (_this, id) {
-        var factoryEyeId = "#factoryEyeId" + id;
-        var factoryTrashId = "#factoryTrashId" + id;
-        $("#factoryAllInfoId" + id).toggle(300,
+    var showOrHideFactory = function (_this, idNum) {
+        var factoryEyeId = "#factoryEyeId" + idNum;
+        var factoryTrashId = "#factoryTrashId" + idNum;
+        $("#factoryAllInfoId" + idNum).toggle(300,
             function () {
                 if ($(this).is(':hidden')) {
                     $(factoryEyeId).removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
@@ -401,28 +412,28 @@
     /**
      * 当后台的基础信息修改后，点击刷新，可以刷新cookies信息
      */
-    var refreshFactorySelect = function (_this, id) {
-        var factoryQuoteInfo = buildFactoryQuoteInfo(index);
-        reloadBomSelect(id, function () {
-            initFactoryFields(id, factoryQuoteInfo);
+    var refreshFactorySelect = function (_this, idNum) {
+        var factoryQuoteInfo = buildFactoryQuoteInfo(idNum);
+        reloadBomSelect(idNum, function () {
+            initFactoryFields(idNum, factoryQuoteInfo);
         });
     }
 
 
-    var reloadBomSelect = function (id, callback) {
+    var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
-            _doFactorySuccess_info(data, id, callback);
+            _doFactorySuccess_info(data, idNum, callback);
         });
     }
 
     //第一次初始化下拉列表
-    var reloadFactoryDetailSelectData = function (id, callback) {
-        reloadBomSelect(id, callback);
+    var reloadFactoryDetailSelectData = function (idNum, callback) {
+        reloadBomSelect(idNum, callback);
 
         //if ($.cookie('systemBaseMaps') == undefined) {
         //    //第一次初始化下拉列表，存放到cookies中
         //    $.sendRestFulAjax(path + "/system/baseinfo/bom_select", null, 'GET', 'json', function (data) {
-        //        _doFactorySuccess_info(data, id);
+        //        _doFactorySuccess_info(data, idNum);
         //    });
         //}
         //else {
@@ -433,15 +444,14 @@
 
 
     //cookie重新赋值，给下拉列表赋值
-    var _doFactorySuccess_info = function (_data, id, callback) {
+    var _doFactorySuccess_info = function (_data, idNum, callback) {
         //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
-        initFactorySelect(_data, id, callback);
+        initFactorySelect(_data, idNum, callback);
     }
 
     //给下拉列表赋值
-    var initFactorySelect = function (_data, id, callback) {
-        //console.info("加载包材" + id + "的下拉列表");
-        var idNum = id;
+    var initFactorySelect = function (_data, idNum, callback) {
+        //console.info("加载包材" + idNum + "的下拉列表");
         var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
 
 
