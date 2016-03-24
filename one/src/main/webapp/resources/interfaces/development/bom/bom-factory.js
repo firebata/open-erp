@@ -12,7 +12,7 @@
     var fileUploadURL = path + "/files/upload";
     //var $fileListLi = $("#filesList");
     //var sketchUrlUidUploadFileInfos = [];
-    var specificationUrlUidUploadFileInfos = [];
+    //var specificationUrlUidUploadFileInfos = [];
     var isSubmitAction = 'N';
 
     $.extend({
@@ -38,28 +38,30 @@
         factoryQuoteInfo.nameNum = index;
 
         var productionInstruction = {};
-        productionInstruction.productionInstructionId = $("productionInstructionId" + index).val();
-        productionInstruction.cropRequirements = $("cropRequirements" + index).val();
+        productionInstruction.factoryQuoteId = $("#factoryQuoteId" + index).val();
+        productionInstruction.productionInstructionId = $("#productionInstructionId" + index).val();
+        productionInstruction.cropRequirements = $("#cropRequirements" + index).val();
         productionInstruction.offerAmount = $("#offerAmount" + index).val();
         productionInstruction.spId = $("#spIdC" + index).val();
         productionInstruction.clothReceivedDate = $("#clothReceivedDate" + index).val();
-        productionInstruction.qualityRequirements = $("qualityRequirements" + index).val();
-        productionInstruction.finishPressingRequirements = $("finishPressingRequirements" + index).val();
-        productionInstruction.spcialTech = $("spcialTech" + index).val();
-        productionInstruction.packingRequirements = $("packingRequirements" + index).val();
-        productionInstruction.overstitch = $("overstitch" + index).val();
-        productionInstruction.overstitchSpace = $("overstitchSpace" + index).val();
-        productionInstruction.blindstitch = $("blindstitch" + index).val();
-        productionInstruction.blindstitchSpace = $("blindstitchSpace" + index).val();
-        productionInstruction.overlock = $("overlock" + index).val();
-        productionInstruction.overlockSpace = $("overlockSpace" + index).val();
-        productionInstruction.trademarkCode = $("trademarkCode" + index).val();
-        productionInstruction.trademarkRemark = $("trademarkRemark" + index).val();
-        productionInstruction.scaleRemark = $("scaleRemark" + index).val();
-        productionInstruction.rinsingMarksCode = $("rinsingMarksCode" + index).val();
-        productionInstruction.rinsingMarksRemark = $("rinsingMarksRemark" + index).val();
-        productionInstruction.sketchUrlUid = $("sketchUrlUid" + index).val();
-        productionInstruction.specificationUrlUid = $("specificationUrlUid" + index).val();
+        productionInstruction.qualityRequirements = $("#qualityRequirements" + index).val();
+        productionInstruction.finishPressingRequirements = $("#finishPressingRequirements" + index).val();
+        productionInstruction.spcialTech = $("#spcialTech" + index).val();
+        productionInstruction.packingRequirements = $("#packingRequirements" + index).val();
+        productionInstruction.overstitch = $("#overstitch" + index).val();
+        productionInstruction.overstitchSpace = $("#overstitchSpace" + index).val();
+        productionInstruction.blindstitch = $("#blindstitch" + index).val();
+        productionInstruction.blindstitchSpace = $("#blindstitchSpace" + index).val();
+        productionInstruction.overlock = $("#overlock" + index).val();
+        productionInstruction.overlockSpace = $("#overlockSpace" + index).val();
+        productionInstruction.trademarkCode = $("#trademarkCode" + index).val();
+        productionInstruction.trademarkRemark = $("#trademarkRemark" + index).val();
+        productionInstruction.scaleCode = $("#scaleCode" + index).val();
+        productionInstruction.scaleRemark = $("#scaleRemark" + index).val();
+        productionInstruction.rinsingMarksCode = $("#rinsingMarksCode" + index).val();
+        productionInstruction.rinsingMarksRemark = $("#rinsingMarksRemark" + index).val();
+        productionInstruction.sketchUrlUid = $("#sketchUrlUid" + index).val();
+        productionInstruction.specificationUrlUid = $("#specificationUrlUid" + index).val();
         //上传文件
         var sketchUrlUidUploadFileInfos = [];
         var specificationUrlUidUploadFileInfos = [];
@@ -142,26 +144,52 @@
 
         //初始化赋值
         Object.keys(_factoryInfo).map(function (key) {
+            var keyVal = _factoryInfo[key];
             if (key === 'spId') {
                 //下拉框
-                $("#spIdC" + nextIdNum).val(_factoryInfo[key]);
+                $("#spIdC" + nextIdNum).val(keyVal);
             } else {
-                //下拉框
-                $("#" + key + nextIdNum).val(_factoryInfo[key]);
-            }
 
+                //下拉框
+                $("#" + key + nextIdNum).val(keyVal);
+            }
         });
 
-        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
-        $.loadFileInput($sketchUrlUid, null, _factoryInfo["productionInstruction"]["sketchUrlUidFileinfosMap"], fileUploadURL);
-        $.fileInputAddListenr(null, $sketchUrlUid, null, function () {}, getIsSubmitAction);
+        var productionInstruction = _factoryInfo["productionInstruction"];
+        Object.keys(productionInstruction).map(function (key_2) {//遍历工艺单信息
+            $("#" + key_2 + nextIdNum).val(productionInstruction[key_2]);
+        });
 
-        var $specificationUrlUid = $("#specificationUrlUid" + nextIdNum);
-        $.loadFileInput($specificationUrlUid, null, _factoryInfo["productionInstruction"]["specificationUrlUidFileinfosMap"], fileUploadURL);
-
-        $.fileInputAddListenr(null, $specificationUrlUid, null, function () {}, getIsSubmitAction);
+        initFileInput(nextIdNum, _factoryInfo);
 
     }
+
+    /**
+     * 初始化上传插件
+     * @param nextIdNum
+     * @param _factoryInfo
+     */
+    function initFileInput(nextIdNum, _factoryInfo) {
+        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
+        var sketchUrlUidFileinfosMap = null;
+        var specificationUrlUidFileinfosMap = null;
+
+        if (null != _factoryInfo) {
+            sketchUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["sketchUrlUidFileinfosMap"];
+            specificationUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["specificationUrlUidFileinfosMap"];
+        }
+
+        $.loadFileInput($sketchUrlUid, null, sketchUrlUidFileinfosMap, fileUploadURL);
+        $.fileInputAddListenr(null, $sketchUrlUid, null, function () {
+        }, getIsSubmitAction);
+
+        var $specificationUrlUid = $("#specificationUrlUid" + nextIdNum);
+        $.loadFileInput($specificationUrlUid, null, specificationUrlUidFileinfosMap, fileUploadURL);
+
+        $.fileInputAddListenr(null, $specificationUrlUid, null, function () {
+        }, getIsSubmitAction);
+    }
+
 
     function getIsSubmitAction() {
         return isSubmitAction;
@@ -204,7 +232,7 @@
 
                     //"exchangeCosts": "exchangeCosts" + nextIdNum,
                     //"costing": "costing" + nextIdNum
-
+                    "productionInstructionId": "productionInstructionId" + nextIdNum,
                     "productionInstructionDetailId": "productionInstructionDetailId" + nextIdNum,
                     "productionInstructionTitleName": "productionInstructionTitleName" + nextIdNum,
                     "cropRequirements": "cropRequirements" + nextIdNum,
@@ -220,6 +248,7 @@
                     "overlockSpace": "overlockSpace" + nextIdNum,
                     "trademarkCode": "trademarkCode" + nextIdNum,
                     "trademarkRemark": "trademarkRemark" + nextIdNum,
+                    "scaleCode": "scaleCode" + nextIdNum,
                     "scaleRemark": "scaleRemark" + nextIdNum,
                     "rinsingMarksCode": "rinsingMarksCode" + nextIdNum,
                     "rinsingMarksRemark": "rinsingMarksRemark" + nextIdNum,
@@ -239,14 +268,15 @@
 
         //加载下拉列表数据,付初始值
         reloadFactoryDetailSelectData(nextIdNum, function () {
-            if (factoryInfo != undefined) {
-
+            if (factoryInfo != null) {
                 initFactoryFields(nextIdNum, factoryInfo);
-
                 //表单字段监听
                 startBootstrapValidatorListner(nextIdNum);
-
+            } else {
+                initFileInput(nextIdNum, factoryInfo);
             }
+
+
         });
 
 

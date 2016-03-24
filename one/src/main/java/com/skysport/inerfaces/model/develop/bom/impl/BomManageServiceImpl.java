@@ -74,7 +74,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
             //包材
             List<KFPackaging> packagings = packagingService.queryPackagingList(bomId);
 
-            //成衣厂
+            //成衣厂 & 生产指示单
             List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.queryFactoryQuoteInfoList(bomId);
 
             bomInfo.setFabrics(fabricItems);
@@ -85,28 +85,24 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
             bomInfo.setFactoryQuoteInfos(factoryQuoteInfos);
 
-            //生产指示单
-            buildProductionInstruction(factoryQuoteInfos);
-
-
         }
         return bomInfo;
     }
-
-    /**
-     * 查询生产指示单信息
-     *
-     * @param factoryQuoteInfos
-     */
-    private void buildProductionInstruction(List<FactoryQuoteInfo> factoryQuoteInfos) {
-        if (null != factoryQuoteInfos) {
-            for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
-                KfProductionInstructionEntity productionInstruction = new KfProductionInstructionEntity();
-                factoryQuoteInfo.setProductionInstruction(productionInstruction);
-            }
-        }
-
-    }
+//
+//    /**
+//     * 查询生产指示单信息
+//     *
+//     * @param factoryQuoteInfos
+//     */
+//    private void buildProductionInstruction(List<FactoryQuoteInfo> factoryQuoteInfos) {
+//        if (null != factoryQuoteInfos) {
+//            for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
+//                KfProductionInstructionEntity productionInstruction = new KfProductionInstructionEntity();
+//                factoryQuoteInfo.setProductionInstruction(productionInstruction);
+//            }
+//        }
+//
+//    }
 
     @Override
     public void edit(BomInfo bomInfo) {

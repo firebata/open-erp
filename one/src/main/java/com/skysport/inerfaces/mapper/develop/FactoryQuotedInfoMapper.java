@@ -25,4 +25,6 @@ public interface FactoryQuotedInfoMapper extends CommonDao<FactoryQuoteInfo> {
     void addProductionInstruction(KfProductionInstructionEntity productionInstruction);
 
     KfProductionInstructionEntity queryProjectAndBomInfoByFactoryQuoteId(String quoteInfoId);
+
+    KfProductionInstructionEntity queryProductionInstractionInfo(String factoryQuoteId);
 }

@@ -134,7 +134,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
-        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
+        UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT_ITEM);
 
         //更新t_project表
         super.edit(info);
@@ -170,11 +170,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         info.setCategoryAid(categoryAid);
         info.setCategoryBid(categoryBid);
 
-
         //生成BOM信息并保存
         BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
-
-
     }
 
     @Override

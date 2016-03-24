@@ -109,7 +109,17 @@ public enum UploadFileHelper {
     }
 
     public Map<String, Object> getFileInfoMap(IUploadFileInfoService uploadFileInfoService, String natrualKey) {
-        List<UploadFileInfo> fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
+        return getFileInfoMap(uploadFileInfoService, natrualKey, null);
+    }
+
+    public Map<String, Object> getFileInfoMap(IUploadFileInfoService uploadFileInfoService, String natrualKey, String type) {
+
+        List<UploadFileInfo> fileInfos;
+        if (null == type) {
+            fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, WebConstants.FILE_IN_FINISH);
+        } else {
+            fileInfos = uploadFileInfoService.queryListByBussId(natrualKey, type, WebConstants.FILE_IN_FINISH);
+        }
         Map<String, Object> fileinfosMap = new HashMap<>();
         buildInitialPreviewByFileRecords(fileinfosMap, fileInfos);
         return fileinfosMap;

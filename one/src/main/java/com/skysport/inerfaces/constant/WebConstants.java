@@ -86,10 +86,17 @@ public interface WebConstants extends TableNameConstants {
     String FILE_IN_FINISH = "1";//文件为删除
 
 
+    //文件类型
     String FILE_KIND_USER = "1";//用户头像
     String FILE_KIND_SP = "2";//供应商头像
     String FILE_KIND_PROJECT = "3";//项目附件
     String FILE_KIND_PROJECT_ITEM = "4";//子项目附件
+    String FILE_KIND_SKETCH = "5";//款式图
+    String FILE_KIND_TRADEMARK = "6";//商标
+    String FILE_KIND_SCALE = "7";//尺标
+    String FILE_KIND_RINSING_MARKS = "8";//水洗标
+    String FILE_KIND_SPECIFICATION = "9";//规格表
+
 
     String BOM_DETAIL_CN_NAME = "面辅料详细";
     String BOM_QUOTE_CN_NAME = "报价表";

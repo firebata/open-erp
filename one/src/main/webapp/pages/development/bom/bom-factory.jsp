@@ -125,7 +125,7 @@
 
 
                 <div id="{{productionInstructionDetailId}}" class="bom-info">
-
+                    <input type="hidden" name="productionInstructionId" id="{{productionInstructionId}}"/>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">

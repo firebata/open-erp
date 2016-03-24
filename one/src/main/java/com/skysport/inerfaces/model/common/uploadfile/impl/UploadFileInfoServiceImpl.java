@@ -33,4 +33,9 @@ public class UploadFileInfoServiceImpl extends CommonServiceImpl<UploadFileInfo>
     public List<UploadFileInfo> queryListByBussId(String bussId, String status) {
         return uploadFileInfoMapper.queryListByBussId(bussId, status);
     }
+
+    @Override
+    public List<UploadFileInfo> queryListByBussId(String bussId, String type, String status) {
+        return uploadFileInfoMapper.queryListByBussIdAndType(bussId, type, status);
+    }
 }

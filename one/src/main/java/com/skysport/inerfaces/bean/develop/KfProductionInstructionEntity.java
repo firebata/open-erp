@@ -1,14 +1,14 @@
-package com.skysport.inerfaces.bean.develop; /******************************************************************
+package com.skysport.inerfaces.bean.develop;
+/******************************************************************
  * * 类    名：KfProductionInstructionEntity
  * * 描    述：生产指示单
  * * 创 建 者：zhangjh
  * * 创建时间：2016-03-22 14:37:08
  ******************************************************************/
-
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
-
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 生产指示单(T_KF_PRODUCTION_INSTRUCTION)
@@ -182,6 +182,16 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
     private List<UploadFileInfo> sketchUrlUidUploadFileInfos;
 
     private List<UploadFileInfo> specificationUrlUidUploadFileInfos;
+
+    /**
+     * 存放初始化文件上传控件中的信息
+     */
+    private Map<String, Object> sketchUrlUidFileinfosMap;
+
+    /**
+     * 存放初始化文件上传控件中的信息
+     */
+    private Map<String, Object> specificationUrlUidFileinfosMap;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -774,5 +784,21 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
 
     public void setSpName(String spName) {
         this.spName = spName;
+    }
+
+    public Map<String, Object> getSketchUrlUidFileinfosMap() {
+        return sketchUrlUidFileinfosMap;
+    }
+
+    public void setSketchUrlUidFileinfosMap(Map<String, Object> sketchUrlUidFileinfosMap) {
+        this.sketchUrlUidFileinfosMap = sketchUrlUidFileinfosMap;
+    }
+
+    public Map<String, Object> getSpecificationUrlUidFileinfosMap() {
+        return specificationUrlUidFileinfosMap;
+    }
+
+    public void setSpecificationUrlUidFileinfosMap(Map<String, Object> specificationUrlUidFileinfosMap) {
+        this.specificationUrlUidFileinfosMap = specificationUrlUidFileinfosMap;
     }
 }

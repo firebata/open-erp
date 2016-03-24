@@ -18,4 +18,8 @@ public interface UploadFileInfoMapper extends CommonDao<UploadFileInfo> {
     void del(@Param(value = "uid") String uid, @Param(value = "status") String status);
 
     List<UploadFileInfo> queryListByBussId(@Param(value = "bussId") String bussId, @Param(value = "status") String status);
+
+    List<UploadFileInfo> queryListByBussIdAndType(@Param(value = "bussId") String bussId, @Param(value = "type") String type, @Param(value = "status") String status);
+
+
 }

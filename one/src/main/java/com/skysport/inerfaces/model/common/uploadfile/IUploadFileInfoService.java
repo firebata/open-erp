@@ -26,4 +26,13 @@ public interface IUploadFileInfoService extends ICommonService<UploadFileInfo> {
      * @param status 文件中间状态
      */
     List<UploadFileInfo> queryListByBussId(String bussId, String status);
+
+    /**
+     * @param bussId
+     * @param type
+     * @param status
+     * @return
+     */
+    List<UploadFileInfo> queryListByBussId(String bussId, String type, String status);
+
 }

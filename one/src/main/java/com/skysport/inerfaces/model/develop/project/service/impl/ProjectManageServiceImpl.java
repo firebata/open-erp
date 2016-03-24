@@ -73,7 +73,6 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
-        logger.info("info=====>" + info);
 
         //新增项目时组装项目名等信息
         info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);

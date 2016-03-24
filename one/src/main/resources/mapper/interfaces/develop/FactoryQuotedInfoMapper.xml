@@ -129,7 +129,7 @@
 
     <insert id="addProductionInstruction">
         insert into
-        t_kf_production_instruction(uid,factory_quote_id,bom_id,project_item_name,bom_name,sp_id,color_name,offer_amout,rop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements)
+        t_kf_production_instruction(uid,factory_quote_id,bom_id,project_item_name,bom_name,sp_id,color_name,offer_amout,crop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements,spcial_tech,packing_requirements,trademark_code,trademark_remark ,scale_code ,scale_remark,rinsing_marks_code,rinsing_marks_remark)
         values(#{uid},#{factoryQuoteId},#{bomId},#{projectItemName},#{bomName},#{spId},#{colorName},#{offerAmout},#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
     </insert>
 
@@ -139,6 +139,50 @@
         set  del_flag=1
         where bom_id =#{bomId}
     </update>
+
+
+    <sql id="searcProductionInstractionInfoSql">
+        id								AS 	 id,
+        uid                 			AS   uid,
+        uid                 			AS   productionInstructionId,
+        factory_quote_id    			AS   factoryQuoteId,
+        bom_id              			AS   bomId,
+        project_item_name   			AS   projectItemName,
+        bom_name            			AS   bomName,
+        sp_id               			AS   spId,
+        sp_name							AS   spName,
+        color_name          			AS   colorName,
+        offer_amout         			AS   offerAmout,
+        crop_requirements    			AS   cropRequirements,
+        quality_requirements     		AS   qualityRequirements,
+        overstitch               		AS   overstitch,
+        overstitch_space         		AS   overstitchSpace,
+        blindstitch               		AS   blindstitch,
+        blindstitch_space          		AS   blindstitchSpace,
+        overlock                  		AS   overlock,
+        overlock_space              	AS   overlockSpace,
+        finish_pressing_requirements	AS   finishPressingRequirements,
+        spcial_tech                 	AS   spcialTech,
+        packing_requirements        	AS   packingRequirements,
+        trademark_code              	AS   trademarkCode,
+        trademark_remark            	AS   trademarkRemark,
+        scale_code                  	AS   scaleCode,
+        scale_remark                	AS   scaleRemark,
+        rinsing_marks_code          	AS   rinsingMarksCode,
+        rinsing_marks_remark        	AS   rinsingMarksRemark,
+        del_flag                        AS   delFlag,
+        update_time                     AS   updateTime,
+        remark                          AS   remark
+    </sql>
+
+    <select id="queryProductionInstractionInfo" resultType="KfProductionInstructionEntity">
+        SELECT
+           <include refid="searcProductionInstractionInfoSql"/>
+        FROM
+        t_kf_production_instruction a
+        WHERE
+        a.factory_quote_id =#{factoryQuoteId} and a.del_flag=0
+    </select>
 
 
     <select id="queryFactoryQuoteInfoList" resultType="FactoryQuoteInfo">
