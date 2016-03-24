@@ -381,9 +381,9 @@
             bom.factoryItems[idNum - 1].showFlag = true;//是否显示
         }
         bom.factoryItems[idNum - 1].currenId = idNum;//当前序号
-        $.sendRestFulAjax(saveFactoryFunURL, jsonObj, 'GET', 'json', function (data) {
-            _doFactorySuccess_info(data, idNum);
-        });
+        //$.sendRestFulAjax(saveFactoryFunURL, jsonObj, 'GET', 'json', function (data) {
+        //    _doFactorySuccess_info(data, idNum);
+        //});
     }
 
 
