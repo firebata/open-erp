@@ -76,9 +76,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
             for (FabricsJoinInfo fabricsJoinInfo : fabricItems) {
 
                 String fabricId = fabricsJoinInfo.getFabricsInfo().getFabricId();
-                MaterialSpInfo materialSpInfo  = fabricsJoinInfo.getMaterialSpInfo();
-                BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
-                materialSpInfo.setTotalPrice(totalPrice);
+                MaterialSpInfo materialSpInfo = fabricsJoinInfo.getMaterialSpInfo();
+                if (null != materialSpInfo.getUnitPrice() && null != materialSpInfo.getTotalAmount()) {
+                    BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
+                    materialSpInfo.setTotalPrice(totalPrice);
+                }
 
                 //有id，更新
                 if (StringUtils.isNotBlank(fabricId)) {

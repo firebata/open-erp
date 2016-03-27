@@ -68,8 +68,10 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 String accessoriesId = accessoriesJoinInfo.getAccessoriesInfo().getAccessoriesId();
 
                 MaterialSpInfo materialSpInfo = accessoriesJoinInfo.getMaterialSpInfo();
-                BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
-                materialSpInfo.setTotalPrice(totalPrice);
+                if (null != materialSpInfo.getUnitPrice() && null != materialSpInfo.getTotalAmount()) {
+                    BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
+                    materialSpInfo.setTotalPrice(totalPrice);
+                }
                 //有id，更新
                 if (StringUtils.isNotBlank(accessoriesId)) {
 
