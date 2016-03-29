@@ -16,5 +16,5 @@ public interface IQuotedService extends ICommonService<QuotedInfo> {
 
     void updateOrAdd(QuotedInfo quotedInfo);
 
-    void download(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException;
+    void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException;
 }

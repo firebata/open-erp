@@ -10,6 +10,7 @@ import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -148,5 +151,18 @@ public class BomAction extends BaseAction<String, Object, BomInfo> {
         info.setQuotedInfo(quotedInfo);
         return info;
     }
+
+
+    /**
+     * @return 导出报价表
+     * @throws IOException
+     */
+    @RequestMapping("/download_productinstruction/{natrualkeys}")
+    @SystemControllerLog(description = "导出生产指示单")
+    public ModelAndView downloadProductinstruction(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException, InvalidFormatException {
+        bomManageService.downloadProductinstruction(request, response, natrualkeys);
+        return null;
+    }
+
 
 }

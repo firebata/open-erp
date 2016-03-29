@@ -12,5 +12,11 @@ import java.util.List;
 public interface ISexColorService extends ICommonService<SexColor> {
 
 
-    List<SexColor> searchInfos2(String natrualKey);
+    List<SexColor> searchInfos2(String projectId);
+
+    void updateSexColorByProjectIdAndSexId(SexColor sexColor);
+
+    void updateSexColorByProjectIdAndSexId(String sexId, String mainColorNew, String mainColorOld, String projectId);
+
+    void delByProjectId(String projectId);
 }

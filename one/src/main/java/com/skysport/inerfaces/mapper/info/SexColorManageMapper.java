@@ -13,6 +13,9 @@ import java.util.List;
 @Component("sexColorManageMapper")
 public interface SexColorManageMapper extends CommonDao<SexColor> {
 
-    List<SexColor> searchInfos2(String natrualKey);
+    List<SexColor> searchInfos2(String projectId);
 
+    void updateSexColorByProjectIdAndSexId(SexColor sexColor);
+
+    void delByProjectId(String projectId);
 }

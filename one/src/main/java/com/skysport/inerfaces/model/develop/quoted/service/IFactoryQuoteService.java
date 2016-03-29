@@ -15,5 +15,5 @@ public interface IFactoryQuoteService extends ICommonService<FactoryQuoteInfo> {
 
     List<FactoryQuoteInfo> queryFactoryQuoteInfoList(String bomId);
 
-    void updateBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo);
+    List<FactoryQuoteInfo> updateBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo);
 }

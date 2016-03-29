@@ -1,20 +1,20 @@
 package com.skysport.inerfaces.model.develop.accessories.service.impl;
 
 import com.skysport.core.constant.CharConstant;
+import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.AccessoriesManageMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
-import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -55,7 +55,9 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
      * @param bomInfo
      */
     @Override
-    public void updateBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
+    public List<AccessoriesInfo> updateBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
+        //返回辅料的id和序号信息
+        List<AccessoriesInfo> accessoriesRtn = new ArrayList<>();
 
         //找出被删除的面料id，并删除
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
@@ -83,12 +85,13 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 }
                 //无id，新增
                 else {
-                    String kind_name = buildKindName(bomInfo, accessoriesJoinInfo);
-
-                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
-
-                    //年份+客户+地域+系列+NNN
-                    accessoriesId = kind_name + seqNo;
+//                    String kind_name = buildKindName(bomInfo, accessoriesJoinInfo);
+//
+//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
+//
+//                    //年份+客户+地域+系列+NNN
+//                    accessoriesId = kind_name + seqNo;
+                    accessoriesId = PrimaryKeyUtils.getUUID();
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
                     accessoriesManageMapper.add(accessoriesJoinInfo.getAccessoriesInfo());
                     //新增面料用量
@@ -97,6 +100,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                     accessoriesManageMapper.addSp(accessoriesJoinInfo.getMaterialSpInfo());
 
                 }
+                accessoriesRtn.add(accessoriesJoinInfo.getAccessoriesInfo());
 
                 if (null != accessoriesJoinInfo.getAccessoriesInfo().getPositionIds() && !accessoriesJoinInfo.getAccessoriesInfo().getPositionIds().isEmpty()) {
                     kFMaterialPositionService.addBatch(accessoriesJoinInfo.getAccessoriesInfo().getPositionIds());
@@ -108,6 +112,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 }
             }
         }
+        return accessoriesRtn;
     }
 
     @Override
@@ -148,6 +153,12 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds(), accessoriesId);
     }
 
+    /**
+     * 从数据库删除‘已从页面删除的辅料信息’
+     *
+     * @param accessoriesItems
+     * @param bomId
+     */
     private void deleteAccessoriesByIds(List<AccessoriesJoinInfo> accessoriesItems, String bomId) {
 
         List<String> allAccessoriesIds = accessoriesManageMapper.selectAllAccessoriesId(bomId);
@@ -168,8 +179,9 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         if (null != accessoriesItems) {
             for (AccessoriesJoinInfo accessoriesJoinInfo : accessoriesItems) {
                 String accessoriesId = accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId();
-                needToSaveAccessoriesId.add(accessoriesId);
-
+                if (StringUtils.isNotEmpty(accessoriesId)) {
+                    needToSaveAccessoriesId.add(accessoriesId);
+                }
             }
         }
         return needToSaveAccessoriesId;

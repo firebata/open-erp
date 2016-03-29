@@ -17,8 +17,6 @@ public enum DateUtils {
     public final static String YYYYMMDDHHMMSS = "yyyyMMddhhmmss";
 
 
-
-
     public String getYyyy() {
         LocalDate today = LocalDate.now();
         return String.valueOf(today.getYear());
@@ -45,7 +43,19 @@ public enum DateUtils {
             yyyymmdd = today.getYear() + CharConstant.EMPTY + today.getMonthValue() + day;
         }
         return yyyymmdd;
+    }
 
+    public String getYyyy_Mm_dd() {
+        LocalDate today = LocalDate.now();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+        StringBuilder yyyymmdd = new StringBuilder();
+        yyyymmdd.append(today.getYear()).append(CharConstant.HORIZONTAL_LINE);
+        if (month < 10) {
+            yyyymmdd.append(CharConstant.ZERO);
+        }
+        yyyymmdd.append(today.getMonthValue()).append(CharConstant.HORIZONTAL_LINE).append(day);
+        return yyyymmdd.toString();
     }
 
     /**

@@ -29,4 +29,6 @@ public interface IProjectItemManageService extends ICommonService<ProjectBomInfo
     void addBatchBomInfo(List<ProjectBomInfo> info);
 
     void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, UnsupportedEncodingException;
+
+    void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
 }

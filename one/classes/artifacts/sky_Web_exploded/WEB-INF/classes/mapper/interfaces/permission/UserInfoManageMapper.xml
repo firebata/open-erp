@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.permission.UserInfoManageMapper">
+    <sql id="searchInfoSql">
+       t.id AS id,
+       t.user_id AS natrualkey,
+       t.user_name AS name,
+       t.aliases AS aliases,
+       t.user_pwd AS password,
+       t.user_type AS userType,
+       t.user_email AS userEmail,
+       t.user_mobile AS userMobile,
+       t.lock_flag AS lockFlag,
+       t.question AS question,
+       t.answer AS answer,
+       t.last_login_time AS lastLoginTime,
+       t.is_online AS isOnline,
+       t.is_limit AS isLimit,
+       t.del_flag AS delFlag,
+       t.update_time AS updateTime,
+       t.remark AS remark,
+       t.is_admin AS isAdmin,
+       n.file_url as imgUrl
+    </sql>
+    <sql id="searchInfoSql2">
+        id AS id,
+        user_id AS natrualkey,
+        user_name AS name,
+        aliases AS aliases,
+        user_pwd AS password,
+        user_type AS userType,
+        user_email AS userEmail,
+        user_mobile AS userMobile,
+        lock_flag AS lockFlag,
+        question AS question,
+        answer AS answer,
+        last_login_time AS lastLoginTime,
+        is_online AS isOnline,
+        is_limit AS isLimit,
+        del_flag AS delFlag,
+        update_time AS updateTime,
+        remark AS remark,
+        is_admin AS isAdmin
+    </sql>
+    <select id="queryInfo" resultType="UserInfo">
+        select
+          <include refid="searchInfoSql"/>
+        FROM t_qx_user t LEFT JOIN t_sys_file_records n
+        ON t.user_id = n.buss_id
+        and n.status=1
+        and n.del_flag=0
+        WHERE user_id =#{natrualkey} and t.del_flag=0
+        limit 1
+    </select>
+
+    <select id="queryInfoByUserInfoName" resultType="UserInfo">
+        select
+          <include refid="searchInfoSql"/>
+        FROM t_qx_user t LEFT JOIN t_sys_file_records n
+        ON t.user_id = n.buss_id
+        and n.status=1
+        and n.del_flag=0
+        WHERE t.user_name =#{userName} and t.del_flag=0
+        limit 1
+    </select>
+
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM
+        t_qx_user t where del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_qx_user t where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            user_name like concat('%',#{searchValue},'%') or
+            user_email like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="UserInfo">
+        SELECT
+        <include refid="searchInfoSql2"/>
+        FROM t_qx_user t
+        WHERE del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            user_name like concat('%',#{searchValue},'%') or
+            user_email like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+    </select>
+
+    <update id="updateInfo">
+        update t_qx_user t
+        set
+        aliases=#{aliases},
+        user_email=#{userEmail},
+        remark=#{remark},
+        user_type=#{userType}
+        WHERE user_id =#{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert into
+        t_qx_user t (user_id,user_name,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
+        values (#{natrualkey},#{name},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
+    </insert>
+
+    <update id="del">
+        update t_qx_user t
+        set  del_flag=1
+        where user_id =#{natrualkey}
+    </update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+        select case when  user_id is NULL then 0 else user_id end from t_qx_user t    ORDER BY id DESC LIMIT 1
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        user_id AS natrualkey,
+        user_name AS name
+        from t_qx_user t
+        where del_flag=0
+        <if test="name!=null and name!=''">and upper(name) like concat('%',#{name},'%')</if>
+    </select>
+
+    <!--修改用户密码-->
+    <update id="chgpwd">
+        update t_qx_user t
+        set
+        user_pwd = #{password}
+        where user_id= #{natrualkey}
+    </update>
+
+</mapper>

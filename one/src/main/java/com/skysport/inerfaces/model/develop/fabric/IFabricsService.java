@@ -29,7 +29,7 @@ public interface IFabricsService extends ICommonService<FabricsInfo> {
      *
      * @param fabricItems
      */
-    void updateBatch(List<FabricsJoinInfo> fabricItems,BomInfo bomInfo);
+    List<FabricsInfo> updateBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo);
 
 
     List<FabricsInfo> queryAllFabricByBomId(String bomId);

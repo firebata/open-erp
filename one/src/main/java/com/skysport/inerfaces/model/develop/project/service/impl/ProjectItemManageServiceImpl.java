@@ -1,14 +1,13 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
-import com.skysport.core.constant.CharConstant;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.*;
-import com.skysport.inerfaces.bean.info.MainColor;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.mapper.develop.ProjectItemManageMapper;
@@ -19,11 +18,9 @@ import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
-import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import com.skysport.inerfaces.model.info.main_color.IMainColorService;
-import com.skysport.inerfaces.model.info.main_color.helper.MainColorHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -93,29 +90,29 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         return projectItemManageMapper.queryCurrentSeqNo(info);
     }
 
-    @Override
-    public void add(ProjectBomInfo info) {
-//        LocalDate today = LocalDate.now();
-        String name = ProjectManageHelper.buildProjectName(info);
-        info.setName(name);
-        info.setProjectName(name);
-
-        //增加主项目信息
-        super.add(info);
-
-        //增加项目BOM信息
-        addBomInfo(info);
-
-        List<MainColor> mainColorList = MainColorHelper.SINGLETONE.turnMainColorStrToList(info);
-
-        //增加项目主颜色信息
-        mainColorService.add(mainColorList);
-
-
-        //生成BOM信息并保存
-        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
-
-    }
+//    @Override
+//    public void add(ProjectBomInfo info) {
+////        LocalDate today = LocalDate.now();
+//        String name = ProjectManageHelper.buildProjectName(info);
+//        info.setName(name);
+//        info.setProjectName(name);
+//
+//        //增加主项目信息
+//        super.add(info);
+//
+//        //增加项目BOM信息
+//        addBomInfo(info);
+//
+//        List<MainColor> mainColorList = MainColorHelper.SINGLETONE.turnMainColorStrToList(info);
+//
+//        //增加项目主颜色信息
+//        mainColorService.add(mainColorList);
+//
+//
+//        //生成BOM信息并保存
+//        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
+//
+//    }
 
     /**
      * 项目编号是由年份+客户+地域+系列+NNN构成，但是上面的信息可能会更改，如果按照这个这个规则，项目编号应该要更改才对，但目前的处理方式是，项目编号和序号都不改变
@@ -147,11 +144,12 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 //
 //        List<MainColor> mainColorList = MainColorHelper.SINGLETONE.turnMainColorStrToList(info);
 
-        sexColorService.del(info.getNatrualkey());
+        sexColorService.delByProjectId(info.getNatrualkey());
 
-
-        //增加项目主颜色信息
-        sexColorService.addBatch(info.getSexColors());
+        if (null != info.getSexColors() && !info.getSexColors().isEmpty()) {
+            //增加项目主颜色信息
+            sexColorService.addBatch(info.getSexColors());
+        }
 
 
         ProjectBomInfo info2 = super.queryInfoByNatrualKey(info.getNatrualkey());
@@ -278,7 +276,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
             bomDetailExcelName.append(StringUtils.join(seriesNameSet.toArray(), ""));
             bomDetailExcelName.append(StringUtils.join(bomNameSet.toArray(), ""));
-            bomDetailExcelName.append(WebConstants.SUFFIX_EXCEL);
+            bomDetailExcelName.append(WebConstants.SUFFIX_EXCEL_XLS);
             String fileName = bomDetailExcelName.toString();
 
 
@@ -291,4 +289,15 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
             UpDownUtils.download(request, response, fileName, downLoadPath);
         }
     }
+
+    /**
+     * @param mainColorNew
+     * @param mainColorOld
+     * @param projectId    子项目
+     */
+    @Override
+    public void updateMainColors(String sexId, String mainColorNew, String mainColorOld, String projectId) {
+        sexColorService.updateSexColorByProjectIdAndSexId(sexId, mainColorNew, mainColorOld, projectId);
+    }
+
 }

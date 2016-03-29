@@ -100,12 +100,13 @@ public interface WebConstants extends TableNameConstants {
 
     String BOM_DETAIL_CN_NAME = "面辅料详细";
     String BOM_QUOTE_CN_NAME = "报价表";
+    String BOM_PI_CN_NAME = "翊凯生成指示单";
 
     String AND = " and ";
     String OR = " or ";
 
-    String SUFFIX_EXCEL = ".xls";
-
+    String SUFFIX_EXCEL_XLS = ".xls";
+    String SUFFIX_EXCEL_XLSX = ".xlsx";
     String SP_TABLE_COLUMN = "sp_table_column";
     String PANTONE_TABLE_COLUMN = "pantone_table_column";
     String CUSTOMER_TABLE_COLUMN = "customer_table_column";
@@ -146,4 +147,6 @@ public interface WebConstants extends TableNameConstants {
     String IS_LIMIT = "is_limit";
 
     String DEPT_TYPE = "dept_type";
+
+
 }

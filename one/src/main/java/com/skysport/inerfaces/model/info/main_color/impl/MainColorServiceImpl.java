@@ -15,37 +15,37 @@ import java.util.List;
 @Service("mainColorService")
 public class MainColorServiceImpl implements IMainColorService {
 
-    @Resource(name = "mainColorManageMapper")
-    private MainColorManageMapper mainColorManageMapper;
-
-    /**
-     * 根据项目id查询出所有主颜色
-     *
-     * @param projectId
-     * @return
-     */
-    @Override
-    public List<MainColor> queryMainColorList(String projectId) {
-        return mainColorManageMapper.queryMainColorList(projectId);
-    }
-
-    /**
-     * 保存项目中的主颜色信息
-     *
-     * @param mainColorList
-     */
-    @Override
-    public void add(List<MainColor> mainColorList) {
-        mainColorManageMapper.add(mainColorList);
-    }
-
-    /**
-     * @param natrualkey 项目id
-     */
-    @Override
-    public void delete(String natrualkey) {
-        mainColorManageMapper.delete(natrualkey);
-    }
+//    @Resource(name = "mainColorManageMapper")
+//    private MainColorManageMapper mainColorManageMapper;
+//
+//    /**
+//     * 根据项目id查询出所有主颜色
+//     *
+//     * @param projectId
+//     * @return
+//     */
+//    @Override
+//    public List<MainColor> queryMainColorList(String projectId) {
+//        return mainColorManageMapper.queryMainColorList(projectId);
+//    }
+//
+//    /**
+//     * 保存项目中的主颜色信息
+//     *
+//     * @param mainColorList
+//     */
+//    @Override
+//    public void add(List<MainColor> mainColorList) {
+//        mainColorManageMapper.add(mainColorList);
+//    }
+//
+//    /**
+//     * @param natrualkey 项目id
+//     */
+//    @Override
+//    public void delete(String natrualkey) {
+//        mainColorManageMapper.delete(natrualkey);
+//    }
 
 
 

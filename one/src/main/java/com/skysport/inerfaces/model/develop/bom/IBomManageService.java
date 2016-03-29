@@ -3,7 +3,11 @@ package com.skysport.inerfaces.model.develop.bom;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
 import com.skysport.core.model.common.ICommonService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,4 +43,5 @@ public interface IBomManageService extends ICommonService<BomInfo> {
      */
     List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
 
+    void downloadProductinstruction(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException, InvalidFormatException;
 }

@@ -104,7 +104,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      * @throws IOException
      */
     @Override
-    public void download(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException {
+    public void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException {
 
         String year = DateUtils.SINGLETONE.getYyyy();
         List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
@@ -169,13 +169,15 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
         bomQuoteName.append(StringUtils.join(seriesNameSet.toArray(), ""));
         bomQuoteName.append(StringUtils.join(bomNameSet.toArray(), ""));
-        bomQuoteName.append(WebConstants.SUFFIX_EXCEL);
+        bomQuoteName.append(WebConstants.SUFFIX_EXCEL_XLS);
 
         String fileName = bomQuoteName.toString();
 
         //完整文件路径
         String downLoadPath = ctxPath + File.separator + fileName;
+        //创建文件
         QuotedServiceHelper.createFile(fileName, ctxPath, WebConstants.BOM_QUOTED_TITILE, quotedInfos);
+        //下载文件
         UpDownUtils.download(request, response, fileName, downLoadPath);
 
     }

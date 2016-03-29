@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.ProjectManageMapper">
+    <sql id="searchInfoSql">
+		id AS id,
+		project_id AS natrualkey,
+		project_name AS name,
+		year_code AS yearCode,
+		customer_id AS customerId,
+		area_id AS areaId,
+		series_id AS seriesId,
+		creater AS creater,
+		date_format(create_time,'%Y-%m-%d') AS createTime,
+		version AS version,
+		sample_delivery AS sampleDelivery,
+		is_need_swatch AS isNeedSwatch,
+		is_need_preoffer AS isNeedPreOffer,
+		need_preoffer_date AS needPreOfferDate,
+		sketch_received_date AS sketchReceivedDate,
+		file_location AS fileLocation,
+		del_flag AS delFlag,
+		update_time AS updateTime,
+		remark AS remark,
+		can_edit AS canEdit,
+		status AS status
+	</sql>
+
+    <select id="queryInfo" resultType="ProjectInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_kf_project a
+        WHERE project_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+		SELECT COUNT(*) FROM
+		t_kf_project where del_flag=0
+	</select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM
+        t_kf_project where del_flag=0
+        <if test="projectBomInfo.yearCode !=null and projectBomInfo.yearCode != '' and projectBomInfo.yearCode != '-1'">
+            and year_code=#{projectBomInfo.yearCode}
+        </if>
+        <if test="projectBomInfo.customerId !=null and projectBomInfo.customerId != '' and projectBomInfo.customerId != '-1'">
+            and customer_id=#{projectBomInfo.customerId}
+        </if>
+        <if test="projectBomInfo.areaId !=null and projectBomInfo.areaId != '' and projectBomInfo.areaId != '-1'">
+            and area_id=#{projectBomInfo.areaId}
+        </if>
+        <if test="projectBomInfo.seriesId !=null and projectBomInfo.seriesId != '' and projectBomInfo.seriesId != '-1'">
+            and series_id=#{projectBomInfo.seriesId}
+        </if>
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            project_name like concat('%',#{dataTablesInfo.searchValue},'%') OR
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+    </select>
+
+
+    <select id="searchInfos" resultType="ProjectInfo">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_project a
+        WHERE del_flag=0
+        <if test="projectBomInfo.yearCode !=null and projectBomInfo.yearCode != '' and projectBomInfo.yearCode != '-1'">
+            and year_code=#{projectBomInfo.yearCode}
+        </if>
+        <if test="projectBomInfo.customerId !=null and projectBomInfo.customerId != '' and projectBomInfo.customerId != '-1'">
+            and customer_id=#{projectBomInfo.customerId}
+        </if>
+        <if test="projectBomInfo.areaId !=null and projectBomInfo.areaId != '' and projectBomInfo.areaId != '-1'">
+            and area_id=#{projectBomInfo.areaId}
+        </if>
+        <if test="projectBomInfo.seriesId !=null and projectBomInfo.seriesId != '' and projectBomInfo.seriesId != '-1'">
+            and series_id=#{projectBomInfo.seriesId}
+        </if>
+        <if test="dataTablesInfo.searchValue!=null and dataTablesInfo.searchValue != ''">
+            and (
+            project_name like concat('%',#{dataTablesInfo.searchValue},'%') OR
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY update_time desc, ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
+        </if>
+        <if  test="dataTablesInfo.orderColumn == null or dataTablesInfo.orderColumn == ''">
+            ORDER BY a.update_time desc
+        </if>
+        limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
+
+    </select>
+
+    <update id="updateInfo">
+		update
+			t_kf_project
+		set
+			project_name=#{name},
+			year_code=#{yearCode},
+			customer_id=#{customerId},
+			area_id =#{areaId},
+			series_id =#{seriesId},
+			version =#{version},
+			sample_delivery =#{sampleDelivery},
+			is_need_swatch =#{isNeedSwatch},
+			is_need_preoffer =#{isNeedPreOffer},
+			need_preoffer_date =#{needPreOfferDate},
+			sketch_received_date =#{sketchReceivedDate},
+			file_location =#{fileLocation},
+			remark=#{remark}
+		WHERE
+			project_id =#{natrualkey}
+	</update>
+
+
+    <insert id="add">
+		insert into
+		t_kf_project (project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark,can_edit,status)
+		values (#{natrualkey},#{name},#{yearCode},#{customerId},#{areaId},#{seriesId},#{creater},#{version},#{sampleDelivery},#{isNeedSwatch},#{isNeedPreOffer},#{needPreOfferDate},#{sketchReceivedDate},#{fileLocation},#{remark},0,1)
+	</insert>
+
+
+    <update id="del">
+		update t_kf_project
+		set  del_flag=1
+		where project_id =#{natrualkey}
+	</update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+
+    </select>
+
+    <delete id="delInfoAboutProject">
+	   update t_kf_project_category		set  del_flag=1		where project_id =#{natrualkey};
+	   update t_kf_project_item_bom_baseinfo		set  del_flag=1		where project_id  in (select project_id from t_kf_project_item where parent_project_id  =#{natrualkey});
+       update t_kf_project_item		set  del_flag=1		where parent_project_id =#{natrualkey}
+	</delete>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+		select
+			project_id AS natrualkey,
+			project_name AS name
+		from t_kf_project
+		where del_flag=0 and project_name like concat('%',#{name},'%')
+	</select>
+
+
+</mapper>

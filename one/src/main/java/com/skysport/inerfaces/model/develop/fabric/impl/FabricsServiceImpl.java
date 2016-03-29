@@ -1,19 +1,19 @@
 package com.skysport.inerfaces.model.develop.fabric.impl;
 
+import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.FabricsManageMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
-import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -63,9 +63,9 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
      * @param bomInfo     BomInfo
      */
     @Override
-    public void updateBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo) {
+    public List<FabricsInfo> updateBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo) {
 
-
+        List<FabricsInfo> fabricsRtn = new ArrayList<>();
         //找出被删除的面料id，并删除
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
 
@@ -94,10 +94,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                 }
                 //无id，新增
                 else {
-                    String kind_name = buildKindName(bomInfo, fabricsJoinInfo);
-                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
-                    //年份+客户+地域+系列+NNN
-                    fabricId = kind_name + seqNo;
+//                    String kind_name = buildKindName(bomInfo, fabricsJoinInfo);
+//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
+//                    //年份+客户+地域+系列+NNN
+//                    fabricId = kind_name + seqNo;
+                    fabricId = PrimaryKeyUtils.getUUID();
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
                     fabricsManageMapper.add(fabricsJoinInfo.getFabricsInfo());
                     //新增面料详细
@@ -107,12 +108,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     //新增面料供应商信息
                     fabricsManageMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());
                 }
-
+                fabricsRtn.add(fabricsJoinInfo.getFabricsInfo());
                 //保存物料位置信息
                 if (null != fabricsJoinInfo.getFabricsInfo().getPositionIds() && !fabricsJoinInfo.getFabricsInfo().getPositionIds().isEmpty()) {
                     kFMaterialPositionService.addBatch(fabricsJoinInfo.getFabricsInfo().getPositionIds());
                 }
-
 
                 //保留物料颜色信息
                 if (null != fabricsJoinInfo.getFabricsInfo().getPantoneIds() && !fabricsJoinInfo.getFabricsInfo().getPantoneIds().isEmpty()) {
@@ -122,7 +122,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
             }
         }
-
+        return fabricsRtn;
     }
 
     @Override

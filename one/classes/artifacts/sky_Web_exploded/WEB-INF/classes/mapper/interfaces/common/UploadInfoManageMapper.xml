@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.common.UploadFileInfoMapper">
+
+    <sql id="searchInfoSql">
+        id AS id,
+        uid AS natrualkey,
+        file_name AS name,
+        uid AS uid,
+        file_name AS fileName,
+        new_file_name AS newFileName,
+        suffix AS suffix,
+        file_path AS filePath,
+        file_url AS fileUrl,
+        del_url AS delUrl,
+        del_flag AS delFlag,
+        callback_url AS callbackUrl,
+        type AS type,
+        buss_id AS bussId,
+        operator AS operator,
+        update_time AS updateTime,
+        remark AS remark,
+        status AS status,
+        path_type AS pathType
+    </sql>
+
+    <!--查询文件记录信息-->
+    <select id="queryInfo" resultType="UploadFileInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM
+        t_sys_file_records
+        WHERE
+        uid =#{natrualkey} and del_flag=0
+        limit 1
+    </select>
+
+    <select id="queryListByBussId" resultType="UploadFileInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM
+        t_sys_file_records
+        WHERE
+        buss_id =#{bussId} and del_flag=0 and status = #{status}
+    </select>
+
+    <select id="queryListByBussIdAndType" resultType="UploadFileInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM
+        t_sys_file_records
+        WHERE
+        buss_id =#{bussId} and del_flag=0 and status = #{status} and type = #{type}
+    </select>
+
+    <select id="queryInfoByUserInfoName" resultType="UploadFileInfo">
+        select
+            <include refid="searchInfoSql"/>
+        FROM
+        t_sys_file_records
+        WHERE
+        file_name =#{fileName} and del_flag=0
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_sys_file_records
+        where
+          del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT
+          COUNT(*)
+        FROM
+          t_sys_file_records where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            file_name like concat('%',#{searchValue},'%') or
+            type like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="UploadFileInfo">
+        SELECT
+          <include refid="searchInfoSql"/>
+        FROM
+        t_sys_file_records
+        WHERE
+        del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            file_name like concat('%',#{searchValue},'%') or
+            type like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+    </select>
+
+    <update id="updateBatch">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update
+            t_sys_file_records
+            <set>
+                type= #{item.type},
+                buss_id = #{item.bussId},
+                operator = #{item.operator},
+                status =#{item.status}
+            </set>
+            where uid = #{item.uid}
+        </foreach>
+    </update>
+
+    <insert id="add">
+        insert into
+            t_sys_file_records (uid,file_name,new_file_name,suffix,file_path,file_url,del_url,remark,callback_url,type,buss_id,operator,update_time,status,path_type)
+        values
+            (#{uid},#{fileName},#{newFileName},#{suffix},#{filePath},#{fileUrl},#{delUrl},#{remark},#{callbackUrl},#{type},#{bussId},#{operator},#{updateTime},#{status},#{status})
+    </insert>
+
+    <insert id="addBatch" parameterType="list">
+        insert into
+        t_sys_file_records(uid,file_name,new_file_name,suffix,file_path,file_url,del_url,remark,callback_url,type,buss_id,operator,update_time,status,path_type)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.uid},#{item.fileName},#{item.newFileName},#{item.suffix},#{item.filePath},#{item.fileUrl},#{item.delUrl},#{item.remark},#{item.callbackUrl},#{item.type},#{item.bussId},#{item.operator},#{item.updateTime},#{item.status},#{item.pathType})
+        </foreach>
+    </insert>
+
+    <!--根据业务id删除数据-->
+    <update id="del">
+        update
+          t_sys_file_records
+        set
+          del_flag=1
+        where
+          uid =#{uid} and status = #{status}
+    </update>
+
+
+</mapper>

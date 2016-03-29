@@ -56,7 +56,7 @@
 
     <update id="updateInfo">
 		update t_wl_position 	set
-		position_name=#{natrualkey},
+		position_name=#{name},
 		remark=#{remark}
 		WHERE position_id =#{natrualkey}
 	</update>

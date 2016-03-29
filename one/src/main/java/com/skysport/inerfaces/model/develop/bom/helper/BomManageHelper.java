@@ -1,10 +1,14 @@
 package com.skysport.inerfaces.model.develop.bom.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.constant.CharConstant;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
+import com.skysport.core.constant.CharConstant;
+import com.skysport.core.init.SkySportAppContext;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.SeqCreateUtils;
+import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
@@ -17,12 +21,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jxls.area.Area;
+import org.jxls.builder.AreaBuilder;
+import org.jxls.builder.xls.XlsCommentAreaBuilder;
+import org.jxls.common.CellRef;
+import org.jxls.common.Context;
+import org.jxls.transform.Transformer;
+import org.jxls.transform.poi.PoiContext;
+import org.jxls.transform.poi.PoiTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -34,7 +50,7 @@ import java.util.List;
  */
 public class BomManageHelper extends ExcelCreateHelper {
 
-    private transient Logger logger = LoggerFactory.getLogger(BomManageHelper.class);
+    private static transient Logger logger = LoggerFactory.getLogger(BomManageHelper.class);
 
     /**
      * 自定义查询条件
@@ -380,111 +396,115 @@ public class BomManageHelper extends ExcelCreateHelper {
                 }
 //                fabricsInfo.setBlcId(SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, blcId));
 
-
-                if (blcId.equals("A1")) {
-
-                    //材质列表
-                    String compositeClassicId = fabricsInfo.getCompositeClassicId();
-                    if (StringUtils.isNotBlank(compositeClassicId)) {
-                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
-                        compositeClassicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeClassicId);
-                        stringBuilder.append(CharConstant.COMMA).append(compositeClassicId);
-                    }
+                //复合或者贴膜
+                if (blcId.equals(SkySportAppContext.blc_type_fuhe) || blcId.equals(SkySportAppContext.ble_type_tiemo)) {
+                    //复合
+                    if (blcId.equals(SkySportAppContext.blc_type_fuhe)) {
+                        //材质列表
+                        String compositeClassicId = fabricsInfo.getCompositeClassicId();
+                        if (StringUtils.isNotBlank(compositeClassicId)) {
+                            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+                            compositeClassicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeClassicId);
+                            stringBuilder.append(CharConstant.COMMA).append(compositeClassicId);
+                        }
 
 //                fabricsInfo.setCompositeClassicId(compositeClassicId);
 
-                    //品名列表
-                    String compositeProductTypeId = fabricsInfo.getCompositeProductTypeId();
-                    if (StringUtils.isNotBlank(compositeProductTypeId)) {
-                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
-                        compositeProductTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeProductTypeId);
-                        stringBuilder.append(CharConstant.COMMA).append(compositeProductTypeId);
-                    }
+                        //品名列表
+                        String compositeProductTypeId = fabricsInfo.getCompositeProductTypeId();
+                        if (StringUtils.isNotBlank(compositeProductTypeId)) {
+                            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+                            compositeProductTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeProductTypeId);
+                            stringBuilder.append(CharConstant.COMMA).append(compositeProductTypeId);
+                        }
 
 //                fabricsInfo.setCompositeProductTypeId(compositeProductTypeId);
 
-                    //纱支密度列表
-                    String compositeSpecificationId = fabricsInfo.getCompositeSpecificationId();
-                    if (StringUtils.isNotBlank(compositeSpecificationId)) {
-                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
-                        compositeSpecificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeSpecificationId);
-                        stringBuilder.append(CharConstant.COMMA).append(compositeSpecificationId);
-                    }
+                        //纱支密度列表
+                        String compositeSpecificationId = fabricsInfo.getCompositeSpecificationId();
+                        if (StringUtils.isNotBlank(compositeSpecificationId)) {
+                            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
+                            compositeSpecificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeSpecificationId);
+                            stringBuilder.append(CharConstant.COMMA).append(compositeSpecificationId);
+                        }
 
 //                fabricsInfo.setCompositeSpecificationId(compositeSpecificationId);
 
 
-                    //染色方式列表
-                    String compositeDyeId = fabricsInfo.getCompositeDyeId();
-                    if (StringUtils.isNotBlank(compositeDyeId)) {
-                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
-                        compositeDyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeDyeId);
-                        stringBuilder.append(CharConstant.COMMA).append(compositeDyeId);
-                    }
+                        //染色方式列表
+                        String compositeDyeId = fabricsInfo.getCompositeDyeId();
+                        if (StringUtils.isNotBlank(compositeDyeId)) {
+                            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
+                            compositeDyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeDyeId);
+                            stringBuilder.append(CharConstant.COMMA).append(compositeDyeId);
+                        }
 
 //                fabricsInfo.setCompositeDyeId(compositeDyeId);
 
-                    //后整理列表
-                    String compositeFinishId = fabricsInfo.getCompositeFinishId();
-                    if (StringUtils.isNotBlank(compositeFinishId)) {
-                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
-                        compositeFinishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeFinishId);
-                        stringBuilder.append(CharConstant.COMMA).append(compositeFinishId);
-                    }
+                        //后整理列表
+                        String compositeFinishId = fabricsInfo.getCompositeFinishId();
+                        if (StringUtils.isNotBlank(compositeFinishId)) {
+                            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
+                            compositeFinishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeFinishId);
+                            stringBuilder.append(CharConstant.COMMA).append(compositeFinishId);
+                        }
 
 //                fabricsInfo.setCompositeFinishId(compositeFinishId);
-                }
+                    }
 
-                //膜或涂层的材质列表
-                String momcId = fabricsInfo.getMomcId();
-                if (StringUtils.isNotBlank(momcId)) {
-                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("momcItems");
-                    momcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, momcId);
-                    stringBuilder.append(CharConstant.COMMA).append(momcId);
-                }
+
+                    //膜或涂层的材质列表
+                    String momcId = fabricsInfo.getMomcId();
+                    if (StringUtils.isNotBlank(momcId)) {
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("momcItems");
+                        momcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, momcId);
+                        stringBuilder.append(CharConstant.COMMA).append(momcId);
+                    }
 
 //                fabricsInfo.setMomcId(momcId);
 
 
-                //膜或涂层的颜色列表
-                String comocId = fabricsInfo.getComocId();
-                if (StringUtils.isNotBlank(comocId)) {
-                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("comocItems");
-                    comocId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, comocId);
-                    stringBuilder.append(CharConstant.COMMA).append(comocId);
-                }
+                    //膜或涂层的颜色列表
+                    String comocId = fabricsInfo.getComocId();
+                    if (StringUtils.isNotBlank(comocId)) {
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("comocItems");
+                        comocId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, comocId);
+                        stringBuilder.append(CharConstant.COMMA).append(comocId);
+                    }
 
 //                fabricsInfo.setComocId(comocId);
 
-                //透湿程度列表
-                String wvpId = fabricsInfo.getWvpId();
-                if (StringUtils.isNotBlank(wvpId)) {
-                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wvpItems");
-                    wvpId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, wvpId);
-                    stringBuilder.append(CharConstant.COMMA).append(wvpId);
-                }
+                    //透湿程度列表
+                    String wvpId = fabricsInfo.getWvpId();
+                    if (StringUtils.isNotBlank(wvpId)) {
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wvpItems");
+                        wvpId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, wvpId);
+                        stringBuilder.append(CharConstant.COMMA).append(wvpId);
+                    }
 
 //                fabricsInfo.setWvpId(wvpId);
 
-                //膜的厚度列表
-                String mtId = fabricsInfo.getMtId();
-                if (StringUtils.isNotBlank(mtId)) {
-                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("mtItems");
-                    mtId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, mtId);
-                    stringBuilder.append(CharConstant.COMMA).append(mtId);
-                }
+                    //膜的厚度列表
+                    String mtId = fabricsInfo.getMtId();
+                    if (StringUtils.isNotBlank(mtId)) {
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("mtItems");
+                        mtId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, mtId);
+                        stringBuilder.append(CharConstant.COMMA).append(mtId);
+                    }
 
 //                fabricsInfo.setMtId(mtId);
 
-                // 贴膜或涂层工艺列表
-                String woblcId = fabricsInfo.getWoblcId();
-                if (StringUtils.isNotBlank(woblcId)) {
-                    selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wblcItems");
-                    woblcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, woblcId);
-                    stringBuilder.append(CharConstant.COMMA).append(woblcId);
-                }
+                    // 贴膜或涂层工艺列表
+                    String woblcId = fabricsInfo.getWoblcId();
+                    if (StringUtils.isNotBlank(woblcId)) {
+                        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wblcItems");
+                        woblcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, woblcId);
+                        stringBuilder.append(CharConstant.COMMA).append(woblcId);
+                    }
 
 //                fabricsInfo.setWoblcId(woblcId);
+
+                }
 
 
                 // 用量单位列表
@@ -734,5 +754,84 @@ public class BomManageHelper extends ExcelCreateHelper {
 
     }
 
+    /**
+     * 导出每个bom中每个成衣工厂的生产指示单
+     *
+     * @param bomInfo
+     * @param response
+     * @param request
+     */
+    public static void downloadProductinstruction(BomInfo bomInfo, HttpServletResponse response, HttpServletRequest request) throws IOException, InvalidFormatException {
+        org.springframework.core.io.Resource fileRource = new ClassPathResource("conf/pi-20160316.xlsx");
+        String seriesName = bomInfo.getSeriesName();
+        //面料集合
+        List<FabricsInfo> fabricItems = bomInfo.getFabrics();
+        //将id转成name
+        BomManageHelper.translateIdToNameInFabrics(fabricItems, seriesName, WebConstants.FABRIC_ID_EXCHANGE_BOM);
+        //辅料集合
+        List<AccessoriesInfo> accessories = bomInfo.getAccessories();
+        BomManageHelper.translateIdToNameInAccessoriesInfos(accessories, seriesName);
+        //包材
+        List<KFPackaging> packagings = bomInfo.getPackagings();
+        BomManageHelper.translateIdToNameInPackagings(packagings, seriesName);
+        //成衣厂 & 生产指示单
+        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
 
+        String bomId = bomInfo.getNatrualkey() == null ? bomInfo.getBomId() : bomInfo.getNatrualkey();
+        if (null == factoryQuoteInfos || factoryQuoteInfos.isEmpty()) {
+            logger.info("==============================================>工厂报价信息 = null or 工厂报价信息 isEmpty ");
+            return;
+        }
+        /**
+         * 下单日期（导出时间）
+         */
+        String exportDate = DateUtils.SINGLETONE.getYyyy_Mm_dd();
+        for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
+            String factoryQuoteId = factoryQuoteInfo.getFactoryQuoteId();
+            //指示单信息
+            KfProductionInstructionEntity productionInstruction = factoryQuoteInfo.getProductionInstruction();
+            if (productionInstruction == null) {
+                logger.info("==============================================>bomid[{0}] 的成衣厂factoryQuoteId[{1}]对应的指示单信息为空 ", new Object[]{bomId, factoryQuoteId});
+                continue;
+            }
+            productionInstruction.setFabrics(fabricItems);
+            productionInstruction.setAccessories(accessories);
+            productionInstruction.setPackagings(packagings);
+            productionInstruction.setExportDate(exportDate);
+
+            InputStream is = fileRource.getInputStream();
+            String year = DateUtils.SINGLETONE.getYyyy();
+            String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
+                    .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(DateUtils.SINGLETONE.getYyyyMmdd());
+            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_PI_CN_NAME);
+            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getProjectItemName());
+            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getColorName());
+            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(bomInfo.getName());
+            stringBuilder.append(WebConstants.SUFFIX_EXCEL_XLSX);
+            String fileName = stringBuilder.toString();
+
+            //完整文件路径
+            String downLoadPath = ctxPath + File.separator + fileName;
+            //生成生成指示单
+            OutputStream os = new FileOutputStream(downLoadPath);
+            Transformer transformer = PoiTransformer.createTransformer(is, os);
+            AreaBuilder areaBuilder = new XlsCommentAreaBuilder(transformer);
+            List<Area> xlsAreaList = areaBuilder.build();
+            Area xlsArea = xlsAreaList.get(0);
+            Context context = new PoiContext();
+            context.putVar("productionInstruction", productionInstruction);
+//            xlsArea.applyAt(new CellRef("Sheet2!A1"), context);
+            xlsArea.applyAt(new CellRef("Sheet1!A1"), context);
+            xlsArea.processFormulas();
+            transformer.write();
+
+            //下载
+            UpDownUtils.download(request, response, fileName, downLoadPath);
+
+        }
+
+    }
 }

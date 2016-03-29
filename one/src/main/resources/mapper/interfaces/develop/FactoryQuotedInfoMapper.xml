@@ -101,7 +101,10 @@
         update
         t_kf_production_instruction
         set
-        crop_requirements    = #{cropRequirements},
+        sp_name                     = #{spName},
+        offer_amout                 =#{offerAmout},
+        cloth_received_date         =#{clothReceivedDate},
+        crop_requirements     = #{cropRequirements},
         quality_requirements     = #{qualityRequirements},
         overstitch               = #{overstitch},
         overstitch_space         = #{overstitchSpace},
@@ -129,8 +132,8 @@
 
     <insert id="addProductionInstruction">
         insert into
-        t_kf_production_instruction(uid,factory_quote_id,bom_id,project_item_name,bom_name,sp_id,color_name,offer_amout,crop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements,spcial_tech,packing_requirements,trademark_code,trademark_remark ,scale_code ,scale_remark,rinsing_marks_code,rinsing_marks_remark)
-        values(#{uid},#{factoryQuoteId},#{bomId},#{projectItemName},#{bomName},#{spId},#{colorName},#{offerAmout},#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
+        t_kf_production_instruction(uid,factory_quote_id,bom_id,project_item_name,bom_name,sp_id,sp_name,color_name,offer_amout,cloth_received_date,crop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements,spcial_tech,packing_requirements,trademark_code,trademark_remark ,scale_code ,scale_remark,rinsing_marks_code,rinsing_marks_remark)
+        values(#{uid},#{factoryQuoteId},#{bomId},#{projectItemName},#{bomName},#{spId},#{spName},#{colorName},#{offerAmout},#{clothReceivedDate},#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
     </insert>
 
 
@@ -177,7 +180,7 @@
 
     <select id="queryProductionInstractionInfo" resultType="KfProductionInstructionEntity">
         SELECT
-           <include refid="searcProductionInstractionInfoSql"/>
+        <include refid="searcProductionInstractionInfoSql"/>
         FROM
         t_kf_production_instruction a
         WHERE

@@ -8,6 +8,7 @@
         id AS id,
         accessories_id AS natrualkey,
         accessories_name AS name,
+        accessories_name AS accessoriesName,
         material_type_id AS materialTypeId,
         classic_id AS classicId,
         sp_id AS spId,
@@ -73,6 +74,7 @@
         update
             t_kf_accessories
         set
+            accessories_name = #{accessoriesName},
             material_type_id = #{materialTypeId},
             classic_id = #{classicId},
             sp_id = #{spId},
@@ -187,7 +189,7 @@
 
     <resultMap id="infosMap" type="AccessoriesInfo">
         <result column="accessoriesId" property="accessoriesId"/>
-        <result column="accessoriessName" property="accessoriessName"/>
+        <result column="accessoriesName" property="accessoriesName"/>
         <result column="materialTypeId" property="materialTypeId"/>
         <result column="classicId" property="classicId"/>
         <result column="spId" property="spId"/>
@@ -218,7 +220,7 @@
     <select id="queryAccessoriesList" resultMap="infosMap">
     SELECT
         a.accessories_id AS accessoriesId,
-        a.accessories_name AS accessoriessName,
+        a.accessories_name AS accessoriesName,
         a.material_type_id AS materialTypeId,
         a.classic_id AS classicId,
         a.sp_id AS spId,
@@ -254,7 +256,7 @@
 
     <resultMap id="infosMap2" type="AccessoriesInfo">
         <result column="accessoriesId" property="accessoriesId"/>
-        <result column="accessoriessName" property="accessoriessName"/>
+        <result column="accessoriesName" property="accessoriesName"/>
         <result column="bomName" property="bomName"/>
         <result column="spId" property="spId"/>
         <result column="productTypeId" property="productTypeId"/>
@@ -276,7 +278,7 @@
     <select id="queryAllAccessoriesByBomId"  resultMap="infosMap2">
           SELECT
             a.accessories_id AS accessoriesId,
-            a.accessories_name AS accessoriessName,
+            a.accessories_name AS accessoriesName,
             e.bom_name AS bomName,
             a.accessories_id AS accessoriesId,
             a.sp_id AS spId,

@@ -24,4 +24,7 @@ public class SkySportAppContext {
     @Autowired
     public static HistoryService historyService;
 
+    public static String blc_type_fuhe = "A1";
+    public static  String ble_type_tiemo = "BBA";
+
 }

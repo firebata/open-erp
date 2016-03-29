@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="sky:Web">
+    <output-path>$PROJECT_DIR$/classes/artifacts/sky_Web</output-path>
+    <root id="archive" name="sky_Web.war">
+      <element id="artifact" artifact-name="sky:Web exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.3" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-jexl:2.1.1" />
+          <element id="library" level="project" name="Maven: org.jxls:jxls-poi:1.0.8" />
+          <element id="library" level="project" name="Maven: org.jxls:jxls:2.2.9" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

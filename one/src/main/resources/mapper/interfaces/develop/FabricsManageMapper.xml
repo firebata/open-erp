@@ -6,7 +6,9 @@
     <sql id="searchInfoSql">
         id AS id,
         fabrics_id AS natrualkey,
+        fabrics_id AS fabricId,
         fabrics_name AS name,
+        fabrics_name AS fabricName,
         material_type_id AS materialTypeId,
         classic_id AS classicId,
         sp_id AS spId,
@@ -24,7 +26,7 @@
 
     <resultMap id="infosMap" type="FabricsInfo">
         <result column="fabricId" property="fabricId"/>
-        <result column="fabricsName" property="fabricsName"/>
+        <result column="fabricName" property="fabricName"/>
         <result column="materialTypeId" property="materialTypeId"/>
         <result column="classicId" property="classicId"/>
         <result column="spId" property="spId"/>
@@ -72,7 +74,7 @@
 
     <resultMap id="infosMap2" type="FabricsInfo">
         <result column="fabricId" property="fabricId"/>
-        <result column="fabricsName" property="fabricsName"/>
+        <result column="fabricName" property="fabricName"/>
         <result column="bomName" property="bomName"/>
         <result column="spId" property="spId"/>
         <result column="bomId" property="bomId"/>
@@ -152,6 +154,7 @@
         update
             t_kf_fabrics
         set
+            fabrics_name  = #{fabricName},
             material_type_id = #{materialTypeId},
             classic_id = #{classicId},
             sp_id = #{spId},
@@ -291,7 +294,7 @@
         from t_kf_fabrics
         where del_flag=0
         <if test="name!=null and name!=''">
-            and upper(fabricsName) like concat('%',#{factoryName},'%')
+            and upper(fabricName) like concat('%',#{factoryName},'%')
         </if>
     </select>
 
@@ -299,7 +302,7 @@
     <select id="queryFabricList" resultMap="infosMap">
       SELECT
         a.fabrics_id AS fabricId,
-        a.fabrics_name AS fabricsName,
+        a.fabrics_name AS fabricName,
         a.material_type_id AS materialTypeId,
         a.classic_id AS classicId,
         a.sp_id AS spId,
@@ -349,7 +352,7 @@
     <select id="queryAllFabricByBomId"  resultMap="infosMap2">
       SELECT
             a.fabrics_id AS fabricId,
-            a.fabrics_name AS fabricsName,
+            a.fabrics_name AS fabricName,
             e.bom_name AS bomName,
             a.sp_id AS spId,
             a.bom_id AS bomId,

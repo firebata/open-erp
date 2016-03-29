@@ -32,26 +32,26 @@
 
     <select id="searchInfos" resultType="SexColor">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM
-          t_kf_project_item_sex_color a
+        t_kf_project_item_sex_color a
         WHERE
-          a.del_flag=0
-          and a.project_id =#{natrualkey}
+        a.del_flag=0
+        and a.project_id =#{projectId}
     </select>
 
-	<select id="searchInfos2" resultType="SexColor">
-		SELECT
-		<include refid="searchInfoSql"/>
-		FROM
-		t_kf_project_item_sex_color a
-		WHERE
-		a.del_flag=0
-		and a.project_id =#{natrualkey}
-	</select>
+    <select id="searchInfos2" resultType="SexColor">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM
+        t_kf_project_item_sex_color a
+        WHERE
+        a.del_flag=0
+        and a.project_id =#{projectId}
+    </select>
 
 
-	<update id="updateInfo">
+    <update id="updateInfo">
 		update
 			t_kf_project_item_sex_color
 		set
@@ -59,7 +59,16 @@
 			sex_name =#{sexName},
 			sex_id_child =#{sexIdChild}
 		WHERE
-			project_id =#{natrualkey}
+			project_id =#{projectId} where del_flag=0
+	</update>
+
+    <update id="updateSexColorByProjectIdAndSexId">
+		update
+			t_kf_project_item_sex_color
+		set
+			main_color_ids =#{mainColorNames}
+		WHERE
+		  project_id =#{projectId} and sex_id_child =#{sexIdChild} where del_flag=0
 	</update>
 
     <insert id="addBatch" parameterType="list">
@@ -80,20 +89,20 @@
 
     <select id="selectAllBomSexAndMainColor" resultType="SexColor">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         from
-          t_kf_project_item_sex_color a
+        t_kf_project_item_sex_color a
         where
-          a.project_id= #{projectId} and a.del_flag =0
+        a.project_id= #{projectId} and a.del_flag =0
     </select>
 
-    <update id="del">
+    <update id="delByProjectId">
 		update
 		  t_kf_project_item_sex_color
 		set
 		  del_flag=1
 		where
-		  project_id =#{natrualkey}
+		  project_id =#{projectId}
 	</update>
 
 
@@ -105,8 +114,6 @@
 		where
 		  project_id =#{projectId}
 	</delete>
-
-
 
 
 </mapper>

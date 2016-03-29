@@ -37,7 +37,7 @@ public class FactoryQuoteInfo {
      * 成衣收到时间
      */
     private String clothReceivedDate;
-
+    private String serialNumber;
     /**
      * 订单数量
      */
@@ -238,5 +238,13 @@ public class FactoryQuoteInfo {
 
     public void setProductionInstruction(KfProductionInstructionEntity productionInstruction) {
         this.productionInstruction = productionInstruction;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 }

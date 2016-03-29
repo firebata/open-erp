@@ -62,9 +62,8 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
     }
 
     @Override
-    public void updateBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo) {
-
-
+    public List<FactoryQuoteInfo> updateBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo) {
+        List<FactoryQuoteInfo> factorysRtn = new ArrayList<>();
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
 
         //找出被删除的工厂报价id，并删除
@@ -79,8 +78,11 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
 
                 //有id，更新
                 if (StringUtils.isNotBlank(quoteInfoId)) {
+                    //项目信息
+
                     factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
                     factoryQuotedInfoMapper.updateInfo(factoryQuoteInfo);
+                    getKfProductionInstructionEntity(factoryQuoteInfo, quoteInfoId);
                     factoryQuotedInfoMapper.updateProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }
                 //无id，新增
@@ -95,31 +97,35 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
                     factoryQuoteInfo.setFactoryQuoteId(quoteInfoId);
 
                     factoryQuotedInfoMapper.add(factoryQuoteInfo);
-
+                    //必须在成衣厂报价信息下方（因为供应商在下方）
+                    getKfProductionInstructionEntity(factoryQuoteInfo, quoteInfoId);
                     factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
-                    //项目信息
-                    KfProductionInstructionEntity productionInstructionEntity = factoryQuotedInfoMapper.queryProjectAndBomInfoByFactoryQuoteId(quoteInfoId);
-
                     factoryQuoteInfo.getProductionInstruction().setUid(uid);
                     factoryQuoteInfo.getProductionInstruction().setProductionInstructionId(uid);
-                    if (null != productionInstructionEntity) {
-                        factoryQuoteInfo.getProductionInstruction().setSpName(productionInstructionEntity.getSpName());
-                        factoryQuoteInfo.getProductionInstruction().setProjectItemName(productionInstructionEntity.getProjectItemName());
-                        factoryQuoteInfo.getProductionInstruction().setColorName(productionInstructionEntity.getColorName());
-                        factoryQuoteInfo.getProductionInstruction().setBomName(productionInstructionEntity.getBomName());
-                    }
-
                     factoryQuoteInfo.getProductionInstruction().setBomId(bomId);
-
-
                     factoryQuotedInfoMapper.addProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }
 
                 List<UploadFileInfo> fileInfos = factoryQuoteInfo.getProductionInstruction().getSketchUrlUidUploadFileInfos();
                 UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, quoteInfoId, uploadFileInfoService, WebConstants.FILE_KIND_SKETCH);
+
                 fileInfos = factoryQuoteInfo.getProductionInstruction().getSpecificationUrlUidUploadFileInfos();
                 UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, quoteInfoId, uploadFileInfoService, WebConstants.FILE_KIND_SPECIFICATION);
+
+                factorysRtn.add(factoryQuoteInfo);
             }
+        }
+        return factorysRtn;
+    }
+
+    private void getKfProductionInstructionEntity(FactoryQuoteInfo factoryQuoteInfo, String quoteInfoId) {
+        KfProductionInstructionEntity productionInstructionEntity = factoryQuotedInfoMapper.queryProjectAndBomInfoByFactoryQuoteId(quoteInfoId);
+        if (null != productionInstructionEntity) {
+            factoryQuoteInfo.getProductionInstruction().setSpName(productionInstructionEntity.getSpName());
+            factoryQuoteInfo.getProductionInstruction().setProjectItemName(productionInstructionEntity.getProjectItemName());
+            factoryQuoteInfo.getProductionInstruction().setColorName(productionInstructionEntity.getColorName());
+            factoryQuoteInfo.getProductionInstruction().setBomName(productionInstructionEntity.getBomName());
+            factoryQuoteInfo.getProductionInstruction().setClothReceivedDate(factoryQuoteInfo.getClothReceivedDate());
         }
     }
 

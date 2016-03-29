@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.info.SexManageMapper">
+    <sql id="searchInfoSql">
+        id AS id,
+        sex_id AS natrualkey,
+        sex_name AS name,
+        sex_fullname AS sexFullname,
+        en_sex_name AS enSexName,
+        del_flag AS delFlag,
+        update_time AS updateTime,
+        remark AS remark
+    </sql>
+    <select id="queryInfo" resultType="SexInfo">
+        select
+        <include refid="searchInfoSql"/>
+        FROM t_jc_sex
+        WHERE sex_id =#{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM  t_jc_sex where del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_jc_sex where del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            sex_name like concat('%',#{searchValue},'%') or
+            en_sex_name	like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+    <select id="searchInfos" resultType="SexInfo">
+        SELECT
+            <include refid="searchInfoSql" />
+        FROM t_jc_sex
+        WHERE del_flag=0
+        <if test="searchValue!=null and searchValue != ''">
+            and (
+            sex_name like concat('%',#{searchValue},'%') or
+            en_sex_name	like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+
+    </select>
+
+    <update id="updateInfo">
+        update t_jc_sex
+        set
+        sex_name=#{name},
+        sex_fullname=#{sexFullname},
+        en_sex_name=#{enSexName},
+        remark=#{remark}
+        WHERE sex_id =#{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert into
+        t_jc_sex (sex_id,sex_name,sex_fullname,en_sex_name,remark)
+        values (#{natrualkey},#{name},#{sexFullname},#{enSexName},#{remark})
+    </insert>
+
+    <update id="del">
+        update t_jc_sex
+        set  del_flag=1
+        where sex_id =#{natrualkey}
+    </update>
+
+
+    <select id="queryCurrentSeqNo" resultType="String">
+        select case when  sex_id is NULL then 0 else sex_id end from t_jc_sex    ORDER BY id DESC LIMIT 1
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        sex_id AS natrualkey,
+        sex_name AS name
+        from t_jc_sex
+        where del_flag=0
+        <if test="name!=null and name != ''">
+            and upper(sex_name) like concat('%',#{name},'%')
+        </if>
+    </select>
+
+</mapper>

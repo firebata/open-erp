@@ -1,4 +1,5 @@
 package com.skysport.inerfaces.action.develop;
+
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.annotation.Resource;
@@ -147,7 +149,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     @RequestMapping("/download_offer/{natrualkeys}")
     @SystemControllerLog(description = "导出报价表")
     public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        quotedService.download(request, response, natrualkeys);
+        quotedService.downloadOffer(request, response, natrualkeys);
         return null;
     }
 
@@ -162,7 +164,7 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
     public ProjectInfo info(@PathVariable String natrualKey) {
         ProjectInfo info = projectManageService.queryInfoByNatrualKey(natrualKey);
         if (null != info) {
-            Map<String, Object> fileinfosMap =  UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService,natrualKey);
+            Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);
         }
         return info;

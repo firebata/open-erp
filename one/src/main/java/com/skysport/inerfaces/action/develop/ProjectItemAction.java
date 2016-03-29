@@ -89,9 +89,7 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @RequestMapping("/download_offer/{natrualkeys}")
     @SystemControllerLog(description = "导出报价表")
     public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        quotedService.download(request, response, natrualkeys);
-
+        quotedService.downloadOffer(request, response, natrualkeys);
         return null;
     }
 

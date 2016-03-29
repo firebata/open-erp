@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.mapper.info;
 
+import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
-import com.skysport.core.mapper.CommonDao;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -29,5 +29,7 @@ public interface BomInfoManageMapper extends CommonDao<BomInfo> {
     void delBomInThisIds(List<BomInfo> needDelBomList);
 
     List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
+
+
 }
 

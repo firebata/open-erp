@@ -5,7 +5,9 @@ package com.skysport.inerfaces.bean.develop;
  * * 创 建 者：zhangjh
  * * 创建时间：2016-03-22 14:37:08
  ******************************************************************/
+
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
+
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,14 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      */
     private String uid;
 
+    /**
+     * 指示单uid
+     */
+    private String piNo;
+
+    private String seriesName;
+
+    private String customerName;
     /**
      * 工厂报价id
      */
@@ -178,6 +188,21 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
 
     /**  */
     private Timestamp updateTime;
+    /**
+     * 下单日期（导出时间）
+     */
+    private String exportDate;
+
+    //面料集合
+    private List<FabricsInfo> fabrics;
+
+    //辅料集合
+    private List<AccessoriesInfo> accessories;
+
+    //包材
+    private List<KFPackaging> packagings;
+
+    private FactoryQuoteInfo factoryQuoteInfo;
 
     private List<UploadFileInfo> sketchUrlUidUploadFileInfos;
 
@@ -204,6 +229,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
     public void setClothReceivedDate(String clothReceivedDate) {
         this.clothReceivedDate = clothReceivedDate;
     }
+
 
     /**
      * 获取
@@ -800,5 +826,70 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
 
     public void setSpecificationUrlUidFileinfosMap(Map<String, Object> specificationUrlUidFileinfosMap) {
         this.specificationUrlUidFileinfosMap = specificationUrlUidFileinfosMap;
+    }
+
+
+    public String getExportDate() {
+        return exportDate;
+    }
+
+    public void setExportDate(String exportDate) {
+        this.exportDate = exportDate;
+    }
+
+    public String getPiNo() {
+        return piNo;
+    }
+
+    public void setPiNo(String piNo) {
+        this.piNo = piNo;
+    }
+
+    public String getSeriesName() {
+        return seriesName;
+    }
+
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public List<FabricsInfo> getFabrics() {
+        return fabrics;
+    }
+
+    public void setFabrics(List<FabricsInfo> fabrics) {
+        this.fabrics = fabrics;
+    }
+
+    public List<AccessoriesInfo> getAccessories() {
+        return accessories;
+    }
+
+    public void setAccessories(List<AccessoriesInfo> accessories) {
+        this.accessories = accessories;
+    }
+
+    public List<KFPackaging> getPackagings() {
+        return packagings;
+    }
+
+    public void setPackagings(List<KFPackaging> packagings) {
+        this.packagings = packagings;
+    }
+
+    public FactoryQuoteInfo getFactoryQuoteInfo() {
+        return factoryQuoteInfo;
+    }
+
+    public void setFactoryQuoteInfo(FactoryQuoteInfo factoryQuoteInfo) {
+        this.factoryQuoteInfo = factoryQuoteInfo;
     }
 }

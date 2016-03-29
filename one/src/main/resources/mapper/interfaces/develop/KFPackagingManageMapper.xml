@@ -8,6 +8,7 @@
         id AS id,
         packaging_id AS natrualkey,
         packaging_name AS name,
+        packaging_name AS packagingsName,
         material_type_id AS materialTypeId,
         classic_id AS classicId,
         sp_id AS spId,
@@ -73,6 +74,7 @@
         update
             t_kf_packaging
         set
+            packaging_name = #{packagingsName},
             material_type_id = #{materialTypeId},
             classic_id = #{classicId},
             sp_id = #{spId},

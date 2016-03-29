@@ -1,20 +1,20 @@
 package com.skysport.inerfaces.model.develop.packaging.service.impl;
 
 import com.skysport.core.constant.CharConstant;
+import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.utils.PrimaryKeyUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KFPackaging;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.PackagingManageMapper;
-import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
-import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,9 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
      * @param bomInfo
      */
     @Override
-    public void updateBatch(List<KFPackagingJoinInfo> packagingItems, BomInfo bomInfo) {
+    public List<KFPackaging> updateBatch(List<KFPackagingJoinInfo> packagingItems, BomInfo bomInfo) {
+
+        List<KFPackaging> packagingsRtn = new ArrayList<>();
 
         //找出被删除的包材id，并删除
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
@@ -79,13 +81,15 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
                 }
                 //无id，新增
                 else {
-                    String kind_name = buildKindName(bomInfo, packagingJoinInfo);
+//                    String kind_name = buildKindName(bomInfo, packagingJoinInfo);
+//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
+//                    //年份+客户+地域+系列+NNN
+//                    packagingId = kind_name + seqNo;
 
-                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
-
-                    //年份+客户+地域+系列+NNN
-                    packagingId = kind_name + seqNo;
+                    packagingId = PrimaryKeyUtils.getUUID();
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
+
+
                     packagingManageMapper.add(packagingJoinInfo.getKfPackaging());
                     //新增包材用量
                     packagingManageMapper.addDosage(packagingJoinInfo.getMaterialUnitDosage());
@@ -100,8 +104,10 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
                 if (null != packagingJoinInfo.getKfPackaging().getPantoneIds() && !packagingJoinInfo.getKfPackaging().getPantoneIds().isEmpty()) {
                     kFMaterialPantoneService.addBatch(packagingJoinInfo.getKfPackaging().getPantoneIds());
                 }
+                packagingsRtn.add(packagingJoinInfo.getKfPackaging());
             }
         }
+        return packagingsRtn;
     }
 
     @Override
