@@ -29,8 +29,8 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
     }
 
     @Override
-    public List<SexColor> searchInfos2(String natrualKey) {
-        return sexColorManageMapper.searchInfos2(natrualKey);
+    public List<SexColor> searchInfosByProjectId(String projectId) {
+        return sexColorManageMapper.searchInfosByProjectId(projectId);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
      */
     @Override
     public void updateSexColorByProjectIdAndSexId(String sexId, String mainColorNew, String mainColorOld, String projectId) {
-        List<SexColor> sexColors = searchInfos2(projectId);
+        /*List<SexColor> sexColors = searchSexColorByProjectIdAndSexId(projectId,sexId);
         if (null != sexColors) {
             for (SexColor sexColor : sexColors) {
                 String colorStr = sexColor.getMainColorNames();
@@ -70,7 +70,36 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
                     return;
                 }
             }
+        }*/
+
+
+        SexColor sexColor = searchSexColorByProjectIdAndSexId(projectId, sexId);
+        if (null != sexColor) {
+            String colorStr = sexColor.getMainColorNames();
+            if (sexId.equals(sexColor.getSexIdChild())) {
+                SexColor sexColorNew = sexColor;
+                String[] colors = colorStr.split(CharConstant.COMMA);
+                List<String> newColors = new ArrayList<>();
+
+                for (String color : colors) {
+                    if (color.trim().equals(mainColorOld)) {
+                        newColors.add(mainColorNew);
+                    } else {
+                        newColors.add(color);
+                    }
+                }
+                String colorStrNew = StringUtils.join(newColors, CharConstant.COMMA);
+                sexColorNew.setMainColorNames(colorStrNew);
+                updateSexColorByProjectIdAndSexId(sexColorNew);
+                return;
+            }
         }
+
+
+    }
+
+    private SexColor searchSexColorByProjectIdAndSexId(String projectId, String sexId) {
+        return sexColorManageMapper.searchSexColorByProjectIdAndSexId(projectId, sexId);
     }
 
     @Override

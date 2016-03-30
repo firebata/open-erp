@@ -9,9 +9,24 @@
     var bom_selectURL = path + "/system/baseinfo/bom_select";
     $.extend({
         initAccessories: initAccessories,
-        accessoriesItems: buildAccessoriesItems
+        accessoriesItems: buildAccessoriesItems,
+        refreshAllAccessoriesId: refreshAllAccessoriesId
     });
 
+
+    function refreshAllAccessoriesId(accessories) {
+        if (null != accessories) {
+            for (var idx = 0, len = accessories.length; idx < len; idx++) {
+                var accessoriesInfo = accessories[idx];
+                var accessoriesId = accessoriesInfo.accessoriesId;
+                var serialNumber = accessoriesInfo.serialNumber;
+                if (null != fabricId) {
+                    $("#accessoriesIdF" + serialNumber).val(accessoriesId);
+                }
+
+            }
+        }
+    }
 
     /**
      * 辅料信息
@@ -93,11 +108,13 @@
 
 
         var pantoneIdsArr = _accessoriesInfo["pantoneIds"];
+
         if (pantoneIdsArr != null) {
             var _pantoneIdsArr = $.turnPantoneInfoToSelect2Option(pantoneIdsArr);
             var $id = $('#pantoneIdsF' + idNum);
             $.reloadPantoneId($id, _pantoneIdsArr);
         }
+
 
     }
 
@@ -158,7 +175,6 @@
         var accessoriesItem = getAccessoriesItem(idNum);
         accessoriesItem.accessoriesId = null;
         addAccessories(accessoriesItem);
-
     }
 
     var deleteFun = function (idNum) {
@@ -526,6 +542,7 @@
                     "accessoriesDivId": "accessoriesDivId" + idNum,
                     "accessoriesTitleId": "accessoriesTitleId" + idNum,
                     "accessoriesIdF": "accessoriesIdF" + idNum,
+                    "serialNumberF": "serialNumberF" + idNum,
                     "accessoriesTitleName": title_type + idNum,
                     "accessoriesNameF": "accessoriesNameF" + idNum,
                     "accessoriesEyeId": "accessoriesEyeId" + idNum,
@@ -600,6 +617,7 @@
         accessoriesInfo.length = $("#lengthF" + idNum).val();
         accessoriesInfo.nameNum = idNum;
         accessoriesInfo.accessoriesId = $("#accessoriesIdF" + idNum).val();
+        accessoriesInfo.serialNumber = idNum;
         accessoriesInfo.accessoriesName = $("#accessoriesNameF" + idNum).val();
         accessoriesInfo.name = $("#accessoriesNameF" + idNum).val();
 
@@ -657,6 +675,7 @@
         accessoriesInfo.width = $("#widthF" + idNum).val();
         accessoriesInfo.length = $("#lengthF" + idNum).val();
         accessoriesInfo.nameNum = idNum;
+        accessoriesInfo.nameNum = serialNumber;
         accessoriesInfo.accessoriesId = $("#accessoriesIdF" + idNum).val();
 
         accessoriesInfo.orderCount = $("#orderCountF" + idNum).val();

@@ -163,9 +163,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
         List<String> allAccessoriesIds = accessoriesManageMapper.selectAllAccessoriesId(bomId);
         List<String> needToSaveAccessoriesId = buildNeedSaveAccessoriesId(accessoriesItems);
-
         allAccessoriesIds.removeAll(needToSaveAccessoriesId);
-
         if (null != allAccessoriesIds && !allAccessoriesIds.isEmpty()) {
             accessoriesManageMapper.deleteAccessoriesByIds(allAccessoriesIds);
         }
@@ -178,7 +176,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         List<String> needToSaveAccessoriesId = new ArrayList<String>();
         if (null != accessoriesItems) {
             for (AccessoriesJoinInfo accessoriesJoinInfo : accessoriesItems) {
-                String accessoriesId = accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId();
+                String accessoriesId = accessoriesJoinInfo.getAccessoriesInfo().getAccessoriesId();
                 if (StringUtils.isNotEmpty(accessoriesId)) {
                     needToSaveAccessoriesId.add(accessoriesId);
                 }

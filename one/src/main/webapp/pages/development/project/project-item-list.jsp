@@ -15,7 +15,7 @@
     <div class="page-header">
         <h1>
             开发
-            <small><i class="icon-double-angle-right"></i> 项目列表信息</small>
+            <small><i class="icon-double-angle-right"></i> 子项目列表信息</small>
         </h1>
     </div>
     <!-- PAGE CONTENT BEGINS -->

@@ -7,7 +7,6 @@ import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.FabricsManageMapper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
@@ -151,23 +150,23 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
     }
 
-    /**
-     * 构建面料id:材料类别+供应商代码+年份+材质+品名+序号
-     *
-     * @param bomInfo         BomInfo
-     * @param fabricsJoinInfo FabricsJoinInfo
-     * @return String
-     */
-    private String buildKindName(BomInfo bomInfo, FabricsJoinInfo fabricsJoinInfo) {
-        StringBuilder stringBuilder = new StringBuilder();
-        String materialTypeId = StringUtils.isBlank(fabricsJoinInfo.getFabricsInfo().getMaterialTypeId()) ? WebConstants.FABRIC_MATERIAL_TYPE_ID : fabricsJoinInfo.getFabricsInfo().getMaterialTypeId();
-        stringBuilder.append(materialTypeId);
-        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getSpId());
-        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getYearCode());
-        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getProductTypeId());
-        return stringBuilder.toString();
-
-    }
+//    /**
+//     * 构建面料id:材料类别+供应商代码+年份+材质+品名+序号
+//     *
+//     * @param bomInfo         BomInfo
+//     * @param fabricsJoinInfo FabricsJoinInfo
+//     * @return String
+//     */
+//    private String buildKindName(BomInfo bomInfo, FabricsJoinInfo fabricsJoinInfo) {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String materialTypeId = StringUtils.isBlank(fabricsJoinInfo.getFabricsInfo().getMaterialTypeId()) ? WebConstants.FABRIC_MATERIAL_TYPE_ID : fabricsJoinInfo.getFabricsInfo().getMaterialTypeId();
+//        stringBuilder.append(materialTypeId);
+//        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getSpId());
+//        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getYearCode());
+//        stringBuilder.append(fabricsJoinInfo.getFabricsInfo().getProductTypeId());
+//        return stringBuilder.toString();
+//
+//    }
 
     /**
      * 找出被删除的面料id，并删除

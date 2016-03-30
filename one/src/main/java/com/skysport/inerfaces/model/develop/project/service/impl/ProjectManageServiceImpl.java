@@ -125,7 +125,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 //        ProjectInfo infoInDb = super.queryInfoByNatrualKey(info.getNatrualkey());
 
 //        if (infoInDb.getStatus() == WebConstants.PROJECT_CANOT_EDIT) {
-//            throw new SkySportException(DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getCode(), DevelopmentReturnConstant.PROJECT_CANNOT_EDIT.getMsg());
+//            throw new SkySportException(ReturnCodeConstant.PROJECT_CANNOT_EDIT.getCode(), ReturnCodeConstant.PROJECT_CANNOT_EDIT.getMsg());
 //        }
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();

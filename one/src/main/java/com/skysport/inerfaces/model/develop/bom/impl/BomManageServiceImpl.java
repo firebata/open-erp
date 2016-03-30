@@ -1,8 +1,10 @@
 package com.skysport.inerfaces.model.develop.bom.impl;
 
 import com.skysport.core.constant.CharConstant;
+import com.skysport.core.exception.SkySportException;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
 import com.skysport.inerfaces.mapper.info.BomInfoManageMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
@@ -80,6 +82,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
     @Override
     public BomInfo queryInfoByNatrualKey(String bomId) {
         BomInfo bomInfo = super.queryInfoByNatrualKey(bomId);
+
         if (null != bomInfo) {
 
             //面料集合
@@ -110,8 +113,13 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         String mainColor = bomInfo.getMainColor();
         String sexId = bomInfo.getSexId();
         String mainColorOld = bomInfo.getMainColorOld();
-        if (StringUtils.isNotEmpty(mainColor) && StringUtils.isNotEmpty(mainColorOld) && mainColor.trim().equals(mainColor.trim())) {
-            projectItemManageService.updateMainColors(sexId, mainColor, mainColorOld, bomInfo.getProjectId());
+
+        if (StringUtils.isNotEmpty(mainColor) && StringUtils.isNotEmpty(mainColorOld) && StringUtils.isNotEmpty(sexId)) {
+            if (!mainColor.trim().equals(mainColorOld.trim())) {
+                projectItemManageService.updateMainColors(sexId, mainColor.trim(), mainColorOld.trim(), bomInfo.getProjectId());
+            }
+        } else {
+            throw new SkySportException(ReturnCodeConstant.UPDATE_BOM_MAINCOLOR_PARAM_ERR);
         }
     }
 

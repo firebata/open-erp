@@ -9,8 +9,27 @@
     var title_type = "包材_";
     $.extend({
         initPackaging: initPackaging,
-        packagingItems: buildPackagingItems
+        packagingItems: buildPackagingItems,
+        refreshAllPackagingId: refreshAllPackagingId
     });
+
+    /**
+     * 刷新所有的包装材料id
+     * @param packagings
+     */
+    function refreshAllPackagingId(packagings) {
+        if (null != packagings) {
+            for (var idx = 0, len = packagings.length; idx < len; idx++) {
+                var packaging = packagings[idx];
+                var packagingId = packaging.packagingId;
+                var serialNumber = packaging.serialNumber;
+                if (null != fabricId) {
+                    $("#packagingIdP" + serialNumber).val(packagingId);
+                }
+
+            }
+        }
+    }
 
 
     /**
@@ -106,6 +125,7 @@
                     "packagingDivId": "packagingDivId" + idNum,
                     "packagingTitleId": "packagingTitleId" + idNum,
                     "packagingIdP": "packagingIdP" + idNum,
+                    "serialNumberP": "serialNumberP" + idNum,
                     "packagingTitleName": title_type + idNum,
                     "packagingsNameP": "packagingsNameP" + idNum,
                     "packagingEyeId": "packagingEyeId" + idNum,
@@ -562,6 +582,7 @@
         kfPackaging.width = $("#widthP" + idNum).val();
         kfPackaging.length = $("#lengthP" + idNum).val();
         kfPackaging.nameNum = idNum;
+        kfPackaging.serialNumber = serialNumber;
         kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
         kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
         kfPackaging.orderCount = $("#orderCountP" + idNum).val();
@@ -585,6 +606,7 @@
         var packagingItem = {};
 
         var kfPackaging = {};//基本信息
+
         kfPackaging.spId = $("#spIdP" + idNum).val();
         kfPackaging.yearCode = $("#yearCodeP" + idNum).val();
         kfPackaging.classicId = $("#classicIdP" + idNum).val();
@@ -618,6 +640,7 @@
         kfPackaging.length = $("#lengthP" + idNum).val();
         kfPackaging.nameNum = idNum;
         kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
+        kfPackaging.serialNumber = idNum;
         kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
 
         var materialSpInfo = {};//包材用量信息
@@ -636,6 +659,7 @@
         packagingItem.kfPackaging = kfPackaging;
         packagingItem.materialSpInfo = materialSpInfo;
         packagingItem.materialUnitDosage = materialUnitDosage;
+
         return packagingItem;
     }
 

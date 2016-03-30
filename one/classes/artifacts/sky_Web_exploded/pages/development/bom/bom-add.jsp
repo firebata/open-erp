@@ -49,6 +49,8 @@
                             描述
                             <small></small>
                             <input type="hidden" name="natrualkey" id="natrualkey" value="${natrualkey}"/>
+                            <input type="hidden" name="sexId" id="sexId" />
+                            <input type="hidden" name="projectId" id="projectId" />
                         </h5>
                     </div>
                     <div id="bomDescDetail">
@@ -98,9 +100,11 @@
 
                             <label class="col-xs-2  control-label" for="mainColor"> 主颜色 </label>
 
-                            <div class="col-xs-3">
+                            <div class="col-xs-3" align="center">
                                 <input type="text" id="mainColor" name="mainColor" placeholder="主颜色"
-                                       class="col-xs-10 col-sm-12" disabled="disabled"/>
+                                       class="col-xs-10 col-sm-10" disabled="disabled"/>
+                                <input type="hidden" name="mainColorOld" id="mainColorOld"/>
+                                <span class="glyphicon glyphicon-edit" id="mainColorEditBtnId"    onclick="javascript:$.mainColorEditInBom(this)"></span>
                             </div>
 
 

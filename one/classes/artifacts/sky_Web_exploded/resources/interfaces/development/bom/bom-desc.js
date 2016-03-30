@@ -20,9 +20,7 @@
         //初始化下拉列表
         reloadDescSelectData();
 
-
         initDescFileds(callback);
-
 
         //国际化
         i18nDesc();
@@ -48,6 +46,7 @@
 
     //赋初始值
     function initDescFileds(callback) {
+
         var natrualkey = $("#natrualkey").val();
         if (natrualkey != '' && natrualkey != 'null') {
             $.sendRestFulAjax(infoUrl + natrualkey, null, 'GET', 'json', function (_data) {

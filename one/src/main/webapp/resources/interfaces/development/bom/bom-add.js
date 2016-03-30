@@ -8,7 +8,14 @@
     var path = $.basepath();
     var saveUrl = path + "/development/bom/edit";
     var listUrl = path + "/development/bom/list";
-    $.extend({bomSave: bomSave, bomSubmit: bomSubmit, bomAutoBackup:bomAutoBackup});
+    var mainColorOld;
+    $.extend({
+        bomSave: bomSave,
+        bomSubmit: bomSubmit,
+        bomAutoBackup: bomAutoBackup,
+        mainColorEditInBom: mainColorEditInBom
+    });
+
     $(function () {
 
         initBom();
@@ -16,6 +23,25 @@
         $("#factoryItemInfo").on("change", "select", cb);
 
     });
+
+    /**
+     * 点击编辑
+     * @param _this
+     */
+    function mainColorEditInBom(_this) {
+        // var mainColorDisabled = $('#mainColor').attr("disabled");
+        var classVal = $(_this).attr("class");
+        var editClassVal = 'glyphicon glyphicon-edit';
+        var okClassVal = 'glyphicon glyphicon-ok';
+        var $mainColor = $('#mainColor');
+        if (classVal == editClassVal) {
+            $mainColor.removeAttr("disabled");
+            $(_this).removeClass(editClassVal).addClass(okClassVal);
+        } else if (classVal == okClassVal) {
+            $mainColor.attr("disabled", "disabled");
+            $(_this).removeClass(okClassVal).addClass(editClassVal);
+        }
+    }
 
     function initQuetoInfo(quoteReference, _thisId, f) {
 
@@ -66,6 +92,10 @@
     function buildBomDesc() {
 
         bominfo.offerAmount = $("#offerAmount").val();
+        bominfo.mainColor = $("#mainColor").val();
+        bominfo.projectId = $("#projectId").val();
+        bominfo.sexId = $("#sexId").val();
+        bominfo.mainColorOld = $("#mainColorOld").val();
         bominfo.fabricsEndDate = $("#fabricsEndDate").val();
         bominfo.accessoriesEndDate = $("#accessoriesEndDate").val();
         bominfo.preOfferDate = $("#preOfferDate").val();
@@ -79,11 +109,19 @@
      */
     function bomSaveFun(needToLisPage) {
 
-        $.sendJsonAjax(saveUrl, bominfo, function () {
+        $.sendJsonAjax(saveUrl, bominfo, function (_bomInfo) {
             if (null == needToLisPage) {
                 window.location.href = listUrl;
             } else {
                 bootbox.alert("成功暂存数据.");
+                if (null != _bomInfo) {
+                    var fabrics = _bomInfo["fabrics"];
+                    var accessories = _bomInfo["accessories"];
+                    var packagings = _bomInfo["packagings"];
+                    $.refreshAllFabricId(fabrics);
+                    $.refreshAllAccessoriesId(accessories);
+                    $.refreshAllPackagingId(packagings);
+                }
             }
 
         })

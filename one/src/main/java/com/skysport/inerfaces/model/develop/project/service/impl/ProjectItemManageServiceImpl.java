@@ -20,7 +20,6 @@ import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
-import com.skysport.inerfaces.model.info.main_color.IMainColorService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -46,9 +45,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Resource(name = "bomManageService")
     private IBomManageService bomManageService;
-
-    @Resource(name = "mainColorService")
-    private IMainColorService mainColorService;
 
     @Resource(name = "incrementNumber")
     private IncrementNumber incrementNumber;
@@ -79,7 +75,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     @Override
     public ProjectBomInfo queryInfoByNatrualKey(String natrualKey) {
 
-        List<SexColor> sexColors = sexColorService.searchInfos2(natrualKey);
+        List<SexColor> sexColors = sexColorService.searchInfosByProjectId(natrualKey);
         ProjectBomInfo projectBomInfo = super.queryInfoByNatrualKey(natrualKey);
         projectBomInfo.setSexColors(sexColors);
         return projectBomInfo;

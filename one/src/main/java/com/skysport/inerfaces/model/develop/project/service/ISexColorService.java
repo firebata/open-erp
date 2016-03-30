@@ -12,7 +12,7 @@ import java.util.List;
 public interface ISexColorService extends ICommonService<SexColor> {
 
 
-    List<SexColor> searchInfos2(String projectId);
+    List<SexColor> searchInfosByProjectId(String projectId);
 
     void updateSexColorByProjectIdAndSexId(SexColor sexColor);
 

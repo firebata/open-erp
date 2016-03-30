@@ -4,16 +4,18 @@ package com.skysport.inerfaces.constant.develop;
  * 说明:开发模块的返回码
  * Created by zhangjh on 2015/9/2.
  */
-public enum DevelopmentReturnConstant {
+public enum ReturnCodeConstant {
 
-    PROJECT_CANNOT_EDIT("100004", "不能修改主项目信息");
+    PROJECT_CANNOT_EDIT("100004", "不能修改主项目信息"),
+
+    UPDATE_BOM_MAINCOLOR_PARAM_ERR("100005", "修改bom主颜色时，传输的信息有误");
 
     private String code;
 
     private String msg;
 
 
-    DevelopmentReturnConstant(String code, String msg) {
+    ReturnCodeConstant(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

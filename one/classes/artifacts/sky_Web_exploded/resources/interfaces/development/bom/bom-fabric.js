@@ -14,9 +14,27 @@
         initFabric: initFabric,
         fabricItems: fabricItems,
         turnPantoneInfoToSelect2Option: turnPantoneInfoToSelect2Option,
-        reloadPantoneId: reloadPantoneId
+        reloadPantoneId: reloadPantoneId,
+        refreshAllFabricId: refreshAllFabricId
     });
 
+    /**
+     *  根据编号刷新fabricId
+     * @param fabrics
+     */
+    function refreshAllFabricId(fabrics) {
+        if (null != fabrics) {
+            for (var idx = 0, len = fabrics.length; idx < len; idx++) {
+                var fabricInfo = fabrics[idx];
+                var fabricId = fabricInfo.fabricId;
+                var serialNumber = fabricInfo.serialNumber;
+                if (null != fabricId) {
+                    $("#fabricId" + serialNumber).val(fabricId);
+                }
+
+            }
+        }
+    }
 
     function fabricItems() {
         var size = $("div[id^=fabricAllInfoId]").length;
@@ -76,9 +94,9 @@
     }
 
 
-    function initFabric(fabricItems) {
-        for (var index = 0; index < fabricItems.length; index++) {
-            addFabric(fabricItems[index]);
+    function initFabric(fabrics) {
+        for (var index = 0; index < fabrics.length; index++) {
+            addFabric(fabrics[index]);
         }
     }
 
@@ -739,6 +757,7 @@
                     "currenId": idNum,
                     "fabricDivId": "fabricDivId" + idNum,
                     "fabricTitleId": "fabricTitleId" + idNum,
+                    "serialNumber": "serialNumber" + idNum,
                     "fabricId": "fabricId" + idNum,
                     "fabricTitleName": title_type + idNum,
                     "fabricName": "fabricName" + idNum,
@@ -824,6 +843,7 @@
         fabricsInfo.positionIds = materialPositions;
         fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
         fabricsInfo.nameNum = idNum;
+        fabricsInfo.serialNumber = idNum;
         fabricsInfo.fabricId = $("#fabricId" + idNum).val();
         fabricsInfo.isShow = $("#isShow" + idNum).val();
         fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();
@@ -895,6 +915,7 @@
         fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
         fabricsInfo.nameNum = idNum;
         fabricsInfo.fabricId = $("#fabricId" + idNum).val();
+        fabricsInfo.serialNumber = idNum;
         fabricsInfo.fabricName = $("#fabricName" + idNum).val();
         fabricsInfo.isShow = $("#isShow" + idNum).val();
         fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();

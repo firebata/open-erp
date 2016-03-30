@@ -7,7 +7,7 @@
 
     var path = $.basepath();
     var title_type = "成衣厂_";
-    var saveFactoryFunURL = path + "/development/bom/saveFactoryFun";
+    // var saveFactoryFunURL = path + "/development/bom/saveFactoryFun";
     var bom_selectURL = path + "/system/baseinfo/bom_select";
     var fileUploadURL = path + "/files/upload";
     //var $fileListLi = $("#filesList");
@@ -41,6 +41,7 @@
         factoryQuoteInfo.factoryOffer = $("#factoryOffer" + index).val();
         factoryQuoteInfo.factoryMargins = $("#factoryMargins" + index).val();
         factoryQuoteInfo.nameNum = index;
+        factoryQuoteInfo.serialNumber = index;
 
         var productionInstruction = {};
         productionInstruction.factoryQuoteId = $("#factoryQuoteId" + index).val();
