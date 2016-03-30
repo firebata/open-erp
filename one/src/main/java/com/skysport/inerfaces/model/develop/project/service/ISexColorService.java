@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.project.service;
 
+import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.SexColor;
 import com.skysport.core.model.common.ICommonService;
 
@@ -19,4 +20,6 @@ public interface ISexColorService extends ICommonService<SexColor> {
     void updateSexColorByProjectIdAndSexId(String sexId, String mainColorNew, String mainColorOld, String projectId);
 
     void delByProjectId(String projectId);
+
+    void delSexColorInfoByBomInfo(BomInfo info);
 }

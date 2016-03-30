@@ -165,4 +165,16 @@ public class BomAction extends BaseAction<String, Object, BomInfo> {
     }
 
 
+    /**
+     * @param natrualKey
+     * @return
+     */
+    @RequestMapping(value = "/del/{natrualKey}", method = RequestMethod.DELETE)
+    @ResponseBody
+    @SystemControllerLog(description = "删除主项目信息")
+    public Map<String, Object> del(@PathVariable String natrualKey) {
+        bomManageService.delCacadBomInfo(natrualKey);
+        return rtnSuccessResultMap("删除成功");
+    }
+
 }

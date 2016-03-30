@@ -296,4 +296,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         sexColorService.updateSexColorByProjectIdAndSexId(sexId, mainColorNew, mainColorOld, projectId);
     }
 
+    @Override
+    public void delSexColorInfoByBomInfo(BomInfo info) {
+        sexColorService.delSexColorInfoByBomInfo(info);
+    }
+
 }

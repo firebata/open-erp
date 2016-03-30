@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.project.service;
 
+import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.core.model.common.ICommonService;
@@ -31,4 +32,6 @@ public interface IProjectItemManageService extends ICommonService<ProjectBomInfo
     void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, UnsupportedEncodingException;
 
     void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
+
+    void delSexColorInfoByBomInfo(BomInfo info);
 }

@@ -92,10 +92,10 @@
     function buildBomDesc() {
 
         bominfo.offerAmount = $("#offerAmount").val();
-        bominfo.mainColor = $("#mainColor").val();
         bominfo.projectId = $("#projectId").val();
         bominfo.sexId = $("#sexId").val();
         bominfo.mainColorOld = $("#mainColorOld").val();
+        bominfo.mainColor = $("#mainColor").val();
         bominfo.fabricsEndDate = $("#fabricsEndDate").val();
         bominfo.accessoriesEndDate = $("#accessoriesEndDate").val();
         bominfo.preOfferDate = $("#preOfferDate").val();
@@ -145,11 +145,7 @@
     }
 
 
-    /**
-     * 构建保存数据，并保存
-     */
-    function bomSave(needToLisPage) {
-
+    function toSaveBomInfo(needToLisPage) {
         //描述信息
         buildBomDesc();
 
@@ -173,6 +169,28 @@
         buildBomQuoted();
 
         bomSaveFun(needToLisPage);
+    }
+
+    /**
+     * 构建保存数据，并保存
+     */
+    function bomSave(needToLisPage) {
+        var mainColorOld = $("#mainColorOld").val();
+        var mainColor = $("#mainColor").val();
+        if (mainColorOld != mainColor) {
+            bootbox.confirm({
+                size: 'small',
+                message: "你准备把BOM原主颜色[" + mainColorOld + "]修改为新的颜色[" + mainColor + "],确定修改吗?",
+                callback: function (result) {
+                    if (result) {
+                        toSaveBomInfo(needToLisPage);
+                    }
+                }
+            })
+
+        }
+
+
     }
 
     var bominfo = {};

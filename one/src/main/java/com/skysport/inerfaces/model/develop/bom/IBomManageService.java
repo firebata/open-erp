@@ -44,4 +44,6 @@ public interface IBomManageService extends ICommonService<BomInfo> {
     List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
 
     void downloadProductinstruction(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException, InvalidFormatException;
+
+    void delCacadBomInfo(String natrualKey);
 }

@@ -21,7 +21,8 @@
         createDownloadLink: createDownloadLink,
         loadFileInput: loadFileInput,//初始化文件上传插件内容
         fileInputAddListenr: fileInputAddListenr,//上传插件动作监控
-        buildUploadedFileInfos: buildUploadedFileInfos//已上传的文件信息
+        buildUploadedFileInfos: buildUploadedFileInfos,//已上传的文件信息
+        delTableRecord: delTableRecord
     });
 
 
@@ -450,6 +451,44 @@
             }
         });
     }
+
+
+    /**
+     * 删除信息
+     * @param _natrualkey
+     */
+    function delTableRecord(_natrualkey, _url, $table, _msg) {
+        // natrualkey = _natrualkey;
+        if (null == _msg) {
+            _msg = "您正在执行删除操作，确定执行删除吗？"
+        }
+        bootbox.confirm(_msg, function (result) {
+            doDel(result, _url, $table);
+        });
+
+    }
+
+    /**
+     *
+     * @param result
+     */
+    var doDel = function (result, _url, $table) {
+        if (result)  $.sendRestFulAjax(_url, null, 'DELETE', 'json',
+            function () {
+                _doSuccess_del($table);
+            });
+        //natrualkey = ""; //将修改项的natrualkey置为空
+    }
+
+
+    /**
+     * 删除信息后的处理
+     * @private
+     */
+    var _doSuccess_del = function ($table) {
+        $table.ajax.reload();
+    }
+
 
     $(function () {
         $.ajaxSetup({

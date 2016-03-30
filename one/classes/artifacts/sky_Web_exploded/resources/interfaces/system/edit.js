@@ -50,6 +50,7 @@ var doDel = function (result) {
     if (result)  $.sendRestFulAjax("del/" + natrualkey, null, 'DELETE', 'json', _doSuccess_del);
     natrualkey = ""; //将修改项的natrualkey置为空
 }
+
 /**
  * 删除信息后的处理
  * @private

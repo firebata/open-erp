@@ -3,6 +3,12 @@
  */
 (function () {
     "use strict";
+    var _delURL = path + "/development/bom/del/";
+    $.extend({
+        editBom: editBom,
+        delBom: delBom
+    });
+
     /**
      * 列表展示内容
      * @returns {*[]}
@@ -50,7 +56,8 @@
                         var context =
                         {
                             func: [
-                                {"name": "更新", "fn": "$.editProject(\'" + data.natrualkey + "\')", "type": "primary"}
+                                {"name": "更新", "fn": "$.editBom(\'" + data.natrualkey + "\')", "type": "primary"},
+                                {"name": "删除", "fn": "$.delBom(\'" + data.natrualkey + "\')", "type": "danger"}
                             ]
                         };
                         var html = template(context);
@@ -84,8 +91,15 @@
 
     var projectId = "-1";
 
-    var editProject = function (_bomId) {
+    var editBom = function (_bomId) {
         window.location.href = "add/" + _bomId;
+    }
+
+    var delBom = function (_bomId) {
+        var $talbe = $('#example').DataTable();
+        var _url = _delURL + _bomId;
+        var _msg = "删除BOM会级联删除所属子项目中的颜色信息，确定删除吗?"
+        $.delTableRecord(_bomId, _url, $talbe, _msg);
     }
 
 
@@ -109,7 +123,8 @@
         addSelectChangeListner();
         //$.sendRestFulAjax(path + "/system/baseinfo/project_select", null, 'GET', 'json', initSelect);
     }
+    $.editBom = editBom;
+    $.delBom = delBom;
 
 
-    $.editProject = editProject;
 }());

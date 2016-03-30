@@ -1,7 +1,9 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
 
 import com.skysport.core.constant.CharConstant;
+import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.SexColor;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.SexColorManageMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
@@ -48,30 +50,20 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
      */
     @Override
     public void updateSexColorByProjectIdAndSexId(String sexId, String mainColorNew, String mainColorOld, String projectId) {
-        /*List<SexColor> sexColors = searchSexColorByProjectIdAndSexId(projectId,sexId);
-        if (null != sexColors) {
-            for (SexColor sexColor : sexColors) {
-                String colorStr = sexColor.getMainColorNames();
-                if (sexId.equals(sexColor.getSexIdChild())) {
-                    SexColor sexColorNew = sexColor;
-                    String[] colors = colorStr.split(CharConstant.COMMA);
-                    List<String> newColors = new ArrayList<>();
+        int action = WebConstants.NEED_TO_UPDATE_PROJECT_SEX_COLOR;
+        updateSexColor(sexId, mainColorOld, projectId, action, mainColorNew);
+    }
 
-                    for (String color : colors) {
-                        if (color.trim().equals(mainColorOld)) {
-                            newColors.add(mainColorNew);
-                        } else {
-                            newColors.add(color);
-                        }
-                    }
-                    String colorStrNew = StringUtils.join(newColors, CharConstant.COMMA);
-                    sexColorNew.setMainColorNames(colorStrNew);
-                    updateSexColorByProjectIdAndSexId(sexColorNew);
-                    return;
-                }
-            }
-        }*/
-
+    /**
+     * 更新或者删除子项目某个性别对应的颜色
+     *
+     * @param sexId             性别属性
+     * @param mainColorNeedDeal 需要处理的BOM主颜色（待更新的颜色，或者待删除的颜色）
+     * @param projectId         项目id
+     * @param action            行为
+     * @param mainColorNew      主颜色信息
+     */
+    private void updateSexColor(String sexId, String mainColorNeedDeal, String projectId, int action, String mainColorNew) {
 
         SexColor sexColor = searchSexColorByProjectIdAndSexId(projectId, sexId);
         if (null != sexColor) {
@@ -82,8 +74,10 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
                 List<String> newColors = new ArrayList<>();
 
                 for (String color : colors) {
-                    if (color.trim().equals(mainColorOld)) {
-                        newColors.add(mainColorNew);
+                    if (color.trim().equals(mainColorNeedDeal)) {
+                        if (action == WebConstants.NEED_TO_UPDATE_PROJECT_SEX_COLOR) {
+                            newColors.add(mainColorNew);
+                        }
                     } else {
                         newColors.add(color);
                     }
@@ -91,11 +85,8 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
                 String colorStrNew = StringUtils.join(newColors, CharConstant.COMMA);
                 sexColorNew.setMainColorNames(colorStrNew);
                 updateSexColorByProjectIdAndSexId(sexColorNew);
-                return;
             }
         }
-
-
     }
 
     private SexColor searchSexColorByProjectIdAndSexId(String projectId, String sexId) {
@@ -105,5 +96,14 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
     @Override
     public void delByProjectId(String projectId) {
         sexColorManageMapper.delByProjectId(projectId);
+    }
+
+    @Override
+    public void delSexColorInfoByBomInfo(BomInfo info) {
+        int action = WebConstants.NEED_TO_DEL_PROJECT_SEX_COLOR;
+        String projectId = info.getProjectId();
+        String sexId = info.getSexId();
+        String mainColorNeedDel = info.getMainColor();
+        updateSexColor(sexId, mainColorNeedDel, projectId, action, null);
     }
 }

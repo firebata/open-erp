@@ -225,6 +225,23 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     }
 
+    /**
+     * 级联删除bom信息和project的颜色信息
+     *
+     * @param natrualKey
+     */
+    @Override
+    public void delCacadBomInfo(String natrualKey) {
+        //删除bom信息
+        super.del(natrualKey);
+        //删除对应子项目的性别颜色信息
+        BomInfo info = queryInfoByNatrualKey(natrualKey);
+        projectItemManageService.delSexColorInfoByBomInfo(info);
+
+
+
+    }
+
     @Override
     public void updateBatch(List<BomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {

@@ -148,5 +148,6 @@ public interface WebConstants extends TableNameConstants {
 
     String DEPT_TYPE = "dept_type";
 
-
+    int NEED_TO_UPDATE_PROJECT_SEX_COLOR = 1;
+    int NEED_TO_DEL_PROJECT_SEX_COLOR = 2;
 }
