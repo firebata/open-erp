@@ -114,45 +114,7 @@
                                 <input type="text" id="offerAmount" name="offerAmount" placeholder="订单数量"
                                        class="col-xs-10 col-sm-12"/>
                             </div>
-
                         </div>
-
-                        <%--<div class="form-group">--%>
-                        <%--<label class="col-xs-2  control-label" for="fabricsEndDate"> 面料交货时间 </label>--%>
-
-                        <%--<div class="col-xs-3">--%>
-                        <%--<input type="text" id="fabricsEndDate" name="fabricsEndDate" placeholder="面料交货时间"--%>
-                        <%--class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>--%>
-                        <%--</div>--%>
-
-                        <%--<label class="col-xs-2  control-label" for="accessoriesEndDate"> 辅料交货时间 </label>--%>
-
-                        <%--<div class="col-xs-3">--%>
-                        <%--<input type="text" id="accessoriesEndDate" name="accessoriesEndDate"--%>
-                        <%--placeholder="辅料交货时间" class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>--%>
-                        <%--</div>--%>
-
-
-                        <%--</div>--%>
-
-                        <%--<div class="form-group">--%>
-                        <%--<label class="col-xs-2  control-label" for="preOfferDate"> 成衣报价时间 </label>--%>
-
-                        <%--<div class="col-xs-3">--%>
-                        <%--<input type="text" id="preOfferDate" name="preOfferDate" placeholder="成衣报价时间"--%>
-                        <%--class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>--%>
-                        <%--</div>--%>
-
-                        <%--<label class="col-xs-2  control-label" for="clothReceivedDate"> 成衣收到时间 </label>--%>
-
-                        <%--<div class="col-xs-3">--%>
-                        <%--<input type="text" id="clothReceivedDate" name="clothReceivedDate" placeholder="成衣收到时间"--%>
-                        <%--class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>--%>
-                        <%--</div>--%>
-
-                        <%--</div>--%>
-
-
                     </div>
                 </div>
                 <div id="fabricsInfo">
@@ -169,7 +131,6 @@
                 <div id="accessoriesInfo">
                     <h5 class="header smaller lighter blue">
                         辅料
-                        <%--<small>+</small><img src="<%=path%>/resources/images/add.png" alt="增加辅料"   id="imgAddAccessories">--%>
                         <span class="glyphicon glyphicon-plus-sign blue" alt="增加辅料" id="imgAddAccessories"></span>
                     </h5>
 
