@@ -1,7 +1,7 @@
 package com.skysport.core.filter;
 
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,7 +41,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (IGNORE_URIS.contains(url)) {
             return true;
         } else {
-            UserInfo user = (UserInfo) request.getSession().getAttribute(WebConstants.CURRENT_USER);
+            HttpSession session = request.getSession();
+            UserInfo user = UserUtils.getUserFromSession(session);
             if (user == null) {
                 log.info("Interceptor：跳转到login页面！");
                 request.getRequestDispatcher("/page/index.jsp").forward(request, response);

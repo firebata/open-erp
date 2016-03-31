@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.system.DepartmentInfo;
 import com.skysport.inerfaces.model.system.dept.service.IDepartmentService;
 import org.apache.commons.lang3.StringUtils;
@@ -100,7 +100,7 @@ public class DepartmentAction extends BaseAction<String, Object, DepartmentInfo>
     @SystemControllerLog(description = "新增部门信息")
     public Map<String, Object> add(DepartmentInfo departmentInfo) {
         //设置ID
-        departmentInfo.setNatrualkey(PrimaryKeyUtils.getUUID());
+        departmentInfo.setNatrualkey(UuidGeneratorUtils.getNextId());
         departmentService.add(departmentInfo);
         return rtnSuccessResultMap("新增成功");
     }

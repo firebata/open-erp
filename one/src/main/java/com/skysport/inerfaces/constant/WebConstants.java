@@ -150,4 +150,16 @@ public interface WebConstants extends TableNameConstants {
 
     int NEED_TO_UPDATE_PROJECT_SEX_COLOR = 1;
     int NEED_TO_DEL_PROJECT_SEX_COLOR = 2;
+
+    // 用户组别名
+    String devlop_staff = "devlop_emp"; //开发部员工
+    String devlop_manager = "";//开发部经理
+    String manager_assistant = "manager_assistant";//总经理助理
+    String ceo = "ceo";//总经理
+    String operation_staff = "operation_staff";
+    String operation_manager = "operation_manager";
+    String finance_staff = "finance_staff";
+    String finance_manager = "finance_manager";
+
+
 }

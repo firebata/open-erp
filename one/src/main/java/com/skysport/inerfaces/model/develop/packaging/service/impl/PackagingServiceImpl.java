@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.develop.packaging.service.impl;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KFPackaging;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
@@ -86,7 +86,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
 //                    //年份+客户+地域+系列+NNN
 //                    packagingId = kind_name + seqNo;
 
-                    packagingId = PrimaryKeyUtils.getUUID();
+                    packagingId = UuidGeneratorUtils.getNextId();
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
 
 

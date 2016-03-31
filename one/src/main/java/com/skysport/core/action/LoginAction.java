@@ -3,7 +3,7 @@ package com.skysport.core.action;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.login.service.ILoginService;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.utils.UserUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -49,8 +51,8 @@ public class LoginAction {
     @RequestMapping(value = "/loginout")
     @ResponseBody
     @SystemControllerLog(description = "用户登出")
-    public ModelAndView loginout(HttpServletRequest request) throws Exception {
-        request.getSession().removeAttribute(WebConstants.CURRENT_USER);
+    public ModelAndView loginout(HttpSession session) throws Exception {
+        UserUtils.removeUserFromSession(session);
         return new ModelAndView("login");
     }
 

@@ -3,7 +3,8 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
-import com.skysport.core.model.workflow.InstanceService;
+import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
@@ -47,7 +48,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Resource(name = "incrementNumber")
     private IncrementNumber incrementNumber;
     @Resource(name = "devlopmentInstanceServiceImpl")
-    private InstanceService devlopmentInstanceServiceImpl;
+    private IWorkFlowService devlopmentIWorkFlowServiceImpl;
 
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
@@ -67,9 +68,8 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
+        UserInfo userInfo = UserUtils.getUserFromSession(session);
 
-        //读取session中的用户
-        UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
@@ -110,7 +110,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put("projectId", projectId);
         variables.put("userId", userId);
-        devlopmentInstanceServiceImpl.startProcessInstanceByKey(WebConstants.WL_PROCESS_NAME, variables);
+        devlopmentIWorkFlowServiceImpl.startProcessInstanceByKey(WebConstants.WL_PROCESS_NAME, variables);
     }
 
     /**
@@ -130,9 +130,9 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        //读取session中的用户
-        UserInfo userInfo = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
 
+        //读取session中的用户
+        UserInfo userInfo = UserUtils.getUserFromSession(session);
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 

@@ -7,7 +7,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.model.permission.roleinfo.helper.RoleInfoHelper;
 import com.skysport.inerfaces.model.permission.roleinfo.service.IRoleInfoService;
 import com.skysport.inerfaces.model.system.dept.service.IDepartmentService;
@@ -108,7 +108,7 @@ public class RoleInfoAction extends BaseAction<String, Object, RoleInfo> {
     @SystemControllerLog(description = "新增角色")
     public Map<String, Object> add(RoleInfo roleinfoInfo) {
         //设置ID
-        roleinfoInfo.setNatrualkey(PrimaryKeyUtils.getUUID());
+        roleinfoInfo.setNatrualkey(UuidGeneratorUtils.getNextId());
 //        RoleInfoHelper.SINGLETONE.encriptPwd(roleinfoInfo);
         roleInfoService.add(roleinfoInfo);
         return rtnSuccessResultMap("新增成功");

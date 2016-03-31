@@ -6,7 +6,7 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.core.utils.SecurityUtil;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -119,7 +119,7 @@ public class UserInfoAction extends BaseAction<String, Object, UserInfo> {
     @SystemControllerLog(description = "增加用户信息")
     public Map<String, Object> add(UserInfo userInfo, HttpServletRequest request) throws Exception {
 
-        String uid = PrimaryKeyUtils.getUUID();
+        String uid = UuidGeneratorUtils.getNextId();
         //设置ID
         userInfo.setNatrualkey(uid);
 

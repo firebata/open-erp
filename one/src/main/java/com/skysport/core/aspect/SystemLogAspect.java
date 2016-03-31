@@ -1,14 +1,14 @@
 package com.skysport.core.aspect;
 
+import com.skysport.core.annotation.SystemControllerLog;
+import com.skysport.core.annotation.SystemServiceLog;
 import com.skysport.core.bean.LogInfo;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.init.SpringContextHolder;
 import com.skysport.core.model.log.LogService;
-import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.annotation.SystemServiceLog;
 import com.skysport.core.utils.JsonUtils;
-import com.skysport.core.utils.PrimaryKeyUtils;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.utils.UserUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -60,7 +60,7 @@ public class SystemLogAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
-        UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+        UserInfo user = UserUtils.getUserFromSession(session);
         //请求的IP
         String ip = request.getRemoteAddr();
         try {
@@ -85,7 +85,7 @@ public class SystemLogAspect {
             logger.info("请求IP:" + ip);
             //*========数据库日志=========*//
             LogInfo log = SpringContextHolder.getBean("ilog");
-            log.setNatrualkey(PrimaryKeyUtils.getUUID());
+            log.setNatrualkey(UuidGeneratorUtils.getNextId());
             log.setDescription(description);
             log.setMethod(method);
             log.setType("0");
@@ -117,7 +117,7 @@ public class SystemLogAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         //读取session中的用户
-        UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+        UserInfo user = UserUtils.getUserFromSession(session);
         //获取请求ip
         String ip = request.getRemoteAddr();
         //获取用户请求方法的参数并序列化为JSON格式字符串
@@ -141,7 +141,7 @@ public class SystemLogAspect {
             logger.info("请求参数:" + params);
                /*==========数据库日志=========*/
             LogInfo log = SpringContextHolder.getBean("ilog");
-            log.setNatrualkey(PrimaryKeyUtils.getUUID());
+            log.setNatrualkey(UuidGeneratorUtils.getNextId());
             log.setDescription(description);
             log.setExceptionCode(e.getClass().getName());
             log.setType("1");

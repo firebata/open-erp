@@ -3,7 +3,7 @@ package com.skysport.inerfaces.action.permission;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.*;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.model.permission.IPermissionService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -95,8 +96,9 @@ public class PermissionAction extends BaseAction {
      */
     @RequestMapping(value = "/qrMenu", method = RequestMethod.POST)
     @ResponseBody
-    public List<Menu> selectMenu(HttpServletRequest request,HttpServletResponse response) {
-        UserInfo user = (UserInfo) request.getSession().getAttribute(WebConstants.CURRENT_USER);
+    public List<Menu> selectMenu(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        UserInfo user = UserUtils.getUserFromSession(session);
         String userId = user.getNatrualkey();
         String menuSessionKey = userId + "menusTotle";
         List<Menu> menusTotle = (List<Menu>) request.getSession().getAttribute(menuSessionKey);

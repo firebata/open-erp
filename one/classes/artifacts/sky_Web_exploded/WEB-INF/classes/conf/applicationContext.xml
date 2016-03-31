@@ -94,6 +94,9 @@
     <!--<context:component-scan base-package="com.skysport.core.aspect"/>-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+    <!-- 引擎内部提供的UUID生成器，依赖fastxml的java-uuid-generator模块 -->
+    <bean id="uuidGenerator" class="org.activiti.engine.impl.persistence.StrongUuidGenerator" />
+
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="transactionManager"/>

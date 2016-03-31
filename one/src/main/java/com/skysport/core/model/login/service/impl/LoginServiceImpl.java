@@ -4,6 +4,7 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.login.helper.UserInfoServiceHelper;
 import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.core.model.login.service.IUserService;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,7 +36,7 @@ public class LoginServiceImpl implements ILoginService {
      * 5，返回登录页面
      * 6，返回成功
      *
-     * @param user    用户登录输入信息
+     * @param user 用户登录输入信息
      * @return
      */
     @Override
@@ -46,6 +47,8 @@ public class LoginServiceImpl implements ILoginService {
         //判断用户是否存在
         String msg = judgeLoginInfo(userInDB, user);
         if (null == msg) {
+            HttpSession session = request.getSession();
+            UserUtils.saveUserToSession(session, user);
             request.getSession().setAttribute(WebConstants.CURRENT_USER, userInDB);
             ModelAndView mav = new ModelAndView("main");
             Map<String, Object> result = new HashMap<>();

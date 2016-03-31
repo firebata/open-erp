@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.fabric.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
@@ -97,7 +97,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 //                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
 //                    //年份+客户+地域+系列+NNN
 //                    fabricId = kind_name + seqNo;
-                    fabricId = PrimaryKeyUtils.getUUID();
+                    fabricId = UuidGeneratorUtils.getNextId();
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
                     fabricsManageMapper.add(fabricsJoinInfo.getFabricsInfo());
                     //新增面料详细

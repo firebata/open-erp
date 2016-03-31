@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.develop.quoted.service.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FactoryQuoteInfo;
@@ -91,8 +91,8 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
 //                    String kind_name = buildKindName(bomInfo, factoryQuoteInfo);
 //                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.FACTORY_QUOTE_SEQ_NO_LENGTH);
 //                    quoteInfoId = kind_name + seqNo;
-                    quoteInfoId = PrimaryKeyUtils.getUUID();
-                    String uid = PrimaryKeyUtils.getUUID();
+                    quoteInfoId = UuidGeneratorUtils.getNextId();
+                    String productionInstructionId = UuidGeneratorUtils.getNextId();
 
                     factoryQuoteInfo.setFactoryQuoteId(quoteInfoId);
 
@@ -100,8 +100,8 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
                     //必须在成衣厂报价信息下方（因为供应商在下方）
                     getKfProductionInstructionEntity(factoryQuoteInfo, quoteInfoId);
                     factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
-                    factoryQuoteInfo.getProductionInstruction().setUid(uid);
-                    factoryQuoteInfo.getProductionInstruction().setProductionInstructionId(uid);
+                    factoryQuoteInfo.getProductionInstruction().setUid(productionInstructionId);
+                    factoryQuoteInfo.getProductionInstruction().setProductionInstructionId(productionInstructionId);
                     factoryQuoteInfo.getProductionInstruction().setBomId(bomId);
                     factoryQuotedInfoMapper.addProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }

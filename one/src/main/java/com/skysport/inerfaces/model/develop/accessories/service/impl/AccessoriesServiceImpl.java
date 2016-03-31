@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.develop.accessories.service.impl;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
-import com.skysport.core.utils.PrimaryKeyUtils;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
@@ -91,7 +91,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 //
 //                    //年份+客户+地域+系列+NNN
 //                    accessoriesId = kind_name + seqNo;
-                    accessoriesId = PrimaryKeyUtils.getUUID();
+                    accessoriesId = UuidGeneratorUtils.getNextId();
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
                     accessoriesManageMapper.add(accessoriesJoinInfo.getAccessoriesInfo());
                     //新增面料用量

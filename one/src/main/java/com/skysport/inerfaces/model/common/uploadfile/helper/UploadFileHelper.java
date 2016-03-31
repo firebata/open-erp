@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.model.common.uploadfile.helper;
 
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.basic.InitialPreviewConfig;
 import com.skysport.inerfaces.bean.basic.InitialPreviewExtra;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
@@ -101,7 +102,7 @@ public enum UploadFileHelper {
 
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session = request.getSession();
-            UserInfo user = (UserInfo) session.getAttribute(WebConstants.CURRENT_USER);
+            UserInfo user = UserUtils.getUserFromSession(session);
             updateFileStatus(fileInfos, bussId, fileKind, user.getAliases(), WebConstants.FILE_IN_FINISH);
             //回写文件记录表的status状态为1
             uploadFileInfoService.updateBatch(fileInfos);
