@@ -8,7 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" />
     </list>
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,7 +45,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectItemTaskImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProjectItemTaskImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="372">
@@ -54,6 +54,16 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#1571#1587#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectItemProcessV1.01.bpmn" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1456,12 +1466,12 @@
       <workItem from="1458695442250" duration="24602000" />
       <workItem from="1458781565441" duration="3815000" />
       <workItem from="1458787124537" duration="19334000" />
-      <workItem from="1459474090424" duration="29223000" />
+      <workItem from="1459474090424" duration="29313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590252000" />
+    <option name="totallyTimeSpent" value="590342000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1745,14 +1755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-798">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -1978,6 +1980,14 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1571#1587#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
