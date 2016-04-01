@@ -8,81 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/TaskServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/helper/ProjectItemTaskHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/task/TaskQueryForm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/DevlopmentTaskServiceImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/task/ITaskService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/task/impl/TaskServiceImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/SkySportV01.bpmn" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/spring-mybatis.xml--" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/sky_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/sky_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/workflow/BaseWorkflowVo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/bean/workflow/BaseWorkflowVo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/init/InitSystemInfoListener.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/init/InitSystemInfoListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/init/SkySportAppContext.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/init/SkySportAppContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/CommonDao.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/mapper/CommonDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/ICommonService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/ICommonService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/SystemInitHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/init/helper/SystemInitHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/workflow/IWorkFlowService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/model/workflow/IWorkFlowService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/UserUtils.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/core/utils/UserUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/common/FileUpDownAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/FabricAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/FabricAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/MaterialManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/MaterialManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/AreaAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/BondingLaminationCoatingAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CategoryManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CategoryManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ColorOfMembraneCoatingAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CustomerAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/CustomerAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/DyeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/DyeAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FabricsAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FabricsAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FactoryManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FactoryManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FinishAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/FinishAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialClassicAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialClassicAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialOfMembraneCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialOfMembraneCoatingAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialTypeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialTypeAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MaterialUnitManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MembraneThicknessAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/MembraneThicknessAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/PositionManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ProductTypeAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/ProductTypeAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SeriesAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SeriesAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SexAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SexAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpecificationAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/SpecificationAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WaterVapourPermeabilityAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WaterVapourPermeabilityAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WorkmanshipOfBondingLaminatingCoatingAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/WorkmanshipOfBondingLaminatingCoatingAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/YearConfManageAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/info/YearConfManageAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/RoleInfoAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/RoleInfoAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/UserInfoAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/permission/UserInfoAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DepartmentAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DictionaryAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/DictionaryAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SysLogAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/system/SysLogAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/task/TaskAction.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/task/TaskAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/task/TaskInfo.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/bean/task/TaskInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/BaseQueyrForm.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/BaseQueyrForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/develop/BomQueryForm.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/develop/BomQueryForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/develop/ProjectQueryForm.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/develop/ProjectQueryForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectManageMapper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectManageMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/common/uploadfile/helper/UploadFileHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/common/uploadfile/helper/UploadFileHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectManageService.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectManageService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/PermissionServiceImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/permission/PermissionServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" afterPath="$PROJECT_DIR$/one/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" afterPath="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" />
     </list>
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,56 +32,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Activity.java" pinned="false" current-in-tab="true">
-        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-bpmn-model/5.19.0/activiti-bpmn-model-5.19.0-sources.jar!/org/activiti/bpmn/model/Activity.java">
+      <file leaf-file-name="ProjectItemManageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+            <state relative-caret-position="234">
+              <caret line="185" column="60" selection-start-line="185" selection-start-column="31" selection-end-line="185" selection-end-column="60" />
               <folding>
-                <element signature="e#986#1003#0" expanded="true" />
-                <element signature="e#1079#1096#0" expanded="true" />
-                <element signature="e#1162#1177#0" expanded="true" />
-                <element signature="e#1295#1314#0" expanded="true" />
+                <element signature="e#6547#6548#0" expanded="true" />
+                <element signature="e#6626#6627#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationContextElResolver.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-spring/5.19.0/activiti-spring-5.19.0-sources.jar!/org/activiti/spring/ApplicationContextElResolver.java">
+      <file leaf-file-name="ProjectItemTaskImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+            <state relative-caret-position="372">
+              <caret line="41" column="102" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="102" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1571#1587#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Group.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/identity/Group.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReflectUtil.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-image-generator/5.19.0/activiti-image-generator-5.19.0-sources.jar!/org/activiti/image/util/ReflectUtil.java">
+      <file leaf-file-name="GroupQuery.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/identity/GroupQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+            <state relative-caret-position="215">
+              <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MailServerInfo.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/cfg/MailServerInfo.java">
+      <file leaf-file-name="Query.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/query/Query.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractProcessEngineConfigurator.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/cfg/AbstractProcessEngineConfigurator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+            <state relative-caret-position="209">
+              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -233,8 +160,8 @@
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/core/action/BaseAction.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java" />
         <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java" />
-        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" />
         <option value="$PROJECT_DIR$/one/src/main/resources/conf/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java" />
       </list>
     </option>
   </component>
@@ -1529,12 +1456,12 @@
       <workItem from="1458695442250" duration="24602000" />
       <workItem from="1458781565441" duration="3815000" />
       <workItem from="1458787124537" duration="19334000" />
-      <workItem from="1459474090424" duration="25601000" />
+      <workItem from="1459474090424" duration="29223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="586630000" />
+    <option name="totallyTimeSpent" value="590252000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1570,10 +1497,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28724545" sideWeight="0.5788913" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31156316" sideWeight="0.4957265" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.7181009" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.7121662" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14529915" sideWeight="0.51028806" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.227224" sideWeight="0.77132195" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.28189912" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.28783384" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1595,24 +1522,23 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java</url>
+          <line>48</line>
+          <properties />
+          <option name="timeStamp" value="158" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="156" />
+      <option name="time" value="159" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
-        <watch expression="file.getOriginalFilename()" />
-        <watch expression="headers" custom="javax.servlet.http.HttpServletRequest" />
-        <watch expression="mappingData" custom="javax.servlet.http.HttpServletRequest" />
-        <watch expression="mpvs" />
-        <watch expression="mpvs" />
-        <watch expression="request" />
-        <watch expression="mpvs" />
-        <watch expression="isIgnoreInvalidFields()" />
-        <watch expression="isIgnoreUnknownFields()" />
-        <watch expression="getPropertyAccessor()" />
-        <watch expression="info" />
+        <watch expression="identityService.createGroupQuery().groupMember(userId)" />
+        <watch expression="identityService.createGroupQuery().groupMember(userId).list()" />
       </configuration>
     </watches-manager>
   </component>
@@ -1621,36 +1547,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/TaskServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="45" column="55" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/form/task/TaskQueryForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#449#450#0" expanded="false" />
-            <element signature="e#480#481#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/helper/ProjectItemTaskHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/IQuotedService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1801,8 +1697,8 @@
         <state relative-caret-position="243">
           <caret line="35" column="25" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1816#1832#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1816#1832#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1812,7 +1708,7 @@
         <state relative-caret-position="171">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1857,44 +1753,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-695">
-          <caret line="131" column="58" selection-start-line="131" selection-start-column="58" selection-end-line="131" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4748#4749#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="185" column="60" selection-start-line="185" selection-start-column="31" selection-end-line="185" selection-end-column="60" />
-          <folding>
-            <element signature="e#6547#6548#0" expanded="true" />
-            <element signature="e#6626#6627#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="163" column="11" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="49" column="93" selection-start-line="49" selection-start-column="93" selection-end-line="49" selection-end-column="93" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1571#1587#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2031,14 +1894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-spring/5.19.0/activiti-spring-5.19.0-sources.jar!/org/activiti/spring/ApplicationContextElResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/EngineServices.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -2052,10 +1907,76 @@
         <state relative-caret-position="342">
           <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
           <folding>
-            <element signature="e#986#1003#0" expanded="true" />
-            <element signature="e#1079#1096#0" expanded="true" />
-            <element signature="e#1162#1177#0" expanded="true" />
-            <element signature="e#1295#1314#0" expanded="true" />
+            <element signature="e#986#1003#0" expanded="false" />
+            <element signature="e#1079#1096#0" expanded="false" />
+            <element signature="e#1162#1177#0" expanded="false" />
+            <element signature="e#1295#1314#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-spring/5.19.0/activiti-spring-5.19.0-sources.jar!/org/activiti/spring/ApplicationContextElResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="146" column="37" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4682#4683#0" expanded="true" />
+            <element signature="e#4748#4749#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="185" column="60" selection-start-line="185" selection-start-column="31" selection-end-line="185" selection-end-column="60" />
+          <folding>
+            <element signature="e#6547#6548#0" expanded="true" />
+            <element signature="e#6626#6627#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/query/Query.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/identity/GroupQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/activiti/activiti-engine/5.19.0/activiti-engine-5.19.0-sources.jar!/org/activiti/engine/identity/Group.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one/src/main/java/com/skysport/inerfaces/engine/workflow/ProjectItemTaskImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="41" column="102" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="102" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1571#1587#0" expanded="true" />
           </folding>
         </state>
       </provider>

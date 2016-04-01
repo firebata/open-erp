@@ -45,8 +45,12 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
         UserInfo userInfo = UserUtils.getUserFromSession();
         ProcessInstance processInstance = null;
         try {
-            identityService.setAuthenticatedUserId(userInfo.getNatrualkey());
-            variables.put("devlop_staff",userInfo.getNatrualkey());
+            String userId = userInfo.getNatrualkey();
+            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();
+
+            identityService.setAuthenticatedUserId(groupId);
+
+            variables.put("devlop_staff", userInfo.getNatrualkey());
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.PROJECT_TEM_PROCESS, businessKey, variables);
 
         } finally {
