@@ -71,7 +71,6 @@ public interface WebConstants extends TableNameConstants {
     int USER_IS_ADMIN = 1;//管理员
     int USER_IS_NOT_ADMIN = 0;//非管理员
 
-    String WL_PROCESS_NAME = "skysportProcess";
 
     int NEED_TRANSFORM_COLUMN_NEME = 0;
     int NO_NEED_TRANSFORM_COLUMN_NAME = 1;
@@ -160,6 +159,17 @@ public interface WebConstants extends TableNameConstants {
     String operation_manager = "operation_manager";
     String finance_staff = "finance_staff";
     String finance_manager = "finance_manager";
+
+    //
+    String PROJECT_TEM_PROCESS = "projectitemProcess";
+    String APPROVE_BOM_PROCESS = "approveBomProcess";//审核Bom
+    String OFFLINEWORK_PROCESS = "offlineworkProcess";//线下任务
+    String APPROVE_PREQUOTED_PROCESS = "approvePreQuotedProcess";//预报价
+    String COLORSIMPLES_PROCESS = "lapdipProcess";//色样
+    String APPROV_EDEV_SIMPLES_PROCESS = "approveDevSamplesProcess";//审核开发样
+    String APPROVE_FINALLY_QUOTED_PROCESS = "approveFinallyQuotedProcess";//审核最终的报价（和选择的打样的BOM数量一致）
+    String APPROVE_FINALLY_BOM_PROCESS = "approveFinallyBomProcess";//审核BOM审核过程
+
 
 
 }

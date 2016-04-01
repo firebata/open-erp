@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/sex")
-public class SexAction extends BaseAction<String, Object, SexInfo> {
+public class SexAction extends BaseAction<SexInfo> {
 
 
     @Resource(name = "sexManageService")

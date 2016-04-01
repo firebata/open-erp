@@ -30,7 +30,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/dept")
-public class DepartmentAction extends BaseAction<String, Object, DepartmentInfo> {
+public class DepartmentAction extends BaseAction<DepartmentInfo> {
 
     @Resource(name = "departmentService")
     private IDepartmentService departmentService;

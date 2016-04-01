@@ -31,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/unit")
-public class MaterialUnitManageAction extends BaseAction<String, Object, MaterialUnitInfo> {
+public class MaterialUnitManageAction extends BaseAction<MaterialUnitInfo> {
     @Resource(name = "materialUnitService")
     private ICommonService materialUnitService;
 

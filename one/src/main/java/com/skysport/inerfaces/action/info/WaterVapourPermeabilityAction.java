@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/wvp")
-public class WaterVapourPermeabilityAction extends BaseAction<String, Object, WaterVapourPermeabilityInfo> {
+public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeabilityInfo> {
     @Resource(name = "waterVapourPermeabilityService")
     private ICommonService waterVapourPermeabilityService;
 

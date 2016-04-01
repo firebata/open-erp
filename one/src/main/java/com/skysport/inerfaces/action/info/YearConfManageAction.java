@@ -31,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/year_conf")
-public class YearConfManageAction extends BaseAction<String, Object, YearConfInfo> {
+public class YearConfManageAction extends BaseAction<YearConfInfo> {
 
     @Resource(name = "yearConfManageService")
     private ICommonService yearConfManageService;

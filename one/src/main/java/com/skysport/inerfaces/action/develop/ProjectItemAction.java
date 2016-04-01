@@ -14,11 +14,11 @@ import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +35,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/development/project_item")
-public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo> {
+public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
     @Resource(name = "projectItemManageService")
     private IProjectItemManageService projectItemManageService;
@@ -48,6 +48,9 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
 
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
+
+    ProjectItemAction() {
+    }
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -78,8 +81,6 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
         mav.addObject("natrualkey", natrualKey);
         return mav;
     }
-
-
 
 
     /**
@@ -118,29 +119,18 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @ResponseBody
     @SystemControllerLog(description = "查询子项目信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
-
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
-        ProjectBomInfo bomInfo = new ProjectBomInfo();
-        bomInfo.setYearCode(request.getParameter("yearCode"));
-        bomInfo.setCustomerId(request.getParameter("customerId"));
-        bomInfo.setAreaId(request.getParameter("areaId"));
-        bomInfo.setSeriesId(request.getParameter("seriesId"));
+        ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
-
-        // 总记录数
-        int recordsTotal = projectItemManageService.listInfosCounts();
-        int recordsFiltered = recordsTotal;
-        if (!StringUtils.isBlank(queryForm.getDataTablesInfo().getSearchValue())) {
-            recordsFiltered = projectItemManageService.listFilteredInfosCounts(queryForm);
-        }
-        int draw = Integer.parseInt(request.getParameter("draw"));
-        List<ProjectBomInfo> infos = projectItemManageService.searchInfos(queryForm);
-
-        ProjectManageHelper.turnIdToName(infos);
-        Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
+        Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectItemManageService);
         return resultMap;
+    }
+
+    @Override
+    public void turnIdToName(List<ProjectBomInfo> infos) {
+        ProjectManageHelper.SINGLETONE.turnIdToName(infos);
     }
 
     /**
@@ -155,8 +145,8 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     public Map<String, Object> edit(@RequestBody ProjectBomInfo info) {
 
         projectItemManageService.edit(info);
-
         return rtnSuccessResultMap("更新成功");
+
     }
 
 
@@ -171,9 +161,9 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @SystemControllerLog(description = "增加子项目")
     public Map<String, Object> add(ProjectBomInfo info) {
 
-//
-        String kind_name = ProjectManageHelper.buildKindName(info);
+        String kind_name = ProjectManageHelper.SINGLETONE.buildKindName(info);
         String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.PROJECT_SEQ_NO_LENGTH);
+
 //        //年份+客户+地域+系列+NNN
 //        String projectId = kind_name + seqNo;
         String projectId = SeqCreateUtils.newRrojectSeq(info.getSeriesId());
@@ -183,8 +173,6 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
 
         //保存项目信息
         projectItemManageService.add(info);
-
-
         return rtnSuccessResultMap("新增成功");
 
     }
@@ -200,9 +188,8 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
-
         if (null != info) {
-            Map<String, Object> fileinfosMap =  UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService,natrualKey);
+            Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);
         }
         return info;
@@ -224,10 +211,11 @@ public class ProjectItemAction extends BaseAction<String, Object, ProjectBomInfo
     @RequestMapping(value = "/select", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> querySelectList(HttpServletRequest request) {
+
         String name = request.getParameter("name");
         List<SelectItem2> commonBeans = projectItemManageService.querySelectList(name);
-
         return rtSelectResultMap(commonBeans);
+
     }
 
 }

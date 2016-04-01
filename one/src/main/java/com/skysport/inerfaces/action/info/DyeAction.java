@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/dye")
-public class DyeAction extends BaseAction<String, Object, DyeInfo> {
+public class DyeAction extends BaseAction<DyeInfo> {
     @Resource(name = "dyeService")
     private ICommonService dyeService;
 

@@ -7,11 +7,7 @@ import com.skysport.inerfaces.bean.basic.InitialPreviewExtra;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,9 +96,7 @@ public enum UploadFileHelper {
     public void updateFileRecords(List<UploadFileInfo> fileInfos, String bussId, IUploadFileInfoService uploadFileInfoService, String fileKind) {
         if (null != fileInfos && !fileInfos.isEmpty()) {
 
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            HttpSession session = request.getSession();
-            UserInfo user = UserUtils.getUserFromSession(session);
+            UserInfo user = UserUtils.getUserFromSession();
             updateFileStatus(fileInfos, bussId, fileKind, user.getAliases(), WebConstants.FILE_IN_FINISH);
             //回写文件记录表的status状态为1
             uploadFileInfoService.updateBatch(fileInfos);

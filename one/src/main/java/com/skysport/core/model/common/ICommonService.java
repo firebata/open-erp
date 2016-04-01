@@ -2,6 +2,7 @@ package com.skysport.core.model.common;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 
 import java.util.List;
 
@@ -24,10 +25,22 @@ public interface ICommonService<T> {
     int listFilteredInfosCounts(DataTablesInfo dataTablesInfo);
 
     /**
+     * @param baseQueyrForm
+     * @return
+     */
+    int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm);
+
+    /**
      * @param dataTablesInfo
      * @return
      */
     List<T> searchInfos(DataTablesInfo dataTablesInfo);
+
+    /**
+     * @param baseQueyrForm
+     * @return
+     */
+    List<T> searchInfos(BaseQueyrForm baseQueyrForm);
 
     /**
      * @param t

@@ -12,15 +12,14 @@ import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/development/project")
-public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
+public class ProjectAction extends BaseAction<ProjectInfo> {
 
     @Resource(name = "projectManageService")
     private IProjectManageService projectManageService;
@@ -89,26 +88,13 @@ public class ProjectAction extends BaseAction<String, Object, ProjectInfo> {
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
-        ProjectBomInfo bomInfo = new ProjectBomInfo();
-        bomInfo.setYearCode(request.getParameter("yearCode"));
-        bomInfo.setCustomerId(request.getParameter("customerId"));
-        bomInfo.setAreaId(request.getParameter("areaId"));
-        bomInfo.setSeriesId(request.getParameter("seriesId"));
+        ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
-        // 总记录数
-        int recordsTotal = projectManageService.listInfosCounts();
-        int recordsFiltered = recordsTotal;
-        if (!StringUtils.isBlank(queryForm.getDataTablesInfo().getSearchValue())) {
-            recordsFiltered = projectManageService.listFilteredInfosCounts(queryForm);
-        }
-        int draw = Integer.parseInt(request.getParameter("draw"));
-        List<ProjectInfo> infos = projectManageService.searchInfos(queryForm);
-        ProjectManageHelper.turnIdToNameInPorject(infos);
-
-        Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
+        Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectManageService);
         return resultMap;
 
     }
+
 
     /**
      * 此方法描述的是：

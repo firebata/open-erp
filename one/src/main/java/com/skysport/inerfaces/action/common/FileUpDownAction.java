@@ -38,7 +38,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/files")
-public class FileUpDownAction extends BaseAction<String, Object, UserInfo> {
+public class FileUpDownAction extends BaseAction<UserInfo> {
 
     Logger logger = LoggerFactory.getLogger(getClass());
     @Resource(name = "uploadFileInfoService")

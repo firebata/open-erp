@@ -31,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/fabrics")
-public class FabricsAction extends BaseAction<String, Object, FabricsInfo> {
+public class FabricsAction extends BaseAction<FabricsInfo> {
     @Resource(name = "fabricsManageService")
     private ICommonService fabricsManageService;
 

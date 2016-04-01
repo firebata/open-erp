@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/factory")
-public class FactoryManageAction extends BaseAction<String, Object, FactoryInfo> {
+public class FactoryManageAction extends BaseAction<FactoryInfo> {
 
 
     @Resource(name = "factoryManageService")

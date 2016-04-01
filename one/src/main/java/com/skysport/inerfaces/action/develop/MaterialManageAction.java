@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Scope("prototype")
 @Controller
 @RequestMapping("/development/material")
-public class MaterialManageAction extends BaseAction<String, Object, MaterialInfo> {
+public class MaterialManageAction extends BaseAction<MaterialInfo> {
     @Resource(name = "materialManageService")
     private IMaterialManageService materialManageService;
 

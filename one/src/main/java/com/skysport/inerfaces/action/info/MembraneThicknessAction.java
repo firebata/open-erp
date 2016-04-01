@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/mt")
-public class MembraneThicknessAction extends BaseAction<String, Object, MembraneThicknessInfo> {
+public class MembraneThicknessAction extends BaseAction<MembraneThicknessInfo> {
     @Resource(name = "membraneThicknessService")
     private ICommonService membraneThicknessService;
 

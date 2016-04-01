@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.inerfaces.bean.develop.ProjectInfo;
-import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.core.mapper.CommonDao;
+import com.skysport.inerfaces.bean.develop.ProjectInfo;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public interface ProjectManageMapper extends CommonDao<ProjectInfo> {
 
     void updateBomInfo(ProjectInfo info);
 
-    int listFilteredInfosCounts(ProjectQueryForm queryForm);
+    int listFilteredInfosCounts(BaseQueyrForm queryForm);
 
-    List<ProjectInfo> searchInfos(ProjectQueryForm queryForm);
+    List<ProjectInfo> searchInfos(BaseQueyrForm queryForm);
 
     void delInfoAboutProject(String natrualkey);
 

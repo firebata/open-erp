@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/finish")
-public class FinishAction extends BaseAction<String, Object, FinishInfo> {
+public class FinishAction extends BaseAction<FinishInfo> {
     @Resource(name = "finishService")
     private ICommonService finishService;
 

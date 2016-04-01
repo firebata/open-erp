@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.permission;
 
+import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.permission.*;
 import com.skysport.core.model.login.service.IUserService;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -46,16 +47,13 @@ public class PermissionServiceImpl implements IPermissionService {
      */
     @Override
     public List<ZTreeNode> queryAllRole(String userId) {
-
-        List<RoleInfo> roleInfos = roleInfoService.searchInfos(null);
+        DataTablesInfo dataTablesInfo = null;
+        List<RoleInfo> roleInfos = roleInfoService.searchInfos(dataTablesInfo);
         List<RoleUser> roleUsers = null;
-
         if (!StringUtils.isBlank(userId) && !userId.trim().equals("null")) {
             roleUsers = permissionManageMapper.queryRoleUsers(userId);
         }
-
         List<ZTreeNode> zTreeNodes = RoleInfoHelper.SINGLETONE.buildZTreeNodes(roleInfos, roleUsers);
-
         return zTreeNodes;
     }
 
@@ -68,8 +66,8 @@ public class PermissionServiceImpl implements IPermissionService {
      */
     @Override
     public List<ZTreeNode> queryAllRes(String roleId) {
-
-        List<ResourceInfo> resourceInfos = resourceInfoService.searchInfos(null);
+        DataTablesInfo dataTablesInfo = null;
+        List<ResourceInfo> resourceInfos = resourceInfoService.searchInfos(dataTablesInfo);
 
         List<ResourceRole> resourceRoles = null;
         if (!StringUtils.isBlank(roleId) && !roleId.trim().equals("null")) {

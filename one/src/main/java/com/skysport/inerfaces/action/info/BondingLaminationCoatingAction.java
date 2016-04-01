@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/blc")
-public class BondingLaminationCoatingAction extends BaseAction<String, Object, BondingLaminationCoatingInfo> {
+public class BondingLaminationCoatingAction extends BaseAction<BondingLaminationCoatingInfo> {
     @Resource(name = "bondingLaminationCoatingService")
     private ICommonService bondingLaminationCoatingService;
 

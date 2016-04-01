@@ -22,7 +22,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/development/fabrice")
-public class FabricAction extends BaseAction<String, Object, FabricsInfo> {
+public class FabricAction extends BaseAction<FabricsInfo> {
 
     @Resource(name = "bomManageService")
     private IBomManageService bomManageService;

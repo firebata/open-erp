@@ -4,6 +4,7 @@ import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
@@ -22,6 +23,7 @@ import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageSe
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -66,6 +68,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
+
+    @Autowired
+    private IWorkFlowService projectItemTaskService;
 
     @Override
     public void afterPropertiesSet() {
@@ -166,7 +171,21 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
         //生成BOM信息并保存
         BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
+
+        //启动流程
+        startWorkFlow(projectId);
+
     }
+
+    /**
+     * 启动开发流程
+     *
+     * @param projectId String
+     */
+    private void startWorkFlow(String projectId) {
+        projectItemTaskService.startProcessInstanceByBussKey(projectId);
+    }
+
 
     @Override
     public void addBomInfo(ProjectBomInfo info) {

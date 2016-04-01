@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/series")
-public class SeriesAction extends BaseAction<String, Object, SeriesInfo> {
+public class SeriesAction extends BaseAction<SeriesInfo> {
     @Resource(name = "seriesManageService")
     private ICommonService seriesManageService;
 

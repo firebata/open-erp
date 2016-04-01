@@ -1,9 +1,12 @@
 package com.skysport.inerfaces.utils;
 
+import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.model.seqno.helper.IncrementNumberHelper;
 import com.skysport.core.model.seqno.service.IncrementNumber;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 获取序列号的辅助类
@@ -44,6 +47,8 @@ public enum BuildSeqNoHelper {
         String nextVal = incrementNumber.nextVal(kind_name, length, currentSeqNo);
         return nextVal;
     }
+
+
 
 
 }

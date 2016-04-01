@@ -139,7 +139,7 @@
 
     <insert id="addBatchBomInfo">
         insert into
-        t_kf_project_item_bom_baseinfo
+          t_kf_project_item_bom_baseinfo
         (project_id,project_name,category_a_id,category_a_name,category_b_id,category_b_name,collection_number,main_color_ids,sex_ids,remark)
         values
         <foreach collection="list" item="item" index="index" separator=",">

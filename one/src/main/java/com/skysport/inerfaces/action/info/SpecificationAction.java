@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/specification")
-public class SpecificationAction extends BaseAction<String, Object, SpecificationInfo> {
+public class SpecificationAction extends BaseAction<SpecificationInfo> {
     @Resource(name = "specificationService")
     private ICommonService specificationService;
 

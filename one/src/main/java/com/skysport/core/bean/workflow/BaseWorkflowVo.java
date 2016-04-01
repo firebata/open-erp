@@ -25,13 +25,8 @@ public class BaseWorkflowVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date endTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date realityStartTime;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date realityEndTime;
-
     private Date applyTime;
+
     // 流程任务
     private Task task;
 
@@ -46,6 +41,9 @@ public class BaseWorkflowVo {
     // 流程定义
     private ProcessDefinition processDefinition;
 
+    public BaseWorkflowVo() {
+        super();
+    }
 
     public String getProcessInstanceId() {
         return processInstanceId;
@@ -77,22 +75,6 @@ public class BaseWorkflowVo {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
-    }
-
-    public Date getRealityStartTime() {
-        return realityStartTime;
-    }
-
-    public void setRealityStartTime(Date realityStartTime) {
-        this.realityStartTime = realityStartTime;
-    }
-
-    public Date getRealityEndTime() {
-        return realityEndTime;
-    }
-
-    public void setRealityEndTime(Date realityEndTime) {
-        this.realityEndTime = realityEndTime;
     }
 
     public Date getApplyTime() {

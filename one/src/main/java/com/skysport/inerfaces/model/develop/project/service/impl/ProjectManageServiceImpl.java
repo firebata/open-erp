@@ -3,12 +3,12 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumber;
-import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.mapper.develop.ProjectManageMapper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
@@ -25,9 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 类说明:
@@ -47,8 +45,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
     @Resource(name = "incrementNumber")
     private IncrementNumber incrementNumber;
-    @Resource(name = "devlopmentInstanceServiceImpl")
-    private IWorkFlowService devlopmentIWorkFlowServiceImpl;
+
 
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
@@ -75,11 +72,11 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 
         //新增项目时组装项目名等信息
-        info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
+        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumber, info);
         info.setCreater(userInfo.getAliases());
 
         //组装项目品类信息
-        info = ProjectManageHelper.buildProjectCategoryInfo(info);
+        info = ProjectManageHelper.SINGLETONE.buildProjectCategoryInfo(info);
 
         //大项目新增
         //增加主项目信息
@@ -87,30 +84,13 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         //增加项目的品类信息
         projectCategoryManageService.addBatch(info.getCategoryInfos());
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info, userInfo);
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
 
-        //启动流程
-        startWorkFlow(info, userInfo);
-    }
 
-    /**
-     * 启动开发流程
-     *
-     * @param info
-     * @param userInfo
-     */
-    private void startWorkFlow(ProjectInfo info, UserInfo userInfo) {
-        String projectId = info.getNatrualkey() == null ? info.getProjectId() : info.getNatrualkey();
-
-        String userId = userInfo.getNatrualkey();
-        Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("projectId", projectId);
-        variables.put("userId", userId);
-        devlopmentIWorkFlowServiceImpl.startProcessInstanceByKey(WebConstants.WL_PROCESS_NAME, variables);
     }
 
     /**
@@ -142,7 +122,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 //            throw new SkySportException("100001","bom已生成，不能修改项目信息");
 //        }
 
-        info = ProjectManageHelper.buildProjectInfo(incrementNumber, info);
+        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumber, info);
 
         //更新t_project表
         super.edit(info);
@@ -154,7 +134,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //增加项目的品类信息
         projectCategoryManageService.addBatch(info.getCategoryInfos());
 
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.buildProjectBomInfosByProjectInfo(info, userInfo);
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
         projectItemManageService.addBatch(projectBomInfos);
@@ -175,7 +155,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     }
 
     @Override
-    public int listFilteredInfosCounts(ProjectQueryForm queryForm) {
+    public int listFilteredInfosCounts(BaseQueyrForm queryForm) {
         return projectManageMapper.listFilteredInfosCounts(queryForm);
     }
 

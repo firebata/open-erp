@@ -33,7 +33,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/roleinfo")
-public class RoleInfoAction extends BaseAction<String, Object, RoleInfo> {
+public class RoleInfoAction extends BaseAction<RoleInfo> {
 
 
     @Resource(name = "roleInfoService")

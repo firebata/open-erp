@@ -3,7 +3,10 @@ package com.skysport.core.action;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.form.BaseQueyrForm;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -16,10 +19,26 @@ import java.util.Map;
  * @author: zhangjh
  * @version: 2015年4月30日 下午4:34:05
  */
-public class BaseAction<K, V, T> extends BaseController<T> {
+public abstract class BaseAction<T> {
 
 
     protected static String MSG_UPDATE_SUCCESS = "更新成功";
+
+    public Map<String, Object> buildSearchJsonMap(BaseQueyrForm baseQueyrForm, HttpServletRequest request, ICommonService commonService) {
+        // 总记录数
+        int recordsTotal = commonService.listInfosCounts();
+        int recordsFiltered = recordsTotal;
+        if (!StringUtils.isBlank(baseQueyrForm.getDataTablesInfo().getSearchValue())) {
+            recordsFiltered = commonService.listFilteredInfosCounts(baseQueyrForm);
+        }
+        int draw = Integer.parseInt(request.getParameter("draw"));
+        List<T> infos = commonService.searchInfos(baseQueyrForm);
+        this.turnIdToName(infos);
+        Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
+
+        return resultMap;
+    }
+
 
     /**
      * 返回datatables需要的数据
@@ -28,17 +47,15 @@ public class BaseAction<K, V, T> extends BaseController<T> {
      * @param recordsTotal    总记录数
      * @param recordsFiltered 实际查询记录数
      * @param draw
-     * @param <K>             Key
-     * @param <V>             值
      * @return <K, V> Map<K, V>
      */
-    public <K, V> Map<K, V> buildSearchJsonMap(List<T> results, int recordsTotal, int recordsFiltered, int draw) {
+    public Map<String, Object> buildSearchJsonMap(List<T> results, int recordsTotal, int recordsFiltered, int draw) {
         Map<String, Object> info = new HashMap<String, Object>();
         info.put("data", results);
         info.put("recordsTotal", recordsTotal);
         info.put("recordsFiltered", recordsFiltered);
         info.put("draw", draw);
-        return (Map<K, V>) info;
+        return info;
     }
 
     /**
@@ -54,10 +71,6 @@ public class BaseAction<K, V, T> extends BaseController<T> {
         return dataTablesInfo;
     }
 
-    public DataTablesInfo buildQueryDataTableInfo(HttpServletRequest request) {
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(null, request, WebConstants.NO_NEED_TRANSFORM_COLUMN_NAME);
-        return dataTablesInfo;
-    }
 
     /**
      * @param type                  String
@@ -71,30 +84,42 @@ public class BaseAction<K, V, T> extends BaseController<T> {
         int start = Integer.parseInt(request.getParameter("start"));
         int length = Integer.parseInt(request.getParameter("length"));
         int draw = Integer.parseInt(request.getParameter("draw"));
-        String orderColumn = request.getParameter("order[0][column]");
 
-        //前台排序字段名
-        String pageColumnName = request.getParameter("columns[" + orderColumn + "][data]");
-
-        //查找对应的数据库字段名
-        String tableColumnName = pageColumnName;
-
-        if (isNeedTransformColumn == WebConstants.NEED_TRANSFORM_COLUMN_NEME) {
-            tableColumnName = DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(type, pageColumnName);
-        }
+        String orderColumn = buildOrderName(type, request, isNeedTransformColumn);
 
         String orderDir = request.getParameter("order[0][dir]");
         String searchValue = request.getParameter("search[value]");
-
         dataTablesInfo.setStart(start);
         dataTablesInfo.setLength(length);
-        dataTablesInfo.setOrderColumn(tableColumnName);
+        dataTablesInfo.setOrderColumn(orderColumn);
         dataTablesInfo.setOrderDir(orderDir);
         dataTablesInfo.setSearchValue(searchValue);
-        dataTablesInfo.setStart(start);
         dataTablesInfo.setDraw(draw);
 
         return dataTablesInfo;
+    }
+
+    /**
+     * 排序
+     *
+     * @param type
+     * @param request
+     * @param isNeedTransformColumn
+     * @return
+     */
+    private String buildOrderName(String type, HttpServletRequest request, int isNeedTransformColumn) {
+        String orderName = request.getParameter("order[0][column]");
+
+        //前台排序字段名
+        String pageColumnName = request.getParameter("columns[" + orderName + "][data]");
+
+        //查找对应的数据库字段名
+        String orderColumn = pageColumnName;
+
+        if (isNeedTransformColumn == WebConstants.NEED_TRANSFORM_COLUMN_NEME) {
+            orderColumn = DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(type, pageColumnName);
+        }
+        return orderColumn;
     }
 
     /**
@@ -121,5 +146,9 @@ public class BaseAction<K, V, T> extends BaseController<T> {
         resultMap.put("items", commonBeans);
         resultMap.put("total_count", commonBeans.size());
         return resultMap;
+    }
+
+    public void turnIdToName(List<T> infos) {
+
     }
 }

@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/customer")
-public class CustomerAction extends BaseAction<String, Object, CustomerInfo> {
+public class CustomerAction extends BaseAction<CustomerInfo> {
 
     @Resource(name = "customerManageService")
     private ICommonService customerManageService;

@@ -2,6 +2,7 @@ package com.skysport.core.mapper;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,5 +34,9 @@ public interface CommonDao<T> {
 
     void updateBatch(List<T> infos);
 
-    List<SelectItem2> querySelectListByParentId(@Param(value = "parentId")String parentId);
+    List<SelectItem2> querySelectListByParentId(@Param(value = "parentId") String parentId);
+
+    <T> List<T> searchInfos(BaseQueyrForm baseQueyrForm);
+
+    int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm);
 }

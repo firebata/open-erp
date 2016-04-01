@@ -33,7 +33,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/product_type")
-public class ProductTypeAction extends BaseAction<String, Object, ProductTypeInfo> {
+public class ProductTypeAction extends BaseAction<ProductTypeInfo> {
 
 
     @Resource(name = "productTypeManageService")

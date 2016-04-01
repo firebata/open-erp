@@ -13,7 +13,7 @@ public enum SystemInitHelper {
 
     SINGLETONE;
 
-    public void init() {
+    public void  init() {
         // 初始化数据字典信息
         DictionaryHelper.SINGLETONE.initDictionary();
 

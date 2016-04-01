@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.model.develop.project.service;
 
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.core.model.common.ICommonService;
 
@@ -18,7 +19,7 @@ public interface IProjectManageService extends ICommonService<ProjectInfo> {
 
     void updateBomInfo(ProjectInfo t);
 
-    int listFilteredInfosCounts(ProjectQueryForm queryForm);
+    int listFilteredInfosCounts(BaseQueyrForm queryForm);
 
     List<ProjectInfo> searchInfos(ProjectQueryForm queryForm);
 

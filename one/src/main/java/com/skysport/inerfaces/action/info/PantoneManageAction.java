@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/pantone")
-public class PantoneManageAction extends BaseAction<String, Object, PantoneInfo> {
+public class PantoneManageAction extends BaseAction<PantoneInfo> {
 
     @Resource(name = "pantoneManageService")
     private IPantoneManageService pantoneManageService;

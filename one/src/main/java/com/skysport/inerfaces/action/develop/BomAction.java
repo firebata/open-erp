@@ -30,7 +30,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/development/bom")
-public class BomAction extends BaseAction<String, Object, BomInfo> {
+public class BomAction extends BaseAction<BomInfo> {
 
     @Resource(name = "bomManageService")
     private IBomManageService bomManageService;
@@ -94,7 +94,7 @@ public class BomAction extends BaseAction<String, Object, BomInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         BomQueryForm bomQueryForm = new BomQueryForm();
-        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
+        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLULMN, request));
         BomInfo bomInfo = new BomInfo();
         bomQueryForm.setBomInfo(bomInfo);
         BomManageHelper.buildBomQueryForm(bomQueryForm, request);

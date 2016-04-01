@@ -4,6 +4,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.core.model.common.ICommonService;
+import com.skysport.inerfaces.form.BaseQueyrForm;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,9 +13,12 @@ import java.util.List;
 /**
  * Created by zhangjh on 2015/6/8.
  */
-public class CommonServiceImpl<T> implements ICommonService<T> {
+public abstract class CommonServiceImpl<T> implements ICommonService<T> {
+
     protected transient Log logger = LogFactory.getLog(getClass());
     public CommonDao<T> commonDao;
+
+
 
     @Override
     public int listInfosCounts() {
@@ -24,6 +28,23 @@ public class CommonServiceImpl<T> implements ICommonService<T> {
     @Override
     public int listFilteredInfosCounts(DataTablesInfo dataTablesInfo) {
         return commonDao.listFilteredInfosCounts(dataTablesInfo);
+    }
+
+    /**
+     * @param baseQueyrForm
+     * @return
+     */
+    public int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm) {
+        return commonDao.listFilteredInfosCounts(baseQueyrForm);
+    }
+
+    /**
+     * @param baseQueyrForm
+     * @return
+     */
+    @Override
+    public List<T> searchInfos(BaseQueyrForm baseQueyrForm) {
+        return commonDao.searchInfos(baseQueyrForm);
     }
 
     @Override

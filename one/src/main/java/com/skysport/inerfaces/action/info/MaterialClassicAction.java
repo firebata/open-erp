@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material_classic")
-public class MaterialClassicAction extends BaseAction<String, Object, MaterialClassicInfo> {
+public class MaterialClassicAction extends BaseAction<MaterialClassicInfo> {
 
 
     @Resource(name = "materialClassicManageService")

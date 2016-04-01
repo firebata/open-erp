@@ -34,7 +34,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/sp")
-public class SpManageAction extends BaseAction<String, Object, SpInfo> {
+public class SpManageAction extends BaseAction<SpInfo> {
     @Resource(name = "spManageService")
     private ISpManageService spManageService;
     @Resource(name = "incrementNumber")

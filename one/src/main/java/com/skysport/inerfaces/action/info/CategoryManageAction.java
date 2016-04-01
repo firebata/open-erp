@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/category")
-public class CategoryManageAction extends BaseAction<String, Object, CategoryInfo> {
+public class CategoryManageAction extends BaseAction<CategoryInfo> {
 
     @Resource(name = "categoryManageService")
     private ICategoryManageService categoryManageService;

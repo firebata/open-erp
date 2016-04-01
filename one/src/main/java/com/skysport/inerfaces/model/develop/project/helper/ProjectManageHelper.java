@@ -14,6 +14,7 @@ import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,16 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-public class ProjectManageHelper {
+public enum ProjectManageHelper {
+    SINGLETONE;
 
-    private ProjectManageHelper() {
-
+    public ProjectBomInfo getProjectBomInfo(HttpServletRequest request) {
+        ProjectBomInfo bomInfo = new ProjectBomInfo();
+        bomInfo.setYearCode(request.getParameter("yearCode"));
+        bomInfo.setCustomerId(request.getParameter("customerId"));
+        bomInfo.setAreaId(request.getParameter("areaId"));
+        bomInfo.setSeriesId(request.getParameter("seriesId"));
+        return bomInfo;
     }
 
 
@@ -34,7 +41,7 @@ public class ProjectManageHelper {
      * @param info
      * @return
      */
-    public static String buildKindName(ProjectBomInfo info) {
+    public String buildKindName(ProjectBomInfo info) {
         StringBuilder stringBuilder = new StringBuilder(16);
         stringBuilder.append(info.getYearCode());
         stringBuilder.append(info.getCustomerId());
@@ -50,7 +57,7 @@ public class ProjectManageHelper {
      * @param t ProjectBomInfo
      * @return 项目名称
      */
-    public static String buildProjectName(ProjectBomInfo t) {
+    public String buildProjectName(ProjectBomInfo t) {
         StringBuilder stringBuilder = new StringBuilder();
 
         //年份
@@ -75,7 +82,7 @@ public class ProjectManageHelper {
      * @param t
      * @return
      */
-    private static String getCustomerName(ProjectBomInfo t) {
+    private String getCustomerName(ProjectBomInfo t) {
         List<SelectItem2> items;
         String id;
         String name;
@@ -91,7 +98,7 @@ public class ProjectManageHelper {
      * @param t
      * @return
      */
-    private static String getSeriesName(ProjectBomInfo t) {
+    private String getSeriesName(ProjectBomInfo t) {
         List<SelectItem2> items;
         String id;
         String name;
@@ -107,7 +114,7 @@ public class ProjectManageHelper {
      * @param categoryInfo
      * @return
      */
-    private static String getCategoryName(ProjectCategoryInfo categoryInfo) {
+    private String getCategoryName(ProjectCategoryInfo categoryInfo) {
         List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popProject("categoryBItems");
         String id = categoryInfo.getCategoryBid();
         return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
@@ -119,7 +126,7 @@ public class ProjectManageHelper {
      * @param t
      * @return
      */
-    private static String getYearName(ProjectBomInfo t) {
+    private String getYearName(ProjectBomInfo t) {
         List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popBom("yearItems");
         String id = t.getYearCode();
         return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
@@ -131,7 +138,7 @@ public class ProjectManageHelper {
      * @param t ProjectBomInfo
      * @return
      */
-    private static String getAreaName(ProjectBomInfo t) {
+    private String getAreaName(ProjectBomInfo t) {
         List<SelectItem2> items = SystemBaseInfoCachedMap.SINGLETONE.popBom("areaItems");
         String id = t.getAreaId();
         return SystemBaseInfoCachedMap.SINGLETONE.getName(items, id);
@@ -143,7 +150,7 @@ public class ProjectManageHelper {
      *
      * @param infos List<ProjectBomInfo>
      */
-    public static void turnIdToName(List<ProjectBomInfo> infos) {
+    public void turnIdToName(List<ProjectBomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
             for (ProjectBomInfo projectBomInfo : infos) {
                 exchange(projectBomInfo);
@@ -156,8 +163,7 @@ public class ProjectManageHelper {
      *
      * @param infos
      */
-    public static void turnIdToNameInPorject(List<ProjectInfo> infos) {
-
+    public void turnIdToNameInPorject(List<ProjectInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
             for (ProjectInfo projectInfo : infos) {
                 exchange(projectInfo);
@@ -167,7 +173,7 @@ public class ProjectManageHelper {
     }
 
 
-    private static void exchange(ProjectBomInfo projectBomInfo) {
+    private void exchange(ProjectBomInfo projectBomInfo) {
         projectBomInfo.setAreaId(getAreaName(projectBomInfo));
         projectBomInfo.setSeriesId(getSeriesName(projectBomInfo));
         projectBomInfo.setCustomerId(getCustomerName(projectBomInfo));
@@ -180,20 +186,20 @@ public class ProjectManageHelper {
      * @param info
      * @return
      */
-    public static ProjectInfo buildProjectInfo(IncrementNumber incrementNumber, ProjectInfo info) {
+    public ProjectInfo buildProjectInfo(IncrementNumber incrementNumber, ProjectInfo info) {
 
         if (StringUtils.isBlank(info.getNatrualkey()) || "null".equals(info.getNatrualkey())) {
             //构建项目id，名称等信息
             String projectId = SeqCreateUtils.newRrojectSeq(info.getSeriesId());
             //设置ID
             info.setNatrualkey(projectId);
-            String kind_name = ProjectManageHelper.buildKindName(info);
+            String kind_name = buildKindName(info);
             String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.PROJECT_SEQ_NO_LENGTH);
             info.setSeqNo(seqNo);
         }
 
 
-        String name = ProjectManageHelper.buildProjectName(info);
+        String name = buildProjectName(info);
         info.setName(name);
         info.setProjectName(name);
 
@@ -205,7 +211,7 @@ public class ProjectManageHelper {
      *
      * @param info
      */
-    public static ProjectInfo buildProjectCategoryInfo(ProjectInfo info) {
+    public ProjectInfo buildProjectCategoryInfo(ProjectInfo info) {
         List<ProjectCategoryInfo> categoryInfos = info.getCategoryInfos();
         for (ProjectCategoryInfo categoryInfo : categoryInfos) {
             categoryInfo.setProjectId(info.getNatrualkey());
@@ -223,7 +229,7 @@ public class ProjectManageHelper {
      * @param userInfo
      * @return
      */
-    public static List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, UserInfo userInfo) {
+    public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, UserInfo userInfo) {
         List<ProjectBomInfo> projectBomInfos = new ArrayList<>();
         List<ProjectCategoryInfo> projectCategoryInfos = info.getCategoryInfos();
 
@@ -257,7 +263,7 @@ public class ProjectManageHelper {
     }
 
 
-    private static String buildProjectItemName(ProjectInfo info, ProjectCategoryInfo categoryInfo) {
+    private String buildProjectItemName(ProjectInfo info, ProjectCategoryInfo categoryInfo) {
         StringBuilder stringBuilder = new StringBuilder();
         //年份
         String name = getYearName(info);

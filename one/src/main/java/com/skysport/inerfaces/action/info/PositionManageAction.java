@@ -31,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material/position")
-public class PositionManageAction extends BaseAction<String, Object, MaterialPositionInfo> {
+public class PositionManageAction extends BaseAction<MaterialPositionInfo> {
     @Resource(name = "materialPositionService")
     private ICommonService materialPositionService;
 

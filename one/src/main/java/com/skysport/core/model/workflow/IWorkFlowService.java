@@ -13,8 +13,23 @@ import java.util.Map;
  * Created by zhangjh on 2015/12/22.
  */
 public interface IWorkFlowService {
+    ProcessInstance startProcessInstanceByBussKey(String businessKey);
 
-    void startProcessInstanceByKey(String processDefinitionKey, Map<String, Object> variables);
+    ProcessInstance startProcessInstanceByKey(String processDefinitionKey);
+
+    ProcessInstance startProcessInstanceByKey(String processDefinitionKey, Map<String, Object> variables);
+
+    ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables);
+
+    ProcessInstance startProcessInstanceById(String processDefinitionId);
+
+    ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey);
+
+    ProcessInstance startProcessInstanceById(String processDefinitionId, Map<String, Object> variables);
+
+    ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey, Map<String, Object> variables);
+
+    ProcessInstance startProcessInstanceByMessage(String messageName);
 
     /**
      * 查询待办
@@ -47,6 +62,14 @@ public interface IWorkFlowService {
      * @param maxResults
      * @return
      */
-    List<HistoricProcessInstance> findFinishedProcessInstaces(int firstResult, int maxResults);
+    List<HistoricProcessInstance> findFinishedProcessInstaces(int firstResult, int maxResults, String processDefinitionKey);
+
+    /**
+     * 根据流程实例id查询任务id（查询任务id对应的业务信息）
+     *
+     * @param processInStanceId 流程实例id
+     * @return 业务主键
+     */
+    String queryBusinessKeyByProcessInstanceId(String processInStanceId);
 
 }

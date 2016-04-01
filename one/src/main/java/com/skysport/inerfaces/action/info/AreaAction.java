@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/area")
-public class AreaAction extends BaseAction<String, Object, AreaInfo> {
+public class AreaAction extends BaseAction<AreaInfo> {
 
     @Resource(name = "areaManageService")
     private ICommonService areaManageService;

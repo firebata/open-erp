@@ -32,7 +32,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/system/material_type")
-public class MaterialTypeAction extends BaseAction<String, Object, MaterialTypeInfo> {
+public class MaterialTypeAction extends BaseAction<MaterialTypeInfo> {
 
 
     @Resource(name = "materialTypeManageService")
