@@ -7,9 +7,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" afterPath="$PROJECT_DIR$/one/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" />
-    </list>
+    <list default="true" id="82c2013d-a834-44ba-beb7-4d918fb8def8" name="Default" comment="" />
     <ignored path="skysport.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1466,12 +1464,12 @@
       <workItem from="1458695442250" duration="24602000" />
       <workItem from="1458781565441" duration="3815000" />
       <workItem from="1458787124537" duration="19334000" />
-      <workItem from="1459474090424" duration="29313000" />
+      <workItem from="1459474090424" duration="29704000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590342000" />
+    <option name="totallyTimeSpent" value="590733000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

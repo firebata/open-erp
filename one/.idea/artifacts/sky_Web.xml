@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sky:Web">
+    <output-path>$PROJECT_DIR$/classes/artifacts/sky_Web</output-path>
+    <root id="archive" name="sky_Web.war">
+      <element id="artifact" artifact-name="sky:Web exploded" />
+    </root>
+  </artifact>
+</component>

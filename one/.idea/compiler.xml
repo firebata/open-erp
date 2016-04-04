@@ -18,5 +18,8 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sky" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
