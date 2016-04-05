@@ -65,7 +65,7 @@ public class SeriesAction extends BaseAction<SeriesInfo> {
     @SystemControllerLog(description = "查询系列信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.SERIES_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.SERIES_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = seriesManageService.listInfosCounts();
         int recordsFiltered = recordsTotal;

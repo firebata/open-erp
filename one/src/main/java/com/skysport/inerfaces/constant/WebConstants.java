@@ -109,9 +109,9 @@ public interface WebConstants extends TableNameConstants {
     String SP_TABLE_COLUMN = "sp_table_column";
     String PANTONE_TABLE_COLUMN = "pantone_table_column";
     String CUSTOMER_TABLE_COLUMN = "customer_table_column";
-    String AREA_TABLE_COLULMN = "area_table_column";
+    String AREA_TABLE_COLUMN = "area_table_column";
     String SEQ_NO_LENGTH = "seqno_length";
-    String SERIES_TABLE_COLULMN = "series_table_column";
+    String SERIES_TABLE_COLUMN = "series_table_column";
     String YEAR_CONF_TABLE_COLUMN = "year_conf_table_column";
     String SEX_TABLE_COLUMN = "sex_table_column";
     String PRODUCT_TYPE_TABLE_COLUMN = "product_type_table_column";
@@ -134,10 +134,10 @@ public interface WebConstants extends TableNameConstants {
     String MATERIAL_UNIT_TABLE_COLUMN = "material_unit_table_column";
 
 
-    String BOM_TABLE_COLULMN = "bom_table_colulmn";
-    String PROJECT_TABLE_COLULMN = "project_table_colulmn";
+    String BOM_TABLE_COLUMN = "bom_table_colulmn";
+    String PROJECT_TABLE_COLUMN = "project_table_colulmn";
 
-    String USERINFO_TABLE_COLULMN = "userinfo_table_colulmn";
+    String USERINFO_TABLE_COLUMN = "userinfo_table_colulmn";
     String DEPT_TABLE_COLUMN_NAME = "dept_table_column_name";
 
     String USER_TYPE = "user_type";
@@ -151,17 +151,17 @@ public interface WebConstants extends TableNameConstants {
     int NEED_TO_DEL_PROJECT_SEX_COLOR = 2;
 
     // 用户组别名
-    String devlop_staff = "devlop_emp"; //开发部员工
-    String devlop_manager = "";//开发部经理
-    String manager_assistant = "manager_assistant";//总经理助理
-    String ceo = "ceo";//总经理
-    String operation_staff = "operation_staff";
-    String operation_manager = "operation_manager";
-    String finance_staff = "finance_staff";
-    String finance_manager = "finance_manager";
+    String DEVLOP_STAFF = "devlop_staff"; //开发部员工
+    String DEVLOP_MANAGER = "devlop_manager";//开发部经理
+    String MANAGER_ASSISTANT = "manager_assistant";//总经理助理
+    String CEO = "ceo";//总经理
+    String OPERATION_STAFF = "operation_staff";
+    String OPERATION_MANAGER = "operation_manager";
+    String FINANCE_STAFF = "finance_staff";
+    String FINANCE_MANAGER = "finance_manager";
 
     //
-    String PROJECT_TEM_PROCESS = "projectitemProcess";
+    String PROJECT_ITEM_PROCESS = "projectitemProcess";
     String APPROVE_BOM_PROCESS = "approveBomProcess";//审核Bom
     String OFFLINEWORK_PROCESS = "offlineworkProcess";//线下任务
     String APPROVE_PREQUOTED_PROCESS = "approvePreQuotedProcess";//预报价
@@ -169,6 +169,8 @@ public interface WebConstants extends TableNameConstants {
     String APPROV_EDEV_SIMPLES_PROCESS = "approveDevSamplesProcess";//审核开发样
     String APPROVE_FINALLY_QUOTED_PROCESS = "approveFinallyQuotedProcess";//审核最终的报价（和选择的打样的BOM数量一致）
     String APPROVE_FINALLY_BOM_PROCESS = "approveFinallyBomProcess";//审核BOM审核过程
+
+
 
 
 

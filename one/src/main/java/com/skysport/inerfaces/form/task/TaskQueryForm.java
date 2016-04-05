@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.form.task;
 
-import com.skysport.inerfaces.bean.task.TaskInfo;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.form.BaseQueyrForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskQueryForm extends BaseQueyrForm {
     @Autowired
-    private TaskInfo taskInfo;
+    private TaskVo taskInfo;
 
-    public TaskInfo getTaskInfo() {
+    public TaskVo getTaskInfo() {
         return taskInfo;
     }
 
-    public void setTaskInfo(TaskInfo taskInfo) {
+    public void setTaskInfo(TaskVo taskInfo) {
         this.taskInfo = taskInfo;
     }
 }

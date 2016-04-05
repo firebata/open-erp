@@ -3,7 +3,7 @@
   <process id="projectitemProcess" name="子项目流程" isExecutable="true">
     <startEvent id="projectItemTaskStart" name="Start" activiti:initiator="applyUserId"></startEvent>
     <userTask id="updateProjectItem" name="开发员修改子项目" activiti:candidateGroups="${devlop_staff}"></userTask>
-    <userTask id="approveProjectItem" name="经理审核子项目" activiti:candidateGroups="${devlop_staff}"></userTask>
+    <userTask id="approveProjectItem" name="经理审核子项目" activiti:candidateGroups="${devlop_manager}"></userTask>
     <exclusiveGateway id="exclusivegateway1" name="审核子项目"></exclusiveGateway>
     <subProcess id="approveBomProcess" name="审核BOM子流程">
       <startEvent id="startevent2" name="Start"></startEvent>
@@ -445,7 +445,7 @@
         <omgdi:waypoint x="682.0" y="174.0"></omgdi:waypoint>
         <omgdi:waypoint x="656.0" y="173.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="660.0" y="369.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="12.0" x="660.0" y="369.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
@@ -460,7 +460,7 @@
         <omgdi:waypoint x="603.0" y="386.0"></omgdi:waypoint>
         <omgdi:waypoint x="603.0" y="417.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="570.0" y="405.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="12.0" x="570.0" y="405.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow49" id="BPMNEdge_flow49">
@@ -504,7 +504,7 @@
         <omgdi:waypoint x="444.0" y="372.0"></omgdi:waypoint>
         <omgdi:waypoint x="511.0" y="370.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="449.0" y="355.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="12.0" x="449.0" y="355.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
@@ -512,7 +512,7 @@
         <omgdi:waypoint x="424.0" y="313.0"></omgdi:waypoint>
         <omgdi:waypoint x="424.0" y="296.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="430.0" y="320.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="12.0" x="430.0" y="320.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow50" id="BPMNEdge_flow50">

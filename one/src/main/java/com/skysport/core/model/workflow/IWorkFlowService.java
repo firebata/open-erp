@@ -1,9 +1,9 @@
 package com.skysport.core.model.workflow;
 
+import com.skysport.inerfaces.bean.task.TaskVo;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,7 @@ public interface IWorkFlowService {
      * @param userId
      * @return
      */
-    List<Task> queryToDoTask(String userId);
+    List<TaskVo> queryToDoTask(String userId);
 
     /**
      * 查询流程实例

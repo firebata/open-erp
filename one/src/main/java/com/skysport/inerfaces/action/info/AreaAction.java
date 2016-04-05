@@ -66,7 +66,7 @@ public class AreaAction extends BaseAction<AreaInfo> {
     @SystemControllerLog(description = "查询区域信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.AREA_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.AREA_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = areaManageService.listInfosCounts();
         int recordsFiltered = recordsTotal;

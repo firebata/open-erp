@@ -68,7 +68,7 @@ public class UserInfoAction extends BaseAction<UserInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
 
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = userInfoService.listInfosCounts();
         int recordsFiltered = recordsTotal;

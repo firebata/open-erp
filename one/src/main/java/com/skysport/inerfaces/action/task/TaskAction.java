@@ -7,7 +7,7 @@ import com.skysport.core.init.SpringContextHolder;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.bean.task.TaskInfo;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.ProjectItemTaskHelper;
 import com.skysport.inerfaces.form.task.TaskQueryForm;
@@ -31,7 +31,7 @@ import java.util.Map;
 @Scope("prototype")
 @Controller
 @RequestMapping("/task")
-public class TaskAction extends BaseAction<TaskInfo> {
+public class TaskAction extends BaseAction<TaskVo> {
     @Autowired
     private IWorkFlowService projectItemTaskService;
 
@@ -50,7 +50,7 @@ public class TaskAction extends BaseAction<TaskInfo> {
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/list/undo")
+    @RequestMapping(value = "/todo/list")
     @ResponseBody
     @SystemControllerLog(description = "查询待办任务")
     public ModelAndView undo() {
@@ -65,7 +65,7 @@ public class TaskAction extends BaseAction<TaskInfo> {
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/list/done")
+    @RequestMapping(value = "/done/list")
     @ResponseBody
     @SystemControllerLog(description = "查询已办任务")
     public ModelAndView done() {
@@ -95,7 +95,7 @@ public class TaskAction extends BaseAction<TaskInfo> {
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/list/todo")
+    @RequestMapping(value = "/todo/search")
     @ResponseBody
     @SystemControllerLog(description = "查询所有任务")
     public Map<String, Object> searchUndo(HttpServletRequest request) {
@@ -105,14 +105,13 @@ public class TaskAction extends BaseAction<TaskInfo> {
         int draw = Integer.parseInt(request.getParameter("draw"));
 
         TaskQueryForm taskQueryForm = SpringContextHolder.getBean("taskQueryForm");
-        TaskInfo taskInfo = ProjectItemTaskHelper.SINGLETONE.getTaskInfo(taskQueryForm, request);
+        TaskVo taskInfo = ProjectItemTaskHelper.SINGLETONE.getTaskInfo(taskQueryForm, request);
 
-        taskQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
+        taskQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLUMN, request));
         taskQueryForm.setTaskInfo(taskInfo);
 
 
-        List<TaskInfo> infos = new ArrayList<>();
-
+        List<TaskVo> infos = projectItemTaskService.queryToDoTask(UserUtils.getUserFromSession().getNatrualkey());
 
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
         return resultMap;
@@ -125,7 +124,7 @@ public class TaskAction extends BaseAction<TaskInfo> {
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/done/list")
+    @RequestMapping(value = "/done/search")
     @ResponseBody
     @SystemControllerLog(description = "查询所有任务")
     public Map<String, Object> searchFinish(HttpSession session, HttpServletRequest request) {
@@ -133,7 +132,7 @@ public class TaskAction extends BaseAction<TaskInfo> {
         int recordsTotal = 0;
         int recordsFiltered = 0;
         int draw = Integer.parseInt(request.getParameter("draw"));
-        List<TaskInfo> infos = new ArrayList<>();
+        List<TaskVo> infos = new ArrayList<>();
         UserInfo user = UserUtils.getUserFromSession(session);
         String userId = user.getNatrualkey();
 //        List<Task> tasks = devlopmentTaskService.queryToDoTask(userId);

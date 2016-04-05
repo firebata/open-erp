@@ -94,7 +94,7 @@ public class BomAction extends BaseAction<BomInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         BomQueryForm bomQueryForm = new BomQueryForm();
-        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLULMN, request));
+        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
         BomInfo bomInfo = new BomInfo();
         bomQueryForm.setBomInfo(bomInfo);
         BomManageHelper.buildBomQueryForm(bomQueryForm, request);

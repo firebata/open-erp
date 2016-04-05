@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.engine.workflow.helper;
 
-import com.skysport.inerfaces.bean.task.TaskInfo;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.form.task.TaskQueryForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +13,8 @@ public enum ProjectItemTaskHelper {
     SINGLETONE;
 
 
-    public TaskInfo getTaskInfo(TaskQueryForm taskQueryForm, HttpServletRequest request) {
-        TaskInfo taskInfo = taskQueryForm.getTaskInfo();
+    public TaskVo getTaskInfo(TaskQueryForm taskQueryForm, HttpServletRequest request) {
+        TaskVo taskInfo = taskQueryForm.getTaskInfo();
         return taskInfo;
     }
 }

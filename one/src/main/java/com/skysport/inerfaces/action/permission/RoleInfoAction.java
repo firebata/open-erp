@@ -68,7 +68,7 @@ public class RoleInfoAction extends BaseAction<RoleInfo> {
     @SystemControllerLog(description = "查询角色列表信息")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLULMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.USERINFO_TABLE_COLUMN, request);
         // 总记录数
         int recordsTotal = roleInfoService.listInfosCounts();
         int recordsFiltered = recordsTotal;

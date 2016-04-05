@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.engine.workflow;
 
 import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
@@ -11,6 +12,7 @@ import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -93,11 +95,29 @@ public abstract class TaskServiceImpl implements IWorkFlowService {
      * @return
      */
     @Override
-    public List<Task> queryToDoTask(String userId) {
+    public  List<TaskVo> queryToDoTask(String userId) {
         TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
         List<Task> tasks = taskQuery.list();
-        return tasks;
+        List<TaskVo> taskRtn = new ArrayList<>();
+        // 根据流程的业务ID查询实体并关联
+        for (Task task : tasks) {
+            String processInstanceId = task.getProcessInstanceId();
+            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
+            String businessKey = processInstance.getBusinessKey();
+            ProcessDefinition processDefinition = getProcessDefinition(processInstance.getProcessDefinitionId());
+            if (businessKey == null) {
+                continue;
+            }
+            TaskVo taskInfo = new TaskVo();
+            taskInfo.setTask(task);
+            taskInfo.setProcessInstance(processInstance);
+            taskInfo.setProcessDefinition(processDefinition);
+            taskRtn.add(taskInfo);
+
+        }
+        return taskRtn;
     }
+
 
     /**
      * 查询流程实例

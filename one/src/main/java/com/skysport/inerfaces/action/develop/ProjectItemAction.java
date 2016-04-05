@@ -121,7 +121,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
-        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLULMN, request));
+        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLUMN, request));
         ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectItemManageService);
