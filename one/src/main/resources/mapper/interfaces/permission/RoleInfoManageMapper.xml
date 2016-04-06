@@ -16,11 +16,20 @@
     </sql>
     <select id="queryInfo" resultType="RoleInfo">
         select
-            <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_qx_role
         WHERE role_id =#{natrualkey}
         limit 1
     </select>
+
+    <select id="queryParentId">
+        select parent_id
+        from t_qx_role
+         WHERE role_id =#{groupId}
+         where del_flag=0
+            limit 1
+    </select>
+
 
     <select id="listInfosCounts" resultType="Integer">
         SELECT
@@ -31,9 +40,9 @@
 
     <select id="listFilteredInfosCounts" resultType="Integer">
         SELECT
-            COUNT(*)
+        COUNT(*)
         FROM
-            t_qx_role
+        t_qx_role
         where del_flag=0
         <if test="searchValue !=null and searchValue != ''">
             and (
@@ -46,7 +55,7 @@
 
     <select id="searchInfos" resultType="RoleInfo">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_qx_role
         WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
@@ -97,15 +106,12 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-          role_id AS natrualkey,
-          role_name AS name
+        role_id AS natrualkey,
+        role_name AS name
         from t_qx_role
         where del_flag=0
         <if test="name!=null and name!=''">and upper(role_name) like concat('%',#{name},'%')</if>
     </select>
-
-
-
 
 
 </mapper>

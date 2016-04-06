@@ -4,6 +4,7 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
+import com.skysport.inerfaces.model.permission.roleinfo.service.IRoleInfoService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,12 @@ import java.util.Map;
  */
 @Service("projectItemTaskService")
 public class ProjectItemTaskImpl extends TaskServiceImpl {
+
     @Autowired
     private IProjectItemManageService projectItemManageService;
+
+    @Autowired
+    private IRoleInfoService roleInfoService;
 
     @Override
     public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables) {
@@ -37,6 +42,12 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
     }
 
     @Override
+    public void claim(String taskId) {
+        String userId = UserUtils.getUserFromSession().getNatrualkey();
+        taskService.claim(taskId, userId);
+    }
+
+    @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
 
 //        ProjectBomInfo projectBomInfo = projectItemManageService.queryInfoByNatrualKey(businessKey);
@@ -46,11 +57,13 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
         ProcessInstance processInstance = null;
         try {
             String userId = userInfo.getNatrualkey();
-            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();
+            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();//开发人员所属组
+            //开发经理的组id
+            String groupIdDevManager = roleInfoService.queryParentId(groupId);
 
             identityService.setAuthenticatedUserId(userId);
 
-            variables.put(WebConstants.DEVLOP_MANAGER, groupId);
+            variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.PROJECT_ITEM_PROCESS, businessKey, variables);
 
         } finally {

@@ -1,65 +1,45 @@
 package com.skysport.inerfaces.bean.task;
 
-import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
+import com.skysport.inerfaces.bean.common.IdEntity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Map;
 
 /**
- * 说明:
+ * 说明:任务Vo
  * Created by zhangjh on 2015/9/8.
  */
 @Component
 @Entity
-public class TaskVo<T> implements Serializable {
+public class TaskVo<T> extends IdEntity implements Serializable {
+
+    private String name;
+    private String createTime;
+    private String taskDefinitionKey;
+    private String assignee;
+    private String businessKey;
+    private boolean suspended;
+    private int version;
+    private String processInstanceId;
+    private String processDefinitionId;
+
     public TaskVo() {
     }
 
-    private Task task;
-    // 运行中的流程实例
-    private ProcessInstance processInstance;
-
-    // 历史的流程实例
-    private HistoricProcessInstance historicProcessInstance;
-
-    // 流程定义
-    private ProcessDefinition processDefinition;
+//    // 运行中的流程实例
+//    private ProcessInstance processInstance;
+//
+//    // 历史的流程实例
+//    private HistoricProcessInstance historicProcessInstance;
+//
+//    // 流程定义
+//    private ProcessDefinition processDefinition;
 
     private T t;
     private Map<String, Object> variables;
 
-    @Transient
-    public ProcessInstance getProcessInstance() {
-        return processInstance;
-    }
-
-    public void setProcessInstance(ProcessInstance processInstance) {
-        this.processInstance = processInstance;
-    }
-
-    @Transient
-    public HistoricProcessInstance getHistoricProcessInstance() {
-        return historicProcessInstance;
-    }
-
-    public void setHistoricProcessInstance(HistoricProcessInstance historicProcessInstance) {
-        this.historicProcessInstance = historicProcessInstance;
-    }
-
-    @Transient
-    public ProcessDefinition getProcessDefinition() {
-        return processDefinition;
-    }
-
-    public void setProcessDefinition(ProcessDefinition processDefinition) {
-        this.processDefinition = processDefinition;
-    }
 
     public T getT() {
         return t;
@@ -69,21 +49,84 @@ public class TaskVo<T> implements Serializable {
         this.t = t;
     }
 
-    @Transient
-    public Task getTask() {
-        return task;
+    public String getName() {
+        return name;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Transient
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+
     public Map<String, Object> getVariables() {
         return variables;
     }
 
     public void setVariables(Map<String, Object> variables) {
         this.variables = variables;
+    }
+
+    public String getTaskDefinitionKey() {
+        return taskDefinitionKey;
+    }
+
+    public void setTaskDefinitionKey(String taskDefinitionKey) {
+        this.taskDefinitionKey = taskDefinitionKey;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
+    }
+
+    public boolean getSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    public String getProcessInstanceId() {
+        return processInstanceId;
+    }
+
+    public void setProcessInstanceId(String processInstanceId) {
+        this.processInstanceId = processInstanceId;
+    }
+
+    public String getProcessDefinitionId() {
+        return processDefinitionId;
+    }
+
+    public void setProcessDefinitionId(String processDefinitionId) {
+        this.processDefinitionId = processDefinitionId;
     }
 }

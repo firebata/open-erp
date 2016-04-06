@@ -31,4 +31,9 @@ public class RoleInfoServiceImpl extends CommonServiceImpl<RoleInfo> implements 
         return roleInfoManageMapper.queryRoleUsers(userId);
     }
 
+    @Override
+    public String queryParentId(String groupId) {
+        return roleInfoManageMapper.queryParentId(groupId);
+    }
+
 }

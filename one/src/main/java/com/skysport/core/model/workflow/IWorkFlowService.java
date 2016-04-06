@@ -5,6 +5,7 @@ import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public interface IWorkFlowService {
      * @param userId
      * @return
      */
-    List<TaskVo> queryToDoTask(String userId);
+    List<TaskVo> queryToDoTask(String userId) throws InvocationTargetException, IllegalAccessException;
 
     /**
      * 查询流程实例
@@ -72,4 +73,10 @@ public interface IWorkFlowService {
      */
     String queryBusinessKeyByProcessInstanceId(String processInStanceId);
 
+    /**
+     * 签收任务
+     *
+     * @param taskId 任务id
+     */
+    void claim(String taskId);
 }

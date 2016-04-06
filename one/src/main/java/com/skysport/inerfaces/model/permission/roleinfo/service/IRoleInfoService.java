@@ -14,4 +14,6 @@ public interface IRoleInfoService extends ICommonService<RoleInfo> {
 
     List<RoleUser> queryRoleUsers(String userId);
 
+    String queryParentId(String groupId);
+
 }

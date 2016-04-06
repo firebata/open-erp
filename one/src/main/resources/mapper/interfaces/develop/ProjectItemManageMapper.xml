@@ -30,7 +30,8 @@
 		b.sex_ids AS sexIds,
 		a.del_flag AS delFlag,
 		a.update_time AS updateTime,
-		a.remark AS remark
+		a.remark AS remark,
+		a.approve_status AS approveStatus
 	</sql>
 
     <select id="queryInfo" resultType="ProjectBomInfo">
@@ -163,5 +164,26 @@
 		from t_kf_project_item
 		where del_flag=0 and project_name like concat('%',#{name},'%')
 	</select>
+
+    <update id="updateApproveStatus">
+        update
+          t_kf_project_item
+        set
+            approve_status=#{status}
+        where del_flag=0
+        and project_id =#{businessKey}
+    </update>
+
+    <update id="updateApproveStatusBatch">
+        update
+          t_kf_project_item
+        set
+        approve_status=#{status}
+        where del_flag=0
+        and project_id in
+        <foreach item="item" index="index" collection="list"       open="(" separator="," close=")">
+          #{item}
+        </foreach>
+    </update>
 
 </mapper>

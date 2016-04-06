@@ -15,7 +15,7 @@ public enum CustomerManageServiceHelper {
     SINGLETONE;
 
     public void refreshSelect() {
-        CustomerManageServiceImpl customerManageService = SpringContextHolder.getBean("customerManageService");
+        CustomerManageServiceImpl customerManageService = SpringContextHolder. getBean("customerManageService");
         List<SelectItem2> customerItems = customerManageService.querySelectList(null);
         SystemBaseInfoCachedMap.SINGLETONE.pushBom("customerItems", customerItems);
         SystemBaseInfoCachedMap.SINGLETONE.pushProject("customerItems", customerItems);

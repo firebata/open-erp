@@ -13,6 +13,7 @@ public class QuotedInfo {
     private String projectId;
 
     private String projectItemId;
+    private String approveStatus;
     /**
      *
      */
@@ -77,6 +78,13 @@ public class QuotedInfo {
      */
     private BigDecimal exchangeCosts;
 
+    public String getApproveStatus() {
+        return approveStatus;
+    }
+
+    public void setApproveStatus(String approveStatus) {
+        this.approveStatus = approveStatus;
+    }
 
     public int getId() {
         return id;
@@ -241,4 +249,30 @@ public class QuotedInfo {
         this.quotedPrice = quotedPrice;
     }
 
+    @Override
+    public String toString() {
+        return "QuotedInfo{" +
+                "id=" + id +
+                ", projectId='" + projectId + '\'' +
+                ", projectItemId='" + projectItemId + '\'' +
+                ", approveStatus='" + approveStatus + '\'' +
+                ", bomId='" + bomId + '\'' +
+                ", spId='" + spId + '\'' +
+                ", mainFabricIds='" + mainFabricIds + '\'' +
+                ", mainFabricDescs='" + mainFabricDescs + '\'' +
+                ", euroExchangeRates=" + euroExchangeRates +
+                ", rates=" + rates +
+                ", euroPrice=" + euroPrice +
+                ", quotedPrice=" + quotedPrice +
+                ", remark='" + remark + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", delFlag=" + delFlag +
+                ", factoryOffer=" + factoryOffer +
+                ", factoryMargins=" + factoryMargins +
+                ", costing=" + costing +
+                ", lpPrice=" + lpPrice +
+                ", commission=" + commission +
+                ", exchangeCosts=" + exchangeCosts +
+                '}';
+    }
 }

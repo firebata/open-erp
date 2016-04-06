@@ -1,5 +1,4 @@
 package com.skysport.inerfaces.model.develop.project.service.impl;
-
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
@@ -27,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,14 +49,11 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     @Resource(name = "incrementNumber")
     private IncrementNumber incrementNumber;
 
-
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
 
-
     @Resource(name = "accessoriesService")
     private IAccessoriesService accessoriesService;
-
 
     @Resource(name = "packagingService")
     private IPackagingService packagingService;
@@ -79,9 +74,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Override
     public ProjectBomInfo queryInfoByNatrualKey(String natrualKey) {
-
-        List<SexColor> sexColors = sexColorService.searchInfosByProjectId(natrualKey);
         ProjectBomInfo projectBomInfo = super.queryInfoByNatrualKey(natrualKey);
+        List<SexColor> sexColors = sexColorService.searchInfosByProjectId(natrualKey);//
         projectBomInfo.setSexColors(sexColors);
         return projectBomInfo;
     }
@@ -90,30 +84,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     public String queryCurrentSeqNo(ProjectBomInfo info) {
         return projectItemManageMapper.queryCurrentSeqNo(info);
     }
-
-//    @Override
-//    public void add(ProjectBomInfo info) {
-////        LocalDate today = LocalDate.now();
-//        String name = ProjectManageHelper.buildProjectName(info);
-//        info.setName(name);
-//        info.setProjectName(name);
-//
-//        //增加主项目信息
-//        super.add(info);
-//
-//        //增加项目BOM信息
-//        addBomInfo(info);
-//
-//        List<MainColor> mainColorList = MainColorHelper.SINGLETONE.turnMainColorStrToList(info);
-//
-//        //增加项目主颜色信息
-//        mainColorService.add(mainColorList);
-//
-//
-//        //生成BOM信息并保存
-//        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
-//
-//    }
 
     /**
      * 项目编号是由年份+客户+地域+系列+NNN构成，但是上面的信息可能会更改，如果按照这个这个规则，项目编号应该要更改才对，但目前的处理方式是，项目编号和序号都不改变
@@ -171,11 +141,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
         //生成BOM信息并保存
         BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
-
-        //启动流程
-        startWorkFlow(projectId);
-
     }
+
 
     /**
      * 启动开发流程
@@ -204,8 +171,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Override
     public List<ProjectBomInfo> searchInfos(ProjectQueryForm queryForm) {
-
-
         return projectItemManageMapper.searchInfos(queryForm);
     }
 
@@ -319,5 +284,31 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     public void delSexColorInfoByBomInfo(BomInfo info) {
         sexColorService.delSexColorInfoByBomInfo(info);
     }
+
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+        projectItemManageMapper.updateApproveStatus(businessKey, status);
+    }
+
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+        projectItemManageMapper.updateApproveStatusBatch(businessKeys, status);
+    }
+
+    @Override
+    public void submit(String businessKey) {
+        //启动流程
+        startWorkFlow(businessKey);
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+    }
+
+    @Override
+    public void addBatch(List<ProjectBomInfo> infos) {
+
+        super.addBatch(infos);
+
+    }
+
 
 }

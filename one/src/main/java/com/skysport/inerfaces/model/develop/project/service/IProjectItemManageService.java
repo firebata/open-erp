@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.project.service;
 
+import com.skysport.core.model.common.IApproveService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
@@ -15,7 +16,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-public interface IProjectItemManageService extends ICommonService<ProjectBomInfo> {
+public interface IProjectItemManageService extends ICommonService<ProjectBomInfo>, IApproveService {
 
     String queryCurrentSeqNo(ProjectBomInfo t);
 

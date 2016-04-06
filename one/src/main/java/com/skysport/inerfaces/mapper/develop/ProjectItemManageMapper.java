@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
+import com.skysport.core.mapper.ApproveDao;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.core.mapper.CommonDao;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 @Component("projectItemManageMapper")
-public interface ProjectItemManageMapper extends CommonDao<ProjectBomInfo> {
+public interface ProjectItemManageMapper extends CommonDao<ProjectBomInfo> ,ApproveDao{
     String queryCurrentSeqNo(ProjectBomInfo info);
 
     void addBomInfo(ProjectBomInfo info);
@@ -24,4 +25,5 @@ public interface ProjectItemManageMapper extends CommonDao<ProjectBomInfo> {
     List<ProjectBomInfo> searchInfos(ProjectQueryForm queryForm);
 
     void addBatchBomInfo(List<ProjectBomInfo> info);
+
 }

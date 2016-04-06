@@ -217,6 +217,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      * 存放初始化文件上传控件中的信息
      */
     private Map<String, Object> specificationUrlUidFileinfosMap;
+    private String approveStatus;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -891,5 +892,66 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
 
     public void setFactoryQuoteInfo(FactoryQuoteInfo factoryQuoteInfo) {
         this.factoryQuoteInfo = factoryQuoteInfo;
+    }
+
+    public String getApproveStatus() {
+        return approveStatus;
+    }
+
+    public void setApproveStatus(String approveStatus) {
+        this.approveStatus = approveStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "KfProductionInstructionEntity{" +
+                "id=" + id +
+                ", uid='" + uid + '\'' +
+                ", piNo='" + piNo + '\'' +
+                ", seriesName='" + seriesName + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", factoryQuoteId='" + factoryQuoteId + '\'' +
+                ", productionInstructionId='" + productionInstructionId + '\'' +
+                ", bomId='" + bomId + '\'' +
+                ", spId='" + spId + '\'' +
+                ", spName='" + spName + '\'' +
+                ", projectItemName='" + projectItemName + '\'' +
+                ", bomName='" + bomName + '\'' +
+                ", colorName='" + colorName + '\'' +
+                ", offerAmout=" + offerAmout +
+                ", clothReceivedDate='" + clothReceivedDate + '\'' +
+                ", cropRequirements='" + cropRequirements + '\'' +
+                ", qualityRequirements='" + qualityRequirements + '\'' +
+                ", overstitch='" + overstitch + '\'' +
+                ", overstitchSpace='" + overstitchSpace + '\'' +
+                ", blindstitch='" + blindstitch + '\'' +
+                ", blindstitchSpace='" + blindstitchSpace + '\'' +
+                ", overlock='" + overlock + '\'' +
+                ", overlockSpace='" + overlockSpace + '\'' +
+                ", finishPressingRequirements='" + finishPressingRequirements + '\'' +
+                ", spcialTech='" + spcialTech + '\'' +
+                ", packingRequirements='" + packingRequirements + '\'' +
+                ", trademarkCode='" + trademarkCode + '\'' +
+                ", trademarkRemark='" + trademarkRemark + '\'' +
+                ", scaleCode='" + scaleCode + '\'' +
+                ", scaleRemark='" + scaleRemark + '\'' +
+                ", rinsingMarksCode='" + rinsingMarksCode + '\'' +
+                ", rinsingMarksRemark='" + rinsingMarksRemark + '\'' +
+                ", sketchUrlUid='" + sketchUrlUid + '\'' +
+                ", specificationUrlUid='" + specificationUrlUid + '\'' +
+                ", delFlag=" + delFlag +
+                ", remark='" + remark + '\'' +
+                ", updateTime=" + updateTime +
+                ", exportDate='" + exportDate + '\'' +
+                ", fabrics=" + fabrics +
+                ", accessories=" + accessories +
+                ", packagings=" + packagings +
+                ", factoryQuoteInfo=" + factoryQuoteInfo +
+                ", sketchUrlUidUploadFileInfos=" + sketchUrlUidUploadFileInfos +
+                ", specificationUrlUidUploadFileInfos=" + specificationUrlUidUploadFileInfos +
+                ", sketchUrlUidFileinfosMap=" + sketchUrlUidFileinfosMap +
+                ", specificationUrlUidFileinfosMap=" + specificationUrlUidFileinfosMap +
+                ", approveStatus='" + approveStatus + '\'' +
+                '}';
     }
 }

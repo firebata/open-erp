@@ -154,7 +154,7 @@ public class BomAction extends BaseAction<BomInfo> {
 
 
     /**
-     * @return 导出报价表
+     * @return 导出生产指示单
      * @throws IOException
      */
     @RequestMapping("/download_productinstruction/{natrualkeys}")

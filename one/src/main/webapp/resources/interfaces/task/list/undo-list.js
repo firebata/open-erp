@@ -5,15 +5,17 @@
     "use strict";
     var path = $.basepath();
     var project_selectURL = path + "/system/baseinfo/project_select";
+    var claimURL = path + "/task/claim/";
+    var handleURL = path + "/task/handle/";
     /**
      * 列表展示内容
      * @returns {*[]}
      */
     var columnsName = [
         {"data": null},
-        {"data": "task.name"},
-        {"data": "task.createTime"},
-        {"data": "processInstance.suspended"},
+        {"data": "name"},
+        {"data": "createTime"},
+        {"data": "suspended"},
         {"data": null}
     ];
 
@@ -37,19 +39,54 @@
                 {
                     targets: 0,
                     render: function (data, type, row, meta) {
-                        var html = "<input type='checkbox' name='checkList' value='" + data.natrualkey + "'>";
+                        var html = "<input type='checkbox' name='checkList' value='" + data.businessKey + "'>";
+                        return html;
+                    }
+                },
+                {
+                    targets: 3,
+                    render: function (data, type, row, meta) {
+                        var html;
+                        var _suspended = data.suspended;
+                        var _version = data.version;
+                        if (_suspended) {
+                            html = "已挂起;";
+                        } else {
+                            html = "正常;";
+                        }
+                        html += "<b title='流程版本号'>流程版本号:" + _version + "</b>";
                         return html;
                     }
                 },
                 {
                     targets: indexOpreation,
                     render: function (data, type, row, meta) {
-                        var context =
-                        {
-                            func: [
-                                {"name": "更新", "fn": "$.editProject(\'" + data.natrualkey + "\')", "type": "primary"}
-                            ]
-                        };
+                        var _assignee = data.assignee;
+                        var context;
+                        if (null == _assignee) {
+                            context =
+                            {
+                                func: [
+                                    {
+                                        "name": "签收",
+                                        "fn": "$.claimTask(\'" + data.id + "\',\'" + data.businessKey + "\')",
+                                        "type": "primary"
+                                    }
+                                ]
+                            };
+                        }
+                        else {
+                            context =
+                            {
+                                func: [
+                                    {
+                                        "name": "办理",
+                                        "fn": "$.handleTask(\'" + data.id + "\',\'" + data.businessKey + "\')",
+                                        "type": "primary"
+                                    }
+                                ]
+                            };
+                        }
                         var html = template(context);
                         return html;
                     }
@@ -78,9 +115,24 @@
 
     });
 
+    /**
+     * 签收任务
+     * @param _taskId
+     */
+    var claimTask = function (_taskId, _businessKey) {
+        $.sendRestFulAjax(claimURL + _taskId + "/" + _businessKey, null, 'GET', 'json', function (data) {
+            table.ajax.reload();
+        });
 
-    var editProject = function (_projectId) {
-        window.location.href = "add/" + _projectId;
     }
-    $.editProject = editProject;
+    /**
+     * 办理任务
+     * @param _businessKey
+     */
+    var handleTask = function (_taskId, _businessKey) {
+        window.location.href = handleURL + _taskId + "/" + _businessKey;
+    }
+
+    $.claimTask = claimTask;
+    $.handleTask = handleTask;
 }());

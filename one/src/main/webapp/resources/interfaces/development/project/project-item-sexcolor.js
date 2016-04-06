@@ -55,21 +55,12 @@
 
         //已显示的性别颜色模块
         var sexIds = $("[id^=sexIdChild]").arrayVal();
-
-        //var sexIdsLen = $("[id^=sexIdChild]").length;
-        //for (var index = 0; index < sexIdsLen; index++) {
-        //    var sexId = $("[id^=sexIdChild]").eq(index).val();
-        //    sexIds[index] = sexId;
-        //}
-
         //性别属性多选择框
         var sexIdsSelect = $("#sexIds").val();
-
-        if (sexIds === undefined || sexIds == null) {
+        if (sexIds == null) {
             sexIds = [];
         }
-
-        if (sexIdsSelect === undefined || sexIdsSelect == null) {
+        if (sexIdsSelect == null) {
             sexIdsSelect = [];
         }
 

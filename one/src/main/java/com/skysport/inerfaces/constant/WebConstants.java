@@ -136,7 +136,7 @@ public interface WebConstants extends TableNameConstants {
 
     String BOM_TABLE_COLUMN = "bom_table_colulmn";
     String PROJECT_TABLE_COLUMN = "project_table_colulmn";
-
+    String PROJECT_ITEM_TABLE_COLUMN = "project_table_colulmn";
     String USERINFO_TABLE_COLUMN = "userinfo_table_colulmn";
     String DEPT_TABLE_COLUMN_NAME = "dept_table_column_name";
 
@@ -170,8 +170,11 @@ public interface WebConstants extends TableNameConstants {
     String APPROVE_FINALLY_QUOTED_PROCESS = "approveFinallyQuotedProcess";//审核最终的报价（和选择的打样的BOM数量一致）
     String APPROVE_FINALLY_BOM_PROCESS = "approveFinallyBomProcess";//审核BOM审核过程
 
-
-
+    String APPROVE_STATUS_NEW = "1";//新建
+    String APPROVE_STATUS_UNDO = "2";//待审批
+    String APPROVE_STATUS_REJECT = "3";//驳回
+    String APPROVE_STATUS_APPROVED = "4";//审核通过
+    String APPROVE_STATUS_OTHER = "5";//其他
 
 
 }

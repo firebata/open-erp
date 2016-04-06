@@ -22,7 +22,8 @@
 		a.offer_amount AS offerAmount,
 		a.del_flag AS delFlag,
 		a.update_time AS updateTime,
-		a.remark AS remark
+		a.remark AS remark,
+		a.approve_status AS approveStatus
 	</sql>
     <sql id="searchInfoSql2">
         a.id AS id,
@@ -44,7 +45,9 @@
         a.del_flag AS delFlag,
         a.update_time AS updateTime,
         a.remark AS remark,
-        b.project_name AS projectName
+        b.project_name AS projectName,
+		a.approve_status AS approveStatus
+
     </sql>
 
     <sql id="searchInfoSql3">
@@ -67,7 +70,8 @@
         a.del_flag AS delFlag,
         a.update_time AS updateTime,
         a.remark AS remark,
-        b.series_name AS seriesName
+        b.series_name AS seriesName,
+		a.approve_status AS approveStatus
     </sql>
 
 

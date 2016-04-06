@@ -1,7 +1,10 @@
 package com.skysport.core.model.init.helper;
 
 import com.skysport.core.cache.DictionaryInfoCachedMap;
-import com.skysport.inerfaces.model.init.SystemBaseInfoHelper;
+import com.skysport.inerfaces.model.init.BasicInfoHelper;
+import org.dom4j.DocumentException;
+
+import java.io.IOException;
 
 /**
  * 系统启动，加载初始化信息
@@ -13,16 +16,24 @@ public enum SystemInitHelper {
 
     SINGLETONE;
 
-    public void  init() {
+    public void init() throws IOException, DocumentException {
         // 初始化数据字典信息
         DictionaryHelper.SINGLETONE.initDictionary();
 
         // 初始化系统基础信息
-        SystemBaseInfoHelper.SINGLETONE.initSystemBaseInfo();
+        BasicInfoHelper.SINGLETONE.initSystemBaseInfo();
+
+        //初始化任务和业务处理类的对应关系
+        TaskHanlderHelper.SINGLETONE.init();
 
 
     }
 
+    /**
+     * 页面资源文件用
+     *
+     * @return
+     */
     public String getVersion() {
         return DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue("version", "version");
     }

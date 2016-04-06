@@ -87,10 +87,16 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
+        addProjectItems(projectBomInfos);
+    }
+
+    private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
+        //业务数据
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
-
-
+        //审核状态：新增
+        List<String> businessKeys = ProjectManageHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
+        projectItemManageService.updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
     }
 
     /**
@@ -137,10 +143,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
 
         //增加子项目
-        projectItemManageService.addBatch(projectBomInfos);
-
-        projectItemManageService.addBatchBomInfo(projectBomInfos);
-
+        addProjectItems(projectBomInfos);
 
     }
 

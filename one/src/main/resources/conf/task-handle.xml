@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tasks>
+    <task taskDefineKey="approveProjectItem" name="经理审核子项目">
+        <businessController>
+            projectItemAction
+        </businessController>
+        <businessService>
+            projectItemManageService
+        </businessService>
+        <urlInfo>
+            /development/project_item/info/
+        </urlInfo>
+        <urlPass>
+            /development/project_item/pass/
+        </urlPass>
+        <urlReject>
+            /development/project_item/reject/
+        </urlReject>
+        <urlSumit>
+            /development/project_item/submit/
+        </urlSumit>
+    </task>
+
+    <task taskDefineKey="updateProjectItem" name="开发员修改子项目">
+        <businessController>
+            projectItemAction
+        </businessController>
+        <businessService>
+            projectItemManageService
+        </businessService>
+        <urlInfo>
+            /development/project_item/info/
+        </urlInfo>
+        <urlPass>
+            /development/project_item/reject/
+        </urlPass>
+        <urlSumit>
+            /development/project_item/submit/
+        </urlSumit>
+    </task>
+
+    <task taskDefineKey="approveSingleBom" name="审核BOM信息">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="updateSingleBom" name="修改单个BOM">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+    </task>
+
+
+    <task taskDefineKey="approveSingleBomQuoted" name="审核报价">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="approveFactoryInstraction" name="审核成衣指示单">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="recordCustomerOpinion" name="记录，审核客户意见">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="sendProductionInstructionTask" name="发送成衣生产指示单">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="receiveDevSamples" name="收到开发样">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+    <task taskDefineKey="approveDevSamples" name="审核开发样">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+    <task taskDefineKey="approvelapdip" name="审核色样">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+    <task taskDefineKey="recordFeedback" name="记录客户反馈意见">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="approveFinallyQuotedTask" name="审核报价单">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="approveFinallyBomTask" name="审核最终BOM">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+    <task taskDefineKey="updateFinallyBom" name="修改最终BOM">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+    <task taskDefineKey="devSumitOrder" name="订单转接提交">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+    <task taskDefineKey="approveDevSumitOrder" name="订单交接审核">
+        <businessController>
+
+        </businessController>
+        <businessService>
+
+        </businessService>
+        <urlInfo>
+
+        </urlInfo>
+    </task>
+
+
+</tasks>

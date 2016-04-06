@@ -2,9 +2,9 @@ package com.skysport.inerfaces.model.develop.project.helper;
 
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
-import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
@@ -281,5 +281,17 @@ public enum ProjectManageHelper {
         return stringBuilder.toString();
     }
 
+    /**
+     *
+     * @param projectBomInfos
+     * @return
+     */
+    public List<String> buildBusinessKeys(List<ProjectBomInfo> projectBomInfos) {
+        List<String> businessKeys = new ArrayList<>();
+        for (ProjectBomInfo projectBomInfo : projectBomInfos) {
+            businessKeys.add(projectBomInfo.getNatrualkey());
+        }
+        return businessKeys;
+    }
 
 }

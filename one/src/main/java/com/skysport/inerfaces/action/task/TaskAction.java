@@ -3,23 +3,28 @@ package com.skysport.inerfaces.action.task;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.core.cache.TaskHanlderCachedMap;
 import com.skysport.core.init.SpringContextHolder;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.UserUtils;
-import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.ProjectItemTaskHelper;
 import com.skysport.inerfaces.form.task.TaskQueryForm;
-import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.TaskService;
+import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +40,8 @@ public class TaskAction extends BaseAction<TaskVo> {
     @Autowired
     private IWorkFlowService projectItemTaskService;
 
-    @RequestMapping(value = "/del/{natrualKey}", method = RequestMethod.DELETE)
-    @ResponseBody
-    @SystemControllerLog(description = "删除主项目信息")
-    public Map<String, Object> startWorkflow(@PathVariable String natrualKey) {
-        ProcessInstance instance = projectItemTaskService.startProcessInstanceByKey(natrualKey);
-        return rtnSuccessResultMap("启动成功");
-    }
+    @Autowired
+    public TaskService taskService;
 
 
     /**
@@ -98,7 +98,7 @@ public class TaskAction extends BaseAction<TaskVo> {
     @RequestMapping(value = "/todo/search")
     @ResponseBody
     @SystemControllerLog(description = "查询所有任务")
-    public Map<String, Object> searchUndo(HttpServletRequest request) {
+    public Map<String, Object> searchUndo(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException {
         // 总记录数
         int recordsTotal = 0;
         int recordsFiltered = 0;
@@ -141,18 +141,92 @@ public class TaskAction extends BaseAction<TaskVo> {
         return resultMap;
     }
 
+
     /**
-     * 此方法描述的是：
+     * @param taskId
+     * @return
+     */
+    @RequestMapping(value = "/claim/{taskId}/{businessKey}", method = RequestMethod.GET)
+    @ResponseBody
+    @SystemControllerLog(description = "签收任务")
+    public Map<String, Object> claim(@PathVariable String taskId, @PathVariable String businessKey) {
+        projectItemTaskService.claim(taskId);
+        return rtnSuccessResultMap("签收任务成功");
+    }
+
+
+    /**
+     * 此方法描述的是：处理任务：调转到指定的查询详情页面
      *
      * @author: zhangjh
-     * @version: 2015年4月29日 下午5:35:09
+     * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/handle/{taskId}/{businessKey}")
     @ResponseBody
-    @SystemControllerLog(description = "编辑项目信息")
-    public Map<String, Object> edit(@RequestBody BomInfo info) {
-        Map resultMap = rtnSuccessResultMap(MSG_UPDATE_SUCCESS);
-        return resultMap;
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public ModelAndView handle(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        request.setAttribute("taskId", taskId);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String taskDefinitionKey = task.getTaskDefinitionKey();
+        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlInfo();
+        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        return mav;
     }
+
+    /**
+     * 此方法描述的是：表单提交
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/sumit/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public ModelAndView sumit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        request.setAttribute("taskId", taskId);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String taskDefinitionKey = task.getTaskDefinitionKey();
+        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlSumit();
+        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        return mav;
+    }
+
+
+    /**
+     * 此方法描述的是：审核通过
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/pass/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public ModelAndView pass(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        request.setAttribute("taskId", taskId);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String taskDefinitionKey = task.getTaskDefinitionKey();
+        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlPass();
+        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        return mav;
+    }
+
+    /**
+     * 此方法描述的是：驳回
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/reject/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public ModelAndView reject(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        request.setAttribute("taskId", taskId);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String taskDefinitionKey = task.getTaskDefinitionKey();
+        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlReject();
+        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        return mav;
+    }
+
 
 }

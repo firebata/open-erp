@@ -3,9 +3,11 @@ package com.skysport.core.init;
 import com.skysport.core.model.init.helper.SystemInitHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dom4j.DocumentException;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.io.IOException;
 
 /**
  * 启动加载数据字段等信息
@@ -30,7 +32,13 @@ public class InitSystemInfoListener implements ServletContextListener {
 //        SkySportAppContext.historyService = SpringContextHolder.getBean("historyService");
 
         //初始化系统基础信息
-        SystemInitHelper.SINGLETONE.init();
+        try {
+            SystemInitHelper.SINGLETONE.init();
+        } catch (IOException e) {
+            logger.info(e.getMessage(), e);
+        } catch (DocumentException e) {
+            logger.info(e.getMessage(), e);
+        }
 
 
     }

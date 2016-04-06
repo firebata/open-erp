@@ -15,7 +15,7 @@ public enum DateUtils {
     public final static String YYYYMMDD = "yyyyMMdd";
     public final static String YYYY_MM_DD = "yyyy-mm-dd";
     public final static String YYYYMMDDHHMMSS = "yyyyMMddhhmmss";
-
+    public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
 
     public String getYyyy() {
         LocalDate today = LocalDate.now();
@@ -69,6 +69,18 @@ public enum DateUtils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(date);
     }
+
+    /**
+     * 将日期转换成指定格式
+     *
+     * @param format
+     * @return
+     */
+    public String format(Date date ,String format) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(date);
+    }
+
 
 
 }

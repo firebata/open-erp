@@ -58,10 +58,10 @@
 
     var initSelectCallBack = function (_data) {
         initSelect(_data);
-        initOther();
+        queryInfoAnInitFiled();
     }
 
-    var initOther = function () {
+    var queryInfoAnInitFiled = function () {
         var natrualkey = $("#natrualkey").val();
         if (natrualkey != '') {
             $.sendRestFulAjax(project_infoURL + natrualkey, null, 'GET', 'json', initFormFields);
@@ -107,13 +107,15 @@
         //初始化性别属性，再初始化性别属性和颜色
         $.initSexColors(_data["sexColors"]);
 
-
+        //初始化性别属性，再初始化性别属性和颜色
+        $.showHandleBtn(_data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val());
     }
 
 
     var initSelect = function (_data) {
 
         var data = _data;
+
         //年份
         var yearCodeItems = data["yearItems"];
         $("#yearCode").empty();
@@ -161,11 +163,9 @@
         //性别属性
         var sexItems = data["sexItems"];
         $("#sexIds").empty();
-
         $.each(sexItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#sexIds"));
         });
-
         $('#sexIds').selectpicker({noneSelectedText: '请选择...'});
         $('#sexIds').selectpicker('refresh');
 
@@ -291,20 +291,6 @@
                 }
             }
         },
-        //sampleDelivery: {
-        //    validators: {
-        //        notEmpty: {
-        //            message: '样品交付日期为必填项'
-        //        }
-        //    }
-        //},
-        //needPreOfferDate: {
-        //    validators: {
-        //        notEmpty: {
-        //            message: '预报价日期为必填项'
-        //        }
-        //    }
-        //},
         categoryAid: {
             validators: {
                 notEmpty: {
@@ -340,14 +326,6 @@
                 }
             }
         }
-        //,
-        //sketchReceivedDate: {
-        //    validators: {
-        //        notEmpty: {
-        //            message: '产品描述收到时间为必填项'
-        //        }
-        //    }
-        //}
     }
 
 
@@ -368,14 +346,6 @@
             doSaveAction();
         }
     });
-
-
-    //$("#fileLocation").fileinput({
-    //    uploadUrl: path + "/development/project/fileUpload",
-    //    uploadAsync: true,
-    //    minFileCount: 1,
-    //    maxFileCount: 5
-    //});
 
     var project = {
         projectId: "",
@@ -408,8 +378,29 @@
         $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
     })
 
+    function showHandleBtn(_approveStatus, saveFun, _businessKey, _taskId) {
+        var html = ""
+        if (_approveStatus == approve_status_new || _approveStatus == approve_status_reject) {
+            html = "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:" + saveFun + "'>保存</button></div>";
+            html + "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss('" + _businessKey + "','" + _taskId + "'>提交</button></div>";
+        }
+        else if (_approveStatus == approve_status_undo) {
+            html = "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss('" + _businessKey + "','" + _taskId + "'>审核</button></div>";
+        }
+        $("#projectBtnInfo").empty().html(html);
+    }
 
-    $.saveProject = saveProject;
+    function approveBuss(_businessKey, _taskId) {
+        bootbox.alert("提交_businessKey:" + _businessKey + ",_taskId:" + _taskId);
+    }
 
+    function submitBuss(_businessKey, _taskId) {
+        bootbox.alert("审核_businessKey:" + _businessKey + ",_taskId:" + _taskId);
+    }
+
+    $.saveProjectItem = saveProject;
+    $.showHandleBtn = showHandleBtn;
+    $.approveBuss = approveBuss;
+    $.submitBuss = submitBuss;
 
 }());

@@ -43,6 +43,7 @@
                             基本信息
                             <small></small>
                             <input type="hidden" name="natrualkey" id="natrualkey" value="${natrualkey}"/>
+                            <input type="hidden" name="taskId" id="taskId" value="${taskId}"/>
                         </h5>
                     </div>
                     <div id="projectDescDetail">
@@ -215,10 +216,7 @@
                 </div>
 
                 <div id="projectBtnInfo">
-                    <div class="col-xs-offset-6 col-xs-9">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveProject()">保存
-                        </button>
-                    </div>
+
                 </div>
             </form>
 

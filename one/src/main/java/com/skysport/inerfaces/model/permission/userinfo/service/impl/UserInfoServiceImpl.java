@@ -28,4 +28,7 @@ public class UserInfoServiceImpl extends CommonServiceImpl<UserInfo> implements 
     public void chgpwd(UserInfo userInfo) {
         userInfoManageMapper.chgpwd(userInfo);
     }
+
+
+
 }

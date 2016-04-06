@@ -27,6 +27,7 @@ public class ProjectBomInfo extends ProjectBaseInfo {
     private String remark;
     private String updateTime;
     private int delFlag;
+    private String approveStatus;
 
     private List<UploadFileInfo> fileInfos;
     /**
@@ -184,6 +185,14 @@ public class ProjectBomInfo extends ProjectBaseInfo {
         this.fileinfosMap = fileinfosMap;
     }
 
+    public String getApproveStatus() {
+        return approveStatus;
+    }
+
+    public void setApproveStatus(String approveStatus) {
+        this.approveStatus = approveStatus;
+    }
+
     @Override
     public String toString() {
         return "ProjectBomInfo{" +
@@ -202,6 +211,7 @@ public class ProjectBomInfo extends ProjectBaseInfo {
                 ", remark='" + remark + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", delFlag=" + delFlag +
+                ", approveStatus='" + approveStatus + '\'' +
                 ", fileInfos=" + fileInfos +
                 ", fileinfosMap=" + fileinfosMap +
                 '}';

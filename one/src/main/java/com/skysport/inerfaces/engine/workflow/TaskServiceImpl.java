@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.engine.workflow;
 
 import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.core.utils.DateUtils;
 import com.skysport.inerfaces.bean.task.TaskVo;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricProcessInstance;
@@ -12,6 +13,7 @@ import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,9 @@ public abstract class TaskServiceImpl implements IWorkFlowService {
 
     @Autowired
     public IdentityService identityService;
+
+    @Autowired
+    public ManagementService managementService;
 
     /**
      * 启动流程
@@ -95,7 +100,7 @@ public abstract class TaskServiceImpl implements IWorkFlowService {
      * @return
      */
     @Override
-    public  List<TaskVo> queryToDoTask(String userId) {
+    public List<TaskVo> queryToDoTask(String userId) throws InvocationTargetException, IllegalAccessException {
         TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
         List<Task> tasks = taskQuery.list();
         List<TaskVo> taskRtn = new ArrayList<>();
@@ -104,16 +109,28 @@ public abstract class TaskServiceImpl implements IWorkFlowService {
             String processInstanceId = task.getProcessInstanceId();
             ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
             String businessKey = processInstance.getBusinessKey();
+            String processDefinitionId = processInstance.getProcessDefinitionId();
             ProcessDefinition processDefinition = getProcessDefinition(processInstance.getProcessDefinitionId());
             if (businessKey == null) {
                 continue;
             }
             TaskVo taskInfo = new TaskVo();
-            taskInfo.setTask(task);
-            taskInfo.setProcessInstance(processInstance);
-            taskInfo.setProcessDefinition(processDefinition);
+            String taskId = task.getId();
+            String taskName = task.getName();
+            String createTime = DateUtils.SINGLETONE.format(task.getCreateTime(), DateUtils.YYYY_MM_DD_HH_MM_SS);
+            String assignee = task.getAssignee();
+            boolean suspended = task.isSuspended();
+            int version = processDefinition.getVersion();
+            taskInfo.setProcessInstanceId(processInstanceId);
+            taskInfo.setBusinessKey(businessKey);
+            taskInfo.setProcessDefinitionId(processDefinitionId);
+            taskInfo.setId(taskId);
+            taskInfo.setName(taskName);
+            taskInfo.setCreateTime(createTime);
+            taskInfo.setAssignee(assignee);
+            taskInfo.setSuspended(suspended);
+            taskInfo.setVersion(version);
             taskRtn.add(taskInfo);
-
         }
         return taskRtn;
     }

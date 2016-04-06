@@ -75,10 +75,11 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @RequestMapping(value = "/add/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
     @SystemControllerLog(description = "新增子项目")
-    public ModelAndView add(@PathVariable String natrualKey) {
+    public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("/development/project/project-item-add");
         mav.addObject("natrualkey", natrualKey);
+        mav.addObject("taskId", request.getParameter("taskId"));
         return mav;
     }
 
@@ -121,7 +122,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
-        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLUMN, request));
+        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_ITEM_TABLE_COLUMN, request));
         ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectItemManageService);
@@ -188,6 +189,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
+
         if (null != info) {
             Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);

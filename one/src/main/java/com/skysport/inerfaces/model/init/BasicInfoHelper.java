@@ -17,7 +17,7 @@ import com.skysport.inerfaces.model.info.year_conf.YearConfManageServiceHelper;
  * 类说明:
  * Created by zhangjh on 2015/7/6.
  */
-public enum SystemBaseInfoHelper {
+public enum BasicInfoHelper {
     /**
      * 单例
      */

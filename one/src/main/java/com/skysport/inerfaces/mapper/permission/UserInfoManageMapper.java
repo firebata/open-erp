@@ -14,4 +14,6 @@ public interface UserInfoManageMapper extends CommonDao<UserInfo> {
     UserInfo queryInfoByUserInfoName(String userName);
 
     void chgpwd(UserInfo userInfo);
+
+    String queryParentId(String groupId);
 }
