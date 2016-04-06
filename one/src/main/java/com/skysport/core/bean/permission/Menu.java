@@ -1,12 +1,13 @@
 package com.skysport.core.bean.permission;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 说明:菜单
  * Created by zhangjh on 2015/11/26.
  */
-public class Menu {
+public class Menu implements Serializable{
     private String id;
     private String pid;
     private String name;

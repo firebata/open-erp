@@ -7,7 +7,10 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.Map;
 public enum TaskHanlderHelper {
 
     SINGLETONE;
+    Logger logger = LoggerFactory.getLogger(TaskHanlderHelper.class);
 
     public void init() throws IOException, DocumentException {
         TaskHanlderCachedMap.SINGLETONE.taskHanlderCachedMap = parseMap();
@@ -40,12 +44,21 @@ public enum TaskHanlderHelper {
         List<Element> childElements = root.elements();
         List<TaskHanlderVo> vos = new ArrayList<>();
         for (Element child : childElements) {
+
             TaskHanlderVo vo = new TaskHanlderVo();
-            vo.setTaskDefineKey(child.attributeValue("taskDefineKey"));
-            vo.setName(child.attributeValue("name"));
-            vo.setBusinessController(child.elementText("businessController"));
-            vo.setBusinessService(child.elementText("businessService"));
-            vos.add(vo);
+            try {
+                vo.setTaskDefineKey(child.attributeValue("taskDefineKey").replaceAll("\\s", ""));
+                vo.setName(child.attributeValue("name").replaceAll("\\s", ""));
+                vo.setBusinessController(child.elementText("businessController").replaceAll("\\s", ""));
+                vo.setBusinessService(child.elementText("businessService").replaceAll("\\s", ""));
+                vo.setUrlInfo(child.elementText("urlInfo").replaceAll("\\s", ""));
+                vo.setUrlPass(child.elementText("urlPass").replaceAll("\\s", ""));
+                vo.setUrlReject(child.elementText("urlReject").replaceAll("\\s", ""));
+                vo.setUrlSumit(child.elementText("urlSumit").replaceAll("\\s", ""));
+                vos.add(vo);
+            } catch (Exception e) {
+                logger.error("catch one exception when parsing task-handle.xml ", e);
+            }
         }
         return vos;
     }
@@ -67,7 +80,6 @@ public enum TaskHanlderHelper {
         }
         return map;
     }
-
 
 
 }

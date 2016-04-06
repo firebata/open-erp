@@ -76,10 +76,10 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "新增子项目")
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
-
+        String taskId = request.getParameter("taskId");
         ModelAndView mav = new ModelAndView("/development/project/project-item-add");
         mav.addObject("natrualkey", natrualKey);
-        mav.addObject("taskId", request.getParameter("taskId"));
+        mav.addObject("taskId", taskId);
         return mav;
     }
 
