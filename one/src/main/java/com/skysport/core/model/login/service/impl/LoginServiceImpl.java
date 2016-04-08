@@ -65,11 +65,12 @@ public class LoginServiceImpl implements ILoginService {
 
     }
 
+
     private String judgeLoginInfo(UserInfo userInDB, UserInfo user) throws Exception {
         String msg = null;
-        if (null == userInDB || !UserInfoServiceHelper.isPwdRight(userInDB, user.getPassword())) {
+        if (null == userInDB || !UserInfoServiceHelper.SINGLETONE.isPwdRight(userInDB, user.getPassword())) {
             msg = "Account or password is incorrect";
-        } else if (!UserInfoServiceHelper.isUserUnlocked(userInDB)) {
+        } else if (!UserInfoServiceHelper.SINGLETONE.isUserUnlocked(userInDB)) {
             msg = "Account is locked";
         }
         return msg;

@@ -13,7 +13,7 @@
         remark AS remark
     </sql>
     <select id="queryInfo" resultType="YearConfInfo">
-        select
+        SELECT
         <include refid="searchInfoSql"/>
         FROM t_jc_year_conf
         WHERE year_id =#{natrualkey}
@@ -21,13 +21,13 @@
     </select>
 
     <select id="listInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM  t_jc_year_conf where del_flag=0
+        SELECT COUNT(*) FROM  t_jc_year_conf WHERE del_flag=0
     </select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_jc_year_conf where del_flag=0
+        SELECT COUNT(*) FROM t_jc_year_conf WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
+            AND (
             year_name like concat('%',#{searchValue},'%') or
             year_code	like concat('%',#{searchValue},'%') or
             remark like concat('%',#{searchValue},'%')
@@ -42,10 +42,10 @@
         FROM t_jc_year_conf
         WHERE del_flag=0
         <if test="searchValue!=null and searchValue != ''">
-            and (
-            year_name like concat('%',#{searchValue},'%') or
-            year_code	like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            AND (
+            year_name LIKE concat('%',#{searchValue},'%') or
+            year_code	LIKE concat('%',#{searchValue},'%') or
+            remark LIKE concat('%',#{searchValue},'%')
             )
         </if>
         <if test="orderColumn!=null and orderColumn != ''">
@@ -56,8 +56,8 @@
     </select>
 
     <update id="updateInfo">
-        update t_jc_year_conf
-        set
+        UPDATE t_jc_year_conf
+        SET
         year_code=#{yearCode},
         year_name=#{name},
         remark=#{remark}
@@ -65,31 +65,31 @@
     </update>
 
     <insert id="add">
-        insert into
+        INSERT INTO
         t_jc_year_conf (year_id,year_code,year_name,level_id,remark)
-        values (#{natrualkey},#{yearCode},#{name},#{levelId},#{remark})
+        VALUES (#{natrualkey},#{yearCode},#{name},#{levelId},#{remark})
     </insert>
 
     <update id="del">
-        update t_jc_year_conf
-        set  del_flag=1
-        where year_id =#{natrualkey}
+        UPDATE t_jc_year_conf
+        SET  del_flag=1
+        WHERE year_id =#{natrualkey}
     </update>
 
 
     <select id="queryCurrentSeqNo" resultType="String">
-        select case when  year_id is NULL then 0 else year_id end from t_jc_year_conf    ORDER BY id DESC LIMIT 1
+        SELECT CASE WHEN  year_id IS NULL THEN 0 ELSE year_id END FROM t_jc_year_conf    ORDER BY id DESC LIMIT 1
     </select>
 
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
-        select
+        SELECT
         year_id AS natrualkey,
         year_name AS name
-        from t_jc_year_conf
-        where del_flag=0
+        FROM t_jc_year_conf
+        WHERE del_flag=0
         <if test="name!=null and name != ''">
-          and upper(year_name) like concat('%',#{name},'%')
+          AND upper(year_name) LIKE concat('%',#{name},'%')
         </if>
     </select>
 

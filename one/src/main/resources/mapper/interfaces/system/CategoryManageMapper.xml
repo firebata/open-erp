@@ -13,7 +13,7 @@
 		update_time AS updateTime
 	</sql>
     <select id="queryInfo" resultType="CategoryInfo">
-        select
+        SELECT
         <include refid="searchInfoSql"/>
         FROM t_jc_category
         WHERE category_id =#{natrualkey}
@@ -26,13 +26,13 @@
 	</select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_jc_category where del_flag=0
+        SELECT COUNT(*) FROM t_jc_category WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
-            category_id like concat('%',#{searchValue},'%') or
-            category_name like concat('%',#{searchValue},'%') or
-            level_id like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            AND (
+            category_id LIKE concat('%',#{searchValue},'%') or
+            category_name LIKE concat('%',#{searchValue},'%') or
+            level_id LIKE concat('%',#{searchValue},'%') or
+            remark LIKE concat('%',#{searchValue},'%')
             )
         </if>
 
@@ -44,11 +44,11 @@
         FROM t_jc_category
         WHERE del_flag=0
         <if test="searchValue!=null and searchValue != ''">
-            and (
-            category_id like concat('%',#{searchValue},'%') or
-            category_name like concat('%',#{searchValue},'%') or
-            level_id like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            AND (
+            category_id LIKE concat('%',#{searchValue},'%') or
+            category_name LIKE concat('%',#{searchValue},'%') or
+            level_id LIKE concat('%',#{searchValue},'%') or
+            remark LIKE concat('%',#{searchValue},'%')
             )
         </if>
         <if test="orderColumn!=null and orderColumn != ''">
@@ -59,7 +59,7 @@
     </select>
 
     <update id="updateInfo">
-		update t_jc_category 	set
+		UPDATE t_jc_category 	SET
 		category_name=#{name},
 		level_id = #{levelId},
 		parent_category_id=#{parentCategoryId},
@@ -68,49 +68,49 @@
 	</update>
 
     <insert id="add">
-		insert into
+		INSERT INTO
 		t_jc_category (category_id,category_name,level_id,parent_category_id,remark)
-		values (#{natrualkey},#{name},#{levelId},#{parentCategoryId},#{remark})
+		VALUES (#{natrualkey},#{name},#{levelId},#{parentCategoryId},#{remark})
 	</insert>
 
     <update id="del">
-		update t_jc_category
-		set  del_flag=1
-		where category_id =#{natrualkey}
+		UPDATE t_jc_category
+		SET  del_flag=1
+		WHERE category_id =#{natrualkey}
 	</update>
 
     <select id="queryCurrentSeqNo" resultType="String">
-        select case when  category_id is NULL then 0 else category_id end from t_jc_category    ORDER BY id DESC LIMIT 1
+        SELECT CASE WHEN  category_id IS NULL THEN 0 ELSE category_id END FROM t_jc_category    ORDER BY id DESC LIMIT 1
     </select>
 
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
-        select
+        SELECT
           category_id AS natrualkey,
           category_name AS name
-        from t_jc_category
-        where del_flag=0 and level_id=#{name}
+        FROM t_jc_category
+        WHERE del_flag=0 and level_id=#{name}
     </select>
 
     <!--信息下拉列表-->
     <select id="querySelectListByLevelId" resultType="CommonBean">
-        select
+        SELECT
         category_id AS natrualkey,
         category_name AS name
-        from t_jc_category
-        where del_flag=0 and level_id=#{levelId}
+        FROM t_jc_category
+        WHERE del_flag=0 AND level_id=#{levelId}
     </select>
 
 
 
 
     <select id="searchChildCategoryByCategoryId" resultType="CategoryInfo">
-        select
+        SELECT
             <include refid="searchInfoSql"/>
         FROM t_jc_category
         WHERE del_flag=0
         <if test="categoryId!=null and categoryId!=''">
-            and parent_category_id =#{categoryId}
+            AND parent_category_id =#{categoryId}
         </if>
     </select>
 

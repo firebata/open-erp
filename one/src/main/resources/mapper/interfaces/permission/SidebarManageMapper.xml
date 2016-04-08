@@ -44,20 +44,20 @@
           t_qx_resources d
         WHERE
           d.type =0  AND d.pid = '0'
-        order by no desc
+        ORDER BY NO DESC
     </select>
 
 
 
 
     <select id="selectMenu" resultMap="cascadeMenuMap">
-        select
+        SELECT
             resource_id ,
             resource_name,
             pid,
             resource_url
         FROM  t_qx_resources
-        WHERE pid=#{pid} AND TYPE =0 order by no desc
+        WHERE pid=#{pid} AND TYPE =0 ORDER BY NO DESC
     </select>
 
     <resultMap id="cascadeMenuMap" type="com.skysport.core.bean.permission.Menu">

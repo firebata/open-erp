@@ -1,6 +1,7 @@
 package com.skysport.core.model.init.helper;
 
 import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.init.BasicInfoHelper;
 import org.dom4j.DocumentException;
 
@@ -30,12 +31,23 @@ public enum SystemInitHelper {
     }
 
     /**
-     * 页面资源文件用
+     * 版本号：页面资源文件用
      *
      * @return
      */
     public String getVersion() {
         return DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue("version", "version");
     }
+
+
+    /**
+     * 版本号：页面资源文件用
+     *
+     * @return
+     */
+    public String getEnvironment() {
+        return DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.SYSTEM_ENVIRONMENT, WebConstants.SYSTEM_ENVIRONMENT_CURRENT);
+    }
+
 
 }

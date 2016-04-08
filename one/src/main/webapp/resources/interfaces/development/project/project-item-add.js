@@ -108,7 +108,8 @@
         $.initSexColors(_data["sexColors"]);
 
         //初始化性别属性，再初始化性别属性和颜色
-        $.showHandleBtn(_data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val());
+        var $btnDIV = $("#projectBtnInfo");
+        $.showHandleBtn($btnDIV,_data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val());
     }
 
 
@@ -340,11 +341,7 @@
         },
         fields: fieldsDesc
     }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-        $fileInput.fileinput('upload');//批量提交
-        var hasExtraData = $.isEmptyObject($fileInput.fileinput("getExtraData"));
-        if (hasExtraData) {
-            doSaveAction();
-        }
+        doSaveAction();
     });
 
     var project = {
@@ -373,34 +370,12 @@
 
 
     $(function () {
+        $("#saveBtn").on('click', $.saveProjectItem);
         reloadDetailSelectData();
         initTags();
         $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
     })
 
-    function showHandleBtn(_approveStatus, saveFun, _businessKey, _taskId) {
-        var html = ""
-        if (_approveStatus == approve_status_new || _approveStatus == approve_status_reject) {
-            html = "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:" + saveFun + "'>保存</button></div>";
-            html + "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss('" + _businessKey + "','" + _taskId + "'>提交</button></div>";
-        }
-        else if (_approveStatus == approve_status_undo) {
-            html = "<div class='col-xs-offset-6 col-xs-9'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss('" + _businessKey + "','" + _taskId + "'>审核</button></div>";
-        }
-        $("#projectBtnInfo").empty().html(html);
-    }
-
-    function approveBuss(_businessKey, _taskId) {
-        bootbox.alert("提交_businessKey:" + _businessKey + ",_taskId:" + _taskId);
-    }
-
-    function submitBuss(_businessKey, _taskId) {
-        bootbox.alert("审核_businessKey:" + _businessKey + ",_taskId:" + _taskId);
-    }
-
+    
     $.saveProjectItem = saveProject;
-    $.showHandleBtn = showHandleBtn;
-    $.approveBuss = approveBuss;
-    $.submitBuss = submitBuss;
-
 }());

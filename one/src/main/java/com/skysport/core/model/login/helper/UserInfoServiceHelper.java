@@ -6,12 +6,17 @@ import com.skysport.core.utils.SecurityUtil;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 说明:
  * Created by zhangjh on 2015/12/3.
  */
-public class UserInfoServiceHelper {
+public enum UserInfoServiceHelper {
+    SINGLETONE;
     protected transient static Log logger = LogFactory.getLog(UserInfoServiceHelper.class);
 
     /**
@@ -20,7 +25,7 @@ public class UserInfoServiceHelper {
      * @param userInDB
      * @return
      */
-    public static boolean isUserUnlocked(UserInfo userInDB) {
+    public boolean isUserUnlocked(UserInfo userInDB) {
         return WebConstants.USER_IS_UNLOCK == Integer.parseInt(userInDB.getLockFlag());
     }
 
@@ -32,11 +37,22 @@ public class UserInfoServiceHelper {
      * @return
      * @throws Exception
      */
-    public static boolean isPwdRight(UserInfo userInDB, String password) throws Exception {
+    public boolean isPwdRight(UserInfo userInDB, String password) throws Exception {
         String pwd = SecurityUtil.encrypt(password);
-        logger.info("=========ecpwd======================>" + pwd);
         return pwd.equals(userInDB.getPassword());
     }
 
 
+    public ModelAndView toLoginPage() {
+        return new ModelAndView("login");
+    }
+
+
+    public ModelAndView toMainPage(UserInfo userInfo) {
+        ModelAndView mav = new ModelAndView("main");
+        Map<String, Object> result = new HashMap<>();
+        result.put("username", userInfo.getAliases());
+        mav.addAllObjects(result);
+        return mav;
+    }
 }

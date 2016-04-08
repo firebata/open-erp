@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<%=path%>/resources/js/typeahead-bs2.min.js"></script>
 <script type="text/javascript" src="<%=path%>/resources/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="<%=path%>/resources/js/ace.all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/example.js"></script>
 <script type="text/javascript">
   var path = '<%=path%>';
   //    $.cookie('path',path)_;

@@ -10,12 +10,16 @@
     var selectURL = path + "/system/userinfo/select";
     var queryAllRoleURL = path + "/system/permission/queryAllRole/";
     $.extend({
-        reloadRoleUser: reloadRoleUser
+        queryAnInitRoleUser: queryAnInitRoleUser
     });
 
-    $(function () {
-        reloadRoleUser();
+    function loadRoleUser(){
 
+    }
+
+    $(function () {
+
+        queryAnInitRoleUser();
         $("#saveRoleUserBtn").on("click", saveRoleUser);
         $("#userId").on("change", changeUser);
 
@@ -49,7 +53,8 @@
 
     function changeUser() {
         var userId = $(this).val();
-        $.sendJsonAjax(queryAllRoleURL + userId, {}, initZTree);
+        initZTreeByUserId(userId);
+
     }
 
 
@@ -76,7 +81,7 @@
     /**
      * 查询用户信息
      */
-    function reloadRoleUser() {
+    function queryAnInitRoleUser() {
 
         $.sendJsonAjax(selectURL, {}, initUserInfo);
 
@@ -96,9 +101,17 @@
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(userId));
         });
         var userId = 'null';
-        $.sendJsonAjax(queryAllRoleURL + userId, {}, initZTree);
+
+        initZTreeByUserId(userId);
     }
 
+    /**
+     * 根据用户id查询角色
+     * @param userId
+     */
+    function initZTreeByUserId(userId){
+        $.sendJsonAjax(queryAllRoleURL + userId, {}, initZTree);
+    }
 
     /**
      * 初始化角色树

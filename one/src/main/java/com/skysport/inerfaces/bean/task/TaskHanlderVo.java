@@ -14,6 +14,7 @@ public class TaskHanlderVo {
     private String urlPass;
     private String urlReject;
     private String urlSumit;
+    private String urlSave;
 
     public String getTaskDefineKey() {
         return taskDefineKey;
@@ -77,5 +78,13 @@ public class TaskHanlderVo {
 
     public void setUrlSumit(String urlSumit) {
         this.urlSumit = urlSumit;
+    }
+
+    public String getUrlSave() {
+        return urlSave;
+    }
+
+    public void setUrlSave(String urlSave) {
+        this.urlSave = urlSave;
     }
 }

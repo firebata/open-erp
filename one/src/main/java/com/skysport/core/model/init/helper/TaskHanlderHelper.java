@@ -57,7 +57,7 @@ public enum TaskHanlderHelper {
                 vo.setUrlSumit(child.elementText("urlSumit").replaceAll("\\s", ""));
                 vos.add(vo);
             } catch (Exception e) {
-                logger.error("catch one exception when parsing task-handle.xml ", e);
+                logger.error("catch one exception when parsing task-handle.xml ");
             }
         }
         return vos;

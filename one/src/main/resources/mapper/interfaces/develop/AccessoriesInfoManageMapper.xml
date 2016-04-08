@@ -28,7 +28,7 @@
     </sql>
 
     <select id="queryInfo" resultType="AccessoriesInfo">
-        select
+        SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_accessories
         WHERE accessories_id =#{natrualkey}
@@ -43,10 +43,10 @@
     <select id="listFilteredInfosCounts" resultType="Integer">
         SELECT COUNT(*) FROM t_kf_accessories where del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
-            accessories_name like concat('%',#{searchValue},'%') or
-            sp_id like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            AND (
+            accessories_name LIKE concat('%',#{searchValue},'%') or
+            sp_id LIKE concat('%',#{searchValue},'%') or
+            remark LIKE concat('%',#{searchValue},'%')
             )
         </if>
     </select>
@@ -58,10 +58,10 @@
         FROM t_kf_accessories
         WHERE del_flag=0
         <if test="searchValue!=null and searchValue != ''">
-            and (
-            accessories_name like concat('%',#{searchValue},'%') or
-            sp_id like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            AND (
+            accessories_name LIKE concat('%',#{searchValue},'%') or
+            sp_id LIKE concat('%',#{searchValue},'%') or
+            remark LIKE concat('%',#{searchValue},'%')
             )
         </if>
         <if test="orderColumn!=null and orderColumn != ''">
@@ -71,9 +71,9 @@
     </select>
 
     <update id="updateInfo">
-        update
+        UPDATE
             t_kf_accessories
-        set
+        SET
             accessories_name = #{accessoriesName},
             material_type_id = #{materialTypeId},
             classic_id = #{classicId},
@@ -95,9 +95,9 @@
 
 
     <update id="updateDosage">
-	  	update
+	  	UPDATE
 			t_kf_material_unit_dosage
-        set
+        SET
 			unit_id = #{unitId},
 			unit_amount = #{unitAmount}
         WHERE
@@ -105,9 +105,9 @@
     </update>
 
     <update id="updateSp">
- 	    update
+ 	    UPDATE
 			t_kf_material_spinfo
-        set
+        SET
 			order_count = #{orderCount},
 			attrition_rate = #{attritionRate},
 			unit_price = #{unitPrice},
@@ -118,26 +118,26 @@
     </update>
 
     <insert id="add">
-        insert into  t_kf_accessories (accessories_id,accessories_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width)
-        values (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width})
+        INSERT INTO  t_kf_accessories (accessories_id,accessories_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width)
+        VALUES (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width})
     </insert>
 
     <insert id="addDosage">
-     insert into t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
-      values (#{materialId},#{unitId},#{unitAmount});
+     INSERT INTO t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
+      VALUES (#{materialId},#{unitId},#{unitAmount});
     </insert>
 
 
     <insert id="addSp">
-     insert into t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price)
-      values (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice});
+     INSERT INTO t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price)
+      VALUES (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice});
     </insert>
 
 
     <update id="del">
-        update t_kf_accessories
-        set  del_flag=1
-        where accessories_id =#{natrualkey}
+        UPDATE t_kf_accessories
+        SET  del_flag=1
+        WHERE accessories_id =#{natrualkey}
     </update>
 
 
@@ -145,29 +145,29 @@
       SELECT accessories_id
       FROM t_kf_accessories a
       WHERE a.bom_id = #{natrualkey}
-      and   del_flag=0
+      AND   del_flag=0
     </select>
 
 
     <delete id="deleteAccessoriesByIds" parameterType="String">
-        DELETE from t_kf_accessories
-        where accessories_id IN
+        DELETE FROM t_kf_accessories
+        WHERE accessories_id IN
         <foreach item="idItem" collection="list" open="(" separator="," close=")">
             #{idItem}
         </foreach>
     </delete>
 
     <update id="delDosage">
-        update t_kf_material_unit_dosage
-        set  del_flag=1
-        where material_id =#{natrualkey}
+        UPDATE t_kf_material_unit_dosage
+        SET  del_flag=1
+        WHERE material_id =#{natrualkey}
     </update>
 
 
     <update id="delSp">
-        update t_kf_material_spinfo
-        set  del_flag=1
-        where accessories_id =#{natrualkey}
+        UPDATE t_kf_material_spinfo
+        SET  del_flag=1
+        WHERE accessories_id =#{natrualkey}
     </update>
 
 

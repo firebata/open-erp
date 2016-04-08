@@ -1,50 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tasks>
     <task taskDefineKey="approveProjectItem" name="经理审核子项目">
-        <businessController>
-            projectItemAction
-        </businessController>
-        <businessService>
-            projectItemManageService
-        </businessService>
-        <urlInfo>
-            /development/project_item/add/
-        </urlInfo>
-        <urlPass>
-            /development/project_item/pass/
-        </urlPass>
+        <businessController>projectItemAction</businessController>
+        <businessService>projectItemManageService</businessService>
+        <urlInfo>/development/project_item/add/</urlInfo>
+        <urlPass>/development/project_item/pass/</urlPass>
         <urlReject>/development/project_item/reject/</urlReject>
         <urlSumit>/development/project_item/submit/</urlSumit>
     </task>
 
     <task taskDefineKey="updateProjectItem" name="开发员修改子项目">
-        <businessController>
-            projectItemAction
-        </businessController>
-        <businessService>
-            projectItemManageService
-        </businessService>
-        <urlInfo>
-            /development/project_item/add/
-        </urlInfo>
-        <urlPass>
-            /development/project_item/reject/
-        </urlPass>
-        <urlSumit>
-            /development/project_item/submit/
-        </urlSumit>
+        <businessController>projectItemAction</businessController>
+        <businessService>projectItemManageService</businessService>
+        <urlInfo>/development/project_item/add/</urlInfo>
+        <urlPass>/development/project_item/reject/</urlPass>
+        <urlSumit>/development/project_item/submit/</urlSumit>
+        <urlSave>/development/project_item/new/</urlSave>
     </task>
 
     <task taskDefineKey="approveSingleBom" name="审核BOM信息">
-        <businessController>
-
-        </businessController>
-        <businessService>
-
-        </businessService>
-        <urlInfo>
-
-        </urlInfo>
+        <businessController></businessController>
+        <businessService></businessService>
+        <urlInfo></urlInfo>
     </task>
 
     <task taskDefineKey="updateSingleBom" name="修改单个BOM">

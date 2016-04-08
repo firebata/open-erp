@@ -35,4 +35,6 @@ public interface IProjectItemManageService extends ICommonService<ProjectBomInfo
     void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
 
     void delSexColorInfoByBomInfo(BomInfo info);
+
+
 }

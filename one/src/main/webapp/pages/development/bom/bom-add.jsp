@@ -6,14 +6,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>修改BOM信息</title>
-    <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/headResources.jsp"></jsp:include>
+    <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <script language="javascript" type="text/javascript"
-            src="<%=path%>/resources/My97DatePicker/WdatePicker.js"></script>
-    <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
-    <link rel="stylesheet" href="<%=path%>/resources/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"       id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -238,8 +233,6 @@
     </div>
     <%--<%@ include file="../../system/material/bom-material-list.jsp" %>--%>
 </div>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
-<jsp:include page="../../base/aceFoot.jsp"></jsp:include>
 <%@ include file="bom-fabric.jsp" %>
 <%@ include file="bom-accessories.jsp" %>
 <%@ include file="bom-packaging.jsp" %>
@@ -248,17 +241,13 @@
 
 
 </html>
+<jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>

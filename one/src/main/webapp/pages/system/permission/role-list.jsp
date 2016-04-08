@@ -21,7 +21,6 @@
         <!-- Button trigger modal -->
     </div>
 </div>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->
 <script id="roleInfotpl" type="text/x-handlebars-template">
     {{#each func}}

@@ -169,9 +169,29 @@ public class TaskAction extends BaseAction<TaskVo> {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String taskDefinitionKey = task.getTaskDefinitionKey();
         String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlInfo();
-        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        ModelAndView mav = new ModelAndView("forward:" + url + "/" + businessKey);
         return mav;
     }
+
+
+    /**
+     * 此方法描述的是：保存
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/save/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "保存业务信息")
+    public ModelAndView save(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        request.setAttribute("taskId", taskId);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String taskDefinitionKey = task.getTaskDefinitionKey();
+        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlSave();
+        ModelAndView mav = new ModelAndView("forward:" + url + "/" + taskId + "/" + businessKey);
+        return mav;
+    }
+
 
     /**
      * 此方法描述的是：表单提交
@@ -179,15 +199,15 @@ public class TaskAction extends BaseAction<TaskVo> {
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
-    @RequestMapping(value = "/sumit/{taskId}/{businessKey}")
+    @RequestMapping(value = "/submit/{taskId}/{businessKey}")
     @ResponseBody
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
-    public ModelAndView sumit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+    public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
         request.setAttribute("taskId", taskId);
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String taskDefinitionKey = task.getTaskDefinitionKey();
         String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlSumit();
-        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        ModelAndView mav = new ModelAndView("forward:" + url + "/" + taskId + "/" + businessKey);
         return mav;
     }
 
@@ -206,9 +226,10 @@ public class TaskAction extends BaseAction<TaskVo> {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String taskDefinitionKey = task.getTaskDefinitionKey();
         String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlPass();
-        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        ModelAndView mav = new ModelAndView("forward:" + url + "/" + taskId + "/" + businessKey);
         return mav;
     }
+
 
     /**
      * 此方法描述的是：驳回
@@ -224,7 +245,7 @@ public class TaskAction extends BaseAction<TaskVo> {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String taskDefinitionKey = task.getTaskDefinitionKey();
         String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlReject();
-        ModelAndView mav = new ModelAndView("forward:" + url + businessKey);
+        ModelAndView mav = new ModelAndView("forward:" + url + "/" + taskId + "/" + businessKey);
         return mav;
     }
 

@@ -15,18 +15,18 @@
         dept_id AS deptTypeId
     </sql>
     <select id="queryInfo" resultType="RoleInfo">
-        select
-        <include refid="searchInfoSql"/>
+        SELECT
+          <include refid="searchInfoSql"/>
         FROM t_qx_role
         WHERE role_id =#{natrualkey}
         limit 1
     </select>
 
     <select id="queryParentId">
-        select parent_id
-        from t_qx_role
-         WHERE role_id =#{groupId}
-         where del_flag=0
+        SELECT parent_id
+        FROM t_qx_role
+        WHERE role_id =#{groupId}
+         AND del_flag=0
             limit 1
     </select>
 
@@ -35,7 +35,7 @@
         SELECT
           COUNT(*)
         FROM
-          t_qx_role where del_flag=0
+          t_qx_role WHERE del_flag=0
     </select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
@@ -43,11 +43,11 @@
         COUNT(*)
         FROM
         t_qx_role
-        where del_flag=0
+        WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
-            role_name like concat('%',#{searchValue},'%') or
-            role_desc like concat('%',#{searchValue},'%')
+            AND (
+            role_name LIKE concat('%',#{searchValue},'%') or
+            role_desc LIKE concat('%',#{searchValue},'%')
             )
         </if>
 
@@ -73,8 +73,8 @@
     </select>
 
     <update id="updateInfo">
-        update t_qx_role
-        set
+        UPDATE t_qx_role
+        SET
           role_desc=#{roleDesc},
           remark=#{remark},
           role_name=#{name},
@@ -85,32 +85,32 @@
     </update>
 
     <insert id="add">
-        insert
-        into
+        INSERT
+        INTO
             t_qx_role (role_id,role_name,role_desc,remark,parent_id,dept_id)
-        values
+        VALUES
            (#{natrualkey},#{name},#{roleDesc},#{remark},#{parentId},#{deptTypeId})
     </insert>
 
     <update id="del">
-        update t_qx_role
-        set  del_flag=1
-        where role_id =#{natrualkey}
+        UPDATE t_qx_role
+        SET  del_flag=1
+        WHERE role_id =#{natrualkey}
     </update>
 
 
     <select id="queryCurrentSeqNo" resultType="String">
-        select case when role_id is NULL then 0 else role_id end from t_qx_role    ORDER BY id DESC LIMIT 1
+        SELECT CASE WHEN role_id IS NULL THEN 0 ELSE role_id END FROM t_qx_role    ORDER BY id DESC LIMIT 1
     </select>
 
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
-        select
+        SELECT
         role_id AS natrualkey,
         role_name AS name
-        from t_qx_role
-        where del_flag=0
-        <if test="name!=null and name!=''">and upper(role_name) like concat('%',#{name},'%')</if>
+        FROM t_qx_role
+        WHERE del_flag=0
+        <if test="name!=null and name!=''"> AND upper(role_name) LIKE concat('%',#{name},'%')</if>
     </select>
 
 

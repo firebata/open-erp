@@ -176,5 +176,11 @@ public interface WebConstants extends TableNameConstants {
     String APPROVE_STATUS_APPROVED = "4";//审核通过
     String APPROVE_STATUS_OTHER = "5";//其他
 
+    String SYSTEM_ENVIRONMENT = "system_environment";//软件产品环境
+    String SYSTEM_ENVIRONMENT_CURRENT = "current";//当前软件产品环境
+    String SDE = "sde";//开发环境
+    String STE = "ste";//测试环境
+    String SPE = "spe";//生产环境
+
 
 }

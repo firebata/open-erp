@@ -4,7 +4,8 @@
 (function ($) {
     "use strict";
     $.extend({
-        roleinfo: roleinfo
+        roleinfo: roleinfo,
+        loadRoleList:loadRoleList
     });
     var path = $.basepath();
     var searchUrl = path + "/system/roleinfo/search";
@@ -18,15 +19,13 @@
         {"data": null}
     ];
 
-    var table;
-    $(function () {
-
+    var $table;
+    function loadRoleList(){
         var tpl = $("#roleInfotpl").html();
         //预编译模板
         var template = Handlebars.compile(tpl);
         var indexOpreation = columnsName.length - 1;
-
-        table = $('#roleInfoExample').DataTable({
+         $table = $('#roleInfoExample').DataTable({
             ajax: {
                 url: searchUrl
             },
@@ -74,6 +73,12 @@
             roleinfo(roleId);
         })
 
+
+    }
+
+
+    $(function () {
+        loadRoleList();
     });
 
     function roleinfo(roleId) {

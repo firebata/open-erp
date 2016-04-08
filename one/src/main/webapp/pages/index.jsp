@@ -10,7 +10,7 @@
 
 <script language="javascript" type="text/javascript">
     // 以下方式直接跳转
-    window.location.href = 'pages/login.jsp';
+    window.location.href = 'index';
 </script>
 </body>
 </html>

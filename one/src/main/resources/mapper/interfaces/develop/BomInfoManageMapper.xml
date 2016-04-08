@@ -76,7 +76,7 @@
 
 
     <select id="queryInfo" resultType="BomInfo">
-        select
+        SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_bominfo a
         WHERE a.bom_id =#{natrualkey}
@@ -86,21 +86,21 @@
 
     <select id="listInfosCounts" resultType="Integer">
 		SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
+        WHERE a.del_flag=0 AND a.project_id=b.project_id AND b.del_flag=0
 	</select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
         SELECT COUNT(*) FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
+        WHERE a.del_flag=0 and a.project_id=b.project_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
-            and a.project_id like concat('%',#{bomInfo.projectId},'%')
+            AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
-            and (
-            a.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            b.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            a.remark like concat('%',#{dataTablesInfo.searchValue},'%') or
-            b.remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            AND (
+            a.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%') or
+            b.project_name LIKE concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.remark LIKE concat('%',#{dataTablesInfo.searchValue},'%') or
+            b.remark LIKE concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
     </select>
@@ -110,16 +110,16 @@
         SELECT
         <include refid="searchInfoSql2"/>
         FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 and a.project_id=b.project_id and b.del_flag=0
+        WHERE a.del_flag=0 AND a.project_id=b.project_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
-            and a.project_id like concat('%',#{bomInfo.projectId},'%')
+            AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
-            and (
-            a.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            b.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
-            a.remark like concat('%',#{dataTablesInfo.searchValue},'%') or
-            b.remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            AND (
+            a.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%') OR
+            b.project_name LIKE concat('%',#{dataTablesInfo.searchValue},'%') OR
+            a.remark LIKE concat('%',#{dataTablesInfo.searchValue},'%') OR
+            b.remark LIKE concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
         <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
@@ -130,9 +130,9 @@
     </select>
 
     <update id="updateInfo">
-		update
+		UPDATE
 			t_kf_bominfo
-		set
+		SET
 		    <if test="mainColor!=null and mainColor!=''">
                 main_color=#{mainColor},
             </if>
@@ -147,90 +147,90 @@
 	</update>
 
     <insert id="addBatch" parameterType="list">
-        insert into
+        INSERT INTO
         t_kf_bominfo
         (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
-        values
+        VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.projectId},#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
         </foreach>
     </insert>
 
     <insert id="add">
-		insert into
+		INSERT INTO
 		    t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
-		values (#{projectId},#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
+		VALUES (#{projectId},#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
 	</insert>
 
     <select id="selectAllBomSexAndMainColor" resultType="BomInfo">
         SELECT
         <include refid="searchInfoSql"/>
-        from
+        FROM
         t_kf_bominfo a
-        where a.project_id= #{projectId} and a.del_flag =0
+        WHERE a.project_id= #{projectId} AND a.del_flag =0
     </select>
 
     <update id="del">
-		update t_kf_bominfo
-		set  del_flag=1
-		where bom_id =#{natrualkey}
+		UPDATE t_kf_bominfo
+		SET  del_flag=1
+		WHERE bom_id =#{natrualkey}
 	</update>
 
 
     <update id="delDetail">
-		update t_kf_fabrics_detail
-		set  del_flag=1
-		where bom_id =#{natrualkey}
+		UPDATE t_kf_fabrics_detail
+		SET  del_flag=1
+		WHERE bom_id =#{natrualkey}
 	</update>
 
     <update id="delDosage">
-		update t_kf_material_unit_dosage
-		set  del_flag=1
-		where material_id =#{natrualkey}
+		UPDATE t_kf_material_unit_dosage
+		SET  del_flag=1
+		WHERE material_id =#{natrualkey}
 	</update>
 
     <update id="delSp">
-		update t_kf_material_spinfo
-		set  del_flag=1
-		where material_id =#{natrualkey}
+		UPDATE t_kf_material_spinfo
+		SET  del_flag=1
+		WHERE material_id =#{natrualkey}
 	</update>
 
 
     <select id="queryCurrentSeqNo" resultType="String">
-		select case when  bom_id is NULL then 0 else bom_id end from t_kf_bominfo   ORDER BY id DESC LIMIT 1
+		SELECT CASE WHEN  bom_id IS NULL THEN 0 ELSE bom_id END FROM t_kf_bominfo   ORDER BY id DESC LIMIT 1
 	</select>
 
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
-		select
+		SELECT
 			bom_id AS natrualkey,
 			bom_name AS name
-		from t_kf_bominfo
-		where del_flag=0 and bom_name like concat('%',#{name},'%')
+		FROM t_kf_bominfo
+		WHERE del_flag=0 AND bom_name LIKE concat('%',#{name},'%')
 	</select>
 
 
     <delete id="delByProjectId">
-		update t_kf_bominfo
-		set  del_flag=1
-		where project_id =#{projectId}
+		UPDATE t_kf_bominfo
+		SET  del_flag=1
+		WHERE project_id =#{projectId}
 	</delete>
 
     <select id="queryBomInfosByProjectItemIds" resultType="BomInfo">
-        select
+        SELECT
         <include refid="searchInfoSql3"/>
         FROM t_kf_bominfo a,t_jc_series b
-        WHERE a.del_flag=0 and a.series_id=b.series_id and b.del_flag=0 and project_id IN
+        WHERE a.del_flag=0 AND a.series_id=b.series_id AND b.del_flag=0 AND project_id IN
         <foreach item="idItem" collection="list" open="(" separator="," close=")">
             #{idItem}
         </foreach>
     </select>
 
     <select id="queryBomIds" resultType="String">
-        select
+        SELECT
         bom_id AS bomId
-        from t_kf_bominfo
-        where del_flag=0 and project_id IN
+        FROM t_kf_bominfo
+        WHERE del_flag=0 AND project_id IN
         <foreach item="idItem" collection="list" open="(" separator="," close=")">
             #{idItem}
         </foreach>
@@ -238,16 +238,16 @@
 
 
     <delete id="delBomNotInThisIds">
-        update t_kf_bominfo set del_flag =1
-        where bom_id NOT IN
+        UPDATE t_kf_bominfo SET del_flag =1
+        WHERE bom_id NOT IN
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item.natrualkey}
         </foreach>
     </delete>
 
     <delete id="delBomInThisIds">
-        update t_kf_bominfo set del_flag =1
-        where bom_id IN
+        UPDATE t_kf_bominfo SET del_flag =1
+        WHERE bom_id IN
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item.natrualkey}
         </foreach>

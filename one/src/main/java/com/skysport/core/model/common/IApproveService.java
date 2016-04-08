@@ -30,5 +30,5 @@ public interface IApproveService {
      */
     void submit(String businessKey);
 
-
+    void submit(String taskId, String businessKey);
 }

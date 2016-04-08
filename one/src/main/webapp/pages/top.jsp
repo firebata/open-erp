@@ -22,7 +22,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="javascript:clickMenu('pages/content.jsp')" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
                     SkySport Supply Chain Management

@@ -2,4 +2,5 @@
 <%
     String path = request.getContextPath();
     String version = SystemInitHelper.SINGLETONE.getVersion();
+    String environment_current = SystemInitHelper.SINGLETONE.getEnvironment();
 %>

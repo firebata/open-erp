@@ -14,7 +14,7 @@
 
     </sql>
     <select id="queryMainColorList" resultType="MainColor">
-        select
+        SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_project_item_main_colors
         WHERE del_flag =0 and project_id =#{projectId}
@@ -23,8 +23,8 @@
 
     <insert id="add" parameterType="list">
         <if test="list!= null and list.size()>0">
-            insert into
-            t_kf_project_item_main_colors (project_id,project_name,main_color,remark) values
+            INSERT INTO
+            t_kf_project_item_main_colors (project_id,project_name,main_color,remark) VALUES
             <foreach collection="list" item="item" index="index" separator="," >
                 (#{item.projectId},#{item.projectName},#{item.mainColorName},#{item.remark})
             </foreach>
@@ -33,7 +33,7 @@
     </insert>
 
     <delete id="delete">
-        update t_kf_project_item_main_colors set del_flag =1  WHERE del_flag =0 and project_id =#{projectId};
+        UPDATE t_kf_project_item_main_colors SET del_flag =1  WHERE del_flag =0 AND project_id =#{projectId};
     </delete>
 
 </mapper>

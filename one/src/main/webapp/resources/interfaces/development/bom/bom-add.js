@@ -187,7 +187,9 @@
                     }
                 }
             })
-
+        }
+        else{
+            toSaveBomInfo(needToLisPage);
         }
 
 

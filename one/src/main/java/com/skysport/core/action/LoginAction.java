@@ -2,6 +2,7 @@ package com.skysport.core.action;
 
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.core.model.login.helper.UserInfoServiceHelper;
 import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.core.utils.UserUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,21 @@ public class LoginAction {
 
     @Resource(name = "loginService")
     private ILoginService loginService;
+
+
+    @RequestMapping(value = "/index")
+    @ResponseBody
+    @SystemControllerLog(description = "首页")
+    public ModelAndView index(HttpSession session) throws Exception {
+        UserInfo userInfo = UserUtils.getUserFromSession(session);
+        if (userInfo == null) {
+            return UserInfoServiceHelper.SINGLETONE.toLoginPage();
+        } else {
+            return UserInfoServiceHelper.SINGLETONE.toMainPage(userInfo);
+        }
+
+    }
+
 
     /**
      * 1，用户名，如果session存在该用户，执行2，否则执行3

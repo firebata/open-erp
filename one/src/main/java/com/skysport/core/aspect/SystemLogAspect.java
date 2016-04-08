@@ -50,7 +50,7 @@ public class SystemLogAspect {
     }
 
     /**
-     * 前置通知 用于拦截Controller层记录用户的操作
+     * 用于拦截Controller层记录用户的操作
      *
      * @param joinPoint 切点
      */
@@ -78,9 +78,9 @@ public class SystemLogAspect {
                 username = user.getAliases();
             }
 
-            logger.info("=====前置通知开始=====");
-            logger.info("请求方法:" + method);
-            logger.info("方法描述:" + description);
+            logger.debug("=====前置通知开始=====");
+            logger.debug("请求方法:" + method);
+            logger.debug("方法描述:" + description);
             logger.info("请求人:" + username);
             logger.info("请求IP:" + ip);
             //*========数据库日志=========*//
@@ -97,12 +97,10 @@ public class SystemLogAspect {
 //            log.setCreateDate(DatesUtil.getCurrentDate());
             //保存数据库
             logService.add(log);
-            logger.info("=====前置通知结束=====");
+            logger.debug("=====前置通知结束=====");
         } catch (Exception e) {
             //记录本地异常日志
-            logger.error("==前置通知异常==");
             logger.error("异常信息:{}", e.getMessage());
-            logger.error(e.getMessage(), e);
         }
     }
 

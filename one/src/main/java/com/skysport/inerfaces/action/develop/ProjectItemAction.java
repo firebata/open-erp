@@ -76,7 +76,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "新增子项目")
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
-        String taskId = request.getParameter("taskId");
+        String taskId = (String) request.getAttribute("taskId");
         ModelAndView mav = new ModelAndView("/development/project/project-item-add");
         mav.addObject("natrualkey", natrualKey);
         mav.addObject("taskId", taskId);
@@ -218,6 +218,20 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
         List<SelectItem2> commonBeans = projectItemManageService.querySelectList(name);
         return rtSelectResultMap(commonBeans);
 
+    }
+
+    /**
+     * 此方法描述的是：表单提交
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/submit/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public Map<String, Object> submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        projectItemManageService.submit(taskId,businessKey);
+        return rtnSuccessResultMap("提交审核成功");
     }
 
 }

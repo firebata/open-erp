@@ -27,6 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         IGNORE_URIS.add("/loginout");
         IGNORE_URIS.add("/index.jsp");
         IGNORE_URIS.add("/system/permission/qrMenu");
+        IGNORE_URIS.add("/index");
     }
 
     @Override
@@ -48,7 +49,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                 request.getRequestDispatcher("/page/index.jsp").forward(request, response);
                 return false;
             } else {
-
                 //鉴定用户是否具有权限
                 return true;
             }

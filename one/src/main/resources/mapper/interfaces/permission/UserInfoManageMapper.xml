@@ -56,28 +56,28 @@
     </select>
 
     <select id="queryInfoByUserInfoName" resultType="UserInfo">
-        select
+        SELECT
           <include refid="searchInfoSql"/>
         FROM t_qx_user t LEFT JOIN t_sys_file_records n
         ON t.user_id = n.buss_id
-        and n.status=1
-        and n.del_flag=0
-        WHERE t.user_name =#{userName} and t.del_flag=0
+        AND n.status=1
+        AND n.del_flag=0
+        WHERE t.user_name =#{userName} AND t.del_flag=0
         limit 1
     </select>
 
 
     <select id="listInfosCounts" resultType="Integer">
         SELECT COUNT(*) FROM
-        t_qx_user t where del_flag=0
+        t_qx_user t WHERE del_flag=0
     </select>
 
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_qx_user t where del_flag=0
+        SELECT COUNT(*) FROM t_qx_user t WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
-            user_name like concat('%',#{searchValue},'%') or
-            user_email like concat('%',#{searchValue},'%')
+            AND (
+            user_name LIKE concat('%',#{searchValue},'%') OR
+            user_email LIKE concat('%',#{searchValue},'%')
             )
         </if>
 
@@ -89,9 +89,9 @@
         FROM t_qx_user t
         WHERE del_flag=0
         <if test="searchValue !=null and searchValue != ''">
-            and (
-            user_name like concat('%',#{searchValue},'%') or
-            user_email like concat('%',#{searchValue},'%')
+            AND (
+            user_name LIKE concat('%',#{searchValue},'%') OR
+            user_email LIKE concat('%',#{searchValue},'%')
             )
         </if>
         <if test="orderColumn!=null and orderColumn != ''">
@@ -101,8 +101,8 @@
     </select>
 
     <update id="updateInfo">
-        update t_qx_user t
-        set
+        UPDATE t_qx_user t
+        SET
         aliases=#{aliases},
         user_email=#{userEmail},
         remark=#{remark},
@@ -111,15 +111,15 @@
     </update>
 
     <insert id="add">
-        insert into
+        INSERT INTO
         t_qx_user t (user_id,user_name,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
-        values (#{natrualkey},#{name},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
+        VALUES (#{natrualkey},#{name},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
     </insert>
 
     <update id="del">
-        update t_qx_user t
-        set  del_flag=1
-        where user_id =#{natrualkey}
+        UPDATE t_qx_user t
+        SET  del_flag=1
+        WHERE user_id =#{natrualkey}
     </update>
 
 

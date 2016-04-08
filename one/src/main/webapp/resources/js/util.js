@@ -5,7 +5,9 @@
  */
 (function ($) {
     "use strict";
-
+    var passTaskURL = getContextPath() + "/task/pass";
+    var rejectTaskURL = getContextPath() + "/task/reject";
+    var submitBussURL = getContextPath() + "/task/submit";
     //扩展常用方法
     $.extend({
         sendRestFulAjax: sendRestFulAjax,//ajax
@@ -22,19 +24,24 @@
         loadFileInput: loadFileInput,//初始化文件上传插件内容
         fileInputAddListenr: fileInputAddListenr,//上传插件动作监控
         buildUploadedFileInfos: buildUploadedFileInfos,//已上传的文件信息
-        delTableRecord: delTableRecord
+        delTableRecord: delTableRecord,
+        approveBuss: approveBuss,
+        submitBuss: submitBuss,
+        saveBuss: saveBuss,
+        showHandleBtn: showHandleBtn
     });
-
 
     $.fn.extend({
         arrayVal: arrayVal,//返回模糊查询的数组值
     });
 
-
     function getContextPath() {
-        var pathName = document.location.pathname;
-        var index = pathName.substr(1).indexOf("/");
-        var result = pathName.substr(0, index + 1);
+        var result = "";
+        if (spe != environment_current) {
+            var pathName = document.location.pathname;
+            var index = pathName.substr(1).indexOf("/");
+            result = pathName.substr(0, index + 1);
+        }
         return result;
     }
 
@@ -78,14 +85,12 @@
         });
     }
 
-
     Array.prototype.contains = function (needle) {
         for (var i in this) {
             if (this[i] == needle) return true;
         }
         return false;
     }
-
 
     /**
      *
@@ -134,6 +139,7 @@
         //console.error(XMLHttpRequest);
         bootbox.alert("本次操作失败.");
     }
+
     var doSucess = function (XMLHttpRequest, textStatus, errorThrown) {
         //bootbox.alert(XMLHttpRequest);
     }
@@ -144,13 +150,11 @@
      * @returns {Object}  Json
      */
     function strToJson(str) {
-
         str = str.replace(/&/g, "','");
         str = str.replace(/=/g, "':'");
         str = "({'" + str + "'})";
         var obj = eval(str);
         return obj;
-
     }
 
     /**
@@ -159,9 +163,7 @@
      * @returns {boolean}
      */
     function strIsEmpty(input) {
-
         return input == undefined || input == null || $.trim(input) == '';
-
     }
 
     function isFun(input) {
@@ -174,9 +176,7 @@
      * @returns {boolean}
      */
     function strIsNotEmpty(input) {
-
         return !strIsEmpty(input);
-
     }
 
     /**
@@ -184,7 +184,6 @@
      * @param _data 表单对象
      */
     function initSelect2sByArr($element, items) {
-
         for (var idx = 0; idx < items.length; idx++) {
             var item = items[idx];
             var option = new Option(item.text, item.id, true, true);
@@ -199,7 +198,6 @@
      * @param _data 表单对象
      */
     function initSelect2s(_fieldId, _id, _name, _data) {
-
         if (_fieldId == null || _id == null || _name == null || _data == null) {
             console.error("init select2 error:_id or _name is null or undefined");
             return;
@@ -248,8 +246,6 @@
      * @param _templateResult 选中的txt做进一步修饰，如增加颜色等
      */
     function select2s($element, _url, _placeholder, _searchInputPlaceholder, _queryInitData, _templateResult) {
-
-
         if (_url == null) {
             console.error("the url or _selectClass is null or undefined");
             return;
@@ -310,7 +306,6 @@
      * @param f
      */
     function dealUploadedFile($fileListLi, initialPreviewConfig, callback) {
-
         for (var idx = 0; idx < initialPreviewConfig.length; idx++) {
             $("#" + initialPreviewConfig[idx]['extra']['id']).remove();
             var ahref = '<li  id=\"' + initialPreviewConfig[idx]['extra']['id'] + '\"><a href=\"' + initialPreviewConfig[idx]['extra']['url'] + '\"  download=\"' + initialPreviewConfig[idx]["caption"] + '\" class=\"blue\" target=\"_blank\">' + initialPreviewConfig[idx]['caption'] + '</a></li>';
@@ -497,6 +492,73 @@
     })
 
     function beforeSend(xhr) {
-        console.log("ajax提交...");
+        // console.log("ajax提交...");
     }
+
+    function showHandleBtn($btnDIV, _approveStatus, saveFun, _businessKey, _taskId) {
+        if(null == _taskId){
+            _taskId ="null";
+        }
+        var html = ""
+        if (_approveStatus == approve_status_new || _approveStatus == approve_status_reject) {
+            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md' onclick='javascript:$.saveBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>暂存</button></div>";
+            html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>提交审核</button></div>";
+        }
+        else if (_approveStatus == approve_status_undo) {
+            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>审核</button></div>";
+        }
+        $btnDIV.html(html);
+    }
+
+
+    function approveBuss(_businessKey, _taskId) {
+        showApproveForms(_businessKey, _taskId);
+    }
+
+    function submitBuss(_businessKey, _taskId) {
+        window.location.href = submitBussURL + "/" + _taskId + "/" + _businessKey;
+        bootbox.alert("提交_businessKey:" + _businessKey + ",_taskId:" + _taskId);
+    }
+
+    function saveBuss(_businessKey, _taskId) {
+        bootbox.alert("保存_businessKey:" + _businessKey + ",_taskId:" + _taskId);
+
+    }
+
+
+    function showApproveForms(_businessKey, _taskId) {
+        bootbox.dialog({
+                title: "请输入审核意见.",
+                message: '<div class="row">  ' +
+                '<div class="col-md-12"> ' +
+                '<form class="form-horizontal"> ' +
+                '<div class="form-group"> ' +
+                '<label class="col-md-4 control-label" for="suggestion">意见</label> ' +
+                '<div class="col-md-4"> ' +
+                '<textarea id="suggestion" name="suggestion" type="text" placeholder="审核意见" class="form-control input-md"> ' +
+                ' </div> ' +
+                '</div> ' +
+                '</form> </div>  </div>',
+                buttons: {
+                    success: {
+                        label: "审核通过",
+                        className: "btn-success",
+                        callback: function () {
+                            var suggestion = $('#suggestion').val();
+                            Example.show("你选择了审核通过");
+                        }
+                    },
+                    danger: {
+                        label: "驳回",
+                        className: "btn-danger",
+                        callback: function () {
+                            var suggestion = $('#suggestion').val();
+                            Example.show("你选择了驳回");
+                        }
+                    }
+                }
+            }
+        );
+    }
+
 }(jQuery));

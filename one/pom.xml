@@ -46,6 +46,7 @@
 
     <dependencies>
 
+
         <!-- reCAPTCHA 验证码技术-->
         <dependency>
             <groupId>net.tanesha.recaptcha4j</groupId>

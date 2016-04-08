@@ -8,8 +8,7 @@
     <title>新增/修改项目信息</title>
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
-          id="main-ace-style"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"       id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -233,5 +232,4 @@
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/project/project-item-add.js"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/project/project-item-sexcolor.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/project/project-item-sexcolor.js"></script>

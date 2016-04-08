@@ -304,6 +304,15 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     }
 
     @Override
+    public void submit(String taskId, String businessKey) {
+        //启动流程
+        startWorkFlow(businessKey);
+
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+    }
+
+    @Override
     public void addBatch(List<ProjectBomInfo> infos) {
 
         super.addBatch(infos);

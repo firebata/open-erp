@@ -5,28 +5,28 @@
 <mapper namespace="com.skysport.inerfaces.mapper.permission.PermissionManageMapper">
 
     <delete id="delRoleInfoByUserId">
-            DELETE from t_qx_role_user where user_id =#{userId}
+            DELETE FROM t_qx_role_user WHERE user_id =#{userId}
         </delete>
 
     <update id="addBatchRoleUser">
-        insert into t_qx_role_user(user_id,role_id) values
+        INSERT INTO t_qx_role_user(user_id,role_id) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.userId},#{item.roleId})
         </foreach>
     </update>
 
     <select id="queryRoleUsers" resultType="com.skysport.core.bean.permission.RoleUser">
-      select role_id AS roleId,user_id AS userId    from t_qx_role_user where  user_id =#{userId}
+      SELECT role_id AS roleId,user_id AS userId    FROM t_qx_role_user WHERE  user_id =#{userId}
     </select>
 
 
     <delete id="delResourceInfoByRoleId">
-        DELETE from t_qx_role_resources where role_id =#{roleId}
+        DELETE FROM t_qx_role_resources WHERE role_id =#{roleId}
     </delete>
 
 
     <update id="addBatchResourceRole">
-        insert into t_qx_role_resources(role_id,resource_id) values
+        INSERT INTO t_qx_role_resources(role_id,resource_id) VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.roleId},#{item.resourceId})
         </foreach>
@@ -34,7 +34,7 @@
 
 
     <select id="queryResourceRoles" resultType="com.skysport.core.bean.permission.ResourceRole">
-        select resource_id AS resourceId,role_id AS roleId    from t_qx_role_resources where  role_id =#{roleId}
+        SELECT resource_id AS resourceId,role_id AS roleId    FROM t_qx_role_resources WHERE  role_id =#{roleId}
     </select>
 
 

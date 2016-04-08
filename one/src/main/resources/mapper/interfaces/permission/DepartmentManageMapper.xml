@@ -18,7 +18,7 @@
     </sql>
 
     <select id="queryInfo" resultType="DepartmentInfo">
-        select
+        SELECT
           <include refid="searchDepartmentSql"/>
         FROM
           t_qx_department
@@ -80,9 +80,9 @@
     </select>
 
     <update id="updateInfo">
-        update
+        UPDATE
             t_qx_department
-        set
+        SET
             dept_name=#{name},
             dept_admin=#{deptAdmin},
             dept_admin_candidate=#{deptAcminCandidate},
@@ -96,33 +96,33 @@
     </update>
 
     <insert id="add">
-        insert into
+        INSERT INTO
           t_qx_department (dept_id,dept_name,dept_admin,dept_admin_candidate,city_code,country_code,buss_licen,parent_id,remark)
-        values
+        VALUES
           (#{natrualkey},#{name},#{deptAdmin},#{deptAcminCandidate},#{cityCode},#{countryCode},#{bussLicen},#{parentId},#{remark})
     </insert>
 
     <update id="del">
-        update
+        UPDATE
           t_qx_department
-        set
+        SET
           del_flag=1
-        where
+        WHERE
           dept_id =#{natrualkey}
     </update>
 
 
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
-        select
+        SELECT
           dept_id AS natrualkey,
           dept_name AS name
-        from
+        FROM
           t_qx_department
-        where
+        WHERE
            del_flag=0
         <if test="name!=null and name != ''">
-            and upper(dept_name) like concat('%',#{name},'%')
+            AND UPPER(dept_name) LIKE concat('%',#{name},'%')
         </if>
     </select>
 
