@@ -22,7 +22,7 @@
         limit 1
     </select>
 
-    <select id="queryParentId">
+    <select id="queryParentId"  resultType="String">
         SELECT parent_id
         FROM t_qx_role
         WHERE role_id =#{groupId}

@@ -38,194 +38,30 @@
     <div class="row">
         <div class="col-xs-12">
             <form class="form-horizontal" role="form">
-                <div id="bomDesc">
-                    <div id="bomDescTitle">
-                        <h5 class="header smaller lighter blue">
-                            描述
-                            <small></small>
-                            <input type="hidden" name="natrualkey" id="natrualkey" value="${natrualkey}"/>
-                            <input type="hidden" name="sexId" id="sexId" />
-                            <input type="hidden" name="projectId" id="projectId" />
-                        </h5>
+                <div class="tab-content">
+                    <div id="描述" class="tab-pane in active">
+                        <%@ include file="include/bom-desc.jsp" %>
                     </div>
-                    <div id="bomDescDetail">
-                        <div class="form-group">
-                            <label class="col-xs-2  control-label" for="customerId" id="customerLableId"> 客户 </label>
-
-                            <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="customerId" name="customerId"
-                                        placeholder="客户" disabled="disabled">
-                                    <option value="1" selected>客户</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-2  control-label" for="areaId"> 区域 </label>
-
-                            <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"
-                                        placeholder="区域" disabled="disabled">
-                                    <option value="1" selected>区域</option>
-                                </select>
-                            </div>
-
-
-                        </div>
-
-                        <%-- <!-- #section:custom/extra.hr -->
-                     <div class="hr hr32 hr-dotted"></div>--%>
-                        <div class="form-group">
-                            <label class="col-xs-2  control-label" for="seriesId"> 系列 </label>
-
-                            <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"
-                                        placeholder="系列" disabled="disabled">
-                                    <option value="1" selected>系列</option>
-                                </select>
-                            </div>
-
-                            <label class="col-xs-2  control-label" for="collectionNum"> 款式 </label>
-
-                            <div class="col-xs-3">
-                                <input type="text" id="collectionNum" name="collectionNum" placeholder="款式"
-                                       class="col-xs-10 col-sm-12" disabled="disabled"/>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label class="col-xs-2  control-label" for="mainColor"> 主颜色 </label>
-
-                            <div class="col-xs-3" align="center">
-                                <input type="text" id="mainColor" name="mainColor" placeholder="主颜色"
-                                       class="col-xs-10 col-sm-10" disabled="disabled"/>
-                                <input type="hidden" name="mainColorOld" id="mainColorOld"/>
-                                <span class="glyphicon glyphicon-edit" id="mainColorEditBtnId"    onclick="javascript:$.mainColorEditInBom(this)"></span>
-                            </div>
-
-
-                            <label class="col-xs-2  control-label" for="offerAmount"> 订单数量 </label>
-
-                            <div class="col-xs-3">
-                                <input type="text" id="offerAmount" name="offerAmount" placeholder="订单数量"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-                        </div>
+                    <div id="面料" class="tab-pane">
+                        <%@ include file="include/bom-fabric.jsp" %>
+                    </div>
+                    <div id="辅料" class="tab-pane">
+                        <%@ include file="include/bom-accessories.jsp" %>
+                    </div>
+                    <div id="包装材料" class="tab-pane">
+                        <%@ include file="include/bom-packaging.jsp" %>
+                    </div>
+                    <div id="成衣厂" class="tab-pane">
+                        <%@ include file="include/bom-factory.jsp" %>
+                    </div>
+                    <div id="报价" class="tab-pane">
+                        <%@ include file="include/bom-offer.jsp" %>
+                    </div>
+                    <div id="处理" class="tab-pane">
+                        <%@ include file="include/bom-handle.jsp" %>
                     </div>
                 </div>
-                <div id="fabricsInfo">
-                    <h5 class="header smaller lighter blue">
-                        面料
-                        <span class="glyphicon glyphicon-plus-sign blue" alt="增加面料" id="imgAddFabric"></span>
-                    </h5>
 
-                    <div id="fabricsItemInfo">
-
-                    </div>
-                    <%--<div class="hr hr32 hr-dotted"></div>--%>
-                </div>
-                <div id="accessoriesInfo">
-                    <h5 class="header smaller lighter blue">
-                        辅料
-                        <span class="glyphicon glyphicon-plus-sign blue" alt="增加辅料" id="imgAddAccessories"></span>
-                    </h5>
-
-                    <div id="accessoriesItemInfo">
-
-
-                    </div>
-
-                </div>
-                <div id="packagingInfo">
-                    <h5 class="header smaller lighter blue">
-                        包材
-                        <span class="glyphicon glyphicon-plus-sign blue" alt="增加包装材料" id="imgAddPackaging"></span>
-                    </h5>
-                    <div id="packagingItemInfo">
-
-
-                    </div>
-                </div>
-                <div id="factoryInfo">
-                    <h5 class="header smaller lighter blue">
-                        成衣厂
-                        <span class="glyphicon glyphicon-plus-sign blue" alt="增加成衣厂" id="imgAddFactory"></span>
-                    </h5>
-                    <div id="factoryItemInfo">
-
-                    </div>
-                </div>
-                <div id="offerInfo">
-                    <div id="offerDescTitle">
-                        <h5 class="header smaller lighter blue">
-                            报价表
-                        </h5>
-                    </div>
-                    <div id="offerDescDetail" style="display: none">
-                        <div class="form-group">
-                            <label class="col-xs-2  control-label" for="factoryOffer"> 工厂报价 </label>
-                            <div class="col-xs-3">
-                                <input type="text" id="factoryOffer" name="factoryOffer" placeholder="工厂报价"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                            <label class="col-xs-2  control-label" for="factoryMargins"> 工厂报价利润率</label>
-                            <div class="col-xs-3">
-                                <input type="text" id="factoryMargins" name="factoryMargins" placeholder=" 工厂报价利润率"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-xs-2  control-label" for="lpPrice"> 包装费(€) </label>
-                            <div class="col-xs-3">
-                                <input type="text" id="lpPrice" name="lpPrice" placeholder="包装费"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                            <label class="col-xs-2  control-label" for="euroPrice">工厂欧元报价(€)</label>
-                            <div class="col-xs-3">
-                                <input type="text" id="euroPrice" name="euroPrice" placeholder="工厂欧元报价(€)"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-2  control-label" for="exchangeCosts"> 换汇成本 </label>
-                            <div class="col-xs-3">
-                                <input type="text" id="exchangeCosts" name="exchangeCosts" placeholder="换汇成本"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                            <label class="col-xs-2  control-label" for="costing">成本核算</label>
-                            <div class="col-xs-3">
-                                <input type="text" id="costing" name="costing" placeholder="成本核算"
-                                       class="col-xs-10 col-sm-12"/>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <div id="bomBtnInfo">
-                    <div class="col-xs-offset-2 col-xs-2">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.bomAutoBackup()"
-                                id="autoBackupId">暂存
-                        </button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.bomSave()"
-                                id="saveBtnId">保存
-                        </button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.bomSubmit()"
-                                id="commitBtnId">提交
-                        </button>
-                    </div>
-                </div>
             </form>
 
         </div>
@@ -233,13 +69,7 @@
     </div>
     <%--<%@ include file="../../system/material/bom-material-list.jsp" %>--%>
 </div>
-<%@ include file="bom-fabric.jsp" %>
-<%@ include file="bom-accessories.jsp" %>
-<%@ include file="bom-packaging.jsp" %>
-<%@ include file="bom-factory.jsp" %>
 </body>
-
-
 </html>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
