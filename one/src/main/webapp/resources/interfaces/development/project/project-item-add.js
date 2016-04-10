@@ -10,6 +10,7 @@
     var project_listURL = path + "/development/project_item/list";
     var project_newURL = path + "/development/project_item/new";
     var project_editURL = path + "/development/project_item/edit";
+    var project_submitURL = path + "/development/project_item/submit/";
     var uploadFileInfos = [];
     var $fileInput = $("#fileLocation");
     var $fileListLi = $("#filesList");
@@ -56,11 +57,18 @@
 
     }
 
+    /**
+     *
+     * @param _data
+     */
     var initSelectCallBack = function (_data) {
         initSelect(_data);
         queryInfoAnInitFiled();
     }
 
+    /**
+     *
+     */
     var queryInfoAnInitFiled = function () {
         var natrualkey = $("#natrualkey").val();
         if (natrualkey != '') {
@@ -109,10 +117,13 @@
 
         //初始化性别属性，再初始化性别属性和颜色
         var $btnDIV = $("#projectBtnInfo");
-        $.showHandleBtn($btnDIV,_data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val());
+        $.showHandleBtn($btnDIV, _data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val());
     }
 
-
+    /**
+     *
+     * @param _data
+     */
     var initSelect = function (_data) {
 
         var data = _data;
@@ -202,7 +213,9 @@
         $('#projectForm').bootstrapValidator('validate');
     }
 
-
+    /**
+     *
+     */
     var doSaveAction = function () {
 
         var natrualkey = $("#natrualkey").val();
@@ -225,7 +238,11 @@
 
     }
 
-
+    /**
+     *
+     * @param url
+     * @param natrualkey
+     */
     function toSave(url, natrualkey) {
         project.categoryAid = '';
         project.categoryBid = '';
@@ -344,6 +361,10 @@
         doSaveAction();
     });
 
+    /**
+     *
+     * @type {{projectId: string, projectName: string, categoryAid: string, categoryBid: string, collectionNumber: string, sexIds: Array, mainColors: Array, yearCode: string, customerId: string, areaId: string, seriesId: string, sampleDelivery: string, isNeedSwatch: string, isNeedPreOffer: string, needPreOfferDate: string, sketchReceivedDate: string, fileLocation: Array}}
+     */
     var project = {
         projectId: "",
         projectName: "",
@@ -364,18 +385,34 @@
         fileLocation: []
     }
 
+    /**
+     *
+     * @returns {string}
+     */
     function getIsSubmitAction() {
         return isSubmitAction;
     }
 
+    /**
+     *
+     */
+    function submitProject() {
+        var nk = $("#natrualkey").val();
+        var taksId = "null";
+        $.sendJsonAjax(project_submitURL + taksId + "/" + nk, {}, function () {
+            // Example.show("你已提交了审核");
+            window.location.href = project_listURL;
+        })
+    }
 
     $(function () {
-        $("#saveBtn").on('click', $.saveProjectItem);
+        $("#projectForm").on('click', '#saveBtn', saveProject);
+        $("#projectForm").on('click', '#submitBtn', submitProject);
         reloadDetailSelectData();
         initTags();
         $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
     })
 
-    
+
     $.saveProjectItem = saveProject;
 }());

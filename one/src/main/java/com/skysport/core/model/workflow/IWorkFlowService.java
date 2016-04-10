@@ -26,11 +26,15 @@ public interface IWorkFlowService {
 
     ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey);
 
+
     ProcessInstance startProcessInstanceById(String processDefinitionId, Map<String, Object> variables);
 
     ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey, Map<String, Object> variables);
 
     ProcessInstance startProcessInstanceByMessage(String messageName);
+
+    List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey);
+
 
     /**
      * 查询待办
@@ -79,4 +83,6 @@ public interface IWorkFlowService {
      * @param taskId 任务id
      */
     void claim(String taskId);
+
+    List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey);
 }

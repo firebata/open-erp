@@ -7,6 +7,7 @@ import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
@@ -189,7 +190,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
-
+        TaskServiceHelper.getInstance().setStatuCode(info, projectItemManageService, natrualKey);
         if (null != info) {
             Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);
@@ -213,11 +214,9 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @RequestMapping(value = "/select", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> querySelectList(HttpServletRequest request) {
-
         String name = request.getParameter("name");
         List<SelectItem2> commonBeans = projectItemManageService.querySelectList(name);
         return rtSelectResultMap(commonBeans);
-
     }
 
     /**
@@ -230,7 +229,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
     public Map<String, Object> submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
-        projectItemManageService.submit(taskId,businessKey);
+        projectItemManageService.submit(taskId, businessKey);
         return rtnSuccessResultMap("提交审核成功");
     }
 

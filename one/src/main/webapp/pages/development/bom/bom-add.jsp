@@ -8,7 +8,8 @@
     <title>修改BOM信息</title>
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"       id="main-ace-style"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -38,29 +39,77 @@
     <div class="row">
         <div class="col-xs-12">
             <form class="form-horizontal" role="form">
-                <div class="tab-content">
-                    <div id="描述" class="tab-pane in active">
-                        <%@ include file="include/bom-desc.jsp" %>
-                    </div>
-                    <div id="面料" class="tab-pane">
-                        <%@ include file="include/bom-fabric.jsp" %>
-                    </div>
-                    <div id="辅料" class="tab-pane">
-                        <%@ include file="include/bom-accessories.jsp" %>
-                    </div>
-                    <div id="包装材料" class="tab-pane">
-                        <%@ include file="include/bom-packaging.jsp" %>
-                    </div>
-                    <div id="成衣厂" class="tab-pane">
-                        <%@ include file="include/bom-factory.jsp" %>
-                    </div>
-                    <div id="报价" class="tab-pane">
-                        <%@ include file="include/bom-offer.jsp" %>
-                    </div>
-                    <div id="处理" class="tab-pane">
-                        <%@ include file="include/bom-handle.jsp" %>
+                <div class="tabbable">
+                    <ul class="nav nav-tabs" id="myBomTab">
+                        <li class="active">
+                            <a data-toggle="tab" href="#描述">
+                                <i class="pink icon-dashboard bigger-110"></i>
+                                描述
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#面料">
+                                <i class="blue icon-user bigger-110"></i>
+                                面料
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#辅料">
+                                <i class="icon-rocket"></i>
+                                辅料
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#包装材料">
+                                <i class="icon-rocket"></i>
+                                包材
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#成衣厂">
+                                <i class="icon-rocket"></i>
+                                成衣
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#报价">
+                                <i class="icon-rocket"></i>
+                                报价
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#处理">
+                                <i class="icon-rocket"></i>
+                                处理
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="描述" class="tab-pane in active">
+                            <%@ include file="include/bom-desc.jsp" %>
+                        </div>
+                        <div id="面料" class="tab-pane">
+                            <%@ include file="include/bom-fabric.jsp" %>
+                        </div>
+                        <div id="辅料" class="tab-pane">
+                            <%@ include file="include/bom-accessories.jsp" %>
+                        </div>
+                        <div id="包装材料" class="tab-pane">
+                            <%@ include file="include/bom-packaging.jsp" %>
+                        </div>
+                        <div id="成衣厂" class="tab-pane">
+                            <%@ include file="include/bom-factory.jsp" %>
+                        </div>
+                        <div id="报价" class="tab-pane">
+                            <%@ include file="include/bom-offer.jsp" %>
+                        </div>
+                        <div id="处理" class="tab-pane">
+                            <%@ include file="include/bom-handle.jsp" %>
+                        </div>
                     </div>
                 </div>
+
 
             </form>
 
@@ -76,8 +125,13 @@
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>

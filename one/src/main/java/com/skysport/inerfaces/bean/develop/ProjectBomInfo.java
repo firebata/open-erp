@@ -10,7 +10,8 @@ import java.util.Map;
  * Created by zhangjh on 2015/7/2.
  */
 public class ProjectBomInfo extends ProjectBaseInfo {
-
+    //
+    private String stateCode;
     private String id;
     private String projectId;
     private String parentProjectId;

@@ -95,6 +95,11 @@ public class ProjectAction extends BaseAction<ProjectInfo> {
 
     }
 
+    @Override
+    public void turnIdToName(List<ProjectInfo> infos) {
+        ProjectManageHelper.SINGLETONE.turnIdToNameInPorject(infos);
+    }
+
 
     /**
      * 此方法描述的是：

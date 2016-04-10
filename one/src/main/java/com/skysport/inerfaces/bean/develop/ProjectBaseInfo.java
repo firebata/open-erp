@@ -1,12 +1,13 @@
 package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.core.bean.system.SelectItem;
+import com.skysport.inerfaces.bean.task.ApproveVo;
 
 /**
  * 类说明:项目信息
  * Created by zhangjh on 2015/7/2.
  */
-public class ProjectBaseInfo extends SelectItem {
+public class ProjectBaseInfo extends SelectItem implements ApproveVo {
     private String id;
     private String seqNo;
     private String projectId;
@@ -22,6 +23,7 @@ public class ProjectBaseInfo extends SelectItem {
     private String remark;
     private String updateTime;
     private int delFlag;
+    private String stateCode;
 
     /**
      * 推销样交期
@@ -30,11 +32,11 @@ public class ProjectBaseInfo extends SelectItem {
     /**
      * 是否需要打色样
      */
-    private Integer isNeedSwatch=1;
+    private Integer isNeedSwatch = 1;
     /**
      * 是否需要预报价
      */
-    private Integer isNeedPreOffer=1;
+    private Integer isNeedPreOffer = 1;
     /**
      * 需要预报价的时间
      */
@@ -214,5 +216,15 @@ public class ProjectBaseInfo extends SelectItem {
 
     public void setFileLocation(String fileLocation) {
         this.fileLocation = fileLocation;
+    }
+
+    @Override
+    public String getStateCode() {
+        return null;
+    }
+
+    @Override
+    public void setStateCode(String stateCode) {
+
     }
 }

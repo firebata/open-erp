@@ -110,7 +110,7 @@
 
         var pantoneIdsArr = _packagingInfo["pantoneIds"];
         if (pantoneIdsArr != null) {
-            var _pantoneIdsArr = $.turnPantoneInfoToSelect2Option(pantoneIdsArr);
+            var _pantoneIdsArr = $.turnPantoneInfoToSelectOption(pantoneIdsArr);
             var $id = $('#pantoneIdsP' + idNum);
             $.reloadPantoneId($id, _pantoneIdsArr);
         }

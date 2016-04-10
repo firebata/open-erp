@@ -1,5 +1,7 @@
 package com.skysport.core.model.common;
 
+import org.activiti.engine.runtime.ProcessInstance;
+
 import java.util.List;
 
 /**
@@ -31,4 +33,8 @@ public interface IApproveService {
     void submit(String businessKey);
 
     void submit(String taskId, String businessKey);
+
+    List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey);
+
+    List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey);
 }

@@ -19,6 +19,9 @@
             <label class="col-xs-1 text-left green" style="text-align: left;">
                 <input type="text" id="{{fabricName}}" name="fabricName" placeholder="{{fabricTitleName}} "  />
             </label>
+            <label class="col-xs-1 text-left green" style="text-align: left;">
+                <input type="text" id="{{fabricNo}}" name="fabricNo" placeholder="{{fabricNoName}} "  />
+            </label>
             <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue ">
                 <span class="glyphicon glyphicon-eye-open" id="{{fabricEyeId}}"
                       onclick="javascript:showOrHideFabric(this,'{{currenId}}')"></span>

@@ -35,9 +35,9 @@
 
     $(function () {
 
-        $("#offerDescTitle").click(function () {
-            $("#offerDescDetail").toggle(300);
-        });
+        // $("#offerDescTitle").click(function () {
+        //     $("#offerDescDetail").toggle(300);
+        // });
 
         //监听价格变动
         $("#offerDescDetail").on("click", "input", cb);

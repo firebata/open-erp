@@ -22,4 +22,5 @@
     var approve_status_other = '<%=WebConstants.APPROVE_STATUS_OTHER%>';
     var spe = '<%=WebConstants.SPE%>';
     var environment_current = '<%=environment_current%>';
+    var statecode_alive = '<%=WebConstants.STATECODE_ALIVE%>';
 </script>

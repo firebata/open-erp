@@ -5,7 +5,7 @@
             报价表
         </h5>
     </div>
-    <div id="offerDescDetail" style="display: none">
+    <div id="offerDescDetail" <%--style="display: none"--%>>
         <div class="form-group">
             <label class="col-xs-2  control-label" for="factoryOffer"> 工厂报价 </label>
             <div class="col-xs-3">

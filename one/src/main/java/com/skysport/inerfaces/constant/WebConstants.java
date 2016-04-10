@@ -181,6 +181,8 @@ public interface WebConstants extends TableNameConstants {
     String SDE = "sde";//开发环境
     String STE = "ste";//测试环境
     String SPE = "spe";//生产环境
-
+    String STATECODE_ACTIVE = "1";
+    String STATECODE_SUSPENDED = "2";
+    String STATECODE_ALIVE = "0";//ACTIVE和SUSPENDED 都是ALIVE
 
 }

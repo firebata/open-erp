@@ -62,7 +62,7 @@ public class BomAction extends BaseAction<BomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "打开新增BOM新增页面")
     public ModelAndView add() {
-        ModelAndView mav = new ModelAndView("development/bom/bom-add-old");
+        ModelAndView mav = new ModelAndView("development/bom/bom-add");
         return mav;
     }
 
@@ -76,7 +76,7 @@ public class BomAction extends BaseAction<BomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "打开新增BOM新增页面")
     public ModelAndView add(@PathVariable String natrualKey) {
-        ModelAndView mav = new ModelAndView("development/bom/bom-add-old");
+        ModelAndView mav = new ModelAndView("development/bom/bom-add");
         mav.addObject("natrualkey", natrualKey);
         return mav;
     }

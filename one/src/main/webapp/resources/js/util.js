@@ -27,7 +27,6 @@
         delTableRecord: delTableRecord,
         approveBuss: approveBuss,
         submitBuss: submitBuss,
-        saveBuss: saveBuss,
         showHandleBtn: showHandleBtn
     });
 
@@ -163,7 +162,7 @@
      * @returns {boolean}
      */
     function strIsEmpty(input) {
-        return input == undefined || input == null || $.trim(input) == '';
+        return input == null || $.trim(input) == '' || $.trim(input) == 'null';
     }
 
     function isFun(input) {
@@ -495,14 +494,27 @@
         // console.log("ajax提交...");
     }
 
-    function showHandleBtn($btnDIV, _approveStatus, saveFun, _businessKey, _taskId) {
-        if(null == _taskId){
-            _taskId ="null";
+    /**
+     *  业务详细页面的按钮显示处理：保存，提交审核(未启动流程),提交审核(流程已启动，被驳回后的状态)
+     * @param $btnDIV
+     * @param _approveStatus
+     * @param saveFun
+     * @param _businessKey
+     * @param _taskId
+     * @param _stateCode
+     */
+    function showHandleBtn($btnDIV, _approveStatus, saveFun, _businessKey, _taskId, _stateCode) {
+        if (strIsEmpty(_taskId)) {
+            _taskId = "null";
         }
         var html = ""
         if (_approveStatus == approve_status_new || _approveStatus == approve_status_reject) {
-            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md' onclick='javascript:$.saveBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>暂存</button></div>";
-            html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>提交审核</button></div>";
+            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md'>保存</button></div>";
+            if (_stateCode == statecode_alive && strIsNotEmpty(_taskId)) {//流程在运行中：审核走通用接口，只需要传递业务主键和任务id(这个界面值来源于)
+                html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>提交审核</button></div>";
+            } else {//流程已结算
+                html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md'  id='submitBtn' >提交审核</button></div>";
+            }
         }
         else if (_approveStatus == approve_status_undo) {
             html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>审核</button></div>";
@@ -517,12 +529,6 @@
 
     function submitBuss(_businessKey, _taskId) {
         window.location.href = submitBussURL + "/" + _taskId + "/" + _businessKey;
-        bootbox.alert("提交_businessKey:" + _businessKey + ",_taskId:" + _taskId);
-    }
-
-    function saveBuss(_businessKey, _taskId) {
-        bootbox.alert("保存_businessKey:" + _businessKey + ",_taskId:" + _taskId);
-
     }
 
 
@@ -533,9 +539,9 @@
                 '<div class="col-md-12"> ' +
                 '<form class="form-horizontal"> ' +
                 '<div class="form-group"> ' +
-                '<label class="col-md-4 control-label" for="suggestion">意见</label> ' +
-                '<div class="col-md-4"> ' +
-                '<textarea id="suggestion" name="suggestion" type="text" placeholder="审核意见" class="form-control input-md"> ' +
+                '<label class="col-md-2 control-label" for="suggestion">意见</label> ' +
+                '<div class="col-md-10"> ' +
+                '<textarea id="suggestion" name="suggestion" type="text" placeholder="审核意见" class="form-control input-md"  /> ' +
                 ' </div> ' +
                 '</div> ' +
                 '</form> </div>  </div>',
@@ -545,7 +551,7 @@
                         className: "btn-success",
                         callback: function () {
                             var suggestion = $('#suggestion').val();
-                            Example.show("你选择了审核通过");
+                            // Example.show("你选择了审核通过");
                         }
                     },
                     danger: {
@@ -553,7 +559,7 @@
                         className: "btn-danger",
                         callback: function () {
                             var suggestion = $('#suggestion').val();
-                            Example.show("你选择了驳回");
+                            // Example.show("你选择了驳回");
                         }
                     }
                 }

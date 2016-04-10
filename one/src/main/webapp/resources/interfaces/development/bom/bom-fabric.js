@@ -13,7 +13,7 @@
     $.extend({
         initFabric: initFabric,
         fabricItems: fabricItems,
-        turnPantoneInfoToSelect2Option: turnPantoneInfoToSelect2Option,
+        turnPantoneInfoToSelectOption: turnPantoneInfoToSelectOption,
         reloadPantoneId: reloadPantoneId,
         refreshAllFabricId: refreshAllFabricId
     });
@@ -125,7 +125,7 @@
      * @param pantoneIdsArr
      * @returns {Array}
      */
-    function turnPantoneInfoToSelect2Option(pantoneIdsArr) {
+    function turnPantoneInfoToSelectOption(pantoneIdsArr) {
         var _pantoneIdsArr = [];
         for (var idx = 0; idx < pantoneIdsArr.length; idx++) {
             var pantone = pantoneIdsArr[idx];
@@ -183,7 +183,7 @@
 
         var pantoneIdsArr = _fabricInfo["pantoneIds"];
         if (pantoneIdsArr != null) {
-            var _pantoneIdsArr = turnPantoneInfoToSelect2Option(pantoneIdsArr);
+            var _pantoneIdsArr = turnPantoneInfoToSelectOption(pantoneIdsArr);
             var $id = $('#pantoneIds' + idNum);
             reloadPantoneId($id, _pantoneIdsArr);
         }
@@ -759,6 +759,8 @@
                     "fabricTitleId": "fabricTitleId" + idNum,
                     "serialNumber": "serialNumber" + idNum,
                     "fabricId": "fabricId" + idNum,
+                    "fabricNo": "fabricNo" + idNum,
+                    "fabricNoName": "自定义编号" + idNum,
                     "fabricTitleName": title_type + idNum,
                     "fabricName": "fabricName" + idNum,
                     "fabricEyeId": "fabricEyeId" + idNum,
@@ -845,6 +847,7 @@
         fabricsInfo.nameNum = idNum;
         fabricsInfo.serialNumber = idNum;
         fabricsInfo.fabricId = $("#fabricId" + idNum).val();
+        fabricsInfo.fabricNo = $("#fabricNo" + idNum).val();
         fabricsInfo.isShow = $("#isShow" + idNum).val();
         fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();
         fabricsInfo.compositePantoneId = $("#compositePantoneId" + idNum).val();
@@ -915,6 +918,7 @@
         fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
         fabricsInfo.nameNum = idNum;
         fabricsInfo.fabricId = $("#fabricId" + idNum).val();
+        fabricsInfo.fabricNo = $("#fabricNo" + idNum).val();
         fabricsInfo.serialNumber = idNum;
         fabricsInfo.fabricName = $("#fabricName" + idNum).val();
         fabricsInfo.isShow = $("#isShow" + idNum).val();

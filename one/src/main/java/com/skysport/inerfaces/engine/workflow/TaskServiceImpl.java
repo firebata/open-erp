@@ -8,6 +8,7 @@ import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,4 +190,17 @@ public abstract class TaskServiceImpl implements IWorkFlowService {
         return businessKey;
     }
 
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey) {
+        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).active().orderByProcessInstanceId().desc();
+        List<ProcessInstance> list = query.listPage(0, 10);
+        return list;
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String businessKey) {
+        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).suspended().orderByProcessInstanceId().desc();
+        List<ProcessInstance> list = query.listPage(0, 10);
+        return list;
+    }
 }
