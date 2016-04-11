@@ -1,9 +1,13 @@
 package com.skysport.core.model.workflow;
 
 import com.skysport.inerfaces.bean.task.TaskVo;
+import com.skysport.inerfaces.form.task.TaskQueryForm;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Comment;
+import org.activiti.engine.task.Task;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -85,4 +89,18 @@ public interface IWorkFlowService {
     void claim(String taskId);
 
     List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey);
+
+    void saveComment(String taskId, String processInstanceId, String message);
+
+    Task createTaskQueryByTaskId(String taskId);
+
+    void complete(String taskId, Map<String, Object> variables);
+
+    List<Comment> getProcessInstanceComments(String processInstanceId);
+
+    List<HistoricTaskInstance> createHistoricTaskInstanceQuery(String processInstanceId);
+
+    List<TaskVo> queryToDoTaskFiltered(TaskQueryForm taskQueryForm, String natrualkey);
+
+    long queryTaskTotal(String natrualkey);
 }

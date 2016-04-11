@@ -6,7 +6,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.MaterialOfMembraneCoatingInfo;
 import com.skysport.inerfaces.model.info.material.impl.helper.MaterialOfMembraneCoatingServicHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -37,7 +37,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<MaterialOfMembra
     private ICommonService materialOfMembraneCoatingService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -110,7 +110,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<MaterialOfMembra
                                    HttpServletResponse reareaonse) {
         String currentNo = materialOfMembraneCoatingService.queryCurrentSeqNo();
         //设置ID
-        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.MOMC_INFO, currentNo, incrementNumber));
+        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.MOMC_INFO, currentNo, incrementNumberService));
         materialOfMembraneCoatingService.add(areaInfo);
 
         MaterialOfMembraneCoatingServicHelper.SINGLETONE.refreshSelect();

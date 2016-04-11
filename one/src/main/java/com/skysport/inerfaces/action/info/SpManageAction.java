@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.SpInfo;
 import com.skysport.inerfaces.model.info.sp.helper.SpInfoHelper;
 import com.skysport.inerfaces.model.info.sp.service.ISpManageService;
@@ -38,7 +38,7 @@ public class SpManageAction extends BaseAction<SpInfo> {
     @Resource(name = "spManageService")
     private ISpManageService spManageService;
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -107,7 +107,7 @@ public class SpManageAction extends BaseAction<SpInfo> {
     @SystemControllerLog(description = "新增供应商信息")
     public Map<String, Object> add(SpInfo spInfo, HttpServletRequest request, HttpServletResponse response) {
         //设置ID
-        spInfo.setSpId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.SP_INFO, incrementNumber));
+        spInfo.setSpId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.SP_INFO, incrementNumberService));
         spManageService.add(spInfo);
 
         SpInfoHelper.SINGLETONE.refreshSelect();

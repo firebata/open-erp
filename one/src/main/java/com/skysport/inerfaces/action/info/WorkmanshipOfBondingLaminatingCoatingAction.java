@@ -6,7 +6,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.WorkmanshipOfBondingLaminatingCoatingInfo;
 import com.skysport.inerfaces.model.info.material.impl.helper.WorkmanshipOfBondingLaminatingCoatingServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -38,7 +38,7 @@ public class WorkmanshipOfBondingLaminatingCoatingAction extends BaseAction<Work
     private ICommonService workmanshipOfBondingLaminatingCoatingService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -112,7 +112,7 @@ public class WorkmanshipOfBondingLaminatingCoatingAction extends BaseAction<Work
                                    HttpServletResponse reareaonse) {
         String currentNo = workmanshipOfBondingLaminatingCoatingService.queryCurrentSeqNo();
         //设置ID
-        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.WBLC_INFO, currentNo, incrementNumber));
+        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.WBLC_INFO, currentNo, incrementNumberService));
         workmanshipOfBondingLaminatingCoatingService.add(areaInfo);
 
         WorkmanshipOfBondingLaminatingCoatingServiceHelper.SINGLETONE.refreshSelect();

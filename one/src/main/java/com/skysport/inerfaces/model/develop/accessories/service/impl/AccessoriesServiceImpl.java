@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.accessories.service.impl;
 
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
@@ -36,7 +36,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
@@ -87,7 +87,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 else {
 //                    String kind_name = buildKindName(bomInfo, accessoriesJoinInfo);
 //
-//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.MATERIAL_SEQ_NO_LENGTH);
+//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.MATERIAL_SEQ_NO_LENGTH);
 //
 //                    //年份+客户+地域+系列+NNN
 //                    accessoriesId = kind_name + seqNo;

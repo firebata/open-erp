@@ -1,13 +1,16 @@
 package com.skysport.inerfaces.engine.workflow;
 
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.permission.roleinfo.service.IRoleInfoService;
+import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,10 +19,12 @@ import java.util.Map;
  * Created by zhangjh on 2016/4/1.
  */
 @Service("projectItemTaskService")
-public class ProjectItemTaskImpl extends TaskServiceImpl {
+public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
 
     @Autowired
     private IRoleInfoService roleInfoService;
+    @Resource
+    private IStaffService developStaffImpl;
 
     @Override
     public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables) {
@@ -37,11 +42,7 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
         return processInstance;
     }
 
-    @Override
-    public void claim(String taskId) {
-        String userId = UserUtils.getUserFromSession().getNatrualkey();
-        taskService.claim(taskId, userId);
-    }
+
 
     @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
@@ -53,9 +54,12 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
         ProcessInstance processInstance = null;
         try {
             String userId = userInfo.getNatrualkey();
-            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();//开发人员所属组
+
+//            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();//开发人员所属组
             //开发经理的组id
-            String groupIdDevManager = roleInfoService.queryParentId(groupId);
+//            String groupIdDevManager = roleInfoService.queryParentId(groupId);
+
+            String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
 
             identityService.setAuthenticatedUserId(userId);
 
@@ -64,7 +68,6 @@ public class ProjectItemTaskImpl extends TaskServiceImpl {
 
         } finally {
             identityService.setAuthenticatedUserId(null);
-
         }
 
         return processInstance;

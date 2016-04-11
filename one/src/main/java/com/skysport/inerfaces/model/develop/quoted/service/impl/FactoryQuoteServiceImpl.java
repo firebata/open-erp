@@ -32,7 +32,7 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
     private FactoryQuotedInfoMapper factoryQuotedInfoMapper;
 
     //    @Resource(name = "incrementNumber")
-//    private IncrementNumber incrementNumber;
+//    private IncrementNumberService incrementNumber;
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
 

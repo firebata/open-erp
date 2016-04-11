@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.YearConfInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.year_conf.YearConfManageServiceHelper;
@@ -37,7 +37,7 @@ public class YearConfManageAction extends BaseAction<YearConfInfo> {
     private ICommonService yearConfManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -108,7 +108,7 @@ public class YearConfManageAction extends BaseAction<YearConfInfo> {
     public Map<String, Object> add(YearConfInfo year_confInfo, HttpServletRequest request) {
         String currentNo = yearConfManageService.queryCurrentSeqNo();
         //设置ID
-        year_confInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.YEAR_CONF_INFO, currentNo, incrementNumber));
+        year_confInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.YEAR_CONF_INFO, currentNo, incrementNumberService));
         yearConfManageService.add(year_confInfo);
 
         YearConfManageServiceHelper.SINGLETONE.refreshSelect();

@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.CategoryInfo;
 import com.skysport.inerfaces.model.info.category.CategoryManageServiceHelper;
 import com.skysport.inerfaces.model.info.category.ICategoryManageService;
@@ -38,7 +38,7 @@ public class CategoryManageAction extends BaseAction<CategoryInfo> {
     private ICategoryManageService categoryManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -109,7 +109,7 @@ public class CategoryManageAction extends BaseAction<CategoryInfo> {
     public Map<String, Object> add(CategoryInfo info, HttpServletRequest request) {
         String currentNo = categoryManageService.queryCurrentSeqNo();
         //设置ID
-        info.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.T_CATEGORY_INFO, currentNo, incrementNumber));
+        info.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.T_CATEGORY_INFO, currentNo, incrementNumberService));
         categoryManageService.add(info);
         CategoryManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");

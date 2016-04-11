@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
@@ -44,7 +44,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     private IProjectItemManageService projectItemManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
 
     @Resource(name = "uploadFileInfoService")
@@ -72,7 +72,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
 
         //新增项目时组装项目名等信息
-        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumber, info);
+        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumberService, info);
         info.setCreater(userInfo.getAliases());
 
         //组装项目品类信息
@@ -128,7 +128,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 //            throw new SkySportException("100001","bom已生成，不能修改项目信息");
 //        }
 
-        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumber, info);
+        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumberService, info);
 
         //更新t_project表
         super.edit(info);

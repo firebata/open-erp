@@ -4,8 +4,8 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.CustomerInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.customer.helper.CustomerManageServiceHelper;
@@ -38,7 +38,7 @@ public class CustomerAction extends BaseAction<CustomerInfo> {
     private ICommonService customerManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -110,7 +110,7 @@ public class CustomerAction extends BaseAction<CustomerInfo> {
     public Map<String, Object> add(CustomerInfo customerInfo, HttpServletRequest request) {
         String currentNo = customerManageService.queryCurrentSeqNo();
         //设置ID
-        customerInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.CUSTOMER_INFO, currentNo, incrementNumber));
+        customerInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.CUSTOMER_INFO, currentNo, incrementNumberService));
         customerManageService.add(customerInfo);
 
         CustomerManageServiceHelper.SINGLETONE.refreshSelect();

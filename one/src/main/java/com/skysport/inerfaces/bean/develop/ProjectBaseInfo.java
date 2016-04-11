@@ -25,6 +25,7 @@ public class ProjectBaseInfo extends SelectItem implements ApproveVo {
     private int delFlag;
     private String stateCode;
 
+
     /**
      * 推销样交期
      */
@@ -220,11 +221,11 @@ public class ProjectBaseInfo extends SelectItem implements ApproveVo {
 
     @Override
     public String getStateCode() {
-        return null;
+        return stateCode;
     }
 
     @Override
     public void setStateCode(String stateCode) {
-
+        this.stateCode = stateCode;
     }
 }

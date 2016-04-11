@@ -4,5 +4,8 @@
     <stateFile url="file://$PROJECT_DIR$/src/main/resources/conf/ProjectItemProcessV1.01.bpmn">
       <view grid="false" />
     </stateFile>
+    <stateFile url="file://$PROJECT_DIR$/src/main/resources/conf/ProjectItemProcessV1.01.bpmn">
+      <view grid="false" />
+    </stateFile>
   </component>
 </project>

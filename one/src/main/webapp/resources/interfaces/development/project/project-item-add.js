@@ -117,7 +117,7 @@
 
         //初始化性别属性，再初始化性别属性和颜色
         var $btnDIV = $("#projectBtnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val());
+        $.showHandleBtn($btnDIV, _data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
     }
 
     /**
@@ -400,7 +400,6 @@
         var nk = $("#natrualkey").val();
         var taksId = "null";
         $.sendJsonAjax(project_submitURL + taksId + "/" + nk, {}, function () {
-            // Example.show("你已提交了审核");
             window.location.href = project_listURL;
         })
     }

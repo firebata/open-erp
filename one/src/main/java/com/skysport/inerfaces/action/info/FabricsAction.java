@@ -6,7 +6,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -36,7 +36,7 @@ public class FabricsAction extends BaseAction<FabricsInfo> {
     private ICommonService fabricsManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -111,7 +111,7 @@ public class FabricsAction extends BaseAction<FabricsInfo> {
 
         String currentNo = fabricsManageService.queryCurrentSeqNo();
         //设置ID
-        fabricsInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.FABRICS_INFO, currentNo, incrementNumber));
+        fabricsInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.FABRICS_INFO, currentNo, incrementNumberService));
         fabricsManageService.add(fabricsInfo);
 
 

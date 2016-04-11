@@ -2,12 +2,12 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <process id="projectitemProcess" name="子项目流程" isExecutable="true">
     <startEvent id="projectItemTaskStart" name="Start" activiti:initiator="applyUserId"></startEvent>
-    <userTask id="updateProjectItem" name="开发员修改子项目" activiti:candidateGroups="${devlop_staff}"></userTask>
+    <userTask id="updateProjectItem" name="开发员修改子项目" activiti:candidateUsers="${applyUserId}"></userTask>
     <userTask id="approveProjectItem" name="经理审核子项目" activiti:candidateGroups="${devlop_manager}"></userTask>
     <exclusiveGateway id="exclusivegateway1" name="审核子项目"></exclusiveGateway>
     <subProcess id="approveBomProcess" name="审核BOM子流程">
       <startEvent id="startevent2" name="Start"></startEvent>
-      <userTask id="updateSingleBom" name="修改单个BOM" activiti:candidateGroups="${devlop_staff}"></userTask>
+      <userTask id="updateSingleBom" name="修改单个BOM" activiti:candidateUsers="${applyUserId}"></userTask>
       <userTask id="approveSingleBom" name="审核BOM信息" activiti:candidateGroups="${devlop_manager}"></userTask>
       <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
       <sequenceFlow id="flow31" sourceRef="approveSingleBom" targetRef="exclusivegateway2"></sequenceFlow>
@@ -202,7 +202,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_projectitemProcess">
     <bpmndi:BPMNPlane bpmnElement="projectitemProcess" id="BPMNPlane_projectitemProcess">
       <bpmndi:BPMNShape bpmnElement="projectItemTaskStart" id="BPMNShape_projectItemTaskStart">
-        <omgdc:Bounds height="35.0" width="35.0" x="40.0" y="355.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="40.0" y="353.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="updateProjectItem" id="BPMNShape_updateProjectItem">
         <omgdc:Bounds height="55.0" width="105.0" x="372.0" y="241.0"></omgdc:Bounds>
@@ -789,7 +789,7 @@
         <omgdi:waypoint x="1371.0" y="370.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow150" id="BPMNEdge_flow150">
-        <omgdi:waypoint x="75.0" y="372.0"></omgdi:waypoint>
+        <omgdi:waypoint x="75.0" y="370.0"></omgdi:waypoint>
         <omgdi:waypoint x="171.0" y="370.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow151" id="BPMNEdge_flow151">

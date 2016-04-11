@@ -17,7 +17,6 @@ $(function () {
     }
 
     console.log("modalID:"+modalID);
-    $('#start_date').datetimepicker();
 
     var tpl = $("#tpl").html();
     //预编译模板

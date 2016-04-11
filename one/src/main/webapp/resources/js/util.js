@@ -7,7 +7,12 @@
     "use strict";
     var passTaskURL = getContextPath() + "/task/pass";
     var rejectTaskURL = getContextPath() + "/task/reject";
-    var submitBussURL = getContextPath() + "/task/submit";
+    var submitBusURL = getContextPath() + "/task/submit";
+    var addCommentURL = getContextPath() + "/task/add_comment";
+    var passBusURL = getContextPath() + "/task/pass";
+    var rejectBusURL = getContextPath() + "/task/reject";
+    var listCommentsURL = getContextPath() + "/task/list_comments/";
+    var project_listURL = getContextPath() + "/development/project_item/list";
     //扩展常用方法
     $.extend({
         sendRestFulAjax: sendRestFulAjax,//ajax
@@ -503,7 +508,7 @@
      * @param _taskId
      * @param _stateCode
      */
-    function showHandleBtn($btnDIV, _approveStatus, saveFun, _businessKey, _taskId, _stateCode) {
+    function showHandleBtn($btnDIV, _approveStatus, saveFun, _businessKey, _taskId, _stateCode, processInstanceId) {
         if (strIsEmpty(_taskId)) {
             _taskId = "null";
         }
@@ -517,22 +522,27 @@
             }
         }
         else if (_approveStatus == approve_status_undo) {
-            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>审核</button></div>";
+            if (_stateCode == statecode_alive && strIsNotEmpty(_taskId)) {
+                html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.approveBuss(\"" + _businessKey + "\",\"" + _taskId + "\",\"" + processInstanceId + "\")'>审核</button></div>";
+            }
         }
         $btnDIV.html(html);
     }
 
 
-    function approveBuss(_businessKey, _taskId) {
-        showApproveForms(_businessKey, _taskId);
+    function approveBuss(_businessKey, _taskId, _processInstanceId) {
+        showApproveForms(_businessKey, _taskId, _processInstanceId);
     }
 
     function submitBuss(_businessKey, _taskId) {
-        window.location.href = submitBussURL + "/" + _taskId + "/" + _businessKey;
+        window.location.href = submitBusURL + "/" + _taskId + "/" + _businessKey;
+        // $.sendJsonAjax(submitBusURL + "/" + _taskId + "/" + _businessKey, {}, function () {
+        //     window.location.href = project_listURL;
+        // })
     }
 
 
-    function showApproveForms(_businessKey, _taskId) {
+    function showApproveForms(_businessKey, _taskId, _processInstanceId) {
         bootbox.dialog({
                 title: "请输入审核意见.",
                 message: '<div class="row">  ' +
@@ -541,7 +551,7 @@
                 '<div class="form-group"> ' +
                 '<label class="col-md-2 control-label" for="suggestion">意见</label> ' +
                 '<div class="col-md-10"> ' +
-                '<textarea id="suggestion" name="suggestion" type="text" placeholder="审核意见" class="form-control input-md"  /> ' +
+                '<textarea id="suggestion" name="suggestion" type="text" placeholder="审核意见" class="form-control  autosize-transition"  /> ' +
                 ' </div> ' +
                 '</div> ' +
                 '</form> </div>  </div>',
@@ -551,6 +561,7 @@
                         className: "btn-success",
                         callback: function () {
                             var suggestion = $('#suggestion').val();
+                            addCommentsAndApprove(_businessKey, _taskId, _processInstanceId, suggestion, approve_status_pass);
                             // Example.show("你选择了审核通过");
                         }
                     },
@@ -559,12 +570,57 @@
                         className: "btn-danger",
                         callback: function () {
                             var suggestion = $('#suggestion').val();
+                            addCommentsAndApprove(_businessKey, _taskId, _processInstanceId, suggestion, approve_status_reject);
                             // Example.show("你选择了驳回");
                         }
                     }
                 }
             }
         );
+    }
+
+
+    /**
+     * 增加审核评论 并做审核处理：通过或者驳回
+     * @param _businessKey
+     * @param _taskId
+     * @param _processInstanceId
+     * @param _message
+     * @param _approve_status
+     */
+    function addCommentsAndApprove(_businessKey, _taskId, _processInstanceId, _message, _approve_status) {
+        var _data = {
+            businessKey: _businessKey,
+            taskId: _taskId,
+            processInstanceId: _processInstanceId,
+            message: _message
+        };
+
+        var url = null;
+        if (_approve_status == approve_status_pass) { //审核通过
+            url = passBusURL;
+        } else if (_approve_status == approve_status_reject) { //驳回
+            url = rejectBusURL;
+        }
+        if (strIsNotEmpty(url)) {
+            $.post(url, _data, function (resp) {
+                window.location.href = getContextPath() + "/task/todo/list";
+            });
+
+            // $.sendJsonAjax(url, _data, null)
+        }
+
+
+    }
+
+
+    function showCommentsDiv(_data) {
+
+    }
+
+    function readComments($commentDiv, _processInstanceId) {
+        var _data = {};
+        $.sendJsonAjax(listCommentsURL + _processInstanceId, _data, showCommentsDiv);
     }
 
 }(jQuery));

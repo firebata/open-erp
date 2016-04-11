@@ -4,8 +4,8 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.FactoryInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.factory.FactoryManageServiceHelper;
@@ -39,7 +39,7 @@ public class FactoryManageAction extends BaseAction<FactoryInfo> {
     private ICommonService factoryManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -111,7 +111,7 @@ public class FactoryManageAction extends BaseAction<FactoryInfo> {
     public Map<String, Object> add(FactoryInfo factoryInfo, HttpServletRequest request) {
         String currentNo = factoryManageService.queryCurrentSeqNo();
         //设置ID
-        factoryInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.FACTORY_INFO, currentNo, incrementNumber));
+        factoryInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.FACTORY_INFO, currentNo, incrementNumberService));
         factoryManageService.add(factoryInfo);
 
         FactoryManageServiceHelper.SINGLETONE.refreshSelect();

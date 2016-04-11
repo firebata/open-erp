@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
-<%@ include file="../../base/path.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="../../base/path.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>查询供应商信息</title>
-    <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
-    <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
+    <jsp:include page="../../base/hb-headc.jsp" flush="true"></jsp:include>
+    <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
     <!--<script type="text/javascript" src="/dt-page/extjs.js"></script>-->
 </head>
 <body>
@@ -39,24 +38,17 @@
             </table>
 
 
-
         </div>
         <!-- Button trigger modal -->
     </div>
-        <%@ include file="edit2.jsp"%>
+    <%@ include file="edit2.jsp" %>
 </div>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->
-<script id="tpl" type="text/x-handlebars-template">
+<script id="spInfotpl" type="text/x-handlebars-template">
     {{#each func}}
-    <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
+        <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
     {{/each}}
 </script>
-
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/sp/sp-list.js?v=<%=version%>"></script>
-
 </body>
-
-
-
 </html>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/system/sp/sp.js?v=<%=version%>"></script>

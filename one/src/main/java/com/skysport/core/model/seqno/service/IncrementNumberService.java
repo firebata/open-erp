@@ -3,7 +3,7 @@ package com.skysport.core.model.seqno.service;
 /**
  * Created by zhangjh on 2015/6/1.
  */
-public interface  IncrementNumber {
+public interface IncrementNumberService {
      int nextVal(String name);
 
      int reset();

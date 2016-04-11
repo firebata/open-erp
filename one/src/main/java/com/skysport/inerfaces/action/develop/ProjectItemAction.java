@@ -3,7 +3,7 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -42,7 +42,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     private IProjectItemManageService projectItemManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
@@ -78,9 +78,11 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @SystemControllerLog(description = "新增子项目")
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
         String taskId = (String) request.getAttribute("taskId");
+        String processInstanceId = (String) request.getAttribute("processInstanceId");
         ModelAndView mav = new ModelAndView("/development/project/project-item-add");
         mav.addObject("natrualkey", natrualKey);
         mav.addObject("taskId", taskId);
+        mav.addObject("processInstanceId", processInstanceId);
         return mav;
     }
 
@@ -164,7 +166,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public Map<String, Object> add(ProjectBomInfo info) {
 
         String kind_name = ProjectManageHelper.SINGLETONE.buildKindName(info);
-        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.PROJECT_SEQ_NO_LENGTH);
+        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.PROJECT_SEQ_NO_LENGTH);
 
 //        //年份+客户+地域+系列+NNN
 //        String projectId = kind_name + seqNo;
@@ -190,7 +192,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
-        TaskServiceHelper.getInstance().setStatuCode(info, projectItemManageService, natrualKey);
+        TaskServiceHelper.getInstance().setStatuCodeAlive(info, projectItemManageService, natrualKey);
         if (null != info) {
             Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);
@@ -228,9 +230,10 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @RequestMapping(value = "/submit/{taskId}/{businessKey}")
     @ResponseBody
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
-    public Map<String, Object> submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+    public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
         projectItemManageService.submit(taskId, businessKey);
-        return rtnSuccessResultMap("提交审核成功");
+        ModelAndView mav = new ModelAndView("forward:/task/todo/list");
+        return mav;
     }
 
 }

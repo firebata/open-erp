@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -22,7 +22,9 @@ import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
+import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     private IBomManageService bomManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
@@ -70,6 +72,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Autowired
     private IWorkFlowService projectItemTaskService;
+
+    @Resource
+    private IStaffService developStaffImpl;
 
     @Override
     public void afterPropertiesSet() {
@@ -144,7 +149,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         info.setCategoryBid(categoryBid);
 
         //生成BOM信息并保存
-        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumber, info);
+        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumberService, info);
     }
 
 
@@ -311,16 +316,22 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     public void submit(String taskId, String businessKey) {
 
         boolean isAlive = TaskServiceHelper.getInstance().isActive(this, businessKey);
-        if (taskId != null && !isAlive) {
+        if (StringUtils.isNotBlank(taskId) && taskId.equals("null") && !isAlive) {
             logger.warn("流程第一次启动");
             //启动流程
             startWorkFlow(businessKey);
+        } else {
+            //完成当前任务
+            Map<String, Object> variables = new HashMap<String, Object>();
+            String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+            projectItemTaskService.complete(taskId, variables);
         }
+
 
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
-
 
 
     @Override
@@ -333,6 +344,22 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
         List<ProcessInstance> processInstances = projectItemTaskService.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
         return processInstances;
+    }
+
+    @Override
+    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
+        Map<String, Object> variables = new HashedMap();
+        String handleUserId;
+        if (approve) {
+            handleUserId = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, handleUserId);
+        } else {
+//            handleUserId = developStaffImpl.staffId();
+//            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
+        }
+        variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
+
+        return variables;
     }
 
     @Override

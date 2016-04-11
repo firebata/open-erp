@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.SexInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.sex.SexManageServiceHelper;
@@ -39,7 +39,7 @@ public class SexAction extends BaseAction<SexInfo> {
     private ICommonService sexManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -110,7 +110,7 @@ public class SexAction extends BaseAction<SexInfo> {
     public Map<String, Object> add(SexInfo sexInfo, HttpServletRequest request) {
         String currentNo = sexManageService.queryCurrentSeqNo();
         //设置ID
-        sexInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.SEX_INFO, currentNo, incrementNumber));
+        sexInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.SEX_INFO, currentNo, incrementNumberService));
         sexManageService.add(sexInfo);
 
         SexManageServiceHelper.SINGLETONE.refreshSelect();

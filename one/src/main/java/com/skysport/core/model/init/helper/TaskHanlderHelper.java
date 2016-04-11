@@ -1,8 +1,10 @@
 package com.skysport.core.model.init.helper;
 
 import com.skysport.core.cache.TaskHanlderCachedMap;
+import com.skysport.core.constant.CharConstant;
 import com.skysport.inerfaces.bean.task.TaskHanlderVo;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -47,14 +49,39 @@ public enum TaskHanlderHelper {
 
             TaskHanlderVo vo = new TaskHanlderVo();
             try {
-                vo.setTaskDefineKey(child.attributeValue("taskDefineKey").replaceAll("\\s", ""));
-                vo.setName(child.attributeValue("name").replaceAll("\\s", ""));
-                vo.setBusinessController(child.elementText("businessController").replaceAll("\\s", ""));
-                vo.setBusinessService(child.elementText("businessService").replaceAll("\\s", ""));
-                vo.setUrlInfo(child.elementText("urlInfo").replaceAll("\\s", ""));
-                vo.setUrlPass(child.elementText("urlPass").replaceAll("\\s", ""));
-                vo.setUrlReject(child.elementText("urlReject").replaceAll("\\s", ""));
-                vo.setUrlSumit(child.elementText("urlSumit").replaceAll("\\s", ""));
+                String taskDefineKey = child.attributeValue("taskDefineKey");
+                taskDefineKey = StringUtils.isBlank(taskDefineKey) ? CharConstant.EMPTY : taskDefineKey.replaceAll("\\s", "");
+
+                String name = child.attributeValue("name");
+                name = StringUtils.isBlank(name) ? CharConstant.EMPTY : name.replaceAll("\\s", "");
+
+                String businessController = child.elementText("businessController");
+                businessController = StringUtils.isBlank(businessController) ? CharConstant.EMPTY : businessController.replaceAll("\\s", "");
+
+                String businessService = child.elementText("businessService");
+                businessService = StringUtils.isBlank(businessService) ? CharConstant.EMPTY : businessService.replaceAll("\\s", "");
+
+                String urlInfo = child.elementText("urlInfo");
+                urlInfo = StringUtils.isBlank(urlInfo) ? CharConstant.EMPTY : urlInfo.replaceAll("\\s", "");
+
+                String urlPass = child.elementText("urlPass");
+                urlPass = StringUtils.isBlank(urlPass) ? CharConstant.EMPTY : urlPass.replaceAll("\\s", "");
+
+                String urlReject = child.elementText("urlReject");
+                urlReject = StringUtils.isBlank(urlReject) ? CharConstant.EMPTY : urlReject.replaceAll("\\s", "");
+
+
+                String urlSumit = child.elementText("urlSumit");
+                urlSumit = StringUtils.isBlank(urlSumit) ? CharConstant.EMPTY : urlSumit.replaceAll("\\s", "");
+
+                vo.setTaskDefineKey(taskDefineKey);
+                vo.setName(name);
+                vo.setBusinessController(businessController);
+                vo.setBusinessService(businessService);
+                vo.setUrlInfo(urlInfo);
+                vo.setUrlPass(urlPass);
+                vo.setUrlReject(urlReject);
+                vo.setUrlSumit(urlSumit);
                 vos.add(vo);
             } catch (Exception e) {
                 logger.error("catch one exception when parsing task-handle.xml ");

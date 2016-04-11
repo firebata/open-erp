@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.BondingLaminationCoatingInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material.impl.helper.BondingLaminationCoatingServiceHelper;
@@ -37,7 +37,7 @@ public class BondingLaminationCoatingAction extends BaseAction<BondingLamination
     private ICommonService bondingLaminationCoatingService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -109,7 +109,7 @@ public class BondingLaminationCoatingAction extends BaseAction<BondingLamination
                                    HttpServletResponse reareaonse) {
         String currentNo = bondingLaminationCoatingService.queryCurrentSeqNo();
         //设置ID
-        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.BLC_INFO, currentNo, incrementNumber));
+        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.BLC_INFO, currentNo, incrementNumberService));
         bondingLaminationCoatingService.add(areaInfo);
         BondingLaminationCoatingServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");

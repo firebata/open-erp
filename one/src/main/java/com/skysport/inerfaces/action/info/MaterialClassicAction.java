@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.MaterialClassicInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material_classic.MaterialClassicManageServiceHelper;
@@ -39,7 +39,7 @@ public class MaterialClassicAction extends BaseAction<MaterialClassicInfo> {
     private ICommonService materialClassicManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -111,7 +111,7 @@ public class MaterialClassicAction extends BaseAction<MaterialClassicInfo> {
     public Map<String, Object> add(MaterialClassicInfo material_classicInfo, HttpServletRequest request) {
         String currentNo = materialClassicManageService.queryCurrentSeqNo();
         //设置ID
-        material_classicInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.MATERIAL_CLASSIC_INFO, currentNo, incrementNumber));
+        material_classicInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.MATERIAL_CLASSIC_INFO, currentNo, incrementNumberService));
         materialClassicManageService.add(material_classicInfo);
 
         MaterialClassicManageServiceHelper.SINGLETONE.refreshSelect();

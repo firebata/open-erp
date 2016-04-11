@@ -170,10 +170,12 @@ public interface WebConstants extends TableNameConstants {
     String APPROVE_FINALLY_QUOTED_PROCESS = "approveFinallyQuotedProcess";//审核最终的报价（和选择的打样的BOM数量一致）
     String APPROVE_FINALLY_BOM_PROCESS = "approveFinallyBomProcess";//审核BOM审核过程
 
+    String PROJECT_ITEM_PASS = "projectItemPass";//项目审核意见
+
     String APPROVE_STATUS_NEW = "1";//新建
     String APPROVE_STATUS_UNDO = "2";//待审批
     String APPROVE_STATUS_REJECT = "3";//驳回
-    String APPROVE_STATUS_APPROVED = "4";//审核通过
+    String APPROVE_STATUS_PASS = "4";//审核通过
     String APPROVE_STATUS_OTHER = "5";//其他
 
     String SYSTEM_ENVIRONMENT = "system_environment";//软件产品环境
@@ -185,4 +187,8 @@ public interface WebConstants extends TableNameConstants {
     String STATECODE_SUSPENDED = "2";
     String STATECODE_ALIVE = "0";//ACTIVE和SUSPENDED 都是ALIVE
 
+    //pantone类型
+    String pantone_kind = "pantone_kind";
+    String pantone_kind_tpx_tcx = "tpx_tcx";
+    String pantone_kind_c_u = "c_u";
 }

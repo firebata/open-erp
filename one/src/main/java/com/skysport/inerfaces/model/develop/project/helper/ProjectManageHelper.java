@@ -5,7 +5,7 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
@@ -186,7 +186,7 @@ public enum ProjectManageHelper {
      * @param info
      * @return
      */
-    public ProjectInfo buildProjectInfo(IncrementNumber incrementNumber, ProjectInfo info) {
+    public ProjectInfo buildProjectInfo(IncrementNumberService incrementNumberService, ProjectInfo info) {
 
         if (StringUtils.isBlank(info.getNatrualkey()) || "null".equals(info.getNatrualkey())) {
             //构建项目id，名称等信息
@@ -194,7 +194,7 @@ public enum ProjectManageHelper {
             //设置ID
             info.setNatrualkey(projectId);
             String kind_name = buildKindName(info);
-            String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.PROJECT_SEQ_NO_LENGTH);
+            String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.PROJECT_SEQ_NO_LENGTH);
             info.setSeqNo(seqNo);
         }
 

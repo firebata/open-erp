@@ -11,7 +11,6 @@ import java.util.Map;
  */
 public class ProjectBomInfo extends ProjectBaseInfo {
     //
-    private String stateCode;
     private String id;
     private String projectId;
     private String parentProjectId;

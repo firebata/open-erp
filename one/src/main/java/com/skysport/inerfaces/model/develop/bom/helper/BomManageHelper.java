@@ -5,7 +5,7 @@ import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.init.SkySportAppContext;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -75,7 +75,7 @@ public class BomManageHelper extends ExcelCreateHelper {
      * @param info             子项目信息
      * @author zhangjh
      */
-    public static void autoCreateBomInfoAndSave(IBomManageService bomManageService, IncrementNumber incrementNumber, ProjectBomInfo info) {
+    public static void autoCreateBomInfoAndSave(IBomManageService bomManageService, IncrementNumberService incrementNumberService, ProjectBomInfo info) {
 
         List<SexColor> sexColors = info.getSexColors();
 
@@ -90,10 +90,10 @@ public class BomManageHelper extends ExcelCreateHelper {
         List<BomInfo> intersection = getIntersection(sexColors, allStyles);
 
         //获取需要删除的bom列表
-        List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles, incrementNumber, info, projectId, customerId, areaId, seriesId);
+        List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles, incrementNumberService, info, projectId, customerId, areaId, seriesId);
 
         //需要增加的bom列表
-        List<BomInfo> needAddBomList = getNeedAddBomList(intersection, sexColors, incrementNumber, info, projectId, customerId, areaId, seriesId);
+        List<BomInfo> needAddBomList = getNeedAddBomList(intersection, sexColors, incrementNumberService, info, projectId, customerId, areaId, seriesId);
 
 
         if (!needDelBomList.isEmpty()) {
@@ -116,14 +116,14 @@ public class BomManageHelper extends ExcelCreateHelper {
     /**
      * @param intersection
      * @param sexColors
-     * @param incrementNumber
+     * @param incrementNumberService
      * @param info
      * @param projectId
      * @param customerId
      * @param areaId
      * @param seriesId        @return 需要增加的bom集合
      */
-    private static List<BomInfo> getNeedAddBomList(List<BomInfo> intersection, List<SexColor> sexColors, IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+    private static List<BomInfo> getNeedAddBomList(List<BomInfo> intersection, List<SexColor> sexColors, IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
         List<BomInfo> needAddBomList = new ArrayList<>();
         for (SexColor sexColor : sexColors) {
             String sexId = sexColor.getSexIdChild();
@@ -131,7 +131,7 @@ public class BomManageHelper extends ExcelCreateHelper {
             for (String mainColor : mainColors) {
                 BomInfo bomInfoTemp = null;
                 if (intersection.isEmpty()) {//没有交集，数据库中子项目所有的bom
-                    bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+                    bomInfoTemp = createBomInfo(incrementNumberService, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
                 } else {
                     boolean isNeedAdd = true;
                     for (BomInfo bomInfo : intersection) {
@@ -143,7 +143,7 @@ public class BomManageHelper extends ExcelCreateHelper {
                     }
 
                     if (isNeedAdd) {
-                        bomInfoTemp = createBomInfo(incrementNumber, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
+                        bomInfoTemp = createBomInfo(incrementNumberService, info, projectId, customerId, areaId, seriesId, sexId, mainColor);
                     }
                 }
                 if (null != bomInfoTemp) {
@@ -157,14 +157,14 @@ public class BomManageHelper extends ExcelCreateHelper {
     /**
      * @param intersection
      * @param allStyles
-     * @param incrementNumber
+     * @param incrementNumberService
      * @param info
      * @param projectId
      * @param customerId
      * @param areaId
      * @param seriesId        @return 需要删除的bom集合
      */
-    private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles, IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+    private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles, IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
         List<BomInfo> needDelBomList = new ArrayList<>();
 
         if (intersection.isEmpty()) {//没有交集，删除数据库中子项目所有的bom
@@ -213,10 +213,10 @@ public class BomManageHelper extends ExcelCreateHelper {
         return intersection;
     }
 
-    private static BomInfo createBomInfo(IncrementNumber incrementNumber, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId, String sexId, String mainColor) {
+    private static BomInfo createBomInfo(IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId, String sexId, String mainColor) {
         BomInfo bomInfo = new BomInfo();
         String kind_name = buildKindName(info);
-        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.BOM_SEQ_NO_LENGTH);
+        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.BOM_SEQ_NO_LENGTH);
         String categoryBId = info.getCategoryBid();
         List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popProject("categoryBItems");
         categoryBId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, categoryBId);

@@ -4,9 +4,10 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
+import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.PantoneInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.service.IPantoneManageService;
 import com.skysport.inerfaces.model.info.service.helper.PantoneManageServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -21,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
     private IPantoneManageService pantoneManageService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -89,8 +89,7 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "编辑PANTONE")
-    public Map<String, Object> edit(PantoneInfo pantoneInfo, HttpServletRequest request,
-                                    HttpServletResponse respones) {
+    public Map<String, Object> edit(PantoneInfo pantoneInfo) {
         pantoneManageService.edit(pantoneInfo);
         PantoneManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("更新成功");
@@ -106,10 +105,11 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "增加PANTONE")
-    public Map<String, Object> add(PantoneInfo pantoneInfo, HttpServletRequest request,
-                                   HttpServletResponse repantoneonse) {
+    public Map<String, Object> add(PantoneInfo pantoneInfo) {
+//        String pantoneId = UuidGeneratorUtils.getNextId();
+        String pantoneId = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.PANTONE_INFO, incrementNumberService);
         //设置ID
-        pantoneInfo.setPantoneId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.PANTONE_INFO, incrementNumber));
+        pantoneInfo.setPantoneId(pantoneId);
         pantoneManageService.add(pantoneInfo);
         PantoneManageServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");
@@ -117,14 +117,12 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
 
 
     /**
-     * @param pantoneId     主键id
-     * @param request       请求信息
-     * @param repantoneonse 返回信息
+     * @param pantoneId 主键id
      * @return 根据主键id找出详细信息
      */
     @RequestMapping(value = "/info/{pantoneId}", method = RequestMethod.GET)
     @ResponseBody
-    public PantoneInfo queryPantoneNo(@PathVariable String pantoneId, HttpServletRequest request, HttpServletResponse repantoneonse) {
+    public PantoneInfo queryPantoneNo(@PathVariable String pantoneId) {
         PantoneInfo pantoneInfo = pantoneManageService.queryPantoneInfoByPantoneId(pantoneId);
         return pantoneInfo;
     }
@@ -155,4 +153,10 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
         return rtSelectResultMap(commonBeans);
     }
 
+    @RequestMapping(value = "/pantone_type", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> queryPantoneType() {
+        Map<String, String> lists = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.pantone_kind);
+        return lists;
+    }
 }

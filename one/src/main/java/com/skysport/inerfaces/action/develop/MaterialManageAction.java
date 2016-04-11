@@ -2,7 +2,6 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.develop.MaterialInfo;
 import com.skysport.inerfaces.model.info.material.IMaterialManageService;
 import org.springframework.context.annotation.Scope;

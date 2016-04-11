@@ -6,9 +6,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>查询客户信息</title>
-    <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
-    <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
+    <jsp:include page="../../base/hb-headc.jsp" flush="true"></jsp:include>
+    <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 </head>
 <body>
 <div class="page-content">
@@ -43,12 +42,8 @@
 
     <%@ include file="edit.jsp" %>
 </div>
-
 </body>
-
-
 </html>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->
 <script id="tpl" type="text/x-handlebars-template">
     {{#each func}}
@@ -59,5 +54,5 @@
         src="<%=path%>/resources/interfaces/system/customer/customer2.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/system/list.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/system/edit.js?v=<%=version%>"></script>
-
-<script language="javascript" type="text/javascript" src="<%=path%>/resources/My97DatePicker/WdatePicker.js?v=<%=version%>"></script>
+<script language="javascript" type="text/javascript"
+        src="<%=path%>/resources/My97DatePicker/WdatePicker.js?v=<%=version%>"></script>

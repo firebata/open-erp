@@ -76,4 +76,3 @@
                     </div>
                 </div>
             </div>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/sp/sp.js?v=<%=version%>"/>

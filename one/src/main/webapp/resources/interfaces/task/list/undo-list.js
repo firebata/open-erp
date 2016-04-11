@@ -7,6 +7,7 @@
     var project_selectURL = path + "/system/baseinfo/project_select";
     var claimURL = path + "/task/claim/";
     var handleURL = path + "/task/handle/";
+    var searchURL = path + "/task/todo/search/";
     /**
      * 列表展示内容
      * @returns {*[]}
@@ -30,7 +31,7 @@
         var indexOpreation = columnsName.length - 1;
         table = $('#example').DataTable({
             ajax: {
-                url: "search"
+                url: searchURL
             },
             serverSide: true,
             columns: columnsName,
@@ -70,7 +71,7 @@
                                     {
                                         "name": "签收",
                                         "fn": "$.claimTask(\'" + data.id + "\',\'" + data.businessKey + "\')",
-                                        "type": "primary"
+                                        "type": "info"
                                     }
                                 ]
                             };
@@ -81,7 +82,7 @@
                                 func: [
                                     {
                                         "name": "办理",
-                                        "fn": "$.handleTask(\'" + data.id + "\',\'" + data.businessKey + "\')",
+                                        "fn": "$.handleTask(\'" + data.id + "\',\'" + data.businessKey + "\',\'" + data.processInstanceId + "\')",
                                         "type": "primary"
                                     }
                                 ]
@@ -129,8 +130,8 @@
      * 办理任务
      * @param _businessKey
      */
-    var handleTask = function (_taskId, _businessKey) {
-        window.location.href = handleURL + _taskId + "/" + _businessKey;
+    var handleTask = function (_taskId, _businessKey, _processInstanceId) {
+        window.location.href = handleURL + _taskId + "/" + _businessKey + "/" + _processInstanceId;
     }
 
     $.claimTask = claimTask;

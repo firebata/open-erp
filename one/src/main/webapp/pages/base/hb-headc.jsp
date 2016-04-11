@@ -13,12 +13,13 @@
 <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace-fonts.css"/>
 <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/page-header.css"/>
 <script type="text/javascript">
+    var path = '<%=path%>';
     var blc_type_fuhe = '<%=SkySportAppContext.blc_type_fuhe%>';
     var ble_type_tiemo = '<%=SkySportAppContext.ble_type_tiemo%>';
     var approve_status_new = '<%=WebConstants.APPROVE_STATUS_NEW%>';
     var approve_status_reject = '<%=WebConstants.APPROVE_STATUS_REJECT%>';
     var approve_status_undo = '<%=WebConstants.APPROVE_STATUS_UNDO%>';
-    var approve_status_approved = '<%=WebConstants.APPROVE_STATUS_APPROVED%>';
+    var approve_status_pass = '<%=WebConstants.APPROVE_STATUS_PASS%>';
     var approve_status_other = '<%=WebConstants.APPROVE_STATUS_OTHER%>';
     var spe = '<%=WebConstants.SPE%>';
     var environment_current = '<%=environment_current%>';

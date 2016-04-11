@@ -4,8 +4,8 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.MaterialPositionInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.PositionServiceHelper;
@@ -36,7 +36,7 @@ public class PositionManageAction extends BaseAction<MaterialPositionInfo> {
     private ICommonService materialPositionService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面
@@ -107,7 +107,7 @@ public class PositionManageAction extends BaseAction<MaterialPositionInfo> {
     public Map<String, Object> add(MaterialPositionInfo info, HttpServletRequest request) {
         String currentNo = materialPositionService.queryCurrentSeqNo();
         //设置ID
-        info.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.T_MATERIAL_POSITION_INFO, currentNo, incrementNumber));
+        info.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.T_MATERIAL_POSITION_INFO, currentNo, incrementNumberService));
         materialPositionService.add(info);
 
         PositionServiceHelper.SINGLETONE.refreshSelect();

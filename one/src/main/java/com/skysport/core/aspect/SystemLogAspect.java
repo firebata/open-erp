@@ -79,7 +79,7 @@ public class SystemLogAspect {
             }
 
             logger.debug("=====前置通知开始=====");
-            logger.debug("请求方法:" + method);
+            logger.info("请求方法:" + method);
             logger.debug("方法描述:" + description);
             logger.info("请求人:" + username);
             logger.info("请求IP:" + ip);

@@ -4,8 +4,6 @@
         <businessController>projectItemAction</businessController>
         <businessService>projectItemManageService</businessService>
         <urlInfo>/development/project_item/add/</urlInfo>
-        <urlPass>/development/project_item/pass/</urlPass>
-        <urlReject>/development/project_item/reject/</urlReject>
         <urlSumit>/development/project_item/submit/</urlSumit>
     </task>
 

@@ -49,7 +49,7 @@ public abstract class BaseAction<T> {
      * @param draw
      * @return <K, V> Map<K, V>
      */
-    public Map<String, Object> buildSearchJsonMap(List<T> results, int recordsTotal, int recordsFiltered, int draw) {
+    public Map<String, Object> buildSearchJsonMap(List<T> results, long recordsTotal, int recordsFiltered, int draw) {
         Map<String, Object> info = new HashMap<String, Object>();
         info.put("data", results);
         info.put("recordsTotal", recordsTotal);

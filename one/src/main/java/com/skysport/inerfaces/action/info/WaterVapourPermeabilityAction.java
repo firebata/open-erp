@@ -4,8 +4,8 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumber;
 import com.skysport.inerfaces.bean.info.WaterVapourPermeabilityInfo;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.model.info.material.impl.helper.WaterVapourPermeabilityServiceHelper;
@@ -37,7 +37,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
     private ICommonService waterVapourPermeabilityService;
 
     @Resource(name = "incrementNumber")
-    private IncrementNumber incrementNumber;
+    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -110,7 +110,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
                                    HttpServletResponse reareaonse) {
         String currentNo = waterVapourPermeabilityService.queryCurrentSeqNo();
         //设置ID
-        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.WVP_INFO, currentNo, incrementNumber));
+        areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.WVP_INFO, currentNo, incrementNumberService));
         waterVapourPermeabilityService.add(areaInfo);
 
         WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();

@@ -3,6 +3,7 @@ package com.skysport.core.model.common;
 import org.activiti.engine.runtime.ProcessInstance;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明:
@@ -37,4 +38,6 @@ public interface IApproveService {
     List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey);
 
     List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey);
+
+    Map<String, Object> getVariableOfTaskNeeding(boolean approve);
 }
