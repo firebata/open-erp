@@ -191,4 +191,6 @@ public interface WebConstants extends TableNameConstants {
     String pantone_kind = "pantone_kind";
     String pantone_kind_tpx_tcx = "tpx_tcx";
     String pantone_kind_c_u = "c_u";
+
+    String  MENU_SESSION_TAG = "menusTotle";
 }

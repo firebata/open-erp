@@ -13,7 +13,7 @@
     var columnsName = [
         {"data": "name"},
         {"data": "parentId"},
-        {"data": "deptTypeId"},
+        {"data": "deptId"},
         {"data": "roleDesc"},
         {"data": "remark"},
         {"data": null}

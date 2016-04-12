@@ -77,7 +77,8 @@ public class RoleInfoAction extends BaseAction<RoleInfo> {
         }
         int draw = Integer.parseInt(request.getParameter("draw"));
         List<RoleInfo> infos = roleInfoService.searchInfos(dataTablesInfo);
-        RoleInfoHelper.SINGLETONE.turnSomeIdToNameInList(infos);
+        List<SelectItem2> deptList = departmentService.querySelectList(null);
+        RoleInfoHelper.SINGLETONE.turnSomeIdToNameInList(infos, deptList);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
 
         return resultMap;

@@ -9,10 +9,12 @@
         d.resource_id AS natrualkey,
         d.resource_name AS name,
         d.resource_desc AS resourceDesc,
+        d.resource_url AS resourceUrl,
         d.del_flag AS delFlag,
         d.update_time AS updateTime,
         d.remark AS remark,
-        d.pid AS parentId
+        d.pid AS parentId,
+        d.no AS no
     </sql>
 
     <select id="selectAllResourceByUserId" resultType="com.skysport.core.bean.permission.ResourceInfo">
@@ -34,6 +36,7 @@
         <if test="pid!=null">
             AND d.pid = #{pid}
         </if>
+        ORDER BY NO DESC
     </select>
 
 
@@ -55,7 +58,8 @@
             resource_id ,
             resource_name,
             pid,
-            resource_url
+            resource_url,
+            no
         FROM  t_qx_resources
         WHERE pid=#{pid} AND TYPE =0 ORDER BY NO DESC
     </select>
@@ -65,6 +69,7 @@
         <result property="name" column="resource_name"></result>
         <result property="pid" column="pid"></result>
         <result property="url" column="resource_url"></result>
+        <result property="no" column="no"></result>
         <collection property="menus" column="{pid=resource_id}" ofType="String" javaType="java.util.ArrayList" select="selectMenu"></collection>
     </resultMap>
 

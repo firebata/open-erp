@@ -117,9 +117,10 @@ public class UserInfoAction extends BaseAction<UserInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "增加用户信息")
-    public Map<String, Object> add(UserInfo userInfo, HttpServletRequest request) throws Exception {
+    public Map<String, Object> add(@RequestBody UserInfo userInfo, HttpServletRequest request) throws Exception {
 
         String uid = UuidGeneratorUtils.getNextId();
+
         //设置ID
         userInfo.setNatrualkey(uid);
 
@@ -128,6 +129,8 @@ public class UserInfoAction extends BaseAction<UserInfo> {
         userInfoService.add(userInfo);
 
         List<UploadFileInfo> fileInfos = userInfo.getFileInfos();
+
+
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, uid, uploadFileInfoService, WebConstants.FILE_KIND_USER);
 
         return rtnSuccessResultMap("新增成功");

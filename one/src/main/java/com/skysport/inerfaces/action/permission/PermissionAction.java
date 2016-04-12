@@ -4,6 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.permission.*;
 import com.skysport.core.utils.UserUtils;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.permission.IPermissionService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -100,7 +101,7 @@ public class PermissionAction extends BaseAction {
         HttpSession session = request.getSession();
         UserInfo user = UserUtils.getUserFromSession(session);
         String userId = user.getNatrualkey();
-        String menuSessionKey = userId + "menusTotle";
+        String menuSessionKey = userId + WebConstants.MENU_SESSION_TAG;
         List<Menu> menusTotle = (List<Menu>) request.getSession().getAttribute(menuSessionKey);
         if (null == menusTotle || menusTotle.isEmpty()) {
             menusTotle = permissionService.selectMenu(userId);

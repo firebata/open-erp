@@ -12,7 +12,7 @@
      * @param _pantoneId
      */
     function info(_pantoneId) {
-        loadPantoneTypeSelect(function () {
+        loadPantoneTypeSelect(_pantoneId, function () {
             initFormField(_pantoneId);
         });
     }
@@ -30,7 +30,7 @@
         });
     }
 
-    function loadPantoneTypeSelect(_callback) {
+    function loadPantoneTypeSelect(_pantoneId, _callback) {
         $.sendRestFulAjax("pantone_type/", null, 'GET', 'json', function (data) {
             initialPantoneType(data);
             _callback();
@@ -123,6 +123,9 @@
             $('#myModal').on('shown.bs.modal', function (e) {
                 if (pantoneId == '') {
                     $('#defaultForm').data('bootstrapValidator').resetForm(true);
+                    loadPantoneTypeSelect(pantoneId, function () {
+                       
+                    });
                 }
             });
 

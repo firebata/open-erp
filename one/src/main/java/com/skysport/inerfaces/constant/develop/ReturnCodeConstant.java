@@ -8,8 +8,8 @@ public enum ReturnCodeConstant {
 
     PROJECT_CANNOT_EDIT("100004", "不能修改主项目信息"),
 
-    UPDATE_BOM_MAINCOLOR_PARAM_ERR("100005", "修改bom主颜色时，传输的信息有误");
-
+    UPDATE_BOM_MAINCOLOR_PARAM_ERR("100005", "修改bom主颜色时，传输的信息有误"),
+    USER_IS_NOT_LOGINED("100006", "用户没有登录");
     private String code;
 
     private String msg;

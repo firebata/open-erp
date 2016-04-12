@@ -3,12 +3,10 @@ package com.skysport.inerfaces.model.permission.roleinfo.helper;
 import com.skysport.core.bean.permission.RoleInfo;
 import com.skysport.core.bean.permission.RoleUser;
 import com.skysport.core.bean.permission.ZTreeNode;
-import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.core.bean.system.SelectItem2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 说明:
@@ -53,16 +51,21 @@ public enum RoleInfoHelper {
      *
      * @param roleInfos
      */
-    public void turnSomeIdToNameInList(List<RoleInfo> roleInfos) {
-        Map<String, String> resultMap = DictionaryInfoCachedMap.SINGLETONE.getValueMapByTypeKey(WebConstants.DEPT_TYPE);
-
+    public void turnSomeIdToNameInList(List<RoleInfo> roleInfos, List<SelectItem2> deptList) {
         if (null != roleInfos && !roleInfos.isEmpty()) {
             for (RoleInfo roleInfo : roleInfos) {
-
                 //将部门id转换成部门名
-                String deptType = roleInfo.getDeptTypeId();
-                deptType = resultMap.get(deptType);
-                roleInfo.setDeptTypeId(deptType);
+                String deptId = roleInfo.getDeptId();
+                String deptName = "";
+                for (SelectItem2 selectItem2 : deptList) {
+                    String deptIdBase = selectItem2.getNatrualkey();
+                    if (deptIdBase.equals(deptId)) {
+                        deptName = selectItem2.getName();
+                        break;
+                    }
+                }
+                deptId = deptName;//替换内容
+                roleInfo.setDeptId(deptId);
                 turnRoleIdToRoleName(roleInfo, roleInfos);
             }
         }

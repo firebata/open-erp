@@ -30,6 +30,14 @@ public class LoginAction {
     @Resource(name = "loginService")
     private ILoginService loginService;
 
+    @RequestMapping(value = "/main-content")
+    @ResponseBody
+    @SystemControllerLog(description = "控制台")
+    public ModelAndView content(HttpSession session) throws Exception {
+        ModelAndView view = new ModelAndView("content");
+        return view;
+    }
+
 
     @RequestMapping(value = "/index")
     @ResponseBody

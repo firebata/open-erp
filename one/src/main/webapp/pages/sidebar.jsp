@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<div class="sidebar responsive" id="sidebar">
+<div class="sidebar" id="sidebar">
     <script type="text/javascript">
         try {
             ace.settings.check('sidebar', 'fixed')

@@ -13,7 +13,7 @@ public class RoleInfo extends SelectItem {
     private String roleName;
     private String roleDesc;
     private String parentId;
-    private String deptTypeId;
+    private String deptId;
     private int delFlag;
     private String remark;
 
@@ -92,11 +92,11 @@ public class RoleInfo extends SelectItem {
         this.updateTime = updateTime;
     }
 
-    public String getDeptTypeId() {
-        return deptTypeId;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setDeptTypeId(String deptTypeId) {
-        this.deptTypeId = deptTypeId;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

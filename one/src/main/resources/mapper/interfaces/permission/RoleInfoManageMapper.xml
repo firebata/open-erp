@@ -12,7 +12,7 @@
         update_time AS updateTime,
         remark AS remark,
         parent_id AS parentId,
-        dept_id AS deptTypeId
+        dept_id AS deptId
     </sql>
     <select id="queryInfo" resultType="RoleInfo">
         SELECT
@@ -78,7 +78,7 @@
           role_desc=#{roleDesc},
           remark=#{remark},
           role_name=#{name},
-          dept_id=#{deptTypeId},
+          dept_id=#{deptId},
           parent_id=#{parentId}
         WHERE
            role_id =#{natrualkey}
@@ -89,7 +89,7 @@
         INTO
             t_qx_role (role_id,role_name,role_desc,remark,parent_id,dept_id)
         VALUES
-           (#{natrualkey},#{name},#{roleDesc},#{remark},#{parentId},#{deptTypeId})
+           (#{natrualkey},#{name},#{roleDesc},#{remark},#{parentId},#{deptId})
     </insert>
 
     <update id="del">

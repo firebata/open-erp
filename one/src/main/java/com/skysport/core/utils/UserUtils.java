@@ -1,6 +1,7 @@
 package com.skysport.core.utils;
 
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -44,7 +45,12 @@ public class UserUtils {
     }
 
     public static void removeUserFromSession(HttpSession session) {
-        session.removeAttribute(CURRENT_USER);
+        UserInfo userInfo = getUserFromSession(session);
+        if (null != userInfo) {
+            String menuSessionKey = userInfo.getNatrualkey() + WebConstants.MENU_SESSION_TAG;
+            session.removeAttribute(menuSessionKey);//菜单信息
+        }
+        session.removeAttribute(CURRENT_USER);//用户信息
     }
 
 }

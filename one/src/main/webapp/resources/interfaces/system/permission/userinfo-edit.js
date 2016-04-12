@@ -87,7 +87,6 @@
         userInfo.fileInfos = uploadFileInfos;
 
         $.sendJsonAjax(url, userInfo, function () {
-            //$.sendRestFulAjax(saveUrl,bominfo, 'POST', 'json', function () {
             window.location.href = _0URL;
         })
     }

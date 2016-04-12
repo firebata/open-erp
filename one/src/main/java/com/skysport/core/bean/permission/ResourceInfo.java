@@ -28,6 +28,18 @@ public class ResourceInfo extends SelectItem {
     private String updateTime;
 
     private String remark;
+    /**
+     * 序号
+     */
+    private String no;
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     public String getParentId() {
         return parentId;

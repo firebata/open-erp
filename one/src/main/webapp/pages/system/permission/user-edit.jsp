@@ -6,13 +6,9 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新增/修改用户信息</title>
-    <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/headResources.jsp"></jsp:include>
+    <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <script language="javascript" type="text/javascript"
-            src="<%=path%>/resources/My97DatePicker/WdatePicker.js"></script>
-    <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"       id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -121,6 +117,7 @@
 
 </body>
 </html>
+<jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/system/permission/userinfo-edit.js?v=<%=version%>"></script>

@@ -13,7 +13,7 @@
     <meta name="keywords" content="skysport,翊凯"/>
     <meta name="description" content="skysport,翊凯"/>
     <jsp:include page="base/hb-headc.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.min.css" class="ace-main-stylesheet"
           id="main-ace-style"/>
 </head>
 
@@ -66,7 +66,7 @@
 
     <%@ include file="sidebar.jsp" %>
     <div class="main-content">
-        <iframe id="mainIframe" src="pages/content.jsp" width="100%"></iframe>
+        <iframe id="mainIframe" src="main-content" width="100%"></iframe>
     </div>
     <!-- /.main-content -->
 

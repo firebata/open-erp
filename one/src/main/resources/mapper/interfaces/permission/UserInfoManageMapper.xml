@@ -112,7 +112,7 @@
 
     <insert id="add">
         INSERT INTO
-        t_qx_user t (user_id,user_name,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
+        t_qx_user  (user_id,user_name,user_type,user_email,user_mobile,aliases,profile_address,question,answer)
         VALUES (#{natrualkey},#{name},#{userType},#{userEmail},#{userMobile},#{aliases},#{profileAddress},#{question},#{answer})
     </insert>
 

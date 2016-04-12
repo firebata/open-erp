@@ -2,8 +2,11 @@ package com.skysport.inerfaces.model.permission;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.permission.*;
+import com.skysport.core.exception.SkySportException;
 import com.skysport.core.model.login.service.IUserService;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.mapper.permission.PermissionManageMapper;
 import com.skysport.inerfaces.model.permission.resource.helper.ResourceInfoHelper;
 import com.skysport.inerfaces.model.permission.resource.service.IResourceInfoService;
@@ -121,8 +124,10 @@ public class PermissionServiceImpl implements IPermissionService {
      */
     @Override
     public List<Menu> selectMenu(String userId) {
-
-        UserInfo userInDB = userService.queryInfo(userId);
+        UserInfo userInDB = UserUtils.getUserFromSession();
+        if (null == userInDB) {
+            throw new SkySportException(ReturnCodeConstant.USER_IS_NOT_LOGINED);
+        }
         int isAdmin = userInDB.getIsAdmin();
         //顶级菜单
         List<ResourceInfo> resourceInfos;
@@ -137,17 +142,17 @@ public class PermissionServiceImpl implements IPermissionService {
         for (ResourceInfo resourceInfo : resourceInfos) {
             String resourceId = resourceInfo.getNatrualkey();
             List<Menu> menus = sidebarService.selectMenu(resourceId);
-            if (null != menus && !menus.isEmpty()) {
-                Menu menu = new Menu();
-                menu.setId(resourceId);
-                menu.setPid(WebConstants.MENU_LEVEL_TOP_ID);
-                menu.setUrl(resourceInfo.getResourceUrl());
-                menu.setName(resourceInfo.getName());
-                menu.setMenus(menus);
-                menusTotle.add(menu);
-            }
+//            if (null != menus && !menus.isEmpty()) {
+            Menu menu = new Menu();
+            menu.setId(resourceId);
+            menu.setPid(WebConstants.MENU_LEVEL_TOP_ID);
+            menu.setUrl(resourceInfo.getResourceUrl());
+            menu.setName(resourceInfo.getName());
+            menu.setMenus(menus);
+            menu.setNo(resourceInfo.getNo());
+            menusTotle.add(menu);
+//            }
         }
-
         return menusTotle;
     }
 

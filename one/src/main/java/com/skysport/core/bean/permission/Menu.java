@@ -7,12 +7,21 @@ import java.util.List;
  * 说明:菜单
  * Created by zhangjh on 2015/11/26.
  */
-public class Menu implements Serializable{
+public class Menu implements Serializable {
     private String id;
     private String pid;
     private String name;
     private String url;
+    private String no;
     private List<Menu> menus;
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     public String getId() {
         return id;

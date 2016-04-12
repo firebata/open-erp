@@ -6,12 +6,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新增/修改角色信息</title>
-    <jsp:include page="../../base/common.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/commonTable.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/headResources.jsp"></jsp:include>
+    <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <script language="javascript" type="text/javascript"    src="<%=path%>/resources/My97DatePicker/WdatePicker.js"></script>
-    <link rel="stylesheet" href="<%=path%>/resources/css/page-header.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -46,14 +44,16 @@
                         <div class="form-group">
                             <label class="col-xs-7  col-sm-4  control-label" for="parentId">父角色</label>
                             <div class="col-xs-12 col-sm-4">
-                                <select class="col-xs-12" data-style="btn-info" id="parentId" name="parentId"  placeholder="父角色"></select>
+                                <select class="col-xs-12" data-style="btn-info" id="parentId" name="parentId"
+                                        placeholder="父角色"></select>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-xs-7  col-sm-4  control-label" for="deptId">部门</label>
                             <div class="col-xs-12 col-sm-4">
-                                <select class="col-xs-12" data-style="btn-info" id="deptId" name="deptId"  placeholder="部门">
+                                <select class="col-xs-12" data-style="btn-info" id="deptId" name="deptId"
+                                        placeholder="部门">
                                 </select>
                             </div>
                         </div>
@@ -61,14 +61,16 @@
                         <div class="form-group">
                             <label class="col-xs-7  col-sm-4  control-label" for="roleDesc"> 角色描述</label>
                             <div class="col-xs-12 col-sm-4">
-                                <input type="text" id="roleDesc" name="roleDesc"       placeholder="角色描述" class="col-xs-10 col-sm-12"/>
+                                <input type="text" id="roleDesc" name="roleDesc" placeholder="角色描述"
+                                       class="col-xs-10 col-sm-12"/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-xs-7  col-sm-4  control-label" for="remark"> 备注</label>
                             <div class="col-xs-12 col-sm-4">
-                                <input type="text" id="remark" name="remark"       placeholder="备注" class="col-xs-10 col-sm-12"/>
+                                <input type="text" id="remark" name="remark" placeholder="备注"
+                                       class="col-xs-10 col-sm-12"/>
                             </div>
                         </div>
 
@@ -90,4 +92,6 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/permission/roleinfo-edit.js?v=<%=version%>"></script>
+<jsp:include page="../../base/hb-footj.jsp"></jsp:include>
+<script type="text/javascript"
+        src="<%=path%>/resources/interfaces/system/permission/roleinfo-edit.js?v=<%=version%>"></script>
