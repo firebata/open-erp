@@ -53,13 +53,13 @@ function initSelect(_data) {
  * 重置下拉框
  */
 var resetSelect = function () {
-    $('.js-data-example-ajax').select2('val', '');
+    $('.js-data-example-ajax').val(null).trigger("change");
 }
 
 
 $(function () {
 
-
+    initSelect({});
 
     $('#resetBtn').click(function () {
         $('.js-data-example-ajax').select2({

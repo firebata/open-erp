@@ -16,14 +16,16 @@ import java.util.List;
  */
 public interface IBomManageService extends ICommonService<BomInfo> {
 
-    public int listFilteredInfosCounts(BomQueryForm bomQueryForm);
+    int listFilteredInfosCounts(BomQueryForm bomQueryForm);
 
-    public List<BomInfo> searchInfos(BomQueryForm bomQueryForm);
+    List<BomInfo> searchInfos(BomQueryForm bomQueryForm);
 
+    List<String> queryAllBomIdsByProjectId(String projectId);
+    List<String> queryBomIdsNeedLapdipByProjectId(String projectId);
     /**
      * @param bomInfo
      */
-    public void edit(BomInfo bomInfo);
+    void edit(BomInfo bomInfo);
 
     void delByProjectId(String natrualkey);
 

@@ -188,11 +188,13 @@
      * @param _data 表单对象
      */
     function initSelect2sByArr($element, items) {
-        for (var idx = 0; idx < items.length; idx++) {
-            var item = items[idx];
-            var option = new Option(item.text, item.id, true, true);
-            // Append it to the select
-            $element.append(option);
+        if(items != null){
+            for (var idx = 0; idx < items.length; idx++) {
+                var item = items[idx];
+                var option = new Option(item.text, item.id, true, true);
+                // Append it to the select
+                $element.append(option);
+            }
         }
         $element.trigger('change');
     }

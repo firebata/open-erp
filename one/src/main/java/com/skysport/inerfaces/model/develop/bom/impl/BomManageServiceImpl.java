@@ -73,6 +73,16 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         return bomInfoManageMapper.searchInfos(bomQueryForm);
     }
 
+    @Override
+    public List<String> queryAllBomIdsByProjectId(String projectId) {
+        return bomInfoManageMapper.queryAllBomIdsByProjectId(projectId);
+    }
+
+    @Override
+    public List<String> queryBomIdsNeedLapdipByProjectId(String projectId) {
+        return bomInfoManageMapper.queryBomIdsNeedLapdipByProjectId(projectId);
+    }
+
     /**
      * 查询bom信息
      *
@@ -237,7 +247,6 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         //删除对应子项目的性别颜色信息
         BomInfo info = queryInfoByNatrualKey(natrualKey);
         projectItemManageService.delSexColorInfoByBomInfo(info);
-
 
 
     }

@@ -35,8 +35,6 @@
                 <tbody></tbody>
                 <!-- tbody是必须的 -->
             </table>
-
-
         </div>
         <!-- Button trigger modal -->
     </div>
@@ -48,9 +46,6 @@
     <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
     {{/each}}
 </script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/pantone/pantone.js?v=<%=version%>"></script>
-
 </body>
-
-
 </html>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/system/pantone/pantone.js?v=<%=version%>"></script>

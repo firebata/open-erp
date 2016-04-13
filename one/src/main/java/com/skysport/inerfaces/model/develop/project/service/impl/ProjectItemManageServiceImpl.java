@@ -163,6 +163,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     }
 
 
+
+
     @Override
     public void addBomInfo(ProjectBomInfo info) {
         projectItemManageMapper.addBomInfo(info);
@@ -368,6 +370,8 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         super.addBatch(infos);
 
     }
+
+
 
 
 }

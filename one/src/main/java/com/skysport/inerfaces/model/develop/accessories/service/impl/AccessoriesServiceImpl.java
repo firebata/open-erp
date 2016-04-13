@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.model.develop.accessories.service.impl;
 
-import com.skysport.core.constant.CharConstant;
+import com.skysport.core.annotation.SystemServiceLog;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UuidGeneratorUtils;
@@ -8,7 +8,6 @@ import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.info.AccessoriesManageMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
@@ -55,6 +54,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
      * @param bomInfo
      */
     @Override
+    @SystemServiceLog(description = "保存辅料信息")
     public List<AccessoriesInfo> updateBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
         //返回辅料的id和序号信息
         List<AccessoriesInfo> accessoriesRtn = new ArrayList<>();
@@ -114,30 +114,30 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         }
         return accessoriesRtn;
     }
-
+    @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAccessoriesList(String bomId) {
         return accessoriesManageMapper.queryAccessoriesList(bomId);
     }
-
+    @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAllAccessoriesByBomId(String bomId) {
         return accessoriesManageMapper.queryAllAccessoriesByBomId(bomId);
     }
 
-    private String buildKindName(BomInfo bomInfo, AccessoriesJoinInfo accessoriesJoinInfo) {
-
-        String kind_name = CharConstant.EMPTY;
-
-        StringBuilder stringBuilder = new StringBuilder();
-        String materialTypeId = StringUtils.isBlank(accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId()) ? WebConstants.ACCESSORIE_MATERIAL_TYPE_ID : accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId();
-        stringBuilder.append(materialTypeId);
-        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getSpId());
-        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getYearCode());
-        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getProductTypeId());
-
-        return kind_name;
-    }
+//    private String buildKindName(BomInfo bomInfo, AccessoriesJoinInfo accessoriesJoinInfo) {
+//
+//        String kind_name = CharConstant.EMPTY;
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String materialTypeId = StringUtils.isBlank(accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId()) ? WebConstants.ACCESSORIE_MATERIAL_TYPE_ID : accessoriesJoinInfo.getAccessoriesInfo().getMaterialTypeId();
+//        stringBuilder.append(materialTypeId);
+//        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getSpId());
+//        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getYearCode());
+//        stringBuilder.append(accessoriesJoinInfo.getAccessoriesInfo().getProductTypeId());
+//
+//        return kind_name;
+//    }
 
 
     private void setAccessoriesId(AccessoriesJoinInfo accessoriesJoinInfo, String accessoriesId, String bomId) {

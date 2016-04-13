@@ -4,10 +4,8 @@ import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.model.permission.roleinfo.service.IRoleInfoService;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +19,6 @@ import java.util.Map;
 @Service("projectItemTaskService")
 public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
 
-    @Autowired
-    private IRoleInfoService roleInfoService;
     @Resource
     private IStaffService developStaffImpl;
 
