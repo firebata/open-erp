@@ -85,13 +85,15 @@
 
 
     <select id="listInfosCounts" resultType="Integer">
-		SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 AND a.project_id=b.project_id AND b.del_flag=0
+		SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c
+        WHERE a.del_flag=0 AND c.project_id=b.project_id AND a.bom_id = c.bom_id AND b.del_flag=0
 	</select>
 
+
+
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 and a.project_id=b.project_id AND b.del_flag=0
+        SELECT COUNT(*) FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c
+        WHERE a.del_flag=0 AND c.project_id=b.project_id AND a.bom_id = c.bom_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
             AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>
@@ -106,11 +108,13 @@
     </select>
 
 
+
+
     <select id="searchInfos" resultType="BomInfo">
         SELECT
         <include refid="searchInfoSql2"/>
-        FROM t_kf_bominfo a,t_kf_project_item b
-        WHERE a.del_flag=0 AND a.project_id=b.project_id AND b.del_flag=0
+        FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c
+        WHERE a.del_flag=0 AND c.project_id=b.project_id AND a.bom_id = c.bom_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
             AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>
@@ -149,25 +153,25 @@
     <insert id="addBatch" parameterType="list">
         INSERT INTO
         t_kf_bominfo
-        (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+        (bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.projectId},#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
+            (#{item.natrualkey},#{item.name},#{item.customerId},#{item.areaId},#{item.sexId},#{item.seriesId},#{item.collectionNum},#{item.mainColor},#{item.fabricsEndDate},#{item.accessoriesEndDate},#{item.preOfferDate},#{item.clothReceivedDate},#{item.offerAmount})
         </foreach>
     </insert>
 
     <insert id="add">
 		INSERT INTO
-		    t_kf_bominfo (project_id,bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
-		VALUES (#{projectId},#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
+		    t_kf_bominfo (bom_id,bom_name,customer_id,area_id,sex_id,series_id,collectionNum,main_color,fabrics_end_date,accessories_end_date,preoffer_date,cloth_received_date,offer_amount)
+		VALUES (#{natrualkey},#{name},#{customerId},#{areaId},#{sexId},#{seriesId},#{collectionNum},#{mainColor},#{fabricsEndDate},#{accessoriesEndDate},#{preOfferDate},#{clothReceivedDate},#{offerAmount})
 	</insert>
 
     <select id="selectAllBomSexAndMainColor" resultType="BomInfo">
         SELECT
         <include refid="searchInfoSql"/>
         FROM
-        t_kf_bominfo a
-        WHERE a.project_id= #{projectId} AND a.del_flag =0
+        t_kf_bominfo a,t_kf_project_item_bom b
+        WHERE a.bom_id= b.bom_id and b.project_id= #{projectId} AND a.del_flag =0
     </select>
 
     <update id="del">

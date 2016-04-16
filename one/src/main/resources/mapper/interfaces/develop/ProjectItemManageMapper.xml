@@ -117,17 +117,17 @@
 
     <insert id="add">
 		INSERT INTO
-		t_kf_project_item (seq_no,project_id,parent_project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
-		VALUES (#{seqNo},#{natrualkey},#{parentProjectId},#{name},#{yearCode},#{customerId},#{areaId},#{seriesId},#{creater},#{version},#{sampleDelivery},#{isNeedSwatch},#{isNeedPreOffer},#{needPreOfferDate},#{sketchReceivedDate},#{fileLocation},#{remark})
+		t_kf_project_item (seq_no,project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
+		VALUES (#{seqNo},#{natrualkey},#{name},#{yearCode},#{customerId},#{areaId},#{seriesId},#{creater},#{version},#{sampleDelivery},#{isNeedSwatch},#{isNeedPreOffer},#{needPreOfferDate},#{sketchReceivedDate},#{fileLocation},#{remark})
 	</insert>
 
     <insert id="addBatch" parameterType="list">
         INSERT INTO
         t_kf_project_item
-        (seq_no,project_id,parent_project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
+        (seq_no,project_id,project_name,year_code,customer_id,area_id,series_id,creater,version,sample_delivery,is_need_swatch,is_need_preoffer,need_preoffer_date,sketch_received_date,file_location,remark)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.seqNo},#{item.natrualkey},#{item.parentProjectId},#{item.name},#{item.yearCode},#{item.customerId},#{item.areaId},#{item.seriesId},#{item.creater},#{item.version},#{item.sampleDelivery},#{item.isNeedSwatch},#{item.isNeedPreOffer},#{item.needPreOfferDate},#{item.sketchReceivedDate},#{item.fileLocation},#{item.remark})
+            (#{item.seqNo},#{item.natrualkey},#{item.name},#{item.yearCode},#{item.customerId},#{item.areaId},#{item.seriesId},#{item.creater},#{item.version},#{item.sampleDelivery},#{item.isNeedSwatch},#{item.isNeedPreOffer},#{item.needPreOfferDate},#{item.sketchReceivedDate},#{item.fileLocation},#{item.remark})
         </foreach>
     </insert>
 
@@ -178,7 +178,7 @@
         UPDATE
           t_kf_project_item
         SET
-        approve_status=#{status}
+          approve_status=#{status}
         WHERE del_flag=0
         AND project_id IN
         <foreach item="item" index="index" collection="businessKeys"       open="(" separator="," close=")">

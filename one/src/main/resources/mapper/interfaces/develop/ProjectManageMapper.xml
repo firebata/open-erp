@@ -137,10 +137,10 @@
 
     </select>
 
+
     <delete id="delInfoAboutProject">
 	   update t_kf_project_category		set  del_flag=1		where project_id =#{natrualkey};
 	   update t_kf_project_item_bom_baseinfo		set  del_flag=1		where project_id  in (select project_id from t_kf_project_item where parent_project_id  =#{natrualkey});
-       update t_kf_project_item		set  del_flag=1		where parent_project_id =#{natrualkey}
 	</delete>
 
     <!--信息下拉列表-->

@@ -10,7 +10,9 @@ import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
+import com.skysport.inerfaces.bean.relation.ProjectItemProjectIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 
@@ -232,30 +234,30 @@ public enum ProjectManageHelper {
     public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, UserInfo userInfo) {
         List<ProjectBomInfo> projectBomInfos = new ArrayList<>();
         List<ProjectCategoryInfo> projectCategoryInfos = info.getCategoryInfos();
-
+        String aliases = userInfo.getAliases();
 
         if (null != projectCategoryInfos && !projectCategoryInfos.isEmpty()) {
             int seq = 1;
             for (ProjectCategoryInfo categoryInfo : projectCategoryInfos) {
 //
-                info.setSeqNo(seq + "");
+                info.setSeqNo(String.valueOf(seq));
                 ProjectBomInfo projectBomInfo;//直接将项目的大部分项目信息转存到子项目对象中
                 try {
                     projectBomInfo = info.clone();
                 } catch (CloneNotSupportedException e) {
-                    throw new SkySportException("100003", "克隆对象失败");
+                    throw new SkySportException(ReturnCodeConstant.CLONE_FAIL);
                 }
 
-                String natrualkey = info.getNatrualkey() + seq;
+                String projectItemId = info.getNatrualkey() + seq;
                 String name = buildProjectItemName(info, categoryInfo);
-                projectBomInfo.setNatrualkey(natrualkey);
+                projectBomInfo.setNatrualkey(projectItemId);
                 projectBomInfo.setName(name);
                 projectBomInfo.setProjectName(name);
                 projectBomInfo.setCategoryAid(categoryInfo.getCategoryAid());
                 projectBomInfo.setCategoryBid(categoryInfo.getCategoryBid());
                 projectBomInfo.setParentProjectId(info.getNatrualkey());
+                projectBomInfo.setCreater(aliases);
                 projectBomInfos.add(projectBomInfo);
-                projectBomInfo.setCreater(userInfo.getAliases());
                 seq++;
             }
         }
@@ -282,7 +284,6 @@ public enum ProjectManageHelper {
     }
 
     /**
-     *
      * @param projectBomInfos
      * @return
      */
@@ -294,4 +295,15 @@ public enum ProjectManageHelper {
         return businessKeys;
     }
 
+    public List<ProjectItemProjectIdVo> ProjectItemProjectIdVo(List<ProjectBomInfo> projectBomInfos, String projectId) {
+        List<ProjectItemProjectIdVo> vos = new ArrayList<ProjectItemProjectIdVo>();
+        for (ProjectBomInfo projectBomInfo : projectBomInfos) {
+            String projectItemId = projectBomInfo.getNatrualkey();
+            String projectPerentId = projectBomInfo.getParentProjectId();
+            ProjectItemProjectIdVo vo = new ProjectItemProjectIdVo(projectItemId, projectPerentId);
+            vos.add(vo);
+        }
+
+        return vos;
+    }
 }

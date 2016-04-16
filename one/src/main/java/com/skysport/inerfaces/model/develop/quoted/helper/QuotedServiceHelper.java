@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.model.develop.quoted.helper;
 
 import com.skysport.core.constant.CharConstant;
+import com.skysport.inerfaces.bean.develop.FactoryQuoteInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.utils.ExcelCreateHelper;
 import org.apache.commons.logging.Log;
@@ -11,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,8 +22,13 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2015/9/17.
  */
-public class QuotedServiceHelper  extends ExcelCreateHelper {
+public class QuotedServiceHelper extends ExcelCreateHelper {
     protected static transient Log logger = LogFactory.getLog(QuotedServiceHelper.class);
+    private static QuotedServiceHelper quotedServiceHelper = new QuotedServiceHelper();
+
+    public static QuotedServiceHelper getInstance() {
+        return quotedServiceHelper;
+    }
 
     /**
      * 创建报价表
@@ -124,6 +131,8 @@ public class QuotedServiceHelper  extends ExcelCreateHelper {
     }
 
 
-
-
+    public FactoryQuoteInfo getInfo(HttpServletRequest request) {
+        FactoryQuoteInfo info = new FactoryQuoteInfo();
+        return info;
+    }
 }

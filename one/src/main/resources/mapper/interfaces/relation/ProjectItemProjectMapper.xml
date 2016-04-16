@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.relation.ProjectItemProjectMapper">
+
+    <update id="backupRecordsToHisByParentProjectId">
+         INSERT INTO t_kf_project_item_project_his(project_id,parent_project_id) SELECT  project_id,parent_project_id FROM t_kf_project_item_project  WHERE  parent_project_id=#{parentProjectId} ;
+         DELETE  FROM t_kf_project_item_project WHERE  parent_project_id=#{parentProjectId}
+    </update>
+
+    <insert id="batchInsert">
+
+        INSERT INTO t_kf_project_item_project(project_id,parent_project_id)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.projectId},#{item.parentProjectId})
+        </foreach>
+    </insert>
+
+</mapper>

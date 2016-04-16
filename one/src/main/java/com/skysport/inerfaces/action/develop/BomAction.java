@@ -2,14 +2,13 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -93,29 +92,20 @@ public class BomAction extends BaseAction<BomInfo> {
     @SystemControllerLog(description = "查询BOM列表信息")
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
-        BomQueryForm bomQueryForm = new BomQueryForm();
-        bomQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
-        BomInfo bomInfo = new BomInfo();
-        bomQueryForm.setBomInfo(bomInfo);
-        BomManageHelper.buildBomQueryForm(bomQueryForm, request);
-
-        // 总记录数
-        int recordsTotal = bomManageService.listInfosCounts();
-        int recordsFiltered = recordsTotal;
-
-        if (!StringUtils.isBlank(bomQueryForm.getDataTablesInfo().getSearchValue())) {
-            recordsFiltered = bomManageService.listFilteredInfosCounts(bomQueryForm);
-        }
-        int draw = Integer.parseInt(request.getParameter("draw"));
-
-        List<BomInfo> infos = bomManageService.searchInfos(bomQueryForm);
-        BomManageHelper.turnSexIdToName(infos);
-        Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
-
+        BomQueryForm queryForm = new BomQueryForm();
+        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
+        BomInfo bomInfo = BomManageHelper.getInstance().getProjectBomInfo(request);
+        queryForm.setBomInfo(bomInfo);
+        Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, bomManageService);
         return resultMap;
 
     }
 
+
+    @Override
+    public void turnIdToName(List<BomInfo> infos) {
+        BomManageHelper.turnSexIdToName(infos);
+    }
 
     /**
      * 此方法描述的是：

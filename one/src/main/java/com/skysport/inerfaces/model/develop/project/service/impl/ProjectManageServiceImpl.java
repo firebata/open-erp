@@ -6,7 +6,9 @@ import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
+import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
+import com.skysport.inerfaces.bean.relation.ProjectItemProjectIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.BaseQueyrForm;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
@@ -17,14 +19,12 @@ import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectCategoryManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
+import com.skysport.inerfaces.model.relation.IRelationIdDealService;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -50,6 +50,9 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
 
+    @Autowired
+    private IRelationIdDealService projectItemProjectServiceImpl;
+
     @Override
     public void afterPropertiesSet() {
         commonDao = projectManageMapper;
@@ -63,10 +66,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Override
     public void add(ProjectInfo info) {
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        UserInfo userInfo = UserUtils.getUserFromSession(session);
-
+        UserInfo userInfo = UserUtils.getUserFromSession();
 
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
@@ -78,22 +78,33 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         //组装项目品类信息
         info = ProjectManageHelper.SINGLETONE.buildProjectCategoryInfo(info);
 
-        //大项目新增
         //增加主项目信息
         super.add(info);
 
         //增加项目的品类信息
-        projectCategoryManageService.addBatch(info.getCategoryInfos());
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
+        addBatchCategoryInfos(info.getCategoryInfos());
 
         //增加子项目
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
         addProjectItems(projectBomInfos);
+
+        //增加项目和子项目的关系
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, info.getNatrualkey());
+        projectItemProjectServiceImpl.batchInsert(ids);
+
+        updateApproveStatusBatch(projectBomInfos);
+
+
     }
 
     private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
         //业务数据
         projectItemManageService.addBatch(projectBomInfos);
         projectItemManageService.addBatchBomInfo(projectBomInfos);
+
+    }
+
+    private void updateApproveStatusBatch(List<ProjectBomInfo> projectBomInfos) {
         //审核状态：新增
         List<String> businessKeys = ProjectManageHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
         projectItemManageService.updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
@@ -107,44 +118,41 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     @Override
     public void edit(ProjectInfo info) {
 
-
-//        ProjectInfo infoInDb = super.queryInfoByNatrualKey(info.getNatrualkey());
-
-//        if (infoInDb.getStatus() == WebConstants.PROJECT_CANOT_EDIT) {
-//            throw new SkySportException(ReturnCodeConstant.PROJECT_CANNOT_EDIT.getCode(), ReturnCodeConstant.PROJECT_CANNOT_EDIT.getMsg());
-//        }
-
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-
         //读取session中的用户
-        UserInfo userInfo = UserUtils.getUserFromSession(session);
+        UserInfo userInfo = UserUtils.getUserFromSession();
+
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
-
-//        UserInfo userInfo = (UserInfo) BaseController.requestThreadLocal.get().getSession().getAttribute(WebConstants.CURRENT_USER);
-        //判断bom有没有生成，如果bom已生成，不能修改项目信息
-//        if(){
-//            throw new SkySportException("100001","bom已生成，不能修改项目信息");
-//        }
 
         info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumberService, info);
 
         //更新t_project表
         super.edit(info);
 
-        //删除项目相关的所有信息
-        projectManageMapper.delInfoAboutProject(info.getNatrualkey());
+        delInfoAboutProject(info.getNatrualkey());
 
-//        info = ProjectManageHelper.buildProjectCategoryInfo(info);
-        //增加项目的品类信息
-        projectCategoryManageService.addBatch(info.getCategoryInfos());
-
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
+        addBatchCategoryInfos(info.getCategoryInfos());
 
         //增加子项目
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
         addProjectItems(projectBomInfos);
 
+        //增加项目和子项目的关系
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, info.getNatrualkey());
+        projectItemProjectServiceImpl.batchInsert(ids);
+
+        //
+        updateApproveStatusBatch(projectBomInfos);
+    }
+
+    private void addBatchCategoryInfos(List<ProjectCategoryInfo> categoryInfos) {
+        //增加项目的品类信息
+        projectCategoryManageService.addBatch(categoryInfos);
+    }
+
+    private void delInfoAboutProject(String natrualkey) {
+        //删除项目相关的所有信息
+        projectManageMapper.delInfoAboutProject(natrualkey);
     }
 
     @Override

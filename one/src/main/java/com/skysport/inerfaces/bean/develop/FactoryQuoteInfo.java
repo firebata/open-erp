@@ -37,6 +37,7 @@ public class FactoryQuoteInfo {
      * 成衣收到时间
      */
     private String clothReceivedDate;
+
     private String serialNumber;
     /**
      * 订单数量
@@ -85,6 +86,11 @@ public class FactoryQuoteInfo {
     private BigDecimal costing;
 
     private String bomId;
+
+    private String bomName;
+    private String projectName;
+    private String factoryName;
+
 
     private KfProductionInstructionEntity productionInstruction;
 
@@ -246,5 +252,29 @@ public class FactoryQuoteInfo {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public String getBomName() {
+        return bomName;
+    }
+
+    public void setBomName(String bomName) {
+        this.bomName = bomName;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getFactoryName() {
+        return factoryName;
+    }
+
+    public void setFactoryName(String factoryName) {
+        this.factoryName = factoryName;
     }
 }

@@ -53,6 +53,42 @@
         limit 1
     </select>
 
+    <select id="listInfosCounts" resultType="Integer">
+      select count(*) from t_kf_factory_quote and del_flag=0
+    </select>
+
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*) FROM t_kf_factory_quote a,t_kf_bominfo b
+        WHERE a.del_flag=0 and a.bom_id=b.bom_id AND b.del_flag=0
+        <if test="quoteInfo.spId !=null and quoteInfo.spId != ''">
+            AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
+        </if>
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            AND (
+            b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+    </select>
+
+    <select id="searchInfos" resultType="BomInfo">
+    SELECT
+        <include refid="searchInfoSql"/>
+        FROM t_kf_factory_quote a,t_kf_bominfo b
+        WHERE a.del_flag=0 and a.bom_id=b.bom_id AND b.del_flag=0
+        <if test="quoteInfo.spId !=null and quoteInfo.spId != ''">
+            AND a.spId LIKE concat('%',#{quoteInfo.spId},'%')
+        </if>
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            AND (
+              b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
+        </if>
+        limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
+    </select>
 
     <select id="queryProjectAndBomInfoByFactoryQuoteId" resultType="KfProductionInstructionEntity">
         SELECT

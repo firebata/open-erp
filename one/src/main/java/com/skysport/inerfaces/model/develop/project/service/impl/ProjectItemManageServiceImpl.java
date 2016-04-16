@@ -29,8 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -105,11 +103,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         String seqNo = queryInfoByNatrualKey(info.getNatrualkey()).getSeqNo();
         info.setSeqNo(seqNo);
 
-//        String name = ProjectManageHelper.buildProjectName(info);
-//        info.setName(name);
-//        info.setProjectName(name);
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT_ITEM);
 
@@ -119,18 +112,13 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         //更新t_project_bominfo表
         updateBomInfo(info);
 
-//        //增加项目主颜色信息
-//        mainColorService.delete(info.getNatrualkey());
-//
-//        List<MainColor> mainColorList = MainColorHelper.SINGLETONE.turnMainColorStrToList(info);
-
         sexColorService.delByProjectId(info.getNatrualkey());
+
 
         if (null != info.getSexColors() && !info.getSexColors().isEmpty()) {
             //增加项目主颜色信息
             sexColorService.addBatch(info.getSexColors());
         }
-
 
         ProjectBomInfo info2 = super.queryInfoByNatrualKey(info.getNatrualkey());
 
@@ -140,7 +128,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         String seriesId = info2.getSeriesId();
         String categoryAid = info2.getCategoryAid();
         String categoryBid = info2.getCategoryBid();
-
         info.setProjectId(projectId);
         info.setCustomerId(customerId);
         info.setAreaId(areaId);

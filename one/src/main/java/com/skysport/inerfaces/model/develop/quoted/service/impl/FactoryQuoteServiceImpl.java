@@ -11,6 +11,7 @@ import com.skysport.inerfaces.mapper.develop.FactoryQuotedInfoMapper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -176,5 +177,40 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
         }
 
         return needToSavIds;
+    }
+
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+
+    }
+
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+
+    }
+
+    @Override
+    public void submit(String businessKey) {
+
+    }
+
+    @Override
+    public void submit(String taskId, String businessKey) {
+
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
+        return null;
     }
 }

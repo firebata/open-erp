@@ -5,7 +5,7 @@ package com.skysport.inerfaces.constant.develop;
  * Created by zhangjh on 2015/9/2.
  */
 public enum ReturnCodeConstant {
-
+    CLONE_FAIL("100003", "克隆对象失败"),
     PROJECT_CANNOT_EDIT("100004", "不能修改主项目信息"),
 
     UPDATE_BOM_MAINCOLOR_PARAM_ERR("100005", "修改bom主颜色时，传输的信息有误"),

@@ -52,6 +52,16 @@ public class BomManageHelper extends ExcelCreateHelper {
 
     private static transient Logger logger = LoggerFactory.getLogger(BomManageHelper.class);
 
+    private static BomManageHelper singletone = new BomManageHelper();
+
+    private BomManageHelper() {
+        super();
+    }
+
+    public static BomManageHelper getInstance() {
+        return singletone;
+    }
+
     /**
      * 自定义查询条件
      *
@@ -90,7 +100,7 @@ public class BomManageHelper extends ExcelCreateHelper {
         List<BomInfo> intersection = getIntersection(sexColors, allStyles);
 
         //获取需要删除的bom列表
-        List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles, incrementNumberService, info, projectId, customerId, areaId, seriesId);
+        List<BomInfo> needDelBomList = getNeedDelBomList(intersection, allStyles);
 
         //需要增加的bom列表
         List<BomInfo> needAddBomList = getNeedAddBomList(intersection, sexColors, incrementNumberService, info, projectId, customerId, areaId, seriesId);
@@ -121,9 +131,9 @@ public class BomManageHelper extends ExcelCreateHelper {
      * @param projectId
      * @param customerId
      * @param areaId
-     * @param seriesId        @return 需要增加的bom集合
+     * @param seriesId               @return 需要增加的bom集合
      */
-    private static List<BomInfo> getNeedAddBomList(List<BomInfo> intersection, List<SexColor> sexColors, IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+    private static List<BomInfo>      getNeedAddBomList(List<BomInfo> intersection, List<SexColor> sexColors, IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
         List<BomInfo> needAddBomList = new ArrayList<>();
         for (SexColor sexColor : sexColors) {
             String sexId = sexColor.getSexIdChild();
@@ -157,14 +167,9 @@ public class BomManageHelper extends ExcelCreateHelper {
     /**
      * @param intersection
      * @param allStyles
-     * @param incrementNumberService
-     * @param info
-     * @param projectId
-     * @param customerId
-     * @param areaId
-     * @param seriesId        @return 需要删除的bom集合
+     * @return
      */
-    private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles, IncrementNumberService incrementNumberService, ProjectBomInfo info, String projectId, String customerId, String areaId, String seriesId) {
+    private static List<BomInfo> getNeedDelBomList(List<BomInfo> intersection, List<BomInfo> allStyles) {
         List<BomInfo> needDelBomList = new ArrayList<>();
 
         if (intersection.isEmpty()) {//没有交集，删除数据库中子项目所有的bom
@@ -833,5 +838,10 @@ public class BomManageHelper extends ExcelCreateHelper {
 
         }
 
+    }
+
+    public BomInfo getProjectBomInfo(HttpServletRequest request) {
+        BomInfo bomInfo = new BomInfo();
+        return bomInfo;
     }
 }
