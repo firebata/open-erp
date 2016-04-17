@@ -26,4 +26,7 @@ public interface ProjectItemManageMapper extends CommonDao<ProjectBomInfo> ,Appr
 
     void addBatchBomInfo(List<ProjectBomInfo> info);
 
+    void updateBatchBomInfo(List<ProjectBomInfo> intersectionProjectBomInfos);
+
+    void delProjectitems(List<String> subtract);
 }

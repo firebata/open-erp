@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 说明:
+ * 说明:项目子项目关系表
  * Created by zhangjh on 2016/4/15.
  */
 @Component
@@ -17,5 +17,5 @@ public interface ProjectItemProjectMapper {
 
     void batchInsert(List<ProjectItemProjectIdVo> vos);
 
-    void backupRecordsToHisByParentProjectId(@Param(value ="parentProjectId") String parentProjectId);
+    void backupRecordsToHisByParentProjectId(@Param(value = "parentProjectId") String parentProjectId);
 }

@@ -1,11 +1,9 @@
 package com.skysport.inerfaces.model.develop.project.helper;
 
-import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
@@ -174,7 +172,9 @@ public enum ProjectManageHelper {
 
     }
 
-
+    /**
+     * @param projectBomInfo
+     */
     private void exchange(ProjectBomInfo projectBomInfo) {
         projectBomInfo.setAreaId(getAreaName(projectBomInfo));
         projectBomInfo.setSeriesId(getSeriesName(projectBomInfo));
@@ -188,15 +188,16 @@ public enum ProjectManageHelper {
      * @param info
      * @return
      */
-    public ProjectInfo buildProjectInfo(IncrementNumberService incrementNumberService, ProjectInfo info) {
+    public void buildProjectInfo(ProjectInfo info) {
 
         if (StringUtils.isBlank(info.getNatrualkey()) || "null".equals(info.getNatrualkey())) {
             //构建项目id，名称等信息
             String projectId = SeqCreateUtils.newRrojectSeq(info.getSeriesId());
+            String kind_name = buildKindName(info);
+            String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, WebConstants.PROJECT_SEQ_NO_LENGTH);
+
             //设置ID
             info.setNatrualkey(projectId);
-            String kind_name = buildKindName(info);
-            String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.PROJECT_SEQ_NO_LENGTH);
             info.setSeqNo(seqNo);
         }
 
@@ -204,8 +205,6 @@ public enum ProjectManageHelper {
         String name = buildProjectName(info);
         info.setName(name);
         info.setProjectName(name);
-
-        return info;
     }
 
     /**
@@ -227,15 +226,12 @@ public enum ProjectManageHelper {
     /**
      * 组装子项目信息
      *
-     * @param info     ProjectInfo
-     * @param userInfo
+     * @param info ProjectInfo
      * @return
      */
-    public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, UserInfo userInfo) {
+    public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, String aliases) {
         List<ProjectBomInfo> projectBomInfos = new ArrayList<>();
         List<ProjectCategoryInfo> projectCategoryInfos = info.getCategoryInfos();
-        String aliases = userInfo.getAliases();
-
         if (null != projectCategoryInfos && !projectCategoryInfos.isEmpty()) {
             int seq = 1;
             for (ProjectCategoryInfo categoryInfo : projectCategoryInfos) {
@@ -247,8 +243,8 @@ public enum ProjectManageHelper {
                 } catch (CloneNotSupportedException e) {
                     throw new SkySportException(ReturnCodeConstant.CLONE_FAIL);
                 }
-
-                String projectItemId = info.getNatrualkey() + seq;
+                //子项目编号=大项目编号+一级品类+二级品类
+                String projectItemId = info.getNatrualkey() + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
                 String name = buildProjectItemName(info, categoryInfo);
                 projectBomInfo.setNatrualkey(projectItemId);
                 projectBomInfo.setName(name);
@@ -264,7 +260,11 @@ public enum ProjectManageHelper {
         return projectBomInfos;
     }
 
-
+    /**
+     * @param info
+     * @param categoryInfo
+     * @return
+     */
     private String buildProjectItemName(ProjectInfo info, ProjectCategoryInfo categoryInfo) {
         StringBuilder stringBuilder = new StringBuilder();
         //年份
@@ -295,6 +295,11 @@ public enum ProjectManageHelper {
         return businessKeys;
     }
 
+    /**
+     * @param projectBomInfos
+     * @param projectId
+     * @return
+     */
     public List<ProjectItemProjectIdVo> ProjectItemProjectIdVo(List<ProjectBomInfo> projectBomInfos, String projectId) {
         List<ProjectItemProjectIdVo> vos = new ArrayList<ProjectItemProjectIdVo>();
         for (ProjectBomInfo projectBomInfo : projectBomInfos) {
@@ -305,5 +310,92 @@ public enum ProjectManageHelper {
         }
 
         return vos;
+    }
+
+    /**
+     * @param projectBomInfos
+     * @param categoryInfosInDB
+     * @param natrualkey
+     * @return 交集
+     */
+    public List<ProjectBomInfo> getMatchList(List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB, String natrualkey) {
+        String projectId = natrualkey;
+        List<ProjectBomInfo> intersection = new ArrayList<>();
+        for (ProjectBomInfo projectBomInfo : projectBomInfos) {
+            String projectItemId = projectBomInfo.getNatrualkey();
+            for (ProjectCategoryInfo categoryInfo : categoryInfosInDB) {
+                //子项目编号=大项目编号+一级品类+二级品类
+                String projectItemIdDB = projectId + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
+                if (projectItemId.equals(projectItemIdDB)) {
+                    intersection.add(projectBomInfo);
+                    break;
+                }
+            }
+
+        }
+        return intersection;
+    }
+
+
+    public List<ProjectBomInfo> getNeedToDel(List<ProjectBomInfo> intersection, List<ProjectCategoryInfo> categoryInfosInDB, String natrualkey) {
+        List<ProjectBomInfo> needDelBomList = new ArrayList<>();
+        String projectId = natrualkey;
+
+        if (intersection.isEmpty()) {
+            for (ProjectCategoryInfo categoryInfo : categoryInfosInDB) {
+                String projectItemIdDB = projectId + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
+                ProjectBomInfo projectBomInfo = new ProjectBomInfo();
+                projectBomInfo.setNatrualkey(projectItemIdDB);
+                projectBomInfo.setProjectId(projectItemIdDB);
+                needDelBomList.add(projectBomInfo);
+            }
+        } else {
+            for (ProjectCategoryInfo categoryInfo : categoryInfosInDB) {
+                String projectItemIdDB = projectId + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
+
+
+            }
+        }
+        return needDelBomList;
+    }
+
+    public List<String> buildProjectItemsId(List<ProjectBomInfo> projectBomInfos) {
+
+        List<String> list = new ArrayList<>();
+        for (ProjectBomInfo projectBomInfo : projectBomInfos) {
+            String projectItemId = projectBomInfo.getNatrualkey();
+            list.add(projectItemId);
+        }
+        return list;
+    }
+
+    public List<String> buildProjectItemsId(List<ProjectCategoryInfo> categoryInfosInDB, String projectId) {
+        List<String> list = new ArrayList<>();
+        for (ProjectCategoryInfo categoryInfo : categoryInfosInDB) {
+            String projectItemIdDB = projectId + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
+            list.add(projectItemIdDB);
+        }
+        return list;
+    }
+
+    /**
+     * 获取匹配的
+     *
+     * @param intersection
+     * @param projectBomInfos
+     * @return
+     */
+    public List<ProjectBomInfo> getMatchProjectBomInfoList(List<String> intersection, List<ProjectBomInfo> projectBomInfos) {
+        List<ProjectBomInfo> projectItems = new ArrayList<>();
+        for (ProjectBomInfo projectBomInfo : projectBomInfos) {
+            String projectItemId = projectBomInfo.getNatrualkey();
+            for (String id : intersection) {
+                if (projectItemId.equals(id)) {
+                    projectItems.add(projectBomInfo);
+                    break;
+                }
+            }
+        }
+        return projectItems;
     }
 }

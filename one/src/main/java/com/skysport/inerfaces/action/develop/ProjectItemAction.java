@@ -166,7 +166,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public Map<String, Object> add(ProjectBomInfo info) {
 
         String kind_name = ProjectManageHelper.SINGLETONE.buildKindName(info);
-        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.PROJECT_SEQ_NO_LENGTH);
+        String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, WebConstants.PROJECT_SEQ_NO_LENGTH);
 
 //        //年份+客户+地域+系列+NNN
 //        String projectId = kind_name + seqNo;

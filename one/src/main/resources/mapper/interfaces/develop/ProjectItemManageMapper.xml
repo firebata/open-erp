@@ -93,6 +93,33 @@
 
     </select>
 
+    <update id="updateBatch">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_project_item
+            <set>
+                version =#{version},
+                remark=#{remark}
+            </set>
+            project_id =#{natrualkey}
+        </foreach>
+    </update>
+
+    <update id="updateBatchBomInfo">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_project_item_bom_baseinfo
+            <set>
+                collection_number =#{collectionNumber},
+                main_color_ids =#{mainColorNames},
+                sex_ids =#{sexIds},
+                remark=#{remark}
+            </set>
+            project_id =#{natrualkey}
+        </foreach>
+    </update>
+
+
     <update id="updateInfo">
 		UPDATE
 			t_kf_project_item
@@ -140,7 +167,7 @@
 
     <insert id="addBatchBomInfo">
         INSERT INTO
-          t_kf_project_item_bom_baseinfo
+        t_kf_project_item_bom_baseinfo
         (project_id,project_name,category_a_id,category_a_name,category_b_id,category_b_name,collection_number,main_color_ids,sex_ids,remark)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
@@ -176,14 +203,27 @@
 
     <update id="updateApproveStatusBatch">
         UPDATE
-          t_kf_project_item
+        t_kf_project_item
         SET
-          approve_status=#{status}
+        approve_status=#{status}
         WHERE del_flag=0
         AND project_id IN
-        <foreach item="item" index="index" collection="businessKeys"       open="(" separator="," close=")">
-          #{item}
+        <foreach item="item" index="index" collection="businessKeys" open="(" separator="," close=")">
+            #{item}
         </foreach>
     </update>
+
+    <delete id="delProjectitems">
+        update t_kf_project_item set del_flag=1 WHERE project_id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ;
+        update t_kf_project_item_bom_baseinfo set del_flag=1 WHERE project_id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
 
 </mapper>

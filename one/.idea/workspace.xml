@@ -8,48 +8,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cccb3c9-587c-46a8-b8fc-f30ed98c25d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/FactoryQuotePreAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProductionInstractionAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/BomMaterialIdVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/ProjectItemBomIdVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/ProjectItemProjectIdVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/form/develop/FactoryQuotePreQueryForm.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/BomMaterialMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemBomMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomMaterialService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomMaterialServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/prdinstr/IProductionInstractionService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemBomService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemProjectService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemBomServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/relation/IRelationIdDealService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/development/quoteend/quoteend-edit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/development/quoteend/quoteend-list.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/development/quotepre/quotepre-edit.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/development/quotepre/quotepre-list.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/interfaces/development/quotepre/quotepre-edit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/interfaces/development/quotepre/quotepre-list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/core/utils/ListUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/FactoryQuoteInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/FactoryQuoteInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/develop/ReturnCodeConstant.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/develop/ReturnCodeConstant.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemManageService.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemManageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/helper/QuotedServiceHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/helper/QuotedServiceHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/IFactoryQuoteService.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/IFactoryQuoteService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/FactoryQuoteServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/impl/FactoryQuoteServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" afterPath="$PROJECT_DIR$/src/main/resources/conf/ProjectItemProcessV1.01.bpmn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/conf/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" afterPath="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/FactoryQuotedInfoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/FactoryQuotedInfoMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/development/project/project-list.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/development/project/project-list.jsp" />
     </list>
     <ignored path="sky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,11 +52,88 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProjectItemAction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
+      <file leaf-file-name="ProjectManageHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="150" column="37" selection-start-line="150" selection-start-column="33" selection-end-line="150" selection-end-column="37" />
+            <state relative-caret-position="309">
+              <caret line="387" column="32" selection-start-line="387" selection-start-column="32" selection-end-line="387" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectBomInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-646">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectItemManageMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1552">
+              <caret line="224" column="18" selection-start-line="224" selection-start-column="18" selection-end-line="224" selection-end-column="18" />
+              <folding>
+                <marker date="1460888095044" expanded="true" signature="1276:1533" placeholder="SELECT FROM t_kf_project_item" />
+                <marker date="1460888095044" expanded="true" signature="1606:1663" placeholder="SELECT COUNT... t_kf_project_item" />
+                <marker date="1460888095044" expanded="true" signature="2178:3847" placeholder="SELECT FROM t_kf_project_item" />
+                <marker date="1460888095044" expanded="true" signature="3999:4180" placeholder="update t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="4357:4657" placeholder="update t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="4724:4838" placeholder="UPDATE t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="4885:5092" placeholder="UPDATE t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="5129:5590" placeholder="INSERT INTO t_kf_project_item" />
+                <marker date="1460888095044" expanded="true" signature="6374:6707" placeholder="INSERT INTO t_kf_project_item_bom_baseinfo" />
+                <marker date="1460888095044" expanded="true" signature="7314:7390" placeholder="UPDATE t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="7482:7631" placeholder="SELECT proje... t_kf_project_item" />
+                <marker date="1460888095044" expanded="true" signature="7690:7837" placeholder="UPDATE t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="8232:8271" placeholder="update t_kf_... " />
+                <marker date="1460888095044" expanded="true" signature="8232:8291" placeholder="update t_kf_... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DualStackPlainSocketImpl.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/net/DualStackPlainSocketImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="282" column="22" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadInfoManageMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/common/UploadInfoManageMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
+              <folding>
+                <marker date="1459142065828" expanded="true" signature="905:1068" placeholder="select FROM t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="1156:1326" placeholder="select FROM t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="1421:1610" placeholder="select FROM t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="1704:1855" placeholder="select FROM t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="1934:2036" placeholder="SELECT COUNT... t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="2511:3010" placeholder="SELECT FROM t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="3161:3433" placeholder="update t_sys... " />
+                <marker date="1459142065828" expanded="true" signature="3498:3870" placeholder="insert into t_sys_file_records" />
+                <marker date="1459142065828" expanded="true" signature="4549:4676" placeholder="update t_sys... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BomManageServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="74">
+              <caret line="280" column="79" selection-start-line="280" selection-start-column="79" selection-end-line="280" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -88,80 +142,48 @@
       <file leaf-file-name="ProjectItemManageServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="138" column="48" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="48" />
+            <state relative-caret-position="2110">
+              <caret line="300" column="66" selection-start-line="300" selection-start-column="66" selection-end-line="300" selection-end-column="66" />
               <folding>
-                <element signature="e#5870#5871#0" expanded="true" />
-                <element signature="e#5929#5930#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#5921#5922#0" expanded="true" />
+                <element signature="e#5982#5983#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BomManageHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java">
+      <file leaf-file-name="ProjectItemManageMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="664">
-              <caret line="209" column="51" selection-start-line="209" selection-start-column="51" selection-end-line="209" selection-end-column="51" />
+            <state relative-caret-position="456">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BomManageServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+      <file leaf-file-name="CommonServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="198" column="62" selection-start-line="198" selection-start-column="35" selection-end-line="198" selection-end-column="62" />
+            <state relative-caret-position="340">
+              <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
               <folding>
-                <element signature="e#6835#6836#0" expanded="true" />
-                <element signature="e#6902#6903#0" expanded="true" />
+                <element signature="e#2271#2272#0" expanded="true" />
+                <element signature="e#2312#2313#0" expanded="true" />
+                <element signature="e#2372#2373#0" expanded="true" />
+                <element signature="e#2416#2417#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectItemManageMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml">
+      <file leaf-file-name="ListUtils.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1-sources.jar!/org/apache/commons/collections/ListUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
-              <folding>
-                <marker date="1460772243348" expanded="true" signature="1276:1533" placeholder="SELECT FROM t_kf_project_item" />
-                <marker date="1460772243348" expanded="true" signature="1606:1663" placeholder="SELECT COUNT... t_kf_project_item" />
-                <marker date="1460772243348" expanded="true" signature="2178:3847" placeholder="SELECT FROM t_kf_project_item" />
-                <marker date="1460772243348" expanded="true" signature="3895:4009" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772243348" expanded="true" signature="4056:4263" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772243348" expanded="true" signature="4300:4761" placeholder="INSERT INTO t_kf_project_item" />
-                <marker date="1460772243348" expanded="true" signature="5545:5878" placeholder="INSERT INTO t_kf_project_item_bom_baseinfo" />
-                <marker date="1460772243348" expanded="true" signature="6487:6563" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772243348" expanded="true" signature="6655:6804" placeholder="SELECT proje... t_kf_project_item" />
-                <marker date="1460772243348" expanded="true" signature="6863:7010" placeholder="UPDATE t_kf_... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BomInfoManageMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2825">
-              <caret line="88" column="8" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="8" />
-              <folding>
-                <marker date="1460772722010" expanded="true" signature="2542:2671" placeholder="SELECT FROM t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="2745:2923" placeholder="SELECT COUNT... t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="3864:4928" placeholder="SELECT FROM t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="4976:5370" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772722010" expanded="true" signature="6062:6457" placeholder="INSERT INTO t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="6545:6734" placeholder="SELECT FROM t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="6774:6841" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772722010" expanded="true" signature="6885:6959" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772722010" expanded="true" signature="7002:7087" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772722010" expanded="true" signature="7126:7206" placeholder="UPDATE t_kf_... " />
-                <marker date="1460772722010" expanded="true" signature="7278:7378" placeholder="SELECT CASE t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="7469:7601" placeholder="SELECT bom_i... t_kf_bominfo" />
-                <marker date="1460772722010" expanded="true" signature="7650:7720" placeholder="UPDATE t_kf_... " />
-              </folding>
+            <state relative-caret-position="229">
+              <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -190,16 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/info/BomInfoManageMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemFinishApproveListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/listener/ProjectItemFinishApproveListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/engine/listener/ProjectItemFinishApproveListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/engine/listener/ProQuoteFinishListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/BomAction.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/development/quotepre/list.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/development/quotepre/quotepre-edit.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/form/develop/FactoryQuotePreQueryForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/helper/QuotedServiceHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/quoted/service/IFactoryQuoteService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/FactoryQuotePreAction.java" />
@@ -223,24 +235,34 @@
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomMaterialServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/AreaInfoMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/BomMaterialMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemBomServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemBomMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/ProjectItemBomMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/BomMaterialMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/develop/ReturnCodeConstant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/ProjectItemProjectIdVo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/conf/spring-mvc.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/conf/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/ProjectItemProjectMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemManageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/core/utils/ListUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -303,7 +325,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane />
       </pane>
@@ -322,246 +343,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="develop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapper" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="conf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skysport" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="one" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="artifacts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -613,6 +394,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1244,11 +1026,12 @@
       <workItem from="1460595801955" duration="22070000" />
       <workItem from="1460681720883" duration="22331000" />
       <workItem from="1460769138802" duration="3990000" />
+      <workItem from="1460858932806" duration="16492000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="435923000" />
+    <option name="totallyTimeSpent" value="452415000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1261,40 +1044,40 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29978585" sideWeight="0.3258547" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23043944" sideWeight="0.16666667" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22168803" sideWeight="0.48734176" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17110874" sideWeight="0.51265824" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.094017096" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29978585" sideWeight="0.6741453" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23043944" sideWeight="0.8333333" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26688102" sideWeight="0.5608974" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4957265" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2550911" sideWeight="0.5293803" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.4978678" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22168803" sideWeight="0.48734176" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17110874" sideWeight="0.51265824" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.094017096" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29903537" sideWeight="0.6367521" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="BPMN Editor" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.07478633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23043944" sideWeight="0.77029914" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26688102" sideWeight="0.5630342" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2550911" sideWeight="0.5293803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
@@ -1334,7 +1117,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="120" />
+      <option name="time" value="124" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1343,185 +1126,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/action/BaseAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/FactoryQuotePreAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="61" column="19" selection-start-line="61" selection-start-column="19" selection-end-line="61" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/form/develop/FactoryQuotePreQueryForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/FactoryQuoteInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="54" column="23" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/BomInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/MaterialSpInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/FactoryQuotedInfoMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomMaterialService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemProjectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="36" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemBomService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/AreaInfoMapper.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/relation/IRelationIdDealService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemBomServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="32" column="5" selection-start-line="30" selection-start-column="54" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomMaterialServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/ProjectItemBomMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
-          <folding>
-            <marker date="1460706596516" expanded="true" signature="302:445" placeholder="INSERT INTO t_kf_project_item_bom_his... " />
-            <marker date="1460706596516" expanded="true" signature="360:445" placeholder="SELECT proje... t_kf_project_item_bom" />
-            <marker date="1460706596516" expanded="true" signature="459:524" placeholder="DELETE FROM " />
-            <marker date="1460706596516" expanded="true" signature="676:780" placeholder="insert into t_kf_project_item_bom... " />
-            <marker date="1460706596516" expanded="true" signature="776:780" placeholder="insert into t_kf_project_item_project... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemBomMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/ProjectItemBomIdVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/BomMaterialMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/relation/BomMaterialIdVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/BomMaterialMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/bean/permission/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="86" column="18" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
-          <folding>
-            <element signature="e#1501#1502#0" expanded="false" />
-            <element signature="e#1531#1532#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectCategoryInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/develop/ReturnCodeConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/exception/SkySportException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -1545,28 +1149,6 @@
           <folding>
             <element signature="e#239#240#0" expanded="false" />
             <element signature="e#262#263#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectCategoryManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectCategoryManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="75" column="59" selection-start-line="75" selection-start-column="46" selection-end-line="75" selection-end-column="59" />
-          <folding>
-            <marker date="1459142065846" expanded="true" signature="752:872" placeholder="select FROM t_kf_project_category" />
-            <marker date="1459142065846" expanded="true" signature="919:1012" placeholder="update t_kf_... " />
-            <marker date="1459142065846" expanded="true" signature="1049:1179" placeholder="insert into t_kf_project_category" />
-            <marker date="1459142065846" expanded="true" signature="1216:1295" placeholder="update t_kf_... " />
-            <marker date="1459142065846" expanded="true" signature="1541:1666" placeholder="select FROM t_kf_project_category" />
           </folding>
         </state>
       </provider>
@@ -1611,16 +1193,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="28" column="48" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1710">
@@ -1629,33 +1201,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/ProjectItemProjectMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <marker date="1460714538203" expanded="true" signature="321:505" placeholder="INSERT INTO t_kf_project_item_project_his... " />
-            <marker date="1460714538203" expanded="true" signature="393:505" placeholder="SELECT proje... t_kf_project_item_project" />
-            <marker date="1460714538203" expanded="true" signature="517:599" placeholder="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/conf/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="26" column="94" selection-start-line="26" selection-start-column="94" selection-end-line="26" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1672,56 +1221,6 @@
         <state relative-caret-position="114">
           <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="90" column="16" selection-start-line="90" selection-start-column="16" selection-end-line="90" selection-end-column="16" />
-          <folding>
-            <element signature="e#2271#2272#0" expanded="false" />
-            <element signature="e#2312#2313#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="126" column="57" selection-start-line="126" selection-start-column="57" selection-end-line="126" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="190" column="23" selection-start-line="190" selection-start-column="23" selection-end-line="190" selection-end-column="23" />
-          <folding>
-            <element signature="e#9670#9694#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="142" column="161" selection-start-line="142" selection-start-column="161" selection-end-line="142" selection-end-column="162" />
-          <folding>
-            <marker date="1460711733083" expanded="true" signature="947:1078" placeholder="select FROM t_kf_project" />
-            <marker date="1460711733083" expanded="true" signature="1151:1203" placeholder="SELECT COUNT... t_kf_project" />
-            <marker date="1460711733083" expanded="true" signature="2463:4012" placeholder="SELECT FROM t_kf_project" />
-            <marker date="1460711733083" expanded="true" signature="4060:4542" placeholder="update t_kf_... " />
-            <marker date="1460711733083" expanded="true" signature="4580:5040" placeholder="insert into t_kf_project" />
-            <marker date="1460711733083" expanded="true" signature="5078:5149" placeholder="update t_kf_... " />
-            <marker date="1460711733083" expanded="true" signature="5278:5356" placeholder="update t_kf_... " />
-            <marker date="1460711733083" expanded="true" signature="5362:5521" placeholder="update t_kf_... " />
-            <marker date="1460711733083" expanded="true" signature="5440:5520" placeholder="select proje... t_kf_project_item" />
-            <marker date="1460711733083" expanded="true" signature="5613:5757" placeholder="select proje... t_kf_project" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1746,16 +1245,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/develop/ProjectItemAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="150" column="37" selection-start-line="150" selection-start-column="33" selection-end-line="150" selection-end-column="37" />
+        <state relative-caret-position="265">
+          <caret line="168" column="75" selection-start-line="168" selection-start-column="75" selection-end-line="168" selection-end-column="75" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/WebConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/PantoneManageAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-67">
+          <caret line="109" column="66" selection-start-line="109" selection-start-column="66" selection-end-line="109" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/constant/TableNameConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/action/info/SpManageAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/utils/BuildSeqNoHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/IBomManageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/mapper/CommonDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/relation/IRelationIdDealService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/relation/ProjectItemProjectMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="47" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="47" />
+          <folding>
+            <marker date="1460714538203" expanded="true" signature="321:505" placeholder="INSERT INTO t_kf_project_item_project_his... " />
+            <marker date="1460714538203" expanded="true" signature="393:505" placeholder="SELECT proje... t_kf_project_item_project" />
+            <marker date="1460714538203" expanded="true" signature="517:599" placeholder="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/BomInfoManageMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2825">
-          <caret line="88" column="8" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="8" />
+        <state relative-caret-position="179">
+          <caret line="152" column="24" selection-start-line="152" selection-start-column="16" selection-end-line="152" selection-end-column="24" />
           <folding>
             <marker date="1460772722010" expanded="true" signature="2542:2671" placeholder="SELECT FROM t_kf_bominfo" />
             <marker date="1460772722010" expanded="true" signature="2745:2923" placeholder="SELECT COUNT... t_kf_bominfo" />
@@ -1774,51 +1357,276 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/relation/ProjectItemProjectMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="71" column="58" selection-start-line="71" selection-start-column="58" selection-end-line="71" selection-end-column="58" />
+        <state relative-caret-position="95">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/utils/SeqCreateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemManageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
           <folding>
-            <marker date="1460772243348" expanded="true" signature="1276:1533" placeholder="SELECT FROM t_kf_project_item" />
-            <marker date="1460772243348" expanded="true" signature="1606:1663" placeholder="SELECT COUNT... t_kf_project_item" />
-            <marker date="1460772243348" expanded="true" signature="2178:3847" placeholder="SELECT FROM t_kf_project_item" />
-            <marker date="1460772243348" expanded="true" signature="3895:4009" placeholder="UPDATE t_kf_... " />
-            <marker date="1460772243348" expanded="true" signature="4056:4263" placeholder="UPDATE t_kf_... " />
-            <marker date="1460772243348" expanded="true" signature="4300:4761" placeholder="INSERT INTO t_kf_project_item" />
-            <marker date="1460772243348" expanded="true" signature="5545:5878" placeholder="INSERT INTO t_kf_project_item_bom_baseinfo" />
-            <marker date="1460772243348" expanded="true" signature="6487:6563" placeholder="UPDATE t_kf_... " />
-            <marker date="1460772243348" expanded="true" signature="6655:6804" placeholder="SELECT proje... t_kf_project_item" />
-            <marker date="1460772243348" expanded="true" signature="6863:7010" placeholder="UPDATE t_kf_... " />
+            <element signature="e#472#473#0" expanded="false" />
+            <element signature="e#508#509#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectCategoryManageService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="198" column="62" selection-start-line="198" selection-start-column="35" selection-end-line="198" selection-end-column="62" />
+        <state relative-caret-position="190">
+          <caret line="13" column="54" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectCategoryManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="29" column="56" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectCategoryManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="16" column="54" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectCategoryManageMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="64" column="40" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="40" />
           <folding>
-            <element signature="e#6835#6836#0" expanded="true" />
-            <element signature="e#6902#6903#0" expanded="true" />
+            <marker date="1459142065846" expanded="true" signature="752:872" placeholder="select FROM t_kf_project_category" />
+            <marker date="1459142065846" expanded="true" signature="919:1012" placeholder="update t_kf_... " />
+            <marker date="1459142065846" expanded="true" signature="1049:1179" placeholder="insert into t_kf_project_category" />
+            <marker date="1459142065846" expanded="true" signature="1216:1295" placeholder="update t_kf_... " />
+            <marker date="1459142065846" expanded="true" signature="1541:1666" placeholder="select FROM t_kf_project_category" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemProjectServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemBomServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/IProjectItemManageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectManageMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="141" column="91" selection-start-line="141" selection-start-column="91" selection-end-line="141" selection-end-column="91" />
+          <folding>
+            <marker date="1460864750562" expanded="true" signature="947:1078" placeholder="select FROM t_kf_project" />
+            <marker date="1460864750562" expanded="true" signature="1151:1203" placeholder="SELECT COUNT... t_kf_project" />
+            <marker date="1460864750562" expanded="true" signature="2463:4012" placeholder="SELECT FROM t_kf_project" />
+            <marker date="1460864750562" expanded="true" signature="4060:4542" placeholder="update t_kf_... " />
+            <marker date="1460864750562" expanded="true" signature="4580:5040" placeholder="insert into t_kf_project" />
+            <marker date="1460864750562" expanded="true" signature="5078:5149" placeholder="update t_kf_... " />
+            <marker date="1460864750562" expanded="true" signature="5278:5356" placeholder="update t_kf_... " />
+            <marker date="1460864750562" expanded="true" signature="5447:5591" placeholder="select proje... t_kf_project" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="94" column="65" selection-start-line="94" selection-start-column="33" selection-end-line="94" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/helper/BomManageHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
-          <caret line="209" column="51" selection-start-line="209" selection-start-column="51" selection-end-line="209" selection-end-column="51" />
+        <state relative-caret-position="151">
+          <caret line="119" column="25" selection-start-line="119" selection-start-column="25" selection-end-line="119" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/utils/ListUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/bean/develop/ProjectBomInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-646">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/core/model/common/impl/CommonServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+          <folding>
+            <element signature="e#2271#2272#0" expanded="true" />
+            <element signature="e#2312#2313#0" expanded="true" />
+            <element signature="e#2372#2373#0" expanded="true" />
+            <element signature="e#2416#2417#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/common/UploadInfoManageMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
+          <folding>
+            <marker date="1459142065828" expanded="true" signature="905:1068" placeholder="select FROM t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="1156:1326" placeholder="select FROM t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="1421:1610" placeholder="select FROM t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="1704:1855" placeholder="select FROM t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="1934:2036" placeholder="SELECT COUNT... t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="2511:3010" placeholder="SELECT FROM t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="3161:3433" placeholder="update t_sys... " />
+            <marker date="1459142065828" expanded="true" signature="3498:3870" placeholder="insert into t_sys_file_records" />
+            <marker date="1459142065828" expanded="true" signature="4549:4676" placeholder="update t_sys... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/bom/impl/BomManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="280" column="79" selection-start-line="280" selection-start-column="79" selection-end-line="280" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/mapper/develop/ProjectItemManageMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/net/DualStackPlainSocketImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="282" column="22" selection-start-line="282" selection-start-column="22" selection-end-line="282" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/interfaces/develop/ProjectItemManageMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1552">
+          <caret line="224" column="18" selection-start-line="224" selection-start-column="18" selection-end-line="224" selection-end-column="18" />
+          <folding>
+            <marker date="1460888095044" expanded="true" signature="1276:1533" placeholder="SELECT FROM t_kf_project_item" />
+            <marker date="1460888095044" expanded="true" signature="1606:1663" placeholder="SELECT COUNT... t_kf_project_item" />
+            <marker date="1460888095044" expanded="true" signature="2178:3847" placeholder="SELECT FROM t_kf_project_item" />
+            <marker date="1460888095044" expanded="true" signature="3999:4180" placeholder="update t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="4357:4657" placeholder="update t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="4724:4838" placeholder="UPDATE t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="4885:5092" placeholder="UPDATE t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="5129:5590" placeholder="INSERT INTO t_kf_project_item" />
+            <marker date="1460888095044" expanded="true" signature="6374:6707" placeholder="INSERT INTO t_kf_project_item_bom_baseinfo" />
+            <marker date="1460888095044" expanded="true" signature="7314:7390" placeholder="UPDATE t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="7482:7631" placeholder="SELECT proje... t_kf_project_item" />
+            <marker date="1460888095044" expanded="true" signature="7690:7837" placeholder="UPDATE t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="8232:8271" placeholder="update t_kf_... " />
+            <marker date="1460888095044" expanded="true" signature="8232:8291" placeholder="update t_kf_... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/helper/ProjectManageHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="387" column="32" selection-start-line="387" selection-start-column="32" selection-end-line="387" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1-sources.jar!/org/apache/commons/collections/ListUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/skysport/inerfaces/model/develop/project/service/impl/ProjectItemManageServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="138" column="48" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="48" />
+        <state relative-caret-position="2110">
+          <caret line="300" column="66" selection-start-line="300" selection-start-column="66" selection-end-line="300" selection-end-column="66" />
           <folding>
-            <element signature="e#5870#5871#0" expanded="true" />
-            <element signature="e#5929#5930#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#5921#5922#0" expanded="true" />
+            <element signature="e#5982#5983#0" expanded="true" />
           </folding>
         </state>
       </provider>

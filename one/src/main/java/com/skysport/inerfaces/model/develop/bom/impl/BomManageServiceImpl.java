@@ -251,6 +251,54 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     }
 
+    /**
+     * 自动生成Bom信息，并保存DB
+     * 修改子项目，处理bom的方式：
+     * 已知数据库中子项目所有的款式（简称内部集合）和页面传入的所有款式(简称外部集合)；
+     * 则，需要修改的bom为：内部集合 与 外部集合的交集
+     * 需要新增的bom为：外部集合 - 交集；
+     * 需要删除的bom为:内部集合 - 交集；
+     *
+     * @param info 子项目信息
+     * @author zhangjh
+     */
+    @Override
+    public void autoCreateBomInfoAndSave(ProjectBomInfo info) {
+
+        List<SexColor> sexColors = info.getSexColors();
+
+        String projectId = info.getNatrualkey();
+        String customerId = info.getCustomerId();
+        String areaId = info.getAreaId();
+        String seriesId = info.getSeriesId();
+        List<BomInfo> allStyles = selectAllBomSexAndMainColor(projectId.trim());
+
+        //获取需要更新的bom列表
+        //交集
+        List<BomInfo> intersection = BomManageHelper.getInstance().getIntersection(sexColors, allStyles);
+
+        //获取需要删除的bom列表
+        List<BomInfo> needDelBomList = BomManageHelper.getInstance().getNeedDelBomList(intersection, allStyles);
+
+        //需要增加的bom列表
+        List<BomInfo> needAddBomList = BomManageHelper.getInstance().getNeedAddBomList(intersection, sexColors, info, projectId, customerId, areaId, seriesId);
+
+
+        if (!needDelBomList.isEmpty()) {
+            //删除
+            delBomInThisIds(needDelBomList);
+        }
+        if (!intersection.isEmpty()) {
+            //更新bom
+            updateBatch(intersection);
+        }
+        //获取需要新增的bom列表
+        if (!needAddBomList.isEmpty()) {
+            //新增bom
+            addBatch(needAddBomList);
+        }
+    }
+
     @Override
     public void updateBatch(List<BomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {

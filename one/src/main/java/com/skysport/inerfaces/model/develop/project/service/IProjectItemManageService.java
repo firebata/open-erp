@@ -3,6 +3,8 @@ package com.skysport.inerfaces.model.develop.project.service;
 import com.skysport.core.model.common.IApproveService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
+import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
+import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
 import com.skysport.core.model.common.ICommonService;
 
@@ -37,4 +39,5 @@ public interface IProjectItemManageService extends ICommonService<ProjectBomInfo
     void delSexColorInfoByBomInfo(BomInfo info);
 
 
+    void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB);
 }

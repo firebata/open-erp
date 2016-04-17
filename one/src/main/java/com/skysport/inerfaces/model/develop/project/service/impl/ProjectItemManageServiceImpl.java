@@ -20,10 +20,12 @@ import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
+import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -121,22 +123,11 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         }
 
         ProjectBomInfo info2 = super.queryInfoByNatrualKey(info.getNatrualkey());
+        info.buildBomInfo(info2);
 
-        String projectId = info2.getNatrualkey();
-        String customerId = info2.getCustomerId();
-        String areaId = info2.getAreaId();
-        String seriesId = info2.getSeriesId();
-        String categoryAid = info2.getCategoryAid();
-        String categoryBid = info2.getCategoryBid();
-        info.setProjectId(projectId);
-        info.setCustomerId(customerId);
-        info.setAreaId(areaId);
-        info.setSeriesId(seriesId);
-        info.setCategoryAid(categoryAid);
-        info.setCategoryBid(categoryBid);
 
         //生成BOM信息并保存
-        BomManageHelper.autoCreateBomInfoAndSave(bomManageService, incrementNumberService, info);
+        bomManageService.autoCreateBomInfoAndSave(info);
     }
 
 
@@ -148,8 +139,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     private void startWorkFlow(String projectId) {
         projectItemTaskService.startProcessInstanceByBussKey(projectId);
     }
-
-
 
 
     @Override
@@ -246,11 +235,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
             }
 
-
             String year = DateUtils.SINGLETONE.getYyyy();
             String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
                     .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
-
 
             bomDetailExcelName.append(StringUtils.join(seriesNameSet.toArray(), ""));
             bomDetailExcelName.append(StringUtils.join(bomNameSet.toArray(), ""));
@@ -281,6 +268,80 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     @Override
     public void delSexColorInfoByBomInfo(BomInfo info) {
         sexColorService.delSexColorInfoByBomInfo(info);
+    }
+
+    /**
+     * 修改大项目，处理子项目
+     *
+     * @param info
+     * @param projectBomInfos   页面的项目数据
+     * @param categoryInfosInDB
+     */
+    @Override
+    public void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB) {
+        String projectId = info.getNatrualkey();
+        //页面的projectItemsId
+        List<String> projectItemsNew = ProjectManageHelper.SINGLETONE.buildProjectItemsId(projectBomInfos);
+        //DB的projectItemsId
+        List<String> projectItemsDB = ProjectManageHelper.SINGLETONE.buildProjectItemsId(categoryInfosInDB, projectId);
+
+        //获取需要更新的子项目列表
+        //交集
+        List<String> intersection = ListUtils.intersection(projectItemsNew, projectItemsDB);
+//        List<ProjectBomInfo> intersectionProjectBomInfos = ProjectManageHelper.SINGLETONE.getMatchProjectBomInfoList(intersection, projectBomInfos);
+
+        //获取需要删除的
+        List<String> subtract = ListUtils.subtract(projectItemsDB, intersection);
+
+        //需要增加的
+        List<String> adds = ListUtils.subtract(projectItemsNew, intersection);
+        List<ProjectBomInfo> addsProjectBomInfos = ProjectManageHelper.SINGLETONE.getMatchProjectBomInfoList(adds, projectBomInfos);
+
+
+//        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
+
+        delProjectitems(subtract);
+
+        addProjectItems(addsProjectBomInfos);
+
+        //
+        updateApproveStatusBatch(projectBomInfos);
+
+    }
+
+    private void delProjectitems(List<String> subtract) {
+        if (!subtract.isEmpty()) {
+            projectItemManageMapper.delProjectitems(subtract);
+        }
+
+    }
+
+    private void updateProjectItems(List<ProjectBomInfo> intersectionProjectBomInfos) {
+        if (!intersectionProjectBomInfos.isEmpty()) {
+            updateBatch(intersectionProjectBomInfos);
+            updateBatchBomInfo(intersectionProjectBomInfos);
+        }
+    }
+
+    private void updateBatchBomInfo(List<ProjectBomInfo> intersectionProjectBomInfos) {
+        projectItemManageMapper.updateBatchBomInfo(intersectionProjectBomInfos);
+    }
+
+
+    private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
+        if (!projectBomInfos.isEmpty()) {
+            //业务数据
+            addBatch(projectBomInfos);
+
+            addBatchBomInfo(projectBomInfos);
+        }
+
+    }
+
+    private void updateApproveStatusBatch(List<ProjectBomInfo> projectBomInfos) {
+        //审核状态：新增
+        List<String> businessKeys = ProjectManageHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
+        updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
     }
 
     @Override
@@ -357,8 +418,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         super.addBatch(infos);
 
     }
-
-
 
 
 }

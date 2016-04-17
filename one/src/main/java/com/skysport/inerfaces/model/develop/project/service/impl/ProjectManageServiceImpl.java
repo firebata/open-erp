@@ -67,13 +67,14 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
     public void add(ProjectInfo info) {
 
         UserInfo userInfo = UserUtils.getUserFromSession();
-
+        String aliases = userInfo.getAliases();
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
-
+        String projectId = info.getNatrualkey();
+        List<ProjectCategoryInfo> categoryInfosInDB = queryCategoryInfosInDB(projectId);
         //新增项目时组装项目名等信息
-        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumberService, info);
-        info.setCreater(userInfo.getAliases());
+        ProjectManageHelper.SINGLETONE.buildProjectInfo(info);
+        info.setCreater(aliases);
 
         //组装项目品类信息
         info = ProjectManageHelper.SINGLETONE.buildProjectCategoryInfo(info);
@@ -85,30 +86,15 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         addBatchCategoryInfos(info.getCategoryInfos());
 
         //增加子项目
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
-        addProjectItems(projectBomInfos);
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, aliases);
 
         //增加项目和子项目的关系
-        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, info.getNatrualkey());
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, projectId);
         projectItemProjectServiceImpl.batchInsert(ids);
 
-        updateApproveStatusBatch(projectBomInfos);
-
-
+        projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos,categoryInfosInDB);
     }
 
-    private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
-        //业务数据
-        projectItemManageService.addBatch(projectBomInfos);
-        projectItemManageService.addBatchBomInfo(projectBomInfos);
-
-    }
-
-    private void updateApproveStatusBatch(List<ProjectBomInfo> projectBomInfos) {
-        //审核状态：新增
-        List<String> businessKeys = ProjectManageHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
-        projectItemManageService.updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
-    }
 
     /**
      * 项目编号是由年份+客户+地域+系列+NNN构成，但是上面的信息可能会更改，如果按照这个这个规则，项目编号应该要更改才对，但目前的处理方式是，项目编号和序号都不改变
@@ -120,29 +106,33 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
 
         //读取session中的用户
         UserInfo userInfo = UserUtils.getUserFromSession();
-
+        String aliases = userInfo.getAliases();
         List<UploadFileInfo> fileInfos = info.getFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
-
-        info = ProjectManageHelper.SINGLETONE.buildProjectInfo(incrementNumberService, info);
+        ProjectManageHelper.SINGLETONE.buildProjectInfo(info);
+        String projectId = info.getNatrualkey();
+        List<ProjectCategoryInfo> categoryInfosInDB = queryCategoryInfosInDB(projectId);
 
         //更新t_project表
         super.edit(info);
 
         delInfoAboutProject(info.getNatrualkey());
-
         addBatchCategoryInfos(info.getCategoryInfos());
 
-        //增加子项目
-        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, userInfo);
-        addProjectItems(projectBomInfos);
+
+        //子项目
+        List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, aliases);
 
         //增加项目和子项目的关系
-        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, info.getNatrualkey());
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, projectId);
         projectItemProjectServiceImpl.batchInsert(ids);
+        projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos, categoryInfosInDB);
 
-        //
-        updateApproveStatusBatch(projectBomInfos);
+
+    }
+
+    private List<ProjectCategoryInfo> queryCategoryInfosInDB(String projectId) {
+        return projectCategoryManageService.queryProjectCategoryInfo(projectId);
     }
 
     private void addBatchCategoryInfos(List<ProjectCategoryInfo> categoryInfos) {

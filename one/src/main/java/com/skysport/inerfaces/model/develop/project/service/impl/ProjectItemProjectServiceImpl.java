@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 说明:
+ * 说明:项目子项目关系处理
  * Created by zhangjh on 2016/4/15.
  */
 @Service
 public class ProjectItemProjectServiceImpl implements IRelationIdDealService<ProjectItemProjectIdVo> {
+
     @Autowired
     ProjectItemProjectMapper projectItemProjectMapper;
 

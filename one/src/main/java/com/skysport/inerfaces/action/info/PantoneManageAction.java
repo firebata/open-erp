@@ -107,7 +107,7 @@ public class PantoneManageAction extends BaseAction<PantoneInfo> {
     @SystemControllerLog(description = "增加PANTONE")
     public Map<String, Object> add(PantoneInfo pantoneInfo) {
 //        String pantoneId = UuidGeneratorUtils.getNextId();
-        String pantoneId = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.PANTONE_INFO, incrementNumberService);
+        String pantoneId = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.PANTONE_INFO);
         //设置ID
         pantoneInfo.setPantoneId(pantoneId);
         pantoneManageService.add(pantoneInfo);

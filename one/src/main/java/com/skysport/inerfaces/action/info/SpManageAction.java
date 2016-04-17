@@ -4,9 +4,8 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.bean.info.SpInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.sp.helper.SpInfoHelper;
 import com.skysport.inerfaces.model.info.sp.service.ISpManageService;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +35,6 @@ import java.util.Map;
 public class SpManageAction extends BaseAction<SpInfo> {
     @Resource(name = "spManageService")
     private ISpManageService spManageService;
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -105,9 +101,9 @@ public class SpManageAction extends BaseAction<SpInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "新增供应商信息")
-    public Map<String, Object> add(SpInfo spInfo, HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> add(SpInfo spInfo) {
         //设置ID
-        spInfo.setSpId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.SP_INFO, incrementNumberService));
+        spInfo.setSpId(BuildSeqNoHelper.SINGLETONE.getFullSeqNo(WebConstants.SP_INFO));
         spManageService.add(spInfo);
 
         SpInfoHelper.SINGLETONE.refreshSelect();
@@ -116,14 +112,12 @@ public class SpManageAction extends BaseAction<SpInfo> {
 
 
     /**
-     * @param spId     主键id
-     * @param request  请求信息
-     * @param response 返回信息
+     * @param spId 主键id
      * @return 根据主键id找出详细信息
      */
     @RequestMapping(value = "/spinfo/{spId}", method = RequestMethod.GET)
     @ResponseBody
-    public SpInfo querySpNo(@PathVariable String spId, HttpServletRequest request, HttpServletResponse response) {
+    public SpInfo querySpNo(@PathVariable String spId) {
         SpInfo spInfo = spManageService.querySpInfoBySpId(spId);
         return spInfo;
     }

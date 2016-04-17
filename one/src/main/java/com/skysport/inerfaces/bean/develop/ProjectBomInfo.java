@@ -30,6 +30,23 @@ public class ProjectBomInfo extends ProjectBaseInfo {
     private String approveStatus;
 
     private List<UploadFileInfo> fileInfos;
+
+
+    public void buildBomInfo(ProjectBomInfo info) {
+        String projectId = info.getNatrualkey();
+        String customerId = info.getCustomerId();
+        String areaId = info.getAreaId();
+        String seriesId = info.getSeriesId();
+        String categoryAid = info.getCategoryAid();
+        String categoryBid = info.getCategoryBid();
+        this.setProjectId(projectId);
+        this.setCustomerId(customerId);
+        this.setAreaId(areaId);
+        this.setSeriesId(seriesId);
+        this.setCategoryAid(categoryAid);
+        this.setCategoryBid(categoryBid);
+    }
+
     /**
      * 存放初始化文件上传控件中的信息
      */
