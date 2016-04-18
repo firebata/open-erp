@@ -3,8 +3,7 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
-import com.skysport.core.utils.SeqCreateUtils;
+import com.skysport.inerfaces.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
@@ -40,9 +39,6 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
     @Resource(name = "projectItemManageService")
     private IProjectItemManageService projectItemManageService;
-
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
@@ -170,7 +166,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
 //        //年份+客户+地域+系列+NNN
 //        String projectId = kind_name + seqNo;
-        String projectId = SeqCreateUtils.newRrojectSeq(info.getSeriesId());
+        String projectId = SeqCreateUtils.SINGLETONE.newRrojectSeq(info.getSeriesId());
         //设置ID
         info.setNatrualkey(projectId);
         info.setSeqNo(seqNo);

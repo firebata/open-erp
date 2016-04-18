@@ -80,9 +80,9 @@ public class SystemLogAspect {
 
             logger.debug("=====前置通知开始=====");
             logger.info("请求方法:" + method);
-            logger.debug("方法描述:" + description);
+            logger.info("方法描述:" + description);
             logger.info("请求人:" + username);
-            logger.info("请求IP:" + ip);
+            logger.debug("请求IP:" + ip);
             //*========数据库日志=========*//
             LogInfo log = SpringContextHolder.getBean("ilog");
             log.setNatrualkey(UuidGeneratorUtils.getNextId());

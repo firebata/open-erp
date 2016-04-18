@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skysport.inerfaces.mapper.develop.relation.ProjectItemBomMapper">
     <update id="backupRecordsToHis">
-            INSERT INTO t_kf_project_item_bom_his(project_id,bom_id)  SELECT project_id,bom_id FROM t_kf_project_item_bom  WHERE  project_id = ${projectId};
-            DELETE FROM t_kf_project_item_bom WHERE project_id = ${projectId};
+            INSERT INTO t_kf_project_item_bom_his(project_id,bom_id)  SELECT project_id,bom_id FROM t_kf_project_item_bom  WHERE  project_id = #{projectId};
+            DELETE FROM t_kf_project_item_bom WHERE project_id = #{projectId};
     </update>
 
     <insert id="batchInsert">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             insert into t_kf_project_item_bom(project_id,bom_id)
-            values(${item.projectId},${item.bomId});
+            values(#{item.projectId},#{item.bomId})
         </foreach>
     </insert>
 

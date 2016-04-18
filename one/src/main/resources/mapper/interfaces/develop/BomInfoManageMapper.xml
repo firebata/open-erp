@@ -129,6 +129,9 @@
         <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
             ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
         </if>
+        <if test="dataTablesInfo.orderColumn==null or dataTablesInfo.orderColumn == ''">
+            ORDER BY c.update_time desc
+        </if>
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
 
     </select>
@@ -168,10 +171,29 @@
 
     <select id="selectAllBomSexAndMainColor" resultType="BomInfo">
         SELECT
-        <include refid="searchInfoSql"/>
+            c.id AS id,
+            b.project_id AS projectId,
+            c.bom_id AS natrualkey,
+            c.bom_name AS name,
+            c.customer_id AS customerId,
+            c.area_id AS areaId,
+            c.sex_id AS sexId,
+            c.series_id AS seriesId,
+            c.collectionNum AS collectionNum,
+            c.main_color AS mainColor,
+            c.main_color AS mainColorOld,
+            c.fabrics_end_date AS fabricsEndDate,
+            c.accessories_end_date AS accessoriesEndDate,
+            c.preoffer_date AS preOfferDate,
+            c.cloth_received_date AS clothReceivedDate,
+            c.offer_amount AS offerAmount,
+            c.del_flag AS delFlag,
+            c.update_time AS updateTime,
+            c.remark AS remark,
+            c.approve_status AS approveStatus
         FROM
-        t_kf_bominfo a,t_kf_project_item_bom b
-        WHERE a.bom_id= b.bom_id and b.project_id= #{projectId} AND a.del_flag =0
+        t_kf_project_item a,t_kf_project_item_bom b,t_kf_bominfo c
+        WHERE a.project_id= #{projectId} and a.project_id= b.project_id and b.bom_id= c.bom_id  AND a.del_flag =0 and c.del_flag =0
     </select>
 
     <update id="del">

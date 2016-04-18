@@ -299,14 +299,24 @@
                 categoryAidsSelect = [];
             }
 
-            //删除
-            for (var index = 0, len = categoryAids.length; index < len; index++) {
-                var isHave = false;
-                var categoryAid = categoryAids[index];
-                if (!categoryAidsSelect.contains(categoryAid)) {
-                    $("#categoryDivId" + categoryAid).remove();
+            var categoryAidsLen =  categoryAids.length;
+            if(categoryAidsLen == 0 ){
+                $( "[id^=categoryDivId]").remove();
+            }else{
+                // var $categoryAidsArr = $("[id^=categoryAidChild]");
+                // for(var idx=0,len=$categoryAidsArr.length;idx<len;idx++){
+                //     if($.isEmptyObject($categoryAidsArr.val())){
+                //
+                //     }
+                // }
+                //删除
+                for (var index = 0, len = categoryAids.length; index < len; index++) {
+                    var isHave = false;
+                    var categoryAid = categoryAids[index];
+                    if (!categoryAidsSelect.contains(categoryAid)) {
+                        $("#categoryDivId" + categoryAid).remove();
+                    }
                 }
-
             }
 
             //新增

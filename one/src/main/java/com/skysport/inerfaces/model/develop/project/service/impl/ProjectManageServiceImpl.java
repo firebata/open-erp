@@ -89,7 +89,7 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, aliases);
 
         //增加项目和子项目的关系
-        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, projectId);
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.getProjectItemProjectIdVo(projectBomInfos, projectId);
         projectItemProjectServiceImpl.batchInsert(ids);
 
         projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos,categoryInfosInDB);
@@ -124,8 +124,9 @@ public class ProjectManageServiceImpl extends CommonServiceImpl<ProjectInfo> imp
         List<ProjectBomInfo> projectBomInfos = ProjectManageHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, aliases);
 
         //增加项目和子项目的关系
-        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.ProjectItemProjectIdVo(projectBomInfos, projectId);
+        List<ProjectItemProjectIdVo> ids = ProjectManageHelper.SINGLETONE.getProjectItemProjectIdVo(projectBomInfos, projectId);
         projectItemProjectServiceImpl.batchInsert(ids);
+
         projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos, categoryInfosInDB);
 
 

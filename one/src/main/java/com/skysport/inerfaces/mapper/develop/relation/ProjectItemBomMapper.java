@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.mapper.develop.relation;
 
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface ProjectItemBomMapper {
 
     void batchInsert(List<ProjectItemBomIdVo> vos);
 
-    void backupRecordsToHis(String projectId);
+    void backupRecordsToHis(@Param(value = "projectId") String projectId);
+
+
 }

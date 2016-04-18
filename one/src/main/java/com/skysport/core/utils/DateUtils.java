@@ -14,8 +14,9 @@ public enum DateUtils {
     SINGLETONE;
     public final static String YYYYMMDD = "yyyyMMdd";
     public final static String YYYY_MM_DD = "yyyy-mm-dd";
-    public final static String YYYYMMDDHHMMSS = "yyyyMMddhhmmss";
-    public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
+    public final static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+    public final static String YYYYMMDDHHMMSSSSS = "yyyyMMddHHmmssSSS";
+    public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     public String getYyyy() {
         LocalDate today = LocalDate.now();

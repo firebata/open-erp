@@ -3,12 +3,12 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.form.develop.ProjectQueryForm;
@@ -24,6 +24,7 @@ import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
+import com.skysport.inerfaces.model.relation.IRelationIdDealService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.collections.map.HashedMap;
@@ -52,8 +53,6 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     @Resource(name = "bomManageService")
     private IBomManageService bomManageService;
 
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
@@ -75,6 +74,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
     @Resource
     private IStaffService developStaffImpl;
+
+    @Autowired
+    private IRelationIdDealService projectItemBomServiceImpl;
 
     @Override
     public void afterPropertiesSet() {
@@ -111,11 +113,10 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
         //更新t_project表
         super.edit(info);
 
-        //更新t_project_bominfo表
-        updateBomInfo(info);
+        //更新t_kf_project_item_bom_baseinfo
+        updateProjectBomBaseInfo(info);
 
         sexColorService.delByProjectId(info.getNatrualkey());
-
 
         if (null != info.getSexColors() && !info.getSexColors().isEmpty()) {
             //增加项目主颜色信息
@@ -127,7 +128,9 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
 
 
         //生成BOM信息并保存
-        bomManageService.autoCreateBomInfoAndSave(info);
+        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info);
+        projectItemBomServiceImpl.batchInsert(bomIdVos);
+
     }
 
 
@@ -147,7 +150,7 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
     }
 
     @Override
-    public void updateBomInfo(ProjectBomInfo info) {
+    public void updateProjectBomBaseInfo(ProjectBomInfo info) {
         projectItemManageMapper.updateBomInfo(info);
     }
 

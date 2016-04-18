@@ -6,7 +6,7 @@ import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.init.SkySportAppContext;
 import com.skysport.core.utils.DateUtils;
-import com.skysport.core.utils.SeqCreateUtils;
+import com.skysport.inerfaces.utils.SeqCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -158,6 +158,7 @@ public class BomManageHelper extends ExcelCreateHelper {
                 for (BomInfo bominfo : allStyles) {
                     if ((sexId + mainColor).equals(bominfo.getSexId() + bominfo.getMainColor())) {//性别颜色相同则认为款式相同
                         intersection.add(bominfo);
+                        break;
                     }
                 }
 
@@ -179,7 +180,7 @@ public class BomManageHelper extends ExcelCreateHelper {
         String bomName = sexName + categoryBId;
 //                //年份+客户+地域+系列+NNN
 //                String bomId = kind_name + seqNo;
-        String bomId = SeqCreateUtils.newBomSeq();
+        String bomId = SeqCreateUtils.SINGLETONE.newBomSeq(sexId);
         bomInfo.setMainColor(mainColor);
         bomInfo.setSexId(sexId);
         bomInfo.setProjectId(projectId);

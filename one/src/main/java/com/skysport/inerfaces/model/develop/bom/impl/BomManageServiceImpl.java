@@ -4,6 +4,7 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
 import com.skysport.inerfaces.mapper.info.BomInfoManageMapper;
@@ -12,6 +13,7 @@ import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
+import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
@@ -24,6 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,6 +54,8 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     @Resource(name = "projectItemManageService")
     private IProjectItemManageService projectItemManageService;
+
+
 
     /**
      *
@@ -263,10 +268,9 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
      * @author zhangjh
      */
     @Override
-    public void autoCreateBomInfoAndSave(ProjectBomInfo info) {
+    public List<ProjectItemBomIdVo> autoCreateBomInfoAndSave(ProjectBomInfo info) {
 
         List<SexColor> sexColors = info.getSexColors();
-
         String projectId = info.getNatrualkey();
         String customerId = info.getCustomerId();
         String areaId = info.getAreaId();
@@ -283,6 +287,10 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         //需要增加的bom列表
         List<BomInfo> needAddBomList = BomManageHelper.getInstance().getNeedAddBomList(intersection, sexColors, info, projectId, customerId, areaId, seriesId);
 
+        List<BomInfo> alls = new ArrayList<>();
+        alls.addAll(intersection);
+        alls.addAll(needAddBomList);
+
 
         if (!needDelBomList.isEmpty()) {
             //删除
@@ -297,6 +305,12 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
             //新增bom
             addBatch(needAddBomList);
         }
+
+        //增加项目和子项目的关系
+        List<ProjectItemBomIdVo> ids = ProjectManageHelper.SINGLETONE.getProjectItemBomIdVo(alls);
+
+
+        return ids;
     }
 
     @Override
