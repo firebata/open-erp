@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IPackagingService extends ICommonService<KFPackaging> {
 
-    List<KFPackaging> updateBatch(List<KFPackagingJoinInfo> accessoriesItems, BomInfo bomInfo);
+    List<KFPackaging> updateOrAddBatch(List<KFPackagingJoinInfo> accessoriesItems, BomInfo bomInfo);
 
     List<KFPackaging> queryPackagingList(String bomId);
 

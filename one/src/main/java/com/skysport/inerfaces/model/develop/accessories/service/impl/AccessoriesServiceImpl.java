@@ -55,7 +55,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
      */
     @Override
     @SystemServiceLog(description = "保存辅料信息")
-    public List<AccessoriesInfo> updateBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
+    public List<AccessoriesInfo> updateOrAddBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
         //返回辅料的id和序号信息
         List<AccessoriesInfo> accessoriesRtn = new ArrayList<>();
 

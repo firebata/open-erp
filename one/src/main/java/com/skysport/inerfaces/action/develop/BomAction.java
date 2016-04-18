@@ -3,7 +3,6 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.form.develop.BomQueryForm;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
@@ -132,13 +131,7 @@ public class BomAction extends BaseAction<BomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "查询BOM信息")
     public BomInfo info(@PathVariable String natrualKey) {
-
         BomInfo info = bomManageService.queryInfoByNatrualKey(natrualKey);
-
-        //报价信息
-        QuotedInfo quotedInfo = quotedService.queryInfoByNatrualKey(natrualKey);
-
-        info.setQuotedInfo(quotedInfo);
         return info;
     }
 

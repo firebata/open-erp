@@ -14,7 +14,7 @@ import java.io.IOException;
 public interface IQuotedService extends ICommonService<QuotedInfo> {
 
 
-    void updateOrAdd(QuotedInfo quotedInfo);
+    QuotedInfo updateOrAdd(QuotedInfo quotedInfo);
 
     void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException;
 }

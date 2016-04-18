@@ -62,7 +62,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
      * @param bomInfo     BomInfo
      */
     @Override
-    public List<FabricsInfo> updateBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo) {
+    public List<FabricsInfo> updateOrAddBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo) {
 
         List<FabricsInfo> fabricsRtn = new ArrayList<>();
         //找出被删除的面料id，并删除
@@ -89,7 +89,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     fabricsManageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
                     fabricsManageMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
                     kFMaterialPositionService.del(fabricId);//删除物料位置信息
-                    kFMaterialPantoneService.del(fabricId);//删除物料位置信息
+                    kFMaterialPantoneService.del(fabricId);//删除物料颜色信息
                 }
                 //无id，新增
                 else {

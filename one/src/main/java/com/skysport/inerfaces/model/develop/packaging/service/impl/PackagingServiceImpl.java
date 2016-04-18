@@ -54,7 +54,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
      * @param bomInfo
      */
     @Override
-    public List<KFPackaging> updateBatch(List<KFPackagingJoinInfo> packagingItems, BomInfo bomInfo) {
+    public List<KFPackaging> updateOrAddBatch(List<KFPackagingJoinInfo> packagingItems, BomInfo bomInfo) {
 
         List<KFPackaging> packagingsRtn = new ArrayList<>();
 

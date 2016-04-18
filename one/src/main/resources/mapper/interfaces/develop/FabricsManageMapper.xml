@@ -347,10 +347,11 @@
 		d.composite_finish_id AS compositeFinishId
     FROM
         t_kf_fabrics a
+    INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id
     LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id
     LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id
     LEFT JOIN t_kf_fabrics_detail d ON a.fabrics_id = d.fabrics_id
-    WHERE a.bom_id = #{natrualkey} and a.del_flag=0
+    WHERE k.bom_id = #{natrualkey} and a.del_flag=0
     order by a.name_num ASC
     </select>
 
@@ -390,6 +391,7 @@
             d.total_price AS totalPrice
         FROM
             t_kf_fabrics a INNER JOIN
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id
             t_kf_fabrics_detail b INNER JOIN
             t_kf_material_unit_dosage c INNER JOIN
             t_kf_material_spinfo d
@@ -397,7 +399,7 @@
             a.fabrics_id = b.fabrics_id
         AND b.fabrics_id = c.material_id
         AND c.material_id = d.material_id
-        AND a.bom_id = #{bomId}
+        AND k.bom_id = #{bomId}
         LEFT JOIN t_kf_bominfo e on a.bom_id = e.bom_id
     </select>
 

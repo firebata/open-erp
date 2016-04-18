@@ -246,9 +246,10 @@
         c.total_price AS totalPrice
     FROM
         t_kf_accessories a
+    INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id
     LEFT JOIN t_kf_material_unit_dosage b ON a.accessories_id = b.material_id
     LEFT JOIN t_kf_material_spinfo c ON a.accessories_id = c.material_id
-    WHERE a.bom_id = #{natrualkey} and a.del_flag=0
+    WHERE k.bom_id = #{natrualkey} and a.del_flag=0
     order by a.name_num ASC
     </select>
 
@@ -295,12 +296,13 @@
             d.unit_price AS unitPrice,
             d.total_price AS totalPrice
         FROM
-            t_kf_accessories a INNER JOIN
-            t_kf_material_unit_dosage c INNER JOIN
-            t_kf_material_spinfo d
+            t_kf_accessories a
+            INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id
+            INNER JOIN   t_kf_material_unit_dosage c
+            INNER JOIN   t_kf_material_spinfo d
         ON	a.accessories_id =  c.material_id
         AND c.material_id = d.material_id
-        AND a.bom_id = #{bomId}
+        AND k.bom_id = #{bomId}
         LEFT JOIN t_kf_bominfo e ON a.bom_id = e.bom_id
     </select>
 

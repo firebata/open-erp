@@ -56,7 +56,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      * @param quotedInfo QuotedInfo
      */
     @Override
-    public void updateOrAdd(QuotedInfo quotedInfo) {
+    public QuotedInfo updateOrAdd(QuotedInfo quotedInfo) {
 
         DecimalFormat df = new DecimalFormat("0.0000");
 
@@ -90,9 +90,8 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
             quotedInfo.setProjectId(quotedInfo1.getProjectId());
             quotedInfo.setProjectItemId(quotedInfo1.getProjectItemId());
             quotedInfoMapper.updateInfo(quotedInfo);
-
-
         }
+        return quotedInfo;
     }
 
     /**

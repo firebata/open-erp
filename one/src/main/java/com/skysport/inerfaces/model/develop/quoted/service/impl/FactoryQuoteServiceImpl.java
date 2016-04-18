@@ -63,7 +63,7 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
     }
 
     @Override
-    public List<FactoryQuoteInfo> updateBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo) {
+    public List<FactoryQuoteInfo> updateOrAddBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo) {
         List<FactoryQuoteInfo> factorysRtn = new ArrayList<>();
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
 
