@@ -1,9 +1,8 @@
 package com.skysport.inerfaces.model.develop.packaging.service;
 
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KFPackaging;
-import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
-import com.skysport.core.model.common.ICommonService;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  */
 public interface IPackagingService extends ICommonService<KFPackaging> {
 
-    List<KFPackaging> updateOrAddBatch(List<KFPackagingJoinInfo> accessoriesItems, BomInfo bomInfo);
+    List<KFPackaging> updateOrAddBatch(BomInfo bomInfo);
 
     List<KFPackaging> queryPackagingList(String bomId);
 

@@ -14,6 +14,7 @@ import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
+import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstructionService;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
@@ -60,10 +61,9 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
     @Autowired
     private IRelationIdDealService bomMaterialServiceImpl;
+    @Autowired
+    private IProductionInstructionService productionInstructionServiceImpl;
 
-    /**
-     *
-     */
     @Resource(name = "factoryQuoteService")
     private IFactoryQuoteService factoryQuoteService;
 
@@ -120,7 +120,10 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
             //报价信息
             QuotedInfo quotedInfo = quotedService.queryInfoByNatrualKey(bomId);
 
-            buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo);
+
+            KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.queryProductionInstractionInfo(bomId);
+
+            buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo, productionInstruction);
 
         }
         return bomInfo;
@@ -154,12 +157,13 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
      * @param packagings
      * @param factoryQuoteInfos
      */
-    private void buildBomInfo(BomInfo bomInfo, List<FabricsInfo> fabrics, List<AccessoriesInfo> accessories, List<KFPackaging> packagings, List<FactoryQuoteInfo> factoryQuoteInfos, QuotedInfo quotedInfo) {
+    private void buildBomInfo(BomInfo bomInfo, List<FabricsInfo> fabrics, List<AccessoriesInfo> accessories, List<KFPackaging> packagings, List<FactoryQuoteInfo> factoryQuoteInfos, QuotedInfo quotedInfo, KfProductionInstructionEntity productionInstruction) {
         bomInfo.setQuotedInfo(quotedInfo);
         bomInfo.setFabrics(fabrics);
         bomInfo.setAccessories(accessories);
         bomInfo.setPackagings(packagings);
         bomInfo.setFactoryQuoteInfos(factoryQuoteInfos);
+        bomInfo.setProductionInstruction(productionInstruction);
     }
 
     /**
@@ -173,18 +177,19 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         super.edit(bomInfo);
 
         //保存面料信息
-        List<FabricsInfo> fabrics = fabricsManageService.updateOrAddBatch(bomInfo.getFabricItems(), bomInfo);
+        List<FabricsInfo> fabrics = fabricsManageService.updateOrAddBatch(bomInfo);
 
         //保存辅料信息
-        List<AccessoriesInfo> accessories = accessoriesService.updateOrAddBatch(bomInfo.getAccessoriesItems(), bomInfo);
+        List<AccessoriesInfo> accessories = accessoriesService.updateOrAddBatch(bomInfo);
 
 
         //保存包装材料信息
-        List<KFPackaging> packagings = packagingService.updateOrAddBatch(bomInfo.getPackagingItems(), bomInfo);
+        List<KFPackaging> packagings = packagingService.updateOrAddBatch(bomInfo);
 
         //保存成衣厂信息
-        List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.updateOrAddBatch(bomInfo.getFactoryQuoteInfos(), bomInfo);
-        List<KfProductionInstructionEntity> productionInstructionEntities = BomManageHelper.getInstance().buildProductInstruction(bomInfo.getFactoryQuoteInfos());
+        List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.updateOrAddBatch(bomInfo);
+
+        KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.updateOrAddBatch(bomInfo);
 
         //保存报价信息
         QuotedInfo quotedInfo = quotedService.updateOrAdd(bomInfo.getQuotedInfo());
@@ -200,7 +205,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         List<BomMaterialIdVo> idsPackaging = BomManageHelper.getInstance().getBomMaterialIdVoInKFPackaging(packagings, bomId);
 
         List<BomMaterialIdVo> idsFactoryQuoteInfo = BomManageHelper.getInstance().getBomMaterialIdVoInFactoryQuoteInfo(factoryQuoteInfos, bomId);
-        List<BomMaterialIdVo> idsProInst = BomManageHelper.getInstance().getBomMaterialIdVoInKfProductionInstructionEntity(productionInstructionEntities, bomId);
+        List<BomMaterialIdVo> idsProInst = BomManageHelper.getInstance().getBomMaterialIdVoInKfProductionInstructionEntity(productionInstruction, bomId);
 //        List<BomMaterialIdVo> idsQuotedInfo = BomManageHelper.getInstance().getBomMaterialIdVoInQuotedInfo(quotedInfo, bomId);
         List<BomMaterialIdVo> fulls = new ArrayList<>();
         fulls.addAll(idsFabrics);
@@ -211,7 +216,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 //        fulls.addAll(idsQuotedInfo);
         bomMaterialServiceImpl.batchInsert(fulls);
 
-        buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo);
+        buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo, productionInstruction);
 
     }
 

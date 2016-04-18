@@ -58,12 +58,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
     /**
      * 保存面料信息
      *
-     * @param fabricItems List<FabricsJoinInfo>
      * @param bomInfo     BomInfo
      */
     @Override
-    public List<FabricsInfo> updateOrAddBatch(List<FabricsJoinInfo> fabricItems, BomInfo bomInfo) {
-
+    public List<FabricsInfo> updateOrAddBatch(BomInfo bomInfo) {
+        List<FabricsJoinInfo> fabricItems = bomInfo.getFabricItems();
         List<FabricsInfo> fabricsRtn = new ArrayList<>();
         //找出被删除的面料id，并删除
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();

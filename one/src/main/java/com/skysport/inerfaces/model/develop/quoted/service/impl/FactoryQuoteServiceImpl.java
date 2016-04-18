@@ -2,14 +2,9 @@ package com.skysport.inerfaces.model.develop.quoted.service.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.UuidGeneratorUtils;
-import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FactoryQuoteInfo;
-import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.FactoryQuotedInfoMapper;
-import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
-import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
@@ -32,11 +27,6 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
     @Resource(name = "factoryQuotedInfoMapper")
     private FactoryQuotedInfoMapper factoryQuotedInfoMapper;
 
-    //    @Resource(name = "incrementNumber")
-//    private IncrementNumberService incrementNumber;
-    @Resource(name = "uploadFileInfoService")
-    private IUploadFileInfoService uploadFileInfoService;
-
     @Override
     public void afterPropertiesSet() throws Exception {
         commonDao = factoryQuotedInfoMapper;
@@ -47,23 +37,12 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
 
         List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuotedInfoMapper.queryFactoryQuoteInfoList(bomId);
 
-        for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
-            String factoryQuoteId = factoryQuoteInfo.getFactoryQuoteId();
-            KfProductionInstructionEntity productionInstruction = factoryQuotedInfoMapper.queryProductionInstractionInfo(factoryQuoteId);
-            if (null != productionInstruction) {
-                Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, factoryQuoteId, WebConstants.FILE_KIND_SKETCH);
-                productionInstruction.setSketchUrlUidFileinfosMap(fileinfosMap);
-                fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, factoryQuoteId, WebConstants.FILE_KIND_SPECIFICATION);
-                productionInstruction.setSpecificationUrlUidFileinfosMap(fileinfosMap);
-            }
-            factoryQuoteInfo.setProductionInstruction(productionInstruction);
-
-        }
         return factoryQuoteInfos;
     }
 
     @Override
-    public List<FactoryQuoteInfo> updateOrAddBatch(List<FactoryQuoteInfo> factoryQuoteInfos, BomInfo bomInfo) {
+    public List<FactoryQuoteInfo> updateOrAddBatch(BomInfo bomInfo) {
+        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
         List<FactoryQuoteInfo> factorysRtn = new ArrayList<>();
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
 
@@ -80,54 +59,21 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
                 //有id，更新
                 if (StringUtils.isNotBlank(quoteInfoId)) {
                     //项目信息
-
-                    factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
                     factoryQuotedInfoMapper.updateInfo(factoryQuoteInfo);
-                    getKfProductionInstructionEntity(factoryQuoteInfo, quoteInfoId);
-                    factoryQuotedInfoMapper.updateProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }
                 //无id，新增
                 else {
 
-//                    String kind_name = buildKindName(bomInfo, factoryQuoteInfo);
-//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumber, WebConstants.FACTORY_QUOTE_SEQ_NO_LENGTH);
-//                    quoteInfoId = kind_name + seqNo;
                     quoteInfoId = UuidGeneratorUtils.getNextId();
-                    String productionInstructionId = UuidGeneratorUtils.getNextId();
 
                     factoryQuoteInfo.setFactoryQuoteId(quoteInfoId);
 
                     factoryQuotedInfoMapper.add(factoryQuoteInfo);
-                    //必须在成衣厂报价信息下方（因为供应商在下方）
-                    getKfProductionInstructionEntity(factoryQuoteInfo, quoteInfoId);
-                    factoryQuoteInfo.getProductionInstruction().setFactoryQuoteId(quoteInfoId);
-                    factoryQuoteInfo.getProductionInstruction().setUid(productionInstructionId);
-                    factoryQuoteInfo.getProductionInstruction().setProductionInstructionId(productionInstructionId);
-                    factoryQuoteInfo.getProductionInstruction().setBomId(bomId);
-                    factoryQuotedInfoMapper.addProductionInstruction(factoryQuoteInfo.getProductionInstruction());
                 }
-
-                List<UploadFileInfo> fileInfos = factoryQuoteInfo.getProductionInstruction().getSketchUrlUidUploadFileInfos();
-                UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, quoteInfoId, uploadFileInfoService, WebConstants.FILE_KIND_SKETCH);
-
-                fileInfos = factoryQuoteInfo.getProductionInstruction().getSpecificationUrlUidUploadFileInfos();
-                UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, quoteInfoId, uploadFileInfoService, WebConstants.FILE_KIND_SPECIFICATION);
-
                 factorysRtn.add(factoryQuoteInfo);
             }
         }
         return factorysRtn;
-    }
-
-    private void getKfProductionInstructionEntity(FactoryQuoteInfo factoryQuoteInfo, String quoteInfoId) {
-        KfProductionInstructionEntity productionInstructionEntity = factoryQuotedInfoMapper.queryProjectAndBomInfoByFactoryQuoteId(quoteInfoId);
-        if (null != productionInstructionEntity) {
-            factoryQuoteInfo.getProductionInstruction().setSpName(productionInstructionEntity.getSpName());
-            factoryQuoteInfo.getProductionInstruction().setProjectItemName(productionInstructionEntity.getProjectItemName());
-            factoryQuoteInfo.getProductionInstruction().setColorName(productionInstructionEntity.getColorName());
-            factoryQuoteInfo.getProductionInstruction().setBomName(productionInstructionEntity.getBomName());
-            factoryQuoteInfo.getProductionInstruction().setClothReceivedDate(factoryQuoteInfo.getClothReceivedDate());
-        }
     }
 
 

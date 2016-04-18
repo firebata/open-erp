@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Service("projectCategoryManageService")
 public class ProjectCategoryManageServiceImpl extends CommonServiceImpl<ProjectCategoryInfo> implements IProjectCategoryManageService, InitializingBean {
+
     @Resource(name = "projectCategoryManageMapper")
     private ProjectCategoryManageMapper projectCategoryManageMapper;
 

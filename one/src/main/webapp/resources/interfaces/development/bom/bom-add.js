@@ -84,6 +84,10 @@
             //初始成衣厂
             $.initFactory(_data.factoryQuoteInfos);
 
+            $.initProductinst(_date.productionInstruction);
+
+
+
         });
 
     }

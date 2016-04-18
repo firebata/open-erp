@@ -92,7 +92,7 @@ public class FactoryQuoteInfo {
     private String factoryName;
 
 
-    private KfProductionInstructionEntity productionInstruction;
+
 
     public BigDecimal getCosting() {
         return costing;
@@ -238,13 +238,6 @@ public class FactoryQuoteInfo {
         this.nameNum = nameNum;
     }
 
-    public KfProductionInstructionEntity getProductionInstruction() {
-        return productionInstruction;
-    }
-
-    public void setProductionInstruction(KfProductionInstructionEntity productionInstruction) {
-        this.productionInstruction = productionInstruction;
-    }
 
     public String getSerialNumber() {
         return serialNumber;

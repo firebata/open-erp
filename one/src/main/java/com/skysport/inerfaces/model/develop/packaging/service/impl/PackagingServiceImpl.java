@@ -50,12 +50,11 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
     /**
      * 保存包装材料信息
      *
-     * @param packagingItems
      * @param bomInfo
      */
     @Override
-    public List<KFPackaging> updateOrAddBatch(List<KFPackagingJoinInfo> packagingItems, BomInfo bomInfo) {
-
+    public List<KFPackaging> updateOrAddBatch(BomInfo bomInfo) {
+        List<KFPackagingJoinInfo> packagingItems = bomInfo.getPackagingItems();
         List<KFPackaging> packagingsRtn = new ArrayList<>();
 
         //找出被删除的包材id，并删除

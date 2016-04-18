@@ -730,63 +730,55 @@ public class BomManageHelper extends ExcelCreateHelper {
         List<KFPackaging> packagings = bomInfo.getPackagings();
         BomManageHelper.translateIdToNameInPackagings(packagings, seriesName);
         //成衣厂 & 生产指示单
-        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
-
+//        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
+        KfProductionInstructionEntity productionInstruction = bomInfo.getProductionInstruction();
         String bomId = bomInfo.getNatrualkey() == null ? bomInfo.getBomId() : bomInfo.getNatrualkey();
-        if (null == factoryQuoteInfos || factoryQuoteInfos.isEmpty()) {
-            logger.info("==============================================>工厂报价信息 = null or 工厂报价信息 isEmpty ");
-            return;
-        }
+
         /**
          * 下单日期（导出时间）
          */
         String exportDate = DateUtils.SINGLETONE.getYyyy_Mm_dd();
-        for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
-            String factoryQuoteId = factoryQuoteInfo.getFactoryQuoteId();
-            //指示单信息
-            KfProductionInstructionEntity productionInstruction = factoryQuoteInfo.getProductionInstruction();
-            if (productionInstruction == null) {
-                logger.info("==============================================>bomid[{0}] 的成衣厂factoryQuoteId[{1}]对应的指示单信息为空 ", new Object[]{bomId, factoryQuoteId});
-                continue;
-            }
-            productionInstruction.setFabrics(fabricItems);
-            productionInstruction.setAccessories(accessories);
-            productionInstruction.setPackagings(packagings);
-            productionInstruction.setExportDate(exportDate);
-
-            InputStream is = fileRource.getInputStream();
-            String year = DateUtils.SINGLETONE.getYyyy();
-            String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
-                    .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
-
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(DateUtils.SINGLETONE.getYyyyMmdd());
-            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_PI_CN_NAME);
-            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getProjectItemName());
-            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getColorName());
-            stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(bomInfo.getName());
-            stringBuilder.append(WebConstants.SUFFIX_EXCEL_XLSX);
-            String fileName = stringBuilder.toString();
-
-            //完整文件路径
-            String downLoadPath = ctxPath + File.separator + fileName;
-            //生成生成指示单
-            OutputStream os = new FileOutputStream(downLoadPath);
-            Transformer transformer = PoiTransformer.createTransformer(is, os);
-            AreaBuilder areaBuilder = new XlsCommentAreaBuilder(transformer);
-            List<Area> xlsAreaList = areaBuilder.build();
-            Area xlsArea = xlsAreaList.get(0);
-            Context context = new PoiContext();
-            context.putVar("productionInstruction", productionInstruction);
-//            xlsArea.applyAt(new CellRef("Sheet2!A1"), context);
-            xlsArea.applyAt(new CellRef("Sheet1!A1"), context);
-            xlsArea.processFormulas();
-            transformer.write();
-
-            //下载
-            UpDownUtils.download(request, response, fileName, downLoadPath);
-
+        //指示单信息
+        if (productionInstruction == null) {
+            logger.info("==============================================>bomid[{0}] 的成衣厂productionInstructionId[{1}]对应的指示单信息为空 ", new Object[]{bomId, productionInstruction.getProductionInstructionId()});
         }
+        productionInstruction.setFabrics(fabricItems);
+        productionInstruction.setAccessories(accessories);
+        productionInstruction.setPackagings(packagings);
+        productionInstruction.setExportDate(exportDate);
+
+        InputStream is = fileRource.getInputStream();
+        String year = DateUtils.SINGLETONE.getYyyy();
+        String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
+                .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(DateUtils.SINGLETONE.getYyyyMmdd());
+        stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_PI_CN_NAME);
+        stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getProjectItemName());
+        stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(productionInstruction.getColorName());
+        stringBuilder.append(CharConstant.HORIZONTAL_LINE).append(bomInfo.getName());
+        stringBuilder.append(WebConstants.SUFFIX_EXCEL_XLSX);
+        String fileName = stringBuilder.toString();
+
+        //完整文件路径
+        String downLoadPath = ctxPath + File.separator + fileName;
+        //生成生成指示单
+        OutputStream os = new FileOutputStream(downLoadPath);
+        Transformer transformer = PoiTransformer.createTransformer(is, os);
+        AreaBuilder areaBuilder = new XlsCommentAreaBuilder(transformer);
+        List<Area> xlsAreaList = areaBuilder.build();
+        Area xlsArea = xlsAreaList.get(0);
+        Context context = new PoiContext();
+        context.putVar("productionInstruction", productionInstruction);
+//            xlsArea.applyAt(new CellRef("Sheet2!A1"), context);
+        xlsArea.applyAt(new CellRef("Sheet1!A1"), context);
+        xlsArea.processFormulas();
+        transformer.write();
+
+        //下载
+        UpDownUtils.download(request, response, fileName, downLoadPath);
+
 
     }
 
@@ -843,34 +835,14 @@ public class BomManageHelper extends ExcelCreateHelper {
         return bomIdVos;
     }
 
-    public List<BomMaterialIdVo> getBomMaterialIdVoInKfProductionInstructionEntity(List<KfProductionInstructionEntity> productionInstructionEntities, String bomId) {
+    public List<BomMaterialIdVo> getBomMaterialIdVoInKfProductionInstructionEntity(KfProductionInstructionEntity entity, String bomId) {
         List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-        for (KfProductionInstructionEntity entity : productionInstructionEntities) {
-            BomMaterialIdVo vo = new BomMaterialIdVo();
-            String materialId = entity.getProductionInstructionId();
-            vo.setBomId(bomId);
-            vo.setMaterialId(materialId);
-            bomIdVos.add(vo);
-        }
+        BomMaterialIdVo vo = new BomMaterialIdVo();
+        String materialId = entity.getProductionInstructionId();
+        vo.setBomId(bomId);
+        vo.setMaterialId(materialId);
+        bomIdVos.add(vo);
         return bomIdVos;
     }
 
-    public List<KfProductionInstructionEntity> buildProductInstruction(List<FactoryQuoteInfo> factoryQuoteInfos) {
-        List<KfProductionInstructionEntity> list = new ArrayList<>();
-        for (FactoryQuoteInfo info : factoryQuoteInfos) {
-            KfProductionInstructionEntity entity = info.getProductionInstruction();
-            list.add(entity);
-        }
-        return list;
-    }
-
-//    public List<BomMaterialIdVo> getBomMaterialIdVoInQuotedInfo(QuotedInfo quotedInfo, String bomId) {
-//        List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-//        BomMaterialIdVo vo = new BomMaterialIdVo();
-//        String materialId = quotedInfo;
-//        vo.setBomId(bomId);
-//        vo.setMaterialId(materialId);
-//        bomIdVos.add(vo);
-//        return bomIdVos;
-//    }
 }

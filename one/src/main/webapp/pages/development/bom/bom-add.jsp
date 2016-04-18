@@ -72,6 +72,12 @@
                             </a>
                         </li>
                         <li>
+                            <a data-toggle="tab" href="#成衣指示单">
+                                <i class="icon-rocket"></i>
+                                成衣指示单
+                            </a>
+                        </li>
+                        <li>
                             <a data-toggle="tab" href="#报价">
                                 <i class="icon-rocket"></i>
                                 报价
@@ -100,6 +106,9 @@
                         </div>
                         <div id="成衣厂" class="tab-pane">
                             <%@ include file="include/bom-factory.jsp" %>
+                        </div>
+                        <div id="成衣指示单" class="tab-pane">
+                            <%@ include file="include/bom-productinst.jsp" %>
                         </div>
                         <div id="报价" class="tab-pane">
                             <%@ include file="include/bom-offer.jsp" %>

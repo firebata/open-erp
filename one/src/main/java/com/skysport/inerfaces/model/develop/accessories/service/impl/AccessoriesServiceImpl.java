@@ -49,13 +49,12 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
     /**
      * 保存辅料信息
-     *
-     * @param accessoriesItems
      * @param bomInfo
      */
     @Override
     @SystemServiceLog(description = "保存辅料信息")
-    public List<AccessoriesInfo> updateOrAddBatch(List<AccessoriesJoinInfo> accessoriesItems, BomInfo bomInfo) {
+    public List<AccessoriesInfo> updateOrAddBatch(BomInfo bomInfo) {
+        List<AccessoriesJoinInfo> accessoriesItems = bomInfo.getAccessoriesItems();
         //返回辅料的id和序号信息
         List<AccessoriesInfo> accessoriesRtn = new ArrayList<>();
 
@@ -114,11 +113,13 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         }
         return accessoriesRtn;
     }
+
     @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAccessoriesList(String bomId) {
         return accessoriesManageMapper.queryAccessoriesList(bomId);
     }
+
     @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAllAccessoriesByBomId(String bomId) {

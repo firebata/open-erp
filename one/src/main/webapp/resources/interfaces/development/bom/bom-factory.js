@@ -9,11 +9,11 @@
     var title_type = "成衣厂_";
     // var saveFactoryFunURL = path + "/development/bom/saveFactoryFun";
     var bom_selectURL = path + "/system/baseinfo/bom_select";
-    var fileUploadURL = path + "/files/upload";
+   
     //var $fileListLi = $("#filesList");
     //var sketchUrlUidUploadFileInfos = [];
     //var specificationUrlUidUploadFileInfos = [];
-    var isSubmitAction = 'N';
+    
 
     $.extend({
         initFactory: initFactory,
@@ -131,15 +131,15 @@
             },
             fields: fieldsDesc
         }).on('success.form.bv', function (e) { //表单校验成功，ajax提交数据
-            console.log("包材_" + _id + "验证成功");
+            console.log("成衣厂_" + _id + "验证成功");
             saveFactoryFun(_id);
         });
     }
 
     /**
-     * 初始化包材nextIdNum的表单信息
-     * @param nextIdNum 包材序号
-     * @param _factoryInfo 包材表单值
+     * 初始化成衣厂nextIdNum的表单信息
+     * @param nextIdNum 成衣厂序号
+     * @param _factoryInfo 成衣厂表单值
      */
     function initFactoryFields(nextIdNum, _factoryInfo) {
 
@@ -160,57 +160,11 @@
                 $("#" + key + nextIdNum).val(keyVal);
             }
         });
-
-        var productionInstruction = _factoryInfo["productionInstruction"];
-        if (null != productionInstruction) {
-            Object.keys(productionInstruction).map(function (key_2) {//遍历工艺单信息
-                if (key_2 != 'clothReceivedDate') {//避免覆盖上面工厂信息中的clothReceivedDate
-                    $("#" + key_2 + nextIdNum).val(productionInstruction[key_2]);
-                }
-            });
-
-        }
-        initFileInput(nextIdNum, _factoryInfo);
-
     }
+
 
     /**
-     * 初始化上传插件
-     * @param nextIdNum
-     * @param _factoryInfo
-     */
-    function initFileInput(nextIdNum, _factoryInfo) {
-
-
-        var sketchUrlUidFileinfosMap = null;
-        var specificationUrlUidFileinfosMap = null;
-
-        if (null != _factoryInfo && null != _factoryInfo["productionInstruction"]) {
-            sketchUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["sketchUrlUidFileinfosMap"];
-            specificationUrlUidFileinfosMap = _factoryInfo["productionInstruction"]["specificationUrlUidFileinfosMap"];
-        }
-
-        var $sketchUrlUid = $("#sketchUrlUid" + nextIdNum);
-        $.loadFileInput($sketchUrlUid, null, sketchUrlUidFileinfosMap, fileUploadURL);
-        $.fileInputAddListenr(null, $sketchUrlUid, null, function () {
-        }, getIsSubmitAction);
-
-        var $specificationUrlUid = $("#specificationUrlUid" + nextIdNum);
-        $.loadFileInput($specificationUrlUid, null, specificationUrlUidFileinfosMap, fileUploadURL);
-
-        $.fileInputAddListenr(null, $specificationUrlUid, null, function () {
-        }, getIsSubmitAction);
-
-
-    }
-
-
-    function getIsSubmitAction() {
-        return isSubmitAction;
-    }
-
-    /**
-     * 添加包材
+     * 添加成衣厂
      */
     var addFactory = function (factoryInfo) {
 
@@ -276,7 +230,7 @@
         $("#factoryItemInfo").append(myTemplate(data));
 
 
-        $("div[id^=factoryAllInfoId]").hide(); //页面加载时，包材全部隐藏
+        $("div[id^=factoryAllInfoId]").hide(); //页面加载时，成衣厂全部隐藏
 
         $("span[id^=factoryEyeId]").removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
 
@@ -286,9 +240,10 @@
                 initFactoryFields(nextIdNum, factoryInfo);
                 //表单字段监听
                 startBootstrapValidatorListner(nextIdNum);
-            } else {
-                initFileInput(nextIdNum, factoryInfo);
             }
+            // else {
+            //     initFileInput(nextIdNum, factoryInfo);
+            // }
 
 
         });
@@ -297,22 +252,22 @@
     }
 
 
-    //删除包材
+    //删除成衣厂
     function deleteFactoryById(idNum) {
         bom.factoryItems.splice(idNum - 1, 1);
     }
 
     function copyFactory(idNum) {
         if (bom.factoryItems[idNum] == undefined || $.trim(bom.factoryItems[idNum]) == '') {
-            bootbox.alert("请先保存包材_" + idNum);
+            bootbox.alert("请先保存成衣厂_" + idNum);
         }
     }
 
     var deleteFun = function (idNum) {
-        //当前包材idNum
+        //当前成衣厂idNum
         var curId = idNum;
         var factoryArrLength = $("div[id^=factoryAllInfoId]").length;
-        //删除当前包材和之后的所有包材
+        //删除当前成衣厂和之后的所有成衣厂
         for (var index = curId; index <= factoryArrLength; index++) {
             //$("div[id^=factoryAllInfoId]")
             $("#factoryDivId" + index).remove();
@@ -323,7 +278,6 @@
                     deleteFactoryById(index);
                 }
 
-
                 var formDataStr = $("#factoryFormId" + (index + 1)).serialize();
                 if (formDataStr != '') {
                     saveFactoryById(index, formDataStr);
@@ -332,7 +286,7 @@
 
             }
         }
-        //重新生成包材
+        //重新生成成衣厂
         var maxFactoryId = factoryArrLength - 1;
 
         for (var index = curId; index <= maxFactoryId; index++) {
@@ -353,7 +307,7 @@
     var trashFactorySelect = function (_this, idNum) {
         var saveFlag = bom.factoryItems[idNum - 1].saveFlag;
         if (saveFlag == true) {
-            bootbox.confirm("包材_" + idNum + "已保存，确定要删除", function (result) {
+            bootbox.confirm("成衣厂_" + idNum + "已保存，确定要删除", function (result) {
                 doDel(result, idNum);
             });
         }
@@ -371,11 +325,8 @@
         var formDataStr = $("#factoryFormId" + idNum).serialize();
         saveFactoryById(idNum, formDataStr);
 
-
         bom.factoryItems[idNum - 1].saveFlag = true;//已保存
-
     }
-
 
     var saveFactoryById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
@@ -432,33 +383,17 @@
     //第一次初始化下拉列表
     var reloadFactoryDetailSelectData = function (idNum, callback) {
         reloadBomSelect(idNum, callback);
-
-        //if ($.cookie('systemBaseMaps') == undefined) {
-        //    //第一次初始化下拉列表，存放到cookies中
-        //    $.sendRestFulAjax(path + "/system/baseinfo/bom_select", null, 'GET', 'json', function (data) {
-        //        _doFactorySuccess_info(data, idNum);
-        //    });
-        //}
-        //else {
-        //    //第二次，直接从cookies中读取
-        //    initFactorySelect(nextIdNum);
-        //}
     }
 
 
     //cookie重新赋值，给下拉列表赋值
     var _doFactorySuccess_info = function (_data, idNum, callback) {
-        //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
         initFactorySelect(_data, idNum, callback);
     }
 
     //给下拉列表赋值
     var initFactorySelect = function (_data, idNum, callback) {
-        //console.info("加载包材" + idNum + "的下拉列表");
-        var data = _data;//JSON.parse($.cookie('systemBaseMaps'));//字符串转化成JSON 数据
-
-
-        //
+        var data = _data;
         //供应商
         var spItems = data["spItems"];
         $("#spIdC" + idNum).empty();
@@ -499,7 +434,7 @@
         showFlag: false,//页面是否展示
         saveFlag: false,//是否已保存
         delFlag: false,//是否已删除
-        currenId: 0 //包材下标
+        currenId: 0 //成衣厂下标
     }
 
 
@@ -619,10 +554,10 @@
 
         //第一步，页面加载时，加载所有数据/分步加载数据
 
-        //页面加载时，包材全部隐藏
+        //页面加载时，成衣厂全部隐藏
         $("div[id^=factoryAllInfoId]").hide();
 
-        //点击添加包材
+        //点击添加成衣厂
         $("#imgAddFactory").click(function () {
             addFactory();
             //赋初始化值：保存标志，显示标志
@@ -634,7 +569,7 @@
     var bom = {
         projectId: "",//项目id
         bomId: "",//BOMId
-        factoryItems: [],//所有包材
+        factoryItems: [],//所有成衣厂
     }
     window.saveFactory = saveFactory;
     window.refreshFactorySelect = refreshFactorySelect;
