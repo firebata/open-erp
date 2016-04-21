@@ -1,10 +1,10 @@
 package com.skysport.inerfaces.mapper.info;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.bean.info.CategoryInfo;
 import com.skysport.core.mapper.CommonDao;
+import com.skysport.inerfaces.bean.info.CategoryInfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/2.
  */
-@Component("categoryManageMapper")
+@Repository("categoryManageMapper")
 public interface CategoryManageMapper extends CommonDao<CategoryInfo> {
     /**
      * 查询指定级别的品类

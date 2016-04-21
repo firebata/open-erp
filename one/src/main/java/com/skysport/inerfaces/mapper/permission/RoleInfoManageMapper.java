@@ -5,6 +5,7 @@ import com.skysport.core.bean.permission.RoleUser;
 import com.skysport.core.mapper.CommonDao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/8/17.
  */
-@Component("roleInfoManageMapper")
+@Repository("roleInfoManageMapper")
 public interface RoleInfoManageMapper extends CommonDao<RoleInfo> {
     List<RoleUser> queryRoleUsers(String userId);
 

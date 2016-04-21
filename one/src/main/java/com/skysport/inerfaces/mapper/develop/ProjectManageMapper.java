@@ -2,8 +2,8 @@ package com.skysport.inerfaces.mapper.develop;
 
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
-import com.skysport.inerfaces.form.BaseQueyrForm;
-import org.springframework.stereotype.Component;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-@Component("projectManageMapper")
+@Repository("projectManageMapper")
 public interface ProjectManageMapper extends CommonDao<ProjectInfo> {
     String queryCurrentSeqNo(ProjectInfo info);
 

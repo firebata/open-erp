@@ -8,8 +8,7 @@
     <title>修改BOM信息</title>
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
-          id="main-ace-style"/>
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"      id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -118,10 +117,7 @@
                         </div>
                     </div>
                 </div>
-
-
             </form>
-
         </div>
         <!-- Button trigger modal -->
     </div>
@@ -134,13 +130,9 @@
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
 <script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
-<script type="text/javascript"
-        src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-productinst.js?v=<%=version%>"></script>

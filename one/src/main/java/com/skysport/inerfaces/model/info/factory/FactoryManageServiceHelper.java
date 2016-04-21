@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.factory;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 
 import java.util.List;

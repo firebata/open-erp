@@ -1,12 +1,11 @@
 package com.skysport.inerfaces.engine.workflow.helper;
 
 import com.skysport.core.cache.TaskHanlderCachedMap;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.common.IApproveService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.task.ApproveVo;
 import com.skysport.inerfaces.constant.WebConstants;
-import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 

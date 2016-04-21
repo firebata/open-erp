@@ -84,29 +84,13 @@
             //初始成衣厂
             $.initFactory(_data.factoryQuoteInfos);
 
-            $.initProductinst(_date.productionInstruction);
-
+            $.initProductinst(_data);
 
 
         });
 
     }
 
-
-    function buildBomDesc() {
-
-        bominfo.offerAmount = $("#offerAmount").val();
-        bominfo.projectId = $("#projectId").val();
-        bominfo.sexId = $("#sexId").val();
-        bominfo.mainColorOld = $("#mainColorOld").val();
-        bominfo.mainColor = $("#mainColor").val();
-        bominfo.fabricsEndDate = $("#fabricsEndDate").val();
-        bominfo.accessoriesEndDate = $("#accessoriesEndDate").val();
-        bominfo.preOfferDate = $("#preOfferDate").val();
-        bominfo.clothReceivedDate = $("#clothReceivedDate").val();
-        bominfo.natrualkey = $("#natrualkey").val();
-
-    }
 
     /**
      * 保存数据
@@ -132,26 +116,10 @@
 
     }
 
-    /**
-     * 报价信息
-     */
-    function buildBomQuoted() {
-
-        bominfo.quotedInfo = {};
-        bominfo.quotedInfo.factoryOffer = $("#factoryOffer").val();
-        bominfo.quotedInfo.factoryMargins = $("#factoryMargins").val();
-        bominfo.quotedInfo.costing = $("#costing").val();
-        bominfo.quotedInfo.lpPrice = $("#lpPrice").val();
-        bominfo.quotedInfo.euroPrice = $("#euroPrice").val();
-        bominfo.quotedInfo.exchangeCosts = $("#exchangeCosts").val();
-        bominfo.quotedInfo.bomId = $("#natrualkey").val();
-
-    }
-
 
     function toSaveBomInfo(needToLisPage) {
         //描述信息
-        buildBomDesc();
+        $.buildBomDesc(bominfo);
 
         //包材信息
         //var fabricItems = buildFabricItems();
@@ -169,8 +137,11 @@
         var factoryQuoteInfos = $.factoryQuoteInfos();
         bominfo.factoryQuoteInfos = factoryQuoteInfos;
 
+        //生产指示单
+        var productionInstruction = $.buildProductionInstr();
+        bominfo.productionInstruction = productionInstruction;
 
-        buildBomQuoted();
+        $.buildBomQuoted(bominfo);
 
         bomSaveFun(needToLisPage);
     }
@@ -192,7 +163,7 @@
                 }
             })
         }
-        else{
+        else {
             toSaveBomInfo(needToLisPage);
         }
 

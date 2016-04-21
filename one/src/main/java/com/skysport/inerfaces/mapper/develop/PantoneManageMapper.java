@@ -5,13 +5,14 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.PantoneInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by zhangjh on 2015/6/4.
  */
-@Component("pantoneManageDao")
+@Repository("pantoneManageDao")
 public interface PantoneManageMapper {
 
     /**

@@ -3,7 +3,7 @@ package com.skysport.inerfaces.mapper.common;
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2016/2/16.
  */
-@Component("uploadFileInfoMapper")
+@Repository("uploadFileInfoMapper")
 public interface UploadFileInfoMapper extends CommonDao<UploadFileInfo> {
 
 

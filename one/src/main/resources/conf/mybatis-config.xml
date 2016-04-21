@@ -37,8 +37,8 @@
         <typeAlias alias="BomInfo" type="com.skysport.inerfaces.bean.develop.BomInfo"/>
         <typeAlias alias="ProjectBomInfo" type="com.skysport.inerfaces.bean.develop.ProjectBomInfo"/>
         <typeAlias alias="ProjectInfo" type="com.skysport.inerfaces.bean.develop.ProjectInfo"/>
-        <typeAlias alias="ProjectQueryForm" type="com.skysport.inerfaces.form.develop.ProjectQueryForm"/>
-        <typeAlias alias="BomQueryForm" type="com.skysport.inerfaces.form.develop.BomQueryForm"/>
+        <typeAlias alias="ProjectQueryForm" type="com.skysport.inerfaces.bean.form.develop.ProjectQueryForm"/>
+        <typeAlias alias="BomQueryForm" type="com.skysport.inerfaces.bean.form.develop.BomQueryForm"/>
         <typeAlias alias="ProjectCategoryInfo" type="com.skysport.inerfaces.bean.develop.ProjectCategoryInfo"/>
         <typeAlias alias="MainColor" type="com.skysport.inerfaces.bean.info.MainColor"/>
         <typeAlias alias="FabricInfo" type="com.skysport.inerfaces.bean.develop.FabricsInfo"/>

@@ -1,13 +1,9 @@
 package com.skysport.core.init;
 
-import com.skysport.core.model.init.helper.SystemInitHelper;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.dom4j.DocumentException;
+import com.skysport.core.thread.SystemInitThread;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.io.IOException;
 
 /**
  * 启动加载数据字段等信息
@@ -16,7 +12,6 @@ import java.io.IOException;
  * @version:2015年5月6日 下午2:49:25
  */
 public class InitSystemInfoListener implements ServletContextListener {
-    protected transient Log logger = LogFactory.getLog(getClass());
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
@@ -25,22 +20,7 @@ public class InitSystemInfoListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-//        //初始化工作流
-//        SkySportAppContext.repositoryService = SpringContextHolder.getBean("repositoryService");
-//        SkySportAppContext.runtimeService = SpringContextHolder.getBean("runtimeService");
-//        SkySportAppContext.taskService = SpringContextHolder.getBean("taskService");
-//        SkySportAppContext.historyService = SpringContextHolder.getBean("historyService");
-
-        //初始化系统基础信息
-        try {
-            SystemInitHelper.SINGLETONE.init();
-        } catch (IOException e) {
-            logger.info(e.getMessage(), e);
-        } catch (DocumentException e) {
-            logger.info(e.getMessage(), e);
-        }
-
-
+        new Thread(new SystemInitThread()).start();
     }
 
 }

@@ -2,7 +2,7 @@ package com.skysport.inerfaces.mapper.develop.relation;
 
 import com.skysport.inerfaces.bean.relation.ProjectItemProjectIdVo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * 说明:项目子项目关系表
  * Created by zhangjh on 2016/4/15.
  */
-@Component
+@Repository
 public interface ProjectItemProjectMapper {
 
     void backupRecordsToHis(List<ProjectItemProjectIdVo> vos);

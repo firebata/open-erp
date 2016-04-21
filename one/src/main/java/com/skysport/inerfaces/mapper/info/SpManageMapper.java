@@ -5,6 +5,7 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.SpInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author: zhangjh
  * @version:2015年5月5日 下午5:43:26
  */
-@Component("spManageDao")
+@Repository("spManageDao")
 public interface SpManageMapper {
     /**
      * @param spId

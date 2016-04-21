@@ -4,12 +4,14 @@ import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.MaterialUnitDosage;
 import com.skysport.core.mapper.CommonDao;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 /**
  * 说明:
  * Created by zhangjh on 2015/9/24.
  */
-@Component("packagingManageMapper")
+@Repository("packagingManageMapper")
 public interface PackagingManageMapper extends CommonDao<KFPackaging> {
 
     void updateDosage(MaterialUnitDosage materialUnitDosage);

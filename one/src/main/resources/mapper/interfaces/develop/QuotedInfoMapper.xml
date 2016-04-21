@@ -35,9 +35,11 @@
 
     <select id="queryIds" resultType="QuotedInfo">
         SELECT
-            <include refid="searchIdsSql"/>
-        FROM t_kf_bominfo b,t_kf_project_item c
-        where b.project_id = c.project_id and b.bom_id =#{bomId}
+            m.parent_project_id As projectId,
+            m.project_id AS projectItemId,
+            b.bom_id AS bomId
+        FROM t_kf_bominfo b,t_kf_project_item c ,t_kf_project_item_bom f,t_kf_project_item_project m
+        where b.bom_id =#{bomId} and b.del_flag=0 and b.bom_id = f.bom_id and f.project_id = c.project_id and c.project_id = m.project_id
     </select>
 
     <select id="queryInfo" resultType="QuotedInfo">
@@ -58,24 +60,36 @@
 
     <select id="queryListByProjectItemIds" resultType="QuotedInfo">
         SELECT
-          <include refid="searchInfoSql"/>
+        a.id AS id,
+        a.project_id As projectId,
+        a.project_item_id AS projectItemId,
+        a.bom_id AS bomId,
+        a.sp_id AS spId,
+        a.main_fabric_ids AS mainFabricIds,
+        a.main_fabric_descs AS mainFabricDescs,
+        a.euro_exchange_rates AS euroExchangeRates,
+        a.factory_offer AS factoryOffer,
+        a.factory_margins AS factoryMargins,
+        a.exchange_costs AS exchangeCosts,
+        a.rates AS rates,
+        a.euro_price AS euroPrice,
+        a.lp_price AS lpPrice,
+        a.commission AS commission,
+        a.quoted_price AS quotedPrice,
+        a.del_flag AS delFlag,
+        a.update_time AS updateTime,
+        a.remark AS remark,
+        a.costing AS costing
         FROM t_kf_pre_quote a
-        WHERE  a.project_item_id IN
+        WHERE  a.del_flag=0 and a.project_item_id IN
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item}
         </foreach>
-        <!--,t_kf_bominfo b,t_kf_project_item c
-        where a.bom_id = b.bom_id and b.project_id = c.project_item_id
-        and c.project_item_id IN
-            <foreach collection="list" item="item" index="index" separator=",">
-               (#{item})
-            </foreach>-->
-
     </select>
 
     <select id="searchInfos" resultType="QuotedInfo">
         SELECT
-        <include refid="searchInfoSql"/>
+          <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a,t_jc_customer b
         WHERE a.del_flag=0 and a.customer_id = b.customer_id
         <if test="searchValue!=null and searchValue != ''">

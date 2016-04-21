@@ -8,10 +8,10 @@
         a.uid                 			AS   uid,
         a.uid                 			AS   productionInstructionId,
         b.bom_id              			AS   bomId,
-        d.project_item_name   			AS   projectItemName,
+        d.project_name   			    AS   projectItemName,
         c.bom_name            			AS   bomName,
         c.main_color          			AS   colorName,
-        c.offer_amout         			AS   offerAmout,
+        c.offer_amount         			AS   offerAmout,
         a.crop_requirements    			AS   cropRequirements,
         a.quality_requirements     		AS   qualityRequirements,
         a.overstitch               		AS   overstitch,
@@ -37,18 +37,27 @@
 
     <select id="queryProductionInstractionInfo" resultType="KfProductionInstructionEntity">
         SELECT
-          <include refid="searcProductionInstractionInfoSql"/>
+            <include refid="searcProductionInstractionInfoSql"/>
         FROM
-          t_kf_production_instruction a,t_kf_bom_material b,t_kf_bominfo c,t_kf_project_item d
+        t_kf_production_instruction a,
+        t_kf_bom_material b,
+        t_kf_bominfo c,
+        t_kf_project_item_bom f,
+        t_kf_project_item d
         WHERE
-        a.uid =b.material_id and a.del_flag=0 and b.bom_id= c.bom_id and c.project_id =d.project_id and b.bom_id = #{bom_id}
+        a.uid = b.material_id
+        AND a.del_flag = 0
+        AND b.bom_id = c.bom_id
+        AND c.bom_id = f.bom_id
+        AND f.project_id = d.project_id
+        AND b.bom_id =  #{bom_id}
     </select>
 
 
     <insert id="addProductionInstruction">
         insert into
         t_kf_production_instruction(uid,crop_requirements,quality_requirements,overstitch,overstitch_space,blindstitch,blindstitch_space,overlock,overlock_space,finish_pressing_requirements,spcial_tech,packing_requirements,trademark_code,trademark_remark ,scale_code ,scale_remark,rinsing_marks_code,rinsing_marks_remark)
-        values(#{uid}#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
+        values(#{uid},#{cropRequirements},#{qualityRequirements},#{overstitch},#{overstitchSpace},#{blindstitch},#{blindstitchSpace},#{overlock},#{overlockSpace},#{finishPressingRequirements},#{spcialTech},#{packingRequirements},#{trademarkCode},#{trademarkRemark},#{scaleCode},#{scaleRemark},#{rinsingMarksCode},#{rinsingMarksRemark})
     </insert>
 
 

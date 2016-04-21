@@ -1,4 +1,4 @@
-package com.skysport.core.init;
+package com.skysport.core.bean;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,8 +18,9 @@ public class SpringContextHolder implements ApplicationContextAware {
      *
      * @param applicationContext
      */
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
-        SpringContextHolder.applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
 

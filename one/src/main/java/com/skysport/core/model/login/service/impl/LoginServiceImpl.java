@@ -6,7 +6,7 @@ import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.core.model.login.service.IUserService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +21,7 @@ import java.util.Map;
  * 说明:
  * Created by zhangjh on 2015/12/2.
  */
-@Component("loginService")
+@Repository("loginService")
 public class LoginServiceImpl implements ILoginService {
 
     @Resource(name = "userService")

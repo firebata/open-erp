@@ -4,7 +4,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.inerfaces.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

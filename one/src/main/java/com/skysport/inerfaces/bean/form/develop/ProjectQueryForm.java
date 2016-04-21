@@ -1,7 +1,7 @@
-package com.skysport.inerfaces.form.develop;
+package com.skysport.inerfaces.bean.form.develop;
 
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
-import com.skysport.inerfaces.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 
 /**
  * 类说明:项目查询表单

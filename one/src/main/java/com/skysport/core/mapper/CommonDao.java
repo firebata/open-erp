@@ -2,7 +2,7 @@ package com.skysport.core.mapper;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

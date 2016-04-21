@@ -5,7 +5,7 @@ import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.impl.identity.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * 说明:
  * Created by zhangjh on 2016/4/10.
  */
-@Component
+@Service
 public class DevelopStaffImpl implements IStaffService {
     @Resource
     IdentityService identityService;

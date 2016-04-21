@@ -2,7 +2,6 @@ package com.skysport.inerfaces.model.develop.packaging.service.impl;
 
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KFPackaging;
@@ -32,9 +31,6 @@ import java.util.List;
 public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> implements IPackagingService, InitializingBean {
     @Resource(name = "packagingManageMapper")
     private PackagingManageMapper packagingManageMapper;
-
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
 
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;

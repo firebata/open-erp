@@ -2,8 +2,8 @@ package com.skysport.inerfaces.mapper.info;
 
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.form.develop.BomQueryForm;
-import org.springframework.stereotype.Component;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * 类说明:bom信息查询
  * Created by zhangjh on 2015/7/13.
  */
-@Component("bomInfoManageMapper")
+@Repository("bomInfoManageMapper")
 public interface BomInfoManageMapper extends CommonDao<BomInfo> {
 
     int listFilteredInfosCounts(BomQueryForm bomQueryForm);

@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.info;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/15.
  */
-@Component("mainColorManageMapper")
+@Repository("mainColorManageMapper")
 public interface MainColorManageMapper<T> {
     List<T> queryMainColorList(String projectId);
 

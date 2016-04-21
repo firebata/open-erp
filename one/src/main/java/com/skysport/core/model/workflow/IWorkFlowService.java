@@ -1,7 +1,7 @@
 package com.skysport.core.model.workflow;
 
 import com.skysport.inerfaces.bean.task.TaskVo;
-import com.skysport.inerfaces.form.task.TaskQueryForm;
+import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;

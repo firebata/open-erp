@@ -9,7 +9,8 @@
     var projectSelectUrl = path + "/system/baseinfo/project_select";
     var appURL = path + '/resources/js/i18n/app/';
     $.extend({
-        initBomDesc: initDesc
+        initBomDesc: initDesc,
+        buildBomDesc:buildBomDesc
     })
 
     /**
@@ -28,6 +29,20 @@
 
     }
 
+    function buildBomDesc(bominfo) {
+
+        bominfo.offerAmount = $("#offerAmount").val();
+        bominfo.projectId = $("#projectId").val();
+        bominfo.sexId = $("#sexId").val();
+        bominfo.mainColorOld = $("#mainColorOld").val();
+        bominfo.mainColor = $("#mainColor").val();
+        bominfo.fabricsEndDate = $("#fabricsEndDate").val();
+        bominfo.accessoriesEndDate = $("#accessoriesEndDate").val();
+        bominfo.preOfferDate = $("#preOfferDate").val();
+        bominfo.clothReceivedDate = $("#clothReceivedDate").val();
+        bominfo.natrualkey = $("#natrualkey").val();
+
+    }
 
     function i18nDesc() {
         jQuery.i18n.properties({

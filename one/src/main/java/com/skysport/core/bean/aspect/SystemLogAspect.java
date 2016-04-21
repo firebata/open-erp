@@ -1,10 +1,10 @@
-package com.skysport.core.aspect;
+package com.skysport.core.bean.aspect;
 
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.annotation.SystemServiceLog;
 import com.skysport.core.bean.LogInfo;
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.log.LogService;
 import com.skysport.core.utils.JsonUtils;
 import com.skysport.core.utils.UserUtils;

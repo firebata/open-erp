@@ -6,14 +6,14 @@
 
     <update id="backupRecordsToHis">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
-            INSERT INTO t_kf_bom_material_his(material_id,bom_id)  SELECT material_id,bom_id FROM t_kf_bom_material  WHERE  material_id = #{item.materialId},bom_id=#{item.bomId};
-            DELETE FROM t_kf_bom_material WHERE material_id = #{item.materialId},bom_id=#{item.bomId};
+            INSERT INTO t_kf_bom_material_his(material_id,bom_id)  SELECT material_id,bom_id FROM t_kf_bom_material  WHERE  material_id = #{item.materialId} and bom_id=#{item.bomId};
+            DELETE FROM t_kf_bom_material WHERE material_id = #{item.materialId} and bom_id=#{item.bomId}
         </foreach>
     </update>
 
     <insert id="batchInsert">
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
-            INSERT INTO t_kf_bom_material(material_id,bom_id)   VALUES(#{item.materialId},#{item.bomId});
+            INSERT INTO t_kf_bom_material(material_id,bom_id)   VALUES(#{item.materialId},#{item.bomId})
         </foreach>
     </insert>
 

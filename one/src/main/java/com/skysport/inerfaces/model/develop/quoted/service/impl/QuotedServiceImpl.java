@@ -17,6 +17,7 @@ import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ import java.util.*;
 @Service("quotedService")
 public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements IQuotedService, InitializingBean {
 
-    @Resource(name = "quotedInfoMapper")
+    @Autowired
     private QuotedInfoMapper quotedInfoMapper;
 
     @Resource(name = "bomManageService")
@@ -85,6 +86,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
                 quotedInfo.setProjectId(quotedInfo2.getProjectId());
                 quotedInfo.setProjectItemId(quotedInfo2.getProjectItemId());
                 quotedInfoMapper.add(quotedInfo);
+//            }
             }
         } else {
             quotedInfo.setProjectId(quotedInfo1.getProjectId());
@@ -103,7 +105,8 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      * @throws IOException
      */
     @Override
-    public void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws IOException {
+    public void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws
+            IOException {
 
         String year = DateUtils.SINGLETONE.getYyyy();
         List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));

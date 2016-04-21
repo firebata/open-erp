@@ -10,7 +10,7 @@ import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.form.develop.BomQueryForm;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;

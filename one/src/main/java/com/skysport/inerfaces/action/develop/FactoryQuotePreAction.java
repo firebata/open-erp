@@ -5,7 +5,7 @@ import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.FactoryQuoteInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.form.develop.FactoryQuotePreQueryForm;
+import com.skysport.inerfaces.bean.form.develop.FactoryQuotePreQueryForm;
 import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
 import org.springframework.context.annotation.Scope;

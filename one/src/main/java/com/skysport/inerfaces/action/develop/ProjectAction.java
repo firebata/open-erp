@@ -6,7 +6,7 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.form.develop.ProjectQueryForm;
+import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;

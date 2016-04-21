@@ -3,7 +3,8 @@ package com.skysport.inerfaces.model.info.material.impl;
 import com.skysport.inerfaces.bean.develop.MaterialInfo;
 import com.skysport.inerfaces.mapper.info.MaterialManageMapper;
 import com.skysport.inerfaces.model.info.material.IMaterialManageService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-@Component("materialManageService")
+@Service("materialManageService")
 public class MaterialManageServiceImpl implements IMaterialManageService {
 
     @Resource(name = "materialManageMapper")

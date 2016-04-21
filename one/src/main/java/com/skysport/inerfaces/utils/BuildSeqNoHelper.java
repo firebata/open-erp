@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.utils;
 
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.core.cache.DictionaryInfoCachedMap;

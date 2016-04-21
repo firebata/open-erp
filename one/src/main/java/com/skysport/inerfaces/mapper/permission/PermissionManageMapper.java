@@ -3,6 +3,7 @@ package com.skysport.inerfaces.mapper.permission;
 import com.skysport.core.bean.permission.ResourceRole;
 import com.skysport.core.bean.permission.RoleUser;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2015/10/29.
  */
-@Component("permissionManageMapper")
+@Repository("permissionManageMapper")
 public interface PermissionManageMapper {
 
 

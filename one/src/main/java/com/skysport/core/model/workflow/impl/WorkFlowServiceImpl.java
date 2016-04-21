@@ -5,7 +5,7 @@ import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.task.TaskVo;
-import com.skysport.inerfaces.form.task.TaskQueryForm;
+import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;

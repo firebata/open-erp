@@ -4,6 +4,7 @@ import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 import com.skysport.core.mapper.CommonDao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2016/1/20.
  */
-@Component("kFMaterialPantoneMapper")
+@Repository("kFMaterialPantoneMapper")
 public interface KFMaterialPantoneMapper extends CommonDao<KFMaterialPantone> {
 
     List<KFMaterialPantone> queryIds(@Param("materialId") String materialId);

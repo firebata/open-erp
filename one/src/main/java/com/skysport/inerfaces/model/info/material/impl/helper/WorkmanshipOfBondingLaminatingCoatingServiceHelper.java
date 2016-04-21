@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.material.impl.helper;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.inerfaces.model.info.material.impl.WorkmanshipOfBondingLaminatingCoatingServiceImpl;
 

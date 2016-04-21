@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.form.develop.BomQueryForm;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;

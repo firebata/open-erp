@@ -1,7 +1,7 @@
 package com.skysport.core.model.init.helper;
 
 import com.skysport.core.bean.system.DictionaryVo;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.model.init.service.IDictionaryService;
 

@@ -3,7 +3,7 @@ package com.skysport.core.utils;
 import com.fasterxml.uuid.EthernetAddress;
 import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedGenerator;
-import com.skysport.core.init.SpringContextHolder;
+import com.skysport.core.bean.SpringContextHolder;
 import org.activiti.engine.impl.persistence.StrongUuidGenerator;
 
 /**

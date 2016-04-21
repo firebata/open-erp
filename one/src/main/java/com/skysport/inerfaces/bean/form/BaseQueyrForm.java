@@ -1,4 +1,4 @@
-package com.skysport.inerfaces.form;
+package com.skysport.inerfaces.bean.form;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 

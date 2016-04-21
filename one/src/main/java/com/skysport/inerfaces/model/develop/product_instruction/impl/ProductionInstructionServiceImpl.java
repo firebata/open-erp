@@ -13,7 +13,7 @@ import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstr
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.Map;
  * 说明:
  * Created by zhangjh on 2016/4/18.
  */
-@Component
+@Service
 public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProductionInstructionEntity> implements IProductionInstructionService, InitializingBean {
 
     @Autowired

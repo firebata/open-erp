@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+    <!-- 基于@AspectJ切面的驱动器 -->
+    <aop:aspectj-autoproxy/>
+    <bean id="operateLogAspect" class="com.jato.video.common.aspect.OperateLogAspect"/>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.jato.video">
+        <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
+    </context:component-scan>
+
+    <!-- Redis -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="poolConfig"/>
+        <constructor-arg index="1" value="${redis.hostName}"/>
+        <constructor-arg index="2" value="${redis.port}"/>
+        <constructor-arg index="3" value="${redis.timeout}"/>
+        <constructor-arg index="4" value="${redis.password}"/>
+        <!--      <constructor-arg index="4">
+                 <null />
+             </constructor-arg> -->
+        <constructor-arg index="5" value="${redis.default.db}"/>
+    </bean>
+    <bean id="systemConfigRefresh" class="com.jato.video.init.SystemConfigRefresh"/>
+    <bean id="loginNotify" class="com.jato.video.linked.notify.LoginNotify"/>
+    <bean id="parkingNotify" class="com.jato.video.goods.GoodsAction.ParkingNotify"/>
+    <bean id="kkOnlineNotify" class="com.jato.video.linked.notify.KKTalentOnlineNotify"/>
+    <bean id="kkOfflineNotify" class="com.jato.video.linked.notify.KKTalentOfflineNotify"/>
+    <bean id="freezeNotify" class="com.jato.video.linked.notify.FreezeNotify"/>
+    <bean id="classifyNotify" class="com.jato.video.linked.notify.ClassifyNotify"/>
+    <bean id="onlineRecordNotify" class="com.jato.video.linked.notify.OnlineRecordNotify"/>
+    <bean id="publish" class="com.jato.video.linked.distributed.RedisSubscribe" init-method="startMonitor"
+          destroy-method="close">
+        <constructor-arg index="0" ref="jedisPool"/>
+        <constructor-arg index="1">
+            <map>
+                <entry key="thankyo_config" value-ref="systemConfigRefresh"/>
+                <entry key="login" value-ref="loginNotify"/>
+                <entry key="parking" value-ref="parkingNotify"/>
+                <entry key="kkonline" value-ref="kkOnlineNotify"/>
+                <entry key="kkoffline" value-ref="kkOfflineNotify"/>
+                <entry key="freeze" value-ref="freezeNotify"/>
+                <entry key="classify" value-ref="classifyNotify"/>
+                <entry key="onlineRecord" value-ref="onlineRecordNotify"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <!-- 数据库配置文件 -->
+    <context:property-placeholder location="classpath:video.properties" ignore-unresolvable="true"/>
+
+    <bean id="propertyConfigurer" class="com.jato.video.util.PropertyReader">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:video.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 加载国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          scope="singleton">
+        <property name="basenames">
+            <list>
+                <value>classpath:i18n/returncode</value>
+                <value>classpath:i18n/resources</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="5"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${pooled.driverClassName}"/>
+        <property name="url" value="${pooled.url}"/>
+        <property name="username" value="${pooled.username}"/>
+        <property name="password" value="${pooled.password}"/>
+
+        <property name="maxTotal" value="${pooled.maxActive}"/>
+        <property name="maxIdle" value="${pooled.maxIdle}"/>
+        <property name="minIdle" value="${pooled.minIdle}"/>
+        <property name="initialSize" value="${pooled.initialSize}"/>
+
+        <property name="maxWaitMillis" value="${pooled.maxWait}"/>
+        <property name="poolPreparedStatements" value="${pooled.poolPreparedStatements}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${pooled.timeBetweenEvictionRunsMillis}"/>
+
+        <property name="numTestsPerEvictionRun" value="${pooled.numTestsPerEvictionRun}"/>
+        <property name="testOnBorrow" value="${pooled.testOnBorrow}"/>
+        <property name="testWhileIdle" value="${pooled.testWhileIdle}"/>
+        <property name="validationQuery" value="${pooled.validationQuery}"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" />  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="batchSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
+    </bean>
+
+    <bean id="aspect" class="com.jato.video.common.aspect.TransactionAspect">
+        <constructor-arg ref="transactionManager"/>
+    </bean>
+    <aop:config>
+        <aop:aspect ref="aspect">
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.add*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.del*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.modify*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.edit*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.order*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.approve*(..))" method="updateAdvice"/>
+            <aop:around pointcut="execution(public * com.jato.video..dao.*Dao.query*(..))" method="readOnlyAdvice"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.qq.com"/>
+        <property name="port" value="25"/>
+        <property name="username" value="{}"/>
+        <property name="password" value="{}"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.socketFactory.fallback">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- servlet查找资源时，先走dispatcherServlet，找不到时，再找静态资源 -->
+    <mvc:default-servlet-handler/>
+
+    <mvc:annotation-driven>
+        <mvc:async-support default-timeout="50000"/>
+        <mvc:message-converters>
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <!-- <bean class="org.springframework.http.converter.StringHttpMessageConverter" /> -->
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/><!-- 10M -->
+        <property name="resolveLazily" value="true"/>
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
+
+    <mvc:interceptors>
+        <!-- 国际化操作 拦截器 必需配置，可以和其它国际化方式通用 -->
+        <!-- <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" /> -->
+
+        <!-- admin session拦截页面 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/admin/account.html"/>
+            <mvc:exclude-mapping path="/admin/**/*.js"/>
+            <mvc:exclude-mapping path="/admin/**/*.css"/>
+            <mvc:exclude-mapping path="/admin/**/*.jpg"/>
+            <mvc:exclude-mapping path="/admin/**/*.png"/>
+            <mvc:exclude-mapping path="/admin/**/*.gif"/>
+            <bean class="com.jato.video.common.interceptor.AdminSessionInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/agency/**"/>
+            <mvc:exclude-mapping path="/agency/login.html"/>
+            <mvc:exclude-mapping path="/agency/**/*.js"/>
+            <mvc:exclude-mapping path="/agency/**/*.css"/>
+            <mvc:exclude-mapping path="/agency/**/*.jpg"/>
+            <mvc:exclude-mapping path="/agency/**/*.png"/>
+            <mvc:exclude-mapping path="/agency/**/*.gif"/>
+            <bean class="com.jato.video.common.interceptor.AgencySessionInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/talent/**"/>
+            <mvc:exclude-mapping path="/talent/login.html"/>
+            <mvc:exclude-mapping path="/talent/**/*.js"/>
+            <mvc:exclude-mapping path="/talent/**/*.css"/>
+            <mvc:exclude-mapping path="/talent/**/*.jpg"/>
+            <mvc:exclude-mapping path="/talent/**/*.png"/>
+            <mvc:exclude-mapping path="/talent/**/*.gif"/>
+            <bean class="com.jato.video.common.interceptor.TalentSessionInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- user session拦截接口 -->
+        <mvc:interceptor>
+            <!-- UserController -->
+            <mvc:mapping path="/um/addsharepromoscore*"/>
+            <mvc:mapping path="/um/editpwd*"/>
+            <mvc:mapping path="/um/appeditpwd*"/>
+            <mvc:mapping path="/um/editimage*"/>
+            <mvc:mapping path="/um/edituserinfo*"/>
+            <mvc:mapping path="/um/addalbum*"/>
+            <mvc:mapping path="/um/delalbum*"/>
+            <mvc:mapping path="/um/addconcern*"/>
+            <mvc:mapping path="/um/delconcern*"/>
+            <mvc:mapping path="/um/adddynamic*"/>
+            <mvc:mapping path="/um/adddynamicreply*"/>
+            <mvc:mapping path="/um/querycommentbox*"/>
+            <mvc:mapping path="/um/ordercar*"/>
+            <mvc:mapping path="/um/orderring*"/>
+            <mvc:mapping path="/um/ordervip*"/>
+            <mvc:mapping path="/um/querymission*"/>
+            <mvc:mapping path="/um/missionreward*"/>
+            <mvc:mapping path="/um/promoexchange*"/>
+            <mvc:mapping path="/um/querybill*"/>
+            <mvc:mapping path="/um/recharge*"/>
+
+            <mvc:mapping path="/sns/unlink*"/>
+            <mvc:mapping path="/sns/share*"/>
+
+            <!-- FamilyController -->
+            <mvc:mapping path="/family/delfamily*"/>
+            <mvc:mapping path="/family/editfamily*"/>
+            <mvc:mapping path="/family/addfamilymem*"/>
+            <mvc:mapping path="/family/createfamily*"/>
+            <mvc:mapping path="/family/quitfamily*"/>
+            <mvc:mapping path="/family/updatefamilymem*"/>
+            <mvc:mapping path="/family/ordermedal*"/>
+
+            <!-- RoomController -->
+            <mvc:mapping path="/room/addroommanager*"/>
+            <mvc:mapping path="/room/delroommanager*"/>
+            <mvc:mapping path="/room/presentring*"/>
+            <mvc:mapping path="/room/subscriberoom*"/>
+
+            <bean class="com.jato.video.common.interceptor.UserSessionInterceptor"/>
+        </mvc:interceptor>
+
+        <!-- promotion session拦截页面 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/promotion/**"/>
+            <mvc:exclude-mapping path="/promotion/account.html"/>
+            <mvc:exclude-mapping path="/promotion/**/*.js"/>
+            <mvc:exclude-mapping path="/promotion/**/*.css"/>
+            <mvc:exclude-mapping path="/promotion/**/*.jpg"/>
+            <mvc:exclude-mapping path="/promotion/**/*.png"/>
+            <mvc:exclude-mapping path="/promotion/**/*.gif"/>
+            <bean class="com.jato.video.common.interceptor.PromotionSessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+          p:cookieName="clientLanguage"
+          p:cookieMaxAge="100000"
+          p:cookiePath="/"
+          p:defaultLocale="${common.defaultLocale}"/>
+
+    <bean id="propertyConfig" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="defaultLocale">
+                    <value type="java.util.Locale">${common.defaultLocale}</value>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <!-- 配置视图解析器 -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!-- 解析器解析/WEB-INF/jsp/路径下，以.jsp结尾的视图文件 -->
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- <bean id="smppSender" class="com.jato.video.common.smpp.SMPPSender">
+        <property name="smppIP" value="${smpp.ip}" />
+        <property name="smppPort" value="${smpp.port}" />
+    </bean> -->
+
+    <bean id="facebookServiceConfig" class="com.jato.video.sns.OAuthServiceConfig">
+        <constructor-arg value="${facebook.apiKey}"/>
+        <constructor-arg value="${facebook.apiSecret}"/>
+        <constructor-arg value="${facebook.callback}"/>
+        <constructor-arg value="${facebook.scope}"/>
+        <constructor-arg value="com.jato.video.sns.api.FacebookApi20"/>
+    </bean>
+    <bean id="facebookServiceProvider" class="com.jato.video.sns.OAuthServiceProvider">
+        <constructor-arg name="config" ref="facebookServiceConfig"/>
+    </bean>
+
+    <bean id="googleServiceConfig" class="com.jato.video.sns.OAuthServiceConfig">
+        <constructor-arg value="${google.apiKey}"/>
+        <constructor-arg value="${google.apiSecret}"/>
+        <constructor-arg value="${google.callback}"/>
+        <constructor-arg value="${google.scope}"/>
+        <constructor-arg value="com.jato.video.sns.api.GoogleApi20"/>
+    </bean>
+    <bean id="googleServiceProvider" class="com.jato.video.sns.OAuthServiceProvider">
+        <constructor-arg name="config" ref="googleServiceConfig"/>
+    </bean>
+
+    <bean id="twitterServiceConfig" class="com.jato.video.sns.OAuthServiceConfig">
+        <constructor-arg value="${twitter.apiKey}"/>
+        <constructor-arg value="${twitter.apiSecret}"/>
+        <constructor-arg value="${twitter.callback}"/>
+        <constructor-arg value=""/>
+        <constructor-arg value="com.jato.video.sns.api.TwitterApi"/>
+    </bean>
+    <bean id="twitterServiceProvider" class="com.jato.video.sns.OAuthServiceProvider">
+        <constructor-arg name="config" ref="twitterServiceConfig"/>
+    </bean>
+
+    <bean id="instagramServiceConfig" class="com.jato.video.sns.OAuthServiceConfig">
+        <constructor-arg value="${instagram.apiKey}"/>
+        <constructor-arg value="${instagram.apiSecret}"/>
+        <constructor-arg value="${instagram.callback}"/>
+        <constructor-arg value="${instagram.scope}"/>
+        <constructor-arg value="com.jato.video.sns.api.InstagramApi20"/>
+    </bean>
+    <bean id="instagramServiceProvider" class="com.jato.video.sns.OAuthServiceProvider">
+        <constructor-arg name="config" ref="instagramServiceConfig"/>
+    </bean>
+    <bean id="machineCenter" class="com.jato.video.admin.service.MachineCenter" factory-method="getInstance"/>
+</beans>

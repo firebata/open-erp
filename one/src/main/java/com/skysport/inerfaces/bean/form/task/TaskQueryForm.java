@@ -1,7 +1,7 @@
-package com.skysport.inerfaces.form.task;
+package com.skysport.inerfaces.bean.form.task;
 
 import com.skysport.inerfaces.bean.task.TaskVo;
-import com.skysport.inerfaces.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

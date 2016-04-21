@@ -7,7 +7,7 @@ import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
-import com.skysport.inerfaces.form.develop.BomQueryForm;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.mapper.info.BomInfoManageMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
@@ -207,6 +207,8 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
         List<BomMaterialIdVo> idsFactoryQuoteInfo = BomManageHelper.getInstance().getBomMaterialIdVoInFactoryQuoteInfo(factoryQuoteInfos, bomId);
         List<BomMaterialIdVo> idsProInst = BomManageHelper.getInstance().getBomMaterialIdVoInKfProductionInstructionEntity(productionInstruction, bomId);
 //        List<BomMaterialIdVo> idsQuotedInfo = BomManageHelper.getInstance().getBomMaterialIdVoInQuotedInfo(quotedInfo, bomId);
+
+
         List<BomMaterialIdVo> fulls = new ArrayList<>();
         fulls.addAll(idsFabrics);
         fulls.addAll(idsAccessoriesInfo);

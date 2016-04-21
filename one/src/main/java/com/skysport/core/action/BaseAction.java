@@ -5,7 +5,7 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

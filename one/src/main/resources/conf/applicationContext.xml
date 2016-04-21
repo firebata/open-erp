@@ -13,11 +13,19 @@
           http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--<context:component-scan    base-package="com.skysport">-->
+    <!--<context:component-scan          base-package="com.skysport.core.bean,com.skysport.inerfaces.bean,com.skysport.core.mapper,com.skysport.inerfaces.mapper,com.skysport.core.model,com.skysport.inerfaces.model,com.skysport.inerfaces.engine.listener">-->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>-->
+    <!--</context:component-scan>-->
 
-    <!-- 扫描文件（自动将service层注入） -->
-    <context:component-scan base-package="com.skysport">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:component-scan base-package="com.skysport.*">
+        <context:include-filter type="regex" expression="(bean|model|engine|mapper)\..*"/>
     </context:component-scan>
+
+    <bean id="springContextHolder" class="com.skysport.core.bean.SpringContextHolder"></bean>
 
     <!-- 引入jdbc配置文件 -->
     <context:property-placeholder location="classpath:conf/jdbc.properties"/>
@@ -91,7 +99,7 @@
     <!--使用AspectJ方式配置AOP-->
     <!--解决上面..*Impl配置时，报的java.lang.ClassCastException: com.sun.proxy异常-->
     <!-- 激活组件扫描功能,在包com.skysport.core.aspect及其子包下面自动扫描通过注解配置的组件 -->
-    <!--<context:component-scan base-package="com.skysport.core.aspect"/>-->
+    <!--<context:component-scan base-package="com.skysport.core.bean.aspect"/>-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- 引擎内部提供的UUID生成器，依赖fastxml的java-uuid-generator模块 -->
@@ -120,8 +128,6 @@
     <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
     <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
 
-
-    <bean id="springContextHolder" class="com.skysport.core.init.SpringContextHolder" lazy-init="false"></bean>
 
     <!--<bean id="ilog" class="com.skysport.core.bean.LogInfoInfo"/>-->
 

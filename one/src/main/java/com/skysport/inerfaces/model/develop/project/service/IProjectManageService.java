@@ -1,8 +1,8 @@
 package com.skysport.inerfaces.model.develop.project.service;
 
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
-import com.skysport.inerfaces.form.BaseQueyrForm;
-import com.skysport.inerfaces.form.develop.ProjectQueryForm;
+import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.core.model.common.ICommonService;
 
 import java.util.List;

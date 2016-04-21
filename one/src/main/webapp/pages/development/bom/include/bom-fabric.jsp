@@ -46,7 +46,7 @@
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">
                                 <i class="ace-icon fa fa-hand-o-right blue"></i> &nbsp;&nbsp;<h5
-                                    class="widget-title lighter">{{fabricName}}详细</h5>
+                                    class="widget-title lighter"><%--{{fabricTitleName}}--%>详细</h5>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">
                                 <i class="ace-icon fa fa-hand-o-right blue"></i> &nbsp;&nbsp;<h5
-                                    class="widget-title lighter">{{fabricName}}单位用量&位置</h5>
+                                    class="widget-title lighter"><%--{{fabricTitleName}}--%>单位用量&位置</h5>
                             </div>
                         </div>
                     </div>
@@ -280,7 +280,7 @@
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">
                                 <i class="ace-icon fa fa-hand-o-right blue"></i> &nbsp;&nbsp;<h5
-                                    class="widget-title lighter">{{fabricName}}供应商信息</h5>
+                                    class="widget-title lighter"><%--{{fabricTitleName}}--%>供应商信息</h5>
                             </div>
                         </div>
                     </div>

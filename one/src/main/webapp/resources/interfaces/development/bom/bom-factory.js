@@ -42,55 +42,6 @@
         factoryQuoteInfo.factoryMargins = $("#factoryMargins" + index).val();
         factoryQuoteInfo.nameNum = index;
         factoryQuoteInfo.serialNumber = index;
-
-        var productionInstruction = {};
-        productionInstruction.factoryQuoteId = $("#factoryQuoteId" + index).val();
-        productionInstruction.productionInstructionId = $("#productionInstructionId" + index).val();
-        productionInstruction.cropRequirements = $("#cropRequirements" + index).val();
-        productionInstruction.offerAmount = $("#offerAmount" + index).val();
-        productionInstruction.spId = $("#spIdC" + index).val();
-        productionInstruction.clothReceivedDate = $("#clothReceivedDate" + index).val();
-        productionInstruction.qualityRequirements = $("#qualityRequirements" + index).val();
-        productionInstruction.finishPressingRequirements = $("#finishPressingRequirements" + index).val();
-        productionInstruction.spcialTech = $("#spcialTech" + index).val();
-        productionInstruction.packingRequirements = $("#packingRequirements" + index).val();
-        productionInstruction.overstitch = $("#overstitch" + index).val();
-        productionInstruction.overstitchSpace = $("#overstitchSpace" + index).val();
-        productionInstruction.blindstitch = $("#blindstitch" + index).val();
-        productionInstruction.blindstitchSpace = $("#blindstitchSpace" + index).val();
-        productionInstruction.overlock = $("#overlock" + index).val();
-        productionInstruction.overlockSpace = $("#overlockSpace" + index).val();
-        productionInstruction.trademarkCode = $("#trademarkCode" + index).val();
-        productionInstruction.trademarkRemark = $("#trademarkRemark" + index).val();
-        productionInstruction.scaleCode = $("#scaleCode" + index).val();
-        productionInstruction.scaleRemark = $("#scaleRemark" + index).val();
-        productionInstruction.rinsingMarksCode = $("#rinsingMarksCode" + index).val();
-        productionInstruction.rinsingMarksRemark = $("#rinsingMarksRemark" + index).val();
-        productionInstruction.sketchUrlUid = $("#sketchUrlUid" + index).val();
-        productionInstruction.specificationUrlUid = $("#specificationUrlUid" + index).val();
-        //上传文件
-        var sketchUrlUidUploadFileInfos = [];
-        var specificationUrlUidUploadFileInfos = [];
-
-        try {
-            var initialPreviewConfigs = $("#sketchUrlUid" + index).fileinput().data()["fileinput"].ajaxRequests[0].responseJSON.initialPreviewConfig;//上传文件返回的数据
-            $.buildUploadedFileInfos(sketchUrlUidUploadFileInfos, initialPreviewConfigs);
-        } catch (e) {
-
-        }
-
-        try {
-            var initialPreviewConfigs = $("#specificationUrlUid" + index).fileinput().data()["fileinput"].ajaxRequests[0].responseJSON.initialPreviewConfig;//上传文件返回的数据
-            $.buildUploadedFileInfos(specificationUrlUidUploadFileInfos, initialPreviewConfigs);
-        } catch (e) {
-
-        }
-
-        productionInstruction.sketchUrlUidUploadFileInfos = sketchUrlUidUploadFileInfos;
-        productionInstruction.specificationUrlUidUploadFileInfos = specificationUrlUidUploadFileInfos;
-        //
-        factoryQuoteInfo.productionInstruction = productionInstruction;
-
         return factoryQuoteInfo;
     }
 
