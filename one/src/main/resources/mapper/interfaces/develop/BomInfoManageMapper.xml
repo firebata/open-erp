@@ -209,18 +209,6 @@
 		WHERE bom_id =#{natrualkey}
 	</update>
 
-    <update id="delDosage">
-		UPDATE t_kf_material_unit_dosage
-		SET  del_flag=1
-		WHERE material_id =#{natrualkey}
-	</update>
-
-    <update id="delSp">
-		UPDATE t_kf_material_spinfo
-		SET  del_flag=1
-		WHERE material_id =#{natrualkey}
-	</update>
-
 
     <select id="queryCurrentSeqNo" resultType="String">
 		SELECT CASE WHEN  bom_id IS NULL THEN 0 ELSE bom_id END FROM t_kf_bominfo   ORDER BY id DESC LIMIT 1

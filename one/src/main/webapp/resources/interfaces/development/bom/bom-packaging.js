@@ -9,7 +9,7 @@
     var title_type = "包材_";
     $.extend({
         initPackaging: initPackaging,
-        packagingItems: buildPackagingItems,
+        buildPackagingItems: buildPackagingItems,
         refreshAllPackagingId: refreshAllPackagingId
     });
 
@@ -150,6 +150,8 @@
                     "orderCountP": "orderCountP" + idNum,
                     "attritionRateP": "attritionRateP" + idNum,
                     "unitPriceP": "unitPriceP" + idNum,
+                    "colorPriceP": "colorPriceP" + idNum,
+                    "colorAmountP": "colorAmountP" + idNum,
                     "totalAmountP": "totalAmountP" + idNum,
                     "totalPriceP": "totalPriceP" + idNum
                 }
@@ -588,6 +590,8 @@
         kfPackaging.orderCount = $("#orderCountP" + idNum).val();
         kfPackaging.attritionRate = $("#attritionRateP" + idNum).val();
         kfPackaging.unitPrice = $("#unitPriceP" + idNum).val();
+        kfPackaging.colorPrice = $("#colorPriceP" + idNum).val();
+        kfPackaging.colorAmount = $("#colorAmountP" + idNum).val();
         kfPackaging.totalAmount = $("#totalAmountP" + idNum).val();
         kfPackaging.totalPrice = $("#totalPriceP" + idNum).val();
         kfPackaging.unitId = $("#unitIdP" + idNum).val();
@@ -605,12 +609,12 @@
     function buildPackagingItem(idNum) {
         var packagingItem = {};
 
-        var kfPackaging = {};//基本信息
+        var packagingInfo = {};//基本信息
 
-        kfPackaging.spId = $("#spIdP" + idNum).val();
-        kfPackaging.yearCode = $("#yearCodeP" + idNum).val();
-        kfPackaging.classicId = $("#classicIdP" + idNum).val();
-        kfPackaging.productTypeId = $("#productTypeIdP" + idNum).val();
+        packagingInfo.spId = $("#spIdP" + idNum).val();
+        packagingInfo.yearCode = $("#yearCodeP" + idNum).val();
+        packagingInfo.classicId = $("#classicIdP" + idNum).val();
+        packagingInfo.productTypeId = $("#productTypeIdP" + idNum).val();
 
         //颜色多选
         var pantoneIds = $("#pantoneIdsP" + idNum).val();
@@ -621,7 +625,7 @@
                 materialPantoneIds.push(materialPantone)
             }
         }
-        kfPackaging.pantoneIds = materialPantoneIds;
+        packagingInfo.pantoneIds = materialPantoneIds;
 
 
         var positionIds = $("#positionIdsP" + idNum).val();
@@ -633,15 +637,15 @@
             }
         }
 
-        kfPackaging.positionIds = materialPositions;
-        kfPackaging.materialTypeId = $("#materialTypeIdP" + idNum).val();
-        kfPackaging.techRequired = $("#techRequiredP" + idNum).val();
-        kfPackaging.width = $("#widthP" + idNum).val();
-        kfPackaging.length = $("#lengthP" + idNum).val();
-        kfPackaging.nameNum = idNum;
-        kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
-        kfPackaging.serialNumber = idNum;
-        kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
+        packagingInfo.positionIds = materialPositions;
+        packagingInfo.materialTypeId = $("#materialTypeIdP" + idNum).val();
+        packagingInfo.techRequired = $("#techRequiredP" + idNum).val();
+        packagingInfo.width = $("#widthP" + idNum).val();
+        packagingInfo.length = $("#lengthP" + idNum).val();
+        packagingInfo.nameNum = idNum;
+        packagingInfo.packagingId = $("#packagingIdP" + idNum).val();
+        packagingInfo.serialNumber = idNum;
+        packagingInfo.packagingsName = $("#packagingsNameP" + idNum).val();
 
         var materialSpInfo = {};//包材用量信息
         materialSpInfo.orderCount = $("#orderCountP" + idNum).val();
@@ -649,14 +653,16 @@
         materialSpInfo.unitPrice = $("#unitPriceP" + idNum).val();
         materialSpInfo.totalAmount = $("#totalAmountP" + idNum).val();
         materialSpInfo.totalPrice = $("#totalPriceP" + idNum).val();
-        materialSpInfo.packagingId = kfPackaging.packagingId;
+        materialSpInfo.packagingId = packagingInfo.packagingId;
+        materialSpInfo.colorPrice = $("#colorPriceP" + idNum).val();
+        materialSpInfo.colorAmount = $("#colorAmountP" + idNum).val();
 
         var materialUnitDosage = {};//包材单位用量
         materialUnitDosage.unitId = $("#unitIdP" + idNum).val();
         materialUnitDosage.unitAmount = $("#unitAmountP" + idNum).val();
-        materialUnitDosage.packagingId = kfPackaging.packagingId;
+        materialUnitDosage.packagingId = packagingInfo.packagingId;
 
-        packagingItem.kfPackaging = kfPackaging;
+        packagingItem.packagingInfo = packagingInfo;
         packagingItem.materialSpInfo = materialSpInfo;
         packagingItem.materialUnitDosage = materialUnitDosage;
 

@@ -10,8 +10,6 @@ import java.util.List;
  */
 @Repository("mainColorManageMapper")
 public interface MainColorManageMapper<T> {
-    List<T> queryMainColorList(String projectId);
-
     void add(List<T> mainColorList);
 
     void delete(String natrualkey);

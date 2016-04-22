@@ -28,6 +28,7 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
 
     @Autowired
     private ProductionInstructionMapper productionInstructionMapper;
+
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
 
@@ -43,11 +44,13 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
         //有id，更新
         if (StringUtils.isNotBlank(productionInstructionId)) {
             productionInstruction.setUid(productionInstructionId);
+            productionInstruction.setNatrualkey(productionInstructionId);
             productionInstructionMapper.updateProductionInstruction(productionInstruction);
         } else {
             productionInstructionId = UuidGeneratorUtils.getNextId();
             productionInstruction.setProductionInstructionId(productionInstructionId);
             productionInstruction.setUid(productionInstructionId);
+            productionInstruction.setNatrualkey(productionInstructionId);
             productionInstructionMapper.addProductionInstruction(productionInstruction);
         }
 

@@ -6,9 +6,9 @@ package com.skysport.inerfaces.bean.develop;
  * * 创建时间：2016-03-22 14:37:08
  ******************************************************************/
 
+import com.skysport.core.bean.system.SelectItem;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -18,15 +18,14 @@ import java.util.Map;
  * @author bianj
  * @version 1.0.0 2016-03-22
  */
-public class KfProductionInstructionEntity implements java.io.Serializable {
-
+public class KfProductionInstructionEntity extends SelectItem {
     /**
      * 版本号
      */
     private static final long serialVersionUID = -5159272192937975534L;
 
     /**  */
-    private Integer id;
+    private String id;
 
     /**
      * 指示单uid
@@ -179,7 +178,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
     /**
      * 删除标志
      */
-    private Integer delFlag;
+    private int delFlag;
 
     /**
      * 备注
@@ -187,7 +186,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
     private String remark;
 
     /**  */
-    private Timestamp updateTime;
+    private String updateTime;
     /**
      * 下单日期（导出时间）
      */
@@ -200,7 +199,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
     private List<AccessoriesInfo> accessories;
 
     //包材
-    private List<KFPackaging> packagings;
+    private List<PackagingInfo> packagings;
 
     private FactoryQuoteInfo factoryQuoteInfo;
 
@@ -237,7 +236,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @return
      */
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -246,7 +245,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @param id
      */
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -723,7 +722,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @return 删除标志
      */
-    public Integer getDelFlag() {
+    public int getDelFlag() {
         return this.delFlag;
     }
 
@@ -732,7 +731,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @param delFlag 删除标志
      */
-    public void setDelFlag(Integer delFlag) {
+    public void setDelFlag(int delFlag) {
         this.delFlag = delFlag;
     }
 
@@ -759,7 +758,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @return
      */
-    public Timestamp getUpdateTime() {
+    public String getUpdateTime() {
         return this.updateTime;
     }
 
@@ -768,7 +767,7 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
      *
      * @param updateTime
      */
-    public void setUpdateTime(Timestamp updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -878,11 +877,11 @@ public class KfProductionInstructionEntity implements java.io.Serializable {
         this.accessories = accessories;
     }
 
-    public List<KFPackaging> getPackagings() {
+    public List<PackagingInfo> getPackagings() {
         return packagings;
     }
 
-    public void setPackagings(List<KFPackaging> packagings) {
+    public void setPackagings(List<PackagingInfo> packagings) {
         this.packagings = packagings;
     }
 

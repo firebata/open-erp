@@ -6,9 +6,9 @@ import com.skysport.inerfaces.bean.info.SpInfo;
 import com.skysport.inerfaces.mapper.info.SpManageMapper;
 import com.skysport.inerfaces.model.info.sp.service.ISpManageService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,7 +19,8 @@ import java.util.List;
  */
 @Service("spManageService")
 public class SpManageServiceImpl implements ISpManageService {
-    @Resource(name = "spManageDao")
+
+    @Autowired
     private SpManageMapper spManageMapper;
 
     /**

@@ -37,7 +37,7 @@
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" id="bomAddPageForm">
                 <div class="tabbable">
                     <ul class="nav nav-tabs" id="myBomTab">
                         <li class="active">

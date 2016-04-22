@@ -93,55 +93,16 @@
             packaging_id =#{packagingId}
     </update>
 
-
-    <update id="updateDosage">
-
-	  	update
-			t_kf_material_unit_dosage
-        set
-			unit_id = #{unitId},
-			unit_amount = #{unitAmount}
-        WHERE
-			material_id =#{materialId}
-
-    </update>
-
-    <update id="updateSp">
- 	    update
-			t_kf_material_spinfo
-        set
-			order_count = #{orderCount},
-			attrition_rate = #{attritionRate},
-			unit_price = #{unitPrice},
-			total_amount = #{totalAmount},
-			total_price = #{totalPrice}
-        WHERE
-			material_id =#{materialId}
-    </update>
-
     <insert id="add">
         insert into  t_kf_packaging (packaging_id,packaging_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width)
         values (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width})
     </insert>
-
-    <insert id="addDosage">
-     insert into t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
-      values (#{materialId},#{unitId},#{unitAmount});
-    </insert>
-
-
-    <insert id="addSp">
-     insert into t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price)
-      values (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice});
-    </insert>
-
 
     <update id="del">
         update t_kf_packaging
         set  del_flag=1
         where packaging_id =#{natrualkey}
     </update>
-
 
     <select id="selectAllPackagingId" resultType="String">
       SELECT packaging_id
@@ -150,7 +111,6 @@
       and   del_flag=0
     </select>
 
-
     <delete id="deletePackagingByIds" parameterType="String">
         DELETE from t_kf_packaging
         where packaging_id IN
@@ -158,20 +118,6 @@
             #{idItem}
         </foreach>
     </delete>
-
-    <update id="delDosage">
-        update t_kf_material_unit_dosage
-        set  del_flag=1
-        where material_id =#{natrualkey}
-    </update>
-
-
-    <update id="delSp">
-        update t_kf_material_spinfo
-        set  del_flag=1
-        where packaging_id =#{natrualkey}
-    </update>
-
 
     <select id="queryCurrentSeqNo" resultType="String">
         select case when packaging_id is NULL then 0 else packaging_id end from t_kf_packaging    ORDER BY id DESC LIMIT 1
@@ -219,9 +165,12 @@
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalAmount" property="totalAmount"/>
         <result column="totalPrice" property="totalPrice"/>
-
-        <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=packagingId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
+        <collection property="positionIds" column="{materialId=packagingId}"
+                    select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=packagingId}"
+                    select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
 
@@ -251,6 +200,8 @@
         c.order_count AS orderCount,
         c.attrition_rate AS attritionRate,
         c.unit_price AS unitPrice,
+        c.color_price AS colorPrice,
+        c.color_amount AS colorAmount,
         c.total_amount AS totalAmount,
         c.total_price AS totalPrice
     FROM
@@ -278,8 +229,10 @@
         <result column="width" property="width"/>
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalPrice" property="totalPrice"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
         <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=packagingId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=packagingId}"  select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryPackagingByBomId" resultMap="infosMap2">
@@ -300,14 +253,15 @@
             a.length AS length,
             a.width AS width,
             d.unit_price AS unitPrice,
-            d.total_price AS totalPrice
+            d.total_price AS totalPrice,
+            d.color_price AS colorPrice,
+            d.color_amount AS colorAmount
         FROM
-            t_kf_packaging a INNER JOIN
-            t_kf_material_unit_dosage c INNER JOIN
-            t_kf_material_spinfo d
-        ON	a.packaging_id =  c.material_id
-        AND c.material_id = d.material_id
-        AND a.bom_id = #{bomId}
-        LEFT JOIN t_kf_bominfo e ON a.bom_id = e.bom_id
+            t_kf_packaging a
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+            INNER JOIN t_kf_fabrics_detail b  ON a.fabrics_id = b.fabrics_id
+            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = d.material_id
+            INNER JOIN t_kf_material_spinfo d ON b.fabrics_id = c.material_id
+            INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
     </select>
 </mapper>

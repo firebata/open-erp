@@ -2,6 +2,7 @@ package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.core.bean.system.SelectItem;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -25,6 +26,8 @@ public class MaterialInfo extends SelectItem {
     private String orderCount;
     private String attritionRate;
     private String unitPrice;
+    private BigDecimal colorPrice;
+    private BigDecimal colorAmount;
     private String totalAmount;
     private String totalPrice;
     private String yearCode;
@@ -40,6 +43,22 @@ public class MaterialInfo extends SelectItem {
     private int delFlag;
     private String remark;
     private String updateTime;
+
+    public BigDecimal getColorPrice() {
+        return colorPrice;
+    }
+
+    public void setColorPrice(BigDecimal colorPrice) {
+        this.colorPrice = colorPrice;
+    }
+
+    public BigDecimal getColorAmount() {
+        return colorAmount;
+    }
+
+    public void setColorAmount(BigDecimal colorAmount) {
+        this.colorAmount = colorAmount;
+    }
 
     @Override
     public String getId() {

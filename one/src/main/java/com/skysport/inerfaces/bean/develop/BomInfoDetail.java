@@ -23,7 +23,7 @@ public class BomInfoDetail {
 
     private List<AccessoriesInfo> accessoriesInfos;
 
-    private List<KFPackaging> packagings;
+    private List<PackagingInfo> packagings;
     /**
      *
      */
@@ -73,11 +73,11 @@ public class BomInfoDetail {
         this.accessoriesInfos = accessoriesInfos;
     }
 
-    public List<KFPackaging> getPackagings() {
+    public List<PackagingInfo> getPackagings() {
         return packagings;
     }
 
-    public void setPackagings(List<KFPackaging> packagings) {
+    public void setPackagings(List<PackagingInfo> packagings) {
         this.packagings = packagings;
     }
 

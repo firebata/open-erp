@@ -228,11 +228,11 @@ public class ProjectItemManageServiceImpl extends CommonServiceImpl<ProjectBomIn
                 BomManageHelper.translateIdToNameInAccessoriesInfos(accessoriesInfos, seriesName);
 
                 //所有包材
-                List<KFPackaging> kfPackagings = packagingService.queryPackagingByBomId(bomId);
-                BomManageHelper.translateIdToNameInPackagings(kfPackagings, seriesName);
+                List<PackagingInfo> packagingInfos = packagingService.queryPackagingByBomId(bomId);
+                BomManageHelper.translateIdToNameInPackagings(packagingInfos, seriesName);
 
 
-                BomInfoDetail bomInfoDetail = BomManageHelper.buildBomInfoDetail(fabricsInfos, accessoriesInfos, kfPackagings);
+                BomInfoDetail bomInfoDetail = BomManageHelper.buildBomInfoDetail(fabricsInfos, accessoriesInfos, packagingInfos);
 
                 bomInfoDetails.add(bomInfoDetail);
 

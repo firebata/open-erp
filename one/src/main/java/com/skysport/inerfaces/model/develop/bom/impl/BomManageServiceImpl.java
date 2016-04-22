@@ -111,7 +111,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
             List<AccessoriesInfo> accessories = accessoriesService.queryAccessoriesList(bomId);
 
             //包材
-            List<KFPackaging> packagings = packagingService.queryPackagingList(bomId);
+            List<PackagingInfo> packagings = packagingService.queryPackagingList(bomId);
 
 
             //成衣厂 & 生产指示单
@@ -157,7 +157,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
      * @param packagings
      * @param factoryQuoteInfos
      */
-    private void buildBomInfo(BomInfo bomInfo, List<FabricsInfo> fabrics, List<AccessoriesInfo> accessories, List<KFPackaging> packagings, List<FactoryQuoteInfo> factoryQuoteInfos, QuotedInfo quotedInfo, KfProductionInstructionEntity productionInstruction) {
+    private void buildBomInfo(BomInfo bomInfo, List<FabricsInfo> fabrics, List<AccessoriesInfo> accessories, List<PackagingInfo> packagings, List<FactoryQuoteInfo> factoryQuoteInfos, QuotedInfo quotedInfo, KfProductionInstructionEntity productionInstruction) {
         bomInfo.setQuotedInfo(quotedInfo);
         bomInfo.setFabrics(fabrics);
         bomInfo.setAccessories(accessories);
@@ -184,7 +184,7 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
 
         //保存包装材料信息
-        List<KFPackaging> packagings = packagingService.updateOrAddBatch(bomInfo);
+        List<PackagingInfo> packagings = packagingService.updateOrAddBatch(bomInfo);
 
         //保存成衣厂信息
         List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.updateOrAddBatch(bomInfo);
@@ -200,12 +200,12 @@ public class BomManageServiceImpl extends CommonServiceImpl<BomInfo> implements 
 
 
         //增加Bom和物料的关系
-        List<BomMaterialIdVo> idsFabrics = BomManageHelper.getInstance().getBomMaterialIdVoInFabricsInfo(fabrics, bomId);
-        List<BomMaterialIdVo> idsAccessoriesInfo = BomManageHelper.getInstance().getBomMaterialIdVoInAccessoriesInfo(accessories, bomId);
-        List<BomMaterialIdVo> idsPackaging = BomManageHelper.getInstance().getBomMaterialIdVoInKFPackaging(packagings, bomId);
+        List<BomMaterialIdVo> idsFabrics = BomManageHelper.getInstance().getBomMaterialIdVo(fabrics, bomId);
+        List<BomMaterialIdVo> idsAccessoriesInfo = BomManageHelper.getInstance().getBomMaterialIdVo(accessories, bomId);
+        List<BomMaterialIdVo> idsPackaging = BomManageHelper.getInstance().getBomMaterialIdVo(packagings, bomId);
 
-        List<BomMaterialIdVo> idsFactoryQuoteInfo = BomManageHelper.getInstance().getBomMaterialIdVoInFactoryQuoteInfo(factoryQuoteInfos, bomId);
-        List<BomMaterialIdVo> idsProInst = BomManageHelper.getInstance().getBomMaterialIdVoInKfProductionInstructionEntity(productionInstruction, bomId);
+        List<BomMaterialIdVo> idsFactoryQuoteInfo = BomManageHelper.getInstance().getBomMaterialIdVo(factoryQuoteInfos, bomId);
+        List<BomMaterialIdVo> idsProInst = BomManageHelper.getInstance().getBomMaterialIdVo(productionInstruction, bomId);
 //        List<BomMaterialIdVo> idsQuotedInfo = BomManageHelper.getInstance().getBomMaterialIdVoInQuotedInfo(quotedInfo, bomId);
 
 

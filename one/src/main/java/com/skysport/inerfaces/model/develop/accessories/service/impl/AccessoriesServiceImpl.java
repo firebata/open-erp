@@ -2,12 +2,13 @@ package com.skysport.inerfaces.model.develop.accessories.service.impl;
 
 import com.skysport.core.annotation.SystemServiceLog;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
+import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
+import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.info.AccessoriesManageMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
@@ -16,6 +17,7 @@ import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionSe
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,9 +35,11 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
     @Resource(name = "accessoriesManageMapper")
     private AccessoriesManageMapper accessoriesManageMapper;
 
+    @Autowired
+    private MaterialUnitDosageMapper materialUnitDosageMapper;
 
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
+    @Autowired
+    private MaterialSpinfoMapper materialSpinfoMapper;
 
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
@@ -49,6 +53,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
     /**
      * 保存辅料信息
+     *
      * @param bomInfo
      */
     @Override
@@ -78,8 +83,8 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
                     accessoriesManageMapper.updateInfo(accessoriesJoinInfo.getAccessoriesInfo());
-                    accessoriesManageMapper.updateDosage(accessoriesJoinInfo.getMaterialUnitDosage());
-                    accessoriesManageMapper.updateSp(accessoriesJoinInfo.getMaterialSpInfo());
+                    materialUnitDosageMapper.updateDosage(accessoriesJoinInfo.getMaterialUnitDosage());
+                    materialSpinfoMapper.updateSp(accessoriesJoinInfo.getMaterialSpInfo());
 
                 }
                 //无id，新增
@@ -94,9 +99,9 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
                     accessoriesManageMapper.add(accessoriesJoinInfo.getAccessoriesInfo());
                     //新增面料用量
-                    accessoriesManageMapper.addDosage(accessoriesJoinInfo.getMaterialUnitDosage());
+                    materialUnitDosageMapper.addDosage(accessoriesJoinInfo.getMaterialUnitDosage());
                     //新增面料供应商信息
-                    accessoriesManageMapper.addSp(accessoriesJoinInfo.getMaterialSpInfo());
+                    materialSpinfoMapper.addSp(accessoriesJoinInfo.getMaterialSpInfo());
 
                 }
                 accessoriesRtn.add(accessoriesJoinInfo.getAccessoriesInfo());

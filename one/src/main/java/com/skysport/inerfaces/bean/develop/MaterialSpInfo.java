@@ -16,10 +16,15 @@ public class MaterialSpInfo implements CommonVo {
     private String materialId;
     private String spId;
     private BigDecimal orderCount;
+
     private BigDecimal attritionRate;
     private BigDecimal unitPrice;
+    private BigDecimal colorPrice;
+    private BigDecimal colorAmount;
     private BigDecimal totalAmount;
+
     private BigDecimal totalPrice;
+
 
     public MaterialSpInfo() {
         super();
@@ -119,5 +124,21 @@ public class MaterialSpInfo implements CommonVo {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public BigDecimal getColorAmount() {
+        return colorAmount;
+    }
+
+    public void setColorAmount(BigDecimal colorAmount) {
+        this.colorAmount = colorAmount;
+    }
+
+    public BigDecimal getColorPrice() {
+        return colorPrice;
+    }
+
+    public void setColorPrice(BigDecimal colorPrice) {
+        this.colorPrice = colorPrice;
     }
 }

@@ -1,12 +1,13 @@
 package com.skysport.inerfaces.model.develop.fabric.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
 import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
+import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
+import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.info.FabricsManageMapper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
@@ -15,6 +16,7 @@ import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionSe
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,8 +33,11 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
     @Resource(name = "fabricsManageMapper")
     private FabricsManageMapper fabricsManageMapper;
 
-    @Resource(name = "incrementNumber")
-    private IncrementNumberService incrementNumberService;
+    @Autowired
+    private MaterialUnitDosageMapper materialUnitDosageMapper;
+
+    @Autowired
+    private MaterialSpinfoMapper materialSpinfoMapper;
 
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
@@ -58,7 +63,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
     /**
      * 保存面料信息
      *
-     * @param bomInfo     BomInfo
+     * @param bomInfo BomInfo
      */
     @Override
     public List<FabricsInfo> updateOrAddBatch(BomInfo bomInfo) {
@@ -85,8 +90,8 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
                     fabricsManageMapper.updateInfo(fabricsJoinInfo.getFabricsInfo());
                     fabricsManageMapper.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
-                    fabricsManageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
-                    fabricsManageMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
+                    materialUnitDosageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
+                    materialSpinfoMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
                     kFMaterialPositionService.del(fabricId);//删除物料位置信息
                     kFMaterialPantoneService.del(fabricId);//删除物料颜色信息
                 }
@@ -102,9 +107,9 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                     //新增面料详细
                     fabricsManageMapper.addDetail(fabricsJoinInfo.getFabricsDetailInfo());
                     //新增面料用量
-                    fabricsManageMapper.addDosage(fabricsJoinInfo.getMaterialUnitDosage());
+                    materialUnitDosageMapper.addDosage(fabricsJoinInfo.getMaterialUnitDosage());
                     //新增面料供应商信息
-                    fabricsManageMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());
+                    materialSpinfoMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());
                 }
                 fabricsRtn.add(fabricsJoinInfo.getFabricsInfo());
                 //保存物料位置信息

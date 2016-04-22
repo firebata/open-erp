@@ -65,7 +65,8 @@
         <result column="compositeSpecificationId" property="compositeSpecificationId"/>
         <result column="compositeDyeId" property="compositeDyeId"/>
         <result column="compositeFinishId" property="compositeFinishId"/>
-
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
         <result column="delFlag" property="delFlag"/>
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
@@ -107,6 +108,8 @@
         <result column="isShow" property="isShow"/>
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalPrice" property="totalPrice"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
         <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
@@ -198,29 +201,6 @@
 			fabrics_id =#{fabricId}
     </update>
 
-    <update id="updateDosage">
-	  	update
-			t_kf_material_unit_dosage
-        set
-			unit_id = #{unitId},
-			unit_amount = #{unitAmount}
-        WHERE
-			material_id =#{materialId}
-    </update>
-
-
-    <update id="updateSp">
- 	    update
-			t_kf_material_spinfo
-        set
-			order_count = #{orderCount},
-			attrition_rate = #{attritionRate},
-			unit_price = #{unitPrice},
-			total_amount = #{totalAmount},
-			total_price = #{totalPrice}
-        WHERE
-			material_id =#{materialId}
-    </update>
 
     <insert id="add">
         insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id)
@@ -231,19 +211,6 @@
       insert into t_kf_fabrics_detail(fabrics_id,specfication_id,dye_id,finish_id,blc_id,momc_id,comoc_id,wvp_id,mt_id,woblc_id,composite_specfication_id,composite_dye_id,composite_finish_id)
       values (#{fabricId},#{specificationId},#{dyeId},#{finishId},#{blcId},#{momcId},#{comocId},#{wvpId},#{mtId},#{woblcId},#{compositeSpecificationId},#{compositeDyeId},#{compositeFinishId});
     </insert>
-
-
-    <insert id="addDosage">
-     insert into t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
-      values (#{materialId},#{unitId},#{unitAmount});
-    </insert>
-
-
-    <insert id="addSp">
-     insert into t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price)
-      values (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice});
-    </insert>
-
 
     <update id="del">
         update t_kf_fabrics
@@ -271,21 +238,6 @@
         where fabrics_id =#{natrualkey}
     </update>
 
-
-    <update id="delDosage">
-        update t_kf_material_unit_dosage
-        set  del_flag=1
-        where material_id =#{natrualkey}
-    </update>
-
-
-    <update id="delSp">
-        update t_kf_material_spinfo
-        set  del_flag=1
-        where fabrics_id =#{natrualkey}
-    </update>
-
-
     <select id="queryCurrentSeqNo" resultType="String">
         select case when  fabrics_id is NULL then 0 else fabrics_id end from t_kf_fabrics    ORDER BY id DESC LIMIT 1
     </select>
@@ -293,8 +245,8 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-        fabrics_id AS natrualkey,
-        fabrics_name AS name
+            fabrics_id AS natrualkey,
+            fabrics_name AS name
         from t_kf_fabrics
         where del_flag=0
         <if test="name!=null and name!=''">
@@ -331,6 +283,8 @@
         c.order_count AS orderCount,
         c.attrition_rate AS attritionRate,
         c.unit_price AS unitPrice,
+        c.color_price AS colorPrice,
+        c.color_amount AS colorAmount,
         c.total_amount AS totalAmount,
         c.total_price AS totalPrice,
         d.dye_id AS dyeId,
@@ -388,19 +342,16 @@
             b.woblc_id AS  woblcId ,
             a.is_show AS isShow,
             d.unit_price AS unitPrice,
-            d.total_price AS totalPrice
+            d.total_price AS totalPrice,
+            d.color_price AS colorPrice,
+            d.color_amount AS colorAmount
         FROM
-            t_kf_fabrics a INNER JOIN
-            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id
-            t_kf_fabrics_detail b INNER JOIN
-            t_kf_material_unit_dosage c INNER JOIN
-            t_kf_material_spinfo d
-        ON
-            a.fabrics_id = b.fabrics_id
-        AND b.fabrics_id = c.material_id
-        AND c.material_id = d.material_id
-        AND k.bom_id = #{bomId}
-        LEFT JOIN t_kf_bominfo e on a.bom_id = e.bom_id
+            t_kf_fabrics a
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+            INNER JOIN t_kf_fabrics_detail b  ON a.fabrics_id = b.fabrics_id
+            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = d.material_id
+            INNER JOIN t_kf_material_spinfo d ON b.fabrics_id = c.material_id
+            INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
     </select>
 
 

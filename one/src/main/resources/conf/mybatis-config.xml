@@ -44,7 +44,7 @@
         <typeAlias alias="FabricInfo" type="com.skysport.inerfaces.bean.develop.FabricsInfo"/>
         <typeAlias alias="QuotedInfo" type="com.skysport.inerfaces.bean.develop.QuotedInfo"/>
         <typeAlias alias="AccessoriesInfo" type="com.skysport.inerfaces.bean.develop.AccessoriesInfo"/>
-        <typeAlias alias="KFPackaging" type="com.skysport.inerfaces.bean.develop.KFPackaging"/>
+        <typeAlias alias="KFPackaging" type="com.skysport.inerfaces.bean.develop.PackagingInfo"/>
         <typeAlias alias="FactoryQuoteInfo" type="com.skysport.inerfaces.bean.develop.FactoryQuoteInfo"/>
         <typeAlias alias="KFMaterialPosition" type="com.skysport.inerfaces.bean.develop.KFMaterialPosition"/>
         <typeAlias alias="KFMaterialPantone" type="com.skysport.inerfaces.bean.develop.KFMaterialPantone"/>

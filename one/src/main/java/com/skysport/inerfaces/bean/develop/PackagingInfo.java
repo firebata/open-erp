@@ -7,7 +7,7 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2015/9/24.
  */
-public class KFPackaging extends MaterialInfo {
+public class PackagingInfo extends MaterialInfo {
 
     private String id;
 

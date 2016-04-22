@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.bean.develop.join;
 
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.bean.develop.KFPackaging;
+import com.skysport.inerfaces.bean.develop.PackagingInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.MaterialUnitDosage;
 
@@ -11,16 +11,16 @@ import com.skysport.inerfaces.bean.develop.MaterialUnitDosage;
  */
 public class KFPackagingJoinInfo extends SelectItem2 {
 
-    private KFPackaging kfPackaging;
+    private PackagingInfo packagingInfo;
     private MaterialSpInfo materialSpInfo;
     private MaterialUnitDosage materialUnitDosage;
 
-    public KFPackaging getKfPackaging() {
-        return kfPackaging;
+    public PackagingInfo getPackagingInfo() {
+        return packagingInfo;
     }
 
-    public void setKfPackaging(KFPackaging kfPackaging) {
-        this.kfPackaging = kfPackaging;
+    public void setPackagingInfo(PackagingInfo packagingInfo) {
+        this.packagingInfo = packagingInfo;
     }
 
     public MaterialSpInfo getMaterialSpInfo() {

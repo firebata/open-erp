@@ -1,13 +1,13 @@
 package com.skysport.inerfaces.model.develop.packaging.service.impl;
 
-import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.bean.develop.KFPackaging;
+import com.skysport.inerfaces.bean.develop.PackagingInfo;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
+import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.develop.PackagingManageMapper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
@@ -16,6 +16,7 @@ import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionSe
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by zhangjh on 2015/9/24.
  */
 @Service("packagingService")
-public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> implements IPackagingService, InitializingBean {
+public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> implements IPackagingService, InitializingBean {
     @Resource(name = "packagingManageMapper")
     private PackagingManageMapper packagingManageMapper;
 
@@ -37,6 +38,14 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
 
     @Resource(name = "kFMaterialPantoneService")
     private IKFMaterialPantoneService kFMaterialPantoneService;
+
+
+    @Autowired
+    private MaterialUnitDosageMapper materialUnitDosageMapper;
+
+    @Autowired
+    private MaterialSpinfoMapper materialSpinfoMapper;
+
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -49,9 +58,9 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
      * @param bomInfo
      */
     @Override
-    public List<KFPackaging> updateOrAddBatch(BomInfo bomInfo) {
+    public List<PackagingInfo> updateOrAddBatch(BomInfo bomInfo) {
         List<KFPackagingJoinInfo> packagingItems = bomInfo.getPackagingItems();
-        List<KFPackaging> packagingsRtn = new ArrayList<>();
+        List<PackagingInfo> packagingsRtn = new ArrayList<>();
 
         //找出被删除的包材id，并删除
         String bomId = StringUtils.isBlank(bomInfo.getNatrualkey()) ? bomInfo.getBomId() : bomInfo.getNatrualkey();
@@ -61,7 +70,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
         if (null != packagingItems) {
             //包材id存在，修改；包材id不存在则新增
             for (KFPackagingJoinInfo packagingJoinInfo : packagingItems) {
-                String packagingId = packagingJoinInfo.getKfPackaging().getPackagingId();
+                String packagingId = packagingJoinInfo.getPackagingInfo().getPackagingId();
                 MaterialSpInfo materialSpInfo = packagingJoinInfo.getMaterialSpInfo();
                 if (null != materialSpInfo.getUnitPrice() && null != materialSpInfo.getTotalAmount()) {
                     BigDecimal totalPrice = materialSpInfo.getUnitPrice().multiply(materialSpInfo.getTotalAmount());
@@ -70,9 +79,9 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
                 //有id，更新
                 if (StringUtils.isNotBlank(packagingId)) {
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
-                    packagingManageMapper.updateInfo(packagingJoinInfo.getKfPackaging());
-                    packagingManageMapper.updateDosage(packagingJoinInfo.getMaterialUnitDosage());
-                    packagingManageMapper.updateSp(packagingJoinInfo.getMaterialSpInfo());
+                    packagingManageMapper.updateInfo(packagingJoinInfo.getPackagingInfo());
+                    materialUnitDosageMapper.updateDosage(packagingJoinInfo.getMaterialUnitDosage());
+                    materialSpinfoMapper.updateSp(packagingJoinInfo.getMaterialSpInfo());
                 }
                 //无id，新增
                 else {
@@ -84,63 +93,58 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
                     packagingId = UuidGeneratorUtils.getNextId();
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
 
-
-                    packagingManageMapper.add(packagingJoinInfo.getKfPackaging());
+                    packagingManageMapper.add(packagingJoinInfo.getPackagingInfo());
                     //新增包材用量
-                    packagingManageMapper.addDosage(packagingJoinInfo.getMaterialUnitDosage());
+                    materialUnitDosageMapper.addDosage(packagingJoinInfo.getMaterialUnitDosage());
                     //新增包材供应商信息
-                    packagingManageMapper.addSp(packagingJoinInfo.getMaterialSpInfo());
+                    materialSpinfoMapper.addSp(packagingJoinInfo.getMaterialSpInfo());
                 }
-                if (null != packagingJoinInfo.getKfPackaging().getPositionIds() && !packagingJoinInfo.getKfPackaging().getPositionIds().isEmpty()) {
-                    kFMaterialPositionService.addBatch(packagingJoinInfo.getKfPackaging().getPositionIds());
+                if (null != packagingJoinInfo.getPackagingInfo().getPositionIds() && !packagingJoinInfo.getPackagingInfo().getPositionIds().isEmpty()) {
+                    kFMaterialPositionService.addBatch(packagingJoinInfo.getPackagingInfo().getPositionIds());
                 }
 
                 //保留物料颜色信息
-                if (null != packagingJoinInfo.getKfPackaging().getPantoneIds() && !packagingJoinInfo.getKfPackaging().getPantoneIds().isEmpty()) {
-                    kFMaterialPantoneService.addBatch(packagingJoinInfo.getKfPackaging().getPantoneIds());
+                if (null != packagingJoinInfo.getPackagingInfo().getPantoneIds() && !packagingJoinInfo.getPackagingInfo().getPantoneIds().isEmpty()) {
+                    kFMaterialPantoneService.addBatch(packagingJoinInfo.getPackagingInfo().getPantoneIds());
                 }
-                packagingsRtn.add(packagingJoinInfo.getKfPackaging());
+                packagingsRtn.add(packagingJoinInfo.getPackagingInfo());
             }
         }
         return packagingsRtn;
     }
 
     @Override
-    public List<KFPackaging> queryPackagingList(String bomId) {
+    public List<PackagingInfo> queryPackagingList(String bomId) {
         return packagingManageMapper.queryPackagingList(bomId);
     }
 
     @Override
-    public List<KFPackaging> queryPackagingByBomId(String bomId) {
+    public List<PackagingInfo> queryPackagingByBomId(String bomId) {
         return packagingManageMapper.queryPackagingByBomId(bomId);
     }
 
-    private String buildKindName(BomInfo bomInfo, KFPackagingJoinInfo packagingJoinInfo) {
-
-        String kind_name = CharConstant.EMPTY;
-
-        StringBuilder stringBuilder = new StringBuilder();
-        String materialTypeId = StringUtils.isBlank(packagingJoinInfo.getKfPackaging().getMaterialTypeId()) ? WebConstants.PAKING_MATERIAL_TYPE_ID : packagingJoinInfo.getKfPackaging().getMaterialTypeId();
-        stringBuilder.append(materialTypeId);
-        stringBuilder.append(packagingJoinInfo.getKfPackaging().getSpId());
-        stringBuilder.append(packagingJoinInfo.getKfPackaging().getYearCode());
-        stringBuilder.append(packagingJoinInfo.getKfPackaging().getProductTypeId());
-
-        return kind_name;
-    }
+//    private String buildKindName(BomInfo bomInfo, KFPackagingJoinInfo packagingJoinInfo) {
+//        String kind_name = CharConstant.EMPTY;
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String materialTypeId = StringUtils.isBlank(packagingJoinInfo.getPackagingInfo().getMaterialTypeId()) ? WebConstants.PAKING_MATERIAL_TYPE_ID : packagingJoinInfo.getPackagingInfo().getMaterialTypeId();
+//        stringBuilder.append(materialTypeId);
+//        stringBuilder.append(packagingJoinInfo.getPackagingInfo().getSpId());
+//        stringBuilder.append(packagingJoinInfo.getPackagingInfo().getYearCode());
+//        stringBuilder.append(packagingJoinInfo.getPackagingInfo().getProductTypeId());
+//        return kind_name;
+//    }
 
 
     private void setPackagingId(KFPackagingJoinInfo packagingJoinInfo, String packagingId, String bomId) {
-
-        packagingJoinInfo.getKfPackaging().setPackagingId(packagingId);
-        packagingJoinInfo.getKfPackaging().setNatrualkey(packagingId);
-        packagingJoinInfo.getKfPackaging().setBomId(bomId);
+        packagingJoinInfo.getPackagingInfo().setPackagingId(packagingId);
+        packagingJoinInfo.getPackagingInfo().setNatrualkey(packagingId);
+        packagingJoinInfo.getPackagingInfo().setBomId(bomId);
         packagingJoinInfo.getMaterialUnitDosage().setMaterialId(packagingId);
         packagingJoinInfo.getMaterialSpInfo().setMaterialId(packagingId);
         //设置物料位置的物料id
-        KFMaterialPositionServiceHelper.SINGLETONE.setPositionFabricId(packagingJoinInfo.getKfPackaging().getPositionIds(), packagingId);
+        KFMaterialPositionServiceHelper.SINGLETONE.setPositionFabricId(packagingJoinInfo.getPackagingInfo().getPositionIds(), packagingId);
         //设置物料颜色的物料id
-        KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(packagingJoinInfo.getKfPackaging().getPantoneIds(), packagingId);
+        KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(packagingJoinInfo.getPackagingInfo().getPantoneIds(), packagingId);
     }
 
     private void deletePackagingByIds(List<KFPackagingJoinInfo> packagingItems, String bomId) {
@@ -162,7 +166,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<KFPackaging> impleme
         List<String> needToSavePackagingId = new ArrayList<String>();
         if (null != packagingItems) {
             for (KFPackagingJoinInfo packagingJoinInfo : packagingItems) {
-                String packagingId = packagingJoinInfo.getKfPackaging().getPackagingId();
+                String packagingId = packagingJoinInfo.getPackagingInfo().getPackagingId();
                 needToSavePackagingId.add(packagingId);
 
             }

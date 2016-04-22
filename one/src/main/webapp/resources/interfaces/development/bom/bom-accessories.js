@@ -9,7 +9,7 @@
     var bom_selectURL = path + "/system/baseinfo/bom_select";
     $.extend({
         initAccessories: initAccessories,
-        accessoriesItems: buildAccessoriesItems,
+        buildAccessoriesItems: buildAccessoriesItems,
         refreshAllAccessoriesId: refreshAllAccessoriesId
     });
 
@@ -516,6 +516,20 @@
                 }
             }
         },
+        colorPriceF: {
+            validators: {
+                notEmpty: {
+                    message: '各色单价为必填项'
+                }
+            }
+        },
+        colorAmountF: {
+            validators: {
+                notEmpty: {
+                    message: '各色用量为必填项'
+                }
+            }
+        },
         totalAmountF: {
             validators: {
                 notEmpty: {
@@ -567,6 +581,8 @@
                     "orderCountF": "orderCountF" + idNum,
                     "attritionRateF": "attritionRateF" + idNum,
                     "unitPriceF": "unitPriceF" + idNum,
+                    "colorPriceF": "colorPriceF" + idNum,
+                    "colorAmountF": "colorAmountF" + idNum,
                     "totalAmountF": "totalAmountF" + idNum,
                     "totalPriceF": "totalPriceF" + idNum
                 }
@@ -625,6 +641,8 @@
         materialSpInfo.orderCount = $("#orderCountF" + idNum).val();
         materialSpInfo.attritionRate = $("#attritionRateF" + idNum).val();
         materialSpInfo.unitPrice = $("#unitPriceF" + idNum).val();
+        materialSpInfo.colorPrice = $("#colorPriceF" + idNum).val();
+        materialSpInfo.colorAmount = $("#colorAmountF" + idNum).val();
         materialSpInfo.totalAmount = $("#totalAmountF" + idNum).val();
         materialSpInfo.totalPrice = $("#totalPriceF" + idNum).val();
         materialSpInfo.accessoriesId = accessoriesInfo.accessoriesId;
@@ -681,9 +699,10 @@
         accessoriesInfo.orderCount = $("#orderCountF" + idNum).val();
         accessoriesInfo.attritionRate = $("#attritionRateF" + idNum).val();
         accessoriesInfo.unitPrice = $("#unitPriceF" + idNum).val();
+        accessoriesInfo.colorPrice = $("#colorPriceF" + idNum).val();
+        accessoriesInfo.colorAmount = $("#colorAmountF" + idNum).val();
         accessoriesInfo.totalAmount = $("#totalAmountF" + idNum).val();
         accessoriesInfo.totalPrice = $("#totalPriceF" + idNum).val();
-
         accessoriesInfo.unitId = $("#unitIdF" + idNum).val();
         accessoriesInfo.unitAmount = $("#unitAmountF" + idNum).val();
         return accessoriesInfo;

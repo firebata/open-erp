@@ -30,7 +30,6 @@ public interface BomInfoManageMapper extends CommonDao<BomInfo> {
 
     List<BomInfo> queryBomInfosByProjectItemIds(List<String> itemIds);
 
-
     List<String> queryAllBomIdsByProjectId(String projectId);
 
     List<String> queryBomIdsNeedLapdipByProjectId(String projectId);

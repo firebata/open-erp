@@ -94,44 +94,14 @@
     </update>
 
 
-    <update id="updateDosage">
-	  	UPDATE
-			t_kf_material_unit_dosage
-        SET
-			unit_id = #{unitId},
-			unit_amount = #{unitAmount}
-        WHERE
-			material_id =#{materialId}
-    </update>
 
-    <update id="updateSp">
- 	    UPDATE
-			t_kf_material_spinfo
-        SET
-			order_count = #{orderCount},
-			attrition_rate = #{attritionRate},
-			unit_price = #{unitPrice},
-			total_amount = #{totalAmount},
-			total_price = #{totalPrice}
-        WHERE
-			material_id =#{materialId}
-    </update>
 
     <insert id="add">
         INSERT INTO  t_kf_accessories (accessories_id,accessories_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width)
         VALUES (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width})
     </insert>
 
-    <insert id="addDosage">
-     INSERT INTO t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
-      VALUES (#{materialId},#{unitId},#{unitAmount});
-    </insert>
 
-
-    <insert id="addSp">
-     INSERT INTO t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price)
-      VALUES (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice});
-    </insert>
 
 
     <update id="del">
@@ -157,18 +127,7 @@
         </foreach>
     </delete>
 
-    <update id="delDosage">
-        UPDATE t_kf_material_unit_dosage
-        SET  del_flag=1
-        WHERE material_id =#{natrualkey}
-    </update>
 
-
-    <update id="delSp">
-        UPDATE t_kf_material_spinfo
-        SET  del_flag=1
-        WHERE accessories_id =#{natrualkey}
-    </update>
 
 
     <select id="queryCurrentSeqNo" resultType="String">
@@ -213,6 +172,8 @@
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalAmount" property="totalAmount"/>
         <result column="totalPrice" property="totalPrice"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
         <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
@@ -243,7 +204,9 @@
         c.attrition_rate AS attritionRate,
         c.unit_price AS unitPrice,
         c.total_amount AS totalAmount,
-        c.total_price AS totalPrice
+        c.total_price AS totalPrice,
+        c.color_price AS colorPrice,
+        c.color_amount AS colorAmount
     FROM
         t_kf_accessories a
     INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id
@@ -272,6 +235,8 @@
         <result column="width" property="width"/>
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalPrice" property="totalPrice"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
         <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
@@ -288,6 +253,8 @@
             c.unit_id AS unitId,
             d.order_count AS orderCount,
             c.unit_amount AS unitAmount,
+            c.color_price AS colorPrice,
+            c.color_amount AS colorAmount,
             d.total_amount AS totalAmount,
             a.classic_id AS classicId ,
             a.tech_required AS techRequired,
@@ -297,13 +264,11 @@
             d.total_price AS totalPrice
         FROM
             t_kf_accessories a
-            INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id
-            INNER JOIN   t_kf_material_unit_dosage c
-            INNER JOIN   t_kf_material_spinfo d
-        ON	a.accessories_id =  c.material_id
-        AND c.material_id = d.material_id
-        AND k.bom_id = #{bomId}
-        LEFT JOIN t_kf_bominfo e ON a.bom_id = e.bom_id
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+            INNER JOIN t_kf_fabrics_detail b  ON a.fabrics_id = b.fabrics_id
+            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = d.material_id
+            INNER JOIN t_kf_material_spinfo d ON b.fabrics_id = c.material_id
+            INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
     </select>
 
 </mapper>

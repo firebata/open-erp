@@ -1,17 +1,19 @@
 package com.skysport.inerfaces.bean.develop;
 
+import com.skysport.core.bean.system.SelectItem;
+
 import java.math.BigDecimal;
 
 /**
  * 说明:
  * Created by zhangjh on 2015/10/8.
  */
-public class FactoryQuoteInfo {
+public class FactoryQuoteInfo extends SelectItem {
 
     /**
      * id
      */
-    private int id;
+    private String id;
 
     /**
      * 工厂报价id
@@ -92,8 +94,6 @@ public class FactoryQuoteInfo {
     private String factoryName;
 
 
-
-
     public BigDecimal getCosting() {
         return costing;
     }
@@ -134,13 +134,17 @@ public class FactoryQuoteInfo {
         this.bomId = bomId;
     }
 
-    public int getId() {
+
+    @Override
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    @Override
+    public void setId(String id) {
         this.id = id;
     }
+
 
     public String getFactoryQuoteId() {
         return factoryQuoteId;

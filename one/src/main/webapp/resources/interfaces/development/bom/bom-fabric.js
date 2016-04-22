@@ -12,7 +12,7 @@
     var title_type = "面料_";
     $.extend({
         initFabric: initFabric,
-        fabricItems: fabricItems,
+        buildFabricItems: buildFabricItems,
         turnPantoneInfoToSelectOption: turnPantoneInfoToSelectOption,
         reloadPantoneId: reloadPantoneId,
         refreshAllFabricId: refreshAllFabricId
@@ -36,7 +36,7 @@
         }
     }
 
-    function fabricItems() {
+    function buildFabricItems() {
         var size = $("div[id^=fabricAllInfoId]").length;
         var fabricItems = [];
         for (var index = 1; index <= size; index++) {
@@ -802,6 +802,8 @@
                     "orderCount": "orderCount" + idNum,
                     "attritionRate": "attritionRate" + idNum,
                     "unitPrice": "unitPrice" + idNum,
+                    "colorPrice": "colorPrice" + idNum,
+                    "colorAmount": "colorAmount" + idNum,
                     "totalAmount": "totalAmount" + idNum,
                     "totalPrice": "totalPrice" + idNum
                 }
@@ -869,6 +871,8 @@
         fabricsInfo.orderCount = $("#orderCount" + idNum).val();
         fabricsInfo.attritionRate = $("#attritionRate" + idNum).val();
         fabricsInfo.unitPrice = $("#unitPrice" + idNum).val();
+        fabricsInfo.colorPrice = $("#colorPrice" + idNum).val();
+        fabricsInfo.colorAmount = $("#colorAmount" + idNum).val();
         fabricsInfo.totalAmount = $("#totalAmount" + idNum).val();
         fabricsInfo.totalPrice = $("#totalPrice" + idNum).val();
 
@@ -947,6 +951,8 @@
         materialSpInfo.unitPrice = $("#unitPrice" + idNum).val();
         materialSpInfo.totalAmount = $("#totalAmount" + idNum).val();
         materialSpInfo.totalPrice = $("#totalPrice" + idNum).val();
+        materialSpInfo.colorPrice = $("#colorPrice" + idNum).val();
+        materialSpInfo.colorAmount = $("#colorAmount" + idNum).val();
         materialSpInfo.fabricId = fabricsInfo.fabricId;
 
         var materialUnitDosage = {};//面料单位用量
@@ -966,27 +972,26 @@
     function monitorSelectChange() {
 
         var _name = $(this).attr('name');
+        var _thisVal = $(this).val();
+        var _thisId = $(this).attr('id');
         //选择复合时，显示响应的
         if (_name == 'blcId') {
-            var blcIdVal = $(this).val();
-            var thisId = $(this).attr('id');
-            var idNum = thisId.substring(5);
-            showOrHideCompositeDiv(blcIdVal, idNum, function () {
+            var idNum = _thisId.substring(5);
+            showOrHideCompositeDiv(_thisVal, idNum, function () {
 
             });
         }
         //选择材料类别
         else if (_name == 'materialTypeId') {
-            var materialTypeIdVal = $(this).val();
-            var thisId = $(this).attr('id');
-            //noinspection JSDuplicatedDeclaration
-            var idNum = thisId.substring(14);
-            reloadSpSelect(materialTypeIdVal, idNum, function () {
+            var idNum = _thisId.substring(14);
+            reloadSpSelect(_thisVal, idNum, function () {
 
             });
         }
 
     }
+
+
 
     /**
      * 面板内容初始化
@@ -995,7 +1000,6 @@
 
         //显示复合面料信息
         $("#fabricsItemInfo").on("change", "select", monitorSelectChange);
-
 
         //$("#bomDescDetail").hide();
 

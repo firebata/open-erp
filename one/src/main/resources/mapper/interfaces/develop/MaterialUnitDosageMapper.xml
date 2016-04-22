@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper">
+
+
+
+    <update id="updateDosage">
+        update
+        t_kf_material_unit_dosage
+        set
+        unit_id = #{unitId},
+        unit_amount = #{unitAmount}
+        WHERE
+        material_id =#{materialId}
+    </update>
+
+    <insert id="addDosage">
+        INSERT INTO t_kf_material_unit_dosage(material_id,unit_id,unit_amount)
+        VALUES (#{materialId},#{unitId},#{unitAmount});
+    </insert>
+
+
+
+
+
+    <update id="delDosage">
+        UPDATE t_kf_material_unit_dosage
+        SET  del_flag=1
+        WHERE material_id =#{natrualkey}
+    </update>
+
+
+
+</mapper>

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en" class="no-js">
 <head>
-    <title>登录页面</title>
+    <title>翊凯供应链</title>
     <meta name="keywords" content="翊凯供应链"/>
     <meta name="description" content="翊凯供应链系统登录页面"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 <body>
 
 <div class="page-container">
-    <h1>SkySport Supply Chain Management</h1>
+    <h1>Supply Chain Management</h1>
     <form action="<%=path%>/login" method="post">
 
         <input type="text" name="username" id="username" class="username" placeholder="Skysport ID*">

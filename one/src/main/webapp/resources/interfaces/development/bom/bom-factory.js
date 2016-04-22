@@ -17,7 +17,7 @@
 
     $.extend({
         initFactory: initFactory,
-        factoryQuoteInfos: buildFactoryQuoteInfos
+        buildFactoryQuoteInfos: buildFactoryQuoteInfos
     });
 
     /**

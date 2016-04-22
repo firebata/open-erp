@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper">
+    <update id="updateSp">
+        update
+        t_kf_material_spinfo
+        set
+        order_count = #{orderCount},
+        attrition_rate = #{attritionRate},
+        unit_price = #{unitPrice},
+        total_amount = #{totalAmount},
+        total_price = #{totalPrice},
+        color_price = #{colorPrice},
+        color_amount = #{colorAmount}
+        WHERE
+        material_id =#{materialId}
+    </update>
+
+
+    <insert id="addSp">
+        INSERT INTO t_kf_material_spinfo(material_id,sp_id,order_count,attrition_rate,unit_price,total_amount,total_price,color_price,color_amount)
+        VALUES (#{materialId},#{spId},#{orderCount},#{attritionRate},#{unitPrice},#{totalAmount},#{totalPrice},#{colorPrice},#{colorAmount});
+    </insert>
+
+
+
+    <update id="delSp">
+        UPDATE t_kf_material_spinfo
+        SET  del_flag=1
+        WHERE accessories_id =#{natrualkey}
+    </update>
+
+
+</mapper>

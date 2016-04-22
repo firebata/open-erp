@@ -32,11 +32,11 @@
             var exchangeCosts = $("#exchangeCosts").val();
             var factoryOffer = $("#factoryOffer").val();
             //var euroPrice = factoryOffer * (1 + Number(factoryMargins));
-            if ($.strIsEmpty(exchangeCosts)){
+            if ($.strIsEmpty(exchangeCosts)) {
                 bootbox.alert("请输入换汇成本");
                 return;
             }
-            if($.strIsEmpty(factoryOffer)){
+            if ($.strIsEmpty(factoryOffer)) {
                 bootbox.alert("请输入工厂报价");
                 return;
             }
@@ -44,18 +44,7 @@
             $("#euroPrice").val(euroPrice.toFixed(2));
         }
         else if ($(this).attr('id') === 'costing') {//成本核算
-            var costingVal = 0;
-            $("input[name='totalPrice']").each(
-                function () {
-                    var _$thisVal = $(this).val();
-                    //是否是有效值
-                    if ($.strIsEmpty(_$thisVal)) {
-                        _$thisVal = 0;
-                    }
-                    costingVal += parseFloat(_$thisVal);
-                }
-            )
-            $(this).val(costingVal);
+            $.caculateCostingVal();
         }
 
     }

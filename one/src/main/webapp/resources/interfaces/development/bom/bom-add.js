@@ -13,7 +13,8 @@
         bomSave: bomSave,
         bomSubmit: bomSubmit,
         bomAutoBackup: bomAutoBackup,
-        mainColorEditInBom: mainColorEditInBom
+        mainColorEditInBom: mainColorEditInBom,
+        caculateCostingVal: caculateCostingVal
     });
 
     $(function () {
@@ -22,7 +23,139 @@
         //赋值价格
         $("#factoryItemInfo").on("change", "select", cb);
 
+        $("#bomAddPageForm").on("blur", "input", monitorInputBlur);
+
     });
+
+
+    /**
+     *
+     * @param firstChar 序号开始的下标值
+     * @param idNum 所有下标值
+     * @param materialType 所属类型
+     * @returns {{idNum: *, materialType: (string|*)}}
+     */
+    function getIdNumAndMaterialType(idNum, materialType) {
+        var firstChar = "";
+        if (firstChar == "F" || firstChar == "P") {//辅料 或者包装材料
+            idNum = idNum.substr(1);//过滤掉F
+            firstChar = idNum.charAt(0);
+        }
+        materialType = firstChar;
+        return {idNum: idNum, materialType: materialType};
+    }
+
+    /**
+     *监控损耗率和单价发生变化时，动态计算价格
+     */
+    function monitorInputBlur() {
+        var _name = $(this).attr('name');
+        var _thisId = $(this).attr('id');
+        var idNum = "";
+        var materialType = "";
+        var isMonitorPrice = false;
+        if (_name == 'offerAmount') { //订单数量
+            var fabricSize = $("div[id^=fabricAllInfoId]").length;
+            var packagingSize = $("div[id^=packagingAllInfoId]").length;
+            var accessoriesSize = $("div[id^=accessoriesAllInfoId]").length;
+            //序号从1开始
+            for (var idx = 1, len = fabricSize + 1; idx < len; idx++) {
+                caculatePriceAndAmout(idx, '');
+            }
+            for (var idx = 1, len = packagingSize + 1; idx < len; idx++) {
+                caculatePriceAndAmout(idx, 'P');
+            }
+            for (var idx = 1, len = accessoriesSize + 1; idx < len; idx++) {
+                caculatePriceAndAmout(idx, 'F');
+            }
+            caculateCostingVal();
+        }
+        else {
+            //单位用量
+            if (_name == 'unitAmount') {
+                idNum = _thisId.substring(10);
+                isMonitorPrice = true;
+            }
+            //损耗率
+            else if (_name == 'attritionRate') {
+                idNum = _thisId.substring(13);
+                isMonitorPrice = true;
+            }
+            //单价
+            else if (_name == 'unitPrice') {
+                idNum = _thisId.substring(9);
+                isMonitorPrice = true;
+            }
+            if (isMonitorPrice) {
+                var __ret = getIdNumAndMaterialType(idNum, materialType);
+                idNum = __ret.idNum;
+                materialType = __ret.materialType;
+                caculatePriceAndAmout(idNum, materialType);
+                caculateCostingVal();
+            }
+        }
+
+    }
+
+    function getInputVal(_name, idNum, materialType) {
+        var _$val = $("#" + _name + materialType + idNum).val();
+        return _$val;
+    }
+
+    /**
+     * 成本核算
+     */
+    function caculateCostingVal() {
+        var costingVal = 0;
+        $("input[name='colorPrice']").each(
+            function () {
+                var _$thisVal = $(this).val();
+                //是否是有效值
+                if ($.strIsEmpty(_$thisVal)) {
+                    _$thisVal = 0;
+                }
+                costingVal = $.floatAdd(costingVal, parseFloat(_$thisVal));
+            }
+        )
+        $("#costing").val(costingVal);
+    }
+
+    /**
+     * 计算供应商的价格信息
+     * @param idNum
+     * @param materialType
+     */
+    function caculatePriceAndAmout(idNum, materialType) {
+        var unitPriceVal = getInputVal("unitPrice", idNum, materialType); //单位价格
+        var attritionRateVal = getInputVal("attritionRate", idNum, materialType);//损耗率
+        var unitAmountVal = getInputVal("unitAmount", idNum, materialType);//单位用量
+        var offerAmountVal = $("#offerAmount").val();
+        var materialTypeIdNum = materialType + idNum;
+        if ($.strIsNotEmpty(unitPriceVal) && $.strIsNotEmpty(attritionRateVal) && $.strIsNotEmpty(unitAmountVal)) {
+            if (offerAmountVal == '0') {
+                bootbox.alert("订单数量为0.");
+            }
+            //各色用量
+            var colorAmountVal = $.multiply(unitAmountVal, (1 + parseFloat(attritionRateVal)));
+            $("#colorAmount" + materialTypeIdNum).val(colorAmountVal);
+            //各色单价
+            var colorPriceVal = $.multiply(colorAmountVal, unitPriceVal);
+            $("#colorPrice" + materialTypeIdNum).val(colorPriceVal);
+            //各色总用量
+            var totalAmountVal = $.multiply(offerAmountVal, colorAmountVal);
+            $("#totalAmount" + materialTypeIdNum).val(totalAmountVal);
+            //各色总价格
+            var totalPriceVal = $.multiply(offerAmountVal, colorPriceVal);
+            $("#totalPrice" + materialTypeIdNum).val(totalPriceVal);
+
+        } else {
+
+
+        }
+
+
+    }
+
 
     /**
      * 点击编辑
@@ -122,19 +255,19 @@
         $.buildBomDesc(bominfo);
 
         //包材信息
-        //var fabricItems = buildFabricItems();
-        bominfo.fabricItems = $.fabricItems();
+        var fabricItems = $.buildFabricItems();
+        bominfo.fabricItems = fabricItems;
 
         //辅料信息
-        var accessoriesItems = $.accessoriesItems();
+        var accessoriesItems = $.buildAccessoriesItems();
         bominfo.accessoriesItems = accessoriesItems;
 
         //包装材料信息
-        var packagingItems = $.packagingItems();
+        var packagingItems = $.buildPackagingItems();
         bominfo.packagingItems = packagingItems;
 
         //成衣厂
-        var factoryQuoteInfos = $.factoryQuoteInfos();
+        var factoryQuoteInfos = $.buildFactoryQuoteInfos();
         bominfo.factoryQuoteInfos = factoryQuoteInfos;
 
         //生产指示单

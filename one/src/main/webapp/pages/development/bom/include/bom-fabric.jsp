@@ -285,14 +285,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{orderCount}}" data-toggle="tooltip"
-                               title="当前BOM的订单数"> 各色总数量 </label>
-
-                        <div class="col-xs-3">
-                            <input type="text" id="{{orderCount}}" name="orderCount" placeholder="各色总数量"
-                                   class="col-xs-10 col-sm-12"/>
-                        </div>
-
                         <label class="col-xs-2  control-label" for="{{attritionRate}}"> 损耗率 </label>
 
                         <div class="col-xs-3">
@@ -300,26 +292,44 @@
                                    placeholder="损耗率" class="col-xs-10 col-sm-12"/>
                         </div>
 
+
+                        <label class="col-xs-2  control-label" for="{{unitPrice}}"  title="用量单位的价格"> 单价（￥） </label>
+                        <div class="col-xs-3">
+                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价（￥）"
+                                   class="col-xs-10 col-sm-12"/>
+                        </div>
+
+
                     </div>
 
                     <div class="form-group">
+                        <label class="col-xs-2  control-label" for="{{colorAmount}}" data-toggle="tooltip"
+                               title="各色用量 =单位用量 *（1 + 损耗率）"> 各色用量 </label>
+                        <div class="col-xs-3">
+                            <input type="text" id="{{colorAmount}}" name="colorAmount" placeholder="各色用量"
+                                   class="col-xs-10 col-sm-12"/>
+                        </div>
+
+                        <label class="col-xs-2  control-label" for="{{colorPrice}}" title="各色单价 = 各色用量 * 单价">
+                            各色单价（￥） </label>
+                        <div class="col-xs-3">
+                            <input type="text" id="{{colorPrice}}" name="colorPrice" placeholder="各色单价（￥）"
+                                   class="col-xs-10 col-sm-12"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
                         <label class="col-xs-2  control-label" for="{{totalAmount}}" data-toggle="tooltip"
-                               title="各色总数量 * 单位用量"> 各色总用量 </label>
+                               title="订单数量 * 各色用量"> 各色总用量 </label>
                         <div class="col-xs-3">
                             <input type="text" id="{{totalAmount}}" name="totalAmount" placeholder="各色总用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{unitPrice}}"> 单价 </label>
+                        <label class="col-xs-2  control-label" for="{{totalPrice}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价（￥） </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价"
-                                   class="col-xs-10 col-sm-12"/>
-                        </div>
-                        <label class="col-xs-2  control-label" for="{{totalPrice}}"> 总价 </label>
-                        <div class="col-xs-3">
-                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价"
+                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价（￥）"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>

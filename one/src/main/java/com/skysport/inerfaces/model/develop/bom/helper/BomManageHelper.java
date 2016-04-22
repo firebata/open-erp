@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.bom.helper;
 
+import com.skysport.core.bean.system.SelectItem;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
@@ -8,9 +9,9 @@ import com.skysport.core.init.SkySportAppContext;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
@@ -241,7 +242,7 @@ public class BomManageHelper extends ExcelCreateHelper {
      * @param packagings
      * @return
      */
-    public static BomInfoDetail buildBomInfoDetail(List<FabricsInfo> fabricsInfos, List<AccessoriesInfo> accessoriesInfos, List<KFPackaging> packagings) {
+    public static BomInfoDetail buildBomInfoDetail(List<FabricsInfo> fabricsInfos, List<AccessoriesInfo> accessoriesInfos, List<PackagingInfo> packagings) {
         BomInfoDetail bomInfoDetail = new BomInfoDetail();
         bomInfoDetail.setPackagings(packagings);
         bomInfoDetail.setFabricsInfos(fabricsInfos);
@@ -569,9 +570,9 @@ public class BomManageHelper extends ExcelCreateHelper {
      *
      * @param packagings
      */
-    public static void translateIdToNameInPackagings(List<KFPackaging> packagings, String seriesName) {
+    public static void translateIdToNameInPackagings(List<PackagingInfo> packagings, String seriesName) {
         if (null != packagings && !packagings.isEmpty()) {
-            for (KFPackaging packaging : packagings) {
+            for (PackagingInfo packaging : packagings) {
 
                 List<SelectItem2> selectItem2s;
                 StringBuilder stringBuilder = new StringBuilder();
@@ -693,7 +694,7 @@ public class BomManageHelper extends ExcelCreateHelper {
             //辅料
             List<AccessoriesInfo> accessoriesInfos = bomInfoDetail.getAccessoriesInfos();
             //包材
-            List<KFPackaging> packagings = bomInfoDetail.getPackagings();
+            List<PackagingInfo> packagings = bomInfoDetail.getPackagings();
             count = createCellValue(createHelper, sheet, style, fabricsInfos, count);
             count = createCellValue(createHelper, sheet, style, accessoriesInfos, count);
             count = createCellValue(createHelper, sheet, style, packagings, count);
@@ -727,7 +728,7 @@ public class BomManageHelper extends ExcelCreateHelper {
         List<AccessoriesInfo> accessories = bomInfo.getAccessories();
         BomManageHelper.translateIdToNameInAccessoriesInfos(accessories, seriesName);
         //包材
-        List<KFPackaging> packagings = bomInfo.getPackagings();
+        List<PackagingInfo> packagings = bomInfo.getPackagings();
         BomManageHelper.translateIdToNameInPackagings(packagings, seriesName);
         //成衣厂 & 生产指示单
 //        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
@@ -787,11 +788,19 @@ public class BomManageHelper extends ExcelCreateHelper {
         return bomInfo;
     }
 
-    public List<BomMaterialIdVo> getBomMaterialIdVoInFabricsInfo(List<FabricsInfo> fabrics, String bomId) {
+
+    /**
+     * 获取bom和物料关系
+     *
+     * @param infos
+     * @param bomId
+     * @return
+     */
+    public List<BomMaterialIdVo> getBomMaterialIdVo(List<? extends SelectItem> infos, String bomId) {
         List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-        for (FabricsInfo fabric : fabrics) {
+        for (SelectItem info : infos) {
             BomMaterialIdVo vo = new BomMaterialIdVo();
-            String materialId = fabric.getNatrualkey();
+            String materialId = info.getNatrualkey();
             vo.setBomId(bomId);
             vo.setMaterialId(materialId);
             bomIdVos.add(vo);
@@ -799,46 +808,10 @@ public class BomManageHelper extends ExcelCreateHelper {
         return bomIdVos;
     }
 
-    public List<BomMaterialIdVo> getBomMaterialIdVoInAccessoriesInfo(List<AccessoriesInfo> accessories, String bomId) {
-        List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-        for (AccessoriesInfo accessorie : accessories) {
-            BomMaterialIdVo vo = new BomMaterialIdVo();
-            String materialId = accessorie.getNatrualkey();
-            vo.setBomId(bomId);
-            vo.setMaterialId(materialId);
-            bomIdVos.add(vo);
-        }
-        return bomIdVos;
-    }
-
-    public List<BomMaterialIdVo> getBomMaterialIdVoInKFPackaging(List<KFPackaging> packagings, String bomId) {
-        List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-        for (KFPackaging packaging : packagings) {
-            BomMaterialIdVo vo = new BomMaterialIdVo();
-            String materialId = packaging.getNatrualkey();
-            vo.setBomId(bomId);
-            vo.setMaterialId(materialId);
-            bomIdVos.add(vo);
-        }
-        return bomIdVos;
-    }
-
-    public List<BomMaterialIdVo> getBomMaterialIdVoInFactoryQuoteInfo(List<FactoryQuoteInfo> factoryQuoteInfos, String bomId) {
-        List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
-        for (FactoryQuoteInfo factoryQuoteInfo : factoryQuoteInfos) {
-            BomMaterialIdVo vo = new BomMaterialIdVo();
-            String materialId = factoryQuoteInfo.getFactoryQuoteId();
-            vo.setBomId(bomId);
-            vo.setMaterialId(materialId);
-            bomIdVos.add(vo);
-        }
-        return bomIdVos;
-    }
-
-    public List<BomMaterialIdVo> getBomMaterialIdVoInKfProductionInstructionEntity(KfProductionInstructionEntity entity, String bomId) {
+    public List<BomMaterialIdVo> getBomMaterialIdVo(SelectItem entity, String bomId) {
         List<BomMaterialIdVo> bomIdVos = new ArrayList<>();
         BomMaterialIdVo vo = new BomMaterialIdVo();
-        String materialId = entity.getProductionInstructionId();
+        String materialId = entity.getNatrualkey();
         vo.setBomId(bomId);
         vo.setMaterialId(materialId);
         bomIdVos.add(vo);
