@@ -108,10 +108,10 @@
 
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{euroPrice}}">工厂欧元报价(€)</label>
+                       <%-- <label class="col-xs-2  control-label" for="{{euroPrice}}">工厂欧元报价(€)</label>
                         <div class="col-xs-3">
                             <input type="text" id="{{euroPrice}}" name="euroPrice" placeholder="工厂欧元报价(€)"              class="col-xs-10 col-sm-12"/>
-                        </div>
+                        </div>--%>
 
                         <label class="col-xs-2  control-label" for="{{quoteReference}}"> 报价参考 </label>
                         <div class="col-xs-3">

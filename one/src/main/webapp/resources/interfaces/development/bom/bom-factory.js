@@ -516,7 +516,12 @@
             bom.factoryItems[size - 1] = factory;
         });
 
+
+      
+
     });
+
+
     var bom = {
         projectId: "",//项目id
         bomId: "",//BOMId

@@ -139,6 +139,7 @@ public interface WebConstants extends TableNameConstants {
     String PROJECT_ITEM_TABLE_COLUMN = "project_table_colulmn";
     String USERINFO_TABLE_COLUMN = "userinfo_table_colulmn";
     String DEPT_TABLE_COLUMN_NAME = "dept_table_column_name";
+    String PRE_QUOTE_TABLE_COLUMN_NAME = "pre_quote_table_column_name";
 
     String USER_TYPE = "user_type";
     String LOCK_FLAG = "lock_flag";
@@ -193,4 +194,8 @@ public interface WebConstants extends TableNameConstants {
     String pantone_kind_c_u = "c_u";
 
     String  MENU_SESSION_TAG = "menusTotle";
+
+
+    //参考工厂报价
+    String QUOTE_REFERENCE_YES = "1";
 }

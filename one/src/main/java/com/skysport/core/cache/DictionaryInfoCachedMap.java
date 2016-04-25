@@ -77,7 +77,7 @@ public enum DictionaryInfoCachedMap {
             return key;
         }
         for (Map.Entry<String, String> entry : valueMap.entrySet()) {
-            if (entry.getKey().equals(key)) {
+            if (key.equals(entry.getKey())) {
                 value = entry.getValue();
                 break;
             }

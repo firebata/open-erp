@@ -60,7 +60,7 @@ public class FactoryQuotePreAction extends BaseAction<FactoryQuoteInfo> {
     public Map<String, Object> search(HttpServletRequest request) {
         //组件queryFory的参数
         FactoryQuotePreQueryForm queryForm = new FactoryQuotePreQueryForm();
-        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
+        queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PRE_QUOTE_TABLE_COLUMN_NAME, request));
         FactoryQuoteInfo info = QuotedServiceHelper.getInstance().getInfo(request);
         queryForm.setQuoteInfo(info);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, factoryQuoteService);

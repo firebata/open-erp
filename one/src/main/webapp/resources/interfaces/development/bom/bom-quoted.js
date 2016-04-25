@@ -26,40 +26,8 @@
     }
 
 
-    function cbOfferDescDetail() {
-        //工厂利润率改变，重新计算欧元报价
-        if ($(this).attr('id') === 'euroPrice') {
-            var exchangeCosts = $("#exchangeCosts").val();
-            var factoryOffer = $("#factoryOffer").val();
-            //var euroPrice = factoryOffer * (1 + Number(factoryMargins));
-            if ($.strIsEmpty(exchangeCosts)) {
-                bootbox.alert("请输入换汇成本");
-                return;
-            }
-            if ($.strIsEmpty(factoryOffer)) {
-                bootbox.alert("请输入工厂报价");
-                return;
-            }
-            var euroPrice = factoryOffer / exchangeCosts;
-            $("#euroPrice").val(euroPrice.toFixed(2));
-        }
-        else if ($(this).attr('id') === 'costing') {//成本核算
-            $.caculateCostingVal();
-        }
+   
 
-    }
-
-    $(function () {
-
-        // $("#offerDescTitle").click(function () {
-        //     $("#offerDescDetail").toggle(300);
-        // });
-
-        //监听价格变动
-        $("#offerDescDetail").on("click", "input", cbOfferDescDetail);
-
-
-    })
     /**
      * 报价信息
      */

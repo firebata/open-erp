@@ -3,6 +3,8 @@
     <div id="offerDescTitle">
         <h5 class="header smaller lighter blue">
             报价表
+            <input type="hidden" name="spId" id="spId" />
+            <input type="hidden" name="fabricId" id="fabricId" />
         </h5>
     </div>
     <div id="offerDescDetail" <%--style="display: none"--%>>

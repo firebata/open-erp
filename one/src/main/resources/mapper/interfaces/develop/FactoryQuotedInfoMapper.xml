@@ -5,23 +5,23 @@
 <mapper namespace="com.skysport.inerfaces.mapper.develop.FactoryQuotedInfoMapper">
 
     <sql id="searchInfoSql">
-        id AS id,
-        factory_quote_id AS factoryQuoteId,
-        sp_id AS spId,
-        offer_amount AS offerAmount,
-        quote_ref AS quoteReference,
-        fabrics_end_date AS fabricsEndDate,
-        accessories_end_date AS accessoriesEndDate,
-        preoffer_date AS preOfferDate,
-        cloth_received_date AS clothReceivedDate,
-        factory_offer AS factoryOffer,
-        factory_margins AS factoryMargins,
-        costing AS costing,
-        bom_id AS bomId,
-        euro_price AS euroPrice,
-        del_flag AS delFlag,
-        update_time AS updateTime,
-        remark AS remark
+        a.id AS id,
+        a.factory_quote_id AS factoryQuoteId,
+        a.sp_id AS spId,
+        a.offer_amount AS offerAmount,
+        a.quote_ref AS quoteReference,
+        a.fabrics_end_date AS fabricsEndDate,
+        a.accessories_end_date AS accessoriesEndDate,
+        a.preoffer_date AS preOfferDate,
+        a.cloth_received_date AS clothReceivedDate,
+        a.factory_offer AS factoryOffer,
+        a.factory_margins AS factoryMargins,
+        a.costing AS costing,
+        a.bom_id AS bomId,
+        a.euro_price AS euroPrice,
+        a.del_flag AS delFlag,
+        a.update_time AS updateTime,
+        a.remark AS remark
     </sql>
 
     <select id="selectAlId" resultType="String">
@@ -42,13 +42,13 @@
     <select id="queryInfo" resultType="FactoryQuoteInfo">
         select
         <include refid="searchInfoSql"/>
-        FROM t_kf_factory_quote
+        FROM t_kf_factory_quote a
         WHERE bom_id =#{bomId} and del_flag=0
         limit 1
     </select>
 
     <select id="listInfosCounts" resultType="Integer">
-      select count(*) from t_kf_factory_quote and del_flag=0
+      select count(*) from t_kf_factory_quote WHERE del_flag=0
     </select>
 
 
@@ -56,11 +56,11 @@
         SELECT COUNT(*) FROM t_kf_factory_quote a,t_kf_bominfo b
         WHERE a.del_flag=0 and a.bom_id=b.bom_id AND b.del_flag=0
         <if test="quoteInfo.spId !=null and quoteInfo.spId != ''">
-            AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
+            AND a.spId LIKE concat('%',#{quoteInfo.spId},'%')
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             AND (
-            b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
+              b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
     </select>
@@ -75,12 +75,12 @@
         </if>
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             AND (
-            b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
+              b.bom_name LIKE concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
-        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+        <!--<if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
             ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
-        </if>
+        </if>-->
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
     </select>
 
