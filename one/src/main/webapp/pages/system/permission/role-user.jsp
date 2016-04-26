@@ -17,4 +17,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript"      src="<%=path%>/resources/interfaces/system/permission/role-user.js?v=<%=version%>"></script>
+<script type="text/javascript"      src="<%=path%>/resources/js/interfaces/system/permission/role-user.js?v=<%=version%>"></script>

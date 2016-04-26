@@ -24,11 +24,10 @@
     </div>
     <%@ include file="chgpwd.jsp" %>
 </div>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->
 <script id="userInfotpl" type="text/x-handlebars-template">
     {{#each func}}
     <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
     {{/each}}
 </script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/permission/userinfo-list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/permission/userinfo-list.js?v=<%=version%>"></script>

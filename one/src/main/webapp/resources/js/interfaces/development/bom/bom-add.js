@@ -34,7 +34,10 @@
 
     });
 
-
+    /**
+     * 计算欧元价格
+     * @returns {*}
+     */
     function cacuEuroPrice() {
         var exchangeCosts = $("#exchangeCosts").val();
         var factoryOffer = $("#factoryOffer").val();
@@ -47,7 +50,7 @@
         }
         else {
             var euroPrice = $.floatDiv(factoryOffer, exchangeCosts);
-            $("#euroPrice").val(euroPrice);
+            $("#euroPrice").val(euroPrice.toFixed(2));
         }
         return euroPrice;
     }
@@ -193,16 +196,16 @@
             }
             //各色用量
             var colorAmountVal = $.multiply(unitAmountVal, (1 + parseFloat(attritionRateVal)));
-            $("#colorAmount" + materialTypeIdNum).val(colorAmountVal);
+            $("#colorAmount" + materialTypeIdNum).val(colorAmountVal.toFixed(2));
             //各色单价
             var colorPriceVal = $.multiply(colorAmountVal, unitPriceVal);
-            $("#colorPrice" + materialTypeIdNum).val(colorPriceVal);
+            $("#colorPrice" + materialTypeIdNum).val(colorPriceVal.toFixed(2));
             //各色总用量
             var totalAmountVal = $.multiply(offerAmountVal, colorAmountVal);
-            $("#totalAmount" + materialTypeIdNum).val(totalAmountVal);
+            $("#totalAmount" + materialTypeIdNum).val(totalAmountVal.toFixed(2));
             //各色总价格
             var totalPriceVal = $.multiply(offerAmountVal, colorPriceVal);
-            $("#totalPrice" + materialTypeIdNum).val(totalPriceVal);
+            $("#totalPrice" + materialTypeIdNum).val(totalPriceVal.toFixed(2));
 
         } else {
 

@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
     <div class="page-header">
         <h1>
             系统管理
@@ -45,9 +45,9 @@
 <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
 {{/each}}
 </script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/year_conf/year_conf.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/list.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/edit.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/year_conf/year_conf.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/edit.js?v=<%=version%>"></script>
 </body>
 
 

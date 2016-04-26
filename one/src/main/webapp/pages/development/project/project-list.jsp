@@ -31,7 +31,7 @@
 </div>
 
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
     <%--<div class="page-header">
       <h1>
         开发
@@ -102,4 +102,4 @@
 
 </script>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/project/project-list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/project/project-list.js?v=<%=version%>"></script>

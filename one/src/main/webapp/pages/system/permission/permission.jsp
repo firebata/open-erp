@@ -20,4 +20,4 @@
     </div>
 </div>
 <script type="text/javascript"
-        src="<%=path%>/resources/interfaces/system/permission/resource-role.js?v=<%=version%>"></script>
+        src="<%=path%>/resources/js/interfaces/system/permission/resource-role.js?v=<%=version%>"></script>

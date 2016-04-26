@@ -35,13 +35,12 @@
   </div>
 </div>
 <%@ include file="bom-material-add.jsp" %>
-<jsp:include page="../../base/footCommon.jsp"></jsp:include>
 <!--定义操作列按钮模板-->
 <script id="tpl" type="text/x-handlebars-template">
   {{#each func}}
   <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
   {{/each}}
 </script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/material/material_list.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/list.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/edit.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/material/material_list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/edit.js?v=<%=version%>"></script>

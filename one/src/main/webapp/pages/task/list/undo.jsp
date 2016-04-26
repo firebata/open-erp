@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
     <div class="page-header">
         <h1>
             任务管理
@@ -51,4 +51,4 @@
 </body>
 </html>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/task/list/undo-list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/task/list/undo-list.js?v=<%=version%>"></script>

@@ -718,7 +718,7 @@ public class BomManageHelper extends ExcelCreateHelper {
      * @param request
      */
     public static void downloadProductinstruction(BomInfo bomInfo, HttpServletResponse response, HttpServletRequest request) throws IOException, InvalidFormatException {
-        org.springframework.core.io.Resource fileRource = new ClassPathResource("conf/pi-20160316.xlsx");
+        org.springframework.core.io.Resource fileRource = new ClassPathResource("conf/templates/pi-20160316.xlsx");
         String seriesName = bomInfo.getSeriesName();
         //面料集合
         List<FabricsInfo> fabricItems = bomInfo.getFabrics();

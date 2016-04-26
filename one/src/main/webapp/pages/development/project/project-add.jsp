@@ -30,7 +30,7 @@
 </div>
 
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
 
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
@@ -166,4 +166,4 @@
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/project/project-add.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/project/project-add.js?v=<%=version%>"></script>

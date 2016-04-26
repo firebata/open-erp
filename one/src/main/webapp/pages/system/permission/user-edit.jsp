@@ -120,4 +120,4 @@
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/permission/userinfo-edit.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/permission/userinfo-edit.js?v=<%=version%>"></script>

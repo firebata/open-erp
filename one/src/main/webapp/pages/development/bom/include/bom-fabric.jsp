@@ -289,7 +289,7 @@
 
                         <div class="col-xs-3">
                             <input type="text" id="{{attritionRate}}" name="attritionRate"
-                                   placeholder="损耗率" class="col-xs-10 col-sm-12"/>
+                                   placeholder="损耗率，e.g.0.03" class="col-xs-10 col-sm-12"/>
                         </div>
 
 

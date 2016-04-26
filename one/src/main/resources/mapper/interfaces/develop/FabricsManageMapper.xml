@@ -310,48 +310,48 @@
     </select>
 
     <select id="queryAllFabricByBomId"  resultMap="infosMap2">
-      SELECT
-            a.fabrics_id AS fabricId,
-            a.fabrics_no AS fabricNo,
-            a.fabrics_name AS fabricName,
-            e.bom_name AS bomName,
-            a.sp_id AS spId,
-            a.bom_id AS bomId,
-            a.product_type_id AS  productTypeId ,
-            a.pantone_id AS  pantoneId ,
-            c.unit_id AS  unitId ,
-            d.order_count AS  orderCount ,
-            c.unit_amount AS  unitAmount ,
-            d.total_amount AS  totalAmount ,
-            a.classic_id AS   classicId,
-            a.product_type_id AS   productTypeId,
-            b.specfication_id AS  specificationId ,
-            b.dye_id AS  dyeId ,
-            b.finish_id AS   finishId,
-            b.blc_id AS  blcId ,
-            a.composite_classic_id AS   compositeClassicId,
-            a.composite_pantone_id AS   compositePantoneId,
-            a.composite_product_type_id AS   compositeProductTypeId,
-            b.composite_specfication_id AS  compositeSpecificationId ,
-            b.composite_dye_id AS  compositeDyeId ,
-            b.composite_finish_id AS   compositeFinishId,
-            b.momc_id AS momcId  ,
-            b.comoc_id AS  comocId ,
-            b.wvp_id AS  wvpId ,
-            b.mt_id AS  mtId ,
-            b.woblc_id AS  woblcId ,
-            a.is_show AS isShow,
-            d.unit_price AS unitPrice,
-            d.total_price AS totalPrice,
-            d.color_price AS colorPrice,
-            d.color_amount AS colorAmount
-        FROM
-            t_kf_fabrics a
-            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
-            INNER JOIN t_kf_fabrics_detail b  ON a.fabrics_id = b.fabrics_id
-            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = d.material_id
-            INNER JOIN t_kf_material_spinfo d ON b.fabrics_id = c.material_id
-            INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
+           SELECT
+                a.fabrics_id AS fabricId,
+                a.fabrics_no AS fabricNo,
+                a.fabrics_name AS fabricName,
+                e.bom_name AS bomName,
+                a.sp_id AS spId,
+                a.bom_id AS bomId,
+                a.product_type_id AS productTypeId,
+                a.pantone_id AS pantoneId,
+                c.unit_id AS unitId,
+                d.order_count AS orderCount,
+                c.unit_amount AS unitAmount,
+                d.total_amount AS totalAmount,
+                a.classic_id AS classicId,
+                a.product_type_id AS productTypeId,
+                b.specfication_id AS specificationId,
+                b.dye_id AS dyeId,
+                b.finish_id AS finishId,
+                b.blc_id AS blcId,
+                a.composite_classic_id AS compositeClassicId,
+                a.composite_pantone_id AS compositePantoneId,
+                a.composite_product_type_id AS compositeProductTypeId,
+                b.composite_specfication_id AS compositeSpecificationId,
+                b.composite_dye_id AS compositeDyeId,
+                b.composite_finish_id AS compositeFinishId,
+                b.momc_id AS momcId,
+                b.comoc_id AS comocId,
+                b.wvp_id AS wvpId,
+                b.mt_id AS mtId,
+                b.woblc_id AS woblcId,
+                a.is_show AS isShow,
+                d.unit_price AS unitPrice,
+                d.total_price AS totalPrice,
+                d.color_price AS colorPrice,
+                d.color_amount AS colorAmount
+            FROM
+                t_kf_fabrics a
+            INNER JOIN t_kf_bom_material k ON a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+            INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id
+            INNER JOIN t_kf_fabrics_detail b ON a.fabrics_id = b.fabrics_id
+            INNER JOIN t_kf_material_unit_dosage c ON b.fabrics_id = c.material_id
+            INNER JOIN t_kf_material_spinfo d ON c.material_id = d.material_id
     </select>
 
 

@@ -21,7 +21,7 @@
     var approve_status_undo = '<%=WebConstants.APPROVE_STATUS_UNDO%>';
     var approve_status_pass = '<%=WebConstants.APPROVE_STATUS_PASS%>';
     var approve_status_other = '<%=WebConstants.APPROVE_STATUS_OTHER%>';
-     var quote_reference_yes  = '<%=WebConstants.QUOTE_REFERENCE_YES%>;
+    var quote_reference_yes = '<%=WebConstants.QUOTE_REFERENCE_YES%>';
     var spe = '<%=WebConstants.SPE%>';
     var environment_current = '<%=environment_current%>';
     var statecode_alive = '<%=WebConstants.STATECODE_ALIVE%>';

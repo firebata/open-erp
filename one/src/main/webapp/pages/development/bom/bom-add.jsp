@@ -32,7 +32,7 @@
 </div>
 
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
 
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
@@ -128,11 +128,11 @@
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/development/bom/bom-productinst.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-productinst.js?v=<%=version%>"></script>

@@ -40,7 +40,7 @@
 	</div>--%>
 
 	<div class="page-content">
-		<%--<%@ include file="base/ace-setting.jsp"%>--%>
+
 		<div class="page-header">
 			<h1>
 				控制台 <small> <i class="icon-double-angle-right"></i> 查看

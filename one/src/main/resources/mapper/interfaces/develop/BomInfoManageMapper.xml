@@ -232,12 +232,13 @@
 
     <select id="queryBomInfosByProjectItemIds" resultType="BomInfo">
         SELECT
-        <include refid="searchInfoSql3"/>
-        FROM t_kf_bominfo a,t_jc_series b
-        WHERE a.del_flag=0 AND a.series_id=b.series_id AND b.del_flag=0 AND project_id IN
+          <include refid="searchInfoSql3"/>
+        FROM
+        t_kf_bominfo a INNER JOIN  t_kf_project_item_bom c on a.del_flag = 0 AND a.bom_id =c.bom_id and c.project_id IN
         <foreach item="idItem" collection="list" open="(" separator="," close=")">
-            #{idItem}
+          #{idItem}
         </foreach>
+        LEFT JOIN t_jc_series b on a.series_id = b.series_id and b.del_flag = 0
     </select>
 
     <select id="queryBomIds" resultType="String">

@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
     <div class="page-header">
         <h1>
             系统管理
@@ -51,8 +51,8 @@
     {{/each}}
 </script>
 <script type="text/javascript"
-        src="<%=path%>/resources/interfaces/system/customer/customer2.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/list.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/edit.js?v=<%=version%>"></script>
+        src="<%=path%>/resources/js/interfaces/system/customer/customer2.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/list.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/edit.js?v=<%=version%>"></script>
 <script language="javascript" type="text/javascript"
         src="<%=path%>/resources/My97DatePicker/WdatePicker.js?v=<%=version%>"></script>

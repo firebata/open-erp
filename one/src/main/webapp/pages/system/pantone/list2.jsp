@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="page-content">
-    <%--<%@ include file="base/ace-setting.jsp"%>--%>
+
     <div class="page-header">
         <h1>
             系统管理
@@ -48,4 +48,4 @@
 </script>
 </body>
 </html>
-<script type="text/javascript" src="<%=path%>/resources/interfaces/system/pantone/pantone.js?v=<%=version%>"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/pantone/pantone.js?v=<%=version%>"></script>
