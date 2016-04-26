@@ -7,6 +7,7 @@ import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.init.SkySportAppContext;
 import com.skysport.core.utils.DateUtils;
+import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
@@ -15,31 +16,15 @@ import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
-import com.skysport.inerfaces.utils.ExcelCreateHelper;
 import com.skysport.inerfaces.utils.SeqCreateUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jxls.area.Area;
-import org.jxls.builder.AreaBuilder;
-import org.jxls.builder.xls.XlsCommentAreaBuilder;
-import org.jxls.common.CellRef;
-import org.jxls.common.Context;
-import org.jxls.transform.Transformer;
-import org.jxls.transform.poi.PoiContext;
-import org.jxls.transform.poi.PoiTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +33,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-public class BomManageHelper extends ExcelCreateHelper {
+public class BomManageHelper/* extends ExcelCreateHelper */{
 
     private static transient Logger logger = LoggerFactory.getLogger(BomManageHelper.class);
 
@@ -237,17 +222,25 @@ public class BomManageHelper extends ExcelCreateHelper {
     /**
      * 构造bom详细信息
      *
+     * @param bomInfoDetails
      * @param fabricsInfos
      * @param accessoriesInfos
      * @param packagings
      * @return
      */
-    public static BomInfoDetail buildBomInfoDetail(List<FabricsInfo> fabricsInfos, List<AccessoriesInfo> accessoriesInfos, List<PackagingInfo> packagings) {
-        BomInfoDetail bomInfoDetail = new BomInfoDetail();
-        bomInfoDetail.setPackagings(packagings);
-        bomInfoDetail.setFabricsInfos(fabricsInfos);
-        bomInfoDetail.setAccessoriesInfos(accessoriesInfos);
-        return bomInfoDetail;
+    public void buildBomInfoDetail(List<MaterialInfo> bomInfoDetails, List<FabricsInfo> fabricsInfos, List<AccessoriesInfo> accessoriesInfos, List<PackagingInfo> packagings) {
+
+        for (MaterialInfo fabricsInfo : fabricsInfos) {
+            bomInfoDetails.add(fabricsInfo);
+        }
+
+        for (AccessoriesInfo fabricsInfo : accessoriesInfos) {
+            bomInfoDetails.add(fabricsInfo);
+        }
+
+        for (PackagingInfo fabricsInfo : packagings) {
+            bomInfoDetails.add(fabricsInfo);
+        }
     }
 
     /**
@@ -647,68 +640,68 @@ public class BomManageHelper extends ExcelCreateHelper {
     }
 
 
-    /**
-     * 创建文件
-     *
-     * @param fileName
-     * @param ctxPath
-     * @param bomInfoDetails
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     */
-    public static void createFile(String fileName, String ctxPath, List<BomInfoDetail> bomInfoDetails) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-
-        Workbook workbook = new HSSFWorkbook();
-        CreationHelper createHelper = workbook.getCreationHelper();
-        Sheet sheet = workbook.createSheet();
-
-        Font font = workbook.createFont();
-        font.setFontName("仿宋_GB2312");
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);//粗体显示
-        font.setFontHeightInPoints((short) 12);
-        CellStyle style = workbook.createCellStyle();
-        //设置颜色
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-//        style.setFillForegroundColor(HSSFColor.SKY_BLUE.index);//前景颜色
-//        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);//填充方式，前色填充
-
-        //边框填充
-        style.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-        style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-        style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
-        style.setFont(font);
-        style.setWrapText(false);
-        DataFormat dataFormat = workbook.createDataFormat();
-        style.setDataFormat(dataFormat.getFormat("@"));
-
-        //表头
-        createExcelTitle(sheet, createHelper, style, WebConstants.BOM_DETAIL_TITILE_ADVANCED);
-
-        //总记录数
-        int count = 0;
-        for (BomInfoDetail bomInfoDetail : bomInfoDetails) {
-            //面料
-            List<FabricsInfo> fabricsInfos = bomInfoDetail.getFabricsInfos();
-            //辅料
-            List<AccessoriesInfo> accessoriesInfos = bomInfoDetail.getAccessoriesInfos();
-            //包材
-            List<PackagingInfo> packagings = bomInfoDetail.getPackagings();
-            count = createCellValue(createHelper, sheet, style, fabricsInfos, count);
-            count = createCellValue(createHelper, sheet, style, accessoriesInfos, count);
-            count = createCellValue(createHelper, sheet, style, packagings, count);
-        }
-
-
-        if (workbook instanceof XSSFWorkbook) {
-            fileName = fileName + "x";
-        }
-
-        fireCreate(fileName, ctxPath, workbook);
-
-
-    }
+//    /**
+//     * 创建文件
+//     *
+//     * @param fileName
+//     * @param ctxPath
+//     * @param bomInfoDetails
+//     * @throws NoSuchMethodException
+//     * @throws InvocationTargetException
+//     * @throws IllegalAccessException
+//     */
+//    public static void createFile(String fileName, String ctxPath, List<BomInfoDetail> bomInfoDetails) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+//
+//        Workbook workbook = new HSSFWorkbook();
+//        CreationHelper createHelper = workbook.getCreationHelper();
+//        Sheet sheet = workbook.createSheet();
+//
+//        Font font = workbook.createFont();
+//        font.setFontName("仿宋_GB2312");
+//        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);//粗体显示
+//        font.setFontHeightInPoints((short) 12);
+//        CellStyle style = workbook.createCellStyle();
+//        //设置颜色
+//        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+////        style.setFillForegroundColor(HSSFColor.SKY_BLUE.index);//前景颜色
+////        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);//填充方式，前色填充
+//
+//        //边框填充
+//        style.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
+//        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
+//        style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
+//        style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+//        style.setFont(font);
+//        style.setWrapText(false);
+//        DataFormat dataFormat = workbook.createDataFormat();
+//        style.setDataFormat(dataFormat.getFormat("@"));
+//
+//        //表头
+//        createExcelTitle(sheet, createHelper, style, WebConstants.BOM_DETAIL_TITILE_ADVANCED);
+//
+//        //总记录数
+//        int count = 0;
+//        for (BomInfoDetail bomInfoDetail : bomInfoDetails) {
+//            //面料
+//            List<FabricsInfo> fabricsInfos = bomInfoDetail.getFabricsInfos();
+//            //辅料
+//            List<AccessoriesInfo> accessoriesInfos = bomInfoDetail.getAccessoriesInfos();
+//            //包材
+//            List<PackagingInfo> packagings = bomInfoDetail.getPackagings();
+//            count = createCellValue(createHelper, sheet, style, fabricsInfos, count);
+//            count = createCellValue(createHelper, sheet, style, accessoriesInfos, count);
+//            count = createCellValue(createHelper, sheet, style, packagings, count);
+//        }
+//
+//
+//        if (workbook instanceof XSSFWorkbook) {
+//            fileName = fileName + "x";
+//        }
+//
+//        fireCreate(fileName, ctxPath, workbook);
+//
+//
+//    }
 
     /**
      * 导出每个bom中每个成衣工厂的生产指示单
@@ -718,18 +711,23 @@ public class BomManageHelper extends ExcelCreateHelper {
      * @param request
      */
     public static void downloadProductinstruction(BomInfo bomInfo, HttpServletResponse response, HttpServletRequest request) throws IOException, InvalidFormatException {
-        org.springframework.core.io.Resource fileRource = new ClassPathResource("conf/templates/pi-20160316.xlsx");
+
         String seriesName = bomInfo.getSeriesName();
+
         //面料集合
         List<FabricsInfo> fabricItems = bomInfo.getFabrics();
+
         //将id转成name
         BomManageHelper.translateIdToNameInFabrics(fabricItems, seriesName, WebConstants.FABRIC_ID_EXCHANGE_BOM);
+
         //辅料集合
         List<AccessoriesInfo> accessories = bomInfo.getAccessories();
         BomManageHelper.translateIdToNameInAccessoriesInfos(accessories, seriesName);
+
         //包材
         List<PackagingInfo> packagings = bomInfo.getPackagings();
         BomManageHelper.translateIdToNameInPackagings(packagings, seriesName);
+
         //成衣厂 & 生产指示单
 //        List<FactoryQuoteInfo> factoryQuoteInfos = bomInfo.getFactoryQuoteInfos();
         KfProductionInstructionEntity productionInstruction = bomInfo.getProductionInstruction();
@@ -739,6 +737,7 @@ public class BomManageHelper extends ExcelCreateHelper {
          * 下单日期（导出时间）
          */
         String exportDate = DateUtils.SINGLETONE.getYyyy_Mm_dd();
+
         //指示单信息
         if (productionInstruction == null) {
             logger.info("==============================================>bomid[{0}] 的成衣厂productionInstructionId[{1}]对应的指示单信息为空 ", new Object[]{bomId, productionInstruction.getProductionInstructionId()});
@@ -748,10 +747,8 @@ public class BomManageHelper extends ExcelCreateHelper {
         productionInstruction.setPackagings(packagings);
         productionInstruction.setExportDate(exportDate);
 
-        InputStream is = fileRource.getInputStream();
         String year = DateUtils.SINGLETONE.getYyyy();
-        String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER)
-                .append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(DateUtils.SINGLETONE.getYyyyMmdd());
@@ -763,29 +760,16 @@ public class BomManageHelper extends ExcelCreateHelper {
         String fileName = stringBuilder.toString();
 
         //完整文件路径
-        String downLoadPath = ctxPath + File.separator + fileName;
-        //生成生成指示单
-        OutputStream os = new FileOutputStream(downLoadPath);
-        Transformer transformer = PoiTransformer.createTransformer(is, os);
-        AreaBuilder areaBuilder = new XlsCommentAreaBuilder(transformer);
-        List<Area> xlsAreaList = areaBuilder.build();
-        Area xlsArea = xlsAreaList.get(0);
-        Context context = new PoiContext();
-        context.putVar("productionInstruction", productionInstruction);
-//            xlsArea.applyAt(new CellRef("Sheet2!A1"), context);
-        xlsArea.applyAt(new CellRef("Sheet1!A1"), context);
-        xlsArea.processFormulas();
-        transformer.write();
+        String ctxPath = new StringBuilder().append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.BASE_PATH)).append(WebConstants.FILE_SEPRITER).append(year).append(WebConstants.FILE_SEPRITER).append(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FILE_PATH, WebConstants.DEVELOP_PATH)).toString();
+        String resourcePath = WebConstants.RESOURCE_PATH_PI;
+
+        //创建文件
+        String downLoadPath = ExcelCreateUtils.getInstance().create(productionInstruction, "productionInstruction", fileName, ctxPath, resourcePath);
 
         //下载
         UpDownUtils.download(request, response, fileName, downLoadPath);
 
 
-    }
-
-    public BomInfo getProjectBomInfo(HttpServletRequest request) {
-        BomInfo bomInfo = new BomInfo();
-        return bomInfo;
     }
 
 
@@ -818,4 +802,7 @@ public class BomManageHelper extends ExcelCreateHelper {
         return bomIdVos;
     }
 
+    public BomInfo getProjectBomInfo(HttpServletRequest request) {
+        return new BomInfo();
+    }
 }

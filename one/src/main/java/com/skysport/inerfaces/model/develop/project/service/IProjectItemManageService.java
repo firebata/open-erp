@@ -7,9 +7,11 @@ import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.core.model.common.ICommonService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -32,7 +34,7 @@ public interface IProjectItemManageService extends ICommonService<ProjectBomInfo
 
     void addBatchBomInfo(List<ProjectBomInfo> info);
 
-    void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, UnsupportedEncodingException;
+    void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, InvalidFormatException;
 
     void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
 

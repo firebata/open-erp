@@ -13,6 +13,7 @@ public class QuotedInfo {
     private String projectId;
 
     private String projectItemId;
+
     private String approveStatus;
     /**
      *
@@ -22,6 +23,8 @@ public class QuotedInfo {
     private String spId;
 
     private String mainFabricIds;
+
+    private String now;
 
     /**
      *
@@ -247,6 +250,14 @@ public class QuotedInfo {
 
     public void setQuotedPrice(BigDecimal quotedPrice) {
         this.quotedPrice = quotedPrice;
+    }
+
+    public String getNow() {
+        return now;
+    }
+
+    public void setNow(String now) {
+        this.now = now;
     }
 
     @Override

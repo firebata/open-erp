@@ -12,6 +12,7 @@ import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -139,7 +140,7 @@ public class ProjectAction extends BaseAction<ProjectInfo> {
      */
     @RequestMapping("/download_offer/{natrualkeys}")
     @SystemControllerLog(description = "导出报价表")
-    public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException, InvalidFormatException {
         quotedService.downloadOffer(request, response, natrualkeys);
         return null;
     }

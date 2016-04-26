@@ -3,17 +3,18 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
+import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
-import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
+import com.skysport.inerfaces.utils.SeqCreateUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +89,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
      */
     @RequestMapping("/download_offer/{natrualkeys}")
     @SystemControllerLog(description = "导出报价表")
-    public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView downloadOffer(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws IOException, InvalidFormatException {
         quotedService.downloadOffer(request, response, natrualkeys);
         return null;
     }
@@ -101,7 +101,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
      */
     @RequestMapping("/export_materialdetail/{natrualkeys}")
     @SystemControllerLog(description = "导出面辅料详细")
-    public ModelAndView exportMaterialDetail(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, NoSuchMethodException, UnsupportedEncodingException, IllegalAccessException {
+    public ModelAndView exportMaterialDetail(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException, InvalidFormatException {
 
         projectItemManageService.exportMaterialDetail(request, response, natrualkeys);
 

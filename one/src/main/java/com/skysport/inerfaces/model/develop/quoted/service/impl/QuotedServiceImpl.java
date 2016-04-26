@@ -4,6 +4,7 @@ import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.DateUtils;
+import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
@@ -13,9 +14,9 @@ import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
 import com.skysport.inerfaces.model.develop.bom.IBomManageService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
-import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -106,7 +107,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      */
     @Override
     public void downloadOffer(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws
-            IOException {
+            IOException, InvalidFormatException {
 
         String year = DateUtils.SINGLETONE.getYyyy();
         List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
@@ -150,7 +151,11 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
         //设置报价中面料的信息
         String bomId = CharConstant.EMPTY;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String now = simpleDateFormat.format(date);
         for (QuotedInfo quotedInfo : quotedInfos) {
+            quotedInfo.setNow(now);
             if (fabricsInfosAll != null && !fabricsInfosAll.isEmpty()) {
                 for (FabricsInfo fabricsInfo : fabricsInfosAll) {
                     if (fabricsInfo.getBomId().equals(quotedInfo.getBomId()) && !bomId.equals(fabricsInfo.getBomId())) {
@@ -175,11 +180,18 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
         String fileName = bomQuoteName.toString();
 
-        //完整文件路径
-        String downLoadPath = ctxPath + File.separator + fileName;
+//        //完整文件路径
+//        String downLoadPath = ctxPath + File.separator + fileName;
+//        //创建文件
+//        QuotedServiceHelper.createFile(fileName, ctxPath, WebConstants.BOM_QUOTED_TITILE, quotedInfos);
+//        //下载文件
+//        UpDownUtils.download(request, response, fileName, downLoadPath);
+
+
+        String resourcePath = WebConstants.RESOURCE_PATH_QUOTE;
         //创建文件
-        QuotedServiceHelper.createFile(fileName, ctxPath, WebConstants.BOM_QUOTED_TITILE, quotedInfos);
-        //下载文件
+        String downLoadPath = ExcelCreateUtils.getInstance().create(quotedInfos, "items", fileName, ctxPath, resourcePath);
+        //下载
         UpDownUtils.download(request, response, fileName, downLoadPath);
 
     }

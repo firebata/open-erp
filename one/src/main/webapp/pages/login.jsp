@@ -9,8 +9,7 @@
     <meta name="keywords" content="翊凯供应链"/>
     <meta name="description" content="翊凯供应链系统登录页面"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="zhangjh">
     <!-- CSS -->
     <link rel="shortcut icon" href="<%=path%>/resources/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/bootstrap.css"/>

@@ -160,7 +160,6 @@
 
         <result column="unitId" property="unitId"/>
         <result column="unitAmount" property="unitAmount"/>
-        <result column="orderCount" property="orderCount"/>
         <result column="attritionRate" property="attritionRate"/>
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalAmount" property="totalAmount"/>
@@ -201,7 +200,6 @@
         c.attrition_rate AS attritionRate,
         c.unit_price AS unitPrice,
         c.color_price AS colorPrice,
-        c.color_amount AS colorAmount,
         c.total_amount AS totalAmount,
         c.total_price AS totalPrice
     FROM
@@ -258,10 +256,9 @@
             d.color_amount AS colorAmount
         FROM
             t_kf_packaging a
-            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
-            INNER JOIN t_kf_fabrics_detail b  ON a.fabrics_id = b.fabrics_id
-            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = d.material_id
-            INNER JOIN t_kf_material_spinfo d ON b.fabrics_id = c.material_id
+            INNER  JOIN  t_kf_bom_material k ON   a.packaging_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
+            INNER JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
             INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
     </select>
 </mapper>

@@ -198,4 +198,11 @@ public interface WebConstants extends TableNameConstants {
 
     //参考工厂报价
     String QUOTE_REFERENCE_YES = "1";
+
+
+    //excel模板路径
+    String RESOURCE_PATH_PI ="conf/templates/pi-20160316.xlsx";//成衣生产指示单模板
+    String RESOURCE_PATH_BOM="conf/templates/bom-20160426.xlsx";//bom物料清单模板
+    String RESOURCE_PATH_QUOTE="conf/templates/quote-20160426.xlsx";//报价模板
+
 }
