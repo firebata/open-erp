@@ -56,8 +56,6 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
     @Override
     public QuotedInfo updateOrAdd(QuotedInfo quotedInfo) {
 
-        DecimalFormat df = new DecimalFormat("0.0000");
-
         //计算报价:欧元价+包装费+C% .Remark:150527 2015年度新开发项目 - 价格分析.xlsx
         //%C= (欧元价+包装费) * 0.05 （0.05是佣金）
         //所以报价=(欧元价+包装费) * 1.05
@@ -68,6 +66,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
         BigDecimal commission, quotedPrice;
         if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getLpPrice()) {
+            DecimalFormat df = new DecimalFormat("0.0000");
             commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(commissionValue));
             quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
             quotedInfo.setCommission(new BigDecimal(df.format(commission)));
@@ -76,18 +75,20 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
+        //查询项目和子项目id
+        QuotedInfo quotedInfo2 = quotedInfoMapper.queryIds(quotedInfo.getBomId());
+        quotedInfo.setProjectId(quotedInfo2.getProjectId());
+        quotedInfo.setProjectItemId(quotedInfo2.getProjectItemId());
+        quotedInfo.setProjectName(quotedInfo2.getProjectName());
+        quotedInfo.setProjectItemName(quotedInfo2.getProjectItemName());
+        quotedInfo.setBomName(quotedInfo2.getBomName());
+        quotedInfo.setSpName(quotedInfo2.getSpName());
         if (null == quotedInfoInDB) {
             if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getFactoryOffer()) {
-                //查询项目和子项目id
-                QuotedInfo quotedInfo2 = quotedInfoMapper.queryIds(quotedInfo.getBomId());
-                quotedInfo.setProjectId(quotedInfo2.getProjectId());
-                quotedInfo.setProjectItemId(quotedInfo2.getProjectItemId());
                 quotedInfoMapper.add(quotedInfo);
 //            }
             }
         } else {
-            quotedInfo.setProjectId(quotedInfoInDB.getProjectId());
-            quotedInfo.setProjectItemId(quotedInfoInDB.getProjectItemId());
             quotedInfoMapper.updateInfo(quotedInfo);
         }
         return quotedInfo;

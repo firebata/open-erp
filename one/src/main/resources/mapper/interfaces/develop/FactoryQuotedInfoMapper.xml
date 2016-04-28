@@ -65,7 +65,7 @@
         </if>
     </select>
 
-    <select id="searchInfos" resultType="BomInfo">
+    <select id="searchInfos" resultType="FactoryQuoteInfo">
         SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_factory_quote a,t_kf_bominfo b
@@ -84,7 +84,7 @@
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
     </select>
 
-    <select id="queryProjectAndBomInfoByFactoryQuoteId" resultType="KfProductionInstructionEntity">
+    <select id="queryProjectAndFactoryQuoteInfoByFactoryQuoteId" resultType="KfProductionInstructionEntity">
         SELECT
             a.project_name AS projectItemName,
             b.bom_name AS bomName,

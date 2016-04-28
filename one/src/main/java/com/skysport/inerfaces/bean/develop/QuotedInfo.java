@@ -11,21 +11,23 @@ public class QuotedInfo {
     private int id;
 
     private String projectId;
-
+    private String projectName;
     private String projectItemId;
+    private String projectItemName;
 
     private String approveStatus;
     /**
      *
      */
     private String bomId;
+    private String bomName;
 
     private String spId;
-
+    private String spName;
     private String mainFabricIds;
 
     private String now;
-
+    private Integer step;
     /**
      *
      */
@@ -266,6 +268,46 @@ public class QuotedInfo {
 
     public void setFabricId(String fabricId) {
         this.fabricId = fabricId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectItemName() {
+        return projectItemName;
+    }
+
+    public void setProjectItemName(String projectItemName) {
+        this.projectItemName = projectItemName;
+    }
+
+    public String getBomName() {
+        return bomName;
+    }
+
+    public void setBomName(String bomName) {
+        this.bomName = bomName;
+    }
+
+    public String getSpName() {
+        return spName;
+    }
+
+    public void setSpName(String spName) {
+        this.spName = spName;
+    }
+
+    public Integer getStep() {
+        return step;
+    }
+
+    public void setStep(Integer step) {
+        this.step = step;
     }
 
     @Override

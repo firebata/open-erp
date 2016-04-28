@@ -264,8 +264,7 @@
         //var natrualkey = $("#natrualkey").val();
         $.initBomDesc(function (_data) {
 
-            //初始化报价信息
-            $.iniBomQuotedInfo(_data.quotedInfo);
+
 
             //初始化面料
             $.initFabric(_data.fabrics);
@@ -281,6 +280,8 @@
 
             $.initProductinst(_data);
 
+            //初始化报价信息
+            $.iniBomQuotedInfo(_data.quotedInfo);
 
         });
 

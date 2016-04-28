@@ -47,7 +47,6 @@
         a.remark AS remark,
         b.project_name AS projectName,
 		a.approve_status AS approveStatus
-
     </sql>
 
     <sql id="searchInfoSql3">
@@ -92,8 +91,10 @@
 
 
     <select id="listFilteredInfosCounts" resultType="Integer">
-        SELECT COUNT(*) FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c
-        WHERE a.del_flag=0 AND c.project_id=b.project_id AND a.bom_id = c.bom_id AND b.del_flag=0
+        SELECT COUNT(*) FROM
+        t_kf_bominfo a
+        INNER JOIN  t_kf_project_item_bom c ON a.bom_id = c.bom_id  AND a.del_flag=0
+        INNER JOIN    t_kf_project_item b ON c.project_id=b.project_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
             AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>
@@ -113,8 +114,10 @@
     <select id="searchInfos" resultType="BomInfo">
         SELECT
         <include refid="searchInfoSql2"/>
-        FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c
-        WHERE a.del_flag=0 AND c.project_id=b.project_id AND a.bom_id = c.bom_id AND b.del_flag=0
+        FROM
+        t_kf_bominfo a
+        INNER JOIN  t_kf_project_item_bom c ON a.bom_id = c.bom_id  AND a.del_flag=0
+        INNER JOIN    t_kf_project_item b ON c.project_id=b.project_id AND b.del_flag=0
         <if test="bomInfo.projectId !=null and bomInfo.projectId != ''">
             AND a.project_id LIKE concat('%',#{bomInfo.projectId},'%')
         </if>

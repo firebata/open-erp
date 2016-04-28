@@ -4,43 +4,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skysport.inerfaces.mapper.develop.QuotedInfoMapper">
     <sql id="searchInfoSql">
-		a.id AS id,
-		a.project_id As projectId,
-		a.project_item_id AS projectItemId,
-		a.bom_id AS bomId,
-		a.sp_id AS spId,
-		a.main_fabric_ids AS fabricId,
-		a.main_fabric_ids AS mainFabricIds,
-		a.main_fabric_descs AS mainFabricDescs,
-		a.euro_exchange_rates AS euroExchangeRates,
-		a.factory_offer AS factoryOffer,
-		a.factory_margins AS factoryMargins,
-		a.exchange_costs AS exchangeCosts,
-		a.rates AS rates,
-		a.euro_price AS euroPrice,
-		a.lp_price AS lpPrice,
-		a.commission AS commission,
-		a.quoted_price AS quotedPrice,
-		a.del_flag AS delFlag,
-		a.update_time AS updateTime,
-		a.remark AS remark,
-		a.costing AS costing
+		    a.id AS id,
+		    a.project_id As projectId,
+		    a.project_name As projectName,
+		    a.project_item_id As projectItemId,
+            a.project_item_name AS projectItemName,
+            a.bom_id AS bomId,
+            a.bom_name AS bomName,
+            a.sp_id AS spId,
+            a.sp_name AS spName
+		    a.main_fabric_ids AS fabricId,
+            a.main_fabric_ids AS mainFabricIds,
+            a.main_fabric_descs AS mainFabricDescs,
+             a.factory_offer AS factoryOffer,
+             a.factory_margins AS factoryMargins,
+             a.exchange_costs AS exchangeCosts,
+            a.euro_exchange_rates AS euroExchangeRates,
+            a.rates AS rates,
+            a.step AS step,
+            a.euro_price AS euroPrice,
+            a.lp_price AS lpPrice,
+            a.commission AS commission,
+            a.quoted_price AS quotedPrice,
+            a.del_flag AS delFlag,
+            a.update_time AS updateTime,
+            a.remark AS remark,
+            a.costing AS costing
 	</sql>
 
 
-    <sql id="searchIdsSql">
-        c.parent_project_id As projectId,
-        c.project_id AS projectItemId,
-        b.bom_id AS bomId
-    </sql>
-
     <select id="queryIds" resultType="QuotedInfo">
-        SELECT
-            m.parent_project_id As projectId,
+         SELECT
+            m.parent_project_id AS projectId,
+            n.project_name AS projectName,
             m.project_id AS projectItemId,
-            b.bom_id AS bomId
-        FROM t_kf_bominfo b,t_kf_project_item c ,t_kf_project_item_bom f,t_kf_project_item_project m
-        where b.bom_id =#{bomId} and b.del_flag=0 and b.bom_id = f.bom_id and f.project_id = c.project_id and c.project_id = m.project_id
+            c.project_name AS projectItemName,
+            b.bom_id AS bomId,
+            b.bom_name AS bomName,
+            k.sp_name AS spName
+        FROM
+            t_kf_bominfo b
+        INNER JOIN t_kf_project_item_bom f ON b.bom_id = f.bom_id AND b.bom_id =#{bomId}  and b.del_flag=0
+        INNER JOIN t_kf_project_item c ON f.project_id = c.project_id
+        INNER JOIN t_kf_project_item_project m ON c.project_id = m.project_id
+        INNER JOIN t_kf_project n ON m.parent_project_id = n.project_id
+        LEFT JOIN t_jc_supplier k ON k.sp_id = #{spId}
     </select>
 
     <select id="queryInfo" resultType="QuotedInfo">
@@ -50,58 +58,54 @@
         where a.bom_id = #{bomId}
     </select>
 
-    <select id="listInfosCounts" resultType="Integer">
-
-    </select>
-
-    <select id="listFilteredInfosCounts" resultType="Integer">
-
-
-    </select>
 
     <select id="queryListByProjectItemIds" resultType="QuotedInfo">
         SELECT
-        a.id AS id,
-        d.project_name As projectId,
-        c.project_name AS projectItemId,
-        b.bom_name AS bomId,
-        f.sp_name AS spId,
-        a.main_fabric_ids AS mainFabricIds,
-        a.main_fabric_descs AS mainFabricDescs,
-        a.euro_exchange_rates AS euroExchangeRates,
-        a.factory_offer AS factoryOffer,
-        a.factory_margins AS factoryMargins,
-        a.exchange_costs AS exchangeCosts,
-        a.rates AS rates,
-        a.euro_price AS euroPrice,
-        a.lp_price AS lpPrice,
-        a.commission AS commission,
-        a.quoted_price AS quotedPrice,
-        a.del_flag AS delFlag,
-        a.update_time AS updateTime,
-        a.remark AS remark,
-        a.costing AS costing
+        <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a
-        INNER JOIN t_kf_project d on d.project_id = a.project_id and d.del_flag=0
-        INNER JOIN t_kf_project_item c on c.project_id=a.project_item_id and c.del_flag=0
-        INNER JOIN t_kf_bominfo b on a.bom_id = b.bom_id and b.del_flag=0 AND a.del_flag=0
-        LEFT JOIN t_jc_supplier f on a.sp_id = f.sp_id
         WHERE a.project_item_id IN
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
 
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+              count(*)
+        FROM t_kf_pre_quote a
+        WHERE a.del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT
+        count(*)
+        FROM t_kf_pre_quote a
+        WHERE a.del_flag=0 and step = #{quotedInfo.step}
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            project_name like concat('%',#{searchValue},'%') or
+            project_item_name like concat('%',#{searchValue},'%') or
+            bom_name like concat('%',#{searchValue},'%') or
+            sp_name like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+
     <select id="searchInfos" resultType="QuotedInfo">
         SELECT
         <include refid="searchInfoSql"/>
-        FROM t_kf_pre_quote a,t_jc_customer b
-        WHERE a.del_flag=0 and a.customer_id = b.customer_id
-        <if test="searchValue!=null and searchValue != ''">
+        FROM t_kf_pre_quote a
+        WHERE a.del_flag=0 and step = #{quotedInfo.step}
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             and (
-            area_name like concat('%',#{searchValue},'%') or
-            area_id like concat('%',#{searchValue},'%') or
-            customer_id like concat('%',#{searchValue},'%') or
+            project_name like concat('%',#{searchValue},'%') or
+            project_item_name like concat('%',#{searchValue},'%') or
+            bom_name like concat('%',#{searchValue},'%') or
+            sp_name like concat('%',#{searchValue},'%') or
             remark like concat('%',#{searchValue},'%')
             )
         </if>
@@ -128,14 +132,18 @@
             a.lp_price =#{lpPrice},
             a.commission =#{commission},
             a.quoted_price =#{quotedPrice},
-            a.costing = #{costing}
+            a.costing = #{costing},
+            project_name =#{projectName},
+            project_item_name =#{projectItemName},
+            bom_name =#{bomName},
+            sp_name =#{spName}
 		WHERE a.bom_id =#{bomId}
 	</update>
 
     <insert id="add">
 		insert into
-		t_kf_pre_quote (project_id,project_item_id,bom_id,sp_id,main_fabric_ids,main_fabric_descs,factory_offer,factory_margins,exchange_costs,euro_exchange_rates,rates,euro_price,lp_price,commission,quoted_price,costing,step,remark)
-		values (#{projectId},#{projectItemId},#{bomId},#{spId},#{fabricId},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
+		t_kf_pre_quote (project_id,project_name,project_item_id,project_item_name,bom_id,bom_name,sp_id,sp_name,main_fabric_ids,main_fabric_descs,factory_offer,factory_margins,exchange_costs,euro_exchange_rates,rates,euro_price,lp_price,commission,quoted_price,costing,step,remark)
+		values (#{projectId},#{projectName},#{projectItemId},#{projectItemName},#{bomId},#{bomName},#{spId},#{spName},#{fabricId},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
 	</insert>
 
     <update id="del">
@@ -143,5 +151,6 @@
 		set  del_flag=1
 		where bom_id =#{bomId}
 	</update>
+
 
 </mapper>
