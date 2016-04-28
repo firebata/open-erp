@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.series.impl;
 
 import com.skysport.inerfaces.bean.info.SeriesInfo;
-import com.skysport.inerfaces.mapper.info.SeriesManageMapper;
+import com.skysport.inerfaces.mapper.info.SeriesMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import javax.annotation.Resource;
 @Service("seriesManageService")
 public class SeriesManageServiceImpl extends CommonServiceImpl<SeriesInfo> implements InitializingBean {
     @Resource(name = "seriesManageDao")
-    private SeriesManageMapper seriesManageMapper;
+    private SeriesMapper seriesMapper;
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = seriesManageMapper;
+        commonDao = seriesMapper;
     }
 }

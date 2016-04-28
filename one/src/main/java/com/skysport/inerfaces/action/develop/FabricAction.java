@@ -4,7 +4,7 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
-import com.skysport.inerfaces.model.develop.bom.IBomManageService;
+import com.skysport.inerfaces.model.develop.bom.IBomService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class FabricAction extends BaseAction<FabricsInfo> {
 
     @Resource(name = "bomManageService")
-    private IBomManageService bomManageService;
+    private IBomService bomManageService;
 
     /**
      * 此方法描述的是：

@@ -9,7 +9,7 @@ import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
 import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
-import com.skysport.inerfaces.mapper.info.AccessoriesManageMapper;
+import com.skysport.inerfaces.mapper.info.AccessoriesMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
@@ -32,8 +32,8 @@ import java.util.List;
 @Service("accessoriesService")
 public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> implements IAccessoriesService, InitializingBean {
 
-    @Resource(name = "accessoriesManageMapper")
-    private AccessoriesManageMapper accessoriesManageMapper;
+    @Resource(name = "accessoriesMapper")
+    private AccessoriesMapper accessoriesMapper;
 
     @Autowired
     private MaterialUnitDosageMapper materialUnitDosageMapper;
@@ -48,7 +48,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = accessoriesManageMapper;
+        commonDao = accessoriesMapper;
     }
 
     /**
@@ -82,7 +82,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 if (StringUtils.isNotBlank(accessoriesId)) {
 
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
-                    accessoriesManageMapper.updateInfo(accessoriesJoinInfo.getAccessoriesInfo());
+                    accessoriesMapper.updateInfo(accessoriesJoinInfo.getAccessoriesInfo());
                     materialUnitDosageMapper.updateDosage(accessoriesJoinInfo.getMaterialUnitDosage());
                     materialSpinfoMapper.updateSp(accessoriesJoinInfo.getMaterialSpInfo());
 
@@ -97,7 +97,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 //                    accessoriesId = kind_name + seqNo;
                     accessoriesId = UuidGeneratorUtils.getNextId();
                     setAccessoriesId(accessoriesJoinInfo, accessoriesId, bomId);
-                    accessoriesManageMapper.add(accessoriesJoinInfo.getAccessoriesInfo());
+                    accessoriesMapper.add(accessoriesJoinInfo.getAccessoriesInfo());
                     //新增面料用量
                     materialUnitDosageMapper.addDosage(accessoriesJoinInfo.getMaterialUnitDosage());
                     //新增面料供应商信息
@@ -107,12 +107,12 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
                 accessoriesRtn.add(accessoriesJoinInfo.getAccessoriesInfo());
 
                 if (null != accessoriesJoinInfo.getAccessoriesInfo().getPositionIds() && !accessoriesJoinInfo.getAccessoriesInfo().getPositionIds().isEmpty()) {
-                    kFMaterialPositionService.addBatch(accessoriesJoinInfo.getAccessoriesInfo().getPositionIds());
+                    kFMaterialPositionService.addBatch(accessoriesJoinInfo.getAccessoriesInfo().getPositionIds(),accessoriesId);
                 }
 
                 //保留物料颜色信息
                 if (null != accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds() && !accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds().isEmpty()) {
-                    kFMaterialPantoneService.addBatch(accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds());
+                    kFMaterialPantoneService.addBatch(accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds(),accessoriesId);
                 }
             }
         }
@@ -122,13 +122,13 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
     @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAccessoriesList(String bomId) {
-        return accessoriesManageMapper.queryAccessoriesList(bomId);
+        return accessoriesMapper.queryAccessoriesList(bomId);
     }
 
     @SystemServiceLog(description = "通过bomid查询辅料信息")
     @Override
     public List<AccessoriesInfo> queryAllAccessoriesByBomId(String bomId) {
-        return accessoriesManageMapper.queryAllAccessoriesByBomId(bomId);
+        return accessoriesMapper.queryAllAccessoriesByBomId(bomId);
     }
 
 //    private String buildKindName(BomInfo bomInfo, AccessoriesJoinInfo accessoriesJoinInfo) {
@@ -167,11 +167,11 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
      */
     private void deleteAccessoriesByIds(List<AccessoriesJoinInfo> accessoriesItems, String bomId) {
 
-        List<String> allAccessoriesIds = accessoriesManageMapper.selectAllAccessoriesId(bomId);
+        List<String> allAccessoriesIds = accessoriesMapper.selectAllAccessoriesId(bomId);
         List<String> needToSaveAccessoriesId = buildNeedSaveAccessoriesId(accessoriesItems);
         allAccessoriesIds.removeAll(needToSaveAccessoriesId);
         if (null != allAccessoriesIds && !allAccessoriesIds.isEmpty()) {
-            accessoriesManageMapper.deleteAccessoriesByIds(allAccessoriesIds);
+            accessoriesMapper.deleteAccessoriesByIds(allAccessoriesIds);
         }
 
 

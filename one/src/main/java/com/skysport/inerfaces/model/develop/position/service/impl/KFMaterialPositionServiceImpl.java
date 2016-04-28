@@ -8,6 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明:
@@ -22,6 +23,11 @@ public class KFMaterialPositionServiceImpl extends CommonServiceImpl<KFMaterialP
     @Override
     public void afterPropertiesSet() throws Exception {
         commonDao = kFMaterialPositionMapper;
+    }
+
+    public void addBatch(List<KFMaterialPosition> infos, String materialId) {
+        super.del(materialId);
+        super.addBatch(infos);
     }
 
 }

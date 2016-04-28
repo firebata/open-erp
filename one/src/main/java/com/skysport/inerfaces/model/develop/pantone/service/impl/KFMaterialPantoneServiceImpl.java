@@ -8,6 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 说明:
@@ -24,6 +25,9 @@ public class KFMaterialPantoneServiceImpl extends CommonServiceImpl<KFMaterialPa
         commonDao = kFMaterialPantoneMapper;
     }
 
-
-
+    @Override
+    public void addBatch(List<KFMaterialPantone> pantoneIds, String natrualKey) {
+        super.del(natrualKey);
+        super.addBatch(pantoneIds);
+    }
 }

@@ -9,8 +9,8 @@ import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
-import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
-import com.skysport.inerfaces.model.develop.project.service.IProjectItemManageService;
+import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
+import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import com.skysport.inerfaces.utils.SeqCreateUtils;
@@ -38,7 +38,7 @@ import java.util.Map;
 public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
     @Resource(name = "projectItemManageService")
-    private IProjectItemManageService projectItemManageService;
+    private IProjectItemService projectItemManageService;
 
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
@@ -122,7 +122,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_ITEM_TABLE_COLUMN, request));
-        ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
+        ProjectBomInfo bomInfo = ProjectHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectItemManageService);
         return resultMap;
@@ -130,7 +130,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
     @Override
     public void turnIdToName(List<ProjectBomInfo> infos) {
-        ProjectManageHelper.SINGLETONE.turnIdToName(infos);
+        ProjectHelper.SINGLETONE.turnIdToName(infos);
     }
 
     /**
@@ -161,7 +161,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @SystemControllerLog(description = "增加子项目")
     public Map<String, Object> add(ProjectBomInfo info) {
 
-        String kind_name = ProjectManageHelper.SINGLETONE.buildKindName(info);
+        String kind_name = ProjectHelper.SINGLETONE.buildKindName(info);
         String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, WebConstants.PROJECT_SEQ_NO_LENGTH);
 
 //        //年份+客户+地域+系列+NNN

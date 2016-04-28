@@ -9,6 +9,7 @@
 		a.project_item_id AS projectItemId,
 		a.bom_id AS bomId,
 		a.sp_id AS spId,
+		a.main_fabric_ids AS fabricId,
 		a.main_fabric_ids AS mainFabricIds,
 		a.main_fabric_descs AS mainFabricDescs,
 		a.euro_exchange_rates AS euroExchangeRates,
@@ -44,7 +45,7 @@
 
     <select id="queryInfo" resultType="QuotedInfo">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a
         where a.bom_id = #{bomId}
     </select>
@@ -61,10 +62,10 @@
     <select id="queryListByProjectItemIds" resultType="QuotedInfo">
         SELECT
         a.id AS id,
-        a.project_id As projectId,
-        a.project_item_id AS projectItemId,
-        a.bom_id AS bomId,
-        a.sp_id AS spId,
+        d.project_name As projectId,
+        c.project_name AS projectItemId,
+        b.bom_name AS bomId,
+        f.sp_name AS spId,
         a.main_fabric_ids AS mainFabricIds,
         a.main_fabric_descs AS mainFabricDescs,
         a.euro_exchange_rates AS euroExchangeRates,
@@ -81,7 +82,11 @@
         a.remark AS remark,
         a.costing AS costing
         FROM t_kf_pre_quote a
-        WHERE  a.del_flag=0 and a.project_item_id IN
+        INNER JOIN t_kf_project d on d.project_id = a.project_id and d.del_flag=0
+        INNER JOIN t_kf_project_item c on c.project_id=a.project_item_id and c.del_flag=0
+        INNER JOIN t_kf_bominfo b on a.bom_id = b.bom_id and b.del_flag=0 AND a.del_flag=0
+        LEFT JOIN t_jc_supplier f on a.sp_id = f.sp_id
+        WHERE a.project_item_id IN
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -89,7 +94,7 @@
 
     <select id="searchInfos" resultType="QuotedInfo">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a,t_jc_customer b
         WHERE a.del_flag=0 and a.customer_id = b.customer_id
         <if test="searchValue!=null and searchValue != ''">
@@ -112,7 +117,7 @@
 		  t_kf_pre_quote a
 		set
             a.sp_id =#{spId},
-            a.main_fabric_ids =#{mainFabricIds},
+            a.main_fabric_ids =#{fabricId},
             a.main_fabric_descs =#{mainFabricDescs},
             a.euro_exchange_rates =#{euroExchangeRates},
             a.factory_offer =#{factoryOffer},
@@ -130,7 +135,7 @@
     <insert id="add">
 		insert into
 		t_kf_pre_quote (project_id,project_item_id,bom_id,sp_id,main_fabric_ids,main_fabric_descs,factory_offer,factory_margins,exchange_costs,euro_exchange_rates,rates,euro_price,lp_price,commission,quoted_price,costing,step,remark)
-		values (#{projectId},#{projectItemId},#{bomId},#{spId},#{mainFabricIds},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
+		values (#{projectId},#{projectItemId},#{bomId},#{spId},#{fabricId},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
 	</insert>
 
     <update id="del">

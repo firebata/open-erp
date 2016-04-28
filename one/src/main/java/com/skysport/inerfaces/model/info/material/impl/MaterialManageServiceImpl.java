@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.inerfaces.bean.develop.MaterialInfo;
-import com.skysport.inerfaces.mapper.info.MaterialManageMapper;
+import com.skysport.inerfaces.mapper.info.MaterialMapper;
 import com.skysport.inerfaces.model.info.material.IMaterialManageService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,17 @@ import java.util.List;
 @Service("materialManageService")
 public class MaterialManageServiceImpl implements IMaterialManageService {
 
-    @Resource(name = "materialManageMapper")
-    private MaterialManageMapper materialManageMapper;
+    @Resource(name = "materialMapper")
+    private MaterialMapper materialMapper;
 
     @Override
     public MaterialInfo saveFabricFun(MaterialInfo info) {
-        return materialManageMapper.saveFabricFun(info);
+        return materialMapper.saveFabricFun(info);
     }
 
     @Override
     public void addBatch(List<MaterialInfo> fabricItems) {
-        materialManageMapper.addBatch(fabricItems);
+        materialMapper.addBatch(fabricItems);
     }
 
     @Override

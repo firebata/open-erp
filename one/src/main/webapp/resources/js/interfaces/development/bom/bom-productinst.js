@@ -10,10 +10,10 @@
 
 
     function initProductinst(_data) {
-        var _productionInstruction =  _data.productionInstruction;
+        var _productionInstruction = _data.productionInstruction;
         if (null != _productionInstruction) {
             Object.keys(_productionInstruction).map(function (key_2) {//遍历工艺单信息
-                if (key_2 != 'clothReceivedDate' && key_2 !='natrualkey') {//避免覆盖上面工厂信息中的clothReceivedDate
+                if (key_2 != 'clothReceivedDate' && key_2 != 'natrualkey' && key_2 != 'spId' && key_2 != 'fabricId') {//避免覆盖上面工厂信息中的clothReceivedDate
                     $("#" + key_2).val(_productionInstruction[key_2]);
                 }
             });
@@ -69,7 +69,7 @@
         productionInstruction.sketchUrlUidUploadFileInfos = sketchUrlUidUploadFileInfos;
         productionInstruction.specificationUrlUidUploadFileInfos = specificationUrlUidUploadFileInfos;
         //
-        return  productionInstruction;
+        return productionInstruction;
 
 
     }
@@ -109,6 +109,5 @@
         return isSubmitAction;
     }
 
-  
 
 }(jQuery));

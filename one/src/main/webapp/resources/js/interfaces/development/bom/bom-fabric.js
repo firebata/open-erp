@@ -36,6 +36,10 @@
         }
     }
 
+    /**
+     *
+     * @returns {Array}
+     */
     function buildFabricItems() {
         var size = $("div[id^=fabricAllInfoId]").length;
         var fabricItems = [];
@@ -93,7 +97,10 @@
         });
     }
 
-
+    /**
+     *
+     * @param fabrics
+     */
     function initFabric(fabrics) {
         for (var index = 0; index < fabrics.length; index++) {
             addFabric(fabrics[index]);
@@ -256,7 +263,10 @@
         }
     };
 
-
+    /**
+     *
+     * @param idNum
+     */
     //删除面料
     function deleteFraicById(idNum) {
         bom.fabricItems.splice(idNum - 1, 1);
@@ -274,6 +284,10 @@
         addFabric(fabricItem);
     }
 
+    /**
+     *
+     * @param idNum
+     */
     var deleteFun = function (idNum) {
         //当前面料id
         var curId = idNum;
@@ -308,12 +322,22 @@
 
     };
 
+    /**
+     *
+     * @param result
+     * @param idNum
+     */
     var doDel = function (result, idNum) {
         if (result) {
             deleteFun(idNum);
         }
     };
 
+    /**
+     *
+     * @param _this
+     * @param idNum
+     */
     var trashFabricSelect = function (_this, idNum) {
         var saveFlag = bom.fabricItems[idNum - 1].saveFlag;
         if (saveFlag == true) {
@@ -327,7 +351,10 @@
 
     };
 
-
+    /**
+     *
+     * @param idNum
+     */
     var saveFabricFun = function (idNum) {
         var formDataStr = $("#fabricFormId" + idNum).serialize();
         saveFabricById(idNum, formDataStr);
@@ -335,7 +362,11 @@
 
     };
 
-
+    /**
+     *
+     * @param idNum
+     * @param formDataStr
+     */
     var saveFabricById = function (idNum, formDataStr) {
         var jsonObj = $.strToJson(formDataStr);
         bom.fabricItems[idNum - 1] = jsonObj;
@@ -400,39 +431,47 @@
         //callback();
     }
 
-    /**
-     * 对选中的结果进行额外处理后显示
-     * @param state
-     * @returns {*}
-     */
-    function formatState(state) {
-        if (!state.id) {
-            return state.text;
-        }
-        var $state = $(
-            '<table><tr><td bgcolor="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>' + state.text + '</td></tr></table>'
-        );
-        return $state;
-    }
 
+    /**
+     *
+     * @param idNum
+     * @param callback
+     */
     var reloadBomSelect = function (idNum, callback) {
         $.sendRestFulAjax(bom_selectURL, null, 'GET', 'json', function (data) {
             _doFabricSuccess_info(data, idNum, callback);
         });
     };
 
+    /**
+     *
+     * @param id
+     * @param callback
+     */
     //第一次初始化下拉列表
     var reloadFabricDetailSelectData = function (id, callback) {
         reloadBomSelect(id, callback);
     };
 
-
+    /**
+     *
+     * @param _data
+     * @param idNum
+     * @param callback
+     * @private
+     */
     //cookie重新赋值，给下拉列表赋值
     var _doFabricSuccess_info = function (_data, idNum, callback) {
         //$.cookie('systemBaseMaps', JSON.stringify(_data));//JSON 数据转化成字符串
         initFabricSelect(_data, idNum, callback);
     };
 
+    /**
+     *
+     * @param _data
+     * @param _idNum
+     * @param callback
+     */
     //给下拉列表赋值
     var initFabricSelect = function (_data, _idNum, callback) {
         var idNum = _idNum;
@@ -799,7 +838,6 @@
                     "unitId": "unitId" + idNum,
                     "positionIds": "positionIds" + idNum,
                     "unitAmount": "unitAmount" + idNum,
-                    "orderCount": "orderCount" + idNum,
                     "attritionRate": "attritionRate" + idNum,
                     "unitPrice": "unitPrice" + idNum,
                     "colorPrice": "colorPrice" + idNum,
@@ -868,7 +906,6 @@
         fabricsInfo.mtId = $("#mtId" + idNum).val();
         fabricsInfo.woblcId = $("#woblcId" + idNum).val();
 
-        fabricsInfo.orderCount = $("#orderCount" + idNum).val();
         fabricsInfo.attritionRate = $("#attritionRate" + idNum).val();
         fabricsInfo.unitPrice = $("#unitPrice" + idNum).val();
         fabricsInfo.colorPrice = $("#colorPrice" + idNum).val();
@@ -946,7 +983,6 @@
         fabricsDetailInfo.fabricId = fabricsInfo.fabricId;
 
         var materialSpInfo = {};//面料用量信息
-        materialSpInfo.orderCount = $("#orderCount" + idNum).val();
         materialSpInfo.attritionRate = $("#attritionRate" + idNum).val();
         materialSpInfo.unitPrice = $("#unitPrice" + idNum).val();
         materialSpInfo.totalAmount = $("#totalAmount" + idNum).val();
@@ -987,10 +1023,19 @@
             reloadSpSelect(_thisVal, idNum, function () {
 
             });
+        } else if (_name == 'isShow') {
+            var idNum = _thisId.substring(6);
+            if (is_show_fabric == _thisVal) {
+                chgFabricId(idNum);
+            }
         }
 
     }
 
+    function chgFabricId(idNum) {
+        var _thisFabricId = $("#fabricId" + idNum).val();
+        $("#fabricId").val(_thisFabricId);
+    }
 
 
     /**

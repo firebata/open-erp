@@ -4,7 +4,7 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.SexColor;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.mapper.info.SexColorManageMapper;
+import com.skysport.inerfaces.mapper.info.SexColorMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import org.apache.commons.lang3.StringUtils;
@@ -22,22 +22,22 @@ import java.util.List;
 @Service("sexColorService")
 public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements ISexColorService, InitializingBean {
 
-    @Resource(name = "sexColorManageMapper")
-    private SexColorManageMapper sexColorManageMapper;
+    @Resource(name = "sexColorMapper")
+    private SexColorMapper sexColorMapper;
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = sexColorManageMapper;
+        commonDao = sexColorMapper;
     }
 
     @Override
     public List<SexColor> searchInfosByProjectId(String projectId) {
-        return sexColorManageMapper.searchInfosByProjectId(projectId);
+        return sexColorMapper.searchInfosByProjectId(projectId);
     }
 
     @Override
     public void updateSexColorByProjectIdAndSexId(SexColor sexColor) {
-        sexColorManageMapper.updateSexColorByProjectIdAndSexId(sexColor);
+        sexColorMapper.updateSexColorByProjectIdAndSexId(sexColor);
     }
 
     /**
@@ -90,12 +90,12 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
     }
 
     private SexColor searchSexColorByProjectIdAndSexId(String projectId, String sexId) {
-        return sexColorManageMapper.searchSexColorByProjectIdAndSexId(projectId, sexId);
+        return sexColorMapper.searchSexColorByProjectIdAndSexId(projectId, sexId);
     }
 
     @Override
     public void delByProjectId(String projectId) {
-        sexColorManageMapper.delByProjectId(projectId);
+        sexColorMapper.delByProjectId(projectId);
     }
 
     @Override

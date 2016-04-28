@@ -2,7 +2,7 @@ package com.skysport.core.model.login.service.impl;
 
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.login.service.IUserService;
-import com.skysport.inerfaces.mapper.permission.UserInfoManageMapper;
+import com.skysport.inerfaces.mapper.permission.UserInfoMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,16 +16,16 @@ import javax.annotation.Resource;
 @Service("userService")
 public class UserServiceImpl implements IUserService {
 
-    @Resource(name = "userInfoManageMapper")
-    private UserInfoManageMapper userInfoManageMapper;
+    @Resource(name = "userInfoMapper")
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public UserInfo queryInfoByUserInfoName(String userName) {
-        return userInfoManageMapper.queryInfoByUserInfoName(userName);
+        return userInfoMapper.queryInfoByUserInfoName(userName);
     }
 
     @Override
     public UserInfo queryInfo(String userId) {
-        return userInfoManageMapper.queryInfo(userId);
+        return userInfoMapper.queryInfo(userId);
     }
 }

@@ -7,7 +7,7 @@ import com.skysport.core.model.login.service.IUserService;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
-import com.skysport.inerfaces.mapper.permission.PermissionManageMapper;
+import com.skysport.inerfaces.mapper.permission.PermissionMapper;
 import com.skysport.inerfaces.model.permission.resource.helper.ResourceInfoHelper;
 import com.skysport.inerfaces.model.permission.resource.service.IResourceInfoService;
 import com.skysport.inerfaces.model.permission.roleinfo.helper.RoleInfoHelper;
@@ -27,8 +27,8 @@ import java.util.List;
 @Service("permissionService")
 public class PermissionServiceImpl implements IPermissionService {
 
-    @Resource(name = "permissionManageMapper")
-    private PermissionManageMapper permissionManageMapper;
+    @Resource(name = "permissionMapper")
+    private PermissionMapper permissionMapper;
 
     @Resource(name = "roleInfoService")
     private IRoleInfoService roleInfoService;
@@ -54,7 +54,7 @@ public class PermissionServiceImpl implements IPermissionService {
         List<RoleInfo> roleInfos = roleInfoService.searchInfos(dataTablesInfo);
         List<RoleUser> roleUsers = null;
         if (!StringUtils.isBlank(userId) && !userId.trim().equals("null")) {
-            roleUsers = permissionManageMapper.queryRoleUsers(userId);
+            roleUsers = permissionMapper.queryRoleUsers(userId);
         }
         List<ZTreeNode> zTreeNodes = RoleInfoHelper.SINGLETONE.buildZTreeNodes(roleInfos, roleUsers);
         return zTreeNodes;
@@ -74,7 +74,7 @@ public class PermissionServiceImpl implements IPermissionService {
 
         List<ResourceRole> resourceRoles = null;
         if (!StringUtils.isBlank(roleId) && !roleId.trim().equals("null")) {
-            resourceRoles = permissionManageMapper.queryResourceRoles(roleId);
+            resourceRoles = permissionMapper.queryResourceRoles(roleId);
         }
 
         List<ZTreeNode> zTreeNodes = ResourceInfoHelper.SINGLETONE.buildZTreeNodes(resourceInfos, resourceRoles);
@@ -107,10 +107,10 @@ public class PermissionServiceImpl implements IPermissionService {
             }
 
             //删除指定用户的所有角色信息
-            permissionManageMapper.delResourceInfoByRoleId(roleId);
+            permissionMapper.delResourceInfoByRoleId(roleId);
 
             //新增分配用户的角色信息
-            permissionManageMapper.addBatchResourceRole(resourceRoles);
+            permissionMapper.addBatchResourceRole(resourceRoles);
 
         }
 
@@ -177,10 +177,10 @@ public class PermissionServiceImpl implements IPermissionService {
             }
 
             //删除指定用户的所有角色信息
-            permissionManageMapper.delRoleInfoByUserId(userId);
+            permissionMapper.delRoleInfoByUserId(userId);
 
             //新增分配用户的角色信息
-            permissionManageMapper.addBatchRoleUser(roleUsers);
+            permissionMapper.addBatchRoleUser(roleUsers);
 
         }
 

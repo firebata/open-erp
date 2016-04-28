@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.info.FabricsManageMapper">
+<mapper namespace="com.skysport.inerfaces.mapper.info.FabricsMapper">
     <sql id="searchInfoSql">
         id AS id,
         fabrics_no AS fabricNo,
@@ -25,94 +25,7 @@
         remark AS remark
     </sql>
 
-    <resultMap id="infosMap" type="FabricsInfo">
-        <result column="fabricId" property="fabricId"/>
-        <result column="fabricNo" property="fabricNo"/>
-        <result column="fabricName" property="fabricName"/>
-        <result column="materialTypeId" property="materialTypeId"/>
-        <result column="classicId" property="classicId"/>
-        <result column="spId" property="spId"/>
-        <result column="yearCode" property="yearCode"/>
-        <result column="productTypeId" property="productTypeId"/>
-        <result column="serialNumber" property="serialNumber"/>
-        <result column="pantoneId" property="pantoneId"/>
-        <result column="positionId" property="positionId"/>
-        <result column="projectId" property="projectId"/>
-        <result column="bomId" property="bomId"/>
 
-        <result column="isShow" property="isShow"/>
-        <result column="compositeClassicId" property="compositeClassicId"/>
-        <result column="compositeProductTypeId" property="compositeProductTypeId"/>
-        <result column="compositePantoneId" property="compositePantoneId"/>
-        <result column="unitId" property="unitId"/>
-        <result column="unitAmount" property="unitAmount"/>
-        <result column="spId" property="spId"/>
-        <result column="orderCount" property="orderCount"/>
-        <result column="attritionRate" property="attritionRate"/>
-        <result column="unitPrice" property="unitPrice"/>
-        <result column="totalAmount" property="totalAmount"/>
-        <result column="totalPrice" property="totalPrice"/>
-
-        <result column="dyeId" property="dyeId"/>
-        <result column="finishId" property="finishId"/>
-        <result column="blcId" property="blcId"/>
-        <result column="momcId" property="momcId"/>
-        <result column="comocId" property="comocId"/>
-        <result column="wvpId" property="wvpId"/>
-        <result column="mtId" property="mtId"/>
-        <result column="woblcId" property="woblcId"/>
-        <result column="specificationId" property="specificationId"/>
-        <result column="compositeSpecificationId" property="compositeSpecificationId"/>
-        <result column="compositeDyeId" property="compositeDyeId"/>
-        <result column="compositeFinishId" property="compositeFinishId"/>
-        <result column="colorPrice" property="colorPrice"/>
-        <result column="colorAmount" property="colorAmount"/>
-        <result column="delFlag" property="delFlag"/>
-        <result column="updateTime" property="updateTime"/>
-        <result column="remark" property="remark"/>
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-    </resultMap>
-
-
-    <resultMap id="infosMap2" type="FabricsInfo">
-        <result column="fabricNo" property="fabricNo"/>
-        <result column="fabricId" property="fabricId"/>
-        <result column="fabricName" property="fabricName"/>
-        <result column="bomName" property="bomName"/>
-        <result column="spId" property="spId"/>
-        <result column="bomId" property="bomId"/>
-        <result column="productTypeId" property="productTypeId"/>
-        <result column="pantoneId" property="pantoneId"/>
-        <result column="unitId" property="unitId"/>
-        <result column="orderCount" property="orderCount"/>
-        <result column="unitAmount" property="unitAmount"/>
-        <result column="totalAmount" property="totalAmount"/>
-        <result column="classicId" property="classicId"/>
-        <result column="productTypeId" property="productTypeId"/>
-        <result column="specificationId" property="specificationId"/>
-        <result column="dyeId" property="dyeId"/>
-        <result column="finishId" property="finishId"/>
-        <result column="blcId" property="blcId"/>
-        <result column="compositeClassicId" property="compositeClassicId"/>
-        <result column="compositePantoneId" property="compositePantoneId"/>
-        <result column="compositeProductTypeId" property="compositeProductTypeId"/>
-        <result column="compositeSpecificationId" property="compositeSpecificationId"/>
-        <result column="compositeDyeId" property="compositeDyeId"/>
-        <result column="compositeFinishId" property="compositeFinishId"/>
-        <result column="momcId" property="momcId"/>
-        <result column="comocId" property="comocId"/>
-        <result column="wvpId" property="wvpId"/>
-        <result column="mtId" property="mtId"/>
-        <result column="woblcId" property="woblcId"/>
-        <result column="isShow" property="isShow"/>
-        <result column="unitPrice" property="unitPrice"/>
-        <result column="totalPrice" property="totalPrice"/>
-        <result column="colorPrice" property="colorPrice"/>
-        <result column="colorAmount" property="colorAmount"/>
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-    </resultMap>
 
     <select id="queryInfo" resultType="FabricsInfo">
         select
@@ -254,60 +167,149 @@
         </if>
     </select>
 
+    <resultMap id="infosMap" type="FabricsInfo">
+        <result column="fabricId" property="fabricId"/>
+        <result column="fabricNo" property="fabricNo"/>
+        <result column="fabricName" property="fabricName"/>
+        <result column="materialTypeId" property="materialTypeId"/>
+        <result column="classicId" property="classicId"/>
+        <result column="spId" property="spId"/>
+        <result column="yearCode" property="yearCode"/>
+        <result column="productTypeId" property="productTypeId"/>
+        <result column="serialNumber" property="serialNumber"/>
+        <result column="pantoneId" property="pantoneId"/>
+        <result column="positionId" property="positionId"/>
+        <result column="projectId" property="projectId"/>
+        <result column="bomId" property="bomId"/>
+
+        <result column="isShow" property="isShow"/>
+        <result column="compositeClassicId" property="compositeClassicId"/>
+        <result column="compositeProductTypeId" property="compositeProductTypeId"/>
+        <result column="compositePantoneId" property="compositePantoneId"/>
+        <result column="unitId" property="unitId"/>
+        <result column="unitAmount" property="unitAmount"/>
+        <result column="spId" property="spId"/>
+        <result column="orderCount" property="orderCount"/>
+        <result column="attritionRate" property="attritionRate"/>
+        <result column="unitPrice" property="unitPrice"/>
+        <result column="totalAmount" property="totalAmount"/>
+        <result column="totalPrice" property="totalPrice"/>
+
+        <result column="dyeId" property="dyeId"/>
+        <result column="finishId" property="finishId"/>
+        <result column="blcId" property="blcId"/>
+        <result column="momcId" property="momcId"/>
+        <result column="comocId" property="comocId"/>
+        <result column="wvpId" property="wvpId"/>
+        <result column="mtId" property="mtId"/>
+        <result column="woblcId" property="woblcId"/>
+        <result column="specificationId" property="specificationId"/>
+        <result column="compositeSpecificationId" property="compositeSpecificationId"/>
+        <result column="compositeDyeId" property="compositeDyeId"/>
+        <result column="compositeFinishId" property="compositeFinishId"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
+        <result column="delFlag" property="delFlag"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="remark" property="remark"/>
+        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+    </resultMap>
+
 
     <select id="queryFabricList" resultMap="infosMap">
-      SELECT
-        a.fabrics_id AS fabricId,
-        a.fabrics_no AS fabricNo,
-        a.fabrics_name AS fabricName,
-        a.material_type_id AS materialTypeId,
-        a.classic_id AS classicId,
-        a.sp_id AS spId,
-        a.year_code AS yearCode,
-        a.product_type_id AS productTypeId,
-        a.serial_number AS serialNumber,
-        a.pantone_id AS pantoneId,
-        a.del_flag AS delFlag,
-        a.remark AS remark,
-        a.update_time AS updateTime,
-        a.position_id AS positionId,
-        a.project_id AS projectId,
-        a.bom_id AS bomId,
-        a.is_show AS isShow,
-        a.composite_classic_id AS compositeClassicId,
-        a.composite_product_type_id AS compositeProductTypeId,
-        a.composite_pantone_id AS compositePantoneId,
-        b.unit_id AS unitId,
-        b.unit_amount AS unitAmount,
-        c.sp_id AS spId,
-        c.order_count AS orderCount,
-        c.attrition_rate AS attritionRate,
-        c.unit_price AS unitPrice,
-        c.color_price AS colorPrice,
-        c.color_amount AS colorAmount,
-        c.total_amount AS totalAmount,
-        c.total_price AS totalPrice,
-        d.dye_id AS dyeId,
-        d.finish_id AS finishId,
-        d.blc_id AS blcId,
-        d.momc_id AS momcId,
-        d.comoc_id AS comocId,
-        d.wvp_id AS wvpId,
-        d.mt_id AS mtId,
-        d.woblc_id AS woblcId,
-        d.specfication_id AS specificationId,
-        d.composite_specfication_id AS compositeSpecificationId,
-		d.composite_dye_id AS compositeDyeId,
-		d.composite_finish_id AS compositeFinishId
-    FROM
-        t_kf_fabrics a
-    INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id
-    LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id
-    LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id
-    LEFT JOIN t_kf_fabrics_detail d ON a.fabrics_id = d.fabrics_id
-    WHERE k.bom_id = #{natrualkey} and a.del_flag=0
-    order by a.name_num ASC
+              SELECT
+                a.fabrics_id AS fabricId,
+                a.fabrics_no AS fabricNo,
+                a.fabrics_name AS fabricName,
+                a.material_type_id AS materialTypeId,
+                a.classic_id AS classicId,
+                a.sp_id AS spId,
+                a.year_code AS yearCode,
+                a.product_type_id AS productTypeId,
+                a.serial_number AS serialNumber,
+                a.pantone_id AS pantoneId,
+                a.del_flag AS delFlag,
+                a.remark AS remark,
+                a.update_time AS updateTime,
+                a.position_id AS positionId,
+                a.project_id AS projectId,
+                a.bom_id AS bomId,
+                a.is_show AS isShow,
+                a.composite_classic_id AS compositeClassicId,
+                a.composite_product_type_id AS compositeProductTypeId,
+                a.composite_pantone_id AS compositePantoneId,
+                b.unit_id AS unitId,
+                b.unit_amount AS unitAmount,
+                c.sp_id AS spId,
+                c.attrition_rate AS attritionRate,
+                c.unit_price AS unitPrice,
+                c.color_price AS colorPrice,
+                c.color_amount AS colorAmount,
+                c.total_amount AS totalAmount,
+                c.total_price AS totalPrice,
+                d.dye_id AS dyeId,
+                d.finish_id AS finishId,
+                d.blc_id AS blcId,
+                d.momc_id AS momcId,
+                d.comoc_id AS comocId,
+                d.wvp_id AS wvpId,
+                d.mt_id AS mtId,
+                d.woblc_id AS woblcId,
+                d.specfication_id AS specificationId,
+                d.composite_specfication_id AS compositeSpecificationId,
+                d.composite_dye_id AS compositeDyeId,
+                d.composite_finish_id AS compositeFinishId,
+                e.bom_name AS bomName,
+                e.offer_amount AS orderCount
+            FROM t_kf_fabrics a
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
+            INNER  JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
+            LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id AND b.del_flag=0
+            LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id AND c.del_flag=0
+            LEFT JOIN t_kf_fabrics_detail d ON a.fabrics_id = d.fabrics_id AND d.del_flag=0
+            order by a.name_num ASC
     </select>
+
+
+    <resultMap id="infosMap2" type="FabricsInfo">
+        <result column="fabricNo" property="fabricNo"/>
+        <result column="fabricId" property="fabricId"/>
+        <result column="fabricName" property="fabricName"/>
+        <result column="bomName" property="bomName"/>
+        <result column="spId" property="spId"/>
+        <result column="bomId" property="bomId"/>
+        <result column="productTypeId" property="productTypeId"/>
+        <result column="pantoneId" property="pantoneId"/>
+        <result column="unitId" property="unitId"/>
+        <result column="orderCount" property="orderCount"/>
+        <result column="unitAmount" property="unitAmount"/>
+        <result column="totalAmount" property="totalAmount"/>
+        <result column="classicId" property="classicId"/>
+        <result column="productTypeId" property="productTypeId"/>
+        <result column="specificationId" property="specificationId"/>
+        <result column="dyeId" property="dyeId"/>
+        <result column="finishId" property="finishId"/>
+        <result column="blcId" property="blcId"/>
+        <result column="compositeClassicId" property="compositeClassicId"/>
+        <result column="compositePantoneId" property="compositePantoneId"/>
+        <result column="compositeProductTypeId" property="compositeProductTypeId"/>
+        <result column="compositeSpecificationId" property="compositeSpecificationId"/>
+        <result column="compositeDyeId" property="compositeDyeId"/>
+        <result column="compositeFinishId" property="compositeFinishId"/>
+        <result column="momcId" property="momcId"/>
+        <result column="comocId" property="comocId"/>
+        <result column="wvpId" property="wvpId"/>
+        <result column="mtId" property="mtId"/>
+        <result column="woblcId" property="woblcId"/>
+        <result column="isShow" property="isShow"/>
+        <result column="unitPrice" property="unitPrice"/>
+        <result column="totalPrice" property="totalPrice"/>
+        <result column="colorPrice" property="colorPrice"/>
+        <result column="colorAmount" property="colorAmount"/>
+        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+    </resultMap>
 
     <select id="queryAllFabricByBomId"  resultMap="infosMap2">
            SELECT
@@ -324,7 +326,7 @@
                 a.bom_id AS bomId,
                 a.product_type_id AS productTypeId,
                 a.pantone_id AS pantoneId,
-                 b.specfication_id AS specificationId,
+                b.specfication_id AS specificationId,
                 b.dye_id AS dyeId,
                 b.finish_id AS finishId,
                 b.blc_id AS blcId,
@@ -345,13 +347,12 @@
                 d.color_amount AS colorAmount,
                 e.bom_name AS bomName,
                 e.offer_amount AS orderCount
-            FROM
-                t_kf_fabrics a
+            FROM t_kf_fabrics a
             INNER JOIN t_kf_bom_material k ON a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
             INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id
             INNER JOIN t_kf_fabrics_detail b ON a.fabrics_id = b.fabrics_id
-            INNER JOIN t_kf_material_unit_dosage c ON b.fabrics_id = c.material_id
-            INNER JOIN t_kf_material_spinfo d ON c.material_id = d.material_id
+            LEFT JOIN t_kf_material_unit_dosage c ON b.fabrics_id = c.material_id
+            LEFT JOIN t_kf_material_spinfo d ON c.material_id = d.material_id
     </select>
 
 

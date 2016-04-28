@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.permission.sidebar.impl;
 import com.skysport.core.bean.permission.Menu;
 import com.skysport.core.bean.permission.ResourceInfo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.mapper.permission.SidebarManageMapper;
+import com.skysport.inerfaces.mapper.permission.SidebarMapper;
 import com.skysport.inerfaces.model.permission.sidebar.ISidebarService;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,8 @@ import java.util.Map;
  */
 @Service("sidebarService")
 public class SidebarServiceImpl implements ISidebarService {
-    @Resource(name = "sidebarManageMapper")
-    private SidebarManageMapper sidebarManageMapper;
+    @Resource(name = "sidebarMapper")
+    private SidebarMapper sidebarMapper;
 
 
     /**
@@ -32,16 +32,16 @@ public class SidebarServiceImpl implements ISidebarService {
         params.put("type", WebConstants.RESOURCE_TYPE_MENU);
         params.put("pid", WebConstants.MENU_LEVEL_TOP_ID);
         params.put("userId", userId);
-        return sidebarManageMapper.selectAllResourceByUserId(params);
+        return sidebarMapper.selectAllResourceByUserId(params);
     }
 
     @Override
     public List<Menu> selectMenu(String resourceId) {
-        return sidebarManageMapper.selectMenu(resourceId);
+        return sidebarMapper.selectMenu(resourceId);
     }
 
     @Override
     public List<ResourceInfo> selectAdminResource() {
-        return sidebarManageMapper.selectAdminResource();
+        return sidebarMapper.selectAdminResource();
     }
 }

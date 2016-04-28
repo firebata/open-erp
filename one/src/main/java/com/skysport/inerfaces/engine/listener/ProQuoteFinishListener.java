@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.engine.listener;
 
-import com.skysport.inerfaces.model.develop.bom.IBomManageService;
+import com.skysport.inerfaces.model.develop.bom.IBomService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ProQuoteFinishListener implements JavaDelegate {
 
     @Resource(name = "bomManageService")
-    private IBomManageService bomManageService;
+    private IBomService bomManageService;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {

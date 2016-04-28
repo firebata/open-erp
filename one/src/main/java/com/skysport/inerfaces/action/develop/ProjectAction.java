@@ -9,8 +9,8 @@ import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
-import com.skysport.inerfaces.model.develop.project.helper.ProjectManageHelper;
-import com.skysport.inerfaces.model.develop.project.service.IProjectManageService;
+import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
+import com.skysport.inerfaces.model.develop.project.service.IProjectService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
@@ -35,7 +35,7 @@ import java.util.Map;
 public class ProjectAction extends BaseAction<ProjectInfo> {
 
     @Resource(name = "projectManageService")
-    private IProjectManageService projectManageService;
+    private IProjectService projectManageService;
 
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
@@ -89,7 +89,7 @@ public class ProjectAction extends BaseAction<ProjectInfo> {
         //组件queryFory的参数
         ProjectQueryForm queryForm = new ProjectQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLUMN, request));
-        ProjectBomInfo bomInfo = ProjectManageHelper.SINGLETONE.getProjectBomInfo(request);
+        ProjectBomInfo bomInfo = ProjectHelper.SINGLETONE.getProjectBomInfo(request);
         queryForm.setProjectBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, projectManageService);
         return resultMap;
@@ -98,7 +98,7 @@ public class ProjectAction extends BaseAction<ProjectInfo> {
 
     @Override
     public void turnIdToName(List<ProjectInfo> infos) {
-        ProjectManageHelper.SINGLETONE.turnIdToNameInPorject(infos);
+        ProjectHelper.SINGLETONE.turnIdToNameInPorject(infos);
     }
 
 

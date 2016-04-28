@@ -88,8 +88,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<MaterialOfMembra
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "编辑膜或涂层的材质信息")
-    public Map<String, Object> edit(MaterialOfMembraneCoatingInfo areaInfo, HttpServletRequest request,
-                                    HttpServletResponse respones) {
+    public Map<String, Object> edit(MaterialOfMembraneCoatingInfo areaInfo) {
         materialOfMembraneCoatingService.edit(areaInfo);
 
         MaterialOfMembraneCoatingServicHelper.SINGLETONE.refreshSelect();
@@ -106,8 +105,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<MaterialOfMembra
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "增加膜或涂层的材质")
-    public Map<String, Object> add(MaterialOfMembraneCoatingInfo areaInfo, HttpServletRequest request,
-                                   HttpServletResponse reareaonse) {
+    public Map<String, Object> add(MaterialOfMembraneCoatingInfo areaInfo) {
         String currentNo = materialOfMembraneCoatingService.queryCurrentSeqNo();
         //设置ID
         areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.MOMC_INFO, currentNo, incrementNumberService));
@@ -140,7 +138,7 @@ public class MaterialOfMembraneCoatingAction extends BaseAction<MaterialOfMembra
     @RequestMapping(value = "/info/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
     @SystemControllerLog(description = "查询膜或涂层的材质")
-    public MaterialOfMembraneCoatingInfo info(@PathVariable String natrualKey, HttpServletRequest request, HttpServletResponse reareaonse) {
+    public MaterialOfMembraneCoatingInfo info(@PathVariable String natrualKey) {
         MaterialOfMembraneCoatingInfo areaInfo = (MaterialOfMembraneCoatingInfo) materialOfMembraneCoatingService.queryInfoByNatrualKey(natrualKey);
         return areaInfo;
     }

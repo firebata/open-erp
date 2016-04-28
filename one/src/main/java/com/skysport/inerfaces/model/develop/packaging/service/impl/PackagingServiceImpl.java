@@ -8,7 +8,7 @@ import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
 import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
-import com.skysport.inerfaces.mapper.develop.PackagingManageMapper;
+import com.skysport.inerfaces.mapper.develop.PackagingMapper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
@@ -30,8 +30,8 @@ import java.util.List;
  */
 @Service("packagingService")
 public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> implements IPackagingService, InitializingBean {
-    @Resource(name = "packagingManageMapper")
-    private PackagingManageMapper packagingManageMapper;
+    @Resource(name = "packagingMapper")
+    private PackagingMapper packagingMapper;
 
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
@@ -49,7 +49,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = packagingManageMapper;
+        commonDao = packagingMapper;
     }
 
     /**
@@ -79,7 +79,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
                 //有id，更新
                 if (StringUtils.isNotBlank(packagingId)) {
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
-                    packagingManageMapper.updateInfo(packagingJoinInfo.getPackagingInfo());
+                    packagingMapper.updateInfo(packagingJoinInfo.getPackagingInfo());
                     materialUnitDosageMapper.updateDosage(packagingJoinInfo.getMaterialUnitDosage());
                     materialSpinfoMapper.updateSp(packagingJoinInfo.getMaterialSpInfo());
                 }
@@ -93,19 +93,19 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
                     packagingId = UuidGeneratorUtils.getNextId();
                     setPackagingId(packagingJoinInfo, packagingId, bomId);
 
-                    packagingManageMapper.add(packagingJoinInfo.getPackagingInfo());
+                    packagingMapper.add(packagingJoinInfo.getPackagingInfo());
                     //新增包材用量
                     materialUnitDosageMapper.addDosage(packagingJoinInfo.getMaterialUnitDosage());
                     //新增包材供应商信息
                     materialSpinfoMapper.addSp(packagingJoinInfo.getMaterialSpInfo());
                 }
                 if (null != packagingJoinInfo.getPackagingInfo().getPositionIds() && !packagingJoinInfo.getPackagingInfo().getPositionIds().isEmpty()) {
-                    kFMaterialPositionService.addBatch(packagingJoinInfo.getPackagingInfo().getPositionIds());
+                    kFMaterialPositionService.addBatch(packagingJoinInfo.getPackagingInfo().getPositionIds(),packagingId);
                 }
 
                 //保留物料颜色信息
                 if (null != packagingJoinInfo.getPackagingInfo().getPantoneIds() && !packagingJoinInfo.getPackagingInfo().getPantoneIds().isEmpty()) {
-                    kFMaterialPantoneService.addBatch(packagingJoinInfo.getPackagingInfo().getPantoneIds());
+                    kFMaterialPantoneService.addBatch(packagingJoinInfo.getPackagingInfo().getPantoneIds(),packagingId);
                 }
                 packagingsRtn.add(packagingJoinInfo.getPackagingInfo());
             }
@@ -115,12 +115,12 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
 
     @Override
     public List<PackagingInfo> queryPackagingList(String bomId) {
-        return packagingManageMapper.queryPackagingList(bomId);
+        return packagingMapper.queryPackagingList(bomId);
     }
 
     @Override
     public List<PackagingInfo> queryPackagingByBomId(String bomId) {
-        return packagingManageMapper.queryPackagingByBomId(bomId);
+        return packagingMapper.queryPackagingByBomId(bomId);
     }
 
 //    private String buildKindName(BomInfo bomInfo, KFPackagingJoinInfo packagingJoinInfo) {
@@ -149,13 +149,13 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
 
     private void deletePackagingByIds(List<KFPackagingJoinInfo> packagingItems, String bomId) {
 
-        List<String> allPackagingIds = packagingManageMapper.selectAllPackagingId(bomId);
+        List<String> allPackagingIds = packagingMapper.selectAllPackagingId(bomId);
         List<String> needToSavePackagingId = buildNeedSavePackagingId(packagingItems);
 
         allPackagingIds.removeAll(needToSavePackagingId);
 
         if (null != allPackagingIds && !allPackagingIds.isEmpty()) {
-            packagingManageMapper.deletePackagingByIds(allPackagingIds);
+            packagingMapper.deletePackagingByIds(allPackagingIds);
         }
 
 

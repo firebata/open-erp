@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.main_color.impl;
 
 import com.skysport.inerfaces.bean.info.MainColor;
-import com.skysport.inerfaces.mapper.info.MainColorManageMapper;
+import com.skysport.inerfaces.mapper.info.MainColorMapper;
 import com.skysport.inerfaces.model.info.main_color.IMainColorService;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ import java.util.List;
 @Service("mainColorService")
 public class MainColorServiceImpl implements IMainColorService {
 
-//    @Resource(name = "mainColorManageMapper")
-//    private MainColorManageMapper mainColorManageMapper;
+//    @Resource(name = "mainColorMapper")
+//    private MainColorMapper mainColorMapper;
 //
 //    /**
 //     * 根据项目id查询出所有主颜色
@@ -26,7 +26,7 @@ public class MainColorServiceImpl implements IMainColorService {
 //     */
 //    @Override
 //    public List<MainColor> queryMainColorList(String projectId) {
-//        return mainColorManageMapper.queryMainColorList(projectId);
+//        return mainColorMapper.queryMainColorList(projectId);
 //    }
 //
 //    /**
@@ -36,7 +36,7 @@ public class MainColorServiceImpl implements IMainColorService {
 //     */
 //    @Override
 //    public void add(List<MainColor> mainColorList) {
-//        mainColorManageMapper.add(mainColorList);
+//        mainColorMapper.add(mainColorList);
 //    }
 //
 //    /**
@@ -44,7 +44,7 @@ public class MainColorServiceImpl implements IMainColorService {
 //     */
 //    @Override
 //    public void delete(String natrualkey) {
-//        mainColorManageMapper.delete(natrualkey);
+//        mainColorMapper.delete(natrualkey);
 //    }
 
 

@@ -58,7 +58,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     }
 
     @Override
-    public void edit(T t) {
+    public void edit(T t){
         commonDao.updateInfo(t);
     }
 

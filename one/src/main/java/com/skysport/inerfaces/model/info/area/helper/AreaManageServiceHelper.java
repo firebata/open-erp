@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.info.area.helper;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
-import com.skysport.inerfaces.model.info.area.impl.AreaManageServiceImpl;
+import com.skysport.inerfaces.model.info.area.impl.AreaServiceImpl;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public enum AreaManageServiceHelper {
      *
      */
     public void refreshSelect() {
-        AreaManageServiceImpl areaManageService = SpringContextHolder.getBean("areaManageService");
+        AreaServiceImpl areaManageService = SpringContextHolder.getBean("areaManageService");
         List<SelectItem2> areaItems = areaManageService.querySelectList(null);
         SystemBaseInfoCachedMap.SINGLETONE.pushBom("areaItems", areaItems);
         SystemBaseInfoCachedMap.SINGLETONE.pushProject("areaItems", areaItems);

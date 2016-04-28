@@ -25,4 +25,5 @@
     var spe = '<%=WebConstants.SPE%>';
     var environment_current = '<%=environment_current%>';
     var statecode_alive = '<%=WebConstants.STATECODE_ALIVE%>';
+    var is_show_fabric = '<%=WebConstants.IS_SHOW_FABRIC%>'
 </script>

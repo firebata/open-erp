@@ -17,9 +17,10 @@
         var natrualkey = $("#natrualkey").val();
         if (_data != null && natrualkey != '' && natrualkey != 'null') {
             Object.keys(_data).map(function (key) {
-                $('#offerDescDetail input').filter(function () {
-                    return key == this.name;
-                }).val(_data[key]);
+                $("#" + key).val(_data[key]);
+                // $('#offerDescDetail input').filter(function () {
+                //     return key == this.name;
+                // }).val(_data[key]);
                 //$("#" + key).val(_data[key]);
             });
         }
@@ -40,7 +41,8 @@
         bominfo.quotedInfo.euroPrice = $("#euroPrice").val();
         bominfo.quotedInfo.exchangeCosts = $("#exchangeCosts").val();
         bominfo.quotedInfo.bomId = $("#natrualkey").val();
-
+        bominfo.quotedInfo.spId = $("#spId").val();
+        bominfo.quotedInfo.fabricId = $("#fabricId").val();
     }
 
 

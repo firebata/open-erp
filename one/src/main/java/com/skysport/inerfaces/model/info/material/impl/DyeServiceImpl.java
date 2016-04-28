@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.info.DyeInfo;
-import com.skysport.inerfaces.mapper.info.material.DyeManageMapper;
+import com.skysport.inerfaces.mapper.info.material.DyeMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Service("dyeService")
 public class DyeServiceImpl  extends CommonServiceImpl<DyeInfo> implements InitializingBean {
     @Resource(name = "dyeDao")
-    private DyeManageMapper dyeDao;
+    private DyeMapper dyeDao;
 
     @Override
     public void afterPropertiesSet()  {

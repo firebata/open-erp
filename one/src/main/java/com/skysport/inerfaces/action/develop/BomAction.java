@@ -3,11 +3,10 @@ package com.skysport.inerfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
-import com.skysport.inerfaces.model.develop.bom.IBomManageService;
-import com.skysport.inerfaces.model.develop.bom.helper.BomManageHelper;
-import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.model.develop.bom.IBomService;
+import com.skysport.inerfaces.model.develop.bom.helper.BomHelper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -31,10 +30,7 @@ import java.util.Map;
 public class BomAction extends BaseAction<BomInfo> {
 
     @Resource(name = "bomManageService")
-    private IBomManageService bomManageService;
-
-    @Resource(name = "quotedService")
-    private IQuotedService quotedService;
+    private IBomService bomManageService;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -93,7 +89,7 @@ public class BomAction extends BaseAction<BomInfo> {
         //组件queryFory的参数
         BomQueryForm queryForm = new BomQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
-        BomInfo bomInfo = BomManageHelper.getInstance().getProjectBomInfo(request);
+        BomInfo bomInfo = BomHelper.getInstance().getProjectBomInfo(request);
         queryForm.setBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, bomManageService);
         return resultMap;
@@ -103,7 +99,7 @@ public class BomAction extends BaseAction<BomInfo> {
 
     @Override
     public void turnIdToName(List<BomInfo> infos) {
-        BomManageHelper.turnSexIdToName(infos);
+        BomHelper.turnSexIdToName(infos);
     }
 
     /**

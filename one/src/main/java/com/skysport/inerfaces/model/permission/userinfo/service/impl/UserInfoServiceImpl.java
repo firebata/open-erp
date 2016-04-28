@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.permission.userinfo.service.impl;
 
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.inerfaces.mapper.permission.UserInfoManageMapper;
+import com.skysport.inerfaces.mapper.permission.UserInfoMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.permission.userinfo.service.IUserInfoService;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,17 +16,17 @@ import javax.annotation.Resource;
 @Service("userInfoService")
 public class UserInfoServiceImpl extends CommonServiceImpl<UserInfo> implements IUserInfoService, InitializingBean {
 
-    @Resource(name = "userInfoManageMapper")
-    private UserInfoManageMapper userInfoManageMapper;
+    @Resource(name = "userInfoMapper")
+    private UserInfoMapper userInfoMapper;
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = userInfoManageMapper;
+        commonDao = userInfoMapper;
     }
 
     @Override
     public void chgpwd(UserInfo userInfo) {
-        userInfoManageMapper.chgpwd(userInfo);
+        userInfoMapper.chgpwd(userInfo);
     }
 
 

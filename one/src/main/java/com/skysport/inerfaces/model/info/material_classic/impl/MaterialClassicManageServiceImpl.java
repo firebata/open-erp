@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material_classic.impl;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.MaterialClassicInfo;
-import com.skysport.inerfaces.mapper.info.MaterialClassicManageMapper;
+import com.skysport.inerfaces.mapper.info.MaterialClassicMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
 public class MaterialClassicManageServiceImpl extends CommonServiceImpl<MaterialClassicInfo> implements InitializingBean {
 
     @Resource(name = "materialClassicManageDao")
-    private MaterialClassicManageMapper materialClassicManageDao;
+    private MaterialClassicMapper materialClassicManageDao;
 
     @Override
     public void afterPropertiesSet() {

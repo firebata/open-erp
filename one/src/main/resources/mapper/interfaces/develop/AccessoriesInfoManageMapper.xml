@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.info.AccessoriesManageMapper">
+<mapper namespace="com.skysport.inerfaces.mapper.info.AccessoriesMapper">
 
     <sql id="searchInfoSql">
         id AS id,
@@ -173,6 +173,7 @@
         <result column="totalPrice" property="totalPrice"/>
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
+        <result column="bomName" property="bomName"/>
         <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
@@ -204,13 +205,15 @@
             c.total_amount AS totalAmount,
             c.total_price AS totalPrice,
             c.color_price AS colorPrice,
-            c.color_amount AS colorAmount
+            c.color_amount AS colorAmount,
+            e.bom_name AS bomName,
+            e.offer_amount AS orderCount
         FROM
             t_kf_accessories a
-        INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id
+        INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
+        INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
         LEFT JOIN t_kf_material_unit_dosage b ON a.accessories_id = b.material_id
         LEFT JOIN t_kf_material_spinfo c ON a.accessories_id = c.material_id
-        WHERE k.bom_id = #{natrualkey} and a.del_flag=0
         order by a.name_num ASC
     </select>
 
@@ -260,11 +263,11 @@
             d.unit_price AS unitPrice,
             d.total_price AS totalPrice
         FROM
-            t_kf_accessories a
+              t_kf_accessories a
             INNER  JOIN  t_kf_bom_material k ON   a.accessories_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
-            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
-            INNER JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
             INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
+            LEFT JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
+            LEFT JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
     </select>
 
 </mapper>

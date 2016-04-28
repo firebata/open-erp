@@ -20,14 +20,14 @@
 
     <select id="queryIds" resultType="KFMaterialPosition">
         SELECT
-            <include refid="searchIdsSql"/>
+        <include refid="searchIdsSql"/>
         FROM t_kf_material_position a
         WHERE a.material_id =#{materialId} AND del_flag=0
     </select>
 
     <select id="queryInfo" resultType="KFMaterialPosition">
         SELECT
-            <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_kf_material_position a
         WHERE a.material_id = #{materialId}
     </select>
@@ -44,13 +44,13 @@
 	</update>
 
     <insert id="addBatch">
-		INSERT INTO t_kf_material_position (position_id,position_name,material_id,remark)
-		VALUES
+        INSERT INTO t_kf_material_position (position_id,position_name,material_id,remark)
+        VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.positionId},#{item.positionName},#{item.materialId},#{item.remark})
         </foreach>
 
-	</insert>
+    </insert>
 
 
     <insert id="add">
@@ -62,7 +62,7 @@
     <update id="del">
 		UPDATE t_kf_material_position
 		SET  del_flag=1
-		WHERE material_id =#{materialId}
+		WHERE material_id =#{natrualKey}
 	</update>
 
 </mapper>

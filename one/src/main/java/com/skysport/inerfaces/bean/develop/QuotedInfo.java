@@ -80,7 +80,7 @@ public class QuotedInfo {
      * 换汇成本
      */
     private BigDecimal exchangeCosts;
-
+    private String fabricId;
     public String getApproveStatus() {
         return approveStatus;
     }
@@ -258,6 +258,14 @@ public class QuotedInfo {
 
     public void setNow(String now) {
         this.now = now;
+    }
+
+    public String getFabricId() {
+        return fabricId;
+    }
+
+    public void setFabricId(String fabricId) {
+        this.fabricId = fabricId;
     }
 
     @Override

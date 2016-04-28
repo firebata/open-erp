@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.info.service.impl;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.PantoneInfo;
-import com.skysport.inerfaces.mapper.develop.PantoneManageMapper;
+import com.skysport.inerfaces.mapper.develop.PantoneMapper;
 import com.skysport.inerfaces.model.info.service.IPantoneManageService;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Service("pantoneManageService")
 public class PantoneManageServiceImpl implements IPantoneManageService {
     @Resource(name = "pantoneManageDao")
-    private PantoneManageMapper pantoneManageDao;
+    private PantoneMapper pantoneManageDao;
 
     @Override
     public int listPantoneInfosCounts() {

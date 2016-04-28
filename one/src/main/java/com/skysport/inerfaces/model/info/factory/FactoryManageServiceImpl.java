@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.info.factory;
 
 import com.skysport.inerfaces.bean.info.FactoryInfo;
-import com.skysport.inerfaces.mapper.info.FactoryManageMapper;
+import com.skysport.inerfaces.mapper.info.FactoryMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,8 @@ import javax.annotation.Resource;
  */
 @Service("factoryManageService")
 public class FactoryManageServiceImpl extends CommonServiceImpl<FactoryInfo> implements InitializingBean {
-    @Resource(name = "factoryManageMapper")
-    private FactoryManageMapper factoryManageDao;
+    @Resource(name = "factoryMapper")
+    private FactoryMapper factoryManageDao;
 
     @Override
     public void afterPropertiesSet()  {

@@ -62,7 +62,7 @@
     <update id="del">
         UPDATE t_kf_material_pantone
         SET  del_flag=1
-        WHERE material_id =#{materialId}
+        WHERE material_id =#{natrualKey}
     </update>
 
 </mapper>

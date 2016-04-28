@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.permission.resource.service.impl;
 
 import com.skysport.core.bean.permission.ResourceInfo;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.inerfaces.mapper.permission.ResourceInfoManageMapper;
+import com.skysport.inerfaces.mapper.permission.ResourceInfoMapper;
 import com.skysport.inerfaces.model.permission.resource.service.IResourceInfoService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ import javax.annotation.Resource;
 @Service("resourceInfoService")
 public class ResourceInfoServiceImpl extends CommonServiceImpl<ResourceInfo> implements IResourceInfoService, InitializingBean {
 
-    @Resource(name = "resourceInfoManageMapper")
-    private ResourceInfoManageMapper resourceInfoManageMapper;
+    @Resource(name = "resourceInfoMapper")
+    private ResourceInfoMapper resourceInfoMapper;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = resourceInfoManageMapper;
+        commonDao = resourceInfoMapper;
     }
 
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.develop.PackagingManageMapper">
+<mapper namespace="com.skysport.inerfaces.mapper.develop.PackagingMapper">
 
     <sql id="searchInfoSql">
         id AS id,
@@ -150,6 +150,8 @@
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
 
+        <result column="bomName" property="bomName"/>
+        <result column="orderCount" property="orderCount"/>
         <result column="techRequired" property="techRequired"/>
         <result column="length" property="length"/>
         <result column="width" property="width"/>
@@ -200,13 +202,17 @@
         c.attrition_rate AS attritionRate,
         c.unit_price AS unitPrice,
         c.color_price AS colorPrice,
+        c.color_amount AS colorAmount,
         c.total_amount AS totalAmount,
-        c.total_price AS totalPrice
+        c.total_price AS totalPrice,
+        e.bom_name AS bomName,
+        e.offer_amount AS orderCount
     FROM
         t_kf_packaging a
+    INNER  JOIN  t_kf_bom_material k ON   a.packaging_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
+    INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
     LEFT JOIN t_kf_material_unit_dosage b ON a.packaging_id = b.material_id
     LEFT JOIN t_kf_material_spinfo c ON a.packaging_id = c.material_id
-    WHERE a.bom_id = #{natrualkey} and a.del_flag=0
     order by a.name_num ASC
     </select>
 
@@ -243,7 +249,6 @@
             a.product_type_id AS productTypeId,
             a.pantone_id AS pantoneId,
             c.unit_id AS unitId,
-            d.order_count AS orderCount,
             c.unit_amount AS unitAmount,
             d.total_amount AS totalAmount ,
             a.classic_id AS classicId,
@@ -253,12 +258,13 @@
             d.unit_price AS unitPrice,
             d.total_price AS totalPrice,
             d.color_price AS colorPrice,
-            d.color_amount AS colorAmount
+            d.color_amount AS colorAmount,
+            e.offer_amount AS orderCount
         FROM
             t_kf_packaging a
             INNER  JOIN  t_kf_bom_material k ON   a.packaging_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
-            INNER JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
-            INNER JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
             INNER JOIN t_kf_bominfo e on k.bom_id = e.bom_id
+            LEFT JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
+            LEFT JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
     </select>
 </mapper>

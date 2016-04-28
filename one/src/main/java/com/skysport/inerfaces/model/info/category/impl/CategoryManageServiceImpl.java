@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.category.impl;
 
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.CategoryInfo;
-import com.skysport.inerfaces.mapper.info.CategoryManageMapper;
+import com.skysport.inerfaces.mapper.info.CategoryMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.model.info.category.ICategoryManageService;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,23 +16,23 @@ import java.util.List;
  */
 @Service("categoryManageService")
 public class CategoryManageServiceImpl extends CommonServiceImpl<CategoryInfo> implements ICategoryManageService, InitializingBean {
-    @Resource(name = "categoryManageMapper")
-    private CategoryManageMapper categoryManageMapper;
+    @Resource(name = "categoryMapper")
+    private CategoryMapper categoryMapper;
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = categoryManageMapper;
+        commonDao = categoryMapper;
     }
 
 
     @Override
     public List<SelectItem2> querySelectListByLevelId(String levelId) {
-        return categoryManageMapper.querySelectListByLevelId(levelId);
+        return categoryMapper.querySelectListByLevelId(levelId);
     }
 
     @Override
     public List<CategoryInfo> searchChildCategoryByCategoryId(String categoryId) {
-        return categoryManageMapper.searchChildCategoryByCategoryId(categoryId);
+        return categoryMapper.searchChildCategoryByCategoryId(categoryId);
     }
 
 

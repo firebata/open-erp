@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.info.sp.service.impl;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.info.SpInfo;
-import com.skysport.inerfaces.mapper.info.SpManageMapper;
+import com.skysport.inerfaces.mapper.info.SpMapper;
 import com.skysport.inerfaces.model.info.sp.service.ISpManageService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ import java.util.List;
 public class SpManageServiceImpl implements ISpManageService {
 
     @Autowired
-    private SpManageMapper spManageMapper;
+    private SpMapper spMapper;
 
     /**
      * 查询spinfo的总记录数
      */
     @Override
     public int listSPInfosCounts() {
-        return spManageMapper.listSPInfosCounts();
+        return spMapper.listSPInfosCounts();
     }
 
     /**
@@ -44,7 +44,7 @@ public class SpManageServiceImpl implements ISpManageService {
         // // 数据长度
         // int length = dataTablesInfo.getLength();
 
-        return spManageMapper.listFilteredSPInfosCounts(dataTablesInfo);
+        return spMapper.listFilteredSPInfosCounts(dataTablesInfo);
     }
 
     /**
@@ -52,7 +52,7 @@ public class SpManageServiceImpl implements ISpManageService {
      */
     @Override
     public List<SpInfo> searchSP(DataTablesInfo dataTablesInfo) {
-        return spManageMapper.searchSP(dataTablesInfo);
+        return spMapper.searchSP(dataTablesInfo);
     }
 
     /**
@@ -60,27 +60,27 @@ public class SpManageServiceImpl implements ISpManageService {
      */
     @Override
     public void edit(SpInfo spInfo) {
-        spManageMapper.updateSp(spInfo);
+        spMapper.updateSp(spInfo);
     }
 
     @Override
     public SpInfo querySpInfoBySpId(@Param(value = "spId") String spId) {
-        return spManageMapper.querySpInfo(spId);
+        return spMapper.querySpInfo(spId);
     }
 
     @Override
     public void add(SpInfo spInfo) {
-        spManageMapper.add(spInfo);
+        spMapper.add(spInfo);
     }
 
     @Override
     public void del(String spId) {
-        spManageMapper.del(spId);
+        spMapper.del(spId);
     }
 
     @Override
     public List<SelectItem2> querySelectList(String name) {
-        return spManageMapper.querySelectList(name);
+        return spMapper.querySelectList(name);
     }
 
 

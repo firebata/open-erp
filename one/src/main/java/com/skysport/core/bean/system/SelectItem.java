@@ -36,4 +36,5 @@ public abstract class SelectItem implements CommonVo, Cloneable, Serializable {
         this.natrualkey = natrualkey;
         this.name = name;
     }
+
 }
