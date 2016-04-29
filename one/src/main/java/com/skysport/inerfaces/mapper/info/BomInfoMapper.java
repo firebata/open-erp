@@ -3,6 +3,8 @@ package com.skysport.inerfaces.mapper.info;
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
+import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,13 +20,9 @@ public interface BomInfoMapper extends CommonDao<BomInfo> {
 
     List<BomInfo> searchInfos(BomQueryForm bomQueryForm);
 
-    void delByProjectId(String projectId);
-
-    List<String> queryBomIds(List<String> projectItemIds);
 
     List<BomInfo> selectAllBomSexAndMainColor(String projectId);
 
-    void delBomNotInThisIds(List<String> tempStyles);
 
     void delBomInThisIds(List<BomInfo> needDelBomList);
 
@@ -32,6 +30,7 @@ public interface BomInfoMapper extends CommonDao<BomInfo> {
 
     List<String> queryAllBomIdsByProjectId(String projectId);
 
-    List<String> queryBomIdsNeedLapdipByProjectId(String projectId);
+    ProjectPojectItemBomSpVo queryIds(@Param(value = "bomId") String bomId, @Param(value = "spId") String spId);
+
 }
 

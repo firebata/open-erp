@@ -39,18 +39,11 @@
         SELECT
             <include refid="searcProductionInstractionInfoSql"/>
         FROM
-        t_kf_production_instruction a,
-        t_kf_bom_material b,
-        t_kf_bominfo c,
-        t_kf_project_item_bom f,
-        t_kf_project_item d
-        WHERE
-        a.uid = b.material_id
-        AND a.del_flag = 0
-        AND b.bom_id = c.bom_id
-        AND c.bom_id = f.bom_id
-        AND f.project_id = d.project_id
-        AND b.bom_id =  #{bom_id}
+        t_kf_production_instruction a
+        INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0  AND b.bom_id =  #{bom_id}
+        INNER  JOIN   t_kf_bominfo c ON b.bom_id = c.bom_id AND c.del_flag = 0
+        INNER  JOIN   t_kf_project_item_bom f  ON c.bom_id = f.bom_id
+        INNER  JOIN   t_kf_project_item d ON f.project_id = d.project_id AND d.del_flag = 0
     </select>
 
 

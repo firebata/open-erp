@@ -12,13 +12,13 @@
             a.bom_id AS bomId,
             a.bom_name AS bomName,
             a.sp_id AS spId,
-            a.sp_name AS spName
+            a.sp_name AS spName,
 		    a.main_fabric_ids AS fabricId,
             a.main_fabric_ids AS mainFabricIds,
             a.main_fabric_descs AS mainFabricDescs,
-             a.factory_offer AS factoryOffer,
-             a.factory_margins AS factoryMargins,
-             a.exchange_costs AS exchangeCosts,
+            a.factory_offer AS factoryOffer,
+            a.factory_margins AS factoryMargins,
+            a.exchange_costs AS exchangeCosts,
             a.euro_exchange_rates AS euroExchangeRates,
             a.rates AS rates,
             a.step AS step,
@@ -33,29 +33,11 @@
 	</sql>
 
 
-    <select id="queryIds" resultType="QuotedInfo">
-         SELECT
-            m.parent_project_id AS projectId,
-            n.project_name AS projectName,
-            m.project_id AS projectItemId,
-            c.project_name AS projectItemName,
-            b.bom_id AS bomId,
-            b.bom_name AS bomName,
-            k.sp_name AS spName
-        FROM
-            t_kf_bominfo b
-        INNER JOIN t_kf_project_item_bom f ON b.bom_id = f.bom_id AND b.bom_id =#{bomId}  and b.del_flag=0
-        INNER JOIN t_kf_project_item c ON f.project_id = c.project_id
-        INNER JOIN t_kf_project_item_project m ON c.project_id = m.project_id
-        INNER JOIN t_kf_project n ON m.parent_project_id = n.project_id
-        LEFT JOIN t_jc_supplier k ON k.sp_id = #{spId}
-    </select>
-
     <select id="queryInfo" resultType="QuotedInfo">
         SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a
-        where a.bom_id = #{bomId}
+        where a.del_flag=0 and a.bom_id = #{bomId} limit 1
     </select>
 
 
@@ -63,8 +45,8 @@
         SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a
-        WHERE a.project_item_id IN
-        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        WHERE a.del_flag=0 and step = #{step} and a.project_item_id IN
+        <foreach item="item" index="index" collection="itemIds" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
@@ -81,14 +63,14 @@
         SELECT
         count(*)
         FROM t_kf_pre_quote a
-        WHERE a.del_flag=0 and step = #{quotedInfo.step}
+        WHERE a.del_flag=0 and step = #{quoteInfo.step}
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             and (
-            project_name like concat('%',#{searchValue},'%') or
-            project_item_name like concat('%',#{searchValue},'%') or
-            bom_name like concat('%',#{searchValue},'%') or
-            sp_name like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            project_item_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            sp_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
 
@@ -99,20 +81,20 @@
         SELECT
         <include refid="searchInfoSql"/>
         FROM t_kf_pre_quote a
-        WHERE a.del_flag=0 and step = #{quotedInfo.step}
+        WHERE a.del_flag=0 and step = #{quoteInfo.step}
         <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
             and (
-            project_name like concat('%',#{searchValue},'%') or
-            project_item_name like concat('%',#{searchValue},'%') or
-            bom_name like concat('%',#{searchValue},'%') or
-            sp_name like concat('%',#{searchValue},'%') or
-            remark like concat('%',#{searchValue},'%')
+            project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            project_item_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            sp_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            remark like concat('%',#{dataTablesInfo.searchValue},'%')
             )
         </if>
-        <if test="orderColumn!=null and orderColumn != ''">
-            ORDER BY ${orderColumn} ${orderDir}
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
         </if>
-        limit #{start} ,#{length}
+        limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
 
     </select>
 
@@ -139,6 +121,15 @@
             sp_name =#{spName}
 		WHERE a.bom_id =#{bomId}
 	</update>
+
+
+    <update id="updateStep">
+    update
+      t_kf_pre_quote a
+    set
+      step =#{step}
+    WHERE a.bom_id =#{bomId}
+    </update>
 
     <insert id="add">
 		insert into

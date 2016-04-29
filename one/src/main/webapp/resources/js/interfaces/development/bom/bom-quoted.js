@@ -17,17 +17,20 @@
         var natrualkey = $("#natrualkey").val();
         if (_data != null && natrualkey != '' && natrualkey != 'null') {
             Object.keys(_data).map(function (key) {
-                $("#" + key).val(_data[key]);
-                // $('#offerDescDetail input').filter(function () {
-                //     return key == this.name;
-                // }).val(_data[key]);
+                $('#offerDescDetail input').filter(function () {
+                    return key == this.name;
+                }).val(_data[key]);
+                // if (key == 'spId') {
+                //     $('#spId').val(_data[key])
+                // }
+                // else if (key == 'fabricId') {
+                //     $('#fabricId').val(_data[key])
+                // }
                 //$("#" + key).val(_data[key]);
             });
         }
     }
 
-
-   
 
     /**
      * 报价信息

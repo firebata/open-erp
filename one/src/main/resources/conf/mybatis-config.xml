@@ -5,6 +5,7 @@
 <configuration>
     <!-- 命名空间 -->
     <typeAliases>
+
         <typeAlias alias="CommonBean" type="com.skysport.core.bean.system.SelectItem2"/>
         <typeAlias alias="LogInfo" type="com.skysport.core.bean.LogInfo"/>
         <typeAlias alias="SpInfo" type="com.skysport.inerfaces.bean.info.SpInfo"/>
@@ -20,6 +21,7 @@
         <typeAlias alias="SexInfo" type="com.skysport.inerfaces.bean.info.SexInfo"/>
         <typeAlias alias="YearConfInfo" type="com.skysport.inerfaces.bean.info.YearConfInfo"/>
         <typeAlias alias="DyeInfo" type="com.skysport.inerfaces.bean.info.DyeInfo"/>
+
         <!--物料-->
         <typeAlias alias="BondingLaminationCoatingInfo" type="com.skysport.inerfaces.bean.info.BondingLaminationCoatingInfo"/>
         <typeAlias alias="ColorOfMembraneCoatingInfo" type="com.skysport.inerfaces.bean.info.ColorOfMembraneCoatingInfo"/>
@@ -33,6 +35,7 @@
         <typeAlias alias="CategoryInfo" type="com.skysport.inerfaces.bean.info.CategoryInfo"/>
         <typeAlias alias="MaterialPositionInfo" type="com.skysport.inerfaces.bean.info.MaterialPositionInfo"/>
         <typeAlias alias="MaterialUnitInfo" type="com.skysport.inerfaces.bean.info.MaterialUnitInfo"/>
+
         <!--DEVELOP 开发-->
         <typeAlias alias="BomInfo" type="com.skysport.inerfaces.bean.develop.BomInfo"/>
         <typeAlias alias="ProjectBomInfo" type="com.skysport.inerfaces.bean.develop.ProjectBomInfo"/>
@@ -49,7 +52,9 @@
         <typeAlias alias="KFMaterialPosition" type="com.skysport.inerfaces.bean.develop.KFMaterialPosition"/>
         <typeAlias alias="KFMaterialPantone" type="com.skysport.inerfaces.bean.develop.KFMaterialPantone"/>
         <typeAlias alias="SexColor" type="com.skysport.inerfaces.bean.develop.SexColor"/>
+        <typeAlias alias="ProjectPojectItemBomSpVo" type="com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo"/>
         <typeAlias alias="KfProductionInstructionEntity" type="com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity"/>
+
         <!--权限管理-->
         <typeAlias alias="UserInfo" type="com.skysport.core.bean.permission.UserInfo"/>
         <typeAlias alias="RoleInfo" type="com.skysport.core.bean.permission.RoleInfo"/>

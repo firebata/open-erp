@@ -1,33 +1,26 @@
 package com.skysport.inerfaces.bean.develop;
 
+import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
+
 import java.math.BigDecimal;
 
 /**
  * 说明:
  * Created by zhangjh on 2015/9/9.
  */
-public class QuotedInfo {
+public class QuotedInfo extends ProjectPojectItemBomSpVo {
 
-    private int id;
-
-    private String projectId;
-    private String projectName;
-    private String projectItemId;
-    private String projectItemName;
 
     private String approveStatus;
-    /**
-     *
-     */
-    private String bomId;
-    private String bomName;
 
-    private String spId;
-    private String spName;
-    private String mainFabricIds;
+
 
     private String now;
     private Integer step;
+
+    private String fabricId;
+
+    private String mainFabricIds;
     /**
      *
      */
@@ -50,11 +43,6 @@ public class QuotedInfo {
      */
     private BigDecimal quotedPrice;
 
-    private String remark;
-
-    private String updateTime;
-
-    private int delFlag;
 
     /**
      * 工厂报价
@@ -82,7 +70,8 @@ public class QuotedInfo {
      * 换汇成本
      */
     private BigDecimal exchangeCosts;
-    private String fabricId;
+
+
     public String getApproveStatus() {
         return approveStatus;
     }
@@ -91,13 +80,6 @@ public class QuotedInfo {
         this.approveStatus = approveStatus;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public BigDecimal getFactoryOffer() {
         return factoryOffer;
@@ -148,22 +130,6 @@ public class QuotedInfo {
         this.costing = costing;
     }
 
-    public String getBomId() {
-        return bomId;
-    }
-
-    public void setBomId(String bomId) {
-        this.bomId = bomId;
-    }
-
-    public String getSpId() {
-        return spId;
-    }
-
-    public void setSpId(String spId) {
-        this.spId = spId;
-    }
-
 
     public String getMainFabricDescs() {
         return mainFabricDescs;
@@ -174,22 +140,6 @@ public class QuotedInfo {
     }
 
 
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProjectItemId() {
-        return projectItemId;
-    }
-
-    public void setProjectItemId(String projectItemId) {
-        this.projectItemId = projectItemId;
-    }
-
     public String getMainFabricIds() {
         return mainFabricIds;
     }
@@ -198,29 +148,6 @@ public class QuotedInfo {
         this.mainFabricIds = mainFabricIds;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public int getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(int delFlag) {
-        this.delFlag = delFlag;
-    }
 
     public BigDecimal getEuroExchangeRates() {
         return euroExchangeRates;
@@ -270,37 +197,6 @@ public class QuotedInfo {
         this.fabricId = fabricId;
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getProjectItemName() {
-        return projectItemName;
-    }
-
-    public void setProjectItemName(String projectItemName) {
-        this.projectItemName = projectItemName;
-    }
-
-    public String getBomName() {
-        return bomName;
-    }
-
-    public void setBomName(String bomName) {
-        this.bomName = bomName;
-    }
-
-    public String getSpName() {
-        return spName;
-    }
-
-    public void setSpName(String spName) {
-        this.spName = spName;
-    }
 
     public Integer getStep() {
         return step;
@@ -313,27 +209,22 @@ public class QuotedInfo {
     @Override
     public String toString() {
         return "QuotedInfo{" +
-                "id=" + id +
-                ", projectId='" + projectId + '\'' +
-                ", projectItemId='" + projectItemId + '\'' +
-                ", approveStatus='" + approveStatus + '\'' +
-                ", bomId='" + bomId + '\'' +
-                ", spId='" + spId + '\'' +
+                "approveStatus='" + approveStatus + '\'' +
                 ", mainFabricIds='" + mainFabricIds + '\'' +
+                ", now='" + now + '\'' +
+                ", step=" + step +
                 ", mainFabricDescs='" + mainFabricDescs + '\'' +
                 ", euroExchangeRates=" + euroExchangeRates +
                 ", rates=" + rates +
                 ", euroPrice=" + euroPrice +
                 ", quotedPrice=" + quotedPrice +
-                ", remark='" + remark + '\'' +
-                ", updateTime='" + updateTime + '\'' +
-                ", delFlag=" + delFlag +
                 ", factoryOffer=" + factoryOffer +
                 ", factoryMargins=" + factoryMargins +
                 ", costing=" + costing +
                 ", lpPrice=" + lpPrice +
                 ", commission=" + commission +
                 ", exchangeCosts=" + exchangeCosts +
+                ", fabricId='" + fabricId + '\'' +
                 '}';
     }
 }

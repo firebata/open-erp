@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skysport.inerfaces.mapper.info.BomInfoMapper">
+
     <sql id="searchInfoSql">
 		a.id AS id,
 		a.project_id AS projectId,
@@ -25,6 +26,7 @@
 		a.remark AS remark,
 		a.approve_status AS approveStatus
 	</sql>
+
     <sql id="searchInfoSql2">
         a.id AS id,
         a.project_id AS projectId,
@@ -76,12 +78,30 @@
 
     <select id="queryInfo" resultType="BomInfo">
         SELECT
-        <include refid="searchInfoSql"/>
-        FROM t_kf_bominfo a
+          <include refid="searchInfoSql"/>
+        FROM
+          t_kf_bominfo a
         WHERE a.bom_id =#{natrualkey}
         limit 1
     </select>
 
+    <select id="queryIds" resultType="ProjectPojectItemBomSpVo">
+        SELECT
+            m.parent_project_id AS projectId,
+            n.project_name AS projectName,
+            m.project_id AS projectItemId,
+            c.project_name AS projectItemName,
+            b.bom_id AS bomId,
+            b.bom_name AS bomName,
+            k.sp_name AS spName
+        FROM
+           t_kf_bominfo b
+        INNER JOIN t_kf_project_item_bom f ON b.bom_id = f.bom_id AND b.bom_id =#{bomId}  and b.del_flag=0
+        INNER JOIN t_kf_project_item c ON f.project_id = c.project_id AND c.del_flag = 0
+        INNER JOIN t_kf_project_item_project m ON c.project_id = m.project_id
+        INNER JOIN t_kf_project n ON m.parent_project_id = n.project_id  AND n.del_flag = 0
+        LEFT JOIN t_jc_supplier k ON k.sp_id = #{spId} AND k.del_flag = 0
+    </select>
 
     <select id="listInfosCounts" resultType="Integer">
 		SELECT COUNT(*)  FROM t_kf_bominfo a,t_kf_project_item b,t_kf_project_item_bom c

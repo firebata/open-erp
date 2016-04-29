@@ -2,6 +2,7 @@ package com.skysport.inerfaces.mapper.develop;
 
 import com.skysport.core.mapper.CommonDao;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,9 +14,5 @@ import java.util.List;
 @Repository("quotedInfoMapper")
 public interface QuotedInfoMapper extends CommonDao<QuotedInfo> {
 
-    List<QuotedInfo> queryListByProjectItemIds(List<String> itemIds);
-
-    QuotedInfo queryIds(String bomId);
-
-
+    List<QuotedInfo> queryListByProjectItemIds(@Param(value = "itemIds") List<String> itemIds, @Param(value = "step") int step);
 }

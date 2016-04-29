@@ -205,4 +205,7 @@ public interface WebConstants extends TableNameConstants {
     String RESOURCE_PATH_BOM="conf/templates/bom-20160426.xlsx";//bom物料清单模板
     String RESOURCE_PATH_QUOTE="conf/templates/quote-20160426.xlsx";//报价模板
 
+    int QUOTED_STEP_PRE = 0;//预报价
+    int QUOTED_STEP_END = 1;//
+
 }

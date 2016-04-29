@@ -3,12 +3,12 @@
     <div id="offerDescTitle">
         <h5 class="header smaller lighter blue">
             报价表
-            <input type="hidden" name="spId" id="spId"/>
-            <input type="hidden" name="fabricId" id="fabricId"/>
         </h5>
     </div>
     <div id="offerDescDetail" <%--style="display: none"--%>>
         <div class="form-group">
+            <input type="hidden" name="spId" id="spId"/>
+            <input type="hidden" name="fabricId" id="fabricId"/>
             <label class="col-xs-2  control-label" for="costing">成本核算（￥）</label>
             <div class="col-xs-3">
                 <input type="text" id="costing" name="costing" placeholder="成本核算（￥）" class="col-xs-10 col-sm-12"/>

@@ -8,26 +8,25 @@ import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
+import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
+import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 说明:
@@ -38,6 +37,10 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
     @Autowired
     private QuotedInfoMapper quotedInfoMapper;
+
+    @Autowired
+    private BomInfoMapper bomInfoMapper;
+
 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
@@ -76,13 +79,13 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
         //查询项目和子项目id
-        QuotedInfo quotedInfo2 = quotedInfoMapper.queryIds(quotedInfo.getBomId());
-        quotedInfo.setProjectId(quotedInfo2.getProjectId());
-        quotedInfo.setProjectItemId(quotedInfo2.getProjectItemId());
-        quotedInfo.setProjectName(quotedInfo2.getProjectName());
-        quotedInfo.setProjectItemName(quotedInfo2.getProjectItemName());
-        quotedInfo.setBomName(quotedInfo2.getBomName());
-        quotedInfo.setSpName(quotedInfo2.getSpName());
+        ProjectPojectItemBomSpVo projectPojectItemBomSpVo = bomInfoMapper.queryIds(quotedInfo.getBomId(),quotedInfo.getSpId());
+        quotedInfo.setProjectId(projectPojectItemBomSpVo.getProjectId());
+        quotedInfo.setProjectItemId(projectPojectItemBomSpVo.getProjectItemId());
+        quotedInfo.setProjectName(projectPojectItemBomSpVo.getProjectName());
+        quotedInfo.setProjectItemName(projectPojectItemBomSpVo.getProjectItemName());
+        quotedInfo.setBomName(projectPojectItemBomSpVo.getBomName());
+        quotedInfo.setSpName(projectPojectItemBomSpVo.getSpName());
         if (null == quotedInfoInDB) {
             if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getFactoryOffer()) {
                 quotedInfoMapper.add(quotedInfo);
@@ -108,7 +111,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
         String year = DateUtils.SINGLETONE.getYyyy();
         List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
-        List<QuotedInfo> quotedInfos = quotedInfoMapper.queryListByProjectItemIds(itemIds);
+        List<QuotedInfo> quotedInfos = quotedInfoMapper.queryListByProjectItemIds(itemIds, WebConstants.QUOTED_STEP_PRE);
 
         Set<String> seriesNameSet = new HashSet<String>();
         Set<String> bomNameSet = new HashSet<>();
@@ -174,4 +177,38 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
     }
 
 
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+
+    }
+
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+
+    }
+
+    @Override
+    public void submit(String businessKey) {
+
+    }
+
+    @Override
+    public void submit(String taskId, String businessKey) {
+
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
+        return null;
+    }
 }

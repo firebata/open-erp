@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.model.develop.quoted.service;
 
+import com.skysport.core.model.common.IApproveService;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.core.model.common.ICommonService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -12,7 +13,7 @@ import java.io.IOException;
  * 说明:
  * Created by zhangjh on 2015/9/17.
  */
-public interface IQuotedService extends ICommonService<QuotedInfo> {
+public interface IQuotedService extends ICommonService<QuotedInfo> , IApproveService {
 
 
     QuotedInfo updateOrAdd(QuotedInfo quotedInfo);
