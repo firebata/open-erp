@@ -9,3 +9,8 @@ out/
 one/target/
 one/classes/
 one/.idea/
+one/.classpath
+one/.gitignore
+one/.project
+one/.settings/
+one/sky.iml
