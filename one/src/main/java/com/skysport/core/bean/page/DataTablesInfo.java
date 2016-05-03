@@ -32,6 +32,11 @@ public class DataTablesInfo {
 	 */
 	private String searchValue;
 
+	/**
+	 * limit SQL语句：limit begin,length
+	 */
+	private String limitAfter;
+
 	public int getStart() {
 		return start;
 	}
@@ -80,4 +85,11 @@ public class DataTablesInfo {
 		this.searchValue = searchValue;
 	}
 
+	public String getLimitAfter() {
+		return limitAfter;
+	}
+
+	public void setLimitAfter(String limitAfter) {
+		this.limitAfter = limitAfter;
+	}
 }

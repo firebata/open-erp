@@ -43,7 +43,7 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
     @RequestMapping(value = "/list")
     @ResponseBody
     @SystemControllerLog(description = "打开BOM列表页面")
-    public ModelAndView search() {
+    public ModelAndView list() {
         ModelAndView mav = new ModelAndView("/development/quotepre/quotepre-list");
         return mav;
     }
@@ -65,6 +65,27 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
         queryForm.setQuoteInfo(info);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, quotedService);
         return resultMap;
+    }
+
+    /**
+     * 此方法描述的是：展示add页面
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/add/{natrualKey}", method = RequestMethod.GET)
+    @ResponseBody
+    @SystemControllerLog(description = "新增子项目")
+    public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
+        QuotedInfo quotedInfo = info(natrualKey);
+        String taskId = (String) request.getAttribute("taskId");
+        String processInstanceId = (String) request.getAttribute("processInstanceId");
+        ModelAndView mav = new ModelAndView("development/quotepre/quotepre-edit");
+        mav.addObject("natrualkey", natrualKey);
+        mav.addObject("taskId", taskId);
+        mav.addObject("processInstanceId", processInstanceId);
+        mav.addObject("quotedInfo", quotedInfo);
+        return mav;
     }
 
 

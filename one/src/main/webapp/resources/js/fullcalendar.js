@@ -6,7 +6,7 @@
 
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
-		define([ 'jquery', 'moment' ], factory);
+		define([ 'jquery/jquery', 'moment' ], factory);
 	}
 	else {
 		factory(jQuery, moment);

@@ -93,5 +93,5 @@
 
 </script>
 <!--控制菜单显示-->
-<script type="text/javascript" src="<%=path%>/resources/js/sidebar.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/sidebar.js"></script>
 

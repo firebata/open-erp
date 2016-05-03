@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper">
-    <sql id="searcProductionInstractionInfoSql">
+    <sql id="searchInfoSql">
         a.id							AS 	 id,
         a.uid                 			AS   uid,
         a.uid                 			AS   productionInstructionId,
@@ -37,9 +37,9 @@
 
     <select id="queryProductionInstractionInfo" resultType="KfProductionInstructionEntity">
         SELECT
-            <include refid="searcProductionInstractionInfoSql"/>
+            <include refid="searchInfoSql"/>
         FROM
-        t_kf_production_instruction a
+            t_kf_production_instruction a
         INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0  AND b.bom_id =  #{bom_id}
         INNER  JOIN   t_kf_bominfo c ON b.bom_id = c.bom_id AND c.del_flag = 0
         INNER  JOIN   t_kf_project_item_bom f  ON c.bom_id = f.bom_id
@@ -87,5 +87,75 @@
         </foreach>
     </delete>
 
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT
+        count(*)
+        FROM t_kf_production_instruction a
+        WHERE a.del_flag=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT
+        count(*)
+        FROM t_kf_production_instruction a
+        INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0
+        INNER  JOIN   t_kf_bominfo c ON b.bom_id = c.bom_id AND c.del_flag = 0
+        INNER  JOIN   t_kf_project_item_bom f  ON c.bom_id = f.bom_id
+        INNER  JOIN   t_kf_project_item d ON f.project_id = d.project_id AND d.del_flag = 0
+        INNER  JOIN   t_kf_project_item_project m ON m.project_id = f.project_id
+        INNER  JOIN   t_kf_project n ON m.parent_project_id = n.project_id AND n.del_flag = 0
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            n.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            d.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            c.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.sp_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+
+    </select>
+
+
+    <select id="searchInfos" resultType="KfProductionInstructionEntity">
+        SELECT
+            <include refid="searchInfoSql"/>
+        FROM t_kf_production_instruction a
+        INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0
+        INNER  JOIN   t_kf_bominfo c ON b.bom_id = c.bom_id AND c.del_flag = 0
+        INNER  JOIN   t_kf_project_item_bom f  ON c.bom_id = f.bom_id
+        INNER  JOIN   t_kf_project_item d ON f.project_id = d.project_id AND d.del_flag = 0
+        INNER  JOIN   t_kf_project_item_project m ON m.project_id = f.project_id
+        INNER  JOIN   t_kf_project n ON m.parent_project_id = n.project_id AND n.del_flag = 0
+        <if test="dataTablesInfo.searchValue !=null and dataTablesInfo.searchValue != ''">
+            and (
+            n.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            d.project_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            c.bom_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.sp_name like concat('%',#{dataTablesInfo.searchValue},'%') or
+            a.remark like concat('%',#{dataTablesInfo.searchValue},'%')
+            )
+        </if>
+        <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
+            ORDER BY
+            <if test="dataTablesInfo.orderColumn == 'projectName'">
+                n.project_name
+            </if>
+            <if test="dataTablesInfo.orderColumn == 'projectItemName'">
+                d.project_name
+            </if>
+            <if test="dataTablesInfo.orderColumn == 'bomName'">
+                c.bom_name
+            </if>
+            <if test="dataTablesInfo.orderColumn == 'spName'">
+                a.sp_name
+            </if>
+            <if test="dataTablesInfo.orderColumn == 'remark'">
+                a.remark
+            </if>
+             ${dataTablesInfo.orderDir}
+        </if>
+        ${dataTablesInfo.limitAfter}
+    </select>
 
 </mapper>

@@ -10,6 +10,7 @@ import com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstructionService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
     }
 
     @Override
-    public KfProductionInstructionEntity queryProductionInstractionInfo(String bomId) {
+    public KfProductionInstructionEntity queryInfoByNatrualKey(String bomId) {
         KfProductionInstructionEntity productionInstruction = productionInstructionMapper.queryProductionInstractionInfo(bomId);
         if (null != productionInstruction) {
             String productionInstructionId = productionInstruction.getProductionInstructionId();
@@ -76,4 +77,38 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
     }
 
 
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+
+    }
+
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+
+    }
+
+    @Override
+    public void submit(String businessKey) {
+
+    }
+
+    @Override
+    public void submit(String taskId, String businessKey) {
+
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
+        return null;
+    }
 }

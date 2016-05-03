@@ -5,7 +5,7 @@
 <HEAD>
 	<TITLE> ZTREE DEMO - checkbox</TITLE>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src='<%=path%>/resources/js/jquery-2.1.3.min.js'></script>
+	<script type="text/javascript" src='<%=path%>/resources/js/jquery/jquery-2.1.3.min.js'></script>
 	<link rel="stylesheet" href="<%=path%>/resources/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="<%=path%>/resources/js/zTree/jquery.ztree.core-3.5.min.js"></script>
 	<script type="text/javascript" src="<%=path%>/resources/js/zTree/jquery.ztree.excheck-3.5.min.js"></script>

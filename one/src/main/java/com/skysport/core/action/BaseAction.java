@@ -3,9 +3,10 @@ package com.skysport.core.action;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
+import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import com.skysport.inerfaces.constant.WebConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +70,7 @@ public abstract class BaseAction<T> {
 
         DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(type, request, WebConstants.NEED_TRANSFORM_COLUMN_NEME);
         return dataTablesInfo;
+
     }
 
 
@@ -84,9 +86,7 @@ public abstract class BaseAction<T> {
         int start = Integer.parseInt(request.getParameter("start"));
         int length = Integer.parseInt(request.getParameter("length"));
         int draw = Integer.parseInt(request.getParameter("draw"));
-
         String orderColumn = buildOrderName(type, request, isNeedTransformColumn);
-
         String orderDir = request.getParameter("order[0][dir]");
         String searchValue = request.getParameter("search[value]");
         dataTablesInfo.setStart(start);
@@ -95,7 +95,9 @@ public abstract class BaseAction<T> {
         dataTablesInfo.setOrderDir(orderDir);
         dataTablesInfo.setSearchValue(searchValue);
         dataTablesInfo.setDraw(draw);
-
+        StringBuilder limitAfter = new StringBuilder();
+        limitAfter.append("limit ").append(start).append(CharConstant.COMMA).append(length);
+        dataTablesInfo.setLimitAfter(limitAfter.toString());
         return dataTablesInfo;
     }
 

@@ -5,17 +5,16 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>查询客户信息</title>
-    <jsp:include page="../../base/hb-headc.jsp" flush="true"></jsp:include>
-    <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
+    <title>成衣生产指示单</title>
+    <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
 </head>
 <body>
 <div class="page-content">
 
     <div class="page-header">
         <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> 客户信息</small>
+            开发
+            <small><i class="icon-double-angle-right"></i> 成衣生产指示单</small>
         </h1>
     </div>
     <!-- PAGE CONTENT BEGINS -->
@@ -24,33 +23,29 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>客户简称</th>
-                    <th>客户全称</th>
-                    <th>地址</th>
-                    <th>邮箱地址1</th>
-                    <th>联系电话</th>
-                    <th>合作时间</th>
+                    <th>选择</th>
+                    <th>项目名称</th>
+                    <th>BOM名称</th>
+                    <th>成衣厂</th>
+                    <th>备注</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
                 <!-- tbody是必须的 -->
             </table>
+
         </div>
         <!-- Button trigger modal -->
     </div>
-
-    <%@ include file="edit.jsp" %>
 </div>
-</body>
-</html>
 <!--定义操作列按钮模板-->
 <script id="tpl" type="text/x-handlebars-template">
     {{#each func}}
     <button type="button" class="btn btn-{{this.type}} btn-sm" onclick="{{this.fn}}">{{this.name}}</button>
     {{/each}}
 </script>
-<script type="text/javascript"
-        src="<%=path%>/resources/js/interfaces/system/customer/customer2.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/list.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/system/edit.js?v=<%=version%>"></script>
+</body>
+</html>
+<jsp:include page="../../base/hb-footj.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/prdinstr/prdinstr-list.js"></script>

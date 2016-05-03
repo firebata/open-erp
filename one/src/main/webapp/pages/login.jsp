@@ -50,7 +50,7 @@
     var path = '<%=path%>';
     //    $.cookie('path',path)_;
 </script>
-<script src="<%=path%>/resources/js/jquery-2.1.3.min.js"></script>
+<script src="<%=path%>/resources/js/jquery/jquery-2.1.3.min.js"></script>
 <script src="<%=path%>/resources/js/supersized.3.2.7.min.js"></script>
 <script src="<%=path%>/resources/js/supersized-init.js"></script>
 <script src="<%=path%>/resources/js/scripts.js"></script>

@@ -5,7 +5,7 @@
     Version: 1.4.0
 */
 !function(factory) {
-    "function" == typeof define && define.amd ? define([ "jquery" ], factory) : factory("object" == typeof exports ? require("jquery") : jQuery);
+    "function" == typeof define && define.amd ? define([ "" ], factory) : factory("object" == typeof exports ? require("jquery") : jQuery);
 }(function($) {
     var caretTimeoutId, ua = navigator.userAgent, iPhone = /iphone/i.test(ua), chrome = /chrome/i.test(ua), android = /android/i.test(ua);
     $.mask = {

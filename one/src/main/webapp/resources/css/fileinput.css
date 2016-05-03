@@ -17,7 +17,7 @@
     font-size: 999px;
     text-align: right;
     color: #fff;
-    background: transparent url('../img/loading.gif') top left no-repeat;
+    background: transparent url('../images/loading.gif') top left no-repeat;
     border: none;
 }
 
@@ -158,7 +158,7 @@
 }
 
 .file-thumb-loading {
-    background: transparent url('../img/loading.gif') no-repeat scroll center center content-box !important;
+    background: transparent url('../images/loading.gif') no-repeat scroll center center content-box !important;
 }
 
 .file-actions {
@@ -225,7 +225,7 @@
 }
 
 .file-uploading {
-    background: url('../img/loading-sm.gif') no-repeat center bottom 10px;
+    background: url('../images/loading-sm.gif') no-repeat center bottom 10px;
     opacity: 0.65;
 }
 

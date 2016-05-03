@@ -18,7 +18,7 @@
     "use strict";
     if (typeof define === 'function' && define.amd) { // jshint ignore:line
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory); // jshint ignore:line
+        define(['jquery/jquery'], factory); // jshint ignore:line
     } else { // noinspection JSUnresolvedVariable
         if (typeof module === 'object' && module.exports) { // jshint ignore:line
             // Node/CommonJS

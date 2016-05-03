@@ -8,7 +8,7 @@
  */
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
-		define( ["jquery"], factory );
+		define( [""], factory );
 	} else {
 		factory( jQuery );
 	}

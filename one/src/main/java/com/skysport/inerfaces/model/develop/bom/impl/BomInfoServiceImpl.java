@@ -119,7 +119,7 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
             QuotedInfo quotedInfo = quotedService.queryInfoByNatrualKey(bomId);
 
 
-            KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.queryProductionInstractionInfo(bomId);
+            KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.queryInfoByNatrualKey(bomId);
 
             buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo, productionInstruction);
 

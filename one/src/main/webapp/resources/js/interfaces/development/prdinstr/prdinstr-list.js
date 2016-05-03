@@ -1,5 +1,5 @@
 /**
- * Created by zhangjh on 2016/4/14.
+ * Created by zhangjh on 2016-05-03.
  */
 (function () {
     "use strict";
@@ -10,11 +10,9 @@
      */
     var columnsName = [
         {"data": null},
-        {"data": "projectName"},
+        {"data": "projectItemName"},
         {"data": "bomName"},
         {"data": "spName"},
-        {"data": "factoryOffer"},
-        {"data": "euroPrice"},
         {"data": "remark"},
         {"data": null}
     ];
@@ -49,7 +47,7 @@
                         var context =
                         {
                             func: [
-                                {"name": "更新", "fn": "$.editQuotePre(\'" + data.bomId + "\')", "type": "primary"}
+                                {"name": "更新", "fn": "$.editProInstr(\'" + data.bomId + "\')", "type": "primary"}
                             ]
                         };
                         var html = template(context);
@@ -82,13 +80,13 @@
     });
 
 
-    var editQuotePre = function (_bomId) {
-        window.location.href = path+"/development/quotepre/add/" + _bomId;
+    var editProInstr = function (_bomId) {
+        window.location.href = path+"/development/prdinstr/add/" + _bomId;
     }
 
     //第一次初始化下拉列表 & 添加下拉列表监听事件
     var reloadDetailSelectData = function () {
         // $.sendRestFulAjax(project_selectURL, null, 'GET', 'json', initSelect);
     }
-    $.editQuotePre = editQuotePre;
+    $.editProInstr = editProInstr;
 }());
