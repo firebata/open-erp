@@ -21,7 +21,7 @@ public class UploadFileInfoServiceImpl extends CommonServiceImpl<UploadFileInfo>
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = uploadFileInfoMapper;
+        commonMapper = uploadFileInfoMapper;
     }
 
     @Override

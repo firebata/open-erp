@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("seriesManageService")
 public class SeriesManageServiceImpl extends CommonServiceImpl<SeriesInfo> implements InitializingBean {
-    @Resource(name = "seriesManageDao")
+    @Resource(name = "seriesMapper")
     private SeriesMapper seriesMapper;
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = seriesMapper;
+        commonMapper = seriesMapper;
     }
 }

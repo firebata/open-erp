@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.PackagingInfo;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by zhangjh on 2015/9/24.
  */
 @Repository("packagingMapper")
-public interface PackagingMapper extends CommonDao<PackagingInfo> {
+public interface PackagingMapper extends CommonMapper<PackagingInfo> {
 
 
     List<String> selectAllPackagingId(String bomId);

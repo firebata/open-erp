@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by zhangjh on 2015/6/8.
  */
-public interface CommonDao<T> {
+public interface CommonMapper<T> {
 
     int listInfosCounts();
 

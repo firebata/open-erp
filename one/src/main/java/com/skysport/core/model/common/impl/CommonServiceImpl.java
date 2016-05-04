@@ -2,7 +2,7 @@ package com.skysport.core.model.common.impl;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.bean.form.BaseQueyrForm;
 import org.apache.commons.logging.Log;
@@ -16,18 +16,18 @@ import java.util.List;
 public abstract class CommonServiceImpl<T> implements ICommonService<T> {
 
     protected transient Log logger = LogFactory.getLog(getClass());
-    public CommonDao<T> commonDao;
+    public CommonMapper<T> commonMapper;
 
 
 
     @Override
     public int listInfosCounts() {
-        return commonDao.listInfosCounts();
+        return commonMapper.listInfosCounts();
     }
 
     @Override
     public int listFilteredInfosCounts(DataTablesInfo dataTablesInfo) {
-        return commonDao.listFilteredInfosCounts(dataTablesInfo);
+        return commonMapper.listFilteredInfosCounts(dataTablesInfo);
     }
 
     /**
@@ -35,7 +35,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @return
      */
     public int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm) {
-        return commonDao.listFilteredInfosCounts(baseQueyrForm);
+        return commonMapper.listFilteredInfosCounts(baseQueyrForm);
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      */
     @Override
     public List<T> searchInfos(BaseQueyrForm baseQueyrForm) {
-        return commonDao.searchInfos(baseQueyrForm);
+        return commonMapper.searchInfos(baseQueyrForm);
     }
 
     @Override
@@ -54,51 +54,51 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
             dataTablesInfo.setStart(0);
             dataTablesInfo.setLength(10);
         }
-        return commonDao.searchInfos(dataTablesInfo);
+        return commonMapper.searchInfos(dataTablesInfo);
     }
 
     @Override
     public void edit(T t){
-        commonDao.updateInfo(t);
+        commonMapper.updateInfo(t);
     }
 
     @Override
     public void add(T t) {
-        commonDao.add(t);
+        commonMapper.add(t);
     }
 
     @Override
     public T queryInfoByNatrualKey(String natrualKey) {
-        return commonDao.queryInfo(natrualKey);
+        return commonMapper.queryInfo(natrualKey);
     }
 
     @Override
     public void del(String natrualKey) {
-        commonDao.del(natrualKey);
+        commonMapper.del(natrualKey);
     }
 
     @Override
     public String queryCurrentSeqNo() {
-        return commonDao.queryCurrentSeqNo();
+        return commonMapper.queryCurrentSeqNo();
     }
 
     @Override
     public List<SelectItem2> querySelectList(String name) {
-        return commonDao.querySelectList(name);
+        return commonMapper.querySelectList(name);
     }
 
     @Override
     public void addBatch(List<T> infos) {
-        commonDao.addBatch(infos);
+        commonMapper.addBatch(infos);
     }
 
     @Override
     public void updateBatch(List<T> infos) {
-        commonDao.updateBatch(infos);
+        commonMapper.updateBatch(infos);
     }
 
     @Override
     public List<SelectItem2> querySelectListByParentId(String parentId) {
-        return commonDao.querySelectListByParentId(parentId);
+        return commonMapper.querySelectListByParentId(parentId);
     }
 }

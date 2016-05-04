@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.info.MembraneThicknessInfo;
-import com.skysport.inerfaces.mapper.info.material.MembraneThicknessDao;
+import com.skysport.inerfaces.mapper.info.material.MembraneThicknessMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ import javax.annotation.Resource;
  */
 @Service("membraneThicknessService")
 public class MembraneThicknessServiceImpl extends CommonServiceImpl<MembraneThicknessInfo> implements InitializingBean {
-    @Resource(name = "membraneThicknessDao")
-    private MembraneThicknessDao membraneThicknessDao;
+    @Resource(name = "membraneThicknessMapper")
+    private MembraneThicknessMapper membraneThicknessMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = membraneThicknessDao;
+        commonMapper = membraneThicknessMapper;
     }
 }

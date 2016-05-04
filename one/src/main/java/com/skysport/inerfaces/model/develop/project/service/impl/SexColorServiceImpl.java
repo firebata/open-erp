@@ -27,7 +27,7 @@ public class SexColorServiceImpl extends CommonServiceImpl<SexColor> implements 
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = sexColorMapper;
+        commonMapper = sexColorMapper;
     }
 
     @Override

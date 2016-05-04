@@ -11,11 +11,11 @@ import javax.annotation.Resource;
  */
 @Service("sexManageService")
 public class SexManageServiceImpl extends CommonServiceImpl<SexInfo> implements InitializingBean {
-    @Resource(name = "sexManageDao")
+    @Resource(name = "sexMapper")
     private SexMapper sexMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = sexMapper;
+        commonMapper = sexMapper;
     }
 }

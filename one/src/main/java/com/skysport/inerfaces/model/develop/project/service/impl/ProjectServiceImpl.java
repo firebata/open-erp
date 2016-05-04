@@ -55,7 +55,7 @@ public class ProjectServiceImpl extends CommonServiceImpl<ProjectInfo> implement
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = projectMapper;
+        commonMapper = projectMapper;
     }
 
     @Override

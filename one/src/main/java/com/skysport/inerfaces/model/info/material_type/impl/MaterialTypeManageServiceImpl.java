@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("materialTypeManageService")
 public class MaterialTypeManageServiceImpl extends CommonServiceImpl<MaterialTypeInfo> implements InitializingBean {
-    @Resource(name = "materialTypeManageDao")
-    private MaterialTypeMapper materialTypeManageDao;
+    @Resource(name = "materialTypeMapper")
+    private MaterialTypeMapper materialTypeMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = materialTypeManageDao;
+        commonMapper = materialTypeMapper;
     }
 }

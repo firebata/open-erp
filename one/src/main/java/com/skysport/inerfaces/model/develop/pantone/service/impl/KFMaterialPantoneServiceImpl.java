@@ -22,7 +22,7 @@ public class KFMaterialPantoneServiceImpl extends CommonServiceImpl<KFMaterialPa
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = kFMaterialPantoneMapper;
+        commonMapper = kFMaterialPantoneMapper;
     }
 
     @Override

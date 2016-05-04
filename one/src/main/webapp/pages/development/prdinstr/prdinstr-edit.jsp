@@ -31,9 +31,9 @@
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
-            <form class="form-horizontal" role="form" id="quotepreForm">
-                <div id="quotepreDesc">
-                    <div id="quotepreDescTitle">
+            <form class="form-horizontal" role="form" id="prdinstrForm">
+                <div id="prdinstrDesc">
+                    <div id="prdinstrDescTitle">
                         <h5 class="header smaller lighter blue">
                             报价信息
                             <small></small>
@@ -43,7 +43,7 @@
                             <input type="hidden" name="processInstanceId" id="processInstanceId" value="${processInstanceId}"/>
                         </h5>
                     </div>
-                    <div id="quotepreDescDetail">
+                    <div id="prdinstrDescDetail">
                         <div class="form-group">
                             <label class="control-label  col-xs-2" for="cropRequirements"> 裁剪要求 </label>
                             <div class="col-xs-3">
@@ -186,7 +186,7 @@
                     </div>
                 </div>
 
-                <div id="quotepreBtnInfo">
+                <div id="prdinstrBtnInfo">
 
                 </div>
             </form>
@@ -199,3 +199,6 @@
 </body>
 </html>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
+<script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
+<script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/prdinstr/prdinstr-edit.js"></script>

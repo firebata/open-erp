@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("productTypeManageService")
 public class ProductTypeManageServiceImpl extends CommonServiceImpl<ProductTypeInfo> implements InitializingBean {
-    @Resource(name = "productTypeManageDao")
-    private ProductTypeMapper productTypeManageDao;
+    @Resource(name = "productTypeMapper")
+    private ProductTypeMapper productTypeMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = productTypeManageDao;
+        commonMapper = productTypeMapper;
     }
 }

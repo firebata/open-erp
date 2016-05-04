@@ -22,7 +22,7 @@ public class ProjectCategoryManageServiceImpl extends CommonServiceImpl<ProjectC
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = projectCategoryMapper;
+        commonMapper = projectCategoryMapper;
 
     }
 

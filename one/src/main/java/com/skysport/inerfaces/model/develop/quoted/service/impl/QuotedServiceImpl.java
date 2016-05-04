@@ -47,7 +47,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = quotedInfoMapper;
+        commonMapper = quotedInfoMapper;
     }
 
 

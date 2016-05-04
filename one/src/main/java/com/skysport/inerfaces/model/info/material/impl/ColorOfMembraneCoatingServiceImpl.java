@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.info.ColorOfMembraneCoatingInfo;
-import com.skysport.inerfaces.mapper.info.material.ColorOfMembraneCoatingDao;
+import com.skysport.inerfaces.mapper.info.material.ColorOfMembraneCoatingMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,12 @@ import javax.annotation.Resource;
  */
 @Service("colorOfMembraneCoatingService")
 public class ColorOfMembraneCoatingServiceImpl extends CommonServiceImpl<ColorOfMembraneCoatingInfo> implements InitializingBean {
-    @Resource(name = "colorOfMembraneCoatingDao")
-    private ColorOfMembraneCoatingDao colorOfMembraneCoatingDao;
+    @Resource(name = "colorOfMembraneCoatingMapper")
+    private ColorOfMembraneCoatingMapper colorOfMembraneCoatingMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = colorOfMembraneCoatingDao;
+        commonMapper = colorOfMembraneCoatingMapper;
     }
 
 }

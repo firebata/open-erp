@@ -48,7 +48,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = accessoriesMapper;
+        commonMapper = accessoriesMapper;
     }
 
     /**

@@ -23,7 +23,7 @@ public class DepartmentServiceImpl extends CommonServiceImpl<DepartmentInfo> imp
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        commonDao = departmentMapper;
+        commonMapper = departmentMapper;
 
 
     }

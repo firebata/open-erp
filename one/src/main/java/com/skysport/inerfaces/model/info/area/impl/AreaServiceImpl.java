@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("areaManageService")
 public class AreaServiceImpl extends CommonServiceImpl<AreaInfo> implements InitializingBean {
-    @Resource(name = "areaManageDao")
+    @Resource(name = "areaMapper")
     private AreaMapper areaMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = areaMapper;
+        commonMapper = areaMapper;
     }
 }

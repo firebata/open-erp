@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.info.WorkmanshipOfBondingLaminatingCoatingInfo;
-import com.skysport.inerfaces.mapper.info.material.WorkmanshipOfBondingLaminatingCoatingDao;
+import com.skysport.inerfaces.mapper.info.material.WorkmanshipOfBondingLaminatingCoatingMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ import javax.annotation.Resource;
  */
 @Service("workmanshipOfBondingLaminatingCoatingService")
 public class WorkmanshipOfBondingLaminatingCoatingServiceImpl extends CommonServiceImpl<WorkmanshipOfBondingLaminatingCoatingInfo> implements InitializingBean {
-    @Resource(name = "workmanshipOfBondingLaminatingCoatingDao")
-    private WorkmanshipOfBondingLaminatingCoatingDao workmanshipOfBondingLaminatingCoatingDao;
+    @Resource(name = "workmanshipOfBondingLaminatingCoatingMapper")
+    private WorkmanshipOfBondingLaminatingCoatingMapper workmanshipOfBondingLaminatingCoatingMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = workmanshipOfBondingLaminatingCoatingDao;
+        commonMapper = workmanshipOfBondingLaminatingCoatingMapper;
     }
 }

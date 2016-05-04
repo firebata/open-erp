@@ -25,6 +25,6 @@ public class LogServiceImpl extends CommonServiceImpl<LogInfo> implements LogSer
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = logInfoMapper;
+        commonMapper = logInfoMapper;
     }
 }

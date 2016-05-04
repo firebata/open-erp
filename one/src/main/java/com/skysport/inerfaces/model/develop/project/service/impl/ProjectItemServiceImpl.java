@@ -85,7 +85,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = projectItemMapper;
+        commonMapper = projectItemMapper;
     }
 
     @Override

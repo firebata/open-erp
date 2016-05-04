@@ -6,7 +6,9 @@
     var path = $.basepath();
     var fileUploadURL = path + "/files/upload";
     var isSubmitAction = 'N';
-    var infoURL = path +"/development/prdinstr/info/";
+    var infoURL = path + "/development/prdinstr/info/";
+    var editURL = path + "/development/prdinstr/edit/";
+    var listURL = path + "/development/prdinstr/list/";
     // $.extend({
     //     initProductinst: initProductinst,
     //     buildProductionInstr: buildProductionInstr
@@ -121,11 +123,22 @@
     }
 
 
-    $(function(){
-        $.sendRestFulAjax(infoURL, null, 'GET', 'json', _doSuccess_info);
+    $(function () {
+        var natrualKey = $("#natrualkey").val();
+        $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
     });
 
     function _doSuccess_info(data) {
         initProductinst(data);
+        var $btnDIV = $("#btnInfo");
+        $.showHandleBtn($btnDIV, _data["approveStatus"], saveFun, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
     }
+
+    function saveFun() {
+        var info = buildProductionInstr();//$("#prdinstrForm").serialize();
+        $.sendJsonAjax(editURL, info, function () {
+            window.location.href = listURL;
+        })
+    }
+
 }(jQuery));

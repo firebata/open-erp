@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.info;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by zhangjh on 2015/9/22.
  */
 @Repository("accessoriesMapper")
-public interface AccessoriesMapper extends CommonDao<AccessoriesInfo> {
+public interface AccessoriesMapper extends CommonMapper<AccessoriesInfo> {
 
 
     List<String> selectAllAccessoriesId(String bomId);

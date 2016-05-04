@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.info.material;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.info.WaterVapourPermeabilityInfo;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2015/6/25.
  */
 @Repository("waterVapourPermeabilityDao")
-public interface WaterVapourPermeabilityDao extends CommonDao<WaterVapourPermeabilityInfo> {
+public interface WaterVapourPermeabilityMapper extends CommonMapper<WaterVapourPermeabilityInfo> {
 }

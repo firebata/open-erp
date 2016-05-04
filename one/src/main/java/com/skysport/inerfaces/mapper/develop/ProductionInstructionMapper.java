@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2016/4/18.
  */
 @Repository
-public interface ProductionInstructionMapper extends CommonDao<KfProductionInstructionEntity> {
+public interface ProductionInstructionMapper extends CommonMapper<KfProductionInstructionEntity> {
 
     KfProductionInstructionEntity queryProductionInstractionInfo(String bomId);
 

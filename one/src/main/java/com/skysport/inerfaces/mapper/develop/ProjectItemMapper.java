@@ -1,9 +1,9 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.core.mapper.ApproveDao;
+import com.skysport.core.mapper.ApproveMapper;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 @Repository("projectItemMapper")
-public interface ProjectItemMapper extends CommonDao<ProjectBomInfo> ,ApproveDao{
+public interface ProjectItemMapper extends CommonMapper<ProjectBomInfo>,ApproveMapper {
     String queryCurrentSeqNo(ProjectBomInfo info);
 
     void addBomInfo(ProjectBomInfo info);

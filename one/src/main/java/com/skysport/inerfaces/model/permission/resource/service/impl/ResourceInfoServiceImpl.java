@@ -21,7 +21,7 @@ public class ResourceInfoServiceImpl extends CommonServiceImpl<ResourceInfo> imp
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = resourceInfoMapper;
+        commonMapper = resourceInfoMapper;
     }
 
 

@@ -25,6 +25,13 @@ public abstract class BaseAction<T> {
 
     protected static String MSG_UPDATE_SUCCESS = "更新成功";
 
+    /**
+     *
+     * @param baseQueyrForm
+     * @param request
+     * @param commonService
+     * @return
+     */
     public Map<String, Object> buildSearchJsonMap(BaseQueyrForm baseQueyrForm, HttpServletRequest request, ICommonService commonService) {
         // 总记录数
         int recordsTotal = commonService.listInfosCounts();
@@ -36,7 +43,6 @@ public abstract class BaseAction<T> {
         List<T> infos = commonService.searchInfos(baseQueyrForm);
         this.turnIdToName(infos);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
-
         return resultMap;
     }
 
@@ -67,10 +73,8 @@ public abstract class BaseAction<T> {
      * @return 数据表格信息
      */
     public DataTablesInfo convertToDataTableQrInfo(String type, HttpServletRequest request) {
-
         DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(type, request, WebConstants.NEED_TRANSFORM_COLUMN_NEME);
         return dataTablesInfo;
-
     }
 
 

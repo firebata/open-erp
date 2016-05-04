@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.MaterialUnitDosage;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by zhangjh on 2016/4/21.
  */
 @Repository(value = "materialUnitDosageMapper")
-public interface MaterialUnitDosageMapper extends CommonDao<MaterialUnitDosage> {
+public interface MaterialUnitDosageMapper extends CommonMapper<MaterialUnitDosage> {
 
     void updateDosage(MaterialUnitDosage materialUnitDosage);
 

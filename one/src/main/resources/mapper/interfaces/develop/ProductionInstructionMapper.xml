@@ -31,7 +31,8 @@
         a.rinsing_marks_remark        	AS   rinsingMarksRemark,
         a.del_flag                      AS   delFlag,
         a.update_time                   AS   updateTime,
-        a.remark                        AS   remark
+        a.remark                        AS   remark,
+        a.approve_status                AS   approveStatus
     </sql>
 
 

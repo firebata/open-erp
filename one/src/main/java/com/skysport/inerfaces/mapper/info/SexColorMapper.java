@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.info;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.SexColor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by zhangjh on 2015/11/11.
  */
 @Repository("sexColorMapper")
-public interface SexColorMapper extends CommonDao<SexColor> {
+public interface SexColorMapper extends CommonMapper<SexColor> {
 
     List<SexColor> searchInfosByProjectId(@Param(value = "projectId") String projectId);
 

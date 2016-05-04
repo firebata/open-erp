@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.system;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.system.DepartmentInfo;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2015/12/30.
  */
 @Repository("departmentMapper")
-public interface DepartmentMapper extends CommonDao<DepartmentInfo> {
+public interface DepartmentMapper extends CommonMapper<DepartmentInfo> {
 
 }

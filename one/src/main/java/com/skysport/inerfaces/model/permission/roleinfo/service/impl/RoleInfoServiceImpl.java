@@ -23,7 +23,7 @@ public class RoleInfoServiceImpl extends CommonServiceImpl<RoleInfo> implements 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = roleInfoMapper;
+        commonMapper = roleInfoMapper;
     }
 
     @Override

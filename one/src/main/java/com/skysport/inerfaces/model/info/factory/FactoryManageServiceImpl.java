@@ -18,6 +18,6 @@ public class FactoryManageServiceImpl extends CommonServiceImpl<FactoryInfo> imp
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = factoryManageDao;
+        commonMapper = factoryManageDao;
     }
 }

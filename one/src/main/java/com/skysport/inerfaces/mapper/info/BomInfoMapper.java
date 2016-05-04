@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.info;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 @Repository("bomInfoMapper")
-public interface BomInfoMapper extends CommonDao<BomInfo> {
+public interface BomInfoMapper extends CommonMapper<BomInfo> {
 
     int listFilteredInfosCounts(BomQueryForm bomQueryForm);
 

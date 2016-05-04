@@ -1,10 +1,9 @@
 package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.inerfaces.bean.info.WaterVapourPermeabilityInfo;
-import com.skysport.inerfaces.mapper.info.material.WaterVapourPermeabilityDao;
+import com.skysport.inerfaces.mapper.info.material.WaterVapourPermeabilityMapper;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,11 +15,11 @@ import javax.annotation.Resource;
 @Service("waterVapourPermeabilityService")
 public class WaterVapourPermeabilityServiceImpl extends CommonServiceImpl<WaterVapourPermeabilityInfo> implements InitializingBean {
 
-    @Resource(name = "waterVapourPermeabilityDao")
-    private WaterVapourPermeabilityDao waterVapourPermeabilityDao;
+    @Resource(name = "waterVapourPermeabilityMapper")
+    private WaterVapourPermeabilityMapper waterVapourPermeabilityMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = waterVapourPermeabilityDao;
+        commonMapper = waterVapourPermeabilityMapper;
     }
 }

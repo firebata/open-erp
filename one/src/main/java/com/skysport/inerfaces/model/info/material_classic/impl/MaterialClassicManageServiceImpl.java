@@ -16,19 +16,19 @@ import java.util.List;
 @Service("materialClassicManageService")
 public class MaterialClassicManageServiceImpl extends CommonServiceImpl<MaterialClassicInfo> implements InitializingBean {
 
-    @Resource(name = "materialClassicManageDao")
-    private MaterialClassicMapper materialClassicManageDao;
+    @Resource(name = "materialClassicMapper")
+    private MaterialClassicMapper materialClassicMapper;
 
     @Override
     public void afterPropertiesSet() {
 
-        commonDao = materialClassicManageDao;
+        commonMapper = materialClassicMapper;
 
     }
 
     @Override
     public List<SelectItem2> querySelectList(String typeId) {
-        return materialClassicManageDao.querySelectList2(typeId);
+        return materialClassicMapper.querySelectList2(typeId);
     }
 
 

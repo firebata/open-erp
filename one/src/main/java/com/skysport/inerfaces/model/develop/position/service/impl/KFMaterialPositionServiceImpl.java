@@ -22,7 +22,7 @@ public class KFMaterialPositionServiceImpl extends CommonServiceImpl<KFMaterialP
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = kFMaterialPositionMapper;
+        commonMapper = kFMaterialPositionMapper;
     }
 
     public void addBatch(List<KFMaterialPosition> infos, String materialId) {

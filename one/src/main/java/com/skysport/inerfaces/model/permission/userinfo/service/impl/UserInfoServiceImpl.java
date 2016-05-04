@@ -21,7 +21,7 @@ public class UserInfoServiceImpl extends CommonServiceImpl<UserInfo> implements 
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = userInfoMapper;
+        commonMapper = userInfoMapper;
     }
 
     @Override

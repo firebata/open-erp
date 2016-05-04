@@ -149,8 +149,7 @@
 
                 <div id="projectBtnInfo">
                     <div class="col-xs-offset-6 col-xs-9">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveProject()">保存
-                        </button>
+                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveProject()">保存</button>
                     </div>
                 </div>
             </form>

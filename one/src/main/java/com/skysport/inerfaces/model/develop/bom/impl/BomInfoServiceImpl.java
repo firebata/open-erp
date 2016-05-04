@@ -16,6 +16,7 @@ import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstructionService;
+import com.skysport.inerfaces.model.develop.product_instruction.helper.ProductionInstructionServiceHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
@@ -71,7 +72,7 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = bomInfoMapper;
+        commonMapper = bomInfoMapper;
     }
 
     @Override
@@ -192,10 +193,10 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
         //保存成衣厂信息
         List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.updateOrAddBatch(bomInfo);
 
-        KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.updateOrAddBatch(bomInfo);
+        KfProductionInstructionEntity productionInstruction = ProductionInstructionServiceHelper.SINGLETONE.getInfoOrNeedtoAdd(bomId, productionInstructionServiceImpl);
 
         //设置主面料信息
-        FabricsInfo fabricsInfo = getMainFabricsInfo(bomInfo, bomId);
+        FabricsInfo fabricsInfo = getMainFabricsInfo(bomInfo);
         bomInfo.getQuotedInfo().setMainFabricDescs(fabricsInfo.getDescription());
 
         //保存报价信息
@@ -216,10 +217,10 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
      * 获取在价格表中显示的面料信息
      *
      * @param bomInfo
-     * @param bomId
      * @return
      */
-    public FabricsInfo getMainFabricsInfo(BomInfo bomInfo, String bomId) {
+    public FabricsInfo getMainFabricsInfo(BomInfo bomInfo) {
+        String bomId = bomInfo.getBomId();
         List<FabricsInfo> fabricsInfos = fabricsManageService.queryAllFabricByBomId(bomId);//重新查一遍数据
         String seriesName = bomInfo.getSeriesName();
         return FabricsServiceHelper.SINGLETONE.getMainFabricInfo(seriesName, fabricsInfos, bomInfo.getQuotedInfo().getFabricId());

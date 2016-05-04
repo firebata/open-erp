@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.mapper.permission;
 
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2015/8/17.
  */
 @Repository("userInfoMapper")
-public interface UserInfoMapper extends CommonDao<UserInfo> {
+public interface UserInfoMapper extends CommonMapper<UserInfo> {
 
     UserInfo queryInfoByUserInfoName(String userName);
 

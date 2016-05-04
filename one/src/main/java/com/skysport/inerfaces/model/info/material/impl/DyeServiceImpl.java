@@ -14,11 +14,11 @@ import javax.annotation.Resource;
  */
 @Service("dyeService")
 public class DyeServiceImpl  extends CommonServiceImpl<DyeInfo> implements InitializingBean {
-    @Resource(name = "dyeDao")
-    private DyeMapper dyeDao;
+    @Resource(name = "dyeMapper")
+    private DyeMapper dyeMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = dyeDao;
+        commonMapper = dyeMapper;
     }
 }

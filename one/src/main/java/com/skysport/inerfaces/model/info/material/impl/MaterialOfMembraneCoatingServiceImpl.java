@@ -2,7 +2,7 @@ package com.skysport.inerfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.info.MaterialOfMembraneCoatingInfo;
-import com.skysport.inerfaces.mapper.info.material.MaterialOfMembraneCoatingDao;
+import com.skysport.inerfaces.mapper.info.material.MaterialOfMembraneCoatingMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +14,11 @@ import javax.annotation.Resource;
  */
 @Service("materialOfMembraneCoatingService")
 public class MaterialOfMembraneCoatingServiceImpl  extends CommonServiceImpl<MaterialOfMembraneCoatingInfo> implements InitializingBean {
-    @Resource(name = "materialOfMembraneCoatingDao")
-    private MaterialOfMembraneCoatingDao materialOfMembraneCoatingDao;
+    @Resource(name = "materialOfMembraneCoatingMapper")
+    private MaterialOfMembraneCoatingMapper materialOfMembraneCoatingMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = materialOfMembraneCoatingDao;
+        commonMapper = materialOfMembraneCoatingMapper;
     }
 }

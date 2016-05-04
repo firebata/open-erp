@@ -29,7 +29,7 @@ public class FactoryQuoteServiceImpl extends CommonServiceImpl<FactoryQuoteInfo>
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = factoryQuotedInfoMapper;
+        commonMapper = factoryQuotedInfoMapper;
     }
 
     @Override

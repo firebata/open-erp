@@ -1,6 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
-import com.skysport.core.mapper.CommonDao;
+import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.FactoryQuoteInfo;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by zhangjh on 2015/10/8.
  */
 @Repository("factoryQuotedInfoMapper")
-public interface FactoryQuotedInfoMapper extends CommonDao<FactoryQuoteInfo> {
+public interface FactoryQuotedInfoMapper extends CommonMapper<FactoryQuoteInfo> {
 
     List<FactoryQuoteInfo> queryFactoryQuoteInfoList(String bomId);
 

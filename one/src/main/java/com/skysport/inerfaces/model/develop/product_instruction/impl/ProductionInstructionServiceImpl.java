@@ -1,9 +1,7 @@
 package com.skysport.inerfaces.model.develop.product_instruction.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
-import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper;
@@ -21,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 说明:
+ * 说明:成衣生产指示单
  * Created by zhangjh on 2016/4/18.
  */
 @Service
@@ -35,32 +33,37 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = productionInstructionMapper;
+        commonMapper = productionInstructionMapper;
     }
 
     @Override
-    public KfProductionInstructionEntity updateOrAddBatch(BomInfo bomInfo) {
-        KfProductionInstructionEntity productionInstruction = bomInfo.getProductionInstruction();
+    public void edit(KfProductionInstructionEntity productionInstruction) {
+//        KfProductionInstructionEntity productionInstruction = bomInfo.getProductionInstruction();
         String productionInstructionId = productionInstruction.getProductionInstructionId();
         //有id，更新
         if (StringUtils.isNotBlank(productionInstructionId)) {
             productionInstruction.setUid(productionInstructionId);
             productionInstruction.setNatrualkey(productionInstructionId);
             productionInstructionMapper.updateProductionInstruction(productionInstruction);
-        } else {
-            productionInstructionId = UuidGeneratorUtils.getNextId();
-            productionInstruction.setProductionInstructionId(productionInstructionId);
-            productionInstruction.setUid(productionInstructionId);
-            productionInstruction.setNatrualkey(productionInstructionId);
-            productionInstructionMapper.addProductionInstruction(productionInstruction);
         }
+//        else {
+//            productionInstructionId = UuidGeneratorUtils.getNextId();
+//            productionInstruction.setProductionInstructionId(productionInstructionId);
+//            productionInstruction.setUid(productionInstructionId);
+//            productionInstruction.setNatrualkey(productionInstructionId);
+//            productionInstructionMapper.addProductionInstruction(productionInstruction);
+//        }
 
         List<UploadFileInfo> fileInfos = productionInstruction.getSketchUrlUidUploadFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, productionInstructionId, uploadFileInfoService, WebConstants.FILE_KIND_SKETCH);
 
         fileInfos = productionInstruction.getSpecificationUrlUidUploadFileInfos();
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, productionInstructionId, uploadFileInfoService, WebConstants.FILE_KIND_SPECIFICATION);
-        return productionInstruction;
+    }
+
+    @Override
+    public void add(KfProductionInstructionEntity productionInstruction) {
+        productionInstructionMapper.addProductionInstruction(productionInstruction);
     }
 
     @Override

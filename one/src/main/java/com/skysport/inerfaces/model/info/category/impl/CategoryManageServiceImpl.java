@@ -21,7 +21,7 @@ public class CategoryManageServiceImpl extends CommonServiceImpl<CategoryInfo> i
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = categoryMapper;
+        commonMapper = categoryMapper;
     }
 
 

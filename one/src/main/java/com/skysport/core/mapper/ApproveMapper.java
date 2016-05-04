@@ -9,7 +9,7 @@ import java.util.List;
  * Created by zhangjh on 2016/4/6.
  */
 
-public interface ApproveDao {
+public interface ApproveMapper {
     /**
      * @param businessKey 业务主键
      * @param status      状态

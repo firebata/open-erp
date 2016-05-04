@@ -47,7 +47,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
     @Override
     public void afterPropertiesSet() {
-        commonDao = fabricsMapper;
+        commonMapper = fabricsMapper;
     }
 
 

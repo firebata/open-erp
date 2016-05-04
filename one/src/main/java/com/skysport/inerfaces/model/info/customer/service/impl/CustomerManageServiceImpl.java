@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("customerManageService")
 public class CustomerManageServiceImpl extends CommonServiceImpl<CustomerInfo> implements InitializingBean {
-    @Resource(name = "customerManageDao")
-    private CustomerMapper customerManageDao;
+    @Resource(name = "customerMapper")
+    private CustomerMapper customerMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = customerManageDao;
+        commonMapper = customerMapper;
     }
 }

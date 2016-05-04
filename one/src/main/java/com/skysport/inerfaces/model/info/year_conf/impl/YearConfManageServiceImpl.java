@@ -13,11 +13,11 @@ import javax.annotation.Resource;
  */
 @Service("yearConfManageService")
 public class YearConfManageServiceImpl extends CommonServiceImpl<YearConfInfo> implements InitializingBean {
-    @Resource(name = "yearConfManageDao")
+    @Resource(name = "yearConfMapper")
     private YearConfMapper yearConfMapper;
 
     @Override
     public void afterPropertiesSet()  {
-        commonDao = yearConfMapper;
+        commonMapper = yearConfMapper;
     }
 }

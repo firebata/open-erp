@@ -10,10 +10,7 @@ import com.skysport.inerfaces.model.develop.product_instruction.helper.Productio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/development/prdinstr")
 public class ProductionInstractionAction extends BaseAction<KfProductionInstructionEntity> {
+
     /**
      *
      */
@@ -34,14 +32,14 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
     private IProductionInstructionService productionInstructionServiceImpl;
 
     /**
-     * 此方法描述的是：展示list页面	 *
+     * 此方法描述的是：展示list页面
      *
      * @author: zhangjh
      * @version: 2015年4月29日 下午5:34:53
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    @SystemControllerLog(description = "打开BOM列表页面")
+    @SystemControllerLog(description = "打开成衣生产指示单列表页面")
     public ModelAndView list() {
         ModelAndView mav = new ModelAndView("/development/prdinstr/prdinstr-list");
         return mav;
@@ -55,7 +53,7 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
      */
     @RequestMapping(value = "/add/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
-    @SystemControllerLog(description = "新增子项目")
+    @SystemControllerLog(description = "展示成衣生产指示单add页面")
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
         String taskId = (String) request.getAttribute("taskId");
         String processInstanceId = (String) request.getAttribute("processInstanceId");
@@ -97,6 +95,15 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
         //报价信息
         KfProductionInstructionEntity quotedInfo = productionInstructionServiceImpl.queryInfoByNatrualKey(natrualKey);
         return quotedInfo;
+    }
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    @SystemControllerLog(description = "修改成衣生产指示单")
+    public Map<String, Object> edit(@RequestBody KfProductionInstructionEntity info) {
+        productionInstructionServiceImpl.edit(info);
+        return rtnSuccessResultMap("更新成功");
     }
 
     /**

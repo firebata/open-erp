@@ -49,7 +49,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        commonDao = packagingMapper;
+        commonMapper = packagingMapper;
     }
 
     /**
