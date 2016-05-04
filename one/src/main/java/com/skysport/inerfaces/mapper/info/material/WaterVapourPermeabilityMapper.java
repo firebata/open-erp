@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * 类说明:
  * Created by zhangjh on 2015/6/25.
  */
-@Repository("waterVapourPermeabilityDao")
+@Repository("waterVapourPermeabilityMapper")
 public interface WaterVapourPermeabilityMapper extends CommonMapper<WaterVapourPermeabilityInfo> {
 }
