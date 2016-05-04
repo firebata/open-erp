@@ -46,6 +46,7 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
         ModelAndView mav = new ModelAndView("/development/prdinstr/prdinstr-list");
         return mav;
     }
+
     /**
      * 此方法描述的是：展示add页面
      *
@@ -58,7 +59,7 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
         String taskId = (String) request.getAttribute("taskId");
         String processInstanceId = (String) request.getAttribute("processInstanceId");
-        ModelAndView mav = new ModelAndView("development/proinstr/proinstr-edit");
+        ModelAndView mav = new ModelAndView("development/prdinstr/prdinstr-edit");
         mav.addObject("natrualkey", natrualKey);
         mav.addObject("taskId", taskId);
         mav.addObject("processInstanceId", processInstanceId);

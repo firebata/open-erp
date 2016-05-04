@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/6/1.
+ * Created by zhangjh on 2015/6/1.
  */
 @Service("dictionaryService")
 public class DictionaryServiceImpl implements IDictionaryService {
