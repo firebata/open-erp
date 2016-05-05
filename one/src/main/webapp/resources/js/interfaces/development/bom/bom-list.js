@@ -25,7 +25,7 @@
     ];
     //var mHtml = '<div class="dataTables_length col-xs-4" id="projectId_example_length"><label>子项目编号&nbsp;    <input name="projectId" id="projectId" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>';
 
-    var mHtml = '<div class="dataTables_length col-xs-2 col-xs-offset-10" id="prodinst_example_length"><label><button type="button" class="btn btn-info btn-sm" onclick="javascript:_mergeList(\'download_productinstruction\')">生产指示单</button></label></div>';
+    var mHtml = '<div class="dataTables_length col-xs-2 col-xs-offset-10" id="prodinst_example_length"><label><button type="button" class="btn btn-info btn-sm" onclick="javascript:_mergeList(\'download_productinstruction\')">生产+指示单</button></label></div>';
     var table;
     $(function () {
 
@@ -77,7 +77,7 @@
                     "next": "下一页"
                 }
             },
-            "dom": "<'row'<'col-xs-1'l><'#mytool.col-xs-9'><'col-xs-2'f>r>" +
+            "dom": "<'row'<'col-xs-1'l><'#mytool.col-xs-8'><'col-xs-3'f>r>" +
             "t" +
             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
             initComplete: function () {
@@ -123,8 +123,4 @@
         addSelectChangeListner();
         //$.sendRestFulAjax(path + "/system/baseinfo/project_select", null, 'GET', 'json', initSelect);
     }
-    $.editBom = editBom;
-    $.delBom = delBom;
-
-
 }());
