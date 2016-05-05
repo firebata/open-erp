@@ -4,6 +4,7 @@
 (function () {
     "use strict";
     var path = $.basepath();
+    var searchURL = path + "/development/prdinstr/search";
     /**
      * 列表展示内容
      * @returns {*[]}
@@ -27,7 +28,7 @@
         var indexOpreation = columnsName.length - 1;
         table = $('#example').DataTable({
             ajax: {
-                url: "search"
+                url: searchURL
             },
             serverSide: true,
             columns: columnsName,

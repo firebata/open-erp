@@ -91,11 +91,11 @@
 
     var projectId = "-1";
 
-    var editBom = function (_bomId) {
+    function editBom(_bomId) {
         window.location.href = "add/" + _bomId;
     }
 
-    var delBom = function (_bomId) {
+   function delBom(_bomId) {
         var $talbe = $('#example').DataTable();
         var _url = _delURL + _bomId;
         var _msg = "删除BOM会级联删除所属子项目中的颜色信息，确定删除吗?"
