@@ -28,7 +28,16 @@
     <bean id="springContextHolder" class="com.skysport.core.bean.SpringContextHolder"></bean>
 
     <!-- 引入jdbc配置文件 -->
-    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
+    <!--<context:property-placeholder location="classpath:conf/jdbc.properties"/>-->
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+               <!-- <value>classpath:conf/jdbc.properties</value>-->
+                <value>file:/home/sky/conf/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc_driverClassName}"/>
