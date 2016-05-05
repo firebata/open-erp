@@ -186,7 +186,7 @@
                     </div>
                 </div>
 
-                <div id="prdinstrBtnInfo">
+                <div id="btnInfo">
 
                 </div>
             </form>

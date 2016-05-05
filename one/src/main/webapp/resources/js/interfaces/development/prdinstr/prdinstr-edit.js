@@ -9,6 +9,7 @@
     var infoURL = path + "/development/prdinstr/info/";
     var editURL = path + "/development/prdinstr/edit/";
     var listURL = path + "/development/prdinstr/list/";
+    var submitURL = path + "/development/prdinstr/submit/";
     // $.extend({
     //     initProductinst: initProductinst,
     //     buildProductionInstr: buildProductionInstr
@@ -124,19 +125,36 @@
 
 
     $(function () {
+
+
         var natrualKey = $("#natrualkey").val();
         $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
+
+
+        $("#prdinstrForm").on('click', '#saveBtn', tosave);
+        $("#prdinstrForm").on('click', '#submitBtn', tosubmit);
+
+
     });
 
-    function _doSuccess_info(data) {
-        initProductinst(data);
+
+    function _doSuccess_info(_data) {
+        initProductinst(_data);
         var $btnDIV = $("#btnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], saveFun, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
     }
 
-    function saveFun() {
+    function tosave() {
         var info = buildProductionInstr();//$("#prdinstrForm").serialize();
         $.sendJsonAjax(editURL, info, function () {
+            window.location.href = listURL;
+        })
+    }
+
+    function tosubmit(){
+        var nk = $("#natrualkey").val();
+        var taksId = "null";
+        $.sendJsonAjax(submitURL + taksId + "/" + nk, {}, function () {
             window.location.href = listURL;
         })
     }

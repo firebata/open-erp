@@ -25,7 +25,7 @@
     ];
     //var mHtml = '<div class="dataTables_length col-xs-4" id="projectId_example_length"><label>子项目编号&nbsp;    <input name="projectId" id="projectId" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>';
 
-    var mHtml = '<div class="dataTables_length col-xs-2" id="prodinst_example_length"><label><button type="button" class="btn btn-info btn-md" onclick="javascript:_mergeList(\'download_productinstruction\')">生产指示单</button></label></div>';
+    var mHtml = '<div class="dataTables_length col-xs-2 col-xs-offset-10" id="prodinst_example_length"><label><button type="button" class="btn btn-info btn-sm" onclick="javascript:_mergeList(\'download_productinstruction\')">生产指示单</button></label></div>';
     var table;
     $(function () {
 

@@ -117,7 +117,7 @@
 
         //初始化性别属性，再初始化性别属性和颜色
         var $btnDIV = $("#projectBtnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], saveProject, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
     }
 
     /**
@@ -208,7 +208,7 @@
     /**
      *
      */
-    var saveProject = function () {
+    var tosave = function () {
         //执行表单验证
         $('#projectForm').bootstrapValidator('validate');
     }
@@ -396,7 +396,7 @@
     /**
      *
      */
-    function submitProject() {
+    function submit() {
         var nk = $("#natrualkey").val();
         var taksId = "null";
         $.sendJsonAjax(project_submitURL + taksId + "/" + nk, {}, function () {
@@ -405,13 +405,13 @@
     }
 
     $(function () {
-        $("#projectForm").on('click', '#saveBtn', saveProject);
-        $("#projectForm").on('click', '#submitBtn', submitProject);
+        $("#projectForm").on('click', '#saveBtn', tosave);
+        $("#projectForm").on('click', '#submitBtn', submit);
         reloadDetailSelectData();
         initTags();
         $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
     })
 
 
-    $.saveProjectItem = saveProject;
+    $.saveProjectItem = tosave;
 }());

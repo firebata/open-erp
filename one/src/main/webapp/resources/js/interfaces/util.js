@@ -34,7 +34,7 @@
         floatSub: floatSub,
         floatMul: floatMul,
         floatDiv: floatDiv
-})
+    })
     ;
 
     $.fn.extend({
@@ -176,7 +176,12 @@
         return input != undefined && $.isFunction(input);
     }
 
-//加
+    /**
+     * 加
+     * @param arg1
+     * @param arg2
+     * @returns {number}
+     */
     function floatAdd(arg1, arg2) {
         var r1, r2, m;
         try {
@@ -193,7 +198,12 @@
         return (arg1 * m + arg2 * m) / m;
     }
 
-//减
+    /**
+     * 减
+     * @param arg1
+     * @param arg2
+     * @returns {string}
+     */
     function floatSub(arg1, arg2) {
         var r1, r2, m, n;
         try {
@@ -212,7 +222,12 @@
         return ((arg1 * m - arg2 * m) / m).toFixed(n);
     }
 
-//乘
+    /**
+     * 乘
+     * @param arg1
+     * @param arg2
+     * @returns {number}
+     */
     function floatMul(arg1, arg2) {
         var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
         try {
@@ -227,7 +242,12 @@
     }
 
 
-//除
+    /**
+     * 除
+     * @param arg1
+     * @param arg2
+     * @returns {number}
+     */
     function floatDiv(arg1, arg2) {
         var t1 = 0, t2 = 0, r1, r2;
         try {
@@ -611,7 +631,7 @@
             html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md'>保存</button></div>";
             if (_stateCode == statecode_alive && strIsNotEmpty(_taskId)) {//流程在运行中：审核走通用接口，只需要传递业务主键和任务id(这个界面值来源于)
                 html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>提交审核</button></div>";
-            } else {//流程已结算
+            } else {
                 html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md'  id='submitBtn' >提交审核</button></div>";
             }
         }
