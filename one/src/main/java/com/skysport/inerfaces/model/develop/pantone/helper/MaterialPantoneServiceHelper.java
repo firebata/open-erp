@@ -9,7 +9,7 @@ import java.util.List;
  * 说明:
  * Created by zhangjh on 2016/1/20.
  */
-public enum KFMaterialPantoneServiceHelper {
+public enum MaterialPantoneServiceHelper {
     SINGLETONE;
 
     /**

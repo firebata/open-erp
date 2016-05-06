@@ -41,6 +41,7 @@
                             <input type="hidden" name="taskId" id="taskId" value="${taskId}"/>
                             <input type="hidden" name="stateCode" id="stateCode" value="${stateCode}"/>
                             <input type="hidden" name="processInstanceId" id="processInstanceId" value="${processInstanceId}"/>
+                            <input type="hidden" name="uid" id="uid"/>
                         </h5>
                     </div>
                     <div id="prdinstrDescDetail">

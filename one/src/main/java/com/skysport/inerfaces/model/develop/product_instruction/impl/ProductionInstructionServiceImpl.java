@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.model.develop.product_instruction.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.core.utils.UuidGeneratorUtils;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -67,8 +68,8 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
     }
 
     @Override
-    public KfProductionInstructionEntity queryInfoByNatrualKey(String bomId) {
-        KfProductionInstructionEntity productionInstruction = productionInstructionMapper.queryProductionInstractionInfo(bomId);
+    public KfProductionInstructionEntity queryInfoByNatrualKey(String uid) {
+        KfProductionInstructionEntity productionInstruction = productionInstructionMapper.queryProductionInstractionInfo(uid);
         if (null != productionInstruction) {
             String productionInstructionId = productionInstruction.getProductionInstructionId();
             Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, productionInstructionId, WebConstants.FILE_KIND_SKETCH);
@@ -114,4 +115,27 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
         return null;
     }
+
+    /**
+     * 查询BOM对应的生产指示单信息：1,如果存在指示单信息，则直接返回；2，如果不存在，则返回只包含指示单id的指示单信息
+     *
+     * @param bomId String
+     * @return KfProductionInstructionEntity
+     */
+    @Override
+    public KfProductionInstructionEntity getInfoOrNeedtoAdd(String bomId) {
+        KfProductionInstructionEntity entity = queryInfoByNatrualKey(bomId);
+        if (entity == null) {
+            String productionInstructionId = UuidGeneratorUtils.getNextId();
+            entity = new KfProductionInstructionEntity();
+            entity.setProductionInstructionId(productionInstructionId);
+            entity.setUid(productionInstructionId);
+            entity.setNatrualkey(productionInstructionId);
+            add(entity);
+
+        }
+        return entity;
+    }
+
 }
+

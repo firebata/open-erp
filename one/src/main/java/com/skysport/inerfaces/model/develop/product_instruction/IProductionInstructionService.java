@@ -9,5 +9,6 @@ import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
  * Created by zhangjh on 2016/4/18.
  */
 public interface IProductionInstructionService extends ICommonService<KfProductionInstructionEntity> , IApproveService {
+    KfProductionInstructionEntity getInfoOrNeedtoAdd(String bomId);
 //    KfProductionInstructionEntity updateOrAddBatch(KfProductionInstructionEntity productionInstruction);
 }

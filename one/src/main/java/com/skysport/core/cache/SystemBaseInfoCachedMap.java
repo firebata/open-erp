@@ -14,7 +14,7 @@ import java.util.Map;
 public enum SystemBaseInfoCachedMap {
 
     SINGLETONE;
-    
+
     private Map<String, List<SelectItem2>> bomBuildInfoMaps = new HashMap<String, List<SelectItem2>>();
     private Map<String, List<SelectItem2>> projectBuildInfoMaps = new HashMap<String, List<SelectItem2>>();
 
@@ -54,7 +54,7 @@ public enum SystemBaseInfoCachedMap {
     public String getName(List<SelectItem2> items, String id) {
         String name = CharConstant.EMPTY;
         for (SelectItem2 item : items) {
-            if (id.equals(item.getNatrualkey())) {
+            if (item.getNatrualkey().equals(id)) {
                 name = item.getName();
                 break;
             }

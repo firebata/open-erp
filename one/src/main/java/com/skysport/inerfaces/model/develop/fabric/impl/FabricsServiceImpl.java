@@ -10,7 +10,7 @@ import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.info.FabricsMapper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
@@ -30,21 +30,17 @@ import java.util.List;
  */
 @Service("fabricsManageService")
 public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implements IFabricsService, InitializingBean {
+
     @Resource(name = "fabricsMapper")
     private FabricsMapper fabricsMapper;
-
     @Autowired
     private MaterialUnitDosageMapper materialUnitDosageMapper;
-
     @Autowired
     private MaterialSpinfoMapper materialSpinfoMapper;
-
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
-
     @Resource(name = "kFMaterialPantoneService")
     private IKFMaterialPantoneService kFMaterialPantoneService;
-
     @Override
     public void afterPropertiesSet() {
         commonMapper = fabricsMapper;
@@ -84,44 +80,52 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                 //有id，更新
                 if (StringUtils.isNotBlank(fabricId)) {
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
-                    fabricsMapper.updateInfo(fabricsJoinInfo.getFabricsInfo());
-                    fabricsMapper.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
-                    materialUnitDosageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
-                    materialSpinfoMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
-                    kFMaterialPositionService.del(fabricId);//删除物料位置信息
-                    kFMaterialPantoneService.del(fabricId);//删除物料颜色信息
+                    update(fabricsJoinInfo, fabricId);
                 }
                 //无id，新增
                 else {
-//                    String kind_name = buildKindName(bomInfo, fabricsJoinInfo);
-//                    String seqNo = BuildSeqNoHelper.SINGLETONE.getFullSeqNo(kind_name, incrementNumberService, WebConstants.MATERIAL_SEQ_NO_LENGTH);
-//                    //年份+客户+地域+系列+NNN
-//                    fabricId = kind_name + seqNo;
                     fabricId = UuidGeneratorUtils.getNextId();
                     setFabricId(fabricsJoinInfo, fabricId, bomId);
-                    fabricsMapper.add(fabricsJoinInfo.getFabricsInfo());
-                    //新增面料详细
-                    fabricsMapper.addDetail(fabricsJoinInfo.getFabricsDetailInfo());
-                    //新增面料用量
-                    materialUnitDosageMapper.addDosage(fabricsJoinInfo.getMaterialUnitDosage());
-                    //新增面料供应商信息
-                    materialSpinfoMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());
+                    add(fabricsJoinInfo);
                 }
                 fabricsRtn.add(fabricsJoinInfo.getFabricsInfo());
-                //保存物料位置信息
-                if (null != fabricsJoinInfo.getFabricsInfo().getPositionIds() && !fabricsJoinInfo.getFabricsInfo().getPositionIds().isEmpty()) {
-                    kFMaterialPositionService.addBatch(fabricsJoinInfo.getFabricsInfo().getPositionIds(),fabricId);
-                }
-
-                //保留物料颜色信息
-                if (null != fabricsJoinInfo.getFabricsInfo().getPantoneIds() && !fabricsJoinInfo.getFabricsInfo().getPantoneIds().isEmpty()) {
-                    kFMaterialPantoneService.addBatch(fabricsJoinInfo.getFabricsInfo().getPantoneIds(),fabricId);
-                }
+                addPositionIds(fabricsJoinInfo, fabricId);
+                addPantoneIds(fabricsJoinInfo, fabricId);
 
 
             }
         }
         return fabricsRtn;
+    }
+
+    private void add(FabricsJoinInfo fabricsJoinInfo) {
+        fabricsMapper.add(fabricsJoinInfo.getFabricsInfo());
+        fabricsMapper.addDetail(fabricsJoinInfo.getFabricsDetailInfo()); //新增面料详细
+        materialUnitDosageMapper.addDosage(fabricsJoinInfo.getMaterialUnitDosage()); //新增面料用量
+        materialSpinfoMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());  //新增面料供应商信息
+    }
+
+    private void update(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
+        fabricsMapper.updateInfo(fabricsJoinInfo.getFabricsInfo());
+        fabricsMapper.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
+        materialUnitDosageMapper.updateDosage(fabricsJoinInfo.getMaterialUnitDosage());
+        materialSpinfoMapper.updateSp(fabricsJoinInfo.getMaterialSpInfo());
+        kFMaterialPositionService.del(fabricId);//删除物料位置信息
+        kFMaterialPantoneService.del(fabricId);//删除物料颜色信息
+    }
+
+    private void addPantoneIds(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
+        //保留物料颜色信息
+        if (null != fabricsJoinInfo.getFabricsInfo().getPantoneIds() && !fabricsJoinInfo.getFabricsInfo().getPantoneIds().isEmpty()) {
+            kFMaterialPantoneService.addBatch(fabricsJoinInfo.getFabricsInfo().getPantoneIds(),fabricId);
+        }
+    }
+
+    private void addPositionIds(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
+        //保存物料位置信息
+        if (null != fabricsJoinInfo.getFabricsInfo().getPositionIds() && !fabricsJoinInfo.getFabricsInfo().getPositionIds().isEmpty()) {
+            kFMaterialPositionService.addBatch(fabricsJoinInfo.getFabricsInfo().getPositionIds(),fabricId);
+        }
     }
 
     @Override
@@ -146,7 +150,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
         //设置物料位置的物料id
         KFMaterialPositionServiceHelper.SINGLETONE.setPositionFabricId(fabricsJoinInfo.getFabricsInfo().getPositionIds(), fabricId);
         //设置物料颜色的物料id
-        KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(fabricsJoinInfo.getFabricsInfo().getPantoneIds(), fabricId);
+        MaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(fabricsJoinInfo.getFabricsInfo().getPantoneIds(), fabricId);
 
     }
 

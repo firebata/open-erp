@@ -1,7 +1,7 @@
 package com.skysport.inerfaces.model.develop.fabric.helper;
 
-import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
+import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
@@ -9,13 +9,19 @@ import com.skysport.core.init.SkySportAppContext;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
+import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.model.develop.fabric.impl.FabricsServiceImpl;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
+import com.skysport.inerfaces.model.info.sp.helper.SpInfoHelper;
+import com.skysport.inerfaces.model.relation.material_sp.helper.MaterialSpServiceHelper;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,30 +41,6 @@ public enum FabricsServiceHelper {
         SystemBaseInfoCachedMap.SINGLETONE.pushBom("fabricsItems", fabricsItems);
     }
 
-    /**
-     * @param seriesName
-     * @param fabrics
-     * @param fabricId
-     * @return
-     * @throws CloneNotSupportedException
-     */
-    public FabricsInfo getMainFabricInfo(String seriesName, List<FabricsInfo> fabrics, String fabricId) {
-        FabricsInfo info = new FabricsInfo();
-        for (FabricsInfo fabricsInfo : fabrics) {
-            //新增或者修改判断是否为主线面料
-            if ((StringUtils.isEmpty(fabricId) && fabricsInfo.getIsShow() == WebConstants.IS_SHOW_FABRIC) ||
-                    fabricId.equals(fabricsInfo.getFabricId())) {
-                try {
-                    info = fabricsInfo.clone();
-                } catch (CloneNotSupportedException e) {
-                    throw new SkySportException(ReturnCodeConstant.SYS_EXP);
-                }
-                translateIdToNameInFabric(seriesName, info);
-                break;
-            }
-        }
-        return info;
-    }
 
     /**
      * 将面料的id转换成名称
@@ -66,7 +48,7 @@ public enum FabricsServiceHelper {
      * @param fabricsInfos
      * @param exchange_type
      */
-    public static void translateIdToNameInFabrics(List<FabricsInfo> fabricsInfos, String seriesName, int exchange_type) {
+    public void translateIdToNameInFabrics(List<FabricsInfo> fabricsInfos, String seriesName, int exchange_type) {
         if (null != fabricsInfos && !fabricsInfos.isEmpty()) {
             for (FabricsInfo fabricsInfo : fabricsInfos) {
                 if (exchange_type == WebConstants.FABRIC_ID_EXCHANGE_QUOTED) {
@@ -83,12 +65,12 @@ public enum FabricsServiceHelper {
      * @param seriesName
      * @param fabricsInfo
      */
-    public static void translateIdToNameInFabric(String seriesName, FabricsInfo fabricsInfo) {
+    public void translateIdToNameInFabric(String seriesName, FabricsInfo fabricsInfo) {
         fabricsInfo.setSeriesName(seriesName);
         //设置颜色位置
         List<KFMaterialPantone> kfMaterialPantones = fabricsInfo.getPantoneIds();
         List<KFMaterialPosition> kfMaterialPositions = fabricsInfo.getPositionIds();
-        String patoneIds = KFMaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
+        String patoneIds = MaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
         String positionIds = KFMaterialPositionServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPositions);//位置用/分割
 
 
@@ -123,9 +105,9 @@ public enum FabricsServiceHelper {
         String blcId = chgBlcId(fabricsInfo, stringBuilder);
 
         //复合或者贴膜
-        if (blcId.equals(SkySportAppContext.blc_type_fuhe) || blcId.equals(SkySportAppContext.ble_type_tiemo)) {
+        if (SkySportAppContext.blc_type_fuhe.equals(blcId) || SkySportAppContext.ble_type_tiemo.equals(blcId)) {
             //复合
-            if (blcId.equals(SkySportAppContext.blc_type_fuhe)) {
+            if (SkySportAppContext.blc_type_fuhe.equals(blcId)) {
                 //材质列表
                 chgCompositeClassicId(fabricsInfo, stringBuilder);
 
@@ -171,16 +153,20 @@ public enum FabricsServiceHelper {
         fabricsInfo.setDescription(stringBuilder.toString());
     }
 
-
-    public static void chgSpId(FabricsInfo fabricsInfo) {
-        List<SelectItem2> selectItem2s;
+    /**
+     * @param fabricsInfo
+     */
+    public void chgSpId(FabricsInfo fabricsInfo) {
         String spId = fabricsInfo.getSpId();
-        selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
-        spId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
-        fabricsInfo.setSpId(spId);
+        String spName = SpInfoHelper.SINGLETONE.turnSpIdToName(spId);
+        fabricsInfo.setSpId(spName);
     }
 
-    public static void chgClassicId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgClassicId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String classicId = fabricsInfo.getClassicId();
         if (StringUtils.isNotBlank(classicId)) {
@@ -190,7 +176,10 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgProductTypeId(FabricsInfo fabricsInfo) {
+    /**
+     * @param fabricsInfo
+     */
+    public void chgProductTypeId(FabricsInfo fabricsInfo) {
         List<SelectItem2> selectItem2s;
         String productTypeId = fabricsInfo.getProductTypeId();
         if (StringUtils.isNotBlank(productTypeId)) {
@@ -201,7 +190,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgSpecificationId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgSpecificationId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String specificationId = fabricsInfo.getSpecificationId();
         if (StringUtils.isNotBlank(specificationId)) {
@@ -216,7 +209,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgDyeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgDyeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String dyeId = fabricsInfo.getDyeId();
         if (StringUtils.isNotBlank(dyeId)) {
@@ -226,7 +223,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgFinishId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgFinishId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String finishId = fabricsInfo.getFinishId();
         if (StringUtils.isNotBlank(finishId)) {
@@ -236,7 +237,12 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static String chgBlcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     * @return
+     */
+    public String chgBlcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String blcId = fabricsInfo.getBlcId();
         if (StringUtils.isNotBlank(blcId)) {
@@ -247,7 +253,11 @@ public enum FabricsServiceHelper {
         return blcId;
     }
 
-    public static void chgCompositeClassicId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeClassicId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String compositeClassicId = fabricsInfo.getCompositeClassicId();
         if (StringUtils.isNotBlank(compositeClassicId)) {
@@ -257,7 +267,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgCompositeProductTypeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeProductTypeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String compositeProductTypeId = fabricsInfo.getCompositeProductTypeId();
         if (StringUtils.isNotBlank(compositeProductTypeId)) {
@@ -267,7 +281,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgCompositeSpecificationId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeSpecificationId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String compositeSpecificationId = fabricsInfo.getCompositeSpecificationId();
         if (StringUtils.isNotBlank(compositeSpecificationId)) {
@@ -277,7 +295,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgCompositeDyeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeDyeId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String compositeDyeId = fabricsInfo.getCompositeDyeId();
         if (StringUtils.isNotBlank(compositeDyeId)) {
@@ -287,7 +309,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgCompositeFinishId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeFinishId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String compositeFinishId = fabricsInfo.getCompositeFinishId();
         if (StringUtils.isNotBlank(compositeFinishId)) {
@@ -297,7 +323,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgMomcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgMomcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String momcId = fabricsInfo.getMomcId();
         if (StringUtils.isNotBlank(momcId)) {
@@ -307,7 +337,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgComocId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgComocId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;
         String comocId = fabricsInfo.getComocId();
         if (StringUtils.isNotBlank(comocId)) {
@@ -317,7 +351,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;//透湿程度列表
         String wvpId = fabricsInfo.getWvpId();
         if (StringUtils.isNotBlank(wvpId)) {
@@ -327,7 +365,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgMtId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgMtId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;//膜的厚度列表
         String mtId = fabricsInfo.getMtId();
         if (StringUtils.isNotBlank(mtId)) {
@@ -337,7 +379,11 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgWoblcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+    /**
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgWoblcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
         List<SelectItem2> selectItem2s;// 贴膜或涂层工艺列表
         String woblcId = fabricsInfo.getWoblcId();
         if (StringUtils.isNotBlank(woblcId)) {
@@ -347,7 +393,10 @@ public enum FabricsServiceHelper {
         }
     }
 
-    public static void chgUnitId(FabricsInfo fabricsInfo) {
+    /**
+     * @param fabricsInfo
+     */
+    public void chgUnitId(FabricsInfo fabricsInfo) {
         List<SelectItem2> selectItem2s;// 用量单位列表
         String unitId = fabricsInfo.getUnitId();
         if (StringUtils.isNotBlank(unitId)) {
@@ -356,4 +405,65 @@ public enum FabricsServiceHelper {
             fabricsInfo.setUnitId(unitId);
         }
     }
+
+    /**
+     * 所有面料成本
+     *
+     * @param fabricItems
+     * @return
+     */
+    public BigDecimal caculateCostingFabric(List<FabricsJoinInfo> fabricItems) {
+        BigDecimal bigDecimal = new BigDecimal(0);
+        if (null != fabricItems) {
+            for (FabricsJoinInfo joinInfo : fabricItems) {
+                MaterialSpInfo materialSpInfo = joinInfo.getMaterialSpInfo();
+                MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo);
+            }
+        }
+        return bigDecimal;
+    }
+
+    /**
+     * 面料基础信息集合
+     *
+     * @param fabricItems
+     * @return
+     */
+    private List<FabricsInfo> getFabrics(List<FabricsJoinInfo> fabricItems) {
+        List<FabricsInfo> fabrics = new ArrayList<>();
+        if (null != fabricItems) {
+            //面料id存在，修改；面料id不存在则新增
+            for (FabricsJoinInfo fabricsJoinInfo : fabricItems) {
+                fabrics.add(fabricsJoinInfo.getFabricsInfo());
+            }
+        }
+        return fabrics;
+    }
+
+    /**
+     * @param seriesName
+     * @param fabrics
+     * @return
+     * @throws CloneNotSupportedException
+     */
+    public FabricsInfo getMainFabricInfo(String seriesName, List<FabricsInfo> fabrics) {
+        FabricsInfo info = new FabricsInfo();
+        if (null != fabrics && !fabrics.isEmpty()) {
+            for (FabricsInfo fabricsInfo : fabrics) {
+                //新增或者修改判断是否为主线面料
+                if (fabricsInfo.getIsShow() == WebConstants.IS_SHOW_FABRIC) {
+                    try {
+                        info = fabricsInfo.clone();
+                    } catch (CloneNotSupportedException e) {
+                        throw new SkySportException(ReturnCodeConstant.SYS_EXP);
+                    }
+                    translateIdToNameInFabric(seriesName, info);
+                    break;
+                }
+            }
+        }
+
+        return info;
+    }
+
 }

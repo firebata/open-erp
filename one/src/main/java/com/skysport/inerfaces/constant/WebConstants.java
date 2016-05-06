@@ -193,17 +193,17 @@ public interface WebConstants extends TableNameConstants {
     String pantone_kind_tpx_tcx = "tpx_tcx";
     String pantone_kind_c_u = "c_u";
 
-    String  MENU_SESSION_TAG = "menusTotle";
+    String MENU_SESSION_TAG = "menusTotle";
 
 
     //参考工厂报价
-    String QUOTE_REFERENCE_YES = "1";
+    int QUOTE_REFERENCE_YES = 1;
 
 
     //excel模板路径
-    String RESOURCE_PATH_PI ="conf/templates/pi-20160316.xlsx";//成衣生产指示单模板
-    String RESOURCE_PATH_BOM="conf/templates/bom-20160426.xlsx";//bom物料清单模板
-    String RESOURCE_PATH_QUOTE="conf/templates/quote-20160426.xlsx";//报价模板
+    String RESOURCE_PATH_PI = "conf/templates/pi-20160316.xlsx";//成衣生产指示单模板
+    String RESOURCE_PATH_BOM = "conf/templates/bom-20160426.xlsx";//bom物料清单模板
+    String RESOURCE_PATH_QUOTE = "conf/templates/quote-20160426.xlsx";//报价模板
 
     int QUOTED_STEP_PRE = 0;//预报价
     int QUOTED_STEP_END = 1;//

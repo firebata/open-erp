@@ -4,10 +4,10 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.inerfaces.bean.develop.*;
+import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
-import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
@@ -16,9 +16,9 @@ import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstructionService;
-import com.skysport.inerfaces.model.develop.product_instruction.helper.ProductionInstructionServiceHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
+import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.model.relation.IRelationIdDealService;
@@ -100,7 +100,6 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
     @Override
     public BomInfo queryInfoByNatrualKey(String bomId) {
         BomInfo bomInfo = super.queryInfoByNatrualKey(bomId);
-
         if (null != bomInfo) {
 
             //面料集合
@@ -112,13 +111,11 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
             //包材
             List<PackagingInfo> packagings = packagingService.queryPackagingList(bomId);
 
-
             //成衣厂 & 生产指示单
             List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.queryFactoryQuoteInfoList(bomId);
 
             //报价信息
             QuotedInfo quotedInfo = quotedService.queryInfoByNatrualKey(bomId);
-
 
             KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.queryInfoByNatrualKey(bomId);
 
@@ -137,7 +134,6 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
         String mainColor = bomInfo.getMainColor();
         String sexId = bomInfo.getSexId();
         String mainColorOld = bomInfo.getMainColorOld();
-
         if (StringUtils.isNotEmpty(mainColor) && StringUtils.isNotEmpty(mainColorOld) && StringUtils.isNotEmpty(sexId)) {
             if (!mainColor.trim().equals(mainColorOld.trim())) {
                 projectItemManageService.updateMainColors(sexId, mainColor.trim(), mainColorOld.trim(), bomInfo.getProjectId());
@@ -174,7 +170,6 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
      */
     @Override
     public void edit(BomInfo bomInfo) {
-
         String bomId = StringUtils.isEmpty(bomInfo.getBomId()) ? bomInfo.getNatrualkey() : bomInfo.getBomId();
 
         super.edit(bomInfo);
@@ -182,10 +177,8 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
         //保存面料信息
         List<FabricsInfo> fabrics = fabricsManageService.updateOrAddBatch(bomInfo);
 
-
         //保存辅料信息
         List<AccessoriesInfo> accessories = accessoriesService.updateOrAddBatch(bomInfo);
-
 
         //保存包装材料信息
         List<PackagingInfo> packagings = packagingService.updateOrAddBatch(bomInfo);
@@ -193,20 +186,21 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
         //保存成衣厂信息
         List<FactoryQuoteInfo> factoryQuoteInfos = factoryQuoteService.updateOrAddBatch(bomInfo);
 
-        KfProductionInstructionEntity productionInstruction = ProductionInstructionServiceHelper.SINGLETONE.getInfoOrNeedtoAdd(bomId, productionInstructionServiceImpl);
-
-        //设置主面料信息
-        FabricsInfo fabricsInfo = getMainFabricsInfo(bomInfo);
-        bomInfo.getQuotedInfo().setMainFabricDescs(fabricsInfo.getDescription());
+        KfProductionInstructionEntity productionInstruction = productionInstructionServiceImpl.getInfoOrNeedtoAdd(bomId);
 
         //保存报价信息
-        QuotedInfo quotedInfo = quotedService.updateOrAdd(bomInfo.getQuotedInfo());
+        FabricsInfo fabricsInfo = getMainFabricsInfo(bomInfo);
+        QuotedInfo quotedInfo = QuotedServiceHelper.getInstance().getQuotedInfo(bomInfo, fabricsInfo);
+        quotedInfo = quotedService.updateOrAdd(quotedInfo);
+
 
         //如果颜色修改，需要修改bom的颜色(已在上面的修改bom方法中修改)和bom所属项目的子颜色
         dealMainColor(bomInfo);
 
+
         //增加Bom和物料的关系
         List<BomMaterialIdVo> bomMaterials = getBomMaterialIdVos(bomId, fabrics, accessories, packagings, factoryQuoteInfos, productionInstruction);
+
         bomMaterialServiceImpl.batchInsert(bomMaterials);
 
         buildBomInfo(bomInfo, fabrics, accessories, packagings, factoryQuoteInfos, quotedInfo, productionInstruction);
@@ -214,16 +208,17 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
     }
 
     /**
-     * 获取在价格表中显示的面料信息
+     * 获取在价格表中需要显示的面料信息
+     * 这一步操作一定在保存面料信息之后
      *
      * @param bomInfo
      * @return
      */
     public FabricsInfo getMainFabricsInfo(BomInfo bomInfo) {
         String bomId = bomInfo.getBomId();
-        List<FabricsInfo> fabricsInfos = fabricsManageService.queryAllFabricByBomId(bomId);//重新查一遍数据
         String seriesName = bomInfo.getSeriesName();
-        return FabricsServiceHelper.SINGLETONE.getMainFabricInfo(seriesName, fabricsInfos, bomInfo.getQuotedInfo().getFabricId());
+        List<FabricsInfo> fabricsInfos = fabricsManageService.queryAllFabricByBomId(bomId);//重新查一遍数据
+        return FabricsServiceHelper.SINGLETONE.getMainFabricInfo(seriesName, fabricsInfos);
     }
 
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductionInstructionMapper extends CommonMapper<KfProductionInstructionEntity> {
 
-    KfProductionInstructionEntity queryProductionInstractionInfo(String bomId);
+    KfProductionInstructionEntity queryProductionInstractionInfo(String uid);
 
 
     KfProductionInstructionEntity queryProjectAndBomInfoByBomId(String bomId);

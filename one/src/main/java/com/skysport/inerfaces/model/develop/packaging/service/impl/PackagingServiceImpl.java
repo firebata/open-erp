@@ -10,7 +10,7 @@ import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.develop.PackagingMapper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
@@ -144,7 +144,7 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
         //设置物料位置的物料id
         KFMaterialPositionServiceHelper.SINGLETONE.setPositionFabricId(packagingJoinInfo.getPackagingInfo().getPositionIds(), packagingId);
         //设置物料颜色的物料id
-        KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(packagingJoinInfo.getPackagingInfo().getPantoneIds(), packagingId);
+        MaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(packagingJoinInfo.getPackagingInfo().getPantoneIds(), packagingId);
     }
 
     private void deletePackagingByIds(List<KFPackagingJoinInfo> packagingItems, String bomId) {

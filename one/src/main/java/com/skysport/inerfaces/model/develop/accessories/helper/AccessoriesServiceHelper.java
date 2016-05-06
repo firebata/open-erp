@@ -6,8 +6,11 @@ import com.skysport.core.constant.CharConstant;
 import com.skysport.inerfaces.bean.develop.AccessoriesInfo;
 import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
+import com.skysport.inerfaces.bean.develop.join.AccessoriesJoinInfo;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
+import com.skysport.inerfaces.model.relation.material_sp.helper.MaterialSpServiceHelper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -25,7 +28,7 @@ public enum AccessoriesServiceHelper {
      *
      * @param accessoriesInfos
      */
-    public static void translateIdToNameInAccessoriesInfos(List<AccessoriesInfo> accessoriesInfos, String seriesName) {
+    public void translateIdToNameInAccessoriesInfos(List<AccessoriesInfo> accessoriesInfos, String seriesName) {
 
         if (null != accessoriesInfos && !accessoriesInfos.isEmpty()) {
             for (AccessoriesInfo accessoriesInfo : accessoriesInfos) {
@@ -35,7 +38,7 @@ public enum AccessoriesServiceHelper {
         }
     }
 
-    public static void translateIdToNameInAccessoriesInfo(String seriesName, AccessoriesInfo accessoriesInfo) {
+    public void translateIdToNameInAccessoriesInfo(String seriesName, AccessoriesInfo accessoriesInfo) {
         List<SelectItem2> selectItem2s;
         StringBuilder stringBuilder = new StringBuilder();
         String spId = accessoriesInfo.getSpId();
@@ -44,7 +47,7 @@ public enum AccessoriesServiceHelper {
         //设置颜色位置
         List<KFMaterialPantone> kfMaterialPantones = accessoriesInfo.getPantoneIds();
         List<KFMaterialPosition> kfMaterialPositions = accessoriesInfo.getPositionIds();
-        String patoneIds = KFMaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
+        String patoneIds = MaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
         String positionIds = KFMaterialPositionServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPositions);//位置用/分割
 
 
@@ -107,4 +110,18 @@ public enum AccessoriesServiceHelper {
         accessoriesInfo.setDescription(stringBuilder.toString());
     }
 
+    /**
+     * 统计辅料的成本
+     *
+     * @param accessoriesItems
+     * @return
+     */
+    public BigDecimal caculateCostingAccessories(List<AccessoriesJoinInfo> accessoriesItems) {
+        BigDecimal bigDecimal = new BigDecimal(0);
+        for (AccessoriesJoinInfo accessoriesJoinInfo : accessoriesItems) {
+            MaterialSpInfo materialSpInfo = accessoriesJoinInfo.getMaterialSpInfo();
+            MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo);
+        }
+        return bigDecimal;
+    }
 }

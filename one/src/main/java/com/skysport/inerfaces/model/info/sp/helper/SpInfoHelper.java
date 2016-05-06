@@ -25,6 +25,13 @@ public enum SpInfoHelper {
         SystemBaseInfoCachedMap.SINGLETONE.pushBom("spItems", spItems);
     }
 
+
+    public String turnSpIdToName(String spId) {
+        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+        String spName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
+        return spName;
+    }
+
     /**
      * 将材料类型id转换成材料名称，存放在id字段
      *

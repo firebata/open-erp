@@ -23,9 +23,9 @@
         // var _productionInstruction = _data.productionInstruction;
         if (null != _productionInstruction) {
             Object.keys(_productionInstruction).map(function (key_2) {//遍历工艺单信息
-                if (key_2 != 'clothReceivedDate' && key_2 != 'natrualkey' && key_2 != 'spId' && key_2 != 'fabricId') {//避免覆盖上面工厂信息中的clothReceivedDate
-                    $("#" + key_2).val(_productionInstruction[key_2]);
-                }
+                // if (key_2 != 'clothReceivedDate' && key_2 != 'natrualkey' && key_2 != 'spId' && key_2 != 'fabricId') {//避免覆盖上面工厂信息中的clothReceivedDate
+                $("#" + key_2).val(_productionInstruction[key_2]);
+                // }
             });
 
         }
@@ -39,7 +39,7 @@
     function buildProductionInstr() {
         var productionInstruction = {};
         productionInstruction.factoryQuoteId = $("#factoryQuoteId").val();
-        productionInstruction.productionInstructionId = $("#productionInstructionId").val();
+        productionInstruction.productionInstructionId = $("#uid").val();
         productionInstruction.cropRequirements = $("#cropRequirements").val();
         productionInstruction.offerAmount = $("#offerAmount").val();
         productionInstruction.spId = $("#spIdC").val();
@@ -126,15 +126,10 @@
 
     $(function () {
 
-
         var natrualKey = $("#natrualkey").val();
         $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
-
-
         $("#prdinstrForm").on('click', '#saveBtn', tosave);
         $("#prdinstrForm").on('click', '#submitBtn', tosubmit);
-
-
     });
 
 
@@ -151,7 +146,7 @@
         })
     }
 
-    function tosubmit(){
+    function tosubmit() {
         var nk = $("#natrualkey").val();
         var taksId = "null";
         $.sendJsonAjax(submitURL + taksId + "/" + nk, {}, function () {

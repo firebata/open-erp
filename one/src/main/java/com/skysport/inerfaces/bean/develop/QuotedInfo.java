@@ -10,10 +10,7 @@ import java.math.BigDecimal;
  */
 public class QuotedInfo extends ProjectPojectItemBomSpVo {
 
-
     private String approveStatus;
-
-
 
     private String now;
     private Integer step;

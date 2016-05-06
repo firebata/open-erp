@@ -11,7 +11,7 @@ import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.info.AccessoriesMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.pantone.service.IKFMaterialPantoneService;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.develop.position.service.IKFMaterialPositionService;
@@ -156,7 +156,7 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         //设置物料位置的物料id
         KFMaterialPositionServiceHelper.SINGLETONE.setPositionFabricId(accessoriesJoinInfo.getAccessoriesInfo().getPositionIds(), accessoriesId);
         //设置物料颜色的物料id
-        KFMaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds(), accessoriesId);
+        MaterialPantoneServiceHelper.SINGLETONE.setPantoneFabricId(accessoriesJoinInfo.getAccessoriesInfo().getPantoneIds(), accessoriesId);
     }
 
     /**

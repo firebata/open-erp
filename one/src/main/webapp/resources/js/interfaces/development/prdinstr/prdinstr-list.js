@@ -38,7 +38,7 @@
                 {
                     targets: 0,
                     render: function (data, type, row, meta) {
-                        var html = "<input type='checkbox' name='checkList' value='" + data.bomId + "'>";
+                        var html = "<input type='checkbox' name='checkList' value='" + data.uid + "'>";
                         return html;
                     }
                 },
@@ -48,7 +48,7 @@
                         var context =
                         {
                             func: [
-                                {"name": "更新", "fn": "$.editProInstr(\'" + data.bomId + "\')", "type": "primary"}
+                                {"name": "更新", "fn": "$.editProInstr(\'" + data.uid + "\')", "type": "primary"}
                             ]
                         };
                         var html = template(context);
@@ -81,8 +81,8 @@
     });
 
 
-    var editProInstr = function (_bomId) {
-        window.location.href = path+"/development/prdinstr/add/" + _bomId;
+    var editProInstr = function (uid) {
+        window.location.href = path+"/development/prdinstr/add/" + uid;
     }
 
     //第一次初始化下拉列表 & 添加下拉列表监听事件

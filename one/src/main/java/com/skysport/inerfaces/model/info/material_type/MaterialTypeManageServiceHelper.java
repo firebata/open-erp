@@ -21,4 +21,14 @@ public enum MaterialTypeManageServiceHelper {
         List<SelectItem2> materialTypeItems = materialTypeManageService.querySelectList(null);
         SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.MATERIALTYPEITEMS, materialTypeItems);
     }
+
+
+
+
+
+
+
+
+
+
 }

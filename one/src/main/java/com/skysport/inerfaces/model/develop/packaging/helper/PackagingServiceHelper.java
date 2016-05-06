@@ -5,9 +5,12 @@ import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
+import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.PackagingInfo;
-import com.skysport.inerfaces.model.develop.pantone.helper.KFMaterialPantoneServiceHelper;
+import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
+import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
+import com.skysport.inerfaces.model.relation.material_sp.helper.MaterialSpServiceHelper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -42,7 +45,7 @@ public enum PackagingServiceHelper {
         //设置颜色位置
         List<KFMaterialPantone> kfMaterialPantones = packaging.getPantoneIds();
         List<KFMaterialPosition> kfMaterialPositions = packaging.getPositionIds();
-        String patoneIds = KFMaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
+        String patoneIds = MaterialPantoneServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPantones); //颜色用/分割
         String positionIds = KFMaterialPositionServiceHelper.SINGLETONE.turnIdsToNames(kfMaterialPositions);//位置用/分割
         packaging.setPantoneId(patoneIds);
         packaging.setPositionId(positionIds);
@@ -102,5 +105,20 @@ public enum PackagingServiceHelper {
         }
 
         packaging.setDescription(stringBuilder.toString());
+    }
+
+    /**
+     * 统计成本
+     *
+     * @param accessoriesItems
+     * @return
+     */
+    public BigDecimal caculateCostingPackageing(List<KFPackagingJoinInfo> packagingItems) {
+        BigDecimal bigDecimal = new BigDecimal(0);
+        for (KFPackagingJoinInfo joinInfo : packagingItems) {
+            MaterialSpInfo materialSpInfo = joinInfo.getMaterialSpInfo();
+            MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo);
+        }
+        return bigDecimal;
     }
 }
