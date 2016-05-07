@@ -116,10 +116,10 @@
             a.commission =#{commission},
             a.quoted_price =#{quotedPrice},
             a.costing = #{costing},
-            project_name =#{projectName},
-            project_item_name =#{projectItemName},
-            bom_name =#{bomName},
-            sp_name =#{spName}
+            a.project_name =#{projectName},
+            a.project_item_name =#{projectItemName},
+            a.bom_name =#{bomName},
+            a.sp_name =#{spName}
 		WHERE a.bom_id =#{bomId}
 	</update>
 

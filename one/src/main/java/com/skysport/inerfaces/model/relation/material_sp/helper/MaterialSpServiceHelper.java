@@ -11,10 +11,11 @@ import java.math.BigDecimal;
 public enum MaterialSpServiceHelper {
     SINGLETONE;
 
-    public void caculateCosting(BigDecimal bigDecimal, MaterialSpInfo materialSpInfo) {
+    public BigDecimal caculateCosting(BigDecimal bigDecimal, MaterialSpInfo materialSpInfo) {
         BigDecimal colorPrice = materialSpInfo.getColorPrice();
         if (null != colorPrice) {
-            bigDecimal.add(colorPrice);
+            return colorPrice;
         }
+        return new BigDecimal(0);
     }
 }

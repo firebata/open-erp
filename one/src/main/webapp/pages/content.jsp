@@ -1289,3 +1289,5 @@
 </script>
 </body>
 </html>
+<script type="text/javascript" src="<%=path%>/resources/js/jquery/jquery.easy-pie-chart.min.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/jquery/jquery.sparkline.min.js"></script>

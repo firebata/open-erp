@@ -170,7 +170,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String classicId = fabricsInfo.getClassicId();
         if (StringUtils.isNotBlank(classicId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.FABRICCLASSICITEMS);
             classicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, classicId);
             stringBuilder.append(classicId);
         }
@@ -183,7 +183,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String productTypeId = fabricsInfo.getProductTypeId();
         if (StringUtils.isNotBlank(productTypeId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.PRODUCTTYPEITEMS);
             String productTypeName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, productTypeId);
 //                    stringBuilder.append(CharConstant.COMMA).append(productTypeName);
             fabricsInfo.setProductTypeId(productTypeName);
@@ -198,7 +198,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String specificationId = fabricsInfo.getSpecificationId();
         if (StringUtils.isNotBlank(specificationId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.SPECFICATIONITEMS);
             specificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, specificationId);
             if (stringBuilder.length() == 0) {
                 stringBuilder.append(specificationId);
@@ -217,7 +217,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String dyeId = fabricsInfo.getDyeId();
         if (StringUtils.isNotBlank(dyeId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.DYEITEMS);
             dyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, dyeId);
             stringBuilder.append(CharConstant.COMMA).append(dyeId);
         }
@@ -231,7 +231,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String finishId = fabricsInfo.getFinishId();
         if (StringUtils.isNotBlank(finishId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.FINISHITEMS);
             finishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, finishId);
             stringBuilder.append(CharConstant.COMMA).append(finishId);
         }
@@ -246,7 +246,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String blcId = fabricsInfo.getBlcId();
         if (StringUtils.isNotBlank(blcId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("blcItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.BLCITEMS);
             blcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, blcId);
             stringBuilder.append(CharConstant.COMMA).append(blcId);
         }
@@ -261,7 +261,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String compositeClassicId = fabricsInfo.getCompositeClassicId();
         if (StringUtils.isNotBlank(compositeClassicId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.FABRICCLASSICITEMS);
             compositeClassicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeClassicId);
             stringBuilder.append(CharConstant.COMMA).append(compositeClassicId);
         }
@@ -275,7 +275,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String compositeProductTypeId = fabricsInfo.getCompositeProductTypeId();
         if (StringUtils.isNotBlank(compositeProductTypeId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.PRODUCTTYPEITEMS);
             compositeProductTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeProductTypeId);
             stringBuilder.append(CharConstant.COMMA).append(compositeProductTypeId);
         }
@@ -289,7 +289,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String compositeSpecificationId = fabricsInfo.getCompositeSpecificationId();
         if (StringUtils.isNotBlank(compositeSpecificationId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("specficationItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.SPECFICATIONITEMS);
             compositeSpecificationId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeSpecificationId);
             stringBuilder.append(CharConstant.COMMA).append(compositeSpecificationId);
         }
@@ -303,7 +303,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String compositeDyeId = fabricsInfo.getCompositeDyeId();
         if (StringUtils.isNotBlank(compositeDyeId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("dyeItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.DYEITEMS);
             compositeDyeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeDyeId);
             stringBuilder.append(CharConstant.COMMA).append(compositeDyeId);
         }
@@ -317,7 +317,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String compositeFinishId = fabricsInfo.getCompositeFinishId();
         if (StringUtils.isNotBlank(compositeFinishId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("finishItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.FINISHITEMS);
             compositeFinishId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, compositeFinishId);
             stringBuilder.append(CharConstant.COMMA).append(compositeFinishId);
         }
@@ -331,7 +331,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String momcId = fabricsInfo.getMomcId();
         if (StringUtils.isNotBlank(momcId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("momcItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.MOMCITEMS);
             momcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, momcId);
             stringBuilder.append(CharConstant.COMMA).append(momcId);
         }
@@ -345,7 +345,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;
         String comocId = fabricsInfo.getComocId();
         if (StringUtils.isNotBlank(comocId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("comocItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.COMOCITEMS);
             comocId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, comocId);
             stringBuilder.append(CharConstant.COMMA).append(comocId);
         }
@@ -359,7 +359,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;//透湿程度列表
         String wvpId = fabricsInfo.getWvpId();
         if (StringUtils.isNotBlank(wvpId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wvpItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.WVPITEMS);
             wvpId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, wvpId);
             stringBuilder.append(CharConstant.COMMA).append(wvpId);
         }
@@ -373,7 +373,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;//膜的厚度列表
         String mtId = fabricsInfo.getMtId();
         if (StringUtils.isNotBlank(mtId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("mtItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.MTITEMS);
             mtId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, mtId);
             stringBuilder.append(CharConstant.COMMA).append(mtId);
         }
@@ -387,7 +387,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;// 贴膜或涂层工艺列表
         String woblcId = fabricsInfo.getWoblcId();
         if (StringUtils.isNotBlank(woblcId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("wblcItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.WBLCITEMS);
             woblcId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, woblcId);
             stringBuilder.append(CharConstant.COMMA).append(woblcId);
         }
@@ -400,7 +400,7 @@ public enum FabricsServiceHelper {
         List<SelectItem2> selectItem2s;// 用量单位列表
         String unitId = fabricsInfo.getUnitId();
         if (StringUtils.isNotBlank(unitId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("unitItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.UNITITEMS);
             unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
             fabricsInfo.setUnitId(unitId);
         }
@@ -417,7 +417,7 @@ public enum FabricsServiceHelper {
         if (null != fabricItems) {
             for (FabricsJoinInfo joinInfo : fabricItems) {
                 MaterialSpInfo materialSpInfo = joinInfo.getMaterialSpInfo();
-                MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo);
+                bigDecimal = bigDecimal.add(MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo));
             }
         }
         return bigDecimal;

@@ -22,12 +22,12 @@ public enum SpInfoHelper {
     public void refreshSelect() {
         SpManageServiceImpl spManageService = SpringContextHolder.getBean("spManageService");
         List<SelectItem2> spItems = spManageService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom("spItems", spItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.SPITEMS, spItems);
     }
 
 
     public String turnSpIdToName(String spId) {
-        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+        List<SelectItem2> selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.SPITEMS);
         String spName = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
         return spName;
     }

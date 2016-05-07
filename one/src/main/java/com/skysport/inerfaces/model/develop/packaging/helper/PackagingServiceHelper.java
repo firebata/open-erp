@@ -8,6 +8,7 @@ import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
 import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
 import com.skysport.inerfaces.bean.develop.PackagingInfo;
 import com.skysport.inerfaces.bean.develop.join.KFPackagingJoinInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.inerfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.inerfaces.model.relation.material_sp.helper.MaterialSpServiceHelper;
@@ -52,7 +53,7 @@ public enum PackagingServiceHelper {
 
         String spId = packaging.getSpId();
         if (StringUtils.isNotBlank(spId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("spItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.SPITEMS);
             spId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, spId);
             packaging.setSpId(spId);
         }
@@ -61,7 +62,7 @@ public enum PackagingServiceHelper {
         //材质列表
         String classicId = packaging.getClassicId();
         if (StringUtils.isNotBlank(classicId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("fabricClassicItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.FABRICCLASSICITEMS);
             classicId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, classicId);
             stringBuilder.append(classicId);
 //                fabricsInfo.setClassicId(classicId);
@@ -71,7 +72,7 @@ public enum PackagingServiceHelper {
 //                //品名列表
         String productTypeId = packaging.getProductTypeId();
         if (StringUtils.isNotBlank(productTypeId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("productTypeItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.PRODUCTTYPEITEMS);
             productTypeId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, productTypeId);
             packaging.setProductTypeId(productTypeId);
 //                    stringBuilder.append(productTypeId);
@@ -99,7 +100,7 @@ public enum PackagingServiceHelper {
         // 用量单位列表
         String unitId = packaging.getUnitId();
         if (StringUtils.isNotBlank(unitId)) {
-            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom("unitItems");
+            selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.UNITITEMS);
             unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
             packaging.setUnitId(unitId);
         }
@@ -110,14 +111,14 @@ public enum PackagingServiceHelper {
     /**
      * 统计成本
      *
-     * @param accessoriesItems
+     * @param packagingItems
      * @return
      */
     public BigDecimal caculateCostingPackageing(List<KFPackagingJoinInfo> packagingItems) {
         BigDecimal bigDecimal = new BigDecimal(0);
         for (KFPackagingJoinInfo joinInfo : packagingItems) {
             MaterialSpInfo materialSpInfo = joinInfo.getMaterialSpInfo();
-            MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo);
+            bigDecimal = bigDecimal.add(MaterialSpServiceHelper.SINGLETONE.caculateCosting(bigDecimal, materialSpInfo));
         }
         return bigDecimal;
     }

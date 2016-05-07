@@ -54,7 +54,7 @@
                             <label class="col-xs-2  control-label" for="exchangeCosts"> 换汇成本（小数形式） </label>
                             <div class="col-xs-3">
                                 <input type="text" id="exchangeCosts" name="exchangeCosts" placeholder="换汇成本，e.g.0.65"
-                                       class="col-xs-10 col-sm-12" value="${quotedInfo.costing}"/>
+                                       class="col-xs-10 col-sm-12" value="${quotedInfo.exchangeCosts}"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,3 +97,4 @@
 </body>
 </html>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/quotepre/quotepre-edit.js"></script>

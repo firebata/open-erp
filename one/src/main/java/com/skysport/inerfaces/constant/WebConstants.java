@@ -76,6 +76,28 @@ public interface WebConstants extends TableNameConstants {
     int NO_NEED_TRANSFORM_COLUMN_NAME = 1;
 
     String MATERIALTYPEITEMS = "materialTypeItems";
+    String SPITEMS = "spItems";
+    String FABRICCLASSICITEMS = "fabricClassicItems";
+    String PRODUCTTYPEITEMS = "productTypeItems";
+    String PRODUCTTYPEITEMSSTRING = "productTypeItems";
+    String SPECFICATIONITEMS = "specficationItems";
+    String DYEITEMS = "dyeItems";
+    String FINISHITEMS = "finishItems";
+    String BLCITEMS = "blcItems";
+    String MOMCITEMS = "momcItems";
+    String COMOCITEMS = "comocItems";
+    String WVPITEMS = "wvpItems";
+    String MTITEMS = "mtItems";
+    String WBLCITEMS = "wblcItems";
+    String UNITITEMS = "unitItems";
+
+
+
+
+
+
+
+
 
     String FILE_TXT = "txt";
     String FILE_IMG = "img";

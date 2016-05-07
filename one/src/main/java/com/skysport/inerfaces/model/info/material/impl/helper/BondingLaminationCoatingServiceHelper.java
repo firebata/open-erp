@@ -1,8 +1,9 @@
 package com.skysport.inerfaces.model.info.material.impl.helper;
 
-import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
+import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material.impl.BondingLaminationCoatingServiceImpl;
 
 import java.util.List;
@@ -17,6 +18,6 @@ public enum BondingLaminationCoatingServiceHelper {
     public void refreshSelect() {
         BondingLaminationCoatingServiceImpl bondingLaminationCoatingService = SpringContextHolder.getBean("bondingLaminationCoatingService");
         List<SelectItem2> blcItems = bondingLaminationCoatingService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom("blcItems", blcItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.BLCITEMS, blcItems);
     }
 }

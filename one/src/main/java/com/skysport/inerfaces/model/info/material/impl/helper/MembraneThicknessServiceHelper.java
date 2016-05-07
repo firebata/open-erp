@@ -1,8 +1,9 @@
 package com.skysport.inerfaces.model.info.material.impl.helper;
 
-import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
+import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material.impl.MembraneThicknessServiceImpl;
 
 import java.util.List;
@@ -17,6 +18,6 @@ public enum MembraneThicknessServiceHelper {
     public void refreshSelect() {
         MembraneThicknessServiceImpl membraneThicknessService = SpringContextHolder.getBean("membraneThicknessService");
         List<SelectItem2> mtItems = membraneThicknessService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom("mtItems", mtItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.MTITEMS, mtItems);
     }
 }

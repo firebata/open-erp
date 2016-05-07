@@ -1,8 +1,9 @@
 package com.skysport.inerfaces.model.info.material.impl.helper;
 
-import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
+import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material.impl.MaterialUnitServiceImpl;
 
 import java.util.List;
@@ -17,6 +18,6 @@ public enum MaterialUnitServiceHelper {
     public void refreshSelect() {
         MaterialUnitServiceImpl materialUnitService = SpringContextHolder.getBean("materialUnitService");
         List<SelectItem2> unitItems = materialUnitService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom("unitItems", unitItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.UNITITEMS, unitItems);
     }
 }

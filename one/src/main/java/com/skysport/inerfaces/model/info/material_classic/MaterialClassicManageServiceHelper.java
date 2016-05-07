@@ -1,8 +1,9 @@
 package com.skysport.inerfaces.model.info.material_classic;
 
-import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.bean.SpringContextHolder;
+import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.info.material_classic.impl.MaterialClassicManageServiceImpl;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public enum MaterialClassicManageServiceHelper {
 
         //面料
         List<SelectItem2> fabricClassicItems = materialClassicManageService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom("fabricClassicItems", fabricClassicItems);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.FABRICCLASSICITEMS, fabricClassicItems);
 
         //辅料材质
         List<SelectItem2> accessoriesClassicItems = materialClassicManageService.querySelectList(null);

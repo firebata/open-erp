@@ -153,7 +153,7 @@
             ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
         </if>
         <if test="dataTablesInfo.orderColumn==null or dataTablesInfo.orderColumn == ''">
-            ORDER BY c.update_time desc
+            ORDER BY a.update_time desc
         </if>
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
 

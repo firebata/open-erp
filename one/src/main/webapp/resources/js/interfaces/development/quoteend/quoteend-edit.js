@@ -36,7 +36,7 @@
     /**
      * 报价信息
      */
-    function buildBomQuoted(bominfo) {
+    function buildBomQuoted() {
         var quotedInfo = {};
         quotedInfo.factoryOffer = $("#factoryOffer").val();
         quotedInfo.factoryMargins = $("#factoryMargins").val();
@@ -52,8 +52,8 @@
 
 
     $(function () {
-        var natrualKey = $("#natrualkey").val();
-        $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
+        // var natrualKey = $("#natrualkey").val();
+        // $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
         $("#quotepreForm").on('click', '#saveBtn', tosave);
         $("#quotepreForm").on('click', '#submitBtn', tosubmit);
         //监听价格变动
@@ -65,7 +65,7 @@
     function cbOfferDescDetail() {
         //工厂利润率改变，重新计算欧元报价
         var _$id = $(this).attr('id');
-        if (_$id === 'euroPrice') {
+        if (_$id == 'euroPrice') {
             cacuEuroPrice();
         }
         // else if (_$id === 'costing') {//成本核算
@@ -74,25 +74,25 @@
 
     }
 
-    /**
-     * 成本核算
-     */
-    function caculateCostingVal() {
-        //不用计算成本
-
-        var costingVal = 0;
-        $("input[name='colorPrice']").each(
-            function () {
-                var _$thisVal = $(this).val();
-                //是否是有效值
-                if ($.strIsEmpty(_$thisVal)) {
-                    _$thisVal = 0;
-                }
-                costingVal = $.floatAdd(costingVal, parseFloat(_$thisVal));
-            }
-        )
-        $("#costing").val(costingVal);
-    }
+    // /**
+    //  * 成本核算
+    //  */
+    // function caculateCostingVal() {
+    //     //不用计算成本
+    //
+    //     var costingVal = 0;
+    //     $("input[name='colorPrice']").each(
+    //         function () {
+    //             var _$thisVal = $(this).val();
+    //             //是否是有效值
+    //             if ($.strIsEmpty(_$thisVal)) {
+    //                 _$thisVal = 0;
+    //             }
+    //             costingVal = $.floatAdd(costingVal, parseFloat(_$thisVal));
+    //         }
+    //     )
+    //     $("#costing").val(costingVal);
+    // }
 
 
     /**
@@ -101,26 +101,26 @@
      */
     function cacuEuroPrice() {
         var exchangeCosts = $("#exchangeCosts").val();
-        var factoryOffer = $("#factoryOffer").val();
-        //var euroPrice = factoryOffer * (1 + Number(factoryMargins));
-        if ($.strIsEmpty(exchangeCosts)) {
-            bootbox.alert("请输入换汇成本");
-        }
-        else if ($.strIsEmpty(factoryOffer)) {
-            bootbox.alert("请输入工厂报价");
-        }
-        else {
-            var euroPrice = $.floatDiv(factoryOffer, exchangeCosts);
-            $("#euroPrice").val(euroPrice.toFixed(2));
-        }
+    var factoryOffer = $("#factoryOffer").val();
+    //var euroPrice = factoryOffer * (1 + Number(factoryMargins));
+    if ($.strIsEmpty(exchangeCosts)) {
+        bootbox.alert("请输入换汇成本");
     }
+    else if ($.strIsEmpty(factoryOffer)) {
+        bootbox.alert("请输入工厂报价");
+    }
+    else {
+        var euroPrice = $.floatDiv(factoryOffer, exchangeCosts);
+        $("#euroPrice").val(euroPrice.toFixed(2));
+    }
+}
 
 
-    function _doSuccess_info(_data) {
-        iniBomQuotedInfo(_data);
-        var $btnDIV = $("#btnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
-    }
+    // function _doSuccess_info(_data) {
+    //     iniBomQuotedInfo(_data);
+    //     var $btnDIV = $("#btnInfo");
+    //     $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+    // }
 
     function tosave() {
         var info = buildBomQuoted();//$("#quotepreForm").serialize();

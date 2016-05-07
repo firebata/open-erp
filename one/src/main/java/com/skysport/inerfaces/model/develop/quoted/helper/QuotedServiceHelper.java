@@ -122,13 +122,13 @@ public class QuotedServiceHelper {
     private BigDecimal cacaulataCosting(BigDecimal costingFabric, BigDecimal costingAccessories, BigDecimal costingPackageing) {
         BigDecimal costing = new BigDecimal(0);
         if (null != costingFabric) {
-            costing.add(costingFabric);
+            costing = costing.add(costingFabric);
         }
         if (null != costingAccessories) {
-            costing.add(costingAccessories);
+            costing = costing.add(costingAccessories);
         }
         if (null != costingPackageing) {
-            costing.add(costingPackageing);
+            costing = costing.add(costingPackageing);
         }
         return costing;
     }

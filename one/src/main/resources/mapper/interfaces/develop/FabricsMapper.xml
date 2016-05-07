@@ -265,8 +265,8 @@
             FROM t_kf_fabrics a
             INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
             INNER  JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
-            LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id AND b.del_flag=0
-            LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id AND c.del_flag=0
+            LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id
+            LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id
             LEFT JOIN t_kf_fabrics_detail d ON a.fabrics_id = d.fabrics_id AND d.del_flag=0
             order by a.name_num ASC
     </select>
@@ -349,8 +349,8 @@
                 e.offer_amount AS orderCount
             FROM t_kf_fabrics a
             INNER JOIN t_kf_bom_material k ON a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
-            INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id
-            INNER JOIN t_kf_fabrics_detail b ON a.fabrics_id = b.fabrics_id
+            INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
+            INNER JOIN t_kf_fabrics_detail b ON a.fabrics_id = b.fabrics_id AND b.del_flag=0
             LEFT JOIN t_kf_material_unit_dosage c ON b.fabrics_id = c.material_id
             LEFT JOIN t_kf_material_spinfo d ON c.material_id = d.material_id
     </select>
