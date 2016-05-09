@@ -103,9 +103,6 @@
 		update
 		  t_kf_pre_quote a
 		set
-            a.sp_id =#{spId},
-            a.main_fabric_ids =#{fabricId},
-            a.main_fabric_descs =#{mainFabricDescs},
             a.euro_exchange_rates =#{euroExchangeRates},
             a.factory_offer =#{factoryOffer},
             a.factory_margins =#{factoryMargins},
@@ -115,11 +112,7 @@
             a.lp_price =#{lpPrice},
             a.commission =#{commission},
             a.quoted_price =#{quotedPrice},
-            a.costing = #{costing},
-            a.project_name =#{projectName},
-            a.project_item_name =#{projectItemName},
-            a.bom_name =#{bomName},
-            a.sp_name =#{spName}
+            a.costing = #{costing}
 		WHERE a.bom_id =#{bomId}
 	</update>
 

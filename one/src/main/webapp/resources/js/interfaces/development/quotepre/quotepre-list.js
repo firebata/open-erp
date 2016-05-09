@@ -4,6 +4,7 @@
 (function () {
     "use strict";
     var path = $.basepath();
+    var searchURL = path + "/development/quotepre/search/";
     /**
      * 列表展示内容
      * @returns {*[]}
@@ -29,7 +30,7 @@
         var indexOpreation = columnsName.length - 1;
         table = $('#example').DataTable({
             ajax: {
-                url: "search"
+                url: searchURL
             },
             serverSide: true,
             columns: columnsName,
@@ -83,7 +84,7 @@
 
 
     var editQuotePre = function (_bomId) {
-        window.location.href = path+"/development/quotepre/add/" + _bomId;
+        window.location.href = path + "/development/quotepre/add/" + _bomId;
     }
 
     //第一次初始化下拉列表 & 添加下拉列表监听事件

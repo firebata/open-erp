@@ -38,6 +38,7 @@
                             报价信息
                             <small></small>
                             <input type="hidden" name="natrualkey" id="natrualkey" value="${natrualkey}"/>
+                            <input type="hidden" name="approveStatus" id="approveStatus" value="${quotedInfo.approveStatus}"/>
                             <input type="hidden" name="taskId" id="taskId" value="${taskId}"/>
                             <input type="hidden" name="stateCode" id="stateCode" value="${stateCode}"/>
                             <input type="hidden" name="processInstanceId" id="processInstanceId" value="${processInstanceId}"/>
@@ -84,7 +85,7 @@
                     </div>
                 </div>
 
-                <div id="quotepreBtnInfo">
+                <div id="btnInfo">
 
                 </div>
             </form>

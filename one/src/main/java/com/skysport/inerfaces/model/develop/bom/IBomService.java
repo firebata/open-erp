@@ -1,10 +1,11 @@
 package com.skysport.inerfaces.model.develop.bom;
 
+import com.skysport.core.model.common.IApproveService;
+import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
-import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
-import com.skysport.core.model.common.ICommonService;
+import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/13.
  */
-public interface IBomService extends ICommonService<BomInfo> {
+public interface IBomService extends ICommonService<BomInfo>,IApproveService {
 
     int listFilteredInfosCounts(BomQueryForm bomQueryForm);
 

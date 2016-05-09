@@ -3,6 +3,7 @@ package com.skysport.inerfaces.model.develop.quoted.service.impl;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -10,16 +11,20 @@ import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +49,12 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
+
+    @Autowired
+    private IStaffService developStaffImpl;
+
+    @Autowired
+    private IWorkFlowService quoteInfoTaskImpl;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -79,7 +90,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
         //查询项目和子项目id
-        ProjectPojectItemBomSpVo projectPojectItemBomSpVo = bomInfoMapper.queryIds(quotedInfo.getBomId(),quotedInfo.getSpId());
+        ProjectPojectItemBomSpVo projectPojectItemBomSpVo = bomInfoMapper.queryIds(quotedInfo.getBomId(), quotedInfo.getSpId());
         quotedInfo.setProjectId(projectPojectItemBomSpVo.getProjectId());
         quotedInfo.setProjectItemId(projectPojectItemBomSpVo.getProjectItemId());
         quotedInfo.setProjectName(projectPojectItemBomSpVo.getProjectName());
@@ -165,7 +176,6 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
                 String seriesName = bomInfo.getSeriesName();
                 seriesNameSet.add(CharConstant.HORIZONTAL_LINE + seriesName);//去重复
                 String bomName = bomInfo.getName();
-
                 if (bomNameSet.isEmpty()) {
                     bomNameSet.add(bomName);
                 } else if (bomNameSet.size() < 3) {
@@ -179,36 +189,62 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
 
     @Override
     public void updateApproveStatus(String businessKey, String status) {
-
+        bomInfoMapper.updateApproveStatus(businessKey, status);
     }
 
     @Override
     public void updateApproveStatusBatch(List<String> businessKeys, String status) {
-
+        bomInfoMapper.updateApproveStatusBatch(businessKeys, status);
     }
 
     @Override
     public void submit(String businessKey) {
-
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
 
     @Override
     public void submit(String taskId, String businessKey) {
+        //查到bomid
 
+
+        boolean isAlive = TaskServiceHelper.getInstance().isActive(this, businessKey);
+        if (StringUtils.isNotBlank(taskId) && taskId.equals("null") && !isAlive) {
+            logger.warn("流程第一次启动");
+        } else {
+            //完成当前任务
+            Map<String, Object> variables = new HashMap<String, Object>();
+            String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+            quoteInfoTaskImpl.complete(taskId, variables);
+        }
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
 
     @Override
     public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
-        return null;
+        List<ProcessInstance> processInstances = quoteInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(natrualKey);
+        return processInstances;
     }
 
     @Override
     public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
-        return null;
+        List<ProcessInstance> processInstances = quoteInfoTaskImpl.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
+        return processInstances;
     }
 
     @Override
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
-        return null;
+        Map<String, Object> variables = new HashedMap();
+        String handleUserId;
+        if (approve) {
+            handleUserId = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, handleUserId);
+        } else {
+//            handleUserId = developStaffImpl.staffId();
+//            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
+        }
+        variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
+
+        return variables;
     }
 }

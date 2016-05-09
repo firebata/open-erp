@@ -141,7 +141,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(description = "更细子项目")
+    @SystemControllerLog(description = "子项目")
     public Map<String, Object> edit(@RequestBody ProjectBomInfo info) {
 
         projectItemManageService.edit(info);

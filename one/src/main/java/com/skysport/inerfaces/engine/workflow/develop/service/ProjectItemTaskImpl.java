@@ -1,4 +1,4 @@
-package com.skysport.inerfaces.engine.workflow;
+package com.skysport.inerfaces.engine.workflow.develop.service;
 
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
@@ -23,45 +23,17 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
     private IStaffService developStaffImpl;
 
     @Override
-    public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables) {
-        UserInfo userInfo = UserUtils.getUserFromSession();
-        ProcessInstance processInstance = null;
-
-        try {
-            identityService.setAuthenticatedUserId(userInfo.getNatrualkey());
-            processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
-
-        } finally {
-            identityService.setAuthenticatedUserId(null);
-
-        }
-        return processInstance;
-    }
-
-
-
-    @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
-
-//        ProjectBomInfo projectBomInfo = projectItemManageService.queryInfoByNatrualKey(businessKey);
 
         Map<String, Object> variables = new HashMap<String, Object>();
         UserInfo userInfo = UserUtils.getUserFromSession();
         ProcessInstance processInstance = null;
         try {
             String userId = userInfo.getNatrualkey();
-
-//            String groupId = identityService.createGroupQuery().groupMember(userId).list().get(0).getId();//开发人员所属组
-            //开发经理的组id
-//            String groupIdDevManager = roleInfoService.queryParentId(groupId);
-
             String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
-
             identityService.setAuthenticatedUserId(userId);
-
             variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.PROJECT_ITEM_PROCESS, businessKey, variables);
-
         } finally {
             identityService.setAuthenticatedUserId(null);
         }

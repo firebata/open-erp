@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.mapper.info;
 
+import com.skysport.core.mapper.ApproveMapper;
 import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 @Repository("bomInfoMapper")
-public interface BomInfoMapper extends CommonMapper<BomInfo> {
+public interface BomInfoMapper extends CommonMapper<BomInfo> ,ApproveMapper {
 
     int listFilteredInfosCounts(BomQueryForm bomQueryForm);
 

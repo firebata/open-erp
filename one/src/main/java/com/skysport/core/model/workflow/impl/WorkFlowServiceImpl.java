@@ -4,11 +4,9 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UserUtils;
-import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import org.activiti.engine.*;
-import org.activiti.engine.history.HistoricProcessInstance;
-import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -19,7 +17,6 @@ import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,70 +45,6 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
     @Autowired
     public ManagementService managementService;
 
-    /**
-     * 启动流程
-     *
-     * @param processDefinitionKey 流程定义主键
-     * @return
-     */
-    @Override
-    public ProcessInstance startProcessInstanceByKey(String processDefinitionKey) {
-        return runtimeService.startProcessInstanceByKey(processDefinitionKey);
-    }
-
-    /**
-     * @param processDefinitionKey
-     * @param variables
-     * @return
-     */
-    @Override
-    public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, Map<String, Object> variables) {
-        return runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables) {
-        return runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceById(String processDefinitionId) {
-        return runtimeService.startProcessInstanceById(processDefinitionId);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey) {
-        return runtimeService.startProcessInstanceById(processDefinitionId, businessKey);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceById(String processDefinitionId, Map<String, Object> variables) {
-        return runtimeService.startProcessInstanceById(processDefinitionId, variables);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceById(String processDefinitionId, String businessKey, Map<String, Object> variables) {
-        return runtimeService.startProcessInstanceById(processDefinitionId, businessKey, variables);
-    }
-
-    @Override
-    public ProcessInstance startProcessInstanceByMessage(String messageName) {
-        return runtimeService.startProcessInstanceByMessage(messageName);
-    }
-
-    /**
-     * 查询待办任务
-     *
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<TaskVo> queryToDoTask(String userId) throws InvocationTargetException, IllegalAccessException {
-        TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
-        List<Task> tasks = taskQuery.list();
-        List<TaskVo> taskRtn = buildTaskVos(tasks);
-        return taskRtn;
-    }
 
     /**
      * @param tasks
@@ -178,34 +111,6 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
         return processDefinition;
     }
 
-    /**
-     * 查询历史流程定义
-     *
-     * @param firstResult
-     * @param maxResults
-     * @param processDefinitionKey
-     * @return
-     */
-    @Override
-    public List<HistoricProcessInstance> findFinishedProcessInstaces(int firstResult, int maxResults, String processDefinitionKey) {
-
-        HistoricProcessInstanceQuery query = historyService.createHistoricProcessInstanceQuery().processDefinitionKey("leave").finished().orderByProcessInstanceEndTime().desc();
-        List<HistoricProcessInstance> list = query.listPage(firstResult, maxResults);
-        return list;
-    }
-
-    /**
-     * 查询业务逐渐
-     *
-     * @param processInStanceId 流程实例id
-     * @return
-     */
-    @Override
-    public String queryBusinessKeyByProcessInstanceId(String processInStanceId) {
-        ProcessInstance processInstance = queryProcessInstance(processInStanceId);
-        String businessKey = processInstance.getBusinessKey();
-        return businessKey;
-    }
 
     /**
      * @param businessKey
@@ -295,7 +200,6 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
     }
 
     /**
-     *
      * @param taskQueryForm
      * @param userId
      * @return

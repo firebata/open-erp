@@ -48,6 +48,7 @@
         quotedInfo.spId = $("#spId").val();
         quotedInfo.fabricId = $("#fabricId").val();
         quotedInfo.natrualkey = $("#natrualkey").val();
+        return quotedInfo;
     }
 
 
@@ -58,7 +59,8 @@
         $("#quotepreForm").on('click', '#submitBtn', tosubmit);
         //监听价格变动
         $("#quotepreForm").on("click", "input", cbOfferDescDetail);
-
+        var $btnDIV = $("#btnInfo");
+        $.showHandleBtn($btnDIV, $("#approveStatus").val(), tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
     });
 
 

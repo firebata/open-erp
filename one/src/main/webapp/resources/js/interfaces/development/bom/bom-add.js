@@ -6,20 +6,21 @@
 (function ($) {
     "use strict";
     var path = $.basepath();
-    var saveUrl = path + "/development/bom/edit";
-    var listUrl = path + "/development/bom/list";
+    var saveUrl = path + "/development/bom/edit/";
+    var listURL = path + "/development/bom/list/";
+    var submitURL = path + "/development/bom/submit/";
+
     var mainColorOld;
     
     $.extend({
         bomSave: bomSave,
         bomSubmit: bomSubmit,
         bomAutoBackup: bomAutoBackup,
-        mainColorEditInBom: mainColorEditInBom,
+        mainColorEditInBom: mainColorEditInBom
         // caculateCostingVal: caculateCostingVal
     });
 
     $(function () {
-
         initBom();
         //赋值价格
         // $("#factoryItemInfo").on("change", "select", factoryItemInfoSelectChg);
@@ -29,8 +30,13 @@
 
         //监控工厂信息变化
         // $("#factoryItemInfo").on("blur", "input", monitorInputBlur2);
-
+        $("#bomAddPageForm").on('click', '#saveBtn', $.bomSave);
+        $("#bomAddPageForm").on('click', '#submitBtn', function () {
+            $.toSubmitApprove(submitURL,listURL);
+        });
     });
+
+
 
 
   
@@ -235,6 +241,8 @@
             //初始化报价信息
             $.iniBomQuotedInfo(_data.quotedInfo);
 
+            var $btnDIV = $("#btnInfo");
+            $.showHandleBtn($btnDIV, $("#approveStatus").val(), null, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
         });
 
     }
@@ -247,7 +255,7 @@
 
         $.sendJsonAjax(saveUrl, bominfo, function (_bomInfo) {
             if (null == needToLisPage) {
-                window.location.href = listUrl;
+                window.location.href = listURL;
             } else {
                 bootbox.alert("成功暂存数据.");
                 if (null != _bomInfo) {

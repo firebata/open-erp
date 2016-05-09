@@ -86,12 +86,14 @@ public class BomAction extends BaseAction<BomInfo> {
     @ResponseBody
     @SystemControllerLog(description = "查询BOM列表信息")
     public Map<String, Object> search(HttpServletRequest request) {
+
         //组件queryFory的参数
         BomQueryForm queryForm = new BomQueryForm();
         queryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.BOM_TABLE_COLUMN, request));
         BomInfo bomInfo = BomHelper.getInstance().getProjectBomInfo(request);
         queryForm.setBomInfo(bomInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(queryForm, request, bomManageService);
+
         return resultMap;
 
     }
@@ -154,6 +156,22 @@ public class BomAction extends BaseAction<BomInfo> {
     public Map<String, Object> del(@PathVariable String natrualKey) {
         bomManageService.delCacadBomInfo(natrualKey);
         return rtnSuccessResultMap("删除成功");
+    }
+
+
+    /**
+     * 此方法描述的是：表单提交
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/submit/{taskId}/{businessKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
+    public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
+        bomManageService.submit(taskId, businessKey);
+        ModelAndView mav = new ModelAndView("forward:/task/todo/list");
+        return mav;
     }
 
 }

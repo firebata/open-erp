@@ -33,7 +33,8 @@
         floatAdd: floatAdd,
         floatSub: floatSub,
         floatMul: floatMul,
-        floatDiv: floatDiv
+        floatDiv: floatDiv,
+        toSubmitApprove: toSubmitApprove
     })
     ;
 
@@ -628,7 +629,7 @@
         }
         var html = ""
         if (_approveStatus == approve_status_new || _approveStatus == approve_status_reject) {
-            html = "<div class='col-xs-offset-6 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md'>保存</button></div>";
+            html = "<div class='col-xs-offset-4 col-xs-1'><button type='button' id='saveBtn' class='btn btn-info btn-md'>保  存</button></div>";
             if (_stateCode == statecode_alive && strIsNotEmpty(_taskId)) {//流程在运行中：审核走通用接口，只需要传递业务主键和任务id(这个界面值来源于)
                 html += "<div class='col-xs-1'><button type='button' class='btn btn-info btn-md' onclick='javascript:$.submitBuss(\"" + _businessKey + "\",\"" + _taskId + "\")'>提交审核</button></div>";
             } else {
@@ -723,7 +724,19 @@
 
             // $.sendJsonAjax(url, _data, null)
         }
-
-
     }
+
+    /**
+     *
+     * @param submitURL
+     * @param listURL
+     */
+    function toSubmitApprove(submitURL, listURL) {
+        var nk = $("#natrualkey").val();
+        var taksId = "null";
+        $.sendJsonAjax(submitURL + taksId + "/" + nk, {}, function () {
+            window.location.href = listURL;
+        })
+    }
+
 }(jQuery));

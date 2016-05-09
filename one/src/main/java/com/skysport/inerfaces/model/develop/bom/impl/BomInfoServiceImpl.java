@@ -3,10 +3,12 @@ package com.skysport.inerfaces.model.develop.bom.impl;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
@@ -21,7 +23,10 @@ import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
+import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import com.skysport.inerfaces.model.relation.IRelationIdDealService;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
@@ -35,6 +40,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类说明:
@@ -63,6 +69,12 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
     @Autowired
     private IRelationIdDealService bomMaterialServiceImpl;
+
+    @Resource
+    private IStaffService developStaffImpl;
+
+    @Autowired
+    private IWorkFlowService bomInfoTaskImpl;
 
     @Autowired
     private IProductionInstructionService productionInstructionServiceImpl;
@@ -356,8 +368,6 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
         //增加项目和子项目的关系
         List<ProjectItemBomIdVo> ids = ProjectHelper.SINGLETONE.getProjectItemBomIdVo(alls);
-
-
         return ids;
     }
 
@@ -371,4 +381,65 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
     }
 
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+        bomInfoMapper.updateApproveStatus(businessKey, status);
+    }
+
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+        bomInfoMapper.updateApproveStatusBatch(businessKeys, status);
+    }
+
+    @Override
+    public void submit(String businessKey) {
+        //启动流程
+//        startWorkFlow(businessKey);
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+    }
+
+    @Override
+    public void submit(String taskId, String businessKey) {
+
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+    }
+
+    /**
+     * 启动开发流程
+     *
+     * @param projectId String
+     */
+    private void startWorkFlow(String projectId) {
+        bomInfoTaskImpl.startProcessInstanceByBussKey(projectId);
+    }
+
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
+        List<ProcessInstance> processInstances = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(natrualKey);
+        return processInstances;
+    }
+
+    @Override
+    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
+        List<ProcessInstance> processInstances = bomInfoTaskImpl.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
+        return processInstances;
+    }
+
+    @Override
+    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
+        Map<String, Object> variables = new HashedMap();
+        String handleUserId;
+        if (approve) {
+            handleUserId = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, handleUserId);
+        } else {
+//            handleUserId = developStaffImpl.staffId();
+//            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
+        }
+        variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
+
+        return variables;
+    }
 }

@@ -65,12 +65,14 @@
         var natrualkey = $("#natrualkey").val();
         if (natrualkey != '' && natrualkey != 'null') {
             $.sendRestFulAjax(infoUrl + natrualkey, null, 'GET', 'json', function (_data) {
-
                 Object.keys(_data).map(function (key) {
-                    $('#bomDescDetail input').filter(function () {
+                    $('#bomDesc input').filter(function () {
                         return key == this.name;
                     }).val(_data[key]);
-                    $("#" + key).val(_data[key]);
+                    $('#bomDesc select').filter(function () {
+                        return key == this.name;
+                    }).val(_data[key]);
+                    // $("#" + key).val(_data[key]);
                 });
 
                 callback(_data);
@@ -123,6 +125,7 @@
     }
 
     $(function () {
+
         $("#bomDescTitle").click(function () {
             $("#bomDescDetail").toggle(300);
         });

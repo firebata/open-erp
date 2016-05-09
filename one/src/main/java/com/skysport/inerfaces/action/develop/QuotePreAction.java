@@ -9,10 +9,7 @@ import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -88,6 +85,20 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
         return mav;
     }
 
+    /**
+     * 此方法描述的是：
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:35:09
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    @SystemControllerLog(description = "更新预报价")
+    public Map<String, Object> edit(@RequestBody QuotedInfo info) {
+        quotedService.edit(info);
+        return rtnSuccessResultMap("更新成功");
+
+    }
 
     /**
      * @param natrualKey 主键id

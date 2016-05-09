@@ -327,23 +327,14 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     }
 
-    private void updateProjectItems(List<ProjectBomInfo> intersectionProjectBomInfos) {
-        if (!intersectionProjectBomInfos.isEmpty()) {
-            updateBatch(intersectionProjectBomInfos);
-            updateBatchBomInfo(intersectionProjectBomInfos);
-        }
-    }
-
     private void updateBatchBomInfo(List<ProjectBomInfo> intersectionProjectBomInfos) {
         projectItemMapper.updateBatchBomInfo(intersectionProjectBomInfos);
     }
-
 
     private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
         if (!projectBomInfos.isEmpty()) {
             //业务数据
             addBatch(projectBomInfos);
-
             addBatchBomInfo(projectBomInfos);
         }
 
