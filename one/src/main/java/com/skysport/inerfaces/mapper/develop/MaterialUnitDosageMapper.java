@@ -11,7 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "materialUnitDosageMapper")
 public interface MaterialUnitDosageMapper extends CommonMapper<MaterialUnitDosage> {
 
+
+
     void updateDosage(MaterialUnitDosage materialUnitDosage);
 
     void addDosage(MaterialUnitDosage materialUnitDosage);
+
+    
 }
