@@ -88,18 +88,6 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
 
 
     /**
-     * 查询流程实例
-     *
-     * @param processInstanceId
-     * @return
-     */
-    @Override
-    public ProcessInstance queryProcessInstance(String processInstanceId) {
-        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
-        return processInstance;
-    }
-
-    /**
      * 查询流程定义
      *
      * @param processDefinitionId
@@ -119,7 +107,7 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
     @Override
     public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey) {
         ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).active().orderByProcessInstanceId().desc();
-        List<ProcessInstance> list = query.listPage(0, 10);
+        List<ProcessInstance> list = query.listPage(0, 100);
         return list;
     }
 
@@ -230,4 +218,25 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
         return totals;
     }
 
+    /**
+     * @param processInstanceId
+     */
+    public void suspendProcessInstanceById(String processInstanceId) {
+        runtimeService.suspendProcessInstanceById(processInstanceId);
+    }
+
+    public void suspendProcessInstanceById(List<ProcessInstance> instances) {
+        for (ProcessInstance instance : instances) {
+            suspendProcessInstanceById(instance.getProcessInstanceId());
+        }
+    }
+
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> subtract) {
+        List<ProcessInstance> totals = new ArrayList<>();
+        for (String businessKey : subtract) {
+            List<ProcessInstance> subs = queryProcessInstancesActiveByBusinessKey(businessKey);
+            totals.addAll(subs);
+        }
+        return totals;
+    }
 }

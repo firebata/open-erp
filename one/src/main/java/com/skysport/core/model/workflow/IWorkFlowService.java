@@ -22,13 +22,13 @@ public interface IWorkFlowService {
 
     List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey);
 
+
     /**
-     * 查询流程实例
+     * 终止流程
      *
      * @param processInstanceId
-     * @return
      */
-    ProcessInstance queryProcessInstance(String processInstanceId);
+    void suspendProcessInstanceById(String processInstanceId);
 
     /**
      * 查询流程定义
@@ -61,4 +61,8 @@ public interface IWorkFlowService {
     List<TaskVo> queryToDoTaskFiltered(TaskQueryForm taskQueryForm, String natrualkey);
 
     long queryTaskTotal(String natrualkey);
+
+    void suspendProcessInstanceById(List<ProcessInstance> instances);
+
+    List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> subtract);
 }

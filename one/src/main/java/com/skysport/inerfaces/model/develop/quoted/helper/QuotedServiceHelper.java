@@ -85,12 +85,14 @@ public class QuotedServiceHelper {
         QuotedInfo quotedInfo = new QuotedInfo();
         quotedInfo.setFabricId(fabricInfo.getFabricId());
         quotedInfo.setMainFabricDescs(fabricInfo.getDescription());
-        quotedInfo.setFactoryMargins(factory.getFactoryMargins());
-        quotedInfo.setFactoryOffer(factory.getFactoryOffer());
-        String spId = factory.getSpId();
-        String spName = SpInfoHelper.SINGLETONE.turnSpIdToName(spId);
-        quotedInfo.setSpId(factory.getSpId());
-        quotedInfo.setSpName(spName);
+        if (null != factory) {
+            quotedInfo.setFactoryMargins(factory.getFactoryMargins());
+            quotedInfo.setFactoryOffer(factory.getFactoryOffer());
+            String spId = factory.getSpId();
+            String spName = SpInfoHelper.SINGLETONE.turnSpIdToName(spId);
+            quotedInfo.setSpId(factory.getSpId());
+            quotedInfo.setSpName(spName);
+        }
         quotedInfo.setCosting(costing);
         quotedInfo.setBomId(bomId);
         return quotedInfo;

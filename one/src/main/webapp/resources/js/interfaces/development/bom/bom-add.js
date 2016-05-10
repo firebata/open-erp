@@ -11,7 +11,7 @@
     var submitURL = path + "/development/bom/submit/";
 
     var mainColorOld;
-    
+
     $.extend({
         bomSave: bomSave,
         bomSubmit: bomSubmit,
@@ -32,31 +32,9 @@
         // $("#factoryItemInfo").on("blur", "input", monitorInputBlur2);
         $("#bomAddPageForm").on('click', '#saveBtn', $.bomSave);
         $("#bomAddPageForm").on('click', '#submitBtn', function () {
-            $.toSubmitApprove(submitURL,listURL);
+            $.toSubmitApprove(submitURL, listURL);
         });
     });
-
-
-
-
-  
-
-
-    // function monitorInputBlur2() {
-    //     var _name = $(this).attr('name');
-    //     var _thisId = $(this).attr('id');
-    //     var idNum = "";
-    //     if (_name == 'factoryOffer') {
-    //         idNum = _thisId.substring(12);
-    //     }
-    //     else if (_name == 'factoryMargins') {
-    //         idNum = _thisId.substring(14);
-    //     }
-    //
-    //     var quoteReferenceVal = $("#quoteReference" + idNum).val();
-    //     initQuetoInfo(quoteReferenceVal, idNum, cacuEuroPrice);
-    // }
-
 
     /**
      *
@@ -135,7 +113,6 @@
         return _$val;
     }
 
-   
 
     /**
      * 计算供应商的价格信息
@@ -193,30 +170,6 @@
         }
     }
 
-    // function changeFactoryPrice(idNum) {
-    //     $("#factoryOffer").val($("#factoryOffer" + idNum).val());
-    //     $("#factoryMargins").val($("#factoryMargins" + idNum).val());
-    //     $("#spId").val($("#spIdC" + idNum).val());//更改供应商
-    // }
-
-    // function initQuetoInfo(_quoteReferenceVal, idNum, f) {
-    //
-    //     if (_quoteReferenceVal == quote_reference_yes) {//参考工厂报价
-    //         changeFactoryPrice(idNum);
-    //         // $("#euroPrice").val($("#euroPrice" + idNum).val());
-    //     }
-    //     f();
-    // }
-
-    // function factoryItemInfoSelectChg() {
-    //     if ($(this).attr('name') === 'quoteReference') {
-    //         var quoteReferenceVal = $(this).val();
-    //         var _thisId = $(this).attr('id');
-    //         var idNum = _thisId.substring(14);
-    //         initQuetoInfo(quoteReferenceVal, idNum, cacuEuroPrice);
-    //     }
-    // }
-
     function initBom() {
         //初始化描述信息
         //var natrualkey = $("#natrualkey").val();
@@ -241,12 +194,20 @@
             //初始化报价信息
             $.iniBomQuotedInfo(_data.quotedInfo);
 
-            var $btnDIV = $("#btnInfo");
-            $.showHandleBtn($btnDIV, $("#approveStatus").val(), null, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+            showHandleBtn();
         });
 
     }
 
+    function showHandleBtn() {
+        var $btnDIV = $("#btnInfo");
+        var approveStatus = $("#approveStatus").val();
+        var natrualkey = $("#natrualkey").val();
+        var taskId = $("#taskId").val();
+        var stateCode = $("#stateCode").val();
+        var processInstanceId = $("#processInstanceId").val();
+        $.showHandleBtn($btnDIV, approveStatus, null, natrualkey, taskId, stateCode, processInstanceId);
+    }
 
     /**
      * 保存数据

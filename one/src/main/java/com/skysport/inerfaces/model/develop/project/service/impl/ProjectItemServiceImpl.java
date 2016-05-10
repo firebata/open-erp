@@ -12,7 +12,6 @@ import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.mapper.develop.ProjectItemMapper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
@@ -128,14 +127,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
             sexColorService.addBatch(info.getSexColors());
         }
 
-        ProjectBomInfo info2 = super.queryInfoByNatrualKey(info.getNatrualkey());
-        info.buildBomInfo(info2);
-
-
-        //生成BOM信息并保存
-        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info);
-        projectItemBomServiceImpl.batchInsert(bomIdVos);
-
     }
 
 
@@ -144,8 +135,14 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
      *
      * @param projectId String
      */
-    private void startWorkFlow(String projectId) {
+    public void startWorkFlow(String projectId) {
         projectItemTaskService.startProcessInstanceByBussKey(projectId);
+    }
+
+    public void startWorkFlow(List<String> projectIds) {
+        for (String projectId : projectIds) {
+            startWorkFlow(projectId);
+        }
     }
 
 
@@ -312,12 +309,15 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 //        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
 
         delProjectitems(subtract);
+        //启动流程
+        startWorkFlow(adds);
+        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(subtract);
+        projectItemTaskService.suspendProcessInstanceById(instances);//终止流程
+
 
         addProjectItems(addsProjectBomInfos);
 
-        //
         updateApproveStatusBatch(projectBomInfos);
-
     }
 
     private void delProjectitems(List<String> subtract) {
@@ -327,9 +327,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     }
 
-    private void updateBatchBomInfo(List<ProjectBomInfo> intersectionProjectBomInfos) {
-        projectItemMapper.updateBatchBomInfo(intersectionProjectBomInfos);
-    }
 
     private void addProjectItems(List<ProjectBomInfo> projectBomInfos) {
         if (!projectBomInfos.isEmpty()) {
@@ -358,8 +355,14 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     @Override
     public void submit(String businessKey) {
-        //启动流程
-        startWorkFlow(businessKey);
+
+        ProjectBomInfo info2 = super.queryInfoByNatrualKey(businessKey);
+
+        //生成BOM信息并保存
+        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info2);
+
+        projectItemBomServiceImpl.batchInsert(bomIdVos);
+
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
@@ -367,19 +370,18 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     @Override
     public void submit(String taskId, String businessKey) {
 
-        boolean isAlive = TaskServiceHelper.getInstance().isActive(this, businessKey);
-        if (StringUtils.isNotBlank(taskId) && taskId.equals("null") && !isAlive) {
-            logger.warn("流程第一次启动");
-            //启动流程
-            startWorkFlow(businessKey);
-        } else {
-            //完成当前任务
-            Map<String, Object> variables = new HashMap<String, Object>();
-            String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
-            variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
-            projectItemTaskService.complete(taskId, variables);
-        }
-
+//        boolean isAlive = TaskServiceHelper.getInstance().isActive(this, businessKey);
+//        if (StringUtils.isNotBlank(taskId) && taskId.equals("null") && !isAlive) {
+//            logger.warn("流程第一次启动");
+//            //启动流程
+////            startWorkFlow(businessKey);
+//        } else {
+        //完成当前任务
+        Map<String, Object> variables = new HashMap<String, Object>();
+        String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
+        variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+        projectItemTaskService.complete(taskId, variables);
+//        }
 
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);

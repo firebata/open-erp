@@ -11,6 +11,7 @@
     var project_newURL = path + "/development/project_item/new";
     var project_editURL = path + "/development/project_item/edit";
     var project_submitURL = path + "/development/project_item/submit/";
+    var isSubmitAction = "N";//是否点击的
     var uploadFileInfos = [];
     var $fileInput = $("#fileLocation");
     var $fileListLi = $("#filesList");

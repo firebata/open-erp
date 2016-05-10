@@ -291,4 +291,28 @@
         </foreach>
     </delete>
 
+
+
+    <update id="updateApproveStatus">
+        UPDATE
+          t_kf_bominfo
+        SET
+          approve_status=#{status}
+        WHERE del_flag=0
+        AND bom_id =#{businessKey}
+    </update>
+
+    <update id="updateApproveStatusBatch">
+        UPDATE
+          t_kf_bominfo
+        SET
+          approve_status=#{status}
+        WHERE del_flag=0
+        AND bom_id IN
+        <foreach item="item" index="index" collection="businessKeys" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+
 </mapper>

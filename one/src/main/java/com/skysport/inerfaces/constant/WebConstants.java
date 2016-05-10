@@ -10,7 +10,8 @@ public interface WebConstants extends TableNameConstants {
 
     String CURRENT_USER = "current_user";
     String FILE_SEPRITER = File.separator;
-
+    String BLC_TYPE_FUHE = "A1";//复合
+    String BLE_TYPE_TIEMO = "BBA";//贴膜
     String CATEGORY_A_LEVEL = "1";//一级品类
     String CATEGORY_B_LEVEL = "2";//二级品类
 
@@ -90,13 +91,6 @@ public interface WebConstants extends TableNameConstants {
     String MTITEMS = "mtItems";
     String WBLCITEMS = "wblcItems";
     String UNITITEMS = "unitItems";
-
-
-
-
-
-
-
 
 
     String FILE_TXT = "txt";

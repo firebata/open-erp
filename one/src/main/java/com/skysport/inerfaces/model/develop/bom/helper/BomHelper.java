@@ -225,69 +225,6 @@ public class BomHelper/* extends ExcelCreateHelper */ {
     }
 
 
-//    /**
-//     * 创建文件
-//     *
-//     * @param fileName
-//     * @param ctxPath
-//     * @param bomInfoDetails
-//     * @throws NoSuchMethodException
-//     * @throws InvocationTargetException
-//     * @throws IllegalAccessException
-//     */
-//    public static void createFile(String fileName, String ctxPath, List<BomInfoDetail> bomInfoDetails) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-//
-//        Workbook workbook = new HSSFWorkbook();
-//        CreationHelper createHelper = workbook.getCreationHelper();
-//        Sheet sheet = workbook.createSheet();
-//
-//        Font font = workbook.createFont();
-//        font.setFontName("仿宋_GB2312");
-//        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);//粗体显示
-//        font.setFontHeightInPoints((short) 12);
-//        CellStyle style = workbook.createCellStyle();
-//        //设置颜色
-//        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-////        style.setFillForegroundColor(HSSFColor.SKY_BLUE.index);//前景颜色
-////        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);//填充方式，前色填充
-//
-//        //边框填充
-//        style.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-//        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-//        style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-//        style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
-//        style.setFont(font);
-//        style.setWrapText(false);
-//        DataFormat dataFormat = workbook.createDataFormat();
-//        style.setDataFormat(dataFormat.getFormat("@"));
-//
-//        //表头
-//        createExcelTitle(sheet, createHelper, style, WebConstants.BOM_DETAIL_TITILE_ADVANCED);
-//
-//        //总记录数
-//        int count = 0;
-//        for (BomInfoDetail bomInfoDetail : bomInfoDetails) {
-//            //面料
-//            List<FabricsInfo> fabricsInfos = bomInfoDetail.getSeriesAnBomName();
-//            //辅料
-//            List<AccessoriesInfo> accessoriesInfos = bomInfoDetail.getAccessoriesInfos();
-//            //包材
-//            List<PackagingInfo> packagings = bomInfoDetail.getPackagings();
-//            count = createCellValue(createHelper, sheet, style, fabricsInfos, count);
-//            count = createCellValue(createHelper, sheet, style, accessoriesInfos, count);
-//            count = createCellValue(createHelper, sheet, style, packagings, count);
-//        }
-//
-//
-//        if (workbook instanceof XSSFWorkbook) {
-//            fileName = fileName + "x";
-//        }
-//
-//        fireCreate(fileName, ctxPath, workbook);
-//
-//
-//    }
-
     /**
      * 导出每个bom中每个成衣工厂的生产指示单
      *

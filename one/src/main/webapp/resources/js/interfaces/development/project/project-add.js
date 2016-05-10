@@ -13,6 +13,7 @@
         var searchSecondURL = path + "/system/category/searchSecond/";
         var infoCategoryURL = path + "/development/project-category/infoCategory/";
         var qrAreaURL = path + "/system/area/select2";
+        var isSubmitAction = "N";//是否点击的
         var uploadFileInfos = [];
         var $fileInput = $("#fileLocation");
         var $fileListLi = $("#filesList");

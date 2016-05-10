@@ -401,6 +401,11 @@ public enum ProjectHelper {
         return projectItems;
     }
 
+    /**
+     *
+     * @param alls
+     * @return
+     */
     public List<ProjectItemBomIdVo> getProjectItemBomIdVo(List<BomInfo> alls) {
         List<ProjectItemBomIdVo> bomIdVos = new ArrayList<>();
         for (BomInfo bomInfo : alls) {

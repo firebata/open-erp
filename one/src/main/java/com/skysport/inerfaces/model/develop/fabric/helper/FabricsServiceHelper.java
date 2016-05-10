@@ -5,7 +5,6 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
-import com.skysport.core.init.SkySportAppContext;
 import com.skysport.inerfaces.bean.develop.FabricsInfo;
 import com.skysport.inerfaces.bean.develop.KFMaterialPantone;
 import com.skysport.inerfaces.bean.develop.KFMaterialPosition;
@@ -105,9 +104,9 @@ public enum FabricsServiceHelper {
         String blcId = chgBlcId(fabricsInfo, stringBuilder);
 
         //复合或者贴膜
-        if (SkySportAppContext.blc_type_fuhe.equals(blcId) || SkySportAppContext.ble_type_tiemo.equals(blcId)) {
+        if (WebConstants.BLC_TYPE_FUHE.equals(blcId) || WebConstants.BLE_TYPE_TIEMO.equals(blcId)) {
             //复合
-            if (SkySportAppContext.blc_type_fuhe.equals(blcId)) {
+            if (WebConstants.BLC_TYPE_FUHE.equals(blcId)) {
                 //材质列表
                 chgCompositeClassicId(fabricsInfo, stringBuilder);
 

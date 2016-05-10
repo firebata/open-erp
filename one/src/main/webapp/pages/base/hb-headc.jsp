@@ -1,4 +1,3 @@
-<%@ page import="com.skysport.core.init.SkySportAppContext" %>
 <%@ page import="com.skysport.inerfaces.constant.WebConstants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../base/path.jsp" %>
@@ -14,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/page-header.css"/>
 <script type="text/javascript">
     var path = '<%=path%>';
-    var blc_type_fuhe = '<%=SkySportAppContext.blc_type_fuhe%>';
-    var ble_type_tiemo = '<%=SkySportAppContext.ble_type_tiemo%>';
+    var blc_type_fuhe = '<%=WebConstants.BLC_TYPE_FUHE%>';
+    var ble_type_tiemo = '<%=WebConstants.BLE_TYPE_TIEMO%>';
     var approve_status_new = '<%=WebConstants.APPROVE_STATUS_NEW%>';
     var approve_status_reject = '<%=WebConstants.APPROVE_STATUS_REJECT%>';
     var approve_status_undo = '<%=WebConstants.APPROVE_STATUS_UNDO%>';
