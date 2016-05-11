@@ -169,6 +169,7 @@ public interface WebConstants extends TableNameConstants {
 
     // 用户组别名
     String DEVLOP_STAFF = "devlop_staff"; //开发部员工
+    String DEVLOP_STAFF_GROUP = "devlop_staff_group"; //开发部员工
     String DEVLOP_MANAGER = "devlop_manager";//开发部经理
     String MANAGER_ASSISTANT = "manager_assistant";//总经理助理
     String CEO = "ceo";//总经理
@@ -223,5 +224,8 @@ public interface WebConstants extends TableNameConstants {
 
     int QUOTED_STEP_PRE = 0;//预报价
     int QUOTED_STEP_END = 1;//
+
+
+    String PROJECT_ITEM_ID ="project_item_id";
 
 }

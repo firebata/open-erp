@@ -226,6 +226,7 @@ public class TaskAction extends BaseAction<TaskVo> {
     public ModelAndView pass(@RequestParam String businessKey, @RequestParam String taskId, @RequestParam String processInstanceId, @RequestParam String message, HttpServletRequest request) {
         IApproveService approveService = TaskServiceHelper.getInstance().getIApproveService(taskId, taskServiceImpl);
         Map<String, Object> variables = approveService.getVariableOfTaskNeeding(true);
+//        taskServiceImpl.invokePass(businessKey,taskId,processInstanceId);
         taskServiceImpl.saveComment(taskId, processInstanceId, message);
         taskServiceImpl.complete(taskId, variables);
         approveService.updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_PASS);

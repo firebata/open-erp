@@ -35,9 +35,22 @@ public interface IApproveService {
 
     void submit(String taskId, String businessKey);
 
-    List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey);
+    List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey);
 
-    List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey);
 
     Map<String, Object> getVariableOfTaskNeeding(boolean approve);
+
+    /**
+     * 审核通过的处理
+     *
+     * @param businessKey
+     */
+    void invokePass(String businessKey);
+
+    /**
+     * 审核通过的处理
+     *
+     * @param businessKey
+     */
+    void invokeReject(String businessKey);
 }

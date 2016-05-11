@@ -1,19 +1,18 @@
-package com.skysport.inerfaces.engine.listener;
+package com.skysport.inerfaces.engine.listener.devp;
 
 import com.skysport.inerfaces.model.develop.bom.IBomService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 说明:项目最初审批
+ * 说明:预报价后是否需要打色样的监听
  * Created by zhangjh on 2016/4/13.
  */
-@Component
-public class ProjectItemFinishApproveListener implements JavaDelegate {
+@Component("proQuoteFinishListener")
+public class ProQuoteFinishListener implements JavaDelegate {
 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
@@ -22,8 +21,6 @@ public class ProjectItemFinishApproveListener implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String projectId = execution.getProcessBusinessKey();
         List<String> allbomIds = bomManageService.queryAllBomIdsByProjectId(projectId);
-        execution.setVariable("allbomIds", allbomIds);//所有的bomid
-//        RuntimeService runtimeService = execution.getEngineServices().getRuntimeService();
-
+        execution.setVariable("bomIdsNeedLapdip", allbomIds);//需要打色样的BOM
     }
 }

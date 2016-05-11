@@ -121,7 +121,7 @@
         <property name="jobExecutorActivate" value="false"/>
         <property name="mailServerHost" value="mail.my-corp.com"/>
         <property name="mailServerPort" value="5025"/>
-        <property name="deploymentResources" value="classpath*:conf/*.bpmn"/>
+        <property name="deploymentResources" value="classpath*:conf/workflow/*.bpmn"/>
         <property name="dbIdentityUsed" value="true"/>
     </bean>
 

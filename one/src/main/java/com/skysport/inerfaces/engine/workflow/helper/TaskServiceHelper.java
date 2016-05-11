@@ -58,8 +58,8 @@ public class TaskServiceHelper {
 
     public boolean isActive(IApproveService businessService, String natrualKey) {
         List<ProcessInstance> processInstancesActive = businessService.queryProcessInstancesActiveByBusinessKey(natrualKey);
-        List<ProcessInstance> processInstancesSuspended = businessService.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
-        return TaskServiceHelper.getInstance().isInstanceAlive(processInstancesActive, processInstancesSuspended);
+//        List<ProcessInstance> processInstancesSuspended = businessService.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
+        return TaskServiceHelper.getInstance().isInstanceAlive(processInstancesActive);
     }
 
     /**

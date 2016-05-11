@@ -24,7 +24,6 @@ public interface IProjectItemService extends ICommonService<ProjectBomInfo>, IAp
 
     String queryCurrentSeqNo(ProjectBomInfo t);
 
-    void addBomInfo(ProjectBomInfo t);
 
     void updateProjectBomBaseInfo(ProjectBomInfo t);
 
@@ -39,7 +38,6 @@ public interface IProjectItemService extends ICommonService<ProjectBomInfo>, IAp
     void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
 
     void delSexColorInfoByBomInfo(BomInfo info);
-
 
     void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB);
 }

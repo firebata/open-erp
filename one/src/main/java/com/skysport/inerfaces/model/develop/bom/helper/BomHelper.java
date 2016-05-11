@@ -329,4 +329,14 @@ public class BomHelper/* extends ExcelCreateHelper */ {
     public BomInfo getProjectBomInfo(HttpServletRequest request) {
         return new BomInfo();
     }
+
+    public List<String> buildBomIds(List<BomInfo> needDelBomList) {
+        List<String> bomIds = new ArrayList<>();
+        if (null != needDelBomList && !needDelBomList.isEmpty()) {
+            for (BomInfo bomInfo : needDelBomList) {
+                bomIds.add(bomInfo.getNatrualkey());
+            }
+        }
+        return bomIds;
+    }
 }

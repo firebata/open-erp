@@ -29,6 +29,11 @@ public class DevelopStaffImpl implements IStaffService {
         return identityService.createGroupQuery().groupName("开发部经理").singleResult().getId();
     }
 
+    @Override
+    public String getStaffGroupId() {
+        return identityService.createGroupQuery().groupName("开发人员").singleResult().getId();
+    }
+
 
     @Override
     public String getParentGroupId(String groupId) {

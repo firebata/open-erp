@@ -28,7 +28,6 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
         ProcessInstance processInstance = null;
         try {
             String userId = userInfo.getNatrualkey();
-
             String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
             identityService.setAuthenticatedUserId(userId);
             variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);

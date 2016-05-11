@@ -65,4 +65,12 @@ public interface IWorkFlowService {
     void suspendProcessInstanceById(List<ProcessInstance> instances);
 
     List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> subtract);
+
+    /**
+     *
+     * @param businessKey
+     * @param taskId
+     * @param processInstanceId
+     */
+    void invokePass(String businessKey, String taskId, String processInstanceId);
 }

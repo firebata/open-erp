@@ -51,12 +51,12 @@ import java.util.*;
  */
 @Service("projectItemManageService")
 public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> implements IProjectItemService, InitializingBean {
+
     @Resource(name = "projectItemMapper")
     private ProjectItemMapper projectItemMapper;
 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
-
 
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
@@ -126,8 +126,8 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
             //增加项目主颜色信息
             sexColorService.addBatch(info.getSexColors());
         }
-
     }
+
 
 
     /**
@@ -143,12 +143,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         for (String projectId : projectIds) {
             startWorkFlow(projectId);
         }
-    }
-
-
-    @Override
-    public void addBomInfo(ProjectBomInfo info) {
-        projectItemMapper.addBomInfo(info);
     }
 
     @Override
@@ -309,15 +303,17 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 //        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
 
         delProjectitems(subtract);
-        //启动流程
-        startWorkFlow(adds);
-        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(subtract);
-        projectItemTaskService.suspendProcessInstanceById(instances);//终止流程
-
 
         addProjectItems(addsProjectBomInfos);
 
         updateApproveStatusBatch(projectBomInfos);
+
+
+        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(subtract);
+        projectItemTaskService.suspendProcessInstanceById(instances);//终止流程
+
+        //启动流程
+        startWorkFlow(adds);
     }
 
     private void delProjectitems(List<String> subtract) {
@@ -353,38 +349,45 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         projectItemMapper.updateApproveStatusBatch(businessKeys, status);
     }
 
+    /**
+     * 子项目提交审核
+     * @param businessKey
+     */
     @Override
     public void submit(String businessKey) {
 
-        ProjectBomInfo info2 = super.queryInfoByNatrualKey(businessKey);
-
-        //生成BOM信息并保存
-        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info2);
-
-        projectItemBomServiceImpl.batchInsert(bomIdVos);
+        createBoms(businessKey);
+        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(businessKey);
 
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
 
+    private void createBoms(String businessKey) {
+        ProjectBomInfo info2 = super.queryInfoByNatrualKey(businessKey);
+        //生成BOM信息并保存
+        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info2);
+        projectItemBomServiceImpl.batchInsert(bomIdVos);
+    }
+
+    /**
+     * 子项目提交审核
+     * @param businessKey
+     */
     @Override
     public void submit(String taskId, String businessKey) {
 
-//        boolean isAlive = TaskServiceHelper.getInstance().isActive(this, businessKey);
-//        if (StringUtils.isNotBlank(taskId) && taskId.equals("null") && !isAlive) {
-//            logger.warn("流程第一次启动");
-//            //启动流程
-////            startWorkFlow(businessKey);
-//        } else {
+
+
         //完成当前任务
         Map<String, Object> variables = new HashMap<String, Object>();
         String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
         variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
         projectItemTaskService.complete(taskId, variables);
-//        }
 
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+
     }
 
 
@@ -394,11 +397,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         return processInstances;
     }
 
-    @Override
-    public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String natrualKey) {
-        List<ProcessInstance> processInstances = projectItemTaskService.queryProcessInstancesSuspendedByBusinessKey(natrualKey);
-        return processInstances;
-    }
 
     @Override
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
@@ -414,6 +412,16 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
 
         return variables;
+    }
+
+    @Override
+    public void invokePass(String businessKey) {
+        createBoms(businessKey);
+    }
+
+    @Override
+    public void invokeReject(String businessKeys) {
+
     }
 
     @Override

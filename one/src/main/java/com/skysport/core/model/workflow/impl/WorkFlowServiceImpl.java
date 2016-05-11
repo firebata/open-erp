@@ -118,7 +118,7 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
     @Override
     public List<ProcessInstance> queryProcessInstancesSuspendedByBusinessKey(String businessKey) {
         ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).suspended().orderByProcessInstanceId().desc();
-        List<ProcessInstance> list = query.listPage(0, 10);
+        List<ProcessInstance> list = query.listPage(0, 100);
         return list;
     }
 
@@ -238,5 +238,15 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
             totals.addAll(subs);
         }
         return totals;
+    }
+
+    /**
+     * 审核处理通过
+     * @param businessKey
+     * @param taskId
+     * @param processInstanceId
+     */
+    public void invokePass(String businessKey, String taskId, String processInstanceId){
+
     }
 }

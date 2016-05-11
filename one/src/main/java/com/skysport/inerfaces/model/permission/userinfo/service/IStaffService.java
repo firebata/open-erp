@@ -30,4 +30,6 @@ public interface IStaffService {
     String staffId();
 
     String managerId();
+
+    public String getStaffGroupId();
 }

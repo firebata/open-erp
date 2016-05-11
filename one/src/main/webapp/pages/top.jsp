@@ -295,7 +295,10 @@
                 <!-- #section:basics/navbar.user_menu -->
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="<%=((UserInfo) session.getAttribute(UserUtils.CURRENT_USER)).getImgUrl() %>" onerror="javascript:this.src='<%=request.getContextPath()%>/resources/avatars/user.jpg'" alt="${username}'s Photo"/>
+                        <img class="nav-user-photo"
+                             src="<%=((UserInfo) session.getAttribute(UserUtils.CURRENT_USER)).getImgUrl() %>"
+                             onerror="javascript:this.src='<%=request.getContextPath()%>/resources/avatars/user.jpg'"
+                             alt="${username}'s Photo"/>
 								<span class="user-info">
 									<small>Welcome,</small>
 									${username}
@@ -333,7 +336,6 @@
                 <!-- /section:basics/navbar.user_menu -->
             </ul>
         </div>
-
     </div>
     <!-- /.navbar-header -->
 </div>

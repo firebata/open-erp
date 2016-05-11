@@ -31,8 +31,11 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
         try {
             String userId = userInfo.getNatrualkey();
             String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
+            String groupIdDev = developStaffImpl.getStaffGroupId();
             identityService.setAuthenticatedUserId(userId);
+            variables.put(WebConstants.DEVLOP_STAFF_GROUP, groupIdDev);
             variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+            variables.put(WebConstants.PROJECT_ITEM_ID, businessKey);
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.PROJECT_ITEM_PROCESS, businessKey, variables);
         } finally {
             identityService.setAuthenticatedUserId(null);
