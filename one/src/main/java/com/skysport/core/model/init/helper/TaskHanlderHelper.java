@@ -61,6 +61,10 @@ public enum TaskHanlderHelper {
                 String businessService = child.elementText("businessService");
                 businessService = StringUtils.isBlank(businessService) ? CharConstant.EMPTY : businessService.replaceAll("\\s", "");
 
+
+                String taskService = child.elementText("taskService");
+                taskService = StringUtils.isBlank(taskService) ? CharConstant.EMPTY : taskService.replaceAll("\\s", "");
+
                 String urlInfo = child.elementText("urlInfo");
                 urlInfo = StringUtils.isBlank(urlInfo) ? CharConstant.EMPTY : urlInfo.replaceAll("\\s", "");
 
@@ -78,6 +82,7 @@ public enum TaskHanlderHelper {
                 vo.setName(name);
                 vo.setBusinessController(businessController);
                 vo.setBusinessService(businessService);
+                vo.setTaskService(taskService);
                 vo.setUrlInfo(urlInfo);
                 vo.setUrlPass(urlPass);
                 vo.setUrlReject(urlReject);

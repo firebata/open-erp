@@ -7,7 +7,7 @@
     <subProcess id="approveBomProcess" name="审核BOM子流程">
       <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${allbomIds}" activiti:elementVariable="bomId"></multiInstanceLoopCharacteristics>
       <startEvent id="startevent2" name="Start" activiti:initiator="applySingleBomUserId"></startEvent>
-      <userTask id="updateSingleBom" name="修改单个BOM" activiti:candidateGroups="${applyGroupId}"></userTask>
+      <userTask id="updateSingleBom" name="修改单个BOM" activiti:candidateGroups="${devlop_staff_group}"></userTask>
       <userTask id="approveSingleBom" name="审核BOM信息" activiti:candidateGroups="${devlop_manager}"></userTask>
       <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
       <userTask id="approveSingleBomQuoted" name="审核预报价" activiti:candidateGroups="${devlop_manager}"></userTask>
@@ -189,7 +189,7 @@
     <exclusiveGateway id="exclusivegateway20" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow179" sourceRef="exclusivegateway20" targetRef="approveBomProcess">
       <extensionElements>
-        <activiti:executionListener event="take" class="com.skysport.inerfaces.engine.listener.ProjectItemFinishApproveListener"></activiti:executionListener>
+        <activiti:executionListener event="take" expression="${projectItemPassListener}"></activiti:executionListener>
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectItemPass}]]></conditionExpression>
     </sequenceFlow>
@@ -197,8 +197,6 @@
     <sequenceFlow id="flow181" sourceRef="updateProjectItem" targetRef="approveProjectItem"></sequenceFlow>
     <sequenceFlow id="flow182" sourceRef="approveProjectItem" targetRef="exclusivegateway20"></sequenceFlow>
     <sequenceFlow id="flow183" sourceRef="exclusivegateway20" targetRef="updateProjectItem">
-      <documentation>
-</documentation>
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectItemPass}]]></conditionExpression>
     </sequenceFlow>
     <textAnnotation id="textannotation1">

@@ -1,26 +1,24 @@
 package com.skysport.inerfaces.engine.workflow.develop.service;
-
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
-import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
+import com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper;
 import org.activiti.engine.task.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 import java.util.Map;
 
 /**
  * 说明:
- * Created by zhangjh on 2016-05-09.
+ * Created by zhangjh on 2016-05-12.
  */
 @Service
-public class QuoteInfoTaskImpl extends WorkFlowServiceImpl {
-    @Resource(name = "quotedInfoMapper")
-    private QuotedInfoMapper quotedInfoMapper;
+public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
 
+    @Autowired
+    private ProductionInstructionMapper productionInstructionMapper;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        approveMapper = quotedInfoMapper;
+        approveMapper = productionInstructionMapper;
     }
 
     @Override
@@ -37,4 +35,6 @@ public class QuoteInfoTaskImpl extends WorkFlowServiceImpl {
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve, Task task) {
         return null;
     }
+
+
 }

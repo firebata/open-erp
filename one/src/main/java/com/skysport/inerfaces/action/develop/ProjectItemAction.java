@@ -6,7 +6,6 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
@@ -45,9 +44,6 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
 
     @Resource(name = "uploadFileInfoService")
     private IUploadFileInfoService uploadFileInfoService;
-
-    ProjectItemAction() {
-    }
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -188,7 +184,7 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     public ProjectBomInfo info(@PathVariable String natrualKey) {
 
         ProjectBomInfo info = projectItemManageService.queryInfoByNatrualKey(natrualKey);
-        TaskServiceHelper.getInstance().setStatuCodeAlive(info, projectItemManageService, natrualKey);
+        projectItemManageService.setStatuCodeAlive(info, natrualKey);
         if (null != info) {
             Map<String, Object> fileinfosMap = UploadFileHelper.SINGLETONE.getFileInfoMap(uploadFileInfoService, natrualKey);
             info.setFileinfosMap(fileinfosMap);
@@ -216,20 +212,4 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
         List<SelectItem2> commonBeans = projectItemManageService.querySelectList(name);
         return rtSelectResultMap(commonBeans);
     }
-
-    /**
-     * 此方法描述的是：表单提交
-     *
-     * @author: zhangjh
-     * @version: 2015年4月29日 下午5:34:53
-     */
-    @RequestMapping(value = "/submit/{taskId}/{businessKey}")
-    @ResponseBody
-    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
-    public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
-        projectItemManageService.submit(taskId, businessKey);
-        ModelAndView mav = new ModelAndView("forward:/task/todo/list");
-        return mav;
-    }
-
 }

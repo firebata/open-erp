@@ -81,20 +81,5 @@ public class QuoteEndAction extends BaseAction<QuotedInfo> {
         return quotedInfo;
     }
 
-    /**
-     * 此方法描述的是：表单提交
-     *
-     * @author: zhangjh
-     * @version: 2015年4月29日 下午5:34:53
-     */
-    @RequestMapping(value = "/submit/{taskId}/{businessKey}")
-    @ResponseBody
-    @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
-    public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
-        quotedService.submit(taskId, businessKey);
-        ModelAndView mav = new ModelAndView("forward:/task/todo/list");
-        return mav;
-    }
-
 
 }

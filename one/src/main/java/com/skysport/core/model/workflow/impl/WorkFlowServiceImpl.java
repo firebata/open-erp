@@ -1,11 +1,14 @@
 package com.skysport.core.model.workflow.impl;
 
 import com.skysport.core.bean.page.DataTablesInfo;
-import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.core.mapper.ApproveMapper;
+import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
+import com.skysport.inerfaces.bean.task.ApproveVo;
 import com.skysport.inerfaces.bean.task.TaskVo;
+import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -14,6 +17,7 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,25 +30,66 @@ import java.util.Map;
  * Created by zhangjh on 2015/12/22.
  */
 @Service("workFlowServiceImpl")
-public abstract class WorkFlowServiceImpl implements IWorkFlowService {
+public abstract class WorkFlowServiceImpl implements IApproveService, InitializingBean {
+    /**
+     *
+     */
     @Autowired
     public RepositoryService repositoryService;
-
+    /**
+     *
+     */
+    public ApproveMapper approveMapper;
+    /**
+     *
+     */
     @Autowired
     public RuntimeService runtimeService;
-
+    /**
+     *
+     */
     @Autowired
     public TaskService taskService;
-
+    /**
+     *
+     */
     @Autowired
     public HistoryService historyService;
-
+    /**
+     *
+     */
     @Autowired
     public IdentityService identityService;
-
+    /**
+     *
+     */
     @Autowired
     public ManagementService managementService;
 
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
+    }
+
+
+    /**
+     * @param businessKey
+     * @param status
+     */
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+        approveMapper.updateApproveStatus(businessKey, status);
+    }
+
+    /**
+     * @param businessKeys
+     * @param status
+     */
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+        approveMapper.updateApproveStatusBatch(businessKeys, status);
+    }
 
     /**
      * @param tasks
@@ -99,14 +144,20 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
         return processDefinition;
     }
 
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey) {
+        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).active().orderByProcessInstanceId().desc();
+        List<ProcessInstance> list = query.listPage(0, 100);
+        return list;
+    }
 
     /**
      * @param businessKey
      * @return
      */
     @Override
-    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey) {
-        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey).active().orderByProcessInstanceId().desc();
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String businessKey, String processDefinitionKey) {
+        ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businessKey, processDefinitionKey).active().orderByProcessInstanceId().desc();
         List<ProcessInstance> list = query.listPage(0, 100);
         return list;
     }
@@ -128,7 +179,8 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
      */
     @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
-        return null;
+        List<ProcessInstance> list = queryProcessInstancesSuspendedByBusinessKey(businessKey);
+        return list.get(0);
     }
 
     /**
@@ -199,9 +251,7 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
         int length = dataTablesInfo.getLength();
         TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
         List<Task> tasks = taskQuery.listPage(start, start + length);
-
         List<TaskVo> taskRtn = buildTaskVos(tasks);
-
         return taskRtn;
     }
 
@@ -225,15 +275,23 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
         runtimeService.suspendProcessInstanceById(processInstanceId);
     }
 
+    /**
+     * @param instances
+     */
     public void suspendProcessInstanceById(List<ProcessInstance> instances) {
         for (ProcessInstance instance : instances) {
             suspendProcessInstanceById(instance.getProcessInstanceId());
         }
     }
 
-    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> subtract) {
+    /**
+     * @param businessKeys
+     * @return
+     */
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> businessKeys) {
         List<ProcessInstance> totals = new ArrayList<>();
-        for (String businessKey : subtract) {
+        for (String businessKey : businessKeys) {
             List<ProcessInstance> subs = queryProcessInstancesActiveByBusinessKey(businessKey);
             totals.addAll(subs);
         }
@@ -241,12 +299,59 @@ public abstract class WorkFlowServiceImpl implements IWorkFlowService {
     }
 
     /**
-     * 审核处理通过
+     * @param businessKeys
+     * @param processDefinitionKey
+     * @return
+     */
+    @Override
+    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(List<String> businessKeys, String processDefinitionKey) {
+        List<ProcessInstance> totals = new ArrayList<>();
+        for (String businessKey : businessKeys) {
+            List<ProcessInstance> subs = queryProcessInstancesActiveByBusinessKey(businessKey, processDefinitionKey);
+            totals.addAll(subs);
+        }
+        return totals;
+    }
+
+    /**
+     * @param info
+     * @param natrualKey
+     */
+    @Override
+    public void setStatuCodeAlive(ApproveVo info, String natrualKey) {
+        List<ProcessInstance> processInstancesActive = queryProcessInstancesActiveByBusinessKey(natrualKey);
+        TaskServiceHelper.getInstance().setStatuCodeAlive(info, processInstancesActive);
+    }
+
+    /**
      * @param businessKey
      * @param taskId
      * @param processInstanceId
+     * @param <T>
+     * @return
      */
-    public void invokePass(String businessKey, String taskId, String processInstanceId){
+    @Override
+    public <T> T invokePass(String businessKey, String taskId, String processInstanceId) {
+        return null;
+    }
 
+    /**
+     * @param businessKey
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T invokePass(String businessKey) {
+        return null;
+    }
+
+    /**
+     * @param businessKeys
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T invokeReject(String businessKeys) {
+        return null;
     }
 }

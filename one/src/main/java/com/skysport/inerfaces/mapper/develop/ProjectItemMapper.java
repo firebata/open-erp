@@ -13,7 +13,7 @@ import java.util.List;
  * Created by zhangjh on 2015/7/13.
  */
 @Repository("projectItemMapper")
-public interface ProjectItemMapper extends CommonMapper<ProjectBomInfo>,ApproveMapper {
+public interface ProjectItemMapper extends CommonMapper<ProjectBomInfo>, ApproveMapper {
     String queryCurrentSeqNo(ProjectBomInfo info);
 
     void addBomInfo(ProjectBomInfo info);

@@ -1,5 +1,6 @@
 package com.skysport.inerfaces.mapper.develop;
 
+import com.skysport.core.mapper.ApproveMapper;
 import com.skysport.core.mapper.CommonMapper;
 import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
 import org.springframework.stereotype.Repository;
@@ -9,12 +10,9 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2016/4/18.
  */
 @Repository
-public interface ProductionInstructionMapper extends CommonMapper<KfProductionInstructionEntity> {
+public interface ProductionInstructionMapper extends CommonMapper<KfProductionInstructionEntity>, ApproveMapper {
 
     KfProductionInstructionEntity queryProductionInstractionInfo(String uid);
-
-
-    KfProductionInstructionEntity queryProjectAndBomInfoByBomId(String bomId);
 
     void updateProductionInstruction(KfProductionInstructionEntity productionInstruction);
 

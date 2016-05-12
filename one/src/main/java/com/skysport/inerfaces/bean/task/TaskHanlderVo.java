@@ -10,11 +10,20 @@ public class TaskHanlderVo {
     private String name;
     private String businessController;
     private String businessService;
+    private String taskService;
     private String urlInfo;
     private String urlPass;
     private String urlReject;
     private String urlSumit;
     private String urlSave;
+
+    public String getTaskService() {
+        return taskService;
+    }
+
+    public void setTaskService(String taskService) {
+        this.taskService = taskService;
+    }
 
     public String getTaskDefineKey() {
         return taskDefineKey;

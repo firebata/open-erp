@@ -7,18 +7,17 @@ import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
-import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
+import com.skysport.inerfaces.model.develop.bom.bean.DealBomInfos;
 import com.skysport.inerfaces.model.develop.bom.helper.BomHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.product_instruction.IProductionInstructionService;
-import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IFactoryQuoteService;
@@ -26,7 +25,6 @@ import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import com.skysport.inerfaces.model.relation.IRelationIdDealService;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
@@ -40,7 +38,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 类说明:
@@ -326,170 +323,86 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
      * @author zhangjh
      */
     @Override
-    public List<ProjectItemBomIdVo> autoCreateBomInfoAndSave(ProjectBomInfo info) {
+    public DealBomInfos autoCreateBomInfoAndSave(ProjectBomInfo info) {
+        String projectId = info.getNatrualkey();
+        List<BomInfo> allStyles = selectAllBomSexAndMainColor(projectId.trim());
 
-        DealBomInfos dealBomInfos = new DealBomInfos(info).invoke();
+        DealBomInfos dealBomInfos = new DealBomInfos(info).invoke(allStyles);
         List<BomInfo> needDelBomList = dealBomInfos.getNeedDelBomList();
         List<BomInfo> needAddBomList = dealBomInfos.getNeedAddBomList();
-        List<BomInfo> alls = dealBomInfos.getAlls();
+        List<BomInfo> needUpdateBomList = dealBomInfos.getNeedUpdateBomList();
 
-        dealWorkFlow(needDelBomList, needAddBomList);
+        dealBoms(needDelBomList, needAddBomList, needUpdateBomList);
 
+        List<String> bomsNeedToStart = dealWorkFlow(needDelBomList, needAddBomList, needUpdateBomList);
 
-        //增加项目和子项目的关系
-        List<ProjectItemBomIdVo> ids = ProjectHelper.SINGLETONE.getProjectItemBomIdVo(alls);
-        return ids;
+        dealBomInfos.setBomsNeedToStart(bomsNeedToStart);
+        return dealBomInfos;
+
     }
 
     /**
-     * 暂停或新启动
+     * @param needDelBomList
+     * @param needAddBomList
+     * @param intersection
+     */
+    private void dealBoms(List<BomInfo> needDelBomList, List<BomInfo> needAddBomList, List<BomInfo> intersection) {
+
+        if (!needDelBomList.isEmpty()) {
+            //删除
+            delBomInThisIds(needDelBomList);
+        }
+        if (!intersection.isEmpty()) {
+            //更新bom
+            updateBatch(intersection);
+        }
+        //获取需要新增的bom列表
+        if (!needAddBomList.isEmpty()) {
+            //新增bom
+            addBatch(needAddBomList);
+        }
+    }
+
+    /**
+     * 子项目审批通过时，对BOM的处理（每个bom对应一个子流程，在子项目审批通过，启动boms）：
+     * 需要删除的BOM：根据BomIds查出所有存活的实例，然后停止。
+     * 需要更新的BOM：正常情况下，需要更新的bom集合是不需要新启动子流程，但是为了向旧版本兼容，特别增加了“如果需要更新的bom没有对应的子流程，则添加到需要启动的集合中”；
+     *
      * @param needDelBomList
      * @param needAddBomList
      */
-    private void dealWorkFlow(List<BomInfo> needDelBomList, List<BomInfo> needAddBomList) {
+    private List<String> dealWorkFlow(List<BomInfo> needDelBomList, List<BomInfo> needAddBomList, List<BomInfo> needUpdateBomList) {
         //终止部分流程，删除
-        List<String> subtract = BomHelper.getInstance().buildBomIds(needDelBomList);
+        List<String> needDelBomIdList = BomHelper.getInstance().buildBomIds(needDelBomList);
+        List<String> needUpdateBomIdList = BomHelper.getInstance().buildBomIds(needUpdateBomList);
+        List<String> needAddBomIdList = BomHelper.getInstance().buildBomIds(needAddBomList);
 
-        List<ProcessInstance> instances = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(subtract);
-        bomInfoTaskImpl.suspendProcessInstanceById(instances);//终止流程
+        List<ProcessInstance> instances = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(needDelBomIdList);
+        List<ProcessInstance> instancesIntersection = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(needUpdateBomIdList, WebConstants.APPROVE_BOM_PROCESS);
+        needUpdateBomIdList = BomHelper.getInstance().chooseBomsNeedToStartInUpdates(instancesIntersection, needUpdateBomIdList);
 
-        List<String> adds = BomHelper.getInstance().buildBomIds(needAddBomList);
+        //终止流程
+        bomInfoTaskImpl.suspendProcessInstanceById(instances);
+
+        List<String> bomsNeedToStart = new ArrayList<>();
+        bomsNeedToStart.addAll(needAddBomIdList);
+        bomsNeedToStart.addAll(needUpdateBomIdList);
 
         //启动流程
-        startWorkFlow(adds);
+//        startWorkFlow(adds);
+        return bomsNeedToStart;
     }
 
     @Override
     public void updateBatch(List<BomInfo> infos) {
         if (null != infos && !infos.isEmpty()) {
-            for (BomInfo bomInfo : infos) {
-                bomInfoMapper.updateInfo(bomInfo);
-            }
+            bomInfoMapper.updateBatch(infos);
+//            for (BomInfo bomInfo : infos) {
+//                bomInfoMapper.updateInfo(bomInfo);
+//            }
         }
 
     }
 
-    @Override
-    public void updateApproveStatus(String businessKey, String status) {
-        bomInfoMapper.updateApproveStatus(businessKey, status);
-    }
 
-    @Override
-    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
-        bomInfoMapper.updateApproveStatusBatch(businessKeys, status);
-    }
-
-    @Override
-    public void submit(String businessKey) {
-        //启动流程
-//        startWorkFlow(businessKey);
-        //状态改为待审批
-        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
-    }
-
-    @Override
-    public void submit(String taskId, String businessKey) {
-
-        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
-    }
-
-    /**
-     * 启动开发流程
-     *
-     * @param bomId String
-     */
-    private void startWorkFlow(String bomId) {
-        bomInfoTaskImpl.startProcessInstanceByBussKey(bomId);
-    }
-
-    public void startWorkFlow(List<String> bomIds) {
-        for (String bomId : bomIds) {
-            startWorkFlow(bomId);
-        }
-    }
-
-    @Override
-    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
-        List<ProcessInstance> processInstances = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(natrualKey);
-        return processInstances;
-    }
-
-
-    @Override
-    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
-        Map<String, Object> variables = new HashedMap();
-        String handleUserId;
-        if (approve) {
-            handleUserId = developStaffImpl.getManagerStaffGroupId();
-            variables.put(WebConstants.DEVLOP_MANAGER, handleUserId);
-        } else {
-//            handleUserId = developStaffImpl.staffId();
-//            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
-        }
-        variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
-
-        return variables;
-    }
-
-    private class DealBomInfos {
-        private ProjectBomInfo info;
-        private List<BomInfo> needDelBomList;
-        private List<BomInfo> needAddBomList;
-        private List<BomInfo> alls;
-
-        public DealBomInfos(ProjectBomInfo info) {
-            this.info = info;
-        }
-
-        public List<BomInfo> getNeedDelBomList() {
-            return needDelBomList;
-        }
-
-        public List<BomInfo> getNeedAddBomList() {
-            return needAddBomList;
-        }
-
-        public List<BomInfo> getAlls() {
-            return alls;
-        }
-
-        public DealBomInfos invoke() {
-            List<SexColor> sexColors = info.getSexColors();
-            String projectId = info.getNatrualkey();
-            String customerId = info.getCustomerId();
-            String areaId = info.getAreaId();
-            String seriesId = info.getSeriesId();
-            List<BomInfo> allStyles = selectAllBomSexAndMainColor(projectId.trim());
-
-            //获取需要更新的bom列表
-            //交集
-            List<BomInfo> intersection = BomHelper.getInstance().getIntersection(sexColors, allStyles);
-
-            //获取需要删除的bom列表
-            needDelBomList = BomHelper.getInstance().getNeedDelBomList(intersection, allStyles);
-
-            //需要增加的bom列表
-            needAddBomList = BomHelper.getInstance().getNeedAddBomList(intersection, sexColors, info, projectId, customerId, areaId, seriesId);
-
-            alls = new ArrayList<>();
-            alls.addAll(intersection);
-            alls.addAll(needAddBomList);
-
-
-            if (!needDelBomList.isEmpty()) {
-                //删除
-                delBomInThisIds(needDelBomList);
-            }
-            if (!intersection.isEmpty()) {
-                //更新bom
-                updateBatch(intersection);
-            }
-            //获取需要新增的bom列表
-            if (!needAddBomList.isEmpty()) {
-                //新增bom
-                addBatch(needAddBomList);
-            }
-            return this;
-        }
-    }
 }

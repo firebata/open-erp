@@ -16,6 +16,7 @@ import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.helper.PackagingServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import com.skysport.inerfaces.utils.SeqCreateUtils;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -330,6 +331,12 @@ public class BomHelper/* extends ExcelCreateHelper */ {
         return new BomInfo();
     }
 
+    /**
+     * 构造组件id
+     *
+     * @param needDelBomList
+     * @return
+     */
     public List<String> buildBomIds(List<BomInfo> needDelBomList) {
         List<String> bomIds = new ArrayList<>();
         if (null != needDelBomList && !needDelBomList.isEmpty()) {
@@ -338,5 +345,22 @@ public class BomHelper/* extends ExcelCreateHelper */ {
             }
         }
         return bomIds;
+    }
+
+    /**
+     * 在更新的bom集合中找到需要启动的bom集合
+     *
+     * @param instancesIntersection 运行中的BOM实例
+     * @param needUpdateBomIdList   需要更新的bom集合
+     * @return 更新的bom集合中需要启动的bom集合
+     */
+    public List<String> chooseBomsNeedToStartInUpdates(List<ProcessInstance> instancesIntersection, List<String> needUpdateBomIdList) {
+        List<String> results = needUpdateBomIdList;
+        if (null != instancesIntersection && !instancesIntersection.isEmpty()) {
+            for (ProcessInstance pr : instancesIntersection) {
+                results.remove(pr.getBusinessKey());
+            }
+        }
+        return results;
     }
 }

@@ -176,6 +176,25 @@
 			bom_id =#{natrualkey}
 	</update>
 
+    <update id="updateBatch">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            UPDATE
+              t_kf_bominfo
+            SET
+                <if test="item.mainColor!=null and item.mainColor!=''">
+                    main_color=#{item.mainColor},
+                </if>
+                fabrics_end_date =#{item.fabricsEndDate},
+                accessories_end_date =#{item.accessoriesEndDate},
+                preoffer_date =#{item.preOfferDate},
+                cloth_received_date =#{item.clothReceivedDate},
+                offer_amount =#{item.offerAmount},
+                remark=#{item.remark}
+            WHERE
+              bom_id =#{item.natrualkey}
+        </foreach>
+    </update>
+
     <insert id="addBatch" parameterType="list">
         INSERT INTO
         t_kf_bominfo

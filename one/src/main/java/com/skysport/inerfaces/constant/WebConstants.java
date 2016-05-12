@@ -179,7 +179,7 @@ public interface WebConstants extends TableNameConstants {
     String FINANCE_MANAGER = "finance_manager";
 
     //
-    String PROJECT_ITEM_PROCESS = "projectitemProcess";
+    String PROJECT_ITEM_PROCESS = "projectitemProcess";//审核ProjectItem
     String APPROVE_BOM_PROCESS = "approveBomProcess";//审核Bom
     String OFFLINEWORK_PROCESS = "offlineworkProcess";//线下任务
     String APPROVE_PREQUOTED_PROCESS = "approvePreQuotedProcess";//预报价

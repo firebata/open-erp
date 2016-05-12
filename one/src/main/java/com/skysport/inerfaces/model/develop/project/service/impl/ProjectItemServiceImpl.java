@@ -3,7 +3,7 @@ package com.skysport.inerfaces.model.develop.project.service.impl;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -18,6 +18,7 @@ import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
 import com.skysport.inerfaces.model.develop.accessories.helper.AccessoriesServiceHelper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
+import com.skysport.inerfaces.model.develop.bom.bean.DealBomInfos;
 import com.skysport.inerfaces.model.develop.bom.helper.BomHelper;
 import com.skysport.inerfaces.model.develop.fabric.IFabricsService;
 import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
@@ -26,11 +27,9 @@ import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
-import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
 import com.skysport.inerfaces.model.relation.IRelationIdDealService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.collections.ListUtils;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
@@ -74,10 +73,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     private IUploadFileInfoService uploadFileInfoService;
 
     @Autowired
-    private IWorkFlowService projectItemTaskService;
-
-    @Resource
-    private IStaffService developStaffImpl;
+    private IApproveService projectItemTaskService;
 
     @Autowired
     private IRelationIdDealService projectItemBomServiceImpl;
@@ -127,7 +123,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
             sexColorService.addBatch(info.getSexColors());
         }
     }
-
 
 
     /**
@@ -316,6 +311,12 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         startWorkFlow(adds);
     }
 
+    @Override
+    public void setStatuCodeAlive(ProjectBomInfo info, String natrualKey) {
+        projectItemTaskService.setStatuCodeAlive(info, natrualKey);
+
+    }
+
     private void delProjectitems(List<String> subtract) {
         if (!subtract.isEmpty()) {
             projectItemMapper.delProjectitems(subtract);
@@ -336,93 +337,26 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     private void updateApproveStatusBatch(List<ProjectBomInfo> projectBomInfos) {
         //审核状态：新增
         List<String> businessKeys = ProjectHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
-        updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
+        projectItemTaskService.updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
     }
 
-    @Override
-    public void updateApproveStatus(String businessKey, String status) {
-        projectItemMapper.updateApproveStatus(businessKey, status);
-    }
+    public <T> T createBoms(String businessKey) {
 
-    @Override
-    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
-        projectItemMapper.updateApproveStatusBatch(businessKeys, status);
-    }
+        ProjectBomInfo info2 = queryInfoByNatrualKey(businessKey);
+        //增加项目和子项目的关系
 
-    /**
-     * 子项目提交审核
-     * @param businessKey
-     */
-    @Override
-    public void submit(String businessKey) {
-
-        createBoms(businessKey);
-        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(businessKey);
-
-        //状态改为待审批
-        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
-    }
-
-    private void createBoms(String businessKey) {
-        ProjectBomInfo info2 = super.queryInfoByNatrualKey(businessKey);
         //生成BOM信息并保存
-        List<ProjectItemBomIdVo> bomIdVos = bomManageService.autoCreateBomInfoAndSave(info2);
+        DealBomInfos dealBomInfos = bomManageService.autoCreateBomInfoAndSave(info2);
+        List<BomInfo> alls = dealBomInfos.getAlls();
+        List<String> bomsNeedToStart = dealBomInfos.getBomsNeedToStart();
+
+        List<ProjectItemBomIdVo> bomIdVos = ProjectHelper.SINGLETONE.getProjectItemBomIdVo(alls);
         projectItemBomServiceImpl.batchInsert(bomIdVos);
-    }
 
-    /**
-     * 子项目提交审核
-     * @param businessKey
-     */
-    @Override
-    public void submit(String taskId, String businessKey) {
-
-
-
-        //完成当前任务
-        Map<String, Object> variables = new HashMap<String, Object>();
-        String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
-        variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
-        projectItemTaskService.complete(taskId, variables);
-
-        //状态改为待审批
-        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+        return (T) bomsNeedToStart;
 
     }
 
-
-    @Override
-    public List<ProcessInstance> queryProcessInstancesActiveByBusinessKey(String natrualKey) {
-        List<ProcessInstance> processInstances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(natrualKey);
-        return processInstances;
-    }
-
-
-    @Override
-    public Map<String, Object> getVariableOfTaskNeeding(boolean approve) {
-        Map<String, Object> variables = new HashedMap();
-        String handleUserId;
-        if (approve) {
-            handleUserId = developStaffImpl.getManagerStaffGroupId();
-            variables.put(WebConstants.DEVLOP_MANAGER, handleUserId);
-        } else {
-//            handleUserId = developStaffImpl.staffId();
-//            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
-        }
-        variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
-
-        return variables;
-    }
-
-    @Override
-    public void invokePass(String businessKey) {
-        createBoms(businessKey);
-    }
-
-    @Override
-    public void invokeReject(String businessKeys) {
-
-    }
 
     @Override
     public void addBatch(List<ProjectBomInfo> infos) {

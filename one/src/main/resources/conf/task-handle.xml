@@ -3,6 +3,7 @@
     <task taskDefineKey="updateProjectItem" name="开发员修改子项目">
         <businessController>projectItemAction</businessController>
         <businessService>projectItemManageService</businessService>
+        <taskService>projectItemTaskService</taskService>
         <urlInfo>/development/project_item/add/</urlInfo>
         <urlPass>/development/project_item/reject/</urlPass>
         <urlSumit>/development/project_item/submit/</urlSumit>
@@ -12,6 +13,7 @@
     <task taskDefineKey="approveProjectItem" name="经理审核子项目">
         <businessController>projectItemAction</businessController>
         <businessService>projectItemManageService</businessService>
+        <taskService>projectItemTaskService</taskService>
         <urlInfo>/development/project_item/add/</urlInfo>
         <urlSumit>/development/project_item/submit/</urlSumit>
         <invokePass>invokePass</invokePass>

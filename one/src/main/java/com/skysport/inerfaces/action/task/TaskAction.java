@@ -2,17 +2,16 @@ package com.skysport.inerfaces.action.task;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
-import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.core.cache.TaskHanlderCachedMap;
 import com.skysport.core.bean.SpringContextHolder;
-import com.skysport.core.model.common.IApproveService;
+import com.skysport.core.cache.TaskHanlderCachedMap;
+import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.UserUtils;
+import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.develop.helper.ProjectItemTaskHelper;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
-import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
@@ -131,9 +130,6 @@ public class TaskAction extends BaseAction<TaskVo> {
         int recordsFiltered = 0;
         int draw = Integer.parseInt(request.getParameter("draw"));
         List<TaskVo> infos = new ArrayList<>();
-        UserInfo user = UserUtils.getUserFromSession(session);
-        String userId = user.getNatrualkey();
-//        List<Task> tasks = devlopmentTaskService.queryToDoTask(userId);
 
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
         return resultMap;
@@ -205,11 +201,9 @@ public class TaskAction extends BaseAction<TaskVo> {
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
     public ModelAndView submit(@PathVariable String taskId, @PathVariable String businessKey, HttpServletRequest request) {
         request.setAttribute("taskId", taskId);
-        Task task = taskServiceImpl.createTaskQueryByTaskId(taskId);
-        String taskDefinitionKey = task.getTaskDefinitionKey();
-        String url = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getUrlSumit();
-        url = url + taskId + "/" + businessKey;
-        ModelAndView mav = new ModelAndView("forward:" + url);
+        IApproveService approveService = TaskServiceHelper.getInstance().getIApproveService(taskId, taskServiceImpl);
+        approveService.submit(taskId, businessKey);
+        ModelAndView mav = new ModelAndView("forward:/task/todo/list");
         return mav;
     }
 
@@ -224,8 +218,9 @@ public class TaskAction extends BaseAction<TaskVo> {
     @ResponseBody
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
     public ModelAndView pass(@RequestParam String businessKey, @RequestParam String taskId, @RequestParam String processInstanceId, @RequestParam String message, HttpServletRequest request) {
-        IApproveService approveService = TaskServiceHelper.getInstance().getIApproveService(taskId, taskServiceImpl);
-        Map<String, Object> variables = approveService.getVariableOfTaskNeeding(true);
+        Task task = taskServiceImpl.createTaskQueryByTaskId(taskId);
+        IApproveService approveService = TaskServiceHelper.getInstance().getApproveService(task.getTaskDefinitionKey());
+        Map<String, Object> variables = approveService.getVariableOfTaskNeeding(true, task);
 //        taskServiceImpl.invokePass(businessKey,taskId,processInstanceId);
         taskServiceImpl.saveComment(taskId, processInstanceId, message);
         taskServiceImpl.complete(taskId, variables);
@@ -245,8 +240,10 @@ public class TaskAction extends BaseAction<TaskVo> {
     @ResponseBody
     @SystemControllerLog(description = "处理任务：调转到指定的查询详情页面")
     public ModelAndView reject(@RequestParam String businessKey, @RequestParam String taskId, @RequestParam String processInstanceId, @RequestParam String message, HttpServletRequest request) {
-        IApproveService approveService = TaskServiceHelper.getInstance().getIApproveService(taskId, taskServiceImpl);
-        Map<String, Object> variables = approveService.getVariableOfTaskNeeding(false);
+//        String taskDefinitionKey = TaskServiceHelper.getInstance().getTaskDefinitionKey(taskId, taskServiceImpl);
+        Task task = taskServiceImpl.createTaskQueryByTaskId(taskId);
+        IApproveService approveService = TaskServiceHelper.getInstance().getApproveService(task.getTaskDefinitionKey());
+        Map<String, Object> variables = approveService.getVariableOfTaskNeeding(false, task);
         taskServiceImpl.saveComment(taskId, processInstanceId, message);
         taskServiceImpl.complete(taskId, variables);
         approveService.updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_REJECT);
