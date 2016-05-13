@@ -350,6 +350,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         List<BomInfo> alls = dealBomInfos.getAlls();
         List<String> bomsNeedToStart = dealBomInfos.getBomsNeedToStart();
 
+        //子项目BOM关系
         List<ProjectItemBomIdVo> bomIdVos = ProjectHelper.SINGLETONE.getProjectItemBomIdVo(alls);
         projectItemBomServiceImpl.batchInsert(bomIdVos);
 

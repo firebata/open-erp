@@ -19,22 +19,27 @@
         <invokePass>invokePass</invokePass>
     </task>
 
+    <task taskDefineKey="updateSingleBom" name="修改单个BOM">
+        <businessController>bomAction</businessController>
+        <businessService>bomManageService</businessService>
+        <taskService>bomInfoTaskImpl</taskService>
+        <urlInfo>/development/bom/add/</urlInfo>
+        <urlPass>/development/bom/reject/</urlPass>
+        <urlSumit>/development/bom/submit/</urlSumit>
+        <urlSave>/development/bom/new/</urlSave>
+    </task>
 
 
     <task taskDefineKey="approveSingleBom" name="审核BOM信息">
-        <businessController></businessController>
-        <businessService></businessService>
-        <urlInfo></urlInfo>
+        <businessController>bomAction</businessController>
+        <businessService>bomManageService</businessService>
+        <taskService>bomInfoTaskImpl</taskService>
+        <urlInfo>/development/bom/add/</urlInfo>
+        <urlSumit>/development/bom/submit/</urlSumit>
+        <invokePass>invokePass</invokePass>
     </task>
 
-    <task taskDefineKey="updateSingleBom" name="修改单个BOM">
-        <businessController>
 
-        </businessController>
-        <businessService>
-
-        </businessService>
-    </task>
 
 
     <task taskDefineKey="approveSingleBomQuoted" name="审核报价">

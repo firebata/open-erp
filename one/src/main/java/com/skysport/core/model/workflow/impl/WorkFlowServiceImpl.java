@@ -249,7 +249,7 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
         DataTablesInfo dataTablesInfo = taskQueryForm.getDataTablesInfo();
         int start = dataTablesInfo.getStart();
         int length = dataTablesInfo.getLength();
-        TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
+        TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId).orderByTaskCreateTime().desc();
         List<Task> tasks = taskQuery.listPage(start, start + length);
         List<TaskVo> taskRtn = buildTaskVos(tasks);
         return taskRtn;

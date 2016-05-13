@@ -189,7 +189,7 @@
     <exclusiveGateway id="exclusivegateway20" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow179" sourceRef="exclusivegateway20" targetRef="approveBomProcess">
       <extensionElements>
-        <activiti:executionListener event="take" expression="${projectItemPassListener}"></activiti:executionListener>
+        <activiti:executionListener event="take" delegateExpression="${projectItemPassListener}"></activiti:executionListener>
       </extensionElements>
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectItemPass}]]></conditionExpression>
     </sequenceFlow>

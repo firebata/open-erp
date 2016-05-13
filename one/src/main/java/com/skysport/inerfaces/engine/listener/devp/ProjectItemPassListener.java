@@ -1,12 +1,10 @@
 package com.skysport.inerfaces.engine.listener.devp;
-
 import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.ExecutionListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 /**
