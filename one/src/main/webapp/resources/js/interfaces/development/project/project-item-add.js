@@ -118,7 +118,8 @@
 
         //初始化性别属性，再初始化性别属性和颜色
         var $btnDIV = $("#projectBtnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+        var taskId = $("#taskId").val();
+        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), taskId, $("#stateCode").val(), $("#processInstanceId").val());
     }
 
     /**

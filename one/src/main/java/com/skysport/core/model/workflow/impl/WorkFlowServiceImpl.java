@@ -17,6 +17,8 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ import java.util.Map;
  */
 @Service("workFlowServiceImpl")
 public abstract class WorkFlowServiceImpl implements IApproveService, InitializingBean {
+    protected transient Log logger = LogFactory.getLog(getClass());
     /**
      *
      */

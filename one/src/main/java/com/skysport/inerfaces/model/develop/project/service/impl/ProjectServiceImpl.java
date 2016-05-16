@@ -65,13 +65,16 @@ public class ProjectServiceImpl extends CommonServiceImpl<ProjectInfo> implement
 
     @Override
     public void add(ProjectInfo info) {
-
+        logger.info("==>info" + info);
         UserInfo userInfo = UserUtils.getUserFromSession();
+        logger.info("==>userInfo" + userInfo);
         String aliases = userInfo.getAliases();
         List<UploadFileInfo> fileInfos = info.getFileInfos();
+        logger.info("==>fileInfos" + fileInfos);
         UploadFileHelper.SINGLETONE.updateFileRecords(fileInfos, info.getNatrualkey(), uploadFileInfoService, WebConstants.FILE_KIND_PROJECT);
         String projectId = info.getNatrualkey();
         List<ProjectCategoryInfo> categoryInfosInDB = queryCategoryInfosInDB(projectId);
+        logger.info("==>categoryInfosInDB" + categoryInfosInDB);
         //新增项目时组装项目名等信息
         ProjectHelper.SINGLETONE.buildProjectInfo(info);
         info.setCreater(aliases);
@@ -81,18 +84,18 @@ public class ProjectServiceImpl extends CommonServiceImpl<ProjectInfo> implement
 
         //增加主项目信息
         super.add(info);
-
+        logger.info("==>info.getCategoryInfos()" + info.getCategoryInfos());
         //增加项目的品类信息
         addBatchCategoryInfos(info.getCategoryInfos());
 
         //增加子项目
         List<ProjectBomInfo> projectBomInfos = ProjectHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, aliases);
-
+        logger.info("==>projectBomInfos" + projectBomInfos);
         //增加项目和子项目的关系
         List<ProjectItemProjectIdVo> ids = ProjectHelper.SINGLETONE.getProjectItemProjectIdVo(projectBomInfos, projectId);
         projectItemProjectServiceImpl.batchInsert(ids);
-
-        projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos,categoryInfosInDB);
+        logger.info("==>ids" + ids);
+        projectItemManageService.dealProjectItemsOnProjectChanged(info, projectBomInfos, categoryInfosInDB);
     }
 
 

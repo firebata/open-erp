@@ -228,4 +228,6 @@ public interface WebConstants extends TableNameConstants {
 
     String PROJECT_ITEM_ID ="project_item_id";
 
+    String NULL_STR="null";
+
 }

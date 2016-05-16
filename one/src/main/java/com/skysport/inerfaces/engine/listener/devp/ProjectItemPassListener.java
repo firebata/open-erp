@@ -21,5 +21,6 @@ public class ProjectItemPassListener implements ExecutionListener {
         IWorkFlowService projectItemTaskService = SpringContextHolder.getBean("projectItemTaskService");
         List<String> allbomIds = projectItemTaskService.invokePass(businessKey);
         execution.setVariable("allbomIds", allbomIds);//所有的bomids
+
     }
 }

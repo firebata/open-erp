@@ -131,6 +131,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
      * @param projectId String
      */
     public void startWorkFlow(String projectId) {
+        logger.info("==>projectItemTaskService" + projectItemTaskService);
         projectItemTaskService.startProcessInstanceByBussKey(projectId);
     }
 
@@ -279,12 +280,15 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         String projectId = info.getNatrualkey();
         //页面的projectItemsId
         List<String> projectItemsNew = ProjectHelper.SINGLETONE.buildProjectItemsId(projectBomInfos);
+        logger.info("==>projectItemsNew" + projectItemsNew);
         //DB的projectItemsId
         List<String> projectItemsDB = ProjectHelper.SINGLETONE.buildProjectItemsId(categoryInfosInDB, projectId);
+        logger.info("==>projectItemsDB" + projectItemsDB);
 
         //获取需要更新的子项目列表
         //交集
         List<String> intersection = ListUtils.intersection(projectItemsNew, projectItemsDB);
+        logger.info("==>intersection" + intersection);
 //        List<ProjectBomInfo> intersectionProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(intersection, projectBomInfos);
 
         //获取需要删除的
@@ -292,21 +296,24 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
         //需要增加的
         List<String> adds = ListUtils.subtract(projectItemsNew, intersection);
+        logger.info("==>projectBomInfos" + projectBomInfos);
         List<ProjectBomInfo> addsProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(adds, projectBomInfos);
+        logger.info("==>addsProjectBomInfos" + addsProjectBomInfos);
 
 
 //        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
 
         delProjectitems(subtract);
-
+        logger.info("==>subtract" + subtract);
         addProjectItems(addsProjectBomInfos);
-
+        logger.info("==>addsProjectBomInfos" + addsProjectBomInfos);
         updateApproveStatusBatch(projectBomInfos);
-
+        logger.info("==>projectBomInfos" + projectBomInfos);
 
         List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(subtract);
+        logger.info("==>instances" + instances);
         projectItemTaskService.suspendProcessInstanceById(instances);//终止流程
-
+        logger.info("==>adds" + adds);
         //启动流程
         startWorkFlow(adds);
     }

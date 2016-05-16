@@ -41,7 +41,7 @@ public class PlatformMappingExceptionResolver extends SimpleMappingExceptionReso
                     PrintWriter writer = response.getWriter();
                     writer.write(ex.getMessage());
                     //将异常栈信息记录到日志中
-                    logger.error(getTrace(ex));
+                    logger.error(ex.getMessage(), ex);
                     writer.flush();
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);

@@ -39,18 +39,23 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
-
+        logger.info("==>businessKey" + businessKey);
         Map<String, Object> variables = new HashMap<String, Object>();
         UserInfo userInfo = UserUtils.getUserFromSession();
+        logger.info("==>userInfo" + userInfo);
         ProcessInstance processInstance = null;
         try {
             String userId = userInfo.getNatrualkey();
+            identityService.setAuthenticatedUserId(userId);
+            logger.info("==>developStaffImpl" + developStaffImpl);
             String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
             String groupIdDev = developStaffImpl.getStaffGroupId();
-            identityService.setAuthenticatedUserId(userId);
             variables.put(WebConstants.DEVLOP_STAFF_GROUP, groupIdDev);
             variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
             variables.put(WebConstants.PROJECT_ITEM_ID, businessKey);
+            logger.info("==>groupIdDev" + groupIdDev);
+            logger.info("==>groupIdDevManager" + groupIdDevManager);
+            logger.info("==>businessKey" + businessKey);
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.PROJECT_ITEM_PROCESS, businessKey, variables);
         } finally {
             identityService.setAuthenticatedUserId(null);
@@ -73,15 +78,16 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public void submit(String taskId, String businessKey) {
-        //完成当前任务
-        Map<String, Object> variables = new HashMap<String, Object>();
-        String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
-        variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
-        complete(taskId, variables);
+        if (!WebConstants.NULL_STR.equals(taskId.trim())) {
+            //完成当前任务
+            Map<String, Object> variables = new HashMap<String, Object>();
+            String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
+            variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+            complete(taskId, variables);
+        }
         //状态改为待审批
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
-
 
 
     @Override
