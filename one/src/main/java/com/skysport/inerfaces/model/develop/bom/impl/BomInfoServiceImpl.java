@@ -9,6 +9,7 @@ import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.bean.relation.BomMaterialIdVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
+import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
@@ -379,7 +380,7 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
         List<ProcessInstance> instances = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(needDelBomIdList);
         List<ProcessInstance> instancesIntersection = bomInfoTaskImpl.queryProcessInstancesActiveByBusinessKey(needUpdateBomIdList, WebConstants.APPROVE_BOM_PROCESS);
-        needUpdateBomIdList = BomHelper.getInstance().chooseBomsNeedToStartInUpdates(instancesIntersection, needUpdateBomIdList);
+        needUpdateBomIdList = TaskServiceHelper.getInstance().chooseNeedToStartInUpdates(instancesIntersection, needUpdateBomIdList);
 
         //终止流程
         bomInfoTaskImpl.suspendProcessInstanceById(instances);

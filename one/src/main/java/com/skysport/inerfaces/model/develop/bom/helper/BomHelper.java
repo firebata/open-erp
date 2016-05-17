@@ -347,20 +347,5 @@ public class BomHelper/* extends ExcelCreateHelper */ {
         return bomIds;
     }
 
-    /**
-     * 在更新的bom集合中找到需要启动的bom集合
-     *
-     * @param instancesIntersection 运行中的BOM实例
-     * @param needUpdateBomIdList   需要更新的bom集合
-     * @return 更新的bom集合中需要启动的bom集合
-     */
-    public List<String> chooseBomsNeedToStartInUpdates(List<ProcessInstance> instancesIntersection, List<String> needUpdateBomIdList) {
-        List<String> results = needUpdateBomIdList;
-        if (null != instancesIntersection && !instancesIntersection.isEmpty()) {
-            for (ProcessInstance pr : instancesIntersection) {
-                results.remove(pr.getBusinessKey());
-            }
-        }
-        return results;
-    }
+
 }

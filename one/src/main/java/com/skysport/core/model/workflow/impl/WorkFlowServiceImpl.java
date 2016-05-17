@@ -8,6 +8,7 @@ import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import com.skysport.inerfaces.bean.task.ApproveVo;
 import com.skysport.inerfaces.bean.task.TaskVo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricTaskInstance;
@@ -91,7 +92,10 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
      */
     @Override
     public void updateApproveStatusBatch(List<String> businessKeys, String status) {
-        approveMapper.updateApproveStatusBatch(businessKeys, status);
+        if (businessKeys != null && !businessKeys.isEmpty()) {
+            approveMapper.updateApproveStatusBatch(businessKeys, status);
+        }
+
     }
 
     /**
@@ -106,6 +110,7 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
             for (Task task : tasks) {
                 String processInstanceId = task.getProcessInstanceId();
                 ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
+                String businessName = (String) task.getTaskLocalVariables().get(WebConstants.BUSINESS_NAME);
                 String businessKey = processInstance.getBusinessKey();
                 String processDefinitionId = processInstance.getProcessDefinitionId();
                 ProcessDefinition processDefinition = getProcessDefinition(processInstance.getProcessDefinitionId());
@@ -128,6 +133,7 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
                 taskInfo.setAssignee(assignee);
                 taskInfo.setSuspended(suspended);
                 taskInfo.setVersion(version);
+                taskInfo.setBusinessName(businessName);
                 taskRtn.add(taskInfo);
             }
         }
@@ -356,5 +362,30 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
     @Override
     public <T> T invokeReject(String businessKeys) {
         return null;
+    }
+
+    public void suspendProcessInstanceByIds(List<String> subtract) {
+        List<ProcessInstance> instances = queryProcessInstancesActiveByBusinessKey(subtract);
+        suspendProcessInstanceById(instances);//终止流程
+    }
+
+    public void startWorkFlow(List<TaskVo> taskVos) {
+        if (null != taskVos && !taskVos.isEmpty()) {
+            for (TaskVo vo : taskVos) {
+                String businessKey = vo.getBusinessKey();
+                String businessName = vo.getBusinessName();
+                updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_NEW);
+                startProcessInstanceByBussKey(vo);
+            }
+
+        }
+
+    }
+
+    @Override
+    public void startProcessInstanceByBussKey(TaskVo vo) {
+        String businessKey = vo.getBusinessKey();
+        String businessName = vo.getBusinessName();
+        startProcessInstanceByBussKey(businessKey, businessName);
     }
 }

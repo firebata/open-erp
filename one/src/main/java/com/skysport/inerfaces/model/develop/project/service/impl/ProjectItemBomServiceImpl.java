@@ -28,6 +28,11 @@ public class ProjectItemBomServiceImpl implements IRelationIdDealService<Project
         projectItemBomMapper.batchInsert(vos);
     }
 
+    @Override
+    public List<String> queryProjectChildIdsByParentId(String projectId) {
+        return null;
+    }
+
     private void backupRecordsToHis(String projectId) {
         projectItemBomMapper.backupRecordsToHis(projectId);
     }

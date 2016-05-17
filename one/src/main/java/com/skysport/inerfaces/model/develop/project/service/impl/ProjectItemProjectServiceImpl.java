@@ -32,6 +32,11 @@ public class ProjectItemProjectServiceImpl implements IRelationIdDealService<Pro
 
     }
 
+    @Override
+    public List<String> queryProjectChildIdsByParentId(String parentId) {
+        return projectItemProjectMapper.queryProjectChildIdsByParentId(parentId);
+    }
+
     private void backupRecordsToHis(String parentProjectId) {
         projectItemProjectMapper.backupRecordsToHisByParentProjectId(parentProjectId);
     }

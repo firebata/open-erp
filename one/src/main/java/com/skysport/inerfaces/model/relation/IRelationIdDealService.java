@@ -10,4 +10,6 @@ public interface IRelationIdDealService<T> {
     void backupRecordsToHis(List<T> vos);
 
     void batchInsert(List<T> vos);
+
+    List<String> queryProjectChildIdsByParentId(String projectId);
 }

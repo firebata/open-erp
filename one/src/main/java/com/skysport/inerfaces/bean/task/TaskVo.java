@@ -19,7 +19,10 @@ public class TaskVo<T> extends IdEntity implements Serializable {
     private String createTime;
     private String taskDefinitionKey;
     private String assignee;
+    //业务主键
     private String businessKey;
+    //业务名称
+    private String businessName;
     private boolean suspended;
     private int version;
     private String processInstanceId;
@@ -106,6 +109,18 @@ public class TaskVo<T> extends IdEntity implements Serializable {
         this.suspended = suspended;
     }
 
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
     public int getVersion() {
         return version;
     }
@@ -129,4 +144,5 @@ public class TaskVo<T> extends IdEntity implements Serializable {
     public void setProcessDefinitionId(String processDefinitionId) {
         this.processDefinitionId = processDefinitionId;
     }
+
 }

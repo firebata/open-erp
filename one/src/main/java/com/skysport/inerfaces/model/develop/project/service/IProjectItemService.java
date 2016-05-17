@@ -3,7 +3,6 @@ package com.skysport.inerfaces.model.develop.project.service;
 import com.skysport.core.model.common.ICommonService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
-import com.skysport.inerfaces.bean.develop.ProjectCategoryInfo;
 import com.skysport.inerfaces.bean.develop.ProjectInfo;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -37,7 +36,9 @@ public interface IProjectItemService extends ICommonService<ProjectBomInfo>{
 
     void delSexColorInfoByBomInfo(BomInfo info);
 
-    void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB);
+//    void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB);
+
+    void dealProjectItemsOnProjectChanged(ProjectInfo info);
 
     void setStatuCodeAlive(ProjectBomInfo info, String natrualKey);
 

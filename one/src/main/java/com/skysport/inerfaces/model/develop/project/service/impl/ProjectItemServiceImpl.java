@@ -11,7 +11,10 @@ import com.skysport.inerfaces.bean.common.UploadFileInfo;
 import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.form.develop.ProjectQueryForm;
 import com.skysport.inerfaces.bean.relation.ProjectItemBomIdVo;
+import com.skysport.inerfaces.bean.relation.ProjectItemProjectIdVo;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.mapper.develop.ProjectItemMapper;
 import com.skysport.inerfaces.model.common.uploadfile.IUploadFileInfoService;
 import com.skysport.inerfaces.model.common.uploadfile.helper.UploadFileHelper;
@@ -25,6 +28,7 @@ import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.helper.PackagingServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.inerfaces.model.develop.project.helper.ProjectHelper;
+import com.skysport.inerfaces.model.develop.project.service.IProjectCategoryManageService;
 import com.skysport.inerfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.inerfaces.model.develop.project.service.ISexColorService;
 import com.skysport.inerfaces.model.relation.IRelationIdDealService;
@@ -50,7 +54,8 @@ import java.util.*;
  */
 @Service("projectItemManageService")
 public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> implements IProjectItemService, InitializingBean {
-
+    @Autowired
+    private IRelationIdDealService projectItemProjectServiceImpl;
     @Resource(name = "projectItemMapper")
     private ProjectItemMapper projectItemMapper;
 
@@ -59,7 +64,8 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     @Resource(name = "fabricsManageService")
     private IFabricsService fabricsManageService;
-
+    @Resource(name = "projectCategoryManageService")
+    private IProjectCategoryManageService projectCategoryManageService;
     @Resource(name = "accessoriesService")
     private IAccessoriesService accessoriesService;
 
@@ -131,7 +137,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
      * @param projectId String
      */
     public void startWorkFlow(String projectId) {
-        logger.info("==>projectItemTaskService" + projectItemTaskService);
         projectItemTaskService.startProcessInstanceByBussKey(projectId);
     }
 
@@ -268,27 +273,32 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         sexColorService.delSexColorInfoByBomInfo(info);
     }
 
+    private List<ProjectCategoryInfo> queryCategoryInfosInDB(String projectId) {
+        return projectCategoryManageService.queryProjectCategoryInfo(projectId);
+    }
+
     /**
      * 修改大项目，处理子项目
      *
      * @param info
-     * @param projectBomInfos   页面的项目数据
-     * @param categoryInfosInDB
      */
     @Override
-    public void dealProjectItemsOnProjectChanged(ProjectInfo info, List<ProjectBomInfo> projectBomInfos, List<ProjectCategoryInfo> categoryInfosInDB) {
+    public void dealProjectItemsOnProjectChanged(ProjectInfo info) {
+
+
         String projectId = info.getNatrualkey();
-        //页面的projectItemsId
-        List<String> projectItemsNew = ProjectHelper.SINGLETONE.buildProjectItemsId(projectBomInfos);
-        logger.info("==>projectItemsNew" + projectItemsNew);
+//        List<ProjectCategoryInfo> categoryInfosInDB = queryCategoryInfosInDB(projectId);
+
         //DB的projectItemsId
-        List<String> projectItemsDB = ProjectHelper.SINGLETONE.buildProjectItemsId(categoryInfosInDB, projectId);
-        logger.info("==>projectItemsDB" + projectItemsDB);
+        List<String> projectItemsDB = projectItemProjectServiceImpl.queryProjectChildIdsByParentId(projectId);// ProjectHelper.SINGLETONE.buildProjectItemsId(categoryInfosInDB, projectId);
+
+        //页面的projectItemsId
+        List<ProjectBomInfo> projectBomInfos = ProjectHelper.SINGLETONE.buildProjectBomInfosByProjectInfo(info, projectItemsDB);
+        List<String> projectItemsNew = ProjectHelper.SINGLETONE.buildProjectItemsId(projectBomInfos);
 
         //获取需要更新的子项目列表
         //交集
         List<String> intersection = ListUtils.intersection(projectItemsNew, projectItemsDB);
-        logger.info("==>intersection" + intersection);
 //        List<ProjectBomInfo> intersectionProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(intersection, projectBomInfos);
 
         //获取需要删除的
@@ -296,27 +306,60 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
         //需要增加的
         List<String> adds = ListUtils.subtract(projectItemsNew, intersection);
-        logger.info("==>projectBomInfos" + projectBomInfos);
         List<ProjectBomInfo> addsProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(adds, projectBomInfos);
-        logger.info("==>addsProjectBomInfos" + addsProjectBomInfos);
+
+
+        //增加项目和子项目的关系
+        List<ProjectItemProjectIdVo> relations = ProjectHelper.SINGLETONE.getProjectItemProjectIdVo(projectBomInfos);
+        projectItemProjectServiceImpl.batchInsert(relations);
 
 
 //        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
-
         delProjectitems(subtract);
-        logger.info("==>subtract" + subtract);
         addProjectItems(addsProjectBomInfos);
-        logger.info("==>addsProjectBomInfos" + addsProjectBomInfos);
-        updateApproveStatusBatch(projectBomInfos);
-        logger.info("==>projectBomInfos" + projectBomInfos);
 
-        List<ProcessInstance> instances = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(subtract);
-        logger.info("==>instances" + instances);
-        projectItemTaskService.suspendProcessInstanceById(instances);//终止流程
-        logger.info("==>adds" + adds);
+        projectItemTaskService.suspendProcessInstanceByIds(subtract);//终止流程
+
+        List<String> needToStartFlowIds = new ArrayList<>();
+        needToStartFlowIds.addAll(adds);
+        needToStartFlowIds.addAll(intersection);
+        List<ProcessInstance> instancesIntersection = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(needToStartFlowIds, WebConstants.PROJECT_ITEM_PROCESS);
+        needToStartFlowIds = TaskServiceHelper.getInstance().chooseNeedToStartInUpdates(instancesIntersection, needToStartFlowIds);
+
+        List<ProjectBomInfo> needToStartFlowList = getNeedToStartFlowList(needToStartFlowIds, projectBomInfos);
+        List<TaskVo> taskVos = TaskServiceHelper.getInstance().changeToBusinessVo(needToStartFlowList);
+
+
+//        updateApproveStatusBatch(projectBomInfos);
+
+
         //启动流程
-        startWorkFlow(adds);
+//        startWorkFlow(addAnUpdates);
+        projectItemTaskService.startWorkFlow(taskVos);
     }
+
+    /**
+     * 挑选出需要启动流程的子项目
+     *
+     * @param addAnUpdates
+     * @param projectBomInfos
+     * @return
+     */
+    private List<ProjectBomInfo> getNeedToStartFlowList(List<String> addAnUpdates, List<ProjectBomInfo> projectBomInfos) {
+        List<ProjectBomInfo> needToStartFlowList = new ArrayList<>();
+        for (ProjectBomInfo bominfo : projectBomInfos) {
+            String projectItemIdTem = bominfo.getProjectId();
+            for (String projectItemId : addAnUpdates) {
+                if (projectItemId.equals(projectItemIdTem)) {
+                    needToStartFlowList.add(bominfo);
+                }
+            }
+        }
+
+        return needToStartFlowList;
+
+    }
+
 
     @Override
     public void setStatuCodeAlive(ProjectBomInfo info, String natrualKey) {

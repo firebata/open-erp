@@ -14,6 +14,7 @@
      */
     var columnsName = [
         {"data": null},
+        {"data": "businessName"},
         {"data": "name"},
         {"data": "createTime"},
         {"data": "suspended"},

@@ -24,6 +24,8 @@ public interface IWorkFlowService {
      */
     ProcessInstance startProcessInstanceByBussKey(String businessKey);
 
+    ProcessInstance startProcessInstanceByBussKey(String businessKey,String businessName);
+
     /**
      * @param businessKey
      * @return
@@ -175,4 +177,11 @@ public interface IWorkFlowService {
      * @param businessKey
      */
     <T> T invokeReject(String businessKey);
+
+    void suspendProcessInstanceByIds(List<String> subtract);
+
+    void startWorkFlow(List<TaskVo> taskVos);
+
+    void startProcessInstanceByBussKey(TaskVo vo);
+
 }

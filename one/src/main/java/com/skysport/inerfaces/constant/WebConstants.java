@@ -226,8 +226,8 @@ public interface WebConstants extends TableNameConstants {
     int QUOTED_STEP_END = 1;//
 
 
-    String PROJECT_ITEM_ID ="project_item_id";
-
-    String NULL_STR="null";
+    String PROJECT_ITEM_ID = "project_item_id";
+    String BUSINESS_NAME = "businessName";
+    String NULL_STR = "null";
 
 }

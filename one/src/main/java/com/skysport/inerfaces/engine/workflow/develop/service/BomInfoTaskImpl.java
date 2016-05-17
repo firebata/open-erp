@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.engine.workflow.develop.service;
 
 import com.skysport.core.bean.permission.UserInfo;
+import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
 import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -29,6 +30,11 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
+        return startProcessInstanceByBussKey(businessKey, CharConstant.EMPTY);
+    }
+
+    @Override
+    public ProcessInstance startProcessInstanceByBussKey(String businessKey, String businessName) {
         Map<String, Object> variables = new HashMap<String, Object>();
         UserInfo userInfo = UserUtils.getUserFromSession();
         ProcessInstance processInstance = null;
@@ -37,6 +43,7 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
             String groupIdDevManager = developStaffImpl.getManagerStaffGroupId();
             identityService.setAuthenticatedUserId(userId);
             variables.put(WebConstants.DEVLOP_MANAGER, groupIdDevManager);
+            variables.put(WebConstants.BUSINESS_NAME, businessName);
             processInstance = runtimeService.startProcessInstanceByKey(WebConstants.APPROVE_BOM_PROCESS, businessKey, variables);
         } finally {
             identityService.setAuthenticatedUserId(null);
@@ -96,6 +103,8 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
     public <T> T invokeReject(String businessKey) {
         return null;
     }
+
+
 
     @Override
     public void afterPropertiesSet() throws Exception {

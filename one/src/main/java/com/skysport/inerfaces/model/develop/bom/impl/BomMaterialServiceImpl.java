@@ -29,4 +29,9 @@ public class BomMaterialServiceImpl implements IRelationIdDealService<BomMateria
         bomMaterialMapper.batchInsert(vos);
 
     }
+
+    @Override
+    public List<String> queryProjectChildIdsByParentId(String projectId) {
+        return null;
+    }
 }

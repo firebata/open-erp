@@ -18,4 +18,6 @@ public interface ProjectItemProjectMapper {
     void batchInsert(List<ProjectItemProjectIdVo> vos);
 
     void backupRecordsToHisByParentProjectId(@Param(value = "parentProjectId") String parentProjectId);
+
+    List<String> queryProjectChildIdsByParentId(@Param(value = "parentId") String parentId);
 }

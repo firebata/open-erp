@@ -23,4 +23,5 @@ public interface IApproveService extends IWorkFlowService {
      */
     void updateApproveStatusBatch(List<String> businessKeys, String status);
 
+
 }

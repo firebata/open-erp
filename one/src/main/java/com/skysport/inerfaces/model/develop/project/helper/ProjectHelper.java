@@ -1,9 +1,11 @@
 package com.skysport.inerfaces.model.develop.project.helper;
 
+import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.exception.SkySportException;
+import com.skysport.core.utils.UserUtils;
 import com.skysport.inerfaces.utils.SeqCreateUtils;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.ProjectBomInfo;
@@ -231,13 +233,31 @@ public enum ProjectHelper {
      * @param info ProjectInfo
      * @return
      */
-    public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, String aliases) {
+    public List<ProjectBomInfo> buildProjectBomInfosByProjectInfo(ProjectInfo info, List<String> projectItemsDB) {
+        String projectId = info.getNatrualkey();
+        //读取session中的用户
+        UserInfo userInfo = UserUtils.getUserFromSession();
+        String aliases = userInfo.getAliases();
         List<ProjectBomInfo> projectBomInfos = new ArrayList<>();
         List<ProjectCategoryInfo> projectCategoryInfos = info.getCategoryInfos();
         if (null != projectCategoryInfos && !projectCategoryInfos.isEmpty()) {
             int seq = 1;
             for (ProjectCategoryInfo categoryInfo : projectCategoryInfos) {
-//
+                String projectItemId = SeqCreateUtils.SINGLETONE.newProjectItemSeq(categoryInfo);// info.getNatrualkey() + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
+                String categoryAid = categoryInfo.getCategoryAid();
+                String categoryBid = categoryInfo.getCategoryBid();
+                String categoryAidBid = categoryAid + categoryBid;
+                //子项目编号=大项目编号+一级品类+二级品类
+                String name = buildProjectItemName(info, categoryInfo);
+                for (String projectItemIdInDb : projectItemsDB) {
+                    String timstamp = projectItemIdInDb.substring(0, 21);
+                    String categoryAidBidInDB = projectItemIdInDb.substring(21);
+                    if (categoryAidBid.equals(categoryAidBidInDB)) {
+                        projectItemId = projectItemIdInDb;
+                        break;
+                    }
+
+                }
                 info.setSeqNo(String.valueOf(seq));
                 ProjectBomInfo projectBomInfo;//直接将项目的大部分项目信息转存到子项目对象中
                 try {
@@ -245,15 +265,12 @@ public enum ProjectHelper {
                 } catch (CloneNotSupportedException e) {
                     throw new SkySportException(ReturnCodeConstant.SYS_EXP);
                 }
-                //子项目编号=大项目编号+一级品类+二级品类
-                String projectItemId = SeqCreateUtils.SINGLETONE.newProjectItemSeq(categoryInfo);// info.getNatrualkey() + categoryInfo.getCategoryAid() + categoryInfo.getCategoryBid();
-                String name = buildProjectItemName(info, categoryInfo);
                 projectBomInfo.setNatrualkey(projectItemId);
                 projectBomInfo.setName(name);
                 projectBomInfo.setProjectName(name);
-                projectBomInfo.setCategoryAid(categoryInfo.getCategoryAid());
-                projectBomInfo.setCategoryBid(categoryInfo.getCategoryBid());
-                projectBomInfo.setParentProjectId(info.getNatrualkey());
+                projectBomInfo.setCategoryAid(categoryAid);
+                projectBomInfo.setCategoryBid(categoryBid);
+                projectBomInfo.setParentProjectId(projectId);
                 projectBomInfo.setCreater(aliases);
                 projectBomInfos.add(projectBomInfo);
                 seq++;
@@ -302,7 +319,7 @@ public enum ProjectHelper {
      * @param projectId
      * @return
      */
-    public List<ProjectItemProjectIdVo> getProjectItemProjectIdVo(List<ProjectBomInfo> projectBomInfos, String projectId) {
+    public List<ProjectItemProjectIdVo> getProjectItemProjectIdVo(List<ProjectBomInfo> projectBomInfos) {
         List<ProjectItemProjectIdVo> vos = new ArrayList<ProjectItemProjectIdVo>();
         for (ProjectBomInfo projectBomInfo : projectBomInfos) {
             String projectItemId = projectBomInfo.getNatrualkey();
@@ -402,7 +419,6 @@ public enum ProjectHelper {
     }
 
     /**
-     *
      * @param alls
      * @return
      */

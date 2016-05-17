@@ -1,14 +1,17 @@
 package com.skysport.inerfaces.engine.workflow.helper;
 
+import com.skysport.core.bean.system.SelectItem;
 import com.skysport.core.cache.TaskHanlderCachedMap;
 import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.task.ApproveVo;
+import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,5 +94,40 @@ public class TaskServiceHelper {
         String taskService = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getTaskService();
         IApproveService approveService = SpringContextHolder.getBean(taskService);
         return approveService;
+    }
+
+    /**
+     * 在更新的bom集合中找到需要启动的bom集合
+     *
+     * @param instancesIntersection 运行中的BOM实例
+     * @param needUpdateIdList      需要更新的bom集合
+     * @return 更新的bom集合中需要启动的bom集合
+     */
+    public List<String> chooseNeedToStartInUpdates(List<ProcessInstance> instancesIntersection, List<String> needUpdateIdList) {
+        List<String> results = needUpdateIdList;
+        if (null != instancesIntersection && !instancesIntersection.isEmpty()) {
+            for (ProcessInstance pr : instancesIntersection) {
+                results.remove(pr.getBusinessKey());
+            }
+        }
+        return results;
+    }
+
+    /**
+     * @param datas
+     * @return
+     */
+    public List<TaskVo> changeToBusinessVo(List<? extends SelectItem> datas) {
+        List<TaskVo> taskVos = new ArrayList<>();
+        if (null != datas && !datas.isEmpty()) {
+            for (SelectItem item : datas) {
+                TaskVo vo = new TaskVo();
+                vo.setBusinessKey(item.getNatrualkey());
+                vo.setBusinessName(item.getName());
+                taskVos.add(vo);
+            }
+        }
+        return taskVos;
+
     }
 }
