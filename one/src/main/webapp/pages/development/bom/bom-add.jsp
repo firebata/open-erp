@@ -9,6 +9,11 @@
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
     <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"      id="main-ace-style"/>
+    <style  type="text/css">
+        .selfAdapta {
+            width:100%;
+        }
+    </style>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">

@@ -14,9 +14,8 @@
     <div id="{{packagingDivId}}" class="bom-info">
         <div class="bom-info form-group" id="{{packagingTitleId}}" style="margin: 0 auto;">
             <input type="hidden" name="packagingId" id="{{packagingIdP}}"/>
-            <label class="col-xs-1 text-left green" style="text-align: left;">
-                <input type="text" id="{{packagingsNameP}}" name="packagingsName"
-                       placeholder="{{packagingTitleName}} "/></label>
+            <label class="col-xs-2 text-left green" style="text-align: left;">
+                <input type="text" id="{{packagingsNameP}}" name="packagingsName"    placeholder="{{packagingTitleName}}"  class="selfAdapta"/></label>
             <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue ">
                 <span class="glyphicon glyphicon-eye-open" id="{{packagingEyeId}}"
                       onclick="javascript:showOrHidePackaging(this,'{{currenId}}')"></span>

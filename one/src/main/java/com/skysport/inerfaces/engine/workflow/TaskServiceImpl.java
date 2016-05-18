@@ -40,5 +40,10 @@ public class TaskServiceImpl extends WorkFlowServiceImpl {
 
     }
 
+    @Override
+    public String queryBusinessName(String businessKey) {
+        return null;
+    }
+
 
 }

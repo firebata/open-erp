@@ -333,5 +333,23 @@
         </foreach>
     </update>
 
-
+    <select id="queryBusinessName" resultType="String">
+        SELECT
+            CONCAT(
+                c.project_name,
+                '/',
+                bom_name,
+                '/',
+                main_color
+            ) AS NAME
+        FROM
+            t_kf_bominfo a,
+            t_kf_project_item_bom b,
+            t_kf_project_item c
+        WHERE
+            a.del_flag = 0
+        AND a.bom_id = b.bom_id
+        AND b.project_id = c.project_id
+        AND   a.bom_id =#{businessKey}
+    </select>
 </mapper>

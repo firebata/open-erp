@@ -50,4 +50,16 @@ public enum MaterialPantoneServiceHelper {
         }
         return patones.toString();
     }
+
+    /**
+     *
+     * @param compositePantoneIds 更改面料颜色所属：面布或者底布
+     * @param type 0：面布；1：底布
+     */
+    public void changeFabricPantoneType(List<KFMaterialPantone> compositePantoneIds, String materialId, String type) {
+        for(KFMaterialPantone pantone:compositePantoneIds){
+            pantone.setType(type);
+            pantone.setMaterialId(materialId);
+        }
+    }
 }

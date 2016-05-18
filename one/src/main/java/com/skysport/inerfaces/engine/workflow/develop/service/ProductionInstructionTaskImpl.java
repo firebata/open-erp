@@ -1,11 +1,13 @@
 package com.skysport.inerfaces.engine.workflow.develop.service;
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
 import com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper;
+import com.skysport.inerfaces.model.develop.bom.IBomService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -14,7 +16,8 @@ import java.util.Map;
  */
 @Service
 public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
-
+    @Resource(name = "bomManageService")
+    private IBomService bomManageService;
     @Autowired
     private ProductionInstructionMapper productionInstructionMapper;
 
@@ -41,5 +44,10 @@ public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
     @Override
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve, Task task) {
         return null;
+    }
+
+    @Override
+    public String queryBusinessName(String businessKey) {
+        return bomManageService.queryBusinessName(businessKey) + "报价表";
     }
 }

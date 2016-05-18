@@ -307,6 +307,12 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         //需要增加的
         List<String> adds = ListUtils.subtract(projectItemsNew, intersection);
         List<ProjectBomInfo> addsProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(adds, projectBomInfos);
+//        List<ProjectBomInfo> updatesProjectBomInfos = ProjectHelper.SINGLETONE.getMatchProjectBomInfoList(adds, projectBomInfos);
+
+
+//        updateProjectItems(updatesProjectBomInfos); 子项目没有内容需要修改
+        delProjectitems(subtract);
+        addProjectItems(addsProjectBomInfos);
 
 
         //增加项目和子项目的关系
@@ -314,19 +320,15 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         projectItemProjectServiceImpl.batchInsert(relations);
 
 
-//        updateProjectItems(intersectionProjectBomInfos);  不用修改数据
-        delProjectitems(subtract);
-        addProjectItems(addsProjectBomInfos);
-
         projectItemTaskService.suspendProcessInstanceByIds(subtract);//终止流程
 
         List<String> needToStartFlowIds = new ArrayList<>();
         needToStartFlowIds.addAll(adds);
         needToStartFlowIds.addAll(intersection);
         List<ProcessInstance> instancesIntersection = projectItemTaskService.queryProcessInstancesActiveByBusinessKey(needToStartFlowIds, WebConstants.PROJECT_ITEM_PROCESS);
-        needToStartFlowIds = TaskServiceHelper.getInstance().chooseNeedToStartInUpdates(instancesIntersection, needToStartFlowIds);
+        needToStartFlowIds = TaskServiceHelper.getInstance().chooseNeedToStartInUpdates(instancesIntersection, needToStartFlowIds);//筛选出已经启动流程实例的子项目
 
-        List<ProjectBomInfo> needToStartFlowList = getNeedToStartFlowList(needToStartFlowIds, projectBomInfos);
+        List<ProjectBomInfo> needToStartFlowList = getNeedToStartFlowList(needToStartFlowIds, projectBomInfos);//页面传入的子项目中，过滤掉已经启动流程实例的子项目
         List<TaskVo> taskVos = TaskServiceHelper.getInstance().changeToBusinessVo(needToStartFlowList);
 
 
@@ -336,6 +338,10 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         //启动流程
 //        startWorkFlow(addAnUpdates);
         projectItemTaskService.startWorkFlow(taskVos);
+    }
+
+    private void updateProjectItems(List<ProjectBomInfo> updatesProjectBomInfos) {
+        projectItemMapper.updateBatch(updatesProjectBomInfos);
     }
 
     /**
@@ -348,7 +354,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     private List<ProjectBomInfo> getNeedToStartFlowList(List<String> addAnUpdates, List<ProjectBomInfo> projectBomInfos) {
         List<ProjectBomInfo> needToStartFlowList = new ArrayList<>();
         for (ProjectBomInfo bominfo : projectBomInfos) {
-            String projectItemIdTem = bominfo.getProjectId();
+            String projectItemIdTem = bominfo.getNatrualkey();
             for (String projectItemId : addAnUpdates) {
                 if (projectItemId.equals(projectItemIdTem)) {
                     needToStartFlowList.add(bominfo);
@@ -364,7 +370,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     @Override
     public void setStatuCodeAlive(ProjectBomInfo info, String natrualKey) {
         projectItemTaskService.setStatuCodeAlive(info, natrualKey);
-
     }
 
     private void delProjectitems(List<String> subtract) {
@@ -384,11 +389,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     }
 
-    private void updateApproveStatusBatch(List<ProjectBomInfo> projectBomInfos) {
-        //审核状态：新增
-        List<String> businessKeys = ProjectHelper.SINGLETONE.buildBusinessKeys(projectBomInfos);
-        projectItemTaskService.updateApproveStatusBatch(businessKeys, WebConstants.APPROVE_STATUS_NEW);
-    }
 
     public <T> T createBoms(String businessKey) {
 

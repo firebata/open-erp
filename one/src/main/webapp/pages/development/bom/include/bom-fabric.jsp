@@ -16,25 +16,25 @@
         <div class="bom-info form-group" id="{{fabricTitleId}}" style="margin: 0 auto;">
             <input type="hidden" name="fabricId" id="{{fabricId}}"/>
             <input type="hidden" name="serialNumber" id="{{serialNumber}}"/>
-            <label class="col-xs-1 text-left green" style="text-align: left;">
-                <input type="text" id="{{fabricName}}" name="fabricName" placeholder="{{fabricTitleName}} "  />
+            <label class="col-xs-2 text-left green" style="text-align: left;">
+                <input type="text" id="{{fabricName}}" name="fabricName" placeholder="{{fabricTitleName}}"  class="selfAdapta"/>
             </label>
-            <label class="col-xs-1 text-left green" style="text-align: left;">
-                <input type="text" id="{{fabricNo}}" name="fabricNo" placeholder="{{fabricNoName}} "  />
+            <label class="col-xs-2 text-left green" style="text-align: left;">
+                <input type="text" id="{{fabricNo}}" name="fabricNo" placeholder="{{fabricNoName}}"   class="selfAdapta" />
             </label>
-            <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue ">
+            <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue">
                 <span class="glyphicon glyphicon-eye-open" id="{{fabricEyeId}}"
                       onclick="javascript:showOrHideFabric(this,'{{currenId}}')"></span>
             </label>
-            <label class="col-xs-1 control-label no-padding-right blue ">
+            <label class="col-xs-1 control-label no-padding-right blue">
                 <span class="glyphicon glyphicon-trash" id="{{fabricTrashId}}"
                       onclick="javascript:trashFabricSelect(this,'{{currenId}}')"></span>
             </label>
-            <label class="col-xs-1 control-label no-padding-right blue ">
+            <label class="col-xs-1 control-label no-padding-right blue">
                 <span class="glyphicon glyphicon-repeat" id="{{fabricRepeatId}}"
                       onclick="javascript:refreshFabricSelect(this,'{{currenId}}')"></span>
             </label>
-            <label class="col-xs-1 control-label no-padding-right blue ">
+            <label class="col-xs-1 control-label no-padding-right blue">
                 <span class="glyphicon glyphicon-import" id="{{fabricCopyId}}"
                       onclick="javascript:copyFabric(this,'{{currenId}}')"></span>
             </label>
@@ -142,10 +142,10 @@
                                     </select>
                                 </div>
 
-                                <label class="col-xs-2  control-label" for="{{compositePantoneId}}"> 颜色 </label>
+                                <label class="col-xs-2  control-label" for="{{compositePantoneIds}}"> 颜色 </label>
                                 <div class="col-xs-3">
-                                    <input type="text" id="{{compositePantoneId}}" name="compositePantoneId"
-                                           placeholder="颜色" class="col-xs-10 col-sm-12"/>
+                                    <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="compositePantoneIds"
+                                            placeholder="颜色" id="{{compositePantoneIds}}"></select>
                                 </div>
                             </div>
 

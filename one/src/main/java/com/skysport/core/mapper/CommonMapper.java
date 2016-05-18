@@ -39,4 +39,6 @@ public interface CommonMapper<T> {
     <T> List<T> searchInfos(BaseQueyrForm baseQueyrForm);
 
     int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm);
+
+    String queryBusinessName(@Param(value = "businessKey")String businessKey);
 }

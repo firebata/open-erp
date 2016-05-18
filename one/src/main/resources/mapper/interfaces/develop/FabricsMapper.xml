@@ -212,8 +212,10 @@
         <result column="delFlag" property="delFlag"/>
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
+        <result column="type" property="type" />
         <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
 
@@ -261,7 +263,8 @@
                 d.composite_dye_id AS compositeDyeId,
                 d.composite_finish_id AS compositeFinishId,
                 e.bom_name AS bomName,
-                e.offer_amount AS orderCount
+                e.offer_amount AS orderCount,
+                '1' AS type
             FROM t_kf_fabrics a
             INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
             INNER  JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
@@ -307,8 +310,10 @@
         <result column="totalPrice" property="totalPrice"/>
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
+        <result column="type" property="type"/>
         <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryAllFabricByBomId"  resultMap="infosMap2">
@@ -346,7 +351,8 @@
                 d.color_price AS colorPrice,
                 d.color_amount AS colorAmount,
                 e.bom_name AS bomName,
-                e.offer_amount AS orderCount
+                e.offer_amount AS orderCount,
+                '1' AS type
             FROM t_kf_fabrics a
             INNER JOIN t_kf_bom_material k ON a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
             INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0

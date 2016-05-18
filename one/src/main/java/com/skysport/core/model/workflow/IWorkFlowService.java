@@ -184,4 +184,5 @@ public interface IWorkFlowService {
 
     void startProcessInstanceByBussKey(TaskVo vo);
 
+    String queryBusinessName(String businessKey);
 }

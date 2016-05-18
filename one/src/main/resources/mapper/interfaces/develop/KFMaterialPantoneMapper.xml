@@ -20,9 +20,17 @@
 
     <select id="queryIds" resultType="KFMaterialPantone">
         SELECT
-        <include refid="searchInfoSql"/>
-        FROM t_kf_material_pantone a,t_jc_pantone b
-        WHERE a.material_id =#{materialId} and a.pantone_id = b.pantone_id AND a.del_flag=0 AND b.del_flag=0
+            <include refid="searchInfoSql"/>
+        FROM
+          t_kf_material_pantone a,t_jc_pantone b
+        WHERE
+        a.del_flag=0 AND b.del_flag=0  AND a.material_id =#{materialId} and a.pantone_id = b.pantone_id
+        <if test="type!=null and type!=''">
+            AND a.type = #{type}
+        </if>
+        <if test="type ==null or type ==''">
+            AND a.type = '0'
+        </if>
     </select>
 
     <select id="queryInfo" resultType="KFMaterialPantone">
@@ -44,10 +52,10 @@
     </update>
 
     <insert id="addBatch">
-        INSERT INTO t_kf_material_pantone (pantone_id,pantone_name,material_id,remark)
+        INSERT INTO t_kf_material_pantone (pantone_id,pantone_name,material_id,type,remark)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.pantoneId},#{item.pantoneName},#{item.materialId},#{item.remark})
+            (#{item.pantoneId},#{item.pantoneName},#{item.materialId},#{item.type},#{item.remark})
         </foreach>
 
     </insert>

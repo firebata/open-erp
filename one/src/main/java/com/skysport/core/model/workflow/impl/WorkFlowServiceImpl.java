@@ -18,6 +18,7 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -108,22 +109,31 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
         if (null != tasks && !tasks.isEmpty()) {
             // 根据流程的业务ID查询实体并关联
             for (Task task : tasks) {
+
                 String processInstanceId = task.getProcessInstanceId();
                 ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
                 String businessName = (String) task.getTaskLocalVariables().get(WebConstants.BUSINESS_NAME);
+                String taskId = task.getId();
                 String businessKey = processInstance.getBusinessKey();
-                String processDefinitionId = processInstance.getProcessDefinitionId();
-                ProcessDefinition processDefinition = getProcessDefinition(processInstance.getProcessDefinitionId());
-                if (businessKey == null) {
+
+                if (StringUtils.isBlank(businessKey)) {
                     continue;
                 }
-                TaskVo taskInfo = new TaskVo();
-                String taskId = task.getId();
+                if (StringUtils.isBlank(businessName)) {
+                    businessName = getBusinessName(taskId, businessKey);
+                }
+
+                ProcessDefinition processDefinition = getProcessDefinition(processInstance.getProcessDefinitionId());
+                int version = processDefinition.getVersion();
                 String taskName = task.getName();
                 String createTime = DateUtils.SINGLETONE.format(task.getCreateTime(), DateUtils.YYYY_MM_DD_HH_MM_SS);
                 String assignee = task.getAssignee();
                 boolean suspended = task.isSuspended();
-                int version = processDefinition.getVersion();
+
+                String processDefinitionId = processInstance.getProcessDefinitionId();
+
+
+                TaskVo taskInfo = new TaskVo();
                 taskInfo.setProcessInstanceId(processInstanceId);
                 taskInfo.setBusinessKey(businessKey);
                 taskInfo.setProcessDefinitionId(processDefinitionId);
@@ -138,6 +148,12 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
             }
         }
         return taskRtn;
+    }
+
+    public String getBusinessName(String taskId, String businessKey) {
+        IApproveService approveService = TaskServiceHelper.getInstance().getIApproveService(taskId, this);
+        String businessName = approveService.queryBusinessName(businessKey);
+        return businessName;
     }
 
 

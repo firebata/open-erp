@@ -67,4 +67,6 @@ public interface ICommonService<T> {
 
 
     List<SelectItem2> querySelectListByParentId(String keyword);
+
+    String queryBusinessName(String businessKey);
 }

@@ -2,12 +2,14 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.form.develop.BomQueryForm;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
 import com.skysport.inerfaces.model.develop.bom.helper.BomHelper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/development/bom")
 public class BomAction extends BaseAction<BomInfo> {
-
+    @Autowired
+    private IWorkFlowService bomInfoTaskImpl;
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
 
@@ -130,6 +133,7 @@ public class BomAction extends BaseAction<BomInfo> {
     @SystemControllerLog(description = "查询BOM信息")
     public BomInfo info(@PathVariable String natrualKey) {
         BomInfo info = bomManageService.queryInfoByNatrualKey(natrualKey);
+        bomInfoTaskImpl.setStatuCodeAlive(info, natrualKey);
         return info;
     }
 
@@ -157,7 +161,6 @@ public class BomAction extends BaseAction<BomInfo> {
         bomManageService.delCacadBomInfo(natrualKey);
         return rtnSuccessResultMap("删除成功");
     }
-
 
 
 }

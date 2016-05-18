@@ -17,9 +17,8 @@
         <div class="bom-info form-group" id="{{accessoriesTitleId}}" style="margin: 0 auto;">
             <input type="hidden" name="accessoriesId" id="{{accessoriesIdF}}"/>
             <input type="hidden" name="serialNumber" id="{{serialNumberF}}"/>
-            <label class="col-xs-1 text-left green" style="text-align: left;">
-                <input type="text" id="{{accessoriesNameF}}" name="accessoriesName"
-                       placeholder="{{accessoriesTitleName}} "/>
+            <label class="col-xs-2 text-left green" style="text-align: left;">
+                <input type="text" id="{{accessoriesNameF}}" name="accessoriesName"    placeholder="{{accessoriesTitleName}} "  class="selfAdapta"/>
             </label>
             <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue ">
                 <span class="glyphicon glyphicon-eye-open" id="{{accessoriesEyeId}}"

@@ -111,5 +111,10 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
         return null;
     }
 
+    @Override
+    public String queryBusinessName(String businessKey) {
+        return projectItemManageService.queryBusinessName(businessKey);
+    }
+
 
 }

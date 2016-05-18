@@ -101,4 +101,9 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     public List<SelectItem2> querySelectListByParentId(String parentId) {
         return commonMapper.querySelectListByParentId(parentId);
     }
+
+    @Override
+    public String queryBusinessName(String businessKey){
+        return commonMapper.queryBusinessName(businessKey);
+    }
 }

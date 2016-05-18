@@ -11,6 +11,9 @@ public class KFMaterialPantone {
     private String materialId;
     private String remark;
     private String updateTime;
+    //颜色所属：面布，底步
+    private String type = "0";
+
     private int delFlag;
 
     public int getId() {
@@ -67,5 +70,13 @@ public class KFMaterialPantone {
 
     public void setDelFlag(int delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

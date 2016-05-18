@@ -2,10 +2,9 @@ package com.skysport.inerfaces.model.develop.fabric.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.UuidGeneratorUtils;
-import com.skysport.inerfaces.bean.develop.BomInfo;
-import com.skysport.inerfaces.bean.develop.FabricsInfo;
-import com.skysport.inerfaces.bean.develop.MaterialSpInfo;
+import com.skysport.inerfaces.bean.develop.*;
 import com.skysport.inerfaces.bean.develop.join.FabricsJoinInfo;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.inerfaces.mapper.develop.MaterialUnitDosageMapper;
 import com.skysport.inerfaces.mapper.info.FabricsMapper;
@@ -41,6 +40,7 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
     private IKFMaterialPositionService kFMaterialPositionService;
     @Resource(name = "kFMaterialPantoneService")
     private IKFMaterialPantoneService kFMaterialPantoneService;
+
     @Override
     public void afterPropertiesSet() {
         commonMapper = fabricsMapper;
@@ -91,13 +91,16 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
                 fabricsRtn.add(fabricsJoinInfo.getFabricsInfo());
                 addPositionIds(fabricsJoinInfo, fabricId);
                 addPantoneIds(fabricsJoinInfo, fabricId);
-
-
             }
         }
         return fabricsRtn;
     }
 
+    /**
+     * 新增面料信息
+     *
+     * @param fabricsJoinInfo
+     */
     private void add(FabricsJoinInfo fabricsJoinInfo) {
         fabricsMapper.add(fabricsJoinInfo.getFabricsInfo());
         fabricsMapper.addDetail(fabricsJoinInfo.getFabricsDetailInfo()); //新增面料详细
@@ -105,6 +108,12 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
         materialSpinfoMapper.addSp(fabricsJoinInfo.getMaterialSpInfo());  //新增面料供应商信息
     }
 
+    /**
+     * 更新面料信息
+     *
+     * @param fabricsJoinInfo
+     * @param fabricId
+     */
     private void update(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
         fabricsMapper.updateInfo(fabricsJoinInfo.getFabricsInfo());
         fabricsMapper.updateDetail(fabricsJoinInfo.getFabricsDetailInfo());
@@ -114,17 +123,41 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
         kFMaterialPantoneService.del(fabricId);//删除物料颜色信息
     }
 
+    /**
+     * 面料颜色颜色：面布颜色和底布颜色
+     *
+     * @param fabricsJoinInfo
+     * @param fabricId
+     */
     private void addPantoneIds(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
+        List<KFMaterialPantone> pantoneIds = fabricsJoinInfo.getFabricsInfo().getPantoneIds();
+        List<KFMaterialPantone> compositePantoneIds = fabricsJoinInfo.getFabricsInfo().getCompositePantoneIds();
+        List<KFMaterialPantone> totals = new ArrayList<>();
         //保留物料颜色信息
-        if (null != fabricsJoinInfo.getFabricsInfo().getPantoneIds() && !fabricsJoinInfo.getFabricsInfo().getPantoneIds().isEmpty()) {
-            kFMaterialPantoneService.addBatch(fabricsJoinInfo.getFabricsInfo().getPantoneIds(),fabricId);
+        if (null != pantoneIds && !pantoneIds.isEmpty()) {
+            MaterialPantoneServiceHelper.SINGLETONE.changeFabricPantoneType(pantoneIds, fabricId,WebConstants.FACE);
+            totals.addAll(pantoneIds);
         }
+        //保留物料颜色信息
+        if (null != compositePantoneIds && !compositePantoneIds.isEmpty()) {
+            MaterialPantoneServiceHelper.SINGLETONE.changeFabricPantoneType(compositePantoneIds, fabricId, WebConstants.BACKING);
+            totals.addAll(compositePantoneIds);
+        }
+        kFMaterialPantoneService.addBatch(totals, fabricId);
     }
 
+    /**
+     * 物料位置
+     *
+     * @param fabricsJoinInfo
+     * @param fabricId
+     */
     private void addPositionIds(FabricsJoinInfo fabricsJoinInfo, String fabricId) {
+
+        List<KFMaterialPosition> positionIds = fabricsJoinInfo.getFabricsInfo().getPositionIds();
         //保存物料位置信息
-        if (null != fabricsJoinInfo.getFabricsInfo().getPositionIds() && !fabricsJoinInfo.getFabricsInfo().getPositionIds().isEmpty()) {
-            kFMaterialPositionService.addBatch(fabricsJoinInfo.getFabricsInfo().getPositionIds(),fabricId);
+        if (null != positionIds && !positionIds.isEmpty()) {
+            kFMaterialPositionService.addBatch(positionIds, fabricId);
         }
     }
 

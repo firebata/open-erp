@@ -189,7 +189,7 @@ public interface WebConstants extends TableNameConstants {
     String APPROVE_FINALLY_BOM_PROCESS = "approveFinallyBomProcess";//审核BOM审核过程
 
     String PROJECT_ITEM_PASS = "projectItemPass";//项目审核意见
-
+    String SINGLE_BOM_PASS = "singleBomPass";//审核BOM
     String APPROVE_STATUS_NEW = "1";//新建
     String APPROVE_STATUS_UNDO = "2";//待审批
     String APPROVE_STATUS_REJECT = "3";//驳回
@@ -229,5 +229,6 @@ public interface WebConstants extends TableNameConstants {
     String PROJECT_ITEM_ID = "project_item_id";
     String BUSINESS_NAME = "businessName";
     String NULL_STR = "null";
-
+    String FACE  ="0";//复合面料的面布
+    String BACKING  ="1";//复合面料的底布
 }

@@ -226,4 +226,10 @@
 
     </delete>
 
+    <select id="queryBusinessName" resultType="String">
+        select project_name AS name
+        FROM t_kf_project_item
+		WHERE del_flag=0 AND   project_id =#{businessKey}
+    </select>
+
 </mapper>
