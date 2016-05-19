@@ -273,7 +273,8 @@
         }
         projectItemInfo.fileInfos = uploadFileInfos;
         $.sendJsonAjax(url, projectItemInfo, function () {
-            window.location.href = project_listURL;
+            bootbox.alert("成功暂存数据.");
+            // window.location.href = project_listURL;
         })
     }
 

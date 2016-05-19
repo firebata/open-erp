@@ -27,7 +27,9 @@ public class KFMaterialPantoneServiceImpl extends CommonServiceImpl<KFMaterialPa
 
     @Override
     public void addBatch(List<KFMaterialPantone> pantoneIds, String natrualKey) {
-        super.del(natrualKey);
-        super.addBatch(pantoneIds);
+        if (null != pantoneIds && !pantoneIds.isEmpty()) {
+            super.del(natrualKey);
+            super.addBatch(pantoneIds);
+        }
     }
 }

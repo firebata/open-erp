@@ -97,19 +97,16 @@ public class TaskAction extends BaseAction<TaskVo> {
     @SystemControllerLog(description = "查询所有任务")
     public Map<String, Object> searchUndo(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException {
         // 总记录数
-        long recordsTotal = 0;
-        int recordsFiltered = 0;
         int draw = Integer.parseInt(request.getParameter("draw"));
-
         TaskQueryForm taskQueryForm = SpringContextHolder.getBean("taskQueryForm");
         TaskVo taskInfo = ProjectItemTaskHelper.SINGLETONE.getTaskInfo(taskQueryForm, request);
 
         taskQueryForm.setDataTablesInfo(convertToDataTableQrInfo(WebConstants.PROJECT_TABLE_COLUMN, request));
         taskQueryForm.setTaskInfo(taskInfo);
-
-
-        recordsTotal = taskServiceImpl.queryTaskTotal(UserUtils.getUserFromSession().getNatrualkey());
-        List<TaskVo> infos = taskServiceImpl.queryToDoTaskFiltered(taskQueryForm, UserUtils.getUserFromSession().getNatrualkey());
+        long recordsTotal = taskServiceImpl.queryTaskTotal(UserUtils.getUserFromSession().getNatrualkey());
+        String userId = UserUtils.getUserFromSession().getNatrualkey();
+        long recordsFiltered = taskServiceImpl.listFilteredPantoneInfosCounts(taskQueryForm, userId);
+        List<TaskVo> infos = taskServiceImpl.queryToDoTaskFiltered(taskQueryForm, userId);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
         return resultMap;
 
@@ -137,6 +134,8 @@ public class TaskAction extends BaseAction<TaskVo> {
 
 
     /**
+     * 签收任务
+     *
      * @param taskId
      * @return
      */
@@ -146,6 +145,20 @@ public class TaskAction extends BaseAction<TaskVo> {
     public Map<String, Object> claim(@PathVariable String taskId, @PathVariable String businessKey) {
         taskServiceImpl.claim(taskId);
         return rtnSuccessResultMap("签收任务成功");
+    }
+
+    /**
+     * 反签收任务
+     *
+     * @param taskId
+     * @return
+     */
+    @RequestMapping(value = "/unclaim/{taskId}/{businessKey}", method = RequestMethod.GET)
+    @ResponseBody
+    @SystemControllerLog(description = "反签收任务")
+    public Map<String, Object> unclaim(@PathVariable String taskId, @PathVariable String businessKey) {
+        taskServiceImpl.unclaim(taskId);
+        return rtnSuccessResultMap("反签收任务成功");
     }
 
 

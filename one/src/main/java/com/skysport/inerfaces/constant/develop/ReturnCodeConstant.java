@@ -11,7 +11,9 @@ public enum ReturnCodeConstant {
 
     UPDATE_BOM_MAINCOLOR_PARAM_EXP("100005", "修改bom主颜色时，传输的信息有误"),
 
-    USER_IS_NOT_LOGINED("100006", "用户没有登录");
+    USER_IS_NOT_LOGINED("100006", "用户没有登录"),
+    UNCLAIM_TASK("100007", "不能反签收"),;
+
     private String code;
 
     private String msg;

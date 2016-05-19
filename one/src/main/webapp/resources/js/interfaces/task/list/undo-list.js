@@ -6,6 +6,7 @@
     var path = $.basepath();
     var project_selectURL = path + "/system/baseinfo/project_select";
     var claimURL = path + "/task/claim/";
+    var unclaimURL = path + "/task/unclaim/";
     var handleURL = path + "/task/handle/";
     var searchURL = path + "/task/todo/search/";
     /**
@@ -46,7 +47,7 @@
                     }
                 },
                 {
-                    targets: 3,
+                    targets: 4,
                     render: function (data, type, row, meta) {
                         var html;
                         var _suspended = data.suspended;
@@ -85,6 +86,11 @@
                                         "name": "办理",
                                         "fn": "$.handleTask(\'" + data.id + "\',\'" + data.businessKey + "\',\'" + data.processInstanceId + "\')",
                                         "type": "primary"
+                                    },
+                                    {
+                                        "name": "反签收",
+                                        "fn": "$.unclaimTask(\'" + data.id + "\',\'" + data.businessKey + "\',\'" + data.processInstanceId + "\')",
+                                        "type": "danger"
                                     }
                                 ]
                             };
@@ -125,7 +131,11 @@
         $.sendRestFulAjax(claimURL + _taskId + "/" + _businessKey, null, 'GET', 'json', function (data) {
             table.ajax.reload();
         });
-
+    }
+    var unclaimTask = function (_taskId, _businessKey) {
+        $.sendRestFulAjax(unclaimURL + _taskId + "/" + _businessKey, null, 'GET', 'json', function (data) {
+            table.ajax.reload();
+        });
     }
     /**
      * 办理任务
@@ -134,7 +144,9 @@
     var handleTask = function (_taskId, _businessKey, _processInstanceId) {
         window.location.href = handleURL + _taskId + "/" + _businessKey + "/" + _processInstanceId;
     }
-
-    $.claimTask = claimTask;
-    $.handleTask = handleTask;
+    $.extend({
+        claimTask: claimTask,
+        handleTask: handleTask,
+        unclaimTask: unclaimTask
+    });
 }());

@@ -32,12 +32,16 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
 
     @Resource(name = "fabricsMapper")
     private FabricsMapper fabricsMapper;
+
     @Autowired
     private MaterialUnitDosageMapper materialUnitDosageMapper;
+
     @Autowired
     private MaterialSpinfoMapper materialSpinfoMapper;
+
     @Resource(name = "kFMaterialPositionService")
     private IKFMaterialPositionService kFMaterialPositionService;
+
     @Resource(name = "kFMaterialPantoneService")
     private IKFMaterialPantoneService kFMaterialPantoneService;
 

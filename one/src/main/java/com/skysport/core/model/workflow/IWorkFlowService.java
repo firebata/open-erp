@@ -185,4 +185,8 @@ public interface IWorkFlowService {
     void startProcessInstanceByBussKey(TaskVo vo);
 
     String queryBusinessName(String businessKey);
+
+    void unclaim(String taskId);
+
+    long listFilteredPantoneInfosCounts(TaskQueryForm taskQueryForm, String natrualkey);
 }

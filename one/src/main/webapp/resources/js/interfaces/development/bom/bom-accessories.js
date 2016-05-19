@@ -693,7 +693,6 @@
         accessoriesInfo.width = $("#widthF" + idNum).val();
         accessoriesInfo.length = $("#lengthF" + idNum).val();
         accessoriesInfo.nameNum = idNum;
-        accessoriesInfo.nameNum = serialNumber;
         accessoriesInfo.accessoriesId = $("#accessoriesIdF" + idNum).val();
 
         accessoriesInfo.orderCount = $("#orderCountF" + idNum).val();

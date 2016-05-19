@@ -238,7 +238,7 @@
         //描述信息
         $.buildBomDesc(bominfo);
 
-        //包材信息
+        //面料信息
         var fabricItems = $.buildFabricItems();
         bominfo.fabricItems = fabricItems;
 

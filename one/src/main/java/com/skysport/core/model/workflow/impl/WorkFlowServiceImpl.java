@@ -1,6 +1,7 @@
 package com.skysport.core.model.workflow.impl;
 
 import com.skysport.core.bean.page.DataTablesInfo;
+import com.skysport.core.exception.SkySportException;
 import com.skysport.core.mapper.ApproveMapper;
 import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.utils.DateUtils;
@@ -9,15 +10,14 @@ import com.skysport.inerfaces.bean.form.task.TaskQueryForm;
 import com.skysport.inerfaces.bean.task.ApproveVo;
 import com.skysport.inerfaces.bean.task.TaskVo;
 import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.inerfaces.constant.develop.ReturnCodeConstant;
 import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
-import org.activiti.engine.task.Comment;
-import org.activiti.engine.task.Task;
-import org.activiti.engine.task.TaskQuery;
+import org.activiti.engine.task.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -209,12 +209,36 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
     }
 
     /**
+     * 签收
+     *
      * @param taskId 任务id
      */
     @Override
     public void claim(String taskId) {
         String userId = UserUtils.getUserFromSession().getNatrualkey();
         taskService.claim(taskId, userId);
+    }
+
+    /**
+     * 反签收
+     *
+     * @param taskId 任务id
+     */
+    @Override
+    public void unclaim(String taskId) {
+        boolean canUnclaim = false;
+        //反签收条件过滤
+        List<IdentityLink> links = taskService.getIdentityLinksForTask(taskId);
+        for (IdentityLink identityLink : links) {
+            canUnclaim = StringUtils.equals(IdentityLinkType.CANDIDATE, identityLink.getType());
+            if (canUnclaim) {
+                taskService.claim(taskId, null);
+                break;
+            }
+        }
+        if (!canUnclaim) {
+            throw new SkySportException(ReturnCodeConstant.UNCLAIM_TASK);
+        }
     }
 
     /**
@@ -278,6 +302,13 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
         List<Task> tasks = taskQuery.listPage(start, start + length);
         List<TaskVo> taskRtn = buildTaskVos(tasks);
         return taskRtn;
+    }
+
+    @Override
+    public long listFilteredPantoneInfosCounts(TaskQueryForm taskQueryForm, String userId) {
+        TaskQuery taskQuery = taskService.createTaskQuery().taskCandidateOrAssigned(userId);
+        List<Task> tasks = taskQuery.list();
+        return tasks.size();
     }
 
     /**
