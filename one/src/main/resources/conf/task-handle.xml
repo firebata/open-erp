@@ -39,32 +39,42 @@
         <invokePass>invokePass</invokePass>
     </task>
 
+    <task taskDefineKey="updateSingleBomQuoted" name="修改预报报价">
+        <businessController>quotePreAction</businessController>
+        <businessService>quotedService</businessService>
+        <taskService>quoteInfoTaskImpl</taskService>
+        <urlInfo>/development/quotepre/add/</urlInfo>
+        <urlSave>/development/quotepre/new/</urlSave>
+    </task>
 
 
 
-    <task taskDefineKey="approveSingleBomQuoted" name="审核报价">
-        <businessController>
+    <task taskDefineKey="approveSingleBomQuoted" name="审核预报">
+        <businessController>quotePreAction</businessController>
+        <businessService>quotedService</businessService>
+        <taskService>quoteInfoTaskImpl</taskService>
+        <urlInfo>/development/quotepre/add/</urlInfo>
+        <invokePass>invokePass</invokePass>
+    </task>
 
-        </businessController>
-        <businessService>
 
-        </businessService>
-        <urlInfo>
 
-        </urlInfo>
+    <task taskDefineKey="updateFactoryInstraction" name="修改成衣指示单">
+        <businessController>productionInstractionAction</businessController>
+        <businessService>productionInstructionServiceImpl</businessService>
+        <taskService>productionInstructionTaskImpl</taskService>
+        <urlInfo>/development/prdinstr/add/</urlInfo>
+        <urlSave>/development/prdinstr/new/</urlSave>
     </task>
 
     <task taskDefineKey="approveFactoryInstraction" name="审核成衣指示单">
-        <businessController>
-
-        </businessController>
-        <businessService>
-
-        </businessService>
-        <urlInfo>
-
-        </urlInfo>
+        <businessController>productionInstractionAction</businessController>
+        <businessService>productionInstructionServiceImpl</businessService>
+        <taskService>productionInstructionTaskImpl</taskService>
+        <urlInfo>/development/prdinstr/add/</urlInfo>
+        <invokePass>invokePass</invokePass>
     </task>
+
 
     <task taskDefineKey="recordCustomerOpinion" name="记录，审核客户意见">
         <businessController>

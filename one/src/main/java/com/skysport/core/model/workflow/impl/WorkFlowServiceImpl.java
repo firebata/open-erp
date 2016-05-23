@@ -77,6 +77,15 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
 
     }
 
+    @Override
+    public void submit(String taskId, String businessKey) {
+
+    }
+
+    @Override
+    public ProcessInstance startProcessInstanceByBussKey(String businessKey, String businessName) {
+        return runtimeService.startProcessInstanceById(businessKey);
+    }
 
     /**
      * @param businessKey

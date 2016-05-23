@@ -30,6 +30,7 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
     private IStaffService developStaffImpl;
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
+
     @Override
     public ProcessInstance startProcessInstanceByBussKey(String businessKey) {
         return startProcessInstanceByBussKey(businessKey, CharConstant.EMPTY);
@@ -108,6 +109,6 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
+        approveMapper = bomInfoMapper;
     }
 }

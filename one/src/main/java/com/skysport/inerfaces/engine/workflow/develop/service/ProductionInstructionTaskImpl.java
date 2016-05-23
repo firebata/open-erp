@@ -1,13 +1,16 @@
 package com.skysport.inerfaces.engine.workflow.develop.service;
+
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
+import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.mapper.develop.ProductionInstructionMapper;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
-import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,8 +19,10 @@ import java.util.Map;
  */
 @Service
 public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
+
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
+
     @Autowired
     private ProductionInstructionMapper productionInstructionMapper;
 
@@ -26,28 +31,46 @@ public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
         approveMapper = productionInstructionMapper;
     }
 
-    @Override
-    public ProcessInstance startProcessInstanceByBussKey(String businessKey, String businessName) {
-        return null;
-    }
-
-    @Override
-    public void submit(String businessKey) {
-
-    }
-
-    @Override
-    public void submit(String taskId, String businessKey) {
-
-    }
 
     @Override
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve, Task task) {
-        return null;
+        Map<String, Object> variables = new HashedMap();
+        variables.put(WebConstants.SINGLE_PRINTR_PASS, approve);
+        return variables;
     }
 
+    /**
+     * @param businessKey
+     */
     @Override
     public String queryBusinessName(String businessKey) {
-        return bomManageService.queryBusinessName(businessKey) + "报价表";
+        return bomManageService.queryBusinessName(businessKey) + "生产指示单";
+    }
+
+    /**
+     * @param businessKey
+     * @param status
+     */
+    @Override
+    public void updateApproveStatus(String businessKey, String status) {
+        productionInstructionMapper.updateApproveStatus(businessKey, status);
+    }
+
+    /**
+     * @param businessKeys
+     * @param status
+     */
+    @Override
+    public void updateApproveStatusBatch(List<String> businessKeys, String status) {
+        productionInstructionMapper.updateApproveStatusBatch(businessKeys, status);
+    }
+
+    /**
+     * @param businessKey
+     */
+    @Override
+    public void submit(String businessKey) {
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
 }

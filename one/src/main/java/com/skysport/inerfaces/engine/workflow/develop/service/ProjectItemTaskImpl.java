@@ -97,7 +97,6 @@ public class ProjectItemTaskImpl extends WorkFlowServiceImpl {
 //            variables.put(WebConstants.DEVLOP_STAFF, handleUserId);
         }
         variables.put(WebConstants.PROJECT_ITEM_PASS, approve);
-
         return variables;
     }
 

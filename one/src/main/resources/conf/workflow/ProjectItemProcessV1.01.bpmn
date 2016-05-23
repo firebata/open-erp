@@ -18,19 +18,20 @@
     <subProcess id="approveDevSamplesProcess" name="审核开发样">
       <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${allbomIds}" activiti:elementVariable="bomId"></multiInstanceLoopCharacteristics>
       <startEvent id="startevent4" name="Start"></startEvent>
-      <userTask id="sendProductionInstructionTask" name="发送成衣生产指示单" activiti:candidateGroups="${devlop_staff}"></userTask>
-      <userTask id="receiveDevSamples" name="收到开发样" activiti:candidateGroups="${devlop_staff}"></userTask>
       <userTask id="approveDevSamples" name="审核开发样" activiti:candidateGroups="${devlop_staff}"></userTask>
-      <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway">
-        <documentation>是否需要重新打样</documentation>
-      </exclusiveGateway>
-      <sequenceFlow id="flow59" sourceRef="startevent4" targetRef="sendProductionInstructionTask"></sequenceFlow>
-      <sequenceFlow id="flow60" sourceRef="sendProductionInstructionTask" targetRef="receiveDevSamples"></sequenceFlow>
-      <sequenceFlow id="flow61" sourceRef="receiveDevSamples" targetRef="approveDevSamples"></sequenceFlow>
-      <sequenceFlow id="flow62" sourceRef="approveDevSamples" targetRef="exclusivegateway10"></sequenceFlow>
-      <sequenceFlow id="flow66" name="否" sourceRef="exclusivegateway10" targetRef="sendProductionInstructionTask"></sequenceFlow>
       <endEvent id="endevent4" name="End"></endEvent>
-      <sequenceFlow id="flow88" sourceRef="exclusivegateway10" targetRef="endevent4"></sequenceFlow>
+      <manualTask id="manualtask1" name="发送成衣生产指示"></manualTask>
+      <manualTask id="manualtask2" name="收到开发样"></manualTask>
+      <sequenceFlow id="flow186" sourceRef="startevent4" targetRef="manualtask1"></sequenceFlow>
+      <sequenceFlow id="flow187" sourceRef="manualtask1" targetRef="manualtask2"></sequenceFlow>
+      <sequenceFlow id="flow188" sourceRef="manualtask2" targetRef="approveDevSamples"></sequenceFlow>
+      <inclusiveGateway id="inclusivegateway4" name="Inclusive Gateway"></inclusiveGateway>
+      <endEvent id="errorendevent8" name="ErrorEnd">
+        <errorEventDefinition></errorEventDefinition>
+      </endEvent>
+      <sequenceFlow id="flow193" sourceRef="approveDevSamples" targetRef="inclusivegateway4"></sequenceFlow>
+      <sequenceFlow id="flow194" sourceRef="inclusivegateway4" targetRef="endevent4"></sequenceFlow>
+      <sequenceFlow id="flow195" sourceRef="inclusivegateway4" targetRef="errorendevent8"></sequenceFlow>
     </subProcess>
     <subProcess id="approveFinallyQuotedProcess" name="审核最终的报价">
       <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${allbomIds}" activiti:elementVariable="bomId"></multiInstanceLoopCharacteristics>
@@ -74,26 +75,6 @@
       <errorEventDefinition></errorEventDefinition>
     </boundaryEvent>
     <exclusiveGateway id="exclusivegateway16" name="Exclusive Gateway"></exclusiveGateway>
-    <subProcess id="approvePreQuotedProcess" name="预报价子流程">
-      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${allbomIds}" activiti:elementVariable="bomId"></multiInstanceLoopCharacteristics>
-      <startEvent id="startevent7" name="Start"></startEvent>
-      <userTask id="recordCustomerOpinion" name="记录，审核客户意见" activiti:candidateGroups="${devlop_manager}"></userTask>
-      <manualTask id="sendPreQuoteToCu" name="寄报价单给客户"></manualTask>
-      <inclusiveGateway id="inclusivegateway1" name="Inclusive Gateway"></inclusiveGateway>
-      <endEvent id="errorendevent4" name="ErrorEnd">
-        <errorEventDefinition></errorEventDefinition>
-      </endEvent>
-      <sequenceFlow id="flow99" sourceRef="inclusivegateway1" targetRef="errorendevent4"></sequenceFlow>
-      <sequenceFlow id="flow100" sourceRef="inclusivegateway1" targetRef="endevent12"></sequenceFlow>
-      <sequenceFlow id="flow101" sourceRef="recordCustomerOpinion" targetRef="inclusivegateway1"></sequenceFlow>
-      <sequenceFlow id="flow102" sourceRef="startevent7" targetRef="sendPreQuoteToCu"></sequenceFlow>
-      <sequenceFlow id="flow103" sourceRef="sendPreQuoteToCu" targetRef="recordCustomerOpinion"></sequenceFlow>
-      <sequenceFlow id="flow104" sourceRef="inclusivegateway1" targetRef="errorendevent8"></sequenceFlow>
-      <endEvent id="endevent12" name="End"></endEvent>
-      <endEvent id="errorendevent8" name="ErrorEnd">
-        <errorEventDefinition></errorEventDefinition>
-      </endEvent>
-    </subProcess>
     <subProcess id="lapdipProcess" name="打色样的流程（和选择的打样的BOM数量一致）">
       <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${bomIdsNeedLapdip}" activiti:elementVariable="bomId}"></multiInstanceLoopCharacteristics>
       <startEvent id="startevent8" name="Start"></startEvent>
@@ -119,18 +100,13 @@
       <sequenceFlow id="flow124" sourceRef="inclusivegateway2" targetRef="errorendevent6"></sequenceFlow>
       <sequenceFlow id="flow125" sourceRef="inclusivegateway2" targetRef="errorendevent7"></sequenceFlow>
       <sequenceFlow id="flow126" sourceRef="inclusivegateway2" targetRef="manuallapdip"></sequenceFlow>
+      <endEvent id="endevent9" name="End"></endEvent>
+      <sequenceFlow id="flow192" sourceRef="inclusivegateway2" targetRef="endevent9"></sequenceFlow>
     </subProcess>
     <endEvent id="errorendevent5" name="ErrorEnd">
       <errorEventDefinition></errorEventDefinition>
     </endEvent>
     <sequenceFlow id="flow105" sourceRef="boundaryerror2" targetRef="errorendevent5"></sequenceFlow>
-    <boundaryEvent id="boundaryerror4" name="Error" attachedToRef="approvePreQuotedProcess">
-      <errorEventDefinition></errorEventDefinition>
-    </boundaryEvent>
-    <boundaryEvent id="boundaryerror5" name="Error" attachedToRef="approvePreQuotedProcess">
-      <errorEventDefinition></errorEventDefinition>
-    </boundaryEvent>
-    <sequenceFlow id="flow106" sourceRef="boundaryerror4" targetRef="errorendevent5"></sequenceFlow>
     <endEvent id="projectItemTaskEnd" name="End"></endEvent>
     <boundaryEvent id="boundaryerror6" name="Error" attachedToRef="lapdipProcess">
       <errorEventDefinition></errorEventDefinition>
@@ -142,12 +118,6 @@
     <sequenceFlow id="flow130" sourceRef="exclusivegateway14" targetRef="projectItemTaskEnd"></sequenceFlow>
     <sequenceFlow id="flow133" sourceRef="exclusivegateway16" targetRef="errorendevent5"></sequenceFlow>
     <sequenceFlow id="flow138" sourceRef="exclusivegateway16" targetRef="approveDevSumitOrder"></sequenceFlow>
-    <sequenceFlow id="flow166" sourceRef="offlineworkProcess" targetRef="approvePreQuotedProcess"></sequenceFlow>
-    <sequenceFlow id="flow169" sourceRef="approvePreQuotedProcess" targetRef="lapdipProcess">
-      <extensionElements>
-        <activiti:executionListener event="take" delegateExpression="${proQuoteFinishListener}"></activiti:executionListener>
-      </extensionElements>
-    </sequenceFlow>
     <sequenceFlow id="flow170" sourceRef="lapdipProcess" targetRef="approveDevSamplesProcess"></sequenceFlow>
     <userTask id="usertask1" name="订单转接提交" activiti:candidateGroups="${devlop_staff}"></userTask>
     <sequenceFlow id="flow171" sourceRef="usertask1" targetRef="exclusivegateway16"></sequenceFlow>
@@ -174,6 +144,15 @@
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${projectItemPass}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="flow185" sourceRef="callAprBomProcess" targetRef="offlineworkProcess"></sequenceFlow>
+    <callActivity id="callactivity1" name="预报价子流程" calledElement="approvePreQuoted">
+      <documentation>预报价子流程</documentation>
+      <extensionElements>
+        <activiti:in source="bomId" target="bomId"></activiti:in>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="${allbomIds}" activiti:elementVariable="bomId"></multiInstanceLoopCharacteristics>
+    </callActivity>
+    <sequenceFlow id="flow190" sourceRef="offlineworkProcess" targetRef="callactivity1"></sequenceFlow>
+    <sequenceFlow id="flow191" sourceRef="callactivity1" targetRef="lapdipProcess"></sequenceFlow>
     <textAnnotation id="textannotation1">
       <text>外贸服装开发流程</text>
     </textAnnotation>
@@ -213,20 +192,23 @@
       <bpmndi:BPMNShape bpmnElement="startevent4" id="BPMNShape_startevent4">
         <omgdc:Bounds height="35.0" width="35.0" x="2016.0" y="100.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sendProductionInstructionTask" id="BPMNShape_sendProductionInstructionTask">
-        <omgdc:Bounds height="63.0" width="105.0" x="1981.0" y="160.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="receiveDevSamples" id="BPMNShape_receiveDevSamples">
-        <omgdc:Bounds height="55.0" width="105.0" x="1981.0" y="260.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="approveDevSamples" id="BPMNShape_approveDevSamples">
         <omgdc:Bounds height="55.0" width="105.0" x="1981.0" y="370.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="exclusivegateway10" id="BPMNShape_exclusivegateway10">
-        <omgdc:Bounds height="40.0" width="40.0" x="2013.0" y="469.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent4" id="BPMNShape_endevent4">
         <omgdc:Bounds height="35.0" width="35.0" x="2016.0" y="599.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask1" id="BPMNShape_manualtask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="1981.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="manualtask2" id="BPMNShape_manualtask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="1981.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="inclusivegateway4" id="BPMNShape_inclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="2013.0" y="480.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="errorendevent8" id="BPMNShape_errorendevent8">
+        <omgdc:Bounds height="35.0" width="35.0" x="1920.0" y="599.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="approveFinallyQuotedProcess" id="BPMNShape_approveFinallyQuotedProcess">
         <omgdc:Bounds height="615.0" width="211.0" x="2242.0" y="65.0"></omgdc:Bounds>
@@ -282,36 +264,6 @@
       <bpmndi:BPMNShape bpmnElement="exclusivegateway16" id="BPMNShape_exclusivegateway16">
         <omgdc:Bounds height="40.0" width="40.0" x="2982.0" y="352.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="approvePreQuotedProcess" id="BPMNShape_approvePreQuotedProcess">
-        <omgdc:Bounds height="610.0" width="217.0" x="1217.0" y="63.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="startevent7" id="BPMNShape_startevent7">
-        <omgdc:Bounds height="35.0" width="35.0" x="1302.0" y="143.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="recordCustomerOpinion" id="BPMNShape_recordCustomerOpinion">
-        <omgdc:Bounds height="70.0" width="105.0" x="1267.0" y="303.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sendPreQuoteToCu" id="BPMNShape_sendPreQuoteToCu">
-        <omgdc:Bounds height="55.0" width="105.0" x="1267.0" y="213.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="inclusivegateway1" id="BPMNShape_inclusivegateway1">
-        <omgdc:Bounds height="40.0" width="40.0" x="1299.0" y="413.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="errorendevent4" id="BPMNShape_errorendevent4">
-        <omgdc:Bounds height="35.0" width="35.0" x="1222.0" y="523.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="endevent12" id="BPMNShape_endevent12">
-        <omgdc:Bounds height="35.0" width="35.0" x="1302.0" y="523.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="errorendevent8" id="BPMNShape_errorendevent8">
-        <omgdc:Bounds height="35.0" width="35.0" x="1387.0" y="523.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="boundaryerror4" id="BPMNShape_boundaryerror4">
-        <omgdc:Bounds height="30.0" width="30.0" x="1363.0" y="652.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="boundaryerror5" id="BPMNShape_boundaryerror5">
-        <omgdc:Bounds height="30.0" width="30.0" x="1256.0" y="652.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="lapdipProcess" id="BPMNShape_lapdipProcess">
         <omgdc:Bounds height="613.0" width="248.0" x="1537.0" y="62.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -337,10 +289,13 @@
         <omgdc:Bounds height="40.0" width="40.0" x="1634.0" y="560.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="errorendevent6" id="BPMNShape_errorendevent6">
-        <omgdc:Bounds height="35.0" width="35.0" x="1582.0" y="618.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="1560.0" y="610.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="errorendevent7" id="BPMNShape_errorendevent7">
         <omgdc:Bounds height="35.0" width="35.0" x="1732.0" y="610.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent9" id="BPMNShape_endevent9">
+        <omgdc:Bounds height="35.0" width="35.0" x="1637.0" y="618.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="boundaryerror6" id="BPMNShape_boundaryerror6">
         <omgdc:Bounds height="30.0" width="30.0" x="1727.0" y="664.0"></omgdc:Bounds>
@@ -363,6 +318,9 @@
       <bpmndi:BPMNShape bpmnElement="callAprBomProcess" id="BPMNShape_callAprBomProcess">
         <omgdc:Bounds height="81.0" width="131.0" x="581.0" y="327.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="callactivity1" id="BPMNShape_callactivity1">
+        <omgdc:Bounds height="86.0" width="151.0" x="1260.0" y="326.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="textannotation1" id="BPMNShape_textannotation1">
         <omgdc:Bounds height="50.0" width="170.0" x="226.0" y="22.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
@@ -382,34 +340,29 @@
         <omgdi:waypoint x="1019.0" y="465.0"></omgdi:waypoint>
         <omgdi:waypoint x="1019.0" y="575.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow59" id="BPMNEdge_flow59">
+      <bpmndi:BPMNEdge bpmnElement="flow186" id="BPMNEdge_flow186">
         <omgdi:waypoint x="2033.0" y="135.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2033.0" y="160.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2033.0" y="180.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow60" id="BPMNEdge_flow60">
-        <omgdi:waypoint x="2033.0" y="223.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2033.0" y="260.0"></omgdi:waypoint>
+      <bpmndi:BPMNEdge bpmnElement="flow187" id="BPMNEdge_flow187">
+        <omgdi:waypoint x="2033.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2033.0" y="270.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow61" id="BPMNEdge_flow61">
-        <omgdi:waypoint x="2033.0" y="315.0"></omgdi:waypoint>
+      <bpmndi:BPMNEdge bpmnElement="flow188" id="BPMNEdge_flow188">
+        <omgdi:waypoint x="2033.0" y="325.0"></omgdi:waypoint>
         <omgdi:waypoint x="2033.0" y="370.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow62" id="BPMNEdge_flow62">
+      <bpmndi:BPMNEdge bpmnElement="flow193" id="BPMNEdge_flow193">
         <omgdi:waypoint x="2033.0" y="425.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2033.0" y="469.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2033.0" y="480.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow66" id="BPMNEdge_flow66">
-        <omgdi:waypoint x="2053.0" y="489.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2120.0" y="489.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2120.0" y="192.0"></omgdi:waypoint>
-        <omgdi:waypoint x="2086.0" y="191.0"></omgdi:waypoint>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="12.0" x="1742.0" y="350.0"></omgdc:Bounds>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow88" id="BPMNEdge_flow88">
-        <omgdi:waypoint x="2033.0" y="509.0"></omgdi:waypoint>
+      <bpmndi:BPMNEdge bpmnElement="flow194" id="BPMNEdge_flow194">
+        <omgdi:waypoint x="2033.0" y="520.0"></omgdi:waypoint>
         <omgdi:waypoint x="2033.0" y="599.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow195" id="BPMNEdge_flow195">
+        <omgdi:waypoint x="2033.0" y="520.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1937.0" y="599.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow71" id="BPMNEdge_flow71">
         <omgdi:waypoint x="2349.0" y="129.0"></omgdi:waypoint>
@@ -465,30 +418,6 @@
         <omgdi:waypoint x="3191.0" y="371.0"></omgdi:waypoint>
         <omgdi:waypoint x="3272.0" y="372.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow99" id="BPMNEdge_flow99">
-        <omgdi:waypoint x="1319.0" y="453.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1239.0" y="523.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow100" id="BPMNEdge_flow100">
-        <omgdi:waypoint x="1319.0" y="453.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1319.0" y="523.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow101" id="BPMNEdge_flow101">
-        <omgdi:waypoint x="1319.0" y="373.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1319.0" y="413.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow102" id="BPMNEdge_flow102">
-        <omgdi:waypoint x="1319.0" y="178.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1319.0" y="213.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow103" id="BPMNEdge_flow103">
-        <omgdi:waypoint x="1319.0" y="268.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1319.0" y="303.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow104" id="BPMNEdge_flow104">
-        <omgdi:waypoint x="1319.0" y="453.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1404.0" y="523.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow115" id="BPMNEdge_flow115">
         <omgdi:waypoint x="1654.0" y="157.0"></omgdi:waypoint>
         <omgdi:waypoint x="1654.0" y="182.0"></omgdi:waypoint>
@@ -521,8 +450,8 @@
         <omgdi:waypoint x="1654.0" y="560.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow124" id="BPMNEdge_flow124">
-        <omgdi:waypoint x="1654.0" y="600.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1599.0" y="618.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1634.0" y="580.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1577.0" y="610.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow125" id="BPMNEdge_flow125">
         <omgdi:waypoint x="1674.0" y="580.0"></omgdi:waypoint>
@@ -534,14 +463,13 @@
         <omgdi:waypoint x="1758.0" y="209.0"></omgdi:waypoint>
         <omgdi:waypoint x="1707.0" y="209.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow192" id="BPMNEdge_flow192">
+        <omgdi:waypoint x="1654.0" y="600.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1654.0" y="618.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow105" id="BPMNEdge_flow105">
         <omgdi:waypoint x="2416.0" y="690.0"></omgdi:waypoint>
         <omgdi:waypoint x="2415.0" y="737.0"></omgdi:waypoint>
-        <omgdi:waypoint x="3402.0" y="737.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow106" id="BPMNEdge_flow106">
-        <omgdi:waypoint x="1378.0" y="682.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1377.0" y="737.0"></omgdi:waypoint>
         <omgdi:waypoint x="3402.0" y="737.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow127" id="BPMNEdge_flow127">
@@ -562,14 +490,6 @@
       <bpmndi:BPMNEdge bpmnElement="flow138" id="BPMNEdge_flow138">
         <omgdi:waypoint x="3022.0" y="372.0"></omgdi:waypoint>
         <omgdi:waypoint x="3086.0" y="371.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow166" id="BPMNEdge_flow166">
-        <omgdi:waypoint x="1137.0" y="367.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1217.0" y="368.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow169" id="BPMNEdge_flow169">
-        <omgdi:waypoint x="1434.0" y="368.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1537.0" y="368.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow170" id="BPMNEdge_flow170">
         <omgdi:waypoint x="1785.0" y="368.0"></omgdi:waypoint>
@@ -614,6 +534,14 @@
       <bpmndi:BPMNEdge bpmnElement="flow185" id="BPMNEdge_flow185">
         <omgdi:waypoint x="712.0" y="367.0"></omgdi:waypoint>
         <omgdi:waypoint x="922.0" y="367.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow190" id="BPMNEdge_flow190">
+        <omgdi:waypoint x="1137.0" y="367.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1260.0" y="369.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow191" id="BPMNEdge_flow191">
+        <omgdi:waypoint x="1411.0" y="369.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1537.0" y="368.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
