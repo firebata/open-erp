@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductionInstructionMapper extends CommonMapper<KfProductionInstructionEntity>, ApproveMapper {
 
-    KfProductionInstructionEntity queryProductionInstractionInfo(String uid);
-
     void updateProductionInstruction(KfProductionInstructionEntity productionInstruction);
 
     void addProductionInstruction(KfProductionInstructionEntity productionInstruction);
+
+    KfProductionInstructionEntity queryProductionInstractionInfo(String uid);
 }

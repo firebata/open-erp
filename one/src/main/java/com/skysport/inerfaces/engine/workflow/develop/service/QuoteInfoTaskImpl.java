@@ -30,7 +30,6 @@ public class QuoteInfoTaskImpl extends WorkFlowServiceImpl {
     }
 
 
-
     @Override
     public Map<String, Object> getVariableOfTaskNeeding(boolean approve, Task task) {
         Map<String, Object> variables = new HashedMap();

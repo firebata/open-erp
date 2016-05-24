@@ -16,7 +16,6 @@ import com.skysport.inerfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.inerfaces.model.develop.packaging.helper.PackagingServiceHelper;
 import com.skysport.inerfaces.utils.BuildSeqNoHelper;
 import com.skysport.inerfaces.utils.SeqCreateUtils;
-import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -263,7 +262,8 @@ public class BomHelper/* extends ExcelCreateHelper */ {
 
         //指示单信息
         if (productionInstruction == null) {
-            logger.info("==============================================>bomid[{0}] 的成衣厂productionInstructionId[{1}]对应的指示单信息为空 ", new Object[]{bomId, productionInstruction.getProductionInstructionId()});
+            logger.info("==============================================>productionInstruction == null");
+            return;
         }
         productionInstruction.setFabrics(fabricItems);
         productionInstruction.setAccessories(accessories);

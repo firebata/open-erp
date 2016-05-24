@@ -107,7 +107,7 @@
     </select>
 
     <update id="updateBatch">
-        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
             update
             t_sys_file_records
             <set>

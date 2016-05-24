@@ -89,6 +89,7 @@ public class ProductionInstructionServiceImpl extends CommonServiceImpl<KfProduc
     @Override
     public KfProductionInstructionEntity getInfoOrNeedtoAdd(String bomId) {
         KfProductionInstructionEntity entity = queryInfoByNatrualKey(bomId);
+
         if (entity == null) {
             String productionInstructionId = UuidGeneratorUtils.getNextId();
             entity = new KfProductionInstructionEntity();

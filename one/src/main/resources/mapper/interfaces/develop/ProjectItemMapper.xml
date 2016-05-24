@@ -94,7 +94,7 @@
     </select>
 
     <update id="updateBatch">
-        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
             update
             t_kf_project_item
             <set>
@@ -106,7 +106,7 @@
     </update>
 
     <update id="updateBatchBomInfo">
-        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
             update
             t_kf_project_item_bom_baseinfo
             <set>

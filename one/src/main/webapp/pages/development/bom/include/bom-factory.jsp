@@ -94,15 +94,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{factoryOffer}}"> 工厂报价 </label>
+                        <label class="col-xs-2  control-label" for="{{factoryOffer}}"> 工厂报价（￥） </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{factoryOffer}}" name="factoryOffer" placeholder="工厂报价"
+                            <input type="text" id="{{factoryOffer}}" name="factoryOffer" placeholder="工厂报价（￥）"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
                         <label class="col-xs-2  control-label" for="{{factoryMargins}}"> 工厂报价利润率</label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{factoryMargins}}" name="factoryMargins" placeholder=" 工厂报价利润率"  class="col-xs-10 col-sm-12"/>
+                            <input type="text" id="{{factoryMargins}}" name="factoryMargins" placeholder=" 工厂报价利润率，e.g.0.12"  class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>
 

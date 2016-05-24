@@ -40,26 +40,44 @@
                             <input type="hidden" name="natrualkey" id="natrualkey" value="${natrualkey}"/>
                             <input type="hidden" name="approveStatus" id="approveStatus" value="${quotedInfo.approveStatus}"/>
                             <input type="hidden" name="taskId" id="taskId" value="${taskId}"/>
-                            <input type="hidden" name="stateCode" id="stateCode" value="${stateCode}"/>
+                            <input type="hidden" name="stateCode" id="stateCode" value="${quotedInfo.stateCode}"/>
                             <input type="hidden" name="processInstanceId" id="processInstanceId" value="${processInstanceId}"/>
                         </h5>
                     </div>
                     <div id="quotepreDescDetail">
                         <div class="form-group">
+                            <label class="col-xs-2  control-label" for="projectName"> 项目名称 </label>
+                            <div class="col-xs-3">
+                                <input type="text" id="projectName" name="projectName" placeholder="项目名称"
+                                       class="col-xs-10 col-sm-12" value="${quotedInfo.projectName}"  disabled="disabled"/>
+                            </div>
+                            <label class="col-xs-2  control-label" for="bomName">款式</label>
+                            <div class="col-xs-3">
+                                <input type="text" id="bomName" name="bomName" placeholder="款式" class="col-xs-10 col-sm-12" value="${quotedInfo.bomName}"  disabled="disabled"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2  control-label" for="spName"> 成衣厂 </label>
+                            <div class="col-xs-3">
+                                <input type="text" id="spName" name="spName" placeholder="成衣厂"
+                                       class="col-xs-10 col-sm-12" value="${quotedInfo.spName}"  disabled="disabled"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <input type="hidden" name="spId" id="spId"/>
                             <input type="hidden" name="fabricId" id="fabricId"/>
-                            <label class="col-xs-2  control-label" for="costing">成本核算（￥）</label>
+                            <label class="col-xs-2  control-label" for="costing">成本核算(￥)</label>
                             <div class="col-xs-3">
-                                <input type="text" id="costing" name="costing" placeholder="成本核算（￥）" class="col-xs-10 col-sm-12" value="${quotedInfo.costing}"/>
+                                <input type="text" id="costing" name="costing" placeholder="成本核算(￥)" class="col-xs-10 col-sm-12" value="${quotedInfo.costing}"/>
                             </div>
-                            <label class="col-xs-2  control-label" for="exchangeCosts"> 换汇成本（小数形式） </label>
+                            <label class="col-xs-2  control-label" for="exchangeCosts"> 换汇成本(小数形式) </label>
                             <div class="col-xs-3">
                                 <input type="text" id="exchangeCosts" name="exchangeCosts" placeholder="换汇成本，e.g.0.65"
                                        class="col-xs-10 col-sm-12" value="${quotedInfo.exchangeCosts}"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="factoryOffer"> 工厂报价（￥） </label>
+                            <label class="col-xs-2  control-label" for="factoryOffer"> 工厂报价(￥) </label>
                             <div class="col-xs-3">
                                 <input type="text" id="factoryOffer" name="factoryOffer" placeholder="工厂报价"
                                        class="col-xs-10 col-sm-12" value="${quotedInfo.factoryOffer}"/>

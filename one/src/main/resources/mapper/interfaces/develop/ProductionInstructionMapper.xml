@@ -41,7 +41,7 @@
             <include refid="searchInfoSql"/>
         FROM
             t_kf_production_instruction a
-        INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0  AND a.uid =  #{uid}
+        INNER  JOIN   t_kf_bom_material b ON a.uid = b.material_id  AND a.del_flag = 0  AND b.bom_id =  #{uid}
         INNER  JOIN   t_kf_bominfo c ON b.bom_id = c.bom_id AND c.del_flag = 0
         INNER  JOIN   t_kf_project_item_bom f  ON c.bom_id = f.bom_id
         INNER  JOIN   t_kf_project_item d ON f.project_id = d.project_id AND d.del_flag = 0
@@ -58,24 +58,59 @@
     <update id="updateProductionInstruction">
         update
         t_kf_production_instruction
-        set
-            crop_requirements           = #{cropRequirements},
-            quality_requirements        = #{qualityRequirements},
-            overstitch                  = #{overstitch},
-            overstitch_space            = #{overstitchSpace},
-            blindstitch                 = #{blindstitch},
-            blindstitch_space           = #{blindstitchSpace},
-            overlock                    = #{overlock},
-            overlock_space              = #{overlockSpace},
-            finish_pressing_requirements= #{finishPressingRequirements},
-            spcial_tech                 = #{spcialTech},
-            packing_requirements        = #{packingRequirements},
-            trademark_code              = #{trademarkCode},
-            trademark_remark            = #{trademarkRemark},
-            scale_code                  = #{scaleCode},
-            scale_remark                = #{scaleRemark},
-            rinsing_marks_code          = #{rinsingMarksCode},
-            rinsing_marks_remark        = #{rinsingMarksRemark}
+        <set>
+            <if test="cropRequirements!=null and cropRequirements!=''">
+                crop_requirements           = #{cropRequirements},
+            </if>
+            <if test="qualityRequirements!=null and qualityRequirements!=''">
+                quality_requirements           = #{qualityRequirements},
+            </if>
+            <if test="overstitch!=null and overstitch!=''">
+                overstitch           = #{overstitch},
+            </if>
+            <if test="overstitchSpace!=null and overstitchSpace!=''">
+                overstitch_space           = #{overstitchSpace},
+            </if>
+            <if test="blindstitch!=null and blindstitch!=''">
+                blindstitch           = #{blindstitch},
+            </if>
+            <if test="overlock!=null and overlock!=''">
+                overlock           = #{overlock},
+            </if>
+            <if test="overlockSpace!=null and overlockSpace!=''">
+                overlock_space           = #{overlockSpace},
+            </if>
+            <if test="finishPressingRequirements!=null and finishPressingRequirements!=''">
+                finish_pressing_requirements           = #{finishPressingRequirements},
+            </if>
+            <if test="spcialTech!=null and spcialTech!=''">
+                spcial_tech           = #{spcialTech},
+            </if>
+            <if test="packingRequirements!=null and packingRequirements!=''">
+                spcial_tech           = #{packingRequirements},
+            </if>
+            <if test="packingRequirements!=null and packingRequirements!=''">
+                packing_requirements           = #{packingRequirements},
+            </if>
+            <if test="trademarkCode!=null and trademarkCode!=''">
+                trademark_code           = #{trademarkCode},
+            </if>
+            <if test="trademarkRemark!=null and trademarkRemark!=''">
+                trademark_remark           = #{trademarkRemark},
+            </if>
+            <if test="scaleCode!=null and scaleCode!=''">
+                scale_code           = #{scaleCode},
+            </if>
+            <if test="scaleRemark!=null and scaleRemark!=''">
+                scale_remark           = #{scaleRemark},
+            </if>
+            <if test="rinsingMarksCode!=null and rinsingMarksCode!=''">
+                rinsing_marks_code           = #{rinsingMarksCode},
+            </if>
+            <if test="rinsingMarksRemark!=null and rinsingMarksRemark!=''">
+                rinsing_marks_remark           = #{rinsingMarksRemark},
+            </if>
+        </set>
         WHERE
             uid =#{uid}
     </update>

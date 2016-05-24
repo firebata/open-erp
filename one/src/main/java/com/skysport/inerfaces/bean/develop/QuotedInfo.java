@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
+import com.skysport.inerfaces.bean.task.ApproveVo;
 
 import java.math.BigDecimal;
 
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
  * 说明:
  * Created by zhangjh on 2015/9/9.
  */
-public class QuotedInfo extends ProjectPojectItemBomSpVo {
+public class QuotedInfo extends ProjectPojectItemBomSpVo implements ApproveVo {
 
     private String approveStatus;
 
@@ -67,7 +68,7 @@ public class QuotedInfo extends ProjectPojectItemBomSpVo {
      * 换汇成本
      */
     private BigDecimal exchangeCosts;
-
+    private String stateCode;
 
     public String getApproveStatus() {
         return approveStatus;
@@ -223,5 +224,15 @@ public class QuotedInfo extends ProjectPojectItemBomSpVo {
                 ", exchangeCosts=" + exchangeCosts +
                 ", fabricId='" + fabricId + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    @Override
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 }

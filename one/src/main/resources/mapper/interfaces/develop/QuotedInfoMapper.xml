@@ -102,17 +102,42 @@
     <update id="updateInfo">
 		update
 		  t_kf_pre_quote a
-		set
-            a.euro_exchange_rates =#{euroExchangeRates},
-            a.factory_offer =#{factoryOffer},
-            a.factory_margins =#{factoryMargins},
-            a.exchange_costs =#{exchangeCosts},
-            a.rates =#{rates},
-            a.euro_price =#{euroPrice},
-            a.lp_price =#{lpPrice},
-            a.commission =#{commission},
-            a.quoted_price =#{quotedPrice},
-            a.costing = #{costing}
+
+		<set>
+            <if test="euroExchangeRates != null and euroExchangeRates != '' ">
+                a.euro_exchange_rates =#{euroExchangeRates},
+            </if>
+            <if test="euroExchangeRates != null and euroExchangeRates != '' ">
+                a.euro_exchange_rates =#{euroExchangeRates},
+            </if>
+            <if test="factoryOffer != null and factoryOffer != '' ">
+                a.factory_offer =#{factoryOffer},
+            </if>
+            <if test="factoryMargins != null and factoryMargins != '' ">
+                a.factory_margins =#{factoryMargins},
+            </if>
+            <if test="exchangeCosts != null and exchangeCosts != '' ">
+                a.exchange_costs =#{exchangeCosts},
+            </if>
+            <if test="rates != null and rates != '' ">
+                a.rates =#{rates},
+            </if>
+            <if test="euroPrice != null and euroPrice != '' ">
+                a.euro_price =#{euroPrice},
+            </if>
+            <if test="lpPrice != null and lpPrice != '' ">
+                a.lp_price =#{lpPrice},
+            </if>
+            <if test="commission != null and commission != '' ">
+                a.commission =#{commission},
+            </if>
+            <if test="quotedPrice != null and quotedPrice != '' ">
+                a.quoted_price =#{quotedPrice},
+            </if>
+            <if test="costing != null and costing != '' ">
+                a.costing =#{costing},
+            </if>
+        </set>
 		WHERE a.bom_id =#{bomId}
 	</update>
 
@@ -128,7 +153,7 @@
     <insert id="add">
 		insert into
 		t_kf_pre_quote (project_id,project_name,project_item_id,project_item_name,bom_id,bom_name,sp_id,sp_name,main_fabric_ids,main_fabric_descs,factory_offer,factory_margins,exchange_costs,euro_exchange_rates,rates,euro_price,lp_price,commission,quoted_price,costing,step,remark)
-		values (#{projectId},#{projectName},#{projectItemId},#{projectItemName},#{bomId},#{bomName},#{spId},#{spName},#{fabricId},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},1,#{remark})
+		values (#{projectId},#{projectName},#{projectItemId},#{projectItemName},#{bomId},#{bomName},#{spId},#{spName},#{fabricId},#{mainFabricDescs},#{factoryOffer},#{factoryMargins},#{exchangeCosts},#{euroExchangeRates},#{rates},#{euroPrice},#{lpPrice},#{commission},#{quotedPrice},#{costing},0,#{remark})
 	</insert>
 
     <update id="del">

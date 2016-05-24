@@ -2,12 +2,12 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.bean.form.develop.PreQuoteQueryForm;
 import com.skysport.inerfaces.constant.WebConstants;
 import com.skysport.inerfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +31,9 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
      */
     @Resource(name = "quotedService")
     private IQuotedService quotedService;
-    @Autowired
-    private IQuotedService quoteInfoTaskImpl;
+
+    @Resource(name = "quoteInfoTaskImpl")
+    private IWorkFlowService quoteInfoTaskImpl;
 
     /**
      * 此方法描述的是：展示list页面	 *
@@ -113,6 +114,7 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
     public QuotedInfo info(@PathVariable String natrualKey) {
         //报价信息
         QuotedInfo quotedInfo = quotedService.queryInfoByNatrualKey(natrualKey);
+        quoteInfoTaskImpl.setStatuCodeAlive(quotedInfo, natrualKey);
         return quotedInfo;
     }
 }

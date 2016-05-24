@@ -16,7 +16,6 @@
     <userTask id="approveFactoryInstraction" name="审核成衣指示单" activiti:candidateGroups="${devlop_manager}"></userTask>
     <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
     <inclusiveGateway id="inclusivegateway1" name="Inclusive Gateway"></inclusiveGateway>
-    <sequenceFlow id="flow5" sourceRef="updateSingleBomQuoted" targetRef="exclusivegateway2"></sequenceFlow>
     <sequenceFlow id="flow8" sourceRef="exclusivegateway1" targetRef="inclusivegateway1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!singleBomPass}]]></conditionExpression>
     </sequenceFlow>
@@ -41,7 +40,8 @@
     <sequenceFlow id="flow18" sourceRef="exclusivegateway1" targetRef="updateSingleBomQuoted">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${singleBomPass}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow19" sourceRef="updateSingleBomQuoted" targetRef="updateSingleBomQuoted"></sequenceFlow>
+    <sequenceFlow id="flow19" sourceRef="updateSingleBomQuoted" targetRef="approveSingleBomQuoted"></sequenceFlow>
+    <sequenceFlow id="flow20" sourceRef="approveSingleBomQuoted" targetRef="exclusivegateway2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_approveBom">
     <bpmndi:BPMNPlane bpmnElement="approveBom" id="BPMNPlane_approveBom">
@@ -55,7 +55,7 @@
         <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="481.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="approveSingleBomQuoted" id="BPMNShape_approveSingleBomQuoted">
-        <omgdc:Bounds height="55.0" width="105.0" x="600.0" y="480.0"></omgdc:Bounds>
+        <omgdc:Bounds height="55.0" width="105.0" x="630.0" y="560.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
         <omgdc:Bounds height="40.0" width="40.0" x="425.0" y="489.0"></omgdc:Bounds>
@@ -92,10 +92,6 @@
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="385.0" y="508.0"></omgdi:waypoint>
         <omgdi:waypoint x="425.0" y="509.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
-        <omgdi:waypoint x="532.0" y="560.0"></omgdi:waypoint>
-        <omgdi:waypoint x="763.0" y="529.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
         <omgdi:waypoint x="445.0" y="489.0"></omgdi:waypoint>
@@ -140,9 +136,13 @@
         <omgdi:waypoint x="480.0" y="587.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
-        <omgdi:waypoint x="532.0" y="560.0"></omgdi:waypoint>
-        <omgdi:waypoint x="532.0" y="507.0"></omgdi:waypoint>
-        <omgdi:waypoint x="532.0" y="560.0"></omgdi:waypoint>
+        <omgdi:waypoint x="585.0" y="587.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="587.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="735.0" y="587.0"></omgdi:waypoint>
+        <omgdi:waypoint x="763.0" y="587.0"></omgdi:waypoint>
+        <omgdi:waypoint x="763.0" y="529.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

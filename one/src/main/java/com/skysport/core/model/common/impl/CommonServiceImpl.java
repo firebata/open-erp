@@ -58,13 +58,13 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     }
 
     @Override
-    public void edit(T t){
-        commonMapper.updateInfo(t);
+    public void add(T t) {
+        commonMapper.add(t);
     }
 
     @Override
-    public void add(T t) {
-        commonMapper.add(t);
+    public void edit(T t){
+        commonMapper.updateInfo(t);
     }
 
     @Override

@@ -60,7 +60,12 @@
         //监听价格变动
         $("#quotepreForm").on("click", "input", cbOfferDescDetail);
         var $btnDIV = $("#btnInfo");
-        $.showHandleBtn($btnDIV, $("#approveStatus").val(), tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+        var approveStatus = $("#approveStatus").val();
+        var natrualkey = $("#natrualkey").val();
+        var taskId = $("#taskId").val();
+        var stateCode = $("#stateCode").val();
+        var processInstanceId = $("#processInstanceId").val();
+        $.showHandleBtn($btnDIV, approveStatus, tosave, natrualkey, taskId, stateCode, processInstanceId);
     });
 
 

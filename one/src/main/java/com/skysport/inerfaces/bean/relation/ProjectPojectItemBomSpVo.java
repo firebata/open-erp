@@ -1,6 +1,7 @@
 package com.skysport.inerfaces.bean.relation;
 
 import com.skysport.core.bean.system.SelectItem;
+import com.skysport.inerfaces.bean.task.ApproveVo;
 
 /**
  * 说明:

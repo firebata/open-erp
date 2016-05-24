@@ -8,6 +8,7 @@ package com.skysport.inerfaces.bean.develop;
 
 import com.skysport.core.bean.system.SelectItem;
 import com.skysport.inerfaces.bean.common.UploadFileInfo;
+import com.skysport.inerfaces.bean.task.ApproveVo;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @author bianj
  * @version 1.0.0 2016-03-22
  */
-public class KfProductionInstructionEntity extends SelectItem {
+public class KfProductionInstructionEntity extends SelectItem implements ApproveVo {
     /**
      * 版本号
      */
@@ -206,6 +207,7 @@ public class KfProductionInstructionEntity extends SelectItem {
     private List<UploadFileInfo> sketchUrlUidUploadFileInfos;
 
     private List<UploadFileInfo> specificationUrlUidUploadFileInfos;
+    private String stateCode;
 
     /**
      * 存放初始化文件上传控件中的信息
@@ -952,5 +954,15 @@ public class KfProductionInstructionEntity extends SelectItem {
                 ", specificationUrlUidFileinfosMap=" + specificationUrlUidFileinfosMap +
                 ", approveStatus='" + approveStatus + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    @Override
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 }

@@ -73,7 +73,7 @@ public class QuotedServiceHelper {
     }
 
     /**
-     * 设置报价信息
+     * 设置报价信息：工厂报价和工厂利润率从参考的工厂报价中获取
      *
      * @param fabricInfo FabricsInfo
      * @param factory    FactoryQuoteInfo
@@ -90,7 +90,7 @@ public class QuotedServiceHelper {
             quotedInfo.setFactoryOffer(factory.getFactoryOffer());
             String spId = factory.getSpId();
             String spName = SpInfoHelper.SINGLETONE.turnSpIdToName(spId);
-            quotedInfo.setSpId(factory.getSpId());
+            quotedInfo.setSpId(spId);
             quotedInfo.setSpName(spName);
         }
         quotedInfo.setCosting(costing);
@@ -102,7 +102,7 @@ public class QuotedServiceHelper {
      * @param bomInfo BomInfo
      * @return BigDecimal
      */
-    private BigDecimal cacaulataCosting(BomInfo bomInfo) {
+    public BigDecimal cacaulataCosting(BomInfo bomInfo) {
         //所有面料成本
         BigDecimal costingFabric = FabricsServiceHelper.SINGLETONE.caculateCostingFabric(bomInfo.getFabricItems());
 

@@ -2,6 +2,7 @@ package com.skysport.inerfaces.action.develop;
 
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
+import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.inerfaces.bean.develop.KfProductionInstructionEntity;
 import com.skysport.inerfaces.bean.form.develop.ProInstrQueryForm;
 import com.skysport.inerfaces.constant.WebConstants;
@@ -30,6 +31,8 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
      */
     @Autowired
     private IProductionInstructionService productionInstructionServiceImpl;
+    @Autowired
+    private IWorkFlowService productionInstructionTaskImpl;
 
     /**
      * 此方法描述的是：展示list页面
@@ -55,12 +58,14 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
     @ResponseBody
     @SystemControllerLog(description = "展示成衣生产指示单add页面")
     public ModelAndView add(@PathVariable String natrualKey, HttpServletRequest request) {
+//        KfProductionInstructionEntity info = info(natrualKey);
         String taskId = (String) request.getAttribute("taskId");
         String processInstanceId = (String) request.getAttribute("processInstanceId");
         ModelAndView mav = new ModelAndView("development/prdinstr/prdinstr-edit");
-        mav.addObject("natrualkey", natrualKey);
+        mav.addObject("bomId", natrualKey);
         mav.addObject("taskId", taskId);
         mav.addObject("processInstanceId", processInstanceId);
+//        mav.addObject("info", info);
         return mav;
     }
 
@@ -93,8 +98,9 @@ public class ProductionInstractionAction extends BaseAction<KfProductionInstruct
     @SystemControllerLog(description = "查询BOM信息")
     public KfProductionInstructionEntity info(@PathVariable String natrualKey) {
         //报价信息
-        KfProductionInstructionEntity quotedInfo = productionInstructionServiceImpl.queryInfoByNatrualKey(natrualKey);
-        return quotedInfo;
+        KfProductionInstructionEntity productionInstructionEntity = productionInstructionServiceImpl.queryInfoByNatrualKey(natrualKey);
+        productionInstructionTaskImpl.setStatuCodeAlive(productionInstructionEntity, natrualKey);
+        return productionInstructionEntity;
     }
 
 

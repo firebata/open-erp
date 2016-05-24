@@ -126,8 +126,8 @@
 
     $(function () {
 
-        var natrualKey = $("#natrualkey").val();
-        $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
+        var bomId = $("#bomId").val();
+        $.sendRestFulAjax(infoURL + bomId, null, 'GET', 'json', _doSuccess_info);
         $("#prdinstrForm").on('click', '#saveBtn', tosave);
         $("#prdinstrForm").on('click', '#submitBtn', tosubmit);
     });
@@ -136,7 +136,13 @@
     function _doSuccess_info(_data) {
         initProductinst(_data);
         var $btnDIV = $("#btnInfo");
-        $.showHandleBtn($btnDIV, _data["approveStatus"], tosave, $("#natrualkey").val(), $("#taskId").val(), $("#stateCode").val(), $("#processInstanceId").val());
+        var approveStatus = _data["approveStatus"];
+        var bomId = $("#bomId").val();
+        var taskId = $("#taskId").val();
+        var stateCode = $("#stateCode").val();
+        var processInstanceId = $("#processInstanceId").val();
+
+        $.showHandleBtn($btnDIV, approveStatus, tosave, bomId, taskId, stateCode, processInstanceId);
     }
 
     function tosave() {

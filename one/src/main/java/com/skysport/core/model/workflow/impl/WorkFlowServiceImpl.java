@@ -18,6 +18,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.*;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +81,9 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
     @Override
     public void submit(String taskId, String businessKey) {
 
+        complete(taskId,new HashedMap());
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
     }
 
     @Override

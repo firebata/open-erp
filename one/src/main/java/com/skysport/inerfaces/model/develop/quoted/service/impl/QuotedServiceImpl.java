@@ -11,14 +11,11 @@ import com.skysport.inerfaces.bean.develop.BomInfo;
 import com.skysport.inerfaces.bean.develop.QuotedInfo;
 import com.skysport.inerfaces.bean.relation.ProjectPojectItemBomSpVo;
 import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.inerfaces.mapper.develop.QuotedInfoMapper;
 import com.skysport.inerfaces.mapper.info.BomInfoMapper;
 import com.skysport.inerfaces.model.develop.bom.IBomService;
 import com.skysport.inerfaces.model.develop.quoted.service.IQuotedService;
 import com.skysport.inerfaces.model.permission.userinfo.service.IStaffService;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
@@ -31,7 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 说明:
@@ -61,6 +61,23 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         commonMapper = quotedInfoMapper;
     }
 
+    @Override
+    public void edit(QuotedInfo info) {
+        //计算报价:欧元价+包装费+C% .Remark:150527 2015年度新开发项目 - 价格分析.xlsx
+        //%C= (欧元价+包装费) * 0.05 （0.05是佣金）
+        //所以报价=(欧元价+包装费) * 1.05
+        Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
+        BigDecimal commission, quotedPrice;
+        if (null != info.getEuroPrice() && null != info.getLpPrice()) {
+            DecimalFormat df = new DecimalFormat("0.0000");
+            commission = (info.getEuroPrice().add(info.getLpPrice())).multiply(new BigDecimal(commissionValue));
+            quotedPrice = info.getEuroPrice().add(info.getLpPrice()).add(commission);
+            info.setCommission(new BigDecimal(df.format(commission)));
+            info.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
+        }
+
+        quotedInfoMapper.updateInfo(info);
+    }
 
     /**
      * 更新或新增报价信息
@@ -69,24 +86,6 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      */
     @Override
     public QuotedInfo updateOrAdd(QuotedInfo quotedInfo) {
-
-        //计算报价:欧元价+包装费+C% .Remark:150527 2015年度新开发项目 - 价格分析.xlsx
-        //%C= (欧元价+包装费) * 0.05 （0.05是佣金）
-        //所以报价=(欧元价+包装费) * 1.05
-        if (quotedInfo.getLpPrice() == null) {
-            quotedInfo.setLpPrice(new BigDecimal(0));
-        }
-
-        Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
-        BigDecimal commission, quotedPrice;
-        if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getLpPrice()) {
-            DecimalFormat df = new DecimalFormat("0.0000");
-            commission = (quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice())).multiply(new BigDecimal(commissionValue));
-            quotedPrice = quotedInfo.getEuroPrice().add(quotedInfo.getLpPrice()).add(commission);
-            quotedInfo.setCommission(new BigDecimal(df.format(commission)));
-            quotedInfo.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
-        }
-
         //查询BOM是否有对应的报价表
         QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
         //查询项目和子项目id
@@ -98,10 +97,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         quotedInfo.setBomName(projectPojectItemBomSpVo.getBomName());
         quotedInfo.setSpName(projectPojectItemBomSpVo.getSpName());
         if (null == quotedInfoInDB) {
-            if (null != quotedInfo.getEuroPrice() && null != quotedInfo.getFactoryOffer()) {
-                quotedInfoMapper.add(quotedInfo);
-//            }
-            }
+            quotedInfoMapper.add(quotedInfo);
         } else {
             quotedInfoMapper.updateInfo(quotedInfo);
         }
