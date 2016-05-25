@@ -170,7 +170,7 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
             for (BomInfo bomInfo : bomInfos) {
 //                String bomId = bomInfo.getNatrualkey();
                 String seriesName = bomInfo.getSeriesName();
-                seriesNameSet.add(CharConstant.HORIZONTAL_LINE + seriesName);//去重复
+                seriesNameSet.add(CharConstant.HORIZONTAL_LINE + seriesName.replace("\\", "").replace("/", ""));//去重复
                 String bomName = bomInfo.getName();
                 if (bomNameSet.isEmpty()) {
                     bomNameSet.add(bomName);

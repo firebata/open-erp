@@ -448,4 +448,12 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
         String businessName = vo.getBusinessName();
         startProcessInstanceByBussKey(businessKey, businessName);
     }
+    /**
+     * @param businessKey
+     */
+    @Override
+    public void submit(String businessKey) {
+        //状态改为待审批
+        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+    }
 }

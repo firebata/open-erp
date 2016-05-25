@@ -30,7 +30,8 @@
             a.update_time AS updateTime,
             a.remark AS remark,
             a.costing AS costing,
-            a.approve_status   AS   approveStatus
+            a.approve_status   AS   approveStatus,
+            DATE_FORMAT(NOW(),'%Y-%m-%d') AS now
 	</sql>
 
 
@@ -136,6 +137,15 @@
             </if>
             <if test="costing != null and costing != '' ">
                 a.costing =#{costing},
+            </if>
+            <if test="mainFabricDescs != null and mainFabricDescs != '' ">
+                a.main_fabric_descs =#{mainFabricDescs},
+            </if>
+            <if test="spId != null and spId != '' ">
+                a.sp_id =#{spId},
+            </if>
+            <if test="spName != null and spName != '' ">
+                a.sp_name =#{spName},
             </if>
         </set>
 		WHERE a.bom_id =#{bomId}

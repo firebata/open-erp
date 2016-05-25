@@ -189,7 +189,7 @@
             //初始成衣厂
             $.initFactory(_data.factoryQuoteInfos);
 
-            $.initProductinst(_data);
+            // $.initProductinst(_data);
 
             //初始化报价信息
             $.iniBomQuotedInfo(_data.quotedInfo);
@@ -254,9 +254,9 @@
         var factoryQuoteInfos = $.buildFactoryQuoteInfos();
         bominfo.factoryQuoteInfos = factoryQuoteInfos;
 
-        //生产指示单
-        var productionInstruction = $.buildProductionInstr();
-        bominfo.productionInstruction = productionInstruction;
+        // //生产指示单
+        // var productionInstruction = $.buildProductionInstr();
+        // bominfo.productionInstruction = productionInstruction;
 
         $.buildBomQuoted(bominfo);
 

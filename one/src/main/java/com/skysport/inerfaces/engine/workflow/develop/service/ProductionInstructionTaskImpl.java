@@ -65,12 +65,4 @@ public class ProductionInstructionTaskImpl extends WorkFlowServiceImpl {
         productionInstructionMapper.updateApproveStatusBatch(businessKeys, status);
     }
 
-    /**
-     * @param businessKey
-     */
-    @Override
-    public void submit(String businessKey) {
-        //状态改为待审批
-        updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
-    }
 }
