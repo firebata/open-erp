@@ -4,7 +4,7 @@ import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.mapper.CommonMapper;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import com.skysport.interfaces.bean.form.BaseQueyrForm;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,7 +17,6 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
 
     protected transient Log logger = LogFactory.getLog(getClass());
     public CommonMapper<T> commonMapper;
-
 
 
     @Override
@@ -63,7 +62,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     }
 
     @Override
-    public void edit(T t){
+    public void edit(T t) {
         commonMapper.updateInfo(t);
     }
 
@@ -103,7 +102,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     }
 
     @Override
-    public String queryBusinessName(String businessKey){
+    public String queryBusinessName(String businessKey) {
         return commonMapper.queryBusinessName(businessKey);
     }
 }

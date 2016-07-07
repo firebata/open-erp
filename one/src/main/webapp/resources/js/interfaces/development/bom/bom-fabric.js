@@ -550,7 +550,7 @@
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($dyeId);
         });
 
-        //后整理列表
+        //防泼水列表
         var finishIdItems = data["finishItems"];
         var $finishId = $("#finishId" + idNum);
         $finishId.empty();
@@ -606,7 +606,7 @@
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeDyeId);
         });
 
-        //后整理列表
+        //防泼水列表
         var finishIdItems = data["finishItems"];
         var $compositeFinishId = $("#compositeFinishId" + idNum);
         $compositeFinishId.empty();
@@ -784,7 +784,7 @@
         finishId: {
             validators: {
                 notEmpty: {
-                    message: '后整理为必填项'
+                    message: '防泼水为必填项'
                 }
             }
         },

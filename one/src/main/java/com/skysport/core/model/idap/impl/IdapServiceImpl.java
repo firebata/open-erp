@@ -1,9 +1,12 @@
 package com.skysport.core.model.idap.impl;
+
 import com.skysport.core.mapper.IdapMapper;
 import com.skysport.core.model.idap.IdapService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
+
 /**
  * 说明:权限访问业务类
  * Created by zhangjh on 2015/12/25.
@@ -53,13 +56,6 @@ public class IdapServiceImpl implements IdapService {
     public List<String> findManagerOfOP() {
         return idapMapper.findManagerOfOP();
     }
-
-
-
-
-
-
-
 
 
 }

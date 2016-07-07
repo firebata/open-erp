@@ -1,7 +1,7 @@
 package com.skysport.core.utils;
 
 import com.skysport.core.bean.permission.UserInfo;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.interfaces.constant.WebConstants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

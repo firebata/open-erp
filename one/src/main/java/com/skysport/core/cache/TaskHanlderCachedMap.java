@@ -1,6 +1,6 @@
 package com.skysport.core.cache;
 
-import com.skysport.inerfaces.bean.task.TaskHanlderVo;
+import com.skysport.interfaces.bean.task.TaskHanlderVo;
 
 import java.util.HashMap;
 import java.util.Map;

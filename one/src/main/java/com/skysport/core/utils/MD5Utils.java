@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Utils {
 
     public static void main(String[] args) {
-        System.out.println("成都市赛格广场3008 加密后的密文 ："+getMd5String("成都赛格3008"));
+        System.out.println("成都市赛格广场3008 加密后的密文 ：" + getMd5String("成都赛格3008"));
         System.out.println(MD5("good"));
     }
 

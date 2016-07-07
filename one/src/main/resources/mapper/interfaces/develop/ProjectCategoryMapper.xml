@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.develop.ProjectCategoryMapper">
+<mapper namespace="com.skysport.interfaces.mapper.develop.ProjectCategoryMapper">
     <sql id="searchInfoSql">
 		id AS id,
 		project_id AS projectId,

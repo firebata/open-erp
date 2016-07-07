@@ -2,7 +2,7 @@ package com.skysport.core.model.common;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import com.skysport.interfaces.bean.form.BaseQueyrForm;
 
 import java.util.List;
 

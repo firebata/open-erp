@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.info.FabricsMapper">
+<mapper namespace="com.skysport.interfaces.mapper.info.FabricsMapper">
     <sql id="searchInfoSql">
         id AS id,
         fabrics_no AS fabricNo,
@@ -213,9 +213,9 @@
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
         <result column="type" property="type" />
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
 
@@ -311,9 +311,9 @@
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
         <result column="type" property="type"/>
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryAllFabricByBomId"  resultMap="infosMap2">

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.develop.relation.ProjectItemProjectMapper">
+<mapper namespace="com.skysport.interfaces.mapper.develop.relation.ProjectItemProjectMapper">
 
     <update id="backupRecordsToHisByParentProjectId">
          INSERT INTO t_kf_project_item_project_his(project_id,parent_project_id) SELECT  project_id,parent_project_id FROM t_kf_project_item_project  WHERE  parent_project_id=#{parentProjectId} ;

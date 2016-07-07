@@ -5,8 +5,8 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.inerfaces.bean.form.BaseQueyrForm;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.interfaces.bean.form.BaseQueyrForm;
+import com.skysport.interfaces.constant.WebConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +26,6 @@ public abstract class BaseAction<T> {
     protected static String MSG_UPDATE_SUCCESS = "更新成功";
 
     /**
-     *
      * @param baseQueyrForm
      * @param request
      * @param commonService

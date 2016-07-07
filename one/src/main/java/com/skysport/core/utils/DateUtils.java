@@ -77,11 +77,10 @@ public enum DateUtils {
      * @param format
      * @return
      */
-    public String format(Date date ,String format) {
+    public String format(Date date, String format) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(date);
     }
-
 
 
 }

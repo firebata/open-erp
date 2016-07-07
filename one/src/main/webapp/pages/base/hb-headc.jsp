@@ -1,4 +1,4 @@
-<%@ page import="com.skysport.inerfaces.constant.WebConstants" %>
+<%@ page import="com.skysport.interfaces.constant.WebConstants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../base/path.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/bootstrap.css"/>

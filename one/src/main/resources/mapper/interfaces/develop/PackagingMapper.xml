@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.develop.PackagingMapper">
+<mapper namespace="com.skysport.interfaces.mapper.develop.PackagingMapper">
 
     <sql id="searchInfoSql">
         id AS id,
@@ -169,9 +169,9 @@
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
         <collection property="positionIds" column="{materialId=packagingId}"
-                    select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=packagingId}"
-                    select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
 
@@ -235,8 +235,8 @@
         <result column="totalPrice" property="totalPrice"/>
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
-        <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.inerfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=packagingId}"  select="com.skysport.inerfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=packagingId}"  select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryPackagingByBomId" resultMap="infosMap2">

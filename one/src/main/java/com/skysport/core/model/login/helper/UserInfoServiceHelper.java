@@ -3,7 +3,7 @@ package com.skysport.core.model.login.helper;
 
 import com.skysport.core.bean.permission.UserInfo;
 import com.skysport.core.utils.SecurityUtil;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.interfaces.constant.WebConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;

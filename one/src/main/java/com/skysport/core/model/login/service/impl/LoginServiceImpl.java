@@ -5,7 +5,7 @@ import com.skysport.core.model.login.helper.UserInfoServiceHelper;
 import com.skysport.core.model.login.service.ILoginService;
 import com.skysport.core.model.login.service.IUserService;
 import com.skysport.core.utils.UserUtils;
-import com.skysport.inerfaces.constant.WebConstants;
+import com.skysport.interfaces.constant.WebConstants;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

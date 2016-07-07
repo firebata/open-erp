@@ -11,8 +11,9 @@ import java.io.IOException;
  * 说明:
  * Created by zhangjh on 2016/4/19.
  */
-public class SystemInitThread  implements  Runnable{
+public class SystemInitThread implements Runnable {
     protected transient Log logger = LogFactory.getLog(getClass());
+
     @Override
     public void run() {
         //初始化系统基础信息

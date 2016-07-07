@@ -2,7 +2,7 @@ package com.skysport.core.mapper;
 
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.inerfaces.bean.form.BaseQueyrForm;
+import com.skysport.interfaces.bean.form.BaseQueyrForm;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public interface CommonMapper<T> {
 
     void addBatch(List<T> infos);
 
-    void updateBatch(@Param(value = "infos")List<T> infos);
+    void updateBatch(@Param(value = "infos") List<T> infos);
 
     List<SelectItem2> querySelectListByParentId(@Param(value = "parentId") String parentId);
 
@@ -40,5 +40,5 @@ public interface CommonMapper<T> {
 
     int listFilteredInfosCounts(BaseQueyrForm baseQueyrForm);
 
-    String queryBusinessName(@Param(value = "businessKey")String businessKey);
+    String queryBusinessName(@Param(value = "businessKey") String businessKey);
 }

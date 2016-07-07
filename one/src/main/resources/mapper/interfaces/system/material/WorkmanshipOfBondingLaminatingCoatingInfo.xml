@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.info.material.WorkmanshipOfBondingLaminatingCoatingMapper">
+<mapper namespace="com.skysport.interfaces.mapper.info.material.WorkmanshipOfBondingLaminatingCoatingMapper">
     <sql id="searchInfoSql">
         id AS id,
         woblc_id AS natrualkey,

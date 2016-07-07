@@ -1,8 +1,8 @@
 package com.skysport.core.model.init.helper;
 
 import com.skysport.core.cache.DictionaryInfoCachedMap;
-import com.skysport.inerfaces.constant.WebConstants;
-import com.skysport.inerfaces.model.init.BasicInfoHelper;
+import com.skysport.interfaces.constant.WebConstants;
+import com.skysport.interfaces.model.init.BasicInfoHelper;
 import org.dom4j.DocumentException;
 
 import java.io.IOException;

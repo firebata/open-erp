@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skysport.interfaces.mapper.jc.JcOilProofMapper">
+
+    <sql id="searchInfoSql">
+        `id` AS id,
+        `create_time` AS  createTime,
+        `update_time` AS  updateTime,
+        `oil_proof_id` AS  natrualkey,
+        `name` AS  name,
+        remark AS remark,
+        `del_flag` AS  delFlag
+    </sql>
+
+    <select id="queryInfo" resultType="com.skysport.interfaces.bean.jc.JcOilProof">
+        select
+        <include refid="searchInfoSql"/>
+        FROM    t_jc_oil_proof a
+        WHERE
+        `oil_proof_id` = #{natrualkey}
+        limit 1
+    </select>
+
+    <select id="listInfosCounts" resultType="Integer">
+        SELECT COUNT(*)
+        FROM  t_jc_oil_proof a
+        where `del_flag`=0
+    </select>
+
+    <select id="listFilteredInfosCounts" resultType="Integer">
+        SELECT COUNT(*)
+        FROM  t_jc_oil_proof
+        where `del_flag`=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            `name` like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+    </select>
+
+    <select id="searchInfos" resultType="com.skysport.interfaces.bean.jc.JcOilProof">
+        SELECT
+        <include refid="searchInfoSql"/>
+        FROM  t_jc_oil_proof a
+        WHERE del_flag=0
+        <if test="searchValue !=null and searchValue != ''">
+            and (
+            `name` like concat('%',#{searchValue},'%') or
+            remark like concat('%',#{searchValue},'%')
+            )
+        </if>
+        <if test="orderColumn!=null and orderColumn != ''">
+            ORDER BY ${orderColumn} ${orderDir}
+        </if>
+        limit #{start} ,#{length}
+    </select>
+
+    <update id="updateInfo">
+        update
+        t_jc_oil_proof  a
+        <set>
+            <if test="name !=null and name != ''">
+                `name`  = #{name},
+            </if>
+            <if test="remark !=null and remark != ''">
+                `remark`  = #{remark},
+            </if>
+        </set>
+        WHERE
+        `oil_proof_id` = #{natrualkey}
+    </update>
+
+    <update id="del">
+        update
+        t_jc_oil_proof a
+        set
+        `del_flag`=1
+        where
+        `oil_proof_id` = #{natrualkey}
+    </update>
+
+    <insert id="add">
+        insert into
+        t_jc_oil_proof(`oil_proof_id`,`name`,remark)
+        values (#{natrualkey},#{name},#{remark})
+    </insert>
+
+    <select id="queryCurrentSeqNo" resultType="String">
+        select case when  oil_proof_id is NULL then 0 else oil_proof_id end from t_jc_oil_proof    ORDER BY id DESC LIMIT 1
+    </select>
+
+    <!--信息下拉列表-->
+    <select id="querySelectList" resultType="CommonBean">
+        select
+        oil_proof_id AS natrualkey,
+        name AS name
+        from t_jc_oil_proof
+        where del_flag=0
+        <if test="name!=null and name != ''">
+            and upper(name) like concat('%',#{name},'%')
+        </if>
+    </select>
+
+
+</mapper>

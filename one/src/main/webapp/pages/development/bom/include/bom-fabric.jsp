@@ -116,10 +116,10 @@
 
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{finishId}}"> 后整理 </label>
+                        <label class="col-xs-2  control-label" for="{{finishId}}"> 防泼水 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{finishId}}" name="finishId"
-                                    placeholder="后整理">
+                                    placeholder="防泼水">
                             </select>
                         </div>
 
@@ -174,10 +174,10 @@
                                     </select>
                                 </div>
 
-                                <label class="col-xs-2  control-label" for="{{compositeFinishId}}"> 后整理 </label>
+                                <label class="col-xs-2  control-label" for="{{compositeFinishId}}"> 防泼水 </label>
                                 <div class="col-xs-3">
                                     <select class="col-xs-12" data-style="btn-info" id="{{compositeFinishId}}"
-                                            name="compositeFinishId" placeholder="后整理">
+                                            name="compositeFinishId" placeholder="防泼水">
                                     </select>
                                 </div>
                             </div>

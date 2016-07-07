@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.inerfaces.mapper.permission.RoleInfoMapper">
+<mapper namespace="com.skysport.interfaces.mapper.permission.RoleInfoMapper">
     <sql id="searchInfoSql">
         id AS id,
         role_id AS natrualkey,

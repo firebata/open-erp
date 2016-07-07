@@ -1,7 +1,7 @@
 package com.skysport.core.bean.permission;
 
 import com.skysport.core.bean.system.SelectItem;
-import com.skysport.inerfaces.bean.common.UploadFileInfo;
+import com.skysport.interfaces.bean.common.UploadFileInfo;
 
 import java.util.List;
 import java.util.Map;

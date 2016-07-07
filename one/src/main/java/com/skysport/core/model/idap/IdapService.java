@@ -35,6 +35,6 @@ public interface IdapService {
      * @return
      */
     List<String> findManagerOfOP();
-    
+
 
 }

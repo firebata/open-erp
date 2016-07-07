@@ -2,7 +2,7 @@ package com.skysport.core.model.init.helper;
 
 import com.skysport.core.cache.TaskHanlderCachedMap;
 import com.skysport.core.constant.CharConstant;
-import com.skysport.inerfaces.bean.task.TaskHanlderVo;
+import com.skysport.interfaces.bean.task.TaskHanlderVo;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
