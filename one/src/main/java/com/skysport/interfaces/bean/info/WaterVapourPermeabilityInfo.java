@@ -3,7 +3,7 @@ package com.skysport.interfaces.bean.info;
 import com.skysport.core.bean.system.SelectItem;
 
 /**
- * 类说明:透湿程度（高透、中透、低透、不透气）
+ * 类说明:透湿（高透、中透、低透、不透气）
  * Created by zhangjh on 2015/6/25.
  */
 public class WaterVapourPermeabilityInfo extends SelectItem {

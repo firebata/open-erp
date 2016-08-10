@@ -373,7 +373,7 @@
             $.sendRestFulAjax(qrAreaURL, {'keyword': customerId}, 'GET', 'json', function (_data) {
                 var $areaId = $("#areaId");
                 $areaId.empty();
-                $("<option></option>").val('').text("请选择...").appendTo($areaId);
+                $("<option></option>").val('').text("...请选择...").appendTo($areaId);
                 $.each(_data["items"], function (key, value) {
                     $("<option></option>").val(value["natrualkey"]).text(value["name"]).appendTo($areaId);
                 });
@@ -391,7 +391,7 @@
                     .text(item["name"])
                     .appendTo($("#categoryAid"));
             });
-            $('#categoryAid').selectpicker({noneSelectedText: '请选择...'});
+            $('#categoryAid').selectpicker({noneSelectedText: '...请选择...'});
             $('#categoryAid').selectpicker('refresh');
         }
 
@@ -413,7 +413,7 @@
                         .text(value.name)
                         .appendTo($categoryBid);
                 });
-                $categoryBid.selectpicker({noneSelectedText: '请选择...'});
+                $categoryBid.selectpicker({noneSelectedText: '...请选择...'});
                 $categoryBid.selectpicker('refresh');
                 callback();
             }, true);
@@ -495,7 +495,7 @@
             //年份
             var yearCodeItems = data["yearItems"];
             $("#yearCode").empty();
-            $("<option></option>").val('').text("请选择...").appendTo($("#yearCode"));
+            $("<option></option>").val('').text("...请选择...").appendTo($("#yearCode"));
             $.each(yearCodeItems, function (i, item) {
                 $("<option></option>")
                     .val(item["natrualkey"])
@@ -506,7 +506,7 @@
             //客户
             var yearCodeItems = data["customerItems"];
             $("#customerId").empty();
-            $("<option></option>").val('').text("请选择...").appendTo($("#customerId"));
+            $("<option></option>").val('').text("...请选择...").appendTo($("#customerId"));
             $.each(yearCodeItems, function (i, item) {
                 $("<option></option>")
                     .val(item["natrualkey"])
@@ -517,7 +517,7 @@
             //区域
             var areaItems = data["areaItems"];
             $("#areaId").empty();
-            $("<option></option>").val('').text("请选择...").appendTo($("#areaId"));
+            $("<option></option>").val('').text("...请选择...").appendTo($("#areaId"));
             $.each(areaItems, function (i, item) {
                 $("<option></option>")
                     .val(item["natrualkey"])
@@ -528,7 +528,7 @@
             //系列
             var seriesItems = data["seriesItems"];
             $("#seriesId").empty();
-            $("<option></option>").val('').text("请选择...").appendTo($("#seriesId"));
+            $("<option></option>").val('').text("...请选择...").appendTo($("#seriesId"));
             $.each(seriesItems, function (i, item) {
                 $("<option></option>")
                     .val(item["natrualkey"])

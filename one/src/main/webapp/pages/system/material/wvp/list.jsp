@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>查询透湿程度信息</title>
+    <title>查询透湿信息</title>
     <jsp:include page="../../../base/hb-headc.jsp" flush="true"></jsp:include>
     <jsp:include page="../../../base/hb-footj.jsp"></jsp:include>
 </head>
@@ -15,7 +15,7 @@
     <div class="page-header">
         <h1>
             系统管理
-            <small><i class="icon-double-angle-right"></i> 透湿程度信息</small>
+            <small><i class="icon-double-angle-right"></i> 透湿信息</small>
         </h1>
     </div>
     <!-- PAGE CONTENT BEGINS -->

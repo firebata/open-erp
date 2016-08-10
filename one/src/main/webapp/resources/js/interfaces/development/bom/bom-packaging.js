@@ -351,7 +351,7 @@
         var materialTypeIdItems = data["materialTypeItems"];
         var materialTypeIdPId = "#materialTypeIdP" + idNum;
         $(materialTypeIdPId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(materialTypeIdPId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(materialTypeIdPId));
         $.each(materialTypeIdItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(materialTypeIdPId));
         });
@@ -361,7 +361,7 @@
         var spItems = data["spItems"];
         var spIdPId = "#spIdP" + idNum;
         $(spIdPId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(spIdPId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(spIdPId));
         $.each(spItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(spIdPId));
         });
@@ -370,7 +370,7 @@
         var yearCodeItems = data["yearItems"];
         var yearCodePId = "#yearCodeP" + idNum;
         $(yearCodePId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(yearCodePId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(yearCodePId));
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(yearCodePId));
         });
@@ -380,7 +380,7 @@
         var classicIdItems = data["accessoriesClassicItems"];
         var classicIdPId = "#classicIdP" + idNum;
         $(classicIdPId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(classicIdPId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(classicIdPId));
         $.each(classicIdItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(classicIdPId));
         });
@@ -389,7 +389,7 @@
         var productTypeIdItems = data["productTypeItems"];
         var productTypeIdPId = "#productTypeIdP" + idNum;
         $(productTypeIdPId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(productTypeIdPId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(productTypeIdPId));
         $.each(productTypeIdItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(productTypeIdPId));
         });
@@ -402,7 +402,7 @@
         $.each(positionItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(positionIdsPId));
         });
-        $(positionIdsPId).selectpicker({noneSelectedText: '请选择...'});
+        $(positionIdsPId).selectpicker({noneSelectedText: '...请选择...'});
         $(positionIdsPId).selectpicker('refresh');
 
 
@@ -410,7 +410,7 @@
         var unitIdItems = data["unitItems"];
         var unitIdPId = "#unitIdP" + idNum;
         $(unitIdPId).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($(unitIdPId));
+        $("<option></option>").val('').text("...请选择...").appendTo($(unitIdPId));
         $.each(unitIdItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($(unitIdPId));
         });

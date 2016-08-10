@@ -133,7 +133,7 @@
         //年份
         var yearCodeItems = data["yearItems"];
         $("#yearCode").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#yearCode"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#yearCode"));
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -144,7 +144,7 @@
         //客户
         var yearCodeItems = data["customerItems"];
         $("#customerId").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#customerId"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#customerId"));
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -155,7 +155,7 @@
         //区域
         var areaItems = data["areaItems"];
         $("#areaId").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#areaId"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#areaId"));
         $.each(areaItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -166,7 +166,7 @@
         //系列
         var seriesItems = data["seriesItems"];
         $("#seriesId").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#seriesId"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#seriesId"));
         $.each(seriesItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -180,13 +180,13 @@
         $.each(sexItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#sexIds"));
         });
-        $('#sexIds').selectpicker({noneSelectedText: '请选择...'});
+        $('#sexIds').selectpicker({noneSelectedText: '...请选择...'});
         $('#sexIds').selectpicker('refresh');
 
         //一级品类
         var categoryAItems = data["categoryAItems"];
         $("#categoryAid").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#categoryAid"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#categoryAid"));
         $.each(categoryAItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -197,7 +197,7 @@
         //二级品类
         var categoryBItems = data["categoryBItems"];
         $("#categoryBid").empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#categoryBid"));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#categoryBid"));
         $.each(categoryBItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])

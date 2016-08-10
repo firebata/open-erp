@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div id="packagingInfo">
     <h5 class="header smaller lighter blue">
-        包材
+        包&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;材
         <span class="glyphicon glyphicon-plus-sign blue" alt="增加包装材料" id="imgAddPackaging"></span>
     </h5>
     <div id="packagingItemInfo">
@@ -40,7 +40,7 @@
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">
                                 <i class="ace-icon fa fa-hand-o-right blue"></i> &nbsp;&nbsp;<h5
-                                    class="widget-title lighter"><%--{{packagingTitleName}}--%>详细</h5>
+                                    class="widget-title lighter"><%--{{packagingTitleName}}--%>详&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;细</h5>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                     name="materialTypeId" placeholder="材料类别">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{spIdP}}"> 供应商 </label>
+                        <label class="col-xs-2  control-label" for="{{spIdP}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{spIdP}}" name="spId"
@@ -62,14 +62,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{yearCodeP}}"> 年份 </label>
+                        <label class="col-xs-2  control-label" for="{{yearCodeP}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{yearCodeP}}" name="yearCode"
                                     placeholder="年份">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{classicIdP}}"> 材质 </label>
+                        <label class="col-xs-2  control-label" for="{{classicIdP}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{classicIdP}}" name="classicId"
@@ -79,13 +79,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{pantoneIdsP}}"> 颜色 </label>
+                        <label class="col-xs-2  control-label" for="{{pantoneIdsP}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds"
                                     placeholder="颜色" id="{{pantoneIdsP}}"></select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{productTypeIdP}}"> 品名 </label>
+                        <label class="col-xs-2  control-label" for="{{productTypeIdP}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{productTypeIdP}}" name="productTypeId"
@@ -104,23 +104,23 @@
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{lengthP}}"> 长度（CM） </label>
+                        <label class="col-xs-2  control-label" for="{{lengthP}}"> 长度(CM) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{lengthP}}" name="length" placeholder="长度（CM）"
+                            <input type="text" id="{{lengthP}}" name="length" placeholder="长度(CM)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{widthP}}" data-toggle="tooltip" title="宽度（CM）">
-                            宽度（CM） </label>
+                        <label class="col-xs-2  control-label" for="{{widthP}}" data-toggle="tooltip" title="宽度(CM)">
+                            宽度(CM) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{widthP}}" name="width" placeholder="宽度（CM）"
+                            <input type="text" id="{{widthP}}" name="width" placeholder="宽度(CM)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{remarkP}}"> 备注 </label>
+                        <label class="col-xs-2  control-label" for="{{remarkP}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 </label>
                         <div class="col-xs-3">
                             <input type="text" id="{{remarkP}}" name="remark" placeholder="备注"
                                    class="col-xs-10 col-sm-12"/>
@@ -177,16 +177,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{attritionRateP}}"> 损耗率（小数形式） </label>
+                        <label class="col-xs-2  control-label" for="{{attritionRateP}}"> 损耗率(小数形式) </label>
                         <div class="col-xs-3">
                             <input type="text" id="{{attritionRateP}}" name="attritionRate" placeholder="损耗率，e.g.0.03"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
 
-                        <label class="col-xs-2  control-label" for="{{unitPriceP}}" title="用量单位的价格">  单价（￥） </label>
+                        <label class="col-xs-2  control-label" for="{{unitPriceP}}" title="用量单位的价格">  单价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{unitPriceP}}" name="unitPrice" placeholder="单价（￥）"
+                            <input type="text" id="{{unitPriceP}}" name="unitPrice" placeholder="单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
@@ -196,16 +196,16 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{colorAmountP}}" data-toggle="tooltip"
-                               title="各色用量 =单位用量 *（1 + 损耗率）"> 各色用量 </label>
+                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 </label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorAmountP}}" name="colorAmount" placeholder="各色用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
                         <label class="col-xs-2  control-label" for="{{colorPriceP}}" title="各色单价 = 各色用量 * 单价">
-                            各色单价（￥） </label>
+                            各色单价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{colorPriceP}}" name="colorPrice" placeholder="各色单价（￥）"
+                            <input type="text" id="{{colorPriceP}}" name="colorPrice" placeholder="各色单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>
@@ -218,9 +218,9 @@
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{totalPriceP}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价（￥） </label>
+                        <label class="col-xs-2  control-label" for="{{totalPriceP}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{totalPriceP}}" name="totalPrice" placeholder="总价（￥）"
+                            <input type="text" id="{{totalPriceP}}" name="totalPrice" placeholder="总价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>

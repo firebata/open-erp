@@ -91,7 +91,13 @@ public interface WebConstants extends TableNameConstants {
     String MTITEMS = "mtItems";
     String WBLCITEMS = "wblcItems";
     String UNITITEMS = "unitItems";
-
+    String AirPermeabilityItems = "airPermeabilityItems";
+    String JcAntMosquitosItems = "jcAntMosquitosItems";
+    String JcOilProofItems = "jcOilProofItems";
+    String JcQuickDryItems = "jcQuickDryItems";
+    String JcSeamWaterpressureItems = "jcSeamWaterpressureItems";
+    String JcUltravioletProtectionItems = "jcUltravioletProtectionItems";
+    String JcWaterProofItems = "jcWaterProofItems";
 
     String FILE_TXT = "txt";
     String FILE_IMG = "img";
@@ -162,7 +168,7 @@ public interface WebConstants extends TableNameConstants {
     String OIL_PROOF_TABLE_COLUMN_NAME = "oil_proof_table_column_name";
     String QUICK_DRY_TABLE_COLUMN_NAME = "quick_dry_table_column_name";
     String ULTRAVIOLET_PROTECTION_TABLE_COLUMN_NAME = "ultraviolet_protection_table_column_name";
-    String SEAM_WATERSSURE_TABLE_COLUMN_NAME = "seam_waterssure_table_column_name";
+    String SEAM_WATERPRESSURE_TABLE_COLUMN_NAME = "seam_waterpressure_table_column_name";
     String AIR_PERMEABILITY_TABLE_COLUMN_NAME = "air_permeability_table_column_name";
     String USER_TYPE = "user_type";
     String LOCK_FLAG = "lock_flag";
@@ -244,6 +250,7 @@ public interface WebConstants extends TableNameConstants {
     String T_JC_OIL_PROOF = "t_jc_oil_proof";//防油
     String T_JC_QUICK_DRY = "t_jc_quick_dry";//快干
     String T_JC_ULTRAVIOLET_PROTECTION = "t_jc_ultraviolet_protection";//抗紫外线
-    String T_JC_SEAM_WATERSSURE = "t_jc_seam_waterssure";//接缝水压
+    String T_JC_SEAM_WATERPRESSURE = "t_jc_seam_waterssure";//接缝水压
     String T_JC_AIR_PERMEABILITY = "t_jc_air_permeability";//透气
+
 }

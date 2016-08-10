@@ -50,7 +50,7 @@ public class JcOilProofController extends BaseAction<JcOilProof> {
      * @return
      */
     @SystemControllerLog(description = "查询详细信息")
-    @RequestMapping(value = "/oil_proof/{businessKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{businessKey}", method = RequestMethod.GET)
     public JcOilProof queryByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcOilProof jcOilProof = (JcOilProof) jcOilProofServiceImpl.queryInfoByNatrualKey(businessKey);
         ;

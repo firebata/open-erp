@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<style type="text/css">
+    .divcss5 {
+        border: 1px dashed #000;
+    }
+</style>
 <div id="fabricsInfo">
     <h5 class="header smaller lighter blue">
-        面料
+        面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;料
         <span class="glyphicon glyphicon-plus-sign blue" alt="增加面料" id="imgAddFabric"></span>
     </h5>
 
@@ -17,10 +22,11 @@
             <input type="hidden" name="fabricId" id="{{fabricId}}"/>
             <input type="hidden" name="serialNumber" id="{{serialNumber}}"/>
             <label class="col-xs-2 text-left green" style="text-align: left;">
-                <input type="text" id="{{fabricName}}" name="fabricName" placeholder="{{fabricTitleName}}"  class="selfAdapta"/>
+                <input type="text" id="{{fabricName}}" name="fabricName" placeholder="{{fabricTitleName}}"
+                       class="selfAdapta"/>
             </label>
             <label class="col-xs-2 text-left green" style="text-align: left;">
-                <input type="text" id="{{fabricNo}}" name="fabricNo" placeholder="{{fabricNoName}}"   class="selfAdapta" />
+                <input type="text" id="{{fabricNo}}" name="fabricNo" placeholder="{{fabricNoName}}" class="selfAdapta"/>
             </label>
             <label class="col-xs-1 col-md-offset-4 control-label no-padding-right blue">
                 <span class="glyphicon glyphicon-eye-open" id="{{fabricEyeId}}"
@@ -46,59 +52,69 @@
                         <div class="col-xs-12">
                             <div class="widget-header widget-header-blue widget-header-flat">
                                 <i class="ace-icon fa fa-hand-o-right blue"></i> &nbsp;&nbsp;<h5
-                                    class="widget-title lighter"><%--{{fabricTitleName}}--%>详细</h5>
+                                    class="widget-title lighter"><%--{{fabricTitleName}}--%>详&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;细</h5>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label  col-xs-2" for="{{materialTypeId}}"> 材料类别 </label>
+                        <label class="control-label  col-xs-2" for="{{materialTypeId}}"> 类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{materialTypeId}}"
-                                    name="materialTypeId" placeholder="材料类别">
+                                    name="materialTypeId" placeholder="类别">
+                            </select>
+                        </div>
+                        <label class="col-xs-2  control-label" for="{{blcId}}"> 复合/涂层 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{blcId}}" name="blcId"
+                                    placeholder="复合/涂层">
                             </select>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{spId}}"> 供应商 </label>
-                        <div class="col-xs-3">
-                            <select class="col-xs-12" data-style="btn-info" id="{{spId}}" name="spId" placeholder="供应商">
-                            </select>
-                        </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{yearCode}}"> 年份 </label>
+
+
+                        <label class="col-xs-2  control-label" for="{{yearCode}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{yearCode}}" name="yearCode"
                                     placeholder="年份">
                             </select>
                         </div>
+                        <label class="col-xs-2  control-label" for="{{spId}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{spId}}" name="spId" placeholder="供应商">
+                            </select>
+                        </div>
 
-                        <label class="col-xs-2  control-label" for="{{classicId}}"> 材质 </label>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{classicId}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{classicId}}" name="classicId"
                                     placeholder="材质">
                             </select>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{pantoneIds}}"> 颜色 </label>
+                        <label class="col-xs-2  control-label" for="{{pantoneIds}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 </label>
                         <div class="col-xs-3">
-                            <%--<input type="text" id="{{pantoneId}}" name="pantoneId" placeholder="颜色"--%>
-                            <%--class="col-xs-10 col-sm-12"/>--%>
                             <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds"
                                     placeholder="颜色" id="{{pantoneIds}}"></select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{productTypeId}}"> 品名 </label>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{productTypeId}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{productTypeId}}" name="productTypeId"
                                     placeholder="品名">
                             </select>
                         </div>
-                    </div>
 
-                    <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{specificationId}}"> 纱支密度 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{specificationId}}"
@@ -106,106 +122,171 @@
                             </select>
                         </div>
 
+
+                    </div>
+
+
+                    <div class="form-group">
+
                         <label class="col-xs-2 control-label" for="{{dyeId}}"> 染色方式 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{dyeId}}" name="dyeId"
                                     placeholder="染色方式">
                             </select>
                         </div>
+
+                        <label class="col-xs-2  control-label " style="color: red" for="{{isShow}}"> 主&nbsp;&nbsp;面&nbsp;&nbsp;料 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{isShow}}" name="isShow"
+                                    placeholder="报价表中">
+                                <option value="">...请选择...(BOM必须选择一个面料)</option>
+                                <option value="0">不显示</option>
+                                <option value="1">显示</option>
+                            </select>
+                        </div>
+
                     </div>
 
-
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{finishId}}"> 防泼水 </label>
+                        <label class="col-xs-2  control-label" for="{{finishId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水 </label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{finishId}}" name="finishId"
                                     placeholder="防泼水">
                             </select>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{blcId}}"> 复合或涂层 </label>
+                        <label class="col-xs-2  control-label" for="{{wvpId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;湿 </label>
                         <div class="col-xs-3">
-                            <select class="col-xs-12" data-style="btn-info" id="{{blcId}}" name="blcId"
-                                    placeholder="复合或涂层">
+                            <select class="col-xs-12" data-style="btn-info" id="{{wvpId}}" name="wvpId"
+                                    placeholder="透湿">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{waterProofId}}"> 水&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;压 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{waterProofId}}" name="waterProofId"
+                                    placeholder="水压">
                             </select>
                         </div>
 
+                        <label class="col-xs-2  control-label" for="{{permeabilityId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;气 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{permeabilityId}}"
+                                    name="permeabilityId"
+                                    placeholder="透气">
+                            </select>
+                        </div>
                     </div>
 
-                    <div id="{{compositeDiv}}">
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{waterpressureId}}"> 接缝水压 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{waterpressureId}}"
+                                    name="waterpressureId"
+                                    placeholder="接缝水压">
+                            </select>
+                        </div>
+
+                        <label class="col-xs-2  control-label" for="{{ultravioletProtectionId}}"> 抗紫外线 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{ultravioletProtectionId}}"
+                                    name="ultravioletProtectionId"
+                                    placeholder="抗紫外线">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{quickDryId}}"> 快&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;干 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{quickDryId}}" name="quickDryId"
+                                    placeholder="快干">
+                            </select>
+                        </div>
+
+                        <label class="col-xs-2  control-label" for="{{oilProofId}}"> 防&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;油 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{oilProofId}}" name="oilProofId"
+                                    placeholder="防油">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-xs-2  control-label" for="{{antMosquitosId}}"> 防&nbsp;&nbsp;蚊&nbsp;&nbsp;虫 </label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{antMosquitosId}}"
+                                    name="antMosquitosId"
+                                    placeholder="防蚊虫">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="{{compositeDiv}}" class="divcss5">
                         <div id="{{tiemoDiv}}">
                             <div class="form-group">
-                                <label class="col-xs-2  control-label" for="{{compositeClassicId}}"> 材质 </label>
+                                <label class="col-xs-2  control-label" for="{{compositeClassicId}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 </label>
                                 <div class="col-xs-3">
                                     <select class="col-xs-12" data-style="btn-info" id="{{compositeClassicId}}"
                                             name="compositeClassicId" placeholder="材质">
                                     </select>
                                 </div>
 
-                                <label class="col-xs-2  control-label" for="{{compositePantoneIds}}"> 颜色 </label>
+                                <label class="col-xs-2  control-label" for="{{compositePantoneIds}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 </label>
                                 <div class="col-xs-3">
-                                    <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="compositePantoneIds"
+                                    <select class="col-xs-12  col-sm-12 form-control" multiple="multiple"
+                                            name="compositePantoneIds"
                                             placeholder="颜色" id="{{compositePantoneIds}}"></select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-2  control-label" for="{{compositeProductTypeId}}"> 品名 </label>
+                                <label class="col-xs-2  control-label" for="{{compositeProductTypeId}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 </label>
                                 <div class="col-xs-3">
-                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeProductTypeId}}"
-                                            name="compositeProductTypeId"
-                                            placeholder="品名">
-                                    </select>
+                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeProductTypeId}}" name="compositeProductTypeId" placeholder="品名"></select>
                                 </div>
 
                                 <label class="col-xs-2  control-label" for="{{compositeSpecificationId}}"> 纱支密度 </label>
                                 <div class="col-xs-3">
-                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeSpecificationId}}"
-                                            name="compositeSpecificationId" placeholder="纱支密度">
-                                    </select>
+                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeSpecificationId}}" name="compositeSpecificationId" placeholder="纱支密度"></select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-2 control-label" for="{{compositeDyeId}}"> 染色方式 </label>
                                 <div class="col-xs-3">
-                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeDyeId}}"
-                                            name="compositeDyeId" placeholder="染色方式">
-                                    </select>
-                                </div>
-
-                                <label class="col-xs-2  control-label" for="{{compositeFinishId}}"> 防泼水 </label>
-                                <div class="col-xs-3">
-                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeFinishId}}"
-                                            name="compositeFinishId" placeholder="防泼水">
-                                    </select>
+                                    <select class="col-xs-12" data-style="btn-info" id="{{compositeDyeId}}" name="compositeDyeId" placeholder="染色方式"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="{{momcId}}"> 膜或涂层材质 </label>
+                            <label class="col-xs-2  control-label" for="{{momcId}}"> 膜/涂层材质 </label>
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="{{momcId}}" name="momcId"
-                                        placeholder="膜或涂层材质">
+                                        placeholder="膜/涂层材质">
                                 </select>
                             </div>
 
-                            <label class="col-xs-2  control-label" for="{{comocId}}"> 膜或涂层颜色 </label>
+                            <label class="col-xs-2  control-label" for="{{comocId}}"> 膜/涂层颜色 </label>
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="{{comocId}}" name="comocId"
-                                        placeholder="膜或涂层颜色">
+                                        placeholder="膜/涂层颜色">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="{{wvpId}}"> 透湿程度 </label>
+
+                            <label class="col-xs-2  control-label" for="{{woblcId}}"> 膜/涂层工艺 </label>
                             <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="{{wvpId}}" name="wvpId"
-                                        placeholder="透湿程度">
+                                <select class="col-xs-12" data-style="btn-info" id="{{woblcId}}" name="woblcId"
+                                        placeholder="贴膜/涂层工艺">
                                 </select>
                             </div>
-
-                            <label class="col-xs-2  control-label" for="{{mtId}}"> 膜的厚度 </label>
+                            <label class="col-xs-2  control-label" for="{{mtId}}"> 膜&nbsp;&nbsp;厚&nbsp;&nbsp;度 </label>
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="{{mtId}}" name="mtId"
                                         placeholder="膜的厚度">
@@ -214,10 +295,85 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="{{woblcId}}"> 贴膜或涂层工艺 </label>
+                            <label class="col-xs-2  control-label" for="{{compositeFinishId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水 </label>
                             <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="{{woblcId}}" name="woblcId"
-                                        placeholder="贴膜或涂层工艺">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeFinishId}}"
+                                        name="compositeFinishId" placeholder="防泼水">
+                                </select>
+                            </div>
+                            <label class="col-xs-2  control-label" for="{{compositeWvpId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;湿 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeWvpId}}"
+                                        name="compositeWvpId"
+                                        placeholder="透湿">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="col-xs-2  control-label" for="{{compositeWaterProofId}}"> 水&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;压 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeWaterProofId}}"
+                                        name="compositeWaterProofId"
+                                        placeholder="水压">
+                                </select>
+                            </div>
+
+                            <label class="col-xs-2  control-label" for="{{compositePermeabilityId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;气 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositePermeabilityId}}"
+                                        name="compositePermeabilityId"
+                                        placeholder="透气">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label class="col-xs-2  control-label" for="{{compositeWaterpressureId}}"> 接缝水压 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeWaterpressureId}}"
+                                        name="compositeWaterpressureId"
+                                        placeholder="接缝水压">
+                                </select>
+                            </div>
+
+                            <label class="col-xs-2  control-label" for="{{compositeUltravioletProtectionId}}">
+                                抗紫外线 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info"
+                                        id="{{compositeUltravioletProtectionId}}"
+                                        name="compositeUltravioletProtectionId"
+                                        placeholder="抗紫外线">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-xs-2  control-label" for="{{compositeQuickDryId}}"> 快&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;干 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeQuickDryId}}"
+                                        name="compositeQuickDryId"
+                                        placeholder="快干">
+                                </select>
+                            </div>
+
+                            <label class="col-xs-2  control-label" for="{{compositeOilProofId}}"> 防&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;油 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeOilProofId}}"
+                                        name="compositeOilProofId"
+                                        placeholder="防油">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-xs-2  control-label" for="{{compositeAntMosquitosId}}"> 防&nbsp;&nbsp;蚊&nbsp;&nbsp;虫 </label>
+                            <div class="col-xs-3">
+                                <select class="col-xs-12" data-style="btn-info" id="{{compositeAntMosquitosId}}"
+                                        name="compositeAntMosquitosId"
+                                        placeholder="防蚊虫">
                                 </select>
                             </div>
                         </div>
@@ -225,15 +381,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{isShow}}"> 报价表中是否显示 </label>
-                        <div class="col-xs-3">
-                            <select class="col-xs-12" data-style="btn-info" id="{{isShow}}" name="isShow"
-                                    placeholder="报价表中">
-                                <option value="">请选择...</option>
-                                <option value="0">不显示</option>
-                                <option value="1">显示</option>
-                            </select>
-                        </div>
+
                     </div>
 
                 </div>
@@ -285,7 +433,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{attritionRate}}"> 损耗率 </label>
+                        <label class="col-xs-2  control-label" for="{{attritionRate}}"> 损&nbsp;&nbsp;耗&nbsp;&nbsp;率 </label>
 
                         <div class="col-xs-3">
                             <input type="text" id="{{attritionRate}}" name="attritionRate"
@@ -293,9 +441,9 @@
                         </div>
 
 
-                        <label class="col-xs-2  control-label" for="{{unitPrice}}"  title="用量单位的价格"> 单价（￥） </label>
+                        <label class="col-xs-2  control-label" for="{{unitPrice}}" title="用量单位的价格"> 单价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价（￥）"
+                            <input type="text" id="{{unitPrice}}" name="unitPrice" placeholder="单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
@@ -304,16 +452,16 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{colorAmount}}" data-toggle="tooltip"
-                               title="各色用量 =单位用量 *（1 + 损耗率）"> 各色用量 </label>
+                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 </label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorAmount}}" name="colorAmount" placeholder="各色用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
                         <label class="col-xs-2  control-label" for="{{colorPrice}}" title="各色单价 = 各色用量 * 单价">
-                            各色单价（￥） </label>
+                            各色单价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{colorPrice}}" name="colorPrice" placeholder="各色单价（￥）"
+                            <input type="text" id="{{colorPrice}}" name="colorPrice" placeholder="各色单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>
@@ -327,9 +475,10 @@
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{totalPrice}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价（￥） </label>
+                        <label class="col-xs-2  control-label" for="{{totalPrice}}" title="各色总用量的价格和 = 订单数量 *  各色单价 ">
+                            总价(￥) </label>
                         <div class="col-xs-3">
-                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价（￥）"
+                            <input type="text" id="{{totalPrice}}" name="totalPrice" placeholder="总价(￥)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>

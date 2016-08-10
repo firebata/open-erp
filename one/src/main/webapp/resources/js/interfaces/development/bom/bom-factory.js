@@ -348,7 +348,7 @@
         //供应商
         var spItems = data["spItems"];
         $("#spIdC" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#spIdC" + idNum));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#spIdC" + idNum));
         $.each(spItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])

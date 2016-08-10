@@ -50,7 +50,7 @@ public class JcAirPermeabilityController extends BaseAction<JcAirPermeability> {
      * @return
      */
     @SystemControllerLog(description = "查询详细信息")
-    @RequestMapping(value = "/air_permeability/{businessKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{businessKey}", method = RequestMethod.GET)
     public JcAirPermeability queryByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcAirPermeability jcAirPermeability = (JcAirPermeability) jcAirPermeabilityServiceImpl.queryInfoByNatrualKey(businessKey);
         return jcAirPermeability;

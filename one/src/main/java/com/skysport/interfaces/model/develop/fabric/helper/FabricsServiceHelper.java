@@ -355,7 +355,7 @@ public enum FabricsServiceHelper {
      * @param stringBuilder
      */
     public void chgWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
-        List<SelectItem2> selectItem2s;//透湿程度列表
+        List<SelectItem2> selectItem2s;//透湿列表
         String wvpId = fabricsInfo.getWvpId();
         if (StringUtils.isNotBlank(wvpId)) {
             selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(WebConstants.WVPITEMS);

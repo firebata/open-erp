@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 类说明:透湿程度
+ * 类说明:透湿
  * Created by zhangjh on 2015/6/25.
  */
 @Scope("prototype")
@@ -47,7 +47,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    @SystemControllerLog(description = "点击透湿程度菜单")
+    @SystemControllerLog(description = "点击透湿菜单")
     public ModelAndView search() {
         ModelAndView mav = new ModelAndView("/system/material/wvp/list");
         return mav;
@@ -62,7 +62,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/search")
     @ResponseBody
-    @SystemControllerLog(description = "查询透湿程度信息列表")
+    @SystemControllerLog(description = "查询透湿信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
         DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.WVP_TABLE_COLUMN, request);
@@ -87,7 +87,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(description = "编辑透湿程度信息")
+    @SystemControllerLog(description = "编辑透湿信息")
     public Map<String, Object> edit(WaterVapourPermeabilityInfo areaInfo, HttpServletRequest request,
                                     HttpServletResponse respones) {
         waterVapourPermeabilityService.edit(areaInfo);
@@ -105,7 +105,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
-    @SystemControllerLog(description = "新增透湿程度")
+    @SystemControllerLog(description = "新增透湿")
     public Map<String, Object> add(WaterVapourPermeabilityInfo areaInfo, HttpServletRequest request,
                                    HttpServletResponse reareaonse) {
         String currentNo = waterVapourPermeabilityService.queryCurrentSeqNo();
@@ -126,7 +126,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/info/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
-    @SystemControllerLog(description = "查询透湿程度信息")
+    @SystemControllerLog(description = "查询透湿信息")
     public WaterVapourPermeabilityInfo info(@PathVariable String natrualKey, HttpServletRequest request, HttpServletResponse reareaonse) {
         WaterVapourPermeabilityInfo areaInfo = (WaterVapourPermeabilityInfo) waterVapourPermeabilityService.queryInfoByNatrualKey(natrualKey);
         return areaInfo;
@@ -138,7 +138,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
      */
     @RequestMapping(value = "/del/{natrualKey}", method = RequestMethod.DELETE)
     @ResponseBody
-    @SystemControllerLog(description = "删除透湿程度")
+    @SystemControllerLog(description = "删除透湿")
     public Map<String, Object> del(@PathVariable String natrualKey) {
         waterVapourPermeabilityService.del(natrualKey);
         WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();

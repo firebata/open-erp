@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by zhangjh on 2016-7-7 13:32:34
  */
 @RestController
-@RequestMapping("/system/function/ant_mosquitos")
+@RequestMapping("/system/function/anti_mosquitos")
 public class JcAntMosquitosController extends BaseAction<JcAntMosquitos> {
 
     @Resource(name = "jcAntMosquitosServiceImpl")
@@ -39,7 +39,7 @@ public class JcAntMosquitosController extends BaseAction<JcAntMosquitos> {
     @ResponseBody
     @SystemControllerLog(description = "点击菜单")
     public ModelAndView search() {
-        ModelAndView mav = new ModelAndView("/system/function/ant_mosquitos/list");
+        ModelAndView mav = new ModelAndView("/system/function/anti_mosquitos/list");
         return mav;
     }
 
@@ -50,7 +50,7 @@ public class JcAntMosquitosController extends BaseAction<JcAntMosquitos> {
      * @return
      */
     @SystemControllerLog(description = "查询详细信息")
-    @RequestMapping(value = "/ant_mosquitos/{businessKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{businessKey}", method = RequestMethod.GET)
     public JcAntMosquitos queryByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcAntMosquitos jcAntMosquitos = (JcAntMosquitos) jcAntMosquitosServiceImpl.queryInfoByNatrualKey(businessKey);
         return jcAntMosquitos;

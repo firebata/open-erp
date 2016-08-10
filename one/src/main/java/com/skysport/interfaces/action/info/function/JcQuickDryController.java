@@ -50,7 +50,7 @@ public class JcQuickDryController extends BaseAction<JcQuickDry> {
      * @return
      */
     @SystemControllerLog(description = "查询详细信息")
-    @RequestMapping(value = "/quick_dry/{businessKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{businessKey}", method = RequestMethod.GET)
     public JcQuickDry queryByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcQuickDry jcQuickDry = (JcQuickDry) jcQuickDryServiceImpl.queryInfoByNatrualKey(businessKey);
         ;

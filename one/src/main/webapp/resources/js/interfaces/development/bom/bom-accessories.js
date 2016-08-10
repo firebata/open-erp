@@ -315,7 +315,7 @@
         var materialTypeIdItems = data["materialTypeItems"];
         var $materialTypeIdF = $("#materialTypeIdF" + idNum);
         $materialTypeIdF.empty();
-        $("<option></option>").val('').text("请选择...").appendTo($materialTypeIdF);
+        $("<option></option>").val('').text("...请选择...").appendTo($materialTypeIdF);
         $.each(materialTypeIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -328,7 +328,7 @@
         var spItems = data["spItems"];
         var $spIdF = $("#spIdF" + idNum);
         $spIdF.empty();
-        $("<option></option>").val('').text("请选择...").appendTo($spIdF);
+        $("<option></option>").val('').text("...请选择...").appendTo($spIdF);
         $.each(spItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -340,7 +340,7 @@
         var yearCodeItems = data["yearItems"];
         var $yearCodeF = $("#yearCodeF" + idNum);
         $yearCodeF.empty();
-        $("<option></option>").val('').text("请选择...").appendTo($yearCodeF);
+        $("<option></option>").val('').text("...请选择...").appendTo($yearCodeF);
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -352,7 +352,7 @@
         //材质列表
         var classicIdItems = data["accessoriesClassicItems"];
         $("#classicIdF" + idNum).empty();
-        $("<option></option>").val('').text("请选择...").appendTo($("#classicIdF" + idNum));
+        $("<option></option>").val('').text("...请选择...").appendTo($("#classicIdF" + idNum));
         $.each(classicIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -364,7 +364,7 @@
         var productTypeIdItems = data["productTypeItems"];
         var $productTypeIdF = $("#productTypeIdF" + idNum);
         $productTypeIdF.empty();
-        $("<option></option>").val('').text("请选择...").appendTo($productTypeIdF);
+        $("<option></option>").val('').text("...请选择...").appendTo($productTypeIdF);
         $.each(productTypeIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -380,7 +380,7 @@
         $.each(positionItems, function (i, item) {
             $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($positionIdsF);
         });
-        $positionIdsF.selectpicker({noneSelectedText: '请选择...'});
+        $positionIdsF.selectpicker({noneSelectedText: '...请选择...'});
         $positionIdsF.selectpicker('refresh');
 
 
@@ -388,7 +388,7 @@
         var unitIdItems = data["unitItems"];
         var $unitIdF = $("#unitIdF" + idNum);
         $unitIdF.empty();
-        $("<option></option>").val('').text("请选择...").appendTo($unitIdF);
+        $("<option></option>").val('').text("...请选择...").appendTo($unitIdF);
         $.each(unitIdItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])

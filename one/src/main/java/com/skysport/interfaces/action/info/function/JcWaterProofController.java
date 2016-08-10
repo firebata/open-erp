@@ -68,6 +68,7 @@ public class JcWaterProofController extends BaseAction<JcWaterProof> {
     public Map<String, Object> deleteByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcWaterProof jcWaterProof = null;
         jcWaterProofServiceImpl.del(businessKey);
+        JcWaterProofHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 
@@ -82,6 +83,7 @@ public class JcWaterProofController extends BaseAction<JcWaterProof> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Map<String, Object> update(JcWaterProof jcWaterProof, HttpServletRequest request, HttpServletResponse respones) {
         jcWaterProofServiceImpl.edit(jcWaterProof);
+        JcWaterProofHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("更新成功");
     }
 

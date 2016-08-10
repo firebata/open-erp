@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by zhangjh on 2016-7-7 14:31:32
  */
 @RestController
-@RequestMapping("/system/function/jc_ultraviolet_protection")
+@RequestMapping("/system/function/ultraviolet_protection")
 public class JcUltravioletProtectionController extends BaseAction<JcUltravioletProtection> {
 
     @Resource(name = "jcUltravioletProtectionServiceImpl")
@@ -39,7 +39,7 @@ public class JcUltravioletProtectionController extends BaseAction<JcUltravioletP
     @ResponseBody
     @SystemControllerLog(description = "点击菜单")
     public ModelAndView search() {
-        ModelAndView mav = new ModelAndView("/system/function/jc_ultraviolet_protection/list");
+        ModelAndView mav = new ModelAndView("/system/function/ultraviolet_protection/list");
         return mav;
     }
 
@@ -50,7 +50,7 @@ public class JcUltravioletProtectionController extends BaseAction<JcUltravioletP
      * @return
      */
     @SystemControllerLog(description = "查询详细信息")
-    @RequestMapping(value = "/jc_ultraviolet_protection/{businessKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/info/{businessKey}", method = RequestMethod.GET)
     public JcUltravioletProtection queryByBusinessKey(@PathVariable("businessKey") String businessKey) {
         JcUltravioletProtection jcUltravioletProtection = (JcUltravioletProtection) jcUltravioletProtectionServiceImpl.queryInfoByNatrualKey(businessKey);
         return jcUltravioletProtection;

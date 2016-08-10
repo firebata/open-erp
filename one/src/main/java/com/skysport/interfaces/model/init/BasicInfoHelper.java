@@ -12,6 +12,7 @@ import com.skysport.interfaces.model.info.service.helper.PantoneManageServiceHel
 import com.skysport.interfaces.model.info.sex.SexManageServiceHelper;
 import com.skysport.interfaces.model.info.sp.helper.SpInfoHelper;
 import com.skysport.interfaces.model.info.year_conf.YearConfManageServiceHelper;
+import com.skysport.interfaces.model.jc.helper.*;
 
 /**
  * 类说明:
@@ -60,7 +61,6 @@ public enum BasicInfoHelper {
         ProductTypeManageServiceHelper.SINGLETONE.refreshSelect();
 
         // 纱支密度列表
-
         SpecificationServiceHelper.SINGLETONE.refreshSelect();
 
         // 染色方式列表
@@ -78,7 +78,7 @@ public enum BasicInfoHelper {
         // 膜或涂层的颜色列表
         ColorOfMembraneCoatingServiceHelper.SINGLETONE.refreshSelect();
 
-        // 透湿程度列表
+        // 透湿列表
         WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();
 
         // 膜的厚度列表
@@ -93,6 +93,20 @@ public enum BasicInfoHelper {
         //
         MaterialUnitServiceHelper.SINGLETONE.refreshSelect();
 
+
+        JcAirPermeabilityHelper.SINGLETONE.refreshSelect();
+
+        JcAntMosquitosHelper.SINGLETONE.refreshSelect();
+
+        JcOilProofHelper.SINGLETONE.refreshSelect();
+
+        JcQuickDryHelper.SINGLETONE.refreshSelect();
+
+        JcSeamWaterpressureHelper.SINGLETONE.refreshSelect();
+
+        JcUltravioletProtectionHelper.SINGLETONE.refreshSelect();
+
+        JcWaterProofHelper.SINGLETONE.refreshSelect();
 
     }
 }
