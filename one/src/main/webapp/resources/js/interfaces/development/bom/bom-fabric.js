@@ -38,16 +38,25 @@
 
     /**
      *
-     * @returns {Array}
+     * @returns {{isOneShow: boolean, fabricItems: Array}}
      */
     function buildFabricItems() {
         var size = $("div[id^=fabricAllInfoId]").length;
         var fabricItems = [];
+        var isOneShow = false;
         for (var index = 1; index <= size; index++) {
             var fabricItem = buildFabricItem(index);
+            var isShow = fabricItem.fabricsInfo.isShow;
+            isOneShow = isOneShow || isShow==1;
             fabricItems.push(fabricItem);
         }
-        return fabricItems;
+
+        if (fabricItems.length == 0) {
+            isOneShow = true;
+        }
+
+        var fabricObj = {"isOneShow": isOneShow, "fabricItems": fabricItems};
+        return fabricObj;
     }
 
     /**
@@ -1054,6 +1063,7 @@
         fabricsInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
         fabricsInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
         fabricsInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
+        fabricsInfo.compositeWvpId = $("#compositeWvpId" + idNum).val();
         fabricsInfo.blcId = $("#blcId" + idNum).val();
         fabricsInfo.momcId = $("#momcId" + idNum).val();
         fabricsInfo.comocId = $("#comocId" + idNum).val();
@@ -1061,14 +1071,13 @@
         fabricsInfo.mtId = $("#mtId" + idNum).val();
         fabricsInfo.woblcId = $("#woblcId" + idNum).val();
 
-        fabricsInfo.compositeWvpId= $("#compositeWvpId" + idNum).val();
-        fabricsInfo.compositeWaterProofId= $("#compositeWaterProofId" + idNum).val();
-        fabricsInfo.compositePermeabilityId= $("#compositePermeabilityId" + idNum).val();
-        fabricsInfo.compositeWaterpressureId= $("#compositeWaterpressureId" + idNum).val();
-        fabricsInfo.compositeUltravioletProtectionId= $("#compositeUltravioletProtectionId" + idNum).val();
-        fabricsInfo.compositeQuickDryId= $("#compositeQuickDryId" + idNum).val();
-        fabricsInfo.compositeOilProofId= $("#compositeOilProofId" + idNum).val();
-        fabricsInfo.compositeAntMosquitosId= $("#compositeAntMosquitosId" + idNum).val();
+        fabricsInfo.compositeWaterProofId = $("#compositeWaterProofId" + idNum).val();
+        fabricsInfo.compositePermeabilityId = $("#compositePermeabilityId" + idNum).val();
+        fabricsInfo.compositeWaterpressureId = $("#compositeWaterpressureId" + idNum).val();
+        fabricsInfo.compositeUltravioletProtectionId = $("#compositeUltravioletProtectionId" + idNum).val();
+        fabricsInfo.compositeQuickDryId = $("#compositeQuickDryId" + idNum).val();
+        fabricsInfo.compositeOilProofId = $("#compositeOilProofId" + idNum).val();
+        fabricsInfo.compositeAntMosquitosId = $("#compositeAntMosquitosId" + idNum).val();
 
         fabricsInfo.attritionRate = $("#attritionRate" + idNum).val();
         fabricsInfo.unitPrice = $("#unitPrice" + idNum).val();
@@ -1154,7 +1163,19 @@
         fabricsDetailInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
         fabricsDetailInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
         fabricsDetailInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
-
+        fabricsDetailInfo.compositeWvpId = $("#compositeWvpId" + idNum).val();
+        fabricsDetailInfo.waterProofId = $("#waterProofId" + idNum).val();
+        fabricsDetailInfo.permeabilityId = $("#permeabilityId" + idNum).val();
+        fabricsDetailInfo.ultravioletProtectionId = $("#ultravioletProtectionId" + idNum).val();
+        fabricsDetailInfo.quickDryId = $("#quickDryId" + idNum).val();
+        fabricsDetailInfo.oilProofId = $("#oilProofId" + idNum).val();
+        fabricsDetailInfo.antMosquitosId = $("#antMosquitosId" + idNum).val();
+        fabricsDetailInfo.compositeWaterProofId = $("#compositeWaterProofId" + idNum).val();
+        fabricsDetailInfo.compositePermeabilityId = $("#compositePermeabilityId" + idNum).val();
+        fabricsDetailInfo.compositeWaterpressureId = $("#compositeWaterpressureId" + idNum).val();
+        fabricsDetailInfo.compositeQuickDryId = $("#compositeQuickDryId" + idNum).val();
+        fabricsDetailInfo.compositeOilProofId = $("#compositeOilProofId" + idNum).val();
+        fabricsDetailInfo.compositeAntMosquitosId = $("#compositeAntMosquitosId" + idNum).val();
 
         var materialSpInfo = {};//面料用量信息
         materialSpInfo.attritionRate = $("#attritionRate" + idNum).val();

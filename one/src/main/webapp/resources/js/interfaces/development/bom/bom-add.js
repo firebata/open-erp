@@ -239,7 +239,13 @@
         $.buildBomDesc(bominfo);
 
         //面料信息
-        var fabricItems = $.buildFabricItems();
+        var fabricObj = $.buildFabricItems();
+        var isOneShow = fabricObj.isOneShow;
+        if(!isOneShow){
+            bootbox.alert("保存失败，必须选择一种面料作为主面料显示在报价表.");
+            return ;
+        }
+        var fabricItems = fabricObj.fabricItems;
         bominfo.fabricItems = fabricItems;
 
         //辅料信息
