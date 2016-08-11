@@ -7,19 +7,62 @@ import com.skysport.core.bean.CommonVo;
  * Created by zhangjh on 2015/7/2.
  */
 public class FabricsDetailInfo implements CommonVo {
+
+    /**
+     *
+     */
     private String id;
+    /**
+     *
+     */
     private String fabricId;
+    /**
+     *
+     */
     private String specificationId;
+    /**
+     *
+     */
     private String dyeId;
+    /**
+     *
+     */
     private String finishId;
+    /**
+     *
+     */
     private String blcId;
+    /**
+     *
+     */
     private String momcId;
+    /**
+     *
+     */
     private String comocId;
+    /**
+     *
+     */
     private String wvpId;
+    /**
+     *
+     */
     private String mtId;
+    /**
+     *
+     */
     private String woblcId;
+    /**
+     *
+     */
     private String remark;
+    /**
+     *
+     */
     private String updateTime;
+    /**
+     *
+     */
     private int delFlag;
     /**
      * 纱支规格
@@ -33,6 +76,59 @@ public class FabricsDetailInfo implements CommonVo {
      * 防泼水
      */
     private String compositeFinishId;
+    /**
+     * 复合透湿程度
+     */
+    private String compositeWvpId;
+    /**
+     * 水压
+     */
+    private String waterProofId;
+    /**
+     * 透气
+     */
+    private String permeabilityId;
+    /**
+     * 接缝水压
+     */
+    private String ultravioletProtectionId;
+    /**
+     * 快干
+     */
+    private String quickDryId;
+    /**
+     * 防油
+     */
+    private String oilProofId;
+    /**
+     * 防蚊虫
+     */
+    private String antMosquitosId;
+
+    /**
+     * 复合水压
+     */
+    private String compositeWaterProofId;
+    /**
+     * 复合透气
+     */
+    private String compositePermeabilityId;
+    /**
+     * 复合接缝水压
+     */
+    private String compositeWaterpressureId;
+    /**
+     * 复合快干
+     */
+    private String compositeQuickDryId;
+    /**
+     * 复合防油
+     */
+    private String compositeOilProofId;
+    /**
+     * 复合防蚊虫
+     */
+    private String compositeAntMosquitosId;
 
 
     public FabricsDetailInfo() {
@@ -181,5 +277,57 @@ public class FabricsDetailInfo implements CommonVo {
 
     public void setWoblcId(String woblcId) {
         this.woblcId = woblcId;
+    }
+
+    public void setCompositeWvpId(String compositeWvpId) {
+        this.compositeWvpId = compositeWvpId;
+    }
+
+    public void setWaterProofId(String waterProofId) {
+        this.waterProofId = waterProofId;
+    }
+
+    public void setPermeabilityId(String permeabilityId) {
+        this.permeabilityId = permeabilityId;
+    }
+
+    public void setUltravioletProtectionId(String ultravioletProtectionId) {
+        this.ultravioletProtectionId = ultravioletProtectionId;
+    }
+
+    public void setQuickDryId(String quickDryId) {
+        this.quickDryId = quickDryId;
+    }
+
+    public void setOilProofId(String oilProofId) {
+        this.oilProofId = oilProofId;
+    }
+
+    public void setAntMosquitosId(String antMosquitosId) {
+        this.antMosquitosId = antMosquitosId;
+    }
+
+    public void setCompositeWaterProofId(String compositeWaterProofId) {
+        this.compositeWaterProofId = compositeWaterProofId;
+    }
+
+    public void setCompositePermeabilityId(String compositePermeabilityId) {
+        this.compositePermeabilityId = compositePermeabilityId;
+    }
+
+    public void setCompositeWaterpressureId(String compositeWaterpressureId) {
+        this.compositeWaterpressureId = compositeWaterpressureId;
+    }
+
+    public void setCompositeQuickDryId(String compositeQuickDryId) {
+        this.compositeQuickDryId = compositeQuickDryId;
+    }
+
+    public void setCompositeOilProofId(String compositeOilProofId) {
+        this.compositeOilProofId = compositeOilProofId;
+    }
+
+    public void setCompositeAntMosquitosId(String compositeAntMosquitosId) {
+        this.compositeAntMosquitosId = compositeAntMosquitosId;
     }
 }

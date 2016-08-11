@@ -33,6 +33,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/material/comoc")
 public class ColorOfMembraneCoatingAction extends BaseAction<ColorOfMembraneCoatingInfo> {
+
     @Resource(name = "colorOfMembraneCoatingService")
     private ICommonService colorOfMembraneCoatingService;
 

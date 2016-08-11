@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("jcAirPermeabilityMapper")
 public interface JcAirPermeabilityMapper extends CommonMapper<JcAirPermeability> {
-    
+
 
 }

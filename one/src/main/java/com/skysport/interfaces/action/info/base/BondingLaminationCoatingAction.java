@@ -33,6 +33,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/material/blc")
 public class BondingLaminationCoatingAction extends BaseAction<BondingLaminationCoatingInfo> {
+
     @Resource(name = "bondingLaminationCoatingService")
     private ICommonService bondingLaminationCoatingService;
 

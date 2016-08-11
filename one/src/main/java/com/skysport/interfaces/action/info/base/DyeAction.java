@@ -33,6 +33,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/system/material/dye")
 public class DyeAction extends BaseAction<DyeInfo> {
+
     @Resource(name = "dyeService")
     private ICommonService dyeService;
 
