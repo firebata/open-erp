@@ -75,12 +75,18 @@ public class BomInfoTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public void submit(String taskId, String businessKey) {
+
+
         if (!WebConstants.NULL_STR.equals(taskId.trim())) {
             //完成当前任务
             Map<String, Object> variables = new HashMap<String, Object>();
             complete(taskId, variables);
         }
+
+
         updateApproveStatus(businessKey, WebConstants.APPROVE_STATUS_UNDO);
+
+
     }
 
 
