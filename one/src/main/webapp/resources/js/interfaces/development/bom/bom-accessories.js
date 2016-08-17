@@ -577,6 +577,7 @@
                     "widthF": "widthF" + idNum,
                     "unitIdF": "unitIdF" + idNum,
                     "positionIdsF": "positionIdsF" + idNum,
+                    "positionIdBlF": "positionIdBlF" + idNum,
                     "unitAmountF": "unitAmountF" + idNum,
                     "orderCountF": "orderCountF" + idNum,
                     "attritionRateF": "attritionRateF" + idNum,
@@ -626,7 +627,10 @@
                 materialPositions.push(materialPosition)
             }
         }
+        var positionIdBlF = $("#positionIdBlF" + idNum).val();
         accessoriesInfo.positionIds = materialPositions;
+        accessoriesInfo.positionIdBl = positionIdBlF;
+
         accessoriesInfo.materialTypeId = $("#materialTypeIdF" + idNum).val();
         accessoriesInfo.techRequired = $("#techRequiredF" + idNum).val();
         accessoriesInfo.width = $("#widthF" + idNum).val();
@@ -686,8 +690,10 @@
                 materialPositions.push(materialPosition)
             }
         }
-        accessoriesInfo.positionIds = materialPositions;
+        var positionIdBlF = $("#positionIdBlF" + idNum).val();
 
+        accessoriesInfo.positionIds = materialPositions;
+        accessoriesInfo.positionIdBl = positionIdBlF;
         accessoriesInfo.materialTypeId = $("#materialTypeIdF" + idNum).val();
         accessoriesInfo.techRequired = $("#techRequiredF" + idNum).val();
         accessoriesInfo.width = $("#widthF" + idNum).val();

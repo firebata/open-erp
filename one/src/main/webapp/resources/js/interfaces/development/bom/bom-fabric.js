@@ -1008,6 +1008,7 @@
                     "isShow": "isShow" + idNum,
                     "unitId": "unitId" + idNum,
                     "positionIds": "positionIds" + idNum,
+                    "positionIdBl": "positionIdBl" + idNum,
                     "unitAmount": "unitAmount" + idNum,
                     "attritionRate": "attritionRate" + idNum,
                     "unitPrice": "unitPrice" + idNum,
@@ -1047,7 +1048,10 @@
             }
         }
 
+        var positionIdBl = $("#positionIdBl" + idNum).val();
+
         fabricsInfo.positionIds = materialPositions;
+        fabricsInfo.positionIdBl = positionIdBl;
         fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
         fabricsInfo.nameNum = idNum;
         fabricsInfo.serialNumber = idNum;
@@ -1136,8 +1140,9 @@
                 materialPositions.push(materialPosition)
             }
         }
-
+        var positionIdBl = $("#positionIdBl" + idNum).val();
         fabricsInfo.positionIds = materialPositions;
+        fabricsInfo.positionIdBl = positionIdBl;
         fabricsInfo.materialTypeId = $("#materialTypeId" + idNum).val();
         fabricsInfo.nameNum = idNum;
         fabricsInfo.fabricId = $("#fabricId" + idNum).val();

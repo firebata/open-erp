@@ -94,7 +94,9 @@ public abstract class BaseAction<T> {
         String searchValue = request.getParameter("search[value]");
         dataTablesInfo.setStart(start);
         dataTablesInfo.setLength(length);
-        dataTablesInfo.setOrderColumn(orderColumn);
+        if(start!=0){
+            dataTablesInfo.setOrderColumn(orderColumn);
+        }
         dataTablesInfo.setOrderDir(orderDir);
         dataTablesInfo.setSearchValue(searchValue);
         dataTablesInfo.setDraw(draw);

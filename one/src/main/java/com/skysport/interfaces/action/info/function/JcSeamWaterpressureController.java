@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by zhangjh on 2016-7-11 11:54:27
  */
 @RestController
-@RequestMapping("/system/jcSeamWaterpressure")
+@RequestMapping("/system/function/seam_waterpressure")
 public class JcSeamWaterpressureController extends BaseAction<JcSeamWaterpressure> {
 
     @Resource(name = "jcSeamWaterpressureServiceImpl")
@@ -39,7 +39,7 @@ public class JcSeamWaterpressureController extends BaseAction<JcSeamWaterpressur
     @ResponseBody
     @SystemControllerLog(description = "点击菜单")
     public ModelAndView search() {
-        ModelAndView mav = new ModelAndView("/system/jcSeamWaterpressure/list");
+        ModelAndView mav = new ModelAndView("/system/function/seam_waterpressure/list");
         return mav;
     }
 

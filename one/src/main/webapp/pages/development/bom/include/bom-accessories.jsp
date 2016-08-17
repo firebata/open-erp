@@ -49,14 +49,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label  col-xs-2" for="{{materialTypeIdF}}"> 材料类别 </label>
+                        <label class="control-label  col-xs-2" for="{{materialTypeIdF}}"> 类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <a href="<%=path%>/system/material_type/list" target="_blank">+</a> </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{materialTypeIdF}}"
                                     name="materialTypeId" placeholder="材料类别">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{spIdF}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 </label>
+                        <label class="col-xs-2  control-label" for="{{spIdF}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 <a href="<%=path%>/system/sp/list" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{spIdF}}" name="spId"
@@ -67,14 +67,14 @@
 
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{yearCodeF}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 </label>
+                        <label class="col-xs-2  control-label" for="{{yearCodeF}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份  <a href="<%=path%>/system/year_conf/list" target="_blank">+</a> </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{yearCodeF}}" name="yearCode"
                                     placeholder="年份">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{classicIdF}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 </label>
+                        <label class="col-xs-2  control-label" for="{{classicIdF}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 <a href="<%=path%>/system/material_classic/list" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{classicIdF}}" name="classicId"
@@ -84,14 +84,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{pantoneIdsF}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 </label>
+                        <label class="col-xs-2  control-label" for="{{pantoneIdsF}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 <a href="<%=path%>/system/pantone/list" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <%--<input type="text" id="{{pantoneIdF}}" name="pantoneId" placeholder="颜色"   class="col-xs-10 col-sm-12"/>--%>
                             <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds"
                                     placeholder="颜色" id="{{pantoneIdsF}}"></select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{productTypeIdF}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 </label>
+                        <label class="col-xs-2  control-label" for="{{productTypeIdF}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 <a href="<%=path%>/system/product_type/list" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{productTypeIdF}}" name="productTypeId"
@@ -103,14 +103,14 @@
                     <div class="form-group">
 
                         <label class="col-xs-2  control-label" for="{{techRequiredF}}" data-toggle="tooltip"
-                               title="工艺要求"> 工艺要求 </label>
+                               title="工艺要求"> 工艺要求 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
 
                         <div class="col-xs-3">
                             <input type="text" id="{{techRequiredF}}" name="techRequired" placeholder="工艺要求"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{lengthF}}"> 长度(CM) </label>
+                        <label class="col-xs-2  control-label" for="{{lengthF}}"> 长度(CM) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{lengthF}}" name="length" placeholder="长度(CM)"  class="col-xs-10 col-sm-12"/>
                         </div>
@@ -118,13 +118,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{widthF}}" data-toggle="tooltip" title="宽度(CM)">
-                            宽度(CM)</label>
+                        <label class="col-xs-2  control-label" for="{{widthF}}" data-toggle="tooltip" title="宽度(CM)">宽度(CM)<a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{widthF}}" name="width" placeholder="宽度(CM)"  class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{remarkF}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 </label>
+                        <label class="col-xs-2  control-label" for="{{remarkF}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{remarkF}}" name="remark" placeholder="备注" class="col-xs-10 col-sm-12"/>
                         </div>
@@ -142,23 +141,39 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{unitIdF}}"> 用量单位 </label>
+                        <label class="col-xs-2  control-label" for="{{unitIdF}}"> 用量单位 <a href="<%=path%>/system/material/unit/list" target="_blank">+</a></label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{unitIdF}}" name="unitId" placeholder="用量单位">
                             </select>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{unitAmountF}}"> 单位用量 </label>
+                        <label class="col-xs-2  control-label" for="{{unitAmountF}}"> 单位用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{unitAmountF}}" name="unitAmount" placeholder="用量" class="col-xs-10 col-sm-12"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{positionIdsF}}">物料位置</label>
+                        <label class="col-xs-2  control-label" for="{{positionIdsF}}">物料位置<a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"  id="{{positionIdsF}}" name="positionIds" multiple placeholder="物料位置">"
                             </select>
+                            <a href="<%=path%>/system/material/position/list" target="_blank">+</a>
                         </div>
+
+                        <label class="col-xs-2  control-label " style="color: red" for="{{positionIdBlF}}"> 所属归类<a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <div class="col-xs-3">
+                            <select class="col-xs-12" data-style="btn-info" id="{{positionIdBlF}}" name="isShow"
+                                    placeholder="">
+                                <option value="">...请选择...</option>
+                                <option value="0">大身</option>
+                                <option value="1">袖子</option>
+                                <option value="2">帽子</option>
+                                <option value="3">内里</option>
+                                <option value="4">拉链</option>
+                                <option value="5">包装材料</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
 
@@ -172,13 +187,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{attritionRateF}}"> 损耗率(小数形式) </label>
+                        <label class="col-xs-2  control-label" for="{{attritionRateF}}"> 损耗率(小数) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{attritionRateF}}" name="attritionRate" placeholder="损耗率，e.g.0.03"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
                         <label class="col-xs-2  control-label" for="{{unitPriceF}}" data-toggle="tooltip"
-                               data-placement="top" title="用量单位的价格"> 单价(￥) </label>
+                               data-placement="top" title="用量单位的价格"> 单价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{unitPriceF}}" name="unitPrice" placeholder="单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
@@ -187,14 +202,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{colorAmountF}}" data-toggle="tooltip"
-                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 </label>
+                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorAmountF}}" name="colorAmount" placeholder="各色用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{colorPriceF}}" title="各色单价 = 各色用量 * 单价">
-                            各色单价(￥) </label>
+                        <label class="col-xs-2  control-label" for="{{colorPriceF}}" title="各色单价 = 各色用量 * 单价">各色单价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorPriceF}}" name="colorPrice" placeholder="各色单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
@@ -203,13 +217,13 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{totalAmountF}}" data-toggle="tooltip"
-                               title="各色总用量 = 订单数量 * 各色用量"> 各色总用量 </label>
+                               title="各色总用量 = 订单数量 * 各色用量"> 各色总用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{totalAmountF}}" name="totalAmount" placeholder="各色总用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{totalPriceF}}" title="各色总用量的价格和 = 订单数量 *  各色单价 ">总价(￥) </label>
+                        <label class="col-xs-2  control-label" for="{{totalPriceF}}" title="各色总用量的价格和 = 订单数量 *  各色单价 ">总价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{totalPriceF}}" name="totalPrice" placeholder="总价(￥)"
                                    class="col-xs-10 col-sm-12"/>

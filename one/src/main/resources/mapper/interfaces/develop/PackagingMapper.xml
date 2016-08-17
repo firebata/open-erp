@@ -88,14 +88,15 @@
             tech_required  = #{techRequired},
             length  = #{length},
             width  = #{width} ,
-            del_flag  = #{delFlag}
+            del_flag  = #{delFlag},
+			position_id_bl=#{positionIdBl}
         WHERE
             packaging_id =#{packagingId}
     </update>
 
     <insert id="add">
-        insert into  t_kf_packaging (packaging_id,packaging_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width)
-        values (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width})
+        insert into  t_kf_packaging (packaging_id,packaging_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width,position_id_bl)
+        values (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width},#{positionIdBl})
     </insert>
 
     <update id="del">
@@ -149,13 +150,14 @@
         <result column="delFlag" property="delFlag"/>
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
+        <result column="positionIdBl" property="positionIdBl"/>
 
         <result column="bomName" property="bomName"/>
         <result column="orderCount" property="orderCount"/>
         <result column="techRequired" property="techRequired"/>
         <result column="length" property="length"/>
         <result column="width" property="width"/>
-
+        <result column="positionIdBl" property="positionIdBl"/>
         <result column="positionId" property="positionId"/>
         <result column="projectId" property="projectId"/>
         <result column="bomId" property="bomId"/>
@@ -206,7 +208,8 @@
         c.total_amount AS totalAmount,
         c.total_price AS totalPrice,
         e.bom_name AS bomName,
-        e.offer_amount AS orderCount
+        e.offer_amount AS orderCount,
+        a.position_id_bl AS positionIdBl
     FROM
         t_kf_packaging a
     INNER  JOIN  t_kf_bom_material k ON   a.packaging_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
@@ -231,10 +234,14 @@
         <result column="techRequired" property="techRequired"/>
         <result column="length" property="length"/>
         <result column="width" property="width"/>
+        <result column="positionIdBl" property="positionIdBl"/>
+
+
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalPrice" property="totalPrice"/>
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
+
         <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
         <collection property="pantoneIds" column="{materialId=packagingId}"  select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
@@ -259,7 +266,8 @@
             d.total_price AS totalPrice,
             d.color_price AS colorPrice,
             d.color_amount AS colorAmount,
-            e.offer_amount AS orderCount
+            e.offer_amount AS orderCount,
+            a.position_id_bl AS positionIdBl
         FROM
             t_kf_packaging a
             INNER  JOIN  t_kf_bom_material k ON   a.packaging_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0

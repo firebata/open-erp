@@ -146,6 +146,7 @@
                     "widthP": "widthP" + idNum,
                     "unitIdP": "unitIdP" + idNum,
                     "positionIdsP": "positionIdsP" + idNum,
+                    "positionIdBlP": "positionIdBlP" + idNum,
                     "unitAmountP": "unitAmountP" + idNum,
                     "orderCountP": "orderCountP" + idNum,
                     "attritionRateP": "attritionRateP" + idNum,
@@ -406,6 +407,7 @@
         $(positionIdsPId).selectpicker('refresh');
 
 
+
         // 用量单位列表
         var unitIdItems = data["unitItems"];
         var unitIdPId = "#unitIdP" + idNum;
@@ -577,14 +579,15 @@
                 materialPositions.push(materialPosition)
             }
         }
-
+        var positionIdBlP = $("#positionIdBlP" + idNum).val();
         kfPackaging.positionIds = materialPositions;
+        kfPackaging.positionIdBl = positionIdBlP;
         kfPackaging.materialTypeId = $("#materialTypeIdP" + idNum).val();
         kfPackaging.techRequired = $("#techRequiredP" + idNum).val();
         kfPackaging.width = $("#widthP" + idNum).val();
         kfPackaging.length = $("#lengthP" + idNum).val();
         kfPackaging.nameNum = idNum;
-        kfPackaging.serialNumber = serialNumber;
+        kfPackaging.serialNumber = idNum;
         kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
         kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
         kfPackaging.orderCount = $("#orderCountP" + idNum).val();
@@ -636,8 +639,9 @@
                 materialPositions.push(materialPosition)
             }
         }
-
+        var positionIdBlP = $("#positionIdBlP" + idNum).val();
         packagingInfo.positionIds = materialPositions;
+        packagingInfo.positionIdBl = positionIdBlP;
         packagingInfo.materialTypeId = $("#materialTypeIdP" + idNum).val();
         packagingInfo.techRequired = $("#techRequiredP" + idNum).val();
         packagingInfo.width = $("#widthP" + idNum).val();

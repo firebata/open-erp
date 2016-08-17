@@ -3,7 +3,6 @@ package com.skysport.interfaces.model.develop.quoted.service.impl;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.impl.CommonServiceImpl;
-import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
@@ -15,7 +14,6 @@ import com.skysport.interfaces.mapper.develop.QuotedInfoMapper;
 import com.skysport.interfaces.mapper.info.BomInfoMapper;
 import com.skysport.interfaces.model.develop.bom.IBomService;
 import com.skysport.interfaces.model.develop.quoted.service.IQuotedService;
-import com.skysport.interfaces.model.permission.userinfo.service.IStaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.InitializingBean;
@@ -50,11 +48,6 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
 
-    @Autowired
-    private IStaffService developStaffImpl;
-
-    @Autowired
-    private IWorkFlowService quoteInfoTaskImpl;
 
     @Override
     public void afterPropertiesSet() throws Exception {

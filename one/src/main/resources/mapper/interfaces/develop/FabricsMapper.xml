@@ -29,7 +29,7 @@
 
     <select id="queryInfo" resultType="FabricsInfo">
         select
-        <include refid="searchInfoSql"/>
+          <include refid="searchInfoSql"/>
         FROM t_kf_fabrics
         WHERE fabrics_id =#{natrualkey}
         limit 1
@@ -52,7 +52,7 @@
 
     <select id="searchInfos" resultType="FabricsInfo">
         SELECT
-        <include refid="searchInfoSql"/>
+          <include refid="searchInfoSql"/>
         FROM t_kf_fabrics
         WHERE del_flag=0
         <if test="searchValue!=null and searchValue != ''">
@@ -88,7 +88,8 @@
             is_show = #{isShow},
             composite_classic_id = #{compositeClassicId},
             composite_product_type_id = #{compositeProductTypeId},
-            composite_pantone_id = #{compositePantoneId}
+            composite_pantone_id = #{compositePantoneId},
+            position_id_bl = #{positionIdBl}
         WHERE
             fabrics_id =#{fabricId}
     </update>
@@ -129,8 +130,8 @@
 
 
     <insert id="add">
-        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id)
-        values (#{natrualkey},#{fabricNo},#{fabricName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{isShow},#{compositeClassicId},#{compositeProductTypeId},#{compositePantoneId})
+        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id,position_id_bl)
+        values (#{natrualkey},#{fabricNo},#{fabricName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{isShow},#{compositeClassicId},#{compositeProductTypeId},#{compositePantoneId},#{positionIdBl})
     </insert>
 
     <insert id="addDetail">
@@ -207,6 +208,7 @@
         <result column="unitPrice" property="unitPrice"/>
         <result column="totalAmount" property="totalAmount"/>
         <result column="totalPrice" property="totalPrice"/>
+        <result column="positionIdBl" property="positionIdBl"/>
 
         <result column="dyeId" property="dyeId"/>
         <result column="finishId" property="finishId"/>
@@ -304,7 +306,8 @@
 			    d.composite_ant_mosquitos_id AS compositeAntMosquitosId,
                 e.bom_name AS bomName,
                 e.offer_amount AS orderCount,
-                '1' AS type
+                '1' AS type,
+                a.position_id_bl AS positionIdBl
             FROM t_kf_fabrics a
             INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
             INNER  JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
@@ -353,7 +356,7 @@
         <result column="compositeQuickDryId" property="compositeQuickDryId"/>
         <result column="compositeOilProofId" property="compositeOilProofId"/>
         <result column="compositeAntMosquitosId" property="compositeAntMosquitosId"/>
-
+        <result column="positionIdBl" property="positionIdBl"/>
         <result column="momcId" property="momcId"/>
         <result column="comocId" property="comocId"/>
         <result column="wvpId" property="wvpId"/>
@@ -419,7 +422,8 @@
                 d.color_amount AS colorAmount,
                 e.bom_name AS bomName,
                 e.offer_amount AS orderCount,
-                '1' AS type
+                '1' AS type,
+                a.position_id_bl AS positionIdBl
             FROM t_kf_fabrics a
             INNER JOIN t_kf_bom_material k ON a.fabrics_id = k.material_id AND k.bom_id = #{bomId} AND a.del_flag=0
             INNER JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0

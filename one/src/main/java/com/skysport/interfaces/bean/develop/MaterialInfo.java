@@ -34,6 +34,7 @@ public class MaterialInfo extends SelectItem {
     private String productTypeId;
     private String pantoneId;
     private String positionId;
+    private String positionIdBl;
 
     private String unitId;
     private String unitAmount;
@@ -43,6 +44,7 @@ public class MaterialInfo extends SelectItem {
     private int delFlag;
     private String remark;
     private String updateTime;
+
 
     public BigDecimal getColorPrice() {
         return colorPrice;
@@ -274,5 +276,13 @@ public class MaterialInfo extends SelectItem {
 
     public void setPantoneIds(List<KFMaterialPantone> pantoneIds) {
         this.pantoneIds = pantoneIds;
+    }
+
+    public String getPositionIdBl() {
+        return positionIdBl;
+    }
+
+    public void setPositionIdBl(String positionIdBl) {
+        this.positionIdBl = positionIdBl;
     }
 }

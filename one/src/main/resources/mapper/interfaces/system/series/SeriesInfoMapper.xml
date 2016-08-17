@@ -56,6 +56,9 @@
 		<if test="orderColumn!=null and orderColumn != ''">
 			ORDER BY ${orderColumn} ${orderDir}
 		</if>
+		<if test="orderColumn ==null or orderColumn == ''">
+			ORDER BY a.update_time desc
+		</if>
 		limit #{start} ,#{length}
 
 	</select>
