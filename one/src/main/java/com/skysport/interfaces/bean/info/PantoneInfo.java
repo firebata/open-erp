@@ -15,7 +15,16 @@ public class PantoneInfo {
     private String codeColor;
     private String rgb;
     private int delFlag;
+    private String updateTime;
     private String remark;
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public String getPantoneId() {
         return pantoneId;

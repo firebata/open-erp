@@ -6,14 +6,15 @@
             <table id="userInfoExample" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>用户名</th>
-                    <th>用户类型</th>
-                    <th>是否在线</th>
-                    <th>是否锁定</th>
-                    <th>受权限限制</th>
-                    <th>上次登录时间</th>
-                    <th>备注</th>
-                    <th>操作</th>
+                    <th style="text-align: center">用户名</th>
+                    <th style="text-align: center">用户类型</th>
+                    <th style="text-align: center">是否在线</th>
+                    <th style="text-align: center">是否锁定</th>
+                    <th style="text-align: center">受权限限制</th>
+                    <th style="text-align: center">上次登录时间</th>
+                    <th style="text-align: center">备注</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

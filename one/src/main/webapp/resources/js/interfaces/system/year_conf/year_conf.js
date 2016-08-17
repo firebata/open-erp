@@ -9,6 +9,7 @@ var columnsName = [
     {"data": "yearCode"},
     {"data": "name"},
     {"data": "remark"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

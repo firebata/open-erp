@@ -9,6 +9,7 @@ var columnsName = [
     {"data": "email"},
     {"data": "tel"},
     {"data": "corTime"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

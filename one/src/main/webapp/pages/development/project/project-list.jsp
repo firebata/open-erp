@@ -15,17 +15,13 @@
         try {
             ace.settings.check('breadcrumbs', 'fixed')
         } catch (e) {
-
         }
     </script>
-
-    <ul class="breadcrumb">
-        <li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">开发</a>
-        </li>
-
+    <ol class="breadcrumb">
+        <li><a href="#">开发</a></li>
         <li><a href="#">项目</a></li>
-        <li class="active">查询</li>
-    </ul>
+        <li class="active">列表</li>
+    </ol>
     <!-- /.breadcrumb -->
     <!-- /section:basics/content.searchbox -->
 </div>
@@ -44,17 +40,17 @@
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>选择</th>
-                    <th>项目名称</th>
-                    <th>客户</th>
-                    <th>区域</th>
-                    <th>系列</th>
-                    <th>推销样交期</th>
-                    <th>创建人</th>
-                    <th>项目创建时间</th>
-                    <th>备注</th>
-                    <th>最后修改时间</th>
-                    <th>操作</th>
+                    <th style="text-align: center">选择</th>
+                    <th style="text-align: center">项目名称</th>
+                    <th style="text-align: center">客户</th>
+                    <th style="text-align: center">区域</th>
+                    <th style="text-align: center">系列</th>
+                    <th style="text-align: center">推销样交期</th>
+                    <th style="text-align: center">创建人</th>
+                    <th style="text-align: center">项目创建时间</th>
+                    <th style="text-align: center">备注</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

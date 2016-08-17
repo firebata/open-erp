@@ -10,6 +10,7 @@ var columnsName = [
     {"data": "factoryContact"},
     {"data": "factoryTel1"},
     {"data": "remark"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

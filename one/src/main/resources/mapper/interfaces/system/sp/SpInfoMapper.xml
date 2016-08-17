@@ -13,6 +13,7 @@
 		sp_tel1 AS tel,
 		email AS email,
 		cooperation_time AS cooperationTime,
+		update_time AS updateTime,
 		remark AS remark
 	</sql>
 

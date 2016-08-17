@@ -6,12 +6,13 @@
             <table id="roleInfoExample" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>角色名</th>
-                    <th>父角色</th>
-                    <th>所属部门</th>
-                    <th>角色描述</th>
-                    <th>备注</th>
-                    <th>操作</th>
+                    <th style="text-align: center">角色名</th>
+                    <th style="text-align: center">父角色</th>
+                    <th style="text-align: center">所属部门</th>
+                    <th style="text-align: center">角色描述</th>
+                    <th style="text-align: center">备注</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

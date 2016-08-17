@@ -58,7 +58,7 @@
      * @private
      */
     var _doSuccess_del = function () {
-        table.ajax.reload();
+        table.ajax.reload( null, false);
     }
 
     /**
@@ -86,7 +86,7 @@
         }
         //$(".modal-backdrop").remove();//移除遮罩层
         //$('<div class="modal-backdrop"></div>').appendTo(document.body);
-        table.ajax.reload();
+        table.ajax.reload( null, false);
         //console.log(data.code);
         spId = ""; //将修改项的spid置为空
     }
@@ -198,6 +198,10 @@
             ajax: {
                 url: "search"
             },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
+            },
             serverSide: true,
             columns: [
                 {"data": "name"},
@@ -205,12 +209,13 @@
                 {"data": "tel"},
                 {"data": "address"},
                 {"data": "remark"},
+                {"data": "updateTime"},
                 {"data": null}
             ],
-            order: [[0, "desc"]], /*默认第一列倒序*/
+            order: [[5, "desc"]], /*默认第一列倒序*/
             columnDefs: [
                 {
-                    targets: 5,
+                    targets: 6,
                     render: function (data, type, row, meta) {
                         var context =
                         {
@@ -226,7 +231,7 @@
 
             ],
             "language": {
-                "lengthMenu": "_MENU_ 条记录每页",
+                "lengthMenu": "_MENU_",
                 "zeroRecords": "没有找到记录",
                 "info": "第 _PAGE_ 页 ( 共 _PAGES_ 页 )",
                 "infoEmpty": "无记录",
@@ -240,7 +245,7 @@
             "t" +
             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
             initComplete: function () {
-                $("#mytool").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >ADD</button>');
+                $("#mytool").append('<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" >新增</button>');
             }
 
         });

@@ -31,6 +31,10 @@
             ajax: {
                 url: "search"
             },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
+            },
             serverSide: true,
             columns: columnsName,
             order: [[1, "desc"]], /*默认第一列倒序*/

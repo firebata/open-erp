@@ -10,27 +10,28 @@
     <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">系统管理</a></li>
+        <li><a href="#">部门信息</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> 部门信息</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>部门名称</th>
-                    <th>部门负责人</th>
-                    <th>所属公司</th>
-                    <th>上级部门</th>
-                    <th>所在地区</th>
-                    <th>所在国家</th>
-                    <th>操作</th>
+                    <th style="text-align: center">部门名称</th>
+                    <th style="text-align: center">部门负责人</th>
+                    <th style="text-align: center">所属公司</th>
+                    <th style="text-align: center">上级部门</th>
+                    <th style="text-align: center">所在地区</th>
+                    <th style="text-align: center">所在国家</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

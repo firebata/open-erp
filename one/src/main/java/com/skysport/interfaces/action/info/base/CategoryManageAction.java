@@ -75,9 +75,23 @@ public class CategoryManageAction extends BaseAction<CategoryInfo> {
         }
         int draw = Integer.parseInt(request.getParameter("draw"));
         List<CategoryInfo> infos = categoryManageService.searchInfos(dataTablesInfo);
+        turnIdToName(infos);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
 
         return resultMap;
+    }
+
+    public void turnIdToName(List<CategoryInfo> infos) {
+        if (null != infos && infos.size() > 0) {
+            for (CategoryInfo info : infos) {
+                String level_id = info.getLevelId();
+                if (level_id.equals("1")) {
+                    info.setLevelId("一级品类");
+                } else if (level_id.equals("2")) {
+                    info.setLevelId("二级品类");
+                }
+            }
+        }
     }
 
     /**

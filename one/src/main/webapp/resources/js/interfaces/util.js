@@ -600,7 +600,7 @@
      * @private
      */
     var _doSuccess_del = function ($table) {
-        $table.ajax.reload();
+        $table.ajax.reload( null, false);
     }
 
 

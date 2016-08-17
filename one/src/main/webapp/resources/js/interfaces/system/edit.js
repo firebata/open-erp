@@ -56,7 +56,7 @@ var doDel = function (result) {
  * @private
  */
 var _doSuccess_del = function () {
-    table.ajax.reload();
+    table.ajax.reload( null, false);
 }
 
 /**
@@ -84,7 +84,7 @@ function _doSuccess_edit(data) {
     }
     //$(".modal-backdrop").remove();//移除遮罩层
     //$('<div class="modal-backdrop"></div>').appendTo(document.body);
-    table.ajax.reload();
+    table.ajax.reload( null, false);
     console.log(data.code);
     natrualkey = ""; //将修改项的natrualkey置为空
 }

@@ -10,26 +10,26 @@
     <!--<script type="text/javascript" src="/dt-page/extjs.js"></script>-->
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">任务管理</a></li>
+        <li><a href="#">我的待办</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            任务管理
-            <small><i class="icon-double-angle-right"></i> 我的待办</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>选择</th>
-                    <th>待处理任务名称</th>
-                    <th>当前节点</th>
-                    <th>任务创建时间</th>
-                    <th>流程状态</th>
-                    <th>操作</th>
+                    <th style="text-align: center">选择</th>
+                    <th style="text-align: center">待处理任务名称</th>
+                    <th style="text-align: center">当前节点</th>
+                    <th style="text-align: center">任务创建时间</th>
+                    <th style="text-align: center">流程状态</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

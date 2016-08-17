@@ -13,6 +13,7 @@
 		code_color AS codeColor,
 		rgb AS rgb,
 		del_flag AS delFlag,
+		update_time AS updateTime,
 		remark AS remark
 	</sql>
     <select id="queryInfo" resultType="PantoneInfo">

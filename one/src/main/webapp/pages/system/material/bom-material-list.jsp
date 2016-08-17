@@ -16,10 +16,11 @@
               <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>材质名称</th>
-                  <th>所属类型</th>
-                  <th>备注</th>
-                  <th>操作</th>
+                  <th style="text-align: center">材质名称</th>
+                  <th style="text-align: center">所属类型</th>
+                  <th style="text-align: center">备注</th>
+                  <th style="text-align: center">最后修改时间</th>
+                  <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

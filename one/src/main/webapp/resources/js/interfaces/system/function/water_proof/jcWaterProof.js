@@ -4,6 +4,7 @@
 var columnsName = [
     {"data": "name"},
     {"data": "remark"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

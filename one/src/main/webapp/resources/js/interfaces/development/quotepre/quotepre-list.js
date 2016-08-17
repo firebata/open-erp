@@ -17,6 +17,7 @@
         {"data": "factoryOffer"},
         {"data": "euroPrice"},
         {"data": "remark"},
+        {"data": "updateTime"},
         {"data": null}
     ];
 
@@ -31,6 +32,10 @@
         table = $('#example').DataTable({
             ajax: {
                 url: searchURL
+            },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
             },
             serverSide: true,
             columns: columnsName,

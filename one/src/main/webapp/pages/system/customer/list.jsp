@@ -10,27 +10,28 @@
     <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">系统管理</a></li>
+        <li><a href="#">客户信息</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> 客户信息</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>客户简称</th>
-                    <th>客户全称</th>
-                    <th>地址</th>
-                    <th>邮箱地址1</th>
-                    <th>联系电话</th>
-                    <th>合作时间</th>
-                    <th>操作</th>
+                    <th style="text-align: center">客户简称</th>
+                    <th style="text-align: center">客户全称</th>
+                    <th style="text-align: center">地址</th>
+                    <th style="text-align: center">邮箱地址1</th>
+                    <th style="text-align: center">联系电话</th>
+                    <th style="text-align: center">合作时间</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

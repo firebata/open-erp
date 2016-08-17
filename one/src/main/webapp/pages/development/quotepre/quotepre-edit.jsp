@@ -12,21 +12,12 @@
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('breadcrumbs', 'fixed')
-        } catch (e) {
-        }
-    </script>
-    <ul class="breadcrumb">
-        <li><i class="ace-icon fa fa-home home-icon"></i>开发</li>
-        <li><a href="#">报价</a></li>
-        <li class="active">预报价</li>
-    </ul>
-    <!-- /.breadcrumb -->
-    <!-- /section:basics/content.searchbox -->
+    <ol class="breadcrumb">
+        <li><a href="#">开发</a></li>
+        <li><a href="#">预报价</a></li>
+        <li class="active">新增/修改</li>
+    </ol>
 </div>
-
 <div class="page-content">
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">

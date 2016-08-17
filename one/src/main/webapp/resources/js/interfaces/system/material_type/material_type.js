@@ -10,6 +10,7 @@ var columnsName = [
     {"data": "name"},
     {"data": "levelId"},
     {"data": "remark"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

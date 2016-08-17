@@ -21,6 +21,7 @@
         {"data": "sexId"},
         {"data": "offerAmount"},
         {"data": "remark"},
+        {"data": "updateTime"},
         {"data": null}
     ];
     //var mHtml = '<div class="dataTables_length col-xs-4" id="projectId_example_length"><label>子项目编号&nbsp;    <input name="projectId" id="projectId" class="form-control input-sm" placeholder="" aria-controls="example"></label></div>';
@@ -37,6 +38,10 @@
             ajax: {
                 url: "search",
                 data: setPersonalParam
+            },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
             },
             serverSide: true,
             columns: columnsName,
@@ -110,7 +115,7 @@
 
     var reloadTable = function () {
         //触发dt的重新加载数据的方法
-        table.ajax.reload();
+        table.ajax.reload( null, false);
     }
 
     var addSelectChangeListner = function () {

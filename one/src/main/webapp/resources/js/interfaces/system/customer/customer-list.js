@@ -13,6 +13,10 @@ $(function () {
         ajax: {
             url: "search"
         },
+        createdRow: function ( row, data, index ) {
+            /* 设置表格中的内容居中 */
+            $('td', row).attr("class","text-center");
+        },
         serverSide: true,
         columns: [
             {"data": "name"},
@@ -21,6 +25,7 @@ $(function () {
             {"data": "email"},
             {"data": "tel"},
             {"data": "corTime"},
+            {"data": "updateTime"},
             {"data": null}
         ],
         order: [[ 0, "desc" ]],/*默认第一列倒序*/        
@@ -56,7 +61,7 @@ $(function () {
         "t" +
         "<'row'<'col-xs-6'i><'col-xs-6'p>>",
         initComplete: function () {
-            $("#mytool").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >ADD</button>');
+            $("#mytool").append('<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" >新增</button>');
         }
 
     });

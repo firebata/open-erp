@@ -84,7 +84,7 @@
             )
         </if>
         <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
-            ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
+            ORDER BY a.${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
         </if>
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
 

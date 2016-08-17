@@ -8,37 +8,23 @@
     <title>修改BOM信息</title>
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"      id="main-ace-style"/>
-    <style  type="text/css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
+    <style type="text/css">
         .selfAdapta {
-            width:100%;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('breadcrumbs', 'fixed')
-        } catch (e) {
-
-        }
-    </script>
-
-    <ul class="breadcrumb">
-        <li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">开发</a>
-        </li>
-
+    <ol class="breadcrumb">
+        <li><a href="#">开发</a></li>
         <li><a href="#">BOM</a></li>
         <li class="active">新增和修改</li>
-    </ul>
-    <!-- /.breadcrumb -->
-    <!-- /section:basics/content.searchbox -->
+    </ol>
 </div>
-
 <div class="page-content">
-
-
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
@@ -75,18 +61,18 @@
                                 成衣
                             </a>
                         </li>
-                       <%-- <li>
-                            <a data-toggle="tab" href="#成衣指示单">
-                                <i class="icon-rocket"></i>
-                                成衣指示单
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#报价">
-                                <i class="icon-rocket"></i>
-                                报价
-                            </a>
-                        </li>--%>
+                        <%-- <li>
+                             <a data-toggle="tab" href="#成衣指示单">
+                                 <i class="icon-rocket"></i>
+                                 成衣指示单
+                             </a>
+                         </li>
+                         <li>
+                             <a data-toggle="tab" href="#报价">
+                                 <i class="icon-rocket"></i>
+                                 报价
+                             </a>
+                         </li>--%>
                         <li>
                             <a data-toggle="tab" href="#处理">
                                 <i class="icon-rocket"></i>
@@ -111,12 +97,12 @@
                         <div id="成衣厂" class="tab-pane">
                             <%@ include file="include/bom-factory.jsp" %>
                         </div>
-                       <%-- <div id="成衣指示单" class="tab-pane">
-                            <%@ include file="include/bom-productinst.jsp" %>
-                        </div>
-                        <div id="报价" class="tab-pane">
-                            <%@ include file="include/bom-offer.jsp" %>
-                        </div>--%>
+                        <%-- <div id="成衣指示单" class="tab-pane">
+                             <%@ include file="include/bom-productinst.jsp" %>
+                         </div>
+                         <div id="报价" class="tab-pane">
+                             <%@ include file="include/bom-offer.jsp" %>
+                         </div>--%>
                         <div id="处理" class="tab-pane">
                             <%@ include file="include/bom-handle.jsp" %>
                         </div>
@@ -133,11 +119,19 @@
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/bom/bom-productinst.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-add.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-desc.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-fabric.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-accessories.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-packaging.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-factory.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-quoted.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/bom/bom-productinst.js?v=<%=version%>"></script>

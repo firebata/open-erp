@@ -10,25 +10,26 @@
     <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">系统管理</a></li>
+        <li><a href="#">面料信息</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> 面料信息</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>项目编号</th>
-                    <th>BOM编号</th>
-                    <th>面料名称</th>
-                    <th>备注</th>
-                    <th>操作</th>
+                    <th style="text-align: center">项目编号</th>
+                    <th style="text-align: center">BOM编号</th>
+                    <th style="text-align: center">面料名称</th>
+                    <th style="text-align: center">备注</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

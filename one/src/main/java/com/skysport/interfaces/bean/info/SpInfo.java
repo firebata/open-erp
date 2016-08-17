@@ -45,6 +45,15 @@ public class SpInfo extends PageInfo {
      * 备注
      */
     private String remark;
+    private String updateTime;
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public String getRemark() {
         return remark;

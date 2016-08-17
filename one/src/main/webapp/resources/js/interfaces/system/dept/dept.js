@@ -9,6 +9,7 @@ var columnsName = [
     {"data": "parentId"},
     {"data": "cityCode"},
     {"data": "countryCode"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 

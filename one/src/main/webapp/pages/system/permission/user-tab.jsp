@@ -12,15 +12,15 @@
     <script type="text/javascript" src="<%=path%>/resources/js/zTree/jquery.ztree.excheck-3.5.min.js"></script>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">系统管理</a></li>
+        <li><a href="#">用户&角色&权限</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-    <div class="page-header">
-        <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> 用户&角色&权限</small>
-            <input type="hidden" name="tabNo" id="tabNo" value="${tabNo}"/>
-        </h1>
-    </div>
-
+    <input type="hidden" name="tabNo" id="tabNo" value="${tabNo}"/>
 
     <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#userinfo">用户信息</a></li>

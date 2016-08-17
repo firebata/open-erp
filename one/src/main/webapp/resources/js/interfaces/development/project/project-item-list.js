@@ -19,6 +19,7 @@
         {"data": "creater"},
         {"data": "createTime"},
         {"data": "remark"},
+        {"data": "updateTime"},
         {"data": null}
     ];
 
@@ -35,9 +36,13 @@
                 url: "search",
                 data: setPersonalParam
             },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
+            },
             serverSide: true,
             columns: columnsName,
-            order: [[1, "desc"]], /*默认第一列倒序*/
+            order: [[indexOpreation-1, "desc"]], /*默认第一列倒序*/
             fnDrawCallback: reloadDetailSelectData,
             columnDefs: [
                 {
@@ -103,7 +108,7 @@
 
     var reloadTable = function () {
         //触发dt的重新加载数据的方法
-        table.ajax.reload();
+        table.ajax.reload( null, false);
     }
 
     var addSelectChangeListner = function () {

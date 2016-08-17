@@ -79,7 +79,7 @@
      * @private
      */
     var _doSuccess_del = function () {
-        table.ajax.reload();
+        table.ajax.reload( null, false);
     }
 
     /**
@@ -107,7 +107,7 @@
         }
         //$(".modal-backdrop").remove();//移除遮罩层
         //$('<div class="modal-backdrop"></div>').appendTo(document.body);
-        table.ajax.reload();
+        table.ajax.reload( null, false);
         console.log(data.code);
         pantoneId = ""; //将修改项的spid置为空
     }
@@ -217,28 +217,33 @@
             ajax: {
                 url: "search"
             },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
+            },
             serverSide: true,
             columns: [
                 {"data": "colorNo"},
                 {"data": "enName"},
                 {"data": "zhName"},
                 {"data": "pageNo"},
+                {"data": "updateTime"},
                 {"data": null},
                 {"data": null}
             ],
-            order: [[0, "desc"]], /*默认第一列倒序*/
+            order: [[4, "desc"]], /*默认第一列倒序*/
             "createdRow": function (row, data, dataIndex) {
-                $('td', row).eq(4).attr('bgcolor', data.codeColor);
+                $('td', row).eq(5).attr('bgcolor', data.codeColor);
             },
             columnDefs: [
                 {
-                    targets: 4,
+                    targets: 5,
                     render: function (data, type, row, meta) {
                         return "";
                     }
                 },
                 {
-                    targets: 5,
+                    targets:6,
                     render: function (data, type, row, meta) {
                         var context =
                         {
@@ -268,7 +273,7 @@
             "t" +
             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
             initComplete: function () {
-                $("#mytool").append('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >新增</button>');
+                $("#mytool").append('<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" >新增</button>');
             }
 
         });

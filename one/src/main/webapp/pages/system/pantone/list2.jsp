@@ -10,26 +10,27 @@
     <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">系统管理</a></li>
+        <li><a href="#">PANTONE</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            系统管理
-            <small><i class="icon-double-angle-right"></i> PANTONE</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>色号</th>
-                    <th>英文名称</th>
-                    <th>中文名称</th>
-                    <th>页码</th>
-                    <th>颜色</th>
-                    <th>操作</th>
+                    <th style="text-align: center">色号</th>
+                    <th style="text-align: center">英文名称</th>
+                    <th style="text-align: center">中文名称</th>
+                    <th style="text-align: center">页码</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">颜色</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

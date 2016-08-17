@@ -12,25 +12,14 @@
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('breadcrumbs', 'fixed')
-        } catch (e) {
-
-        }
-    </script>
-    <ul class="breadcrumb">
-        <li><i class="ace-icon fa fa-home home-icon"></i> <a href="#">开发</a>
-        </li>
+    <ol class="breadcrumb">
+        <li><a href="#">开发</a></li>
         <li><a href="#">项目</a></li>
         <li class="active">新增/修改</li>
-    </ul>
-    <!-- /.breadcrumb -->
-    <!-- /section:basics/content.searchbox -->
+    </ol>
 </div>
 
 <div class="page-content">
-
 
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">

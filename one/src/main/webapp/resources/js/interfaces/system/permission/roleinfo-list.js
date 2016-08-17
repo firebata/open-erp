@@ -16,6 +16,7 @@
         {"data": "deptId"},
         {"data": "roleDesc"},
         {"data": "remark"},
+        {"data": "updateTime"},
         {"data": null}
     ];
 
@@ -29,9 +30,13 @@
             ajax: {
                 url: searchUrl
             },
+             createdRow: function ( row, data, index ) {
+                 /* 设置表格中的内容居中 */
+                 $('td', row).attr("class","text-center");
+             },
             serverSide: true,
             columns: columnsName,
-            order: [[0, "desc"]], /*默认第一列倒序*/
+            order: [[indexOpreation-1, "desc"]], /*默认第一列倒序*/
             columnDefs: [
                 {
                     targets: indexOpreation,
@@ -63,7 +68,7 @@
             "t" +
             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
             initComplete: function () {
-                $("#myRoleTool").append('<button type="button" id="addBtnAddInRoleTab" class="btn btn-primary" data-toggle="modal">新增</button>');
+                $("#myRoleTool").append('<button type="button" id="addBtnAddInRoleTab" class="btn btn-info" data-toggle="modal">新增</button>');
             }
         });
 

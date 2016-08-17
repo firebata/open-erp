@@ -9,28 +9,29 @@
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
 </head>
 <body>
+<div class="breadcrumbs" id="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="#">开发</a></li>
+        <li><a href="#">预报价</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
 <div class="page-content">
-
-    <div class="page-header">
-        <h1>
-            开发
-            <small><i class="icon-double-angle-right"></i> 预报价</small>
-        </h1>
-    </div>
     <!-- PAGE CONTENT BEGINS -->
     <div class="row">
         <div class="col-xs-12">
             <table id="example" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>选择</th>
-                    <th>项目名称</th>
-                    <th>款式</th>
-                    <th>成衣厂</th>
-                    <th>工厂报价(￥)</th>
-                    <th>欧元报价(€)</th>
-                    <th>备注</th>
-                    <th>操作</th>
+                    <th style="text-align: center">选择</th>
+                    <th style="text-align: center">项目名称</th>
+                    <th style="text-align: center">款式</th>
+                    <th style="text-align: center">成衣厂</th>
+                    <th style="text-align: center">工厂报价(￥)</th>
+                    <th style="text-align: center">欧元报价(€)</th>
+                    <th style="text-align: center">备注</th>
+                    <th style="text-align: center">最后修改时间</th>
+                    <th style="text-align: center">操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

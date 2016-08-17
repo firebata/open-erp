@@ -35,6 +35,10 @@
             ajax: {
                 url: searchURL
             },
+            createdRow: function ( row, data, index ) {
+                /* 设置表格中的内容居中 */
+                $('td', row).attr("class","text-center");
+            },
             serverSide: true,
             columns: columnsName,
             order: [[1, "desc"]], /*默认第一列倒序*/
@@ -83,7 +87,7 @@
                             {
                                 func: [
                                     {
-                                        "name": "办理",
+                                        "name": "处理",
                                         "fn": "$.handleTask(\'" + data.id + "\',\'" + data.businessKey + "\',\'" + data.processInstanceId + "\')",
                                         "type": "primary"
                                     },
@@ -129,12 +133,12 @@
      */
     var claimTask = function (_taskId, _businessKey) {
         $.sendRestFulAjax(claimURL + _taskId + "/" + _businessKey, null, 'GET', 'json', function (data) {
-            table.ajax.reload();
+            table.ajax.reload( null, false);
         });
     }
     var unclaimTask = function (_taskId, _businessKey) {
         $.sendRestFulAjax(unclaimURL + _taskId + "/" + _businessKey, null, 'GET', 'json', function (data) {
-            table.ajax.reload();
+            table.ajax.reload( null, false);
         });
     }
     /**

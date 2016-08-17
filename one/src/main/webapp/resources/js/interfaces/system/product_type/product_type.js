@@ -9,6 +9,7 @@ var columnsName = [
     {"data": "name"},
     {"data": "materialTypeName"},
     {"data": "remark"},
+    {"data": "updateTime"},
     {"data": null}
 ];
 
