@@ -5,6 +5,7 @@ import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.DictionaryInfoCachedMap;
 import com.skysport.core.constant.CharConstant;
 import com.skysport.core.model.common.ICommonService;
+import com.skysport.core.utils.Underline2CamelUtils;
 import com.skysport.interfaces.bean.form.BaseQueyrForm;
 import com.skysport.interfaces.constant.WebConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -94,9 +95,11 @@ public abstract class BaseAction<T> {
         String searchValue = request.getParameter("search[value]");
         dataTablesInfo.setStart(start);
         dataTablesInfo.setLength(length);
-        if(start!=0){
-            dataTablesInfo.setOrderColumn(orderColumn);
-        }
+        orderColumn = Underline2CamelUtils.camel2Underline(orderColumn);
+        dataTablesInfo.setOrderColumn(orderColumn);
+//        if(start!=0){
+//
+//        }
         dataTablesInfo.setOrderDir(orderDir);
         dataTablesInfo.setSearchValue(searchValue);
         dataTablesInfo.setDraw(draw);

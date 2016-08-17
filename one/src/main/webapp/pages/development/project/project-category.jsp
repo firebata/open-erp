@@ -12,7 +12,7 @@
         <div class="col-xs-3">
             <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"      id="{{categoryBid}}" multiple placeholder="品类二级名称">"
             </select>
-            <a href="<%=path%>/system/category/list" target="_blank">+</a>
+            <a href="javascript:openChildW('<%=path%>/system/category/list')" target="_blank">+</a>
         </div>
 
 

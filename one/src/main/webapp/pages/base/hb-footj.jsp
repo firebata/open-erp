@@ -4,7 +4,7 @@
 <script type="text/javascript" src='<%=path%>/resources/js/bootbox.min.js'></script>
 <%--<script type="text/javascript" src="<%=path%>/resources/js/jquery/jquery.cookie.js"></script>--%>
 <script type="text/javascript" src="<%=path%>/resources/js/jquery/jquery.i18n.properties-min-1.0.9.js"></script>
-<script type="text/javascript" src="<%=path%>/resources/js/jquery/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/js/dataTables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<%=path%>/resources/js/bootstrap/bootstrap.js"></script>
 <script type="text/javascript" src="<%=path%>/resources/js/bootstrap/bootstrap-colorpicker.min.js"></script>
 <script type="text/javascript" src="<%=path%>/resources/js/bootstrap/bootstrap-tag.min.js"></script>

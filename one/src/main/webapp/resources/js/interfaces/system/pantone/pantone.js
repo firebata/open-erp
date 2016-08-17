@@ -254,7 +254,7 @@
 
             ],
             "language": {
-                "lengthMenu": "_MENU_ 条记录每页",
+                "lengthMenu": "_MENU_",
                 "zeroRecords": "没有找到记录",
                 "info": "第 _PAGE_ 页 ( 共 _PAGES_ 页 )",
                 "infoEmpty": "无记录",

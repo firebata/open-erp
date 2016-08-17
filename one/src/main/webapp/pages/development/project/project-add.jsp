@@ -46,7 +46,7 @@
                     </div>
                     <div id="projectDescDetail">
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="yearCode"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 <a href="<%=path%>/system/year_conf/list" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="yearCode"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 <a href="javascript:openChildW('<%=path%>/system/year_conf/list')" target="_blank">+</a></label>
 
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="yearCode" name="yearCode"
@@ -54,7 +54,7 @@
                                 </select>
                             </div>
 
-                            <label class="col-xs-2  control-label" for="customerId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户 <a href="<%=path%>/system/customer/list" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="customerId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户 <a href="javascript:openChildW('<%=path%>/system/customer/list')" target="_blank">+</a></label>
 
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="customerId" name="customerId"
@@ -67,14 +67,14 @@
                         <%-- <!-- #section:custom/extra.hr -->
                      <div class="hr hr32 hr-dotted"></div>--%>
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="areaId"> 区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域 <a href="<%=path%>/system/area/list" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="areaId"> 区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域 <a href="javascript:openChildW('<%=path%>/system/area/list')" target="_blank">+</a></label>
 
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"    placeholder="区域">
                                 </select>
                             </div>
 
-                            <label class="col-xs-2  control-label" for="seriesId"> 系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列 <a href="<%=path%>/system/series/list" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="seriesId"> 系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列 <a href="javascript:openChildW('<%=path%>/system/series/list')" target="_blank">+</a></label>
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"      placeholder="系列">
                                 </select>
@@ -112,7 +112,7 @@
                         <div class="col-xs-3">
                             <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"    id="categoryAid" multiple placeholder="品类一级名称">"
                             </select>
-                            <a href="<%=path%>/system/category/list" target="_blank">+</a>
+                            <a href="javascript:openChildW('<%=path%>/system/category/list')" target="_blank">+</a>
                         </div>
                     </div>
                     <!--性别-->

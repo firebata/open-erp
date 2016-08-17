@@ -152,11 +152,7 @@
         <if test="dataTablesInfo.orderColumn!=null and dataTablesInfo.orderColumn != ''">
             ORDER BY ${dataTablesInfo.orderColumn} ${dataTablesInfo.orderDir}
         </if>
-        <if test="dataTablesInfo.orderColumn==null or dataTablesInfo.orderColumn == ''">
-            ORDER BY a.update_time desc
-        </if>
         limit #{dataTablesInfo.start} ,#{dataTablesInfo.length}
-
     </select>
 
     <update id="updateInfo">

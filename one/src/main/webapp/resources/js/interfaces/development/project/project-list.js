@@ -20,13 +20,14 @@
             {"data": "creater"},
             {"data": "createTime"},
             {"data": "remark"},
+            {"data": "updateTime"},
             {"data": null}
         ];
         return columnsName;
     }
 
 
-    var mHtml = ' <div class="dataTables_length col-xs-3" id="yearCode_example_length"><label>年份<select name="yearCode" placeholder="选择" id="yearCode" aria-controls="example" class="form-control input-sm placeholder"></select></label></div><div class="dataTables_length col-xs-3" id="customerId_example_length"><label>客户<select name="customerId" id="customerId" aria-controls="example" class="form-control input-sm"></select></label></div><div class="dataTables_length col-xs-3" id="areaId_example_length"><label>区域<select name="areaId" id="areaId" aria-controls="example" class="form-control input-sm"></select></label></div><div class="dataTables_length col-xs-3   " id="seriesId_example_length"><label>系列<select name="seriesId" id="seriesId" aria-controls="example" class="form-control input-sm"></select></label></div>';
+    var mHtml = ' <div class="dataTables_length col-xs-3" id="yearCode_example_length"><select name="yearCode" placeholder="选择" id="yearCode" aria-controls="example" class="form-control input-sm placeholder"></select></div><div class="dataTables_length col-xs-3" id="customerId_example_length"><select name="customerId" id="customerId" aria-controls="example" class="form-control input-sm"></select></div><div class="dataTables_length col-xs-3" id="areaId_example_length"><select name="areaId" id="areaId" aria-controls="example" class="form-control input-sm"></select></div><div class="dataTables_length col-xs-3   " id="seriesId_example_length"><select name="seriesId" id="seriesId" aria-controls="example" class="form-control input-sm"></select></div>';
     var table;
 
     $(function () {
@@ -41,7 +42,7 @@
             },
             serverSide: true,
             columns: columnsName(),
-            order: [[1, "desc"]], /*默认第一列倒序*/
+            order: [[columnsName().length - 2, "desc"]], /*默认第一列倒序*/
             fnDrawCallback: reloadDetailSelectData,
             columnDefs: [
                 {
@@ -66,7 +67,7 @@
                     }
                 }
             ],
-            "language": {
+            language: {
                 "lengthMenu": "_MENU_",
                 "zeroRecords": "没有找到记录",
                 "info": "第 _PAGE_ 页 ( 共 _PAGES_ 页 )",
@@ -77,7 +78,7 @@
                     "next": "下一页"
                 }
             },
-            "dom": "<'row'<'col-xs-1'l><'#mytool.col-xs-9'><'col-xs-2'f>r>" +
+            dom: "<'row'<'col-xs-1'l><'#mytool.col-xs-9'><'col-xs-2'f>r>" +
             "t" +
             "<'row'<'col-xs-6'i><'col-xs-6'p>>",
             initComplete: function () {
@@ -131,7 +132,7 @@
         //年份
         var yearCodeItems = data["yearItems"];
         $("#yearCode").empty();
-        $("<option></option>").val('').text("...请选择...").appendTo($("#yearCode"));
+        $("<option></option>").val('').text("...请选择年份...").appendTo($("#yearCode"));
         $.each(yearCodeItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -141,10 +142,10 @@
         $("#yearCode").val(yearCode == undefined ? '' : yearCode);
 
         //客户
-        var yearCodeItems = data["customerItems"];
+        var customerItems = data["customerItems"];
         $("#customerId").empty();
-        $("<option></option>").val('').text("...请选择...").appendTo($("#customerId"));
-        $.each(yearCodeItems, function (i, item) {
+        $("<option></option>").val('').text("...请选择客户...").appendTo($("#customerId"));
+        $.each(customerItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
                 .text(item["name"])
@@ -155,7 +156,7 @@
         //区域
         var areaItems = data["areaItems"];
         $("#areaId").empty();
-        $("<option></option>").val('').text("...请选择...").appendTo($("#areaId"));
+        $("<option></option>").val('').text("...请选择区域...").appendTo($("#areaId"));
         $.each(areaItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])
@@ -167,7 +168,7 @@
         //系列
         var seriesItems = data["seriesItems"];
         $("#seriesId").empty();
-        $("<option></option>").val('').text("...请选择...").appendTo($("#seriesId"));
+        $("<option></option>").val('').text("...请选择系列...").appendTo($("#seriesId"));
         $.each(seriesItems, function (i, item) {
             $("<option></option>")
                 .val(item["natrualkey"])

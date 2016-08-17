@@ -45,14 +45,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label  col-xs-2" for="{{materialTypeIdP}}"> 类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <a href="<%=path%>/system/material_type/list" target="_blank">+</a> </label>
+                        <label class="control-label  col-xs-2" for="{{materialTypeIdP}}"> 类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <a href="javascript:openChildW('<%=path%>/system/material_type/list')" target="_blank">+</a> </label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{materialTypeIdP}}"
                                     name="materialTypeId" placeholder="材料类别">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{spIdP}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 <a href="<%=path%>/system/sp/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{spIdP}}"> 供&nbsp;&nbsp;应&nbsp;&nbsp;商 <a href="javascript:openChildW('<%=path%>/system/sp/list')" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{spIdP}}" name="spId"
@@ -62,14 +62,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{yearCodeP}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 <a href="<%=path%>/system/year_conf/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{yearCodeP}}"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 <a href="javascript:openChildW('<%=path%>/system/year_conf/list')" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{yearCodeP}}" name="yearCode"
                                     placeholder="年份">
                             </select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{classicIdP}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 <a href="<%=path%>/system/material_classic/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{classicIdP}}"> 材&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质 <a href="javascript:openChildW('<%=path%>/system/material_classic/list')" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{classicIdP}}" name="classicId"
@@ -79,13 +79,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{pantoneIdsP}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 <a href="<%=path%>/system/pantone/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{pantoneIdsP}}"> 颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色 <a href="javascript:openChildW('<%=path%>/system/pantone/list')" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12  col-sm-12 form-control" multiple="multiple" name="pantoneIds"
                                     placeholder="颜色" id="{{pantoneIdsP}}"></select>
                         </div>
-                        <label class="col-xs-2  control-label" for="{{productTypeIdP}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 <a href="<%=path%>/system/product_type/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{productTypeIdP}}"> 品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">+</a></label>
 
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{productTypeIdP}}" name="productTypeId"
@@ -97,14 +97,14 @@
                     <div class="form-group">
 
                         <label class="col-xs-2  control-label" for="{{techRequiredP}}" data-toggle="tooltip"
-                               title="工艺要求"> 工艺要求 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                               title="工艺要求"> 工艺要求 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
 
                         <div class="col-xs-3">
                             <input type="text" id="{{techRequiredP}}" name="techRequired" placeholder="工艺要求"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{lengthP}}"> 长度(CM) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{lengthP}}"> 长度(CM) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{lengthP}}" name="length" placeholder="长度(CM)"
                                    class="col-xs-10 col-sm-12"/>
@@ -114,13 +114,13 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{widthP}}" data-toggle="tooltip" title="宽度(CM)">
-                            宽度(CM) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                            宽度(CM) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{widthP}}" name="width" placeholder="宽度(CM)"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{remarkP}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{remarkP}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{remarkP}}" name="remark" placeholder="备注"
                                    class="col-xs-10 col-sm-12"/>
@@ -138,14 +138,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{unitIdP}}"> 用量单位 <a href="<%=path%>/system/material/unit/list" target="_blank">+</a></label>
+                        <label class="col-xs-2  control-label" for="{{unitIdP}}"> 用量单位 <a href="javascript:openChildW('<%=path%>/system/material/unit/list')" target="_blank">+</a></label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{unitIdP}}" name="unitId"
                                     placeholder="用量单位">
                             </select>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{unitAmountP}}"> 单位用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{unitAmountP}}"> 单位用量 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{unitAmountP}}" name="unitAmount" placeholder="用量"
                                    class="col-xs-10 col-sm-12"/>
@@ -155,15 +155,15 @@
 
                     <div class="form-group">
 
-                        <label class="col-xs-2  control-label" for="{{positionIdsP}}">物料位置<a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{positionIdsP}}">物料位置<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"
                                     id="{{positionIdsP}}" name="positionIds" multiple placeholder="物料位置">"
                             </select>
-                            <a href="<%=path%>/system/material/position/list" target="_blank">+</a>
+                            <a href="javascript:openChildW('<%=path%>/system/material/position/list')" target="_blank">+</a>
                         </div>
 
-                        <label class="col-xs-2  control-label " style="color: red" for="{{positionIdBlP}}"> 所属归类<a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label " style="color: red" for="{{positionIdBlP}}"> 所属归类<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <select class="col-xs-12" data-style="btn-info" id="{{positionIdBlP}}" name="isShow"
                                     placeholder="">
@@ -191,14 +191,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="{{attritionRateP}}"> 损耗率(小数) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{attritionRateP}}"> 损耗率(小数) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{attritionRateP}}" name="attritionRate" placeholder="损耗率，e.g.0.03"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
 
-                        <label class="col-xs-2  control-label" for="{{unitPriceP}}" title="用量单位的价格">  单价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{unitPriceP}}" title="用量单位的价格">  单价(￥) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{unitPriceP}}" name="unitPrice" placeholder="单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
@@ -210,14 +210,14 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{colorAmountP}}" data-toggle="tooltip"
-                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                               title="各色用量 =单位用量 *(1 + 损耗率)"> 各色用量 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorAmountP}}" name="colorAmount" placeholder="各色用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
                         <label class="col-xs-2  control-label" for="{{colorPriceP}}" title="各色单价 = 各色用量 * 单价">
-                            各色单价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                            各色单价(￥) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{colorPriceP}}" name="colorPrice" placeholder="各色单价(￥)"
                                    class="col-xs-10 col-sm-12"/>
@@ -226,13 +226,13 @@
 
                     <div class="form-group">
                         <label class="col-xs-2  control-label" for="{{totalAmountP}}" data-toggle="tooltip"
-                               title="各色总用量 = 订单数量 * 各色用量"> 各色总用量 <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                               title="各色总用量 = 订单数量 * 各色用量"> 各色总用量 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{totalAmountP}}" name="totalAmount" placeholder="各色总用量"
                                    class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-2  control-label" for="{{totalPriceP}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价(￥) <a href="<%=path%>/system/product_type/list" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="{{totalPriceP}}" title="各色总用量的价格和 = 订单数量 *  各色单价 "> 总价(￥) <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-3">
                             <input type="text" id="{{totalPriceP}}" name="totalPrice" placeholder="总价(￥)"
                                    class="col-xs-10 col-sm-12"/>
