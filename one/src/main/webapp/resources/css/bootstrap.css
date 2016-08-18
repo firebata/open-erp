@@ -5903,7 +5903,9 @@ button.close {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px;
+  margin: 100px;
+  /*display: table-cell;*/
+  vertical-align: middle;
 }
 .modal-content {
   position: relative;

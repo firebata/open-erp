@@ -4,7 +4,7 @@ import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.bean.system.SelectItem2;
 import com.skysport.core.cache.SystemBaseInfoCachedMap;
 import com.skysport.interfaces.constant.WebConstants;
-import com.skysport.interfaces.model.info.material.impl.FinishServiceImpl;
+import com.skysport.interfaces.model.info.material.impl.WaterRepllentInfoServiceImpl;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import java.util.List;
  * 类说明:
  * Created by zhangjh on 2015/7/7.
  */
-public enum FinishServiceHelper {
+public enum  WaterRepllentServiceHelper {
     SINGLETONE;
 
     public void refreshSelect() {
-        FinishServiceImpl finishService = SpringContextHolder.getBean("finishService");
+        WaterRepllentInfoServiceImpl finishService = SpringContextHolder.getBean("waterRepllentInfoService");
         List<SelectItem2> finishItems = finishService.querySelectList(null);
         SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.FINISHITEMS, finishItems);
     }

@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Scope("prototype")
 @Controller
-@RequestMapping("/system/material/wvp")
+@RequestMapping("/system/function/wvp")
 public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeabilityInfo> {
     @Resource(name = "waterVapourPermeabilityService")
     private ICommonService waterVapourPermeabilityService;
@@ -49,7 +49,7 @@ public class WaterVapourPermeabilityAction extends BaseAction<WaterVapourPermeab
     @ResponseBody
     @SystemControllerLog(description = "点击透湿菜单")
     public ModelAndView search() {
-        ModelAndView mav = new ModelAndView("/system/material/wvp/list");
+        ModelAndView mav = new ModelAndView("/system/function/wvp/list");
         return mav;
     }
 

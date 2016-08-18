@@ -6,9 +6,9 @@ import com.skysport.core.bean.system.SelectItem;
  * 类说明:防泼水（所添加的功能性助剂）
  * Created by zhangjh on 2015/6/25.
  */
-public class FinishInfo extends SelectItem {
+public class WaterRepllentInfo extends SelectItem {
     private String id;
-    private String finishId;
+    private String waterRepllentId;
     private String finishName;
     private int levelId;
     private int delFlag;
@@ -59,12 +59,12 @@ public class FinishInfo extends SelectItem {
         this.id = id;
     }
 
-    public String getFinishId() {
-        return finishId;
+    public String getWaterRepllentId() {
+        return waterRepllentId;
     }
 
-    public void setFinishId(String finishId) {
-        this.finishId = finishId;
+    public void setWaterRepllentId(String waterRepllentId) {
+        this.waterRepllentId = waterRepllentId;
     }
 
     public String getFinishName() {

@@ -25,9 +25,9 @@ public class FabricsDetailInfo implements CommonVo {
      */
     private String dyeId;
     /**
-     *
+     *防泼水
      */
-    private String finishId;
+    private String waterRepllentId;
     /**
      *
      */
@@ -75,7 +75,7 @@ public class FabricsDetailInfo implements CommonVo {
     /**
      * 防泼水
      */
-    private String compositeFinishId;
+    private String compositeWaterRepllentId;
     /**
      * 复合透湿程度
      */
@@ -151,12 +151,12 @@ public class FabricsDetailInfo implements CommonVo {
         this.compositeDyeId = compositeDyeId;
     }
 
-    public String getCompositeFinishId() {
-        return compositeFinishId;
+    public String getCompositeWaterRepllentId() {
+        return compositeWaterRepllentId;
     }
 
-    public void setCompositeFinishId(String compositeFinishId) {
-        this.compositeFinishId = compositeFinishId;
+    public void setCompositeWaterRepllentId(String compositeWaterRepllentId) {
+        this.compositeWaterRepllentId = compositeWaterRepllentId;
     }
 
     @Override
@@ -223,12 +223,12 @@ public class FabricsDetailInfo implements CommonVo {
         this.dyeId = dyeId;
     }
 
-    public String getFinishId() {
-        return finishId;
+    public String getWaterRepllentId() {
+        return waterRepllentId;
     }
 
-    public void setFinishId(String finishId) {
-        this.finishId = finishId;
+    public void setWaterRepllentId(String waterRepllentId) {
+        this.waterRepllentId = waterRepllentId;
     }
 
     public String getBlcId() {

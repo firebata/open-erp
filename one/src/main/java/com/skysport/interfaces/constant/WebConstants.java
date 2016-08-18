@@ -144,7 +144,7 @@ public interface WebConstants extends TableNameConstants {
     String BLC_TABLE_COLUMN = "blc_table_column";
     String COMC_TABLE_COLUMN = "comc_table_column";
     String DYE_TABLE_COLUMN = "dye_table_column";
-    String FINISH_TABLE_COLUMN = "finish_table_column";
+    String WATER_REPLLENT_TABLE_COLUMN = "water_repllent_table_column";
     String MOMC_TABLE_COLUMN = "momc_table_column";
     String MT_TABLE_COLUMN = "mt_table_column";
     String WVP_TABLE_COLUMN = "wvp_table_column";

@@ -66,8 +66,6 @@ public enum BasicInfoHelper {
         // 染色方式列表
         DyeServiceHelper.SINGLETONE.refreshSelect();
 
-        // 防泼水列表
-        FinishServiceHelper.SINGLETONE.refreshSelect();
 
         // 复合或涂层列表
         BondingLaminationCoatingServiceHelper.SINGLETONE.refreshSelect();
@@ -77,9 +75,6 @@ public enum BasicInfoHelper {
 
         // 膜或涂层的颜色列表
         ColorOfMembraneCoatingServiceHelper.SINGLETONE.refreshSelect();
-
-        // 透湿列表
-        WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();
 
         // 膜的厚度列表
         MembraneThicknessServiceHelper.SINGLETONE.refreshSelect();
@@ -93,19 +88,31 @@ public enum BasicInfoHelper {
         //
         MaterialUnitServiceHelper.SINGLETONE.refreshSelect();
 
+        // 防泼水列表
+        WaterRepllentServiceHelper.SINGLETONE.refreshSelect();
 
+        // 透湿列表
+        WaterVapourPermeabilityServiceHelper.SINGLETONE.refreshSelect();
+
+        //透气
         JcAirPermeabilityHelper.SINGLETONE.refreshSelect();
 
+        //防蚊虫
         JcAntMosquitosHelper.SINGLETONE.refreshSelect();
 
+        //防油
         JcOilProofHelper.SINGLETONE.refreshSelect();
 
+        //快干
         JcQuickDryHelper.SINGLETONE.refreshSelect();
 
+        //接缝水压
         JcSeamWaterpressureHelper.SINGLETONE.refreshSelect();
 
+        //抗紫外线
         JcUltravioletProtectionHelper.SINGLETONE.refreshSelect();
 
+        //水压
         JcWaterProofHelper.SINGLETONE.refreshSelect();
 
     }

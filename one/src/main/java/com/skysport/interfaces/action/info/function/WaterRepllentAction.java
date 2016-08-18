@@ -4,11 +4,11 @@ import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.bean.page.DataTablesInfo;
 import com.skysport.core.bean.system.SelectItem2;
-import com.skysport.core.model.seqno.service.IncrementNumberService;
-import com.skysport.interfaces.constant.WebConstants;
-import com.skysport.interfaces.bean.info.FinishInfo;
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.interfaces.model.info.material.impl.helper.FinishServiceHelper;
+import com.skysport.core.model.seqno.service.IncrementNumberService;
+import com.skysport.interfaces.bean.info.WaterRepllentInfo;
+import com.skysport.interfaces.constant.WebConstants;
+import com.skysport.interfaces.model.info.material.impl.helper.WaterRepllentServiceHelper;
 import com.skysport.interfaces.utils.BuildSeqNoHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +30,11 @@ import java.util.Map;
  */
 @Scope("prototype")
 @Controller
-@RequestMapping("/system/material/finish")
-public class FinishAction extends BaseAction<FinishInfo> {
+@RequestMapping("/system/function/water_repllent")
+public class WaterRepllentAction extends BaseAction<WaterRepllentInfo> {
 
-    @Resource(name = "finishService")
-    private ICommonService finishService;
+    @Resource(name = "waterRepllentInfoService")
+    private ICommonService waterRepllentInfoService;
 
     @Resource(name = "incrementNumber")
     private IncrementNumberService incrementNumberService;
@@ -50,7 +49,7 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @ResponseBody
     @SystemControllerLog(description = "点击防泼水菜单")
     public ModelAndView search() {
-        ModelAndView mav = new ModelAndView("/system/material/finish/list");
+        ModelAndView mav = new ModelAndView("/system/function/water_repllent/list");
         return mav;
     }
 
@@ -66,15 +65,15 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @SystemControllerLog(description = "查询防泼水信息列表")
     public Map<String, Object> search(HttpServletRequest request) {
         // HashMap<String, String> paramMap = convertToMap(params);
-        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.FINISH_TABLE_COLUMN, request);
+        DataTablesInfo dataTablesInfo = convertToDataTableQrInfo(WebConstants.WATER_REPLLENT_TABLE_COLUMN, request);
         // 总记录数
-        int recordsTotal = finishService.listInfosCounts();
+        int recordsTotal = waterRepllentInfoService.listInfosCounts();
         int recordsFiltered = recordsTotal;
         if (!StringUtils.isBlank(dataTablesInfo.getSearchValue())) {
-            recordsFiltered = finishService.listFilteredInfosCounts(dataTablesInfo);
+            recordsFiltered = waterRepllentInfoService.listFilteredInfosCounts(dataTablesInfo);
         }
         int draw = Integer.parseInt(request.getParameter("draw"));
-        List<FinishInfo> infos = finishService.searchInfos(dataTablesInfo);
+        List<WaterRepllentInfo> infos = waterRepllentInfoService.searchInfos(dataTablesInfo);
         Map<String, Object> resultMap = buildSearchJsonMap(infos, recordsTotal, recordsFiltered, draw);
 
         return resultMap;
@@ -89,11 +88,10 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "编辑防泼水")
-    public Map<String, Object> edit(FinishInfo areaInfo, HttpServletRequest request,
-                                    HttpServletResponse response) {
-        finishService.edit(areaInfo);
+    public Map<String, Object> edit(WaterRepllentInfo areaInfo) {
+        waterRepllentInfoService.edit(areaInfo);
 
-        FinishServiceHelper.SINGLETONE.refreshSelect();
+        WaterRepllentServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("更新成功");
     }
 
@@ -107,29 +105,26 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     @ResponseBody
     @SystemControllerLog(description = "新增防泼水")
-    public Map<String, Object> add(FinishInfo areaInfo, HttpServletRequest request,
-                                   HttpServletResponse response) {
-        String currentNo = finishService.queryCurrentSeqNo();
+    public Map<String, Object> add(WaterRepllentInfo areaInfo) {
+        String currentNo = waterRepllentInfoService.queryCurrentSeqNo();
         //设置ID
         areaInfo.setNatrualkey(BuildSeqNoHelper.SINGLETONE.getNextSeqNo(WebConstants.FINISH_INFO, currentNo, incrementNumberService));
-        finishService.add(areaInfo);
+        waterRepllentInfoService.add(areaInfo);
 
-        FinishServiceHelper.SINGLETONE.refreshSelect();
+        WaterRepllentServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("新增成功");
     }
 
 
     /**
      * @param natrualKey 主键id
-     * @param request    请求信息
-     * @param reareaonse 返回信息
      * @return 根据主键id找出详细信息
      */
     @RequestMapping(value = "/info/{natrualKey}", method = RequestMethod.GET)
     @ResponseBody
     @SystemControllerLog(description = "查询防泼水信息")
-    public FinishInfo info(@PathVariable String natrualKey, HttpServletRequest request, HttpServletResponse reareaonse) {
-        FinishInfo areaInfo = (FinishInfo) finishService.queryInfoByNatrualKey(natrualKey);
+    public WaterRepllentInfo info(@PathVariable String natrualKey) {
+        WaterRepllentInfo areaInfo = (WaterRepllentInfo) waterRepllentInfoService.queryInfoByNatrualKey(natrualKey);
         return areaInfo;
     }
 
@@ -141,8 +136,8 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @ResponseBody
     @SystemControllerLog(description = "删除防泼水")
     public Map<String, Object> del(@PathVariable String natrualKey) {
-        finishService.del(natrualKey);
-        FinishServiceHelper.SINGLETONE.refreshSelect();
+        waterRepllentInfoService.del(natrualKey);
+        WaterRepllentServiceHelper.SINGLETONE.refreshSelect();
         return rtnSuccessResultMap("删除成功");
     }
 
@@ -150,7 +145,7 @@ public class FinishAction extends BaseAction<FinishInfo> {
     @ResponseBody
     public Map<String, Object> querySelectList(HttpServletRequest request) {
         String name = request.getParameter("name");
-        List<SelectItem2> commonBeans = finishService.querySelectList(name);
+        List<SelectItem2> commonBeans = waterRepllentInfoService.querySelectList(name);
         return rtSelectResultMap(commonBeans);
     }
 }

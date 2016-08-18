@@ -11,7 +11,7 @@
 		update_time AS updateTime,
 		remark AS remark
 	</sql>
-    <select id="queryInfo" resultType="FinishInfo">
+    <select id="queryInfo" resultType="WaterRepllentInfo">
         select
         <include refid="searchInfoSql"/>
         FROM t_wl_finish
@@ -35,7 +35,7 @@
 
     </select>
 
-    <select id="searchInfos" resultType="FinishInfo">
+    <select id="searchInfos" resultType="WaterRepllentInfo">
         SELECT
         <include refid="searchInfoSql"/>
         FROM t_wl_finish

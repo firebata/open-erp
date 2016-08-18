@@ -559,12 +559,12 @@
             });
 
             //防泼水列表
-            var finishIdItems = data["finishItems"];
-            var $finishId = $("#finishId" + idNum);
-            $finishId.empty();
-            $("<option></option>").val('').text("...请选择...").appendTo($finishId);
-            $.each(finishIdItems, function (i, item) {
-                $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($finishId);
+            var waterRepllentIdItems = data["finishItems"];
+            var $waterRepllentId = $("#waterRepllentId" + idNum);
+            $waterRepllentId.empty();
+            $("<option></option>").val('').text("...请选择...").appendTo($waterRepllentId);
+            $.each(waterRepllentIdItems, function (i, item) {
+                $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($waterRepllentId);
             });
 
             //复合或涂层列表
@@ -613,12 +613,12 @@
             });
 
             //防泼水列表-复合
-            // var finishIdItems = data["finishItems"];
-            var $compositeFinishId = $("#compositeFinishId" + idNum);
-            $compositeFinishId.empty();
-            $("<option></option>").val('').text("...请选择...").appendTo($compositeFinishId);
-            $.each(finishIdItems, function (i, item) {
-                $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeFinishId);
+            // var waterRepllentIdItems = data["finishItems"];
+            var $compositeWaterRepllentId = $("#compositeWaterRepllentId" + idNum);
+            $compositeWaterRepllentId.empty();
+            $("<option></option>").val('').text("...请选择...").appendTo($compositeWaterRepllentId);
+            $.each(waterRepllentIdItems, function (i, item) {
+                $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeWaterRepllentId);
             });
 
             //膜或涂层的材质列表
@@ -830,7 +830,7 @@
 
     /**
      *
-     * @type {{bomId: string, fabricId: string, nameNum: string, fabricsName: string, materialTypeId: string, classicId: string, spId: string, yearCode: string, productTypeId: string, serialNumber: string, pantoneIds: string, positionIds: string, dyeId: string, finishId: string, blcId: string, momcId: string, comocId: string, wvpId: string, mtId: string, woblcId: string, unitId: string, unitAmount: string, showFlag: boolean, saveFlag: boolean, delFlag: boolean, currenId: number}}
+     * @type {{bomId: string, fabricId: string, nameNum: string, fabricsName: string, materialTypeId: string, classicId: string, spId: string, yearCode: string, productTypeId: string, serialNumber: string, pantoneIds: string, positionIds: string, dyeId: string, waterRepllentId: string, blcId: string, momcId: string, comocId: string, wvpId: string, mtId: string, woblcId: string, unitId: string, unitAmount: string, showFlag: boolean, saveFlag: boolean, delFlag: boolean, currenId: number}}
      */
     var fabric = {
         bomId: "",
@@ -846,7 +846,7 @@
         pantoneIds: "",
         positionIds: "",
         dyeId: "",
-        finishId: "",
+        waterRepllentId: "",
         blcId: "",
         momcId: "",
         comocId: "",
@@ -924,7 +924,7 @@
                 }
             }
         },
-        finishId: {
+        waterRepllentId: {
             validators: {
                 notEmpty: {
                     message: '防泼水为必填项'
@@ -969,7 +969,7 @@
                     "productTypeId": "productTypeId" + idNum,
                     "specificationId": "specificationId" + idNum,
                     "dyeId": "dyeId" + idNum,
-                    "finishId": "finishId" + idNum,
+                    "waterRepllentId": "waterRepllentId" + idNum,
                     "blcId": "blcId" + idNum,
 
                     "compositeDiv": "compositeDiv" + idNum,
@@ -979,7 +979,7 @@
                     "compositeProductTypeId": "compositeProductTypeId" + idNum,
                     "compositeSpecificationId": "compositeSpecificationId" + idNum,
                     "compositeDyeId": "compositeDyeId" + idNum,
-                    "compositeFinishId": "compositeFinishId" + idNum,
+                    "compositeWaterRepllentId": "compositeWaterRepllentId" + idNum,
 
                     "compositeWvpId": "compositeWvpId" + idNum,
 
@@ -1063,10 +1063,10 @@
 
         fabricsInfo.specificationId = $("#specificationId" + idNum).val();
         fabricsInfo.dyeId = $("#dyeId" + idNum).val();
-        fabricsInfo.finishId = $("#finishId" + idNum).val();
+        fabricsInfo.waterRepllentId = $("#waterRepllentId" + idNum).val();
         fabricsInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
         fabricsInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
-        fabricsInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
+        fabricsInfo.compositeWaterRepllentId = $("#compositeWaterRepllentId" + idNum).val();
         fabricsInfo.compositeWvpId = $("#compositeWvpId" + idNum).val();
         fabricsInfo.blcId = $("#blcId" + idNum).val();
         fabricsInfo.momcId = $("#momcId" + idNum).val();
@@ -1157,7 +1157,7 @@
         var fabricsDetailInfo = {};//面料描述信息
         fabricsDetailInfo.specificationId = $("#specificationId" + idNum).val();
         fabricsDetailInfo.dyeId = $("#dyeId" + idNum).val();
-        fabricsDetailInfo.finishId = $("#finishId" + idNum).val();
+        fabricsDetailInfo.waterRepllentId = $("#waterRepllentId" + idNum).val();
         fabricsDetailInfo.blcId = $("#blcId" + idNum).val();
         fabricsDetailInfo.momcId = $("#momcId" + idNum).val();
         fabricsDetailInfo.comocId = $("#comocId" + idNum).val();
@@ -1167,7 +1167,7 @@
         fabricsDetailInfo.fabricId = fabricsInfo.fabricId;
         fabricsDetailInfo.compositeSpecificationId = $("#compositeSpecificationId" + idNum).val();
         fabricsDetailInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
-        fabricsDetailInfo.compositeFinishId = $("#compositeFinishId" + idNum).val();
+        fabricsDetailInfo.compositeWaterRepllentId = $("#compositeWaterRepllentId" + idNum).val();
         fabricsDetailInfo.compositeWvpId = $("#compositeWvpId" + idNum).val();
         fabricsDetailInfo.waterProofId = $("#waterProofId" + idNum).val();
         fabricsDetailInfo.permeabilityId = $("#permeabilityId" + idNum).val();

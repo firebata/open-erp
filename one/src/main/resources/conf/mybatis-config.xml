@@ -25,7 +25,7 @@
         <!--物料-->
         <typeAlias alias="BondingLaminationCoatingInfo" type="com.skysport.interfaces.bean.info.BondingLaminationCoatingInfo"/>
         <typeAlias alias="ColorOfMembraneCoatingInfo" type="com.skysport.interfaces.bean.info.ColorOfMembraneCoatingInfo"/>
-        <typeAlias alias="FinishInfo" type="com.skysport.interfaces.bean.info.FinishInfo"/>
+        <typeAlias alias="WaterRepllentInfo" type="com.skysport.interfaces.bean.info.WaterRepllentInfo"/>
         <typeAlias alias="MaterialOfMembraneCoatingInfo" type="com.skysport.interfaces.bean.info.MaterialOfMembraneCoatingInfo"/>
         <typeAlias alias="MembraneThicknessInfo" type="com.skysport.interfaces.bean.info.MembraneThicknessInfo"/>
         <typeAlias alias="SpecificationInfo" type="com.skysport.interfaces.bean.info.SpecificationInfo"/>

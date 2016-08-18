@@ -1,7 +1,7 @@
 package com.skysport.interfaces.mapper.info.material;
 
 import com.skysport.core.mapper.CommonMapper;
-import com.skysport.interfaces.bean.info.FinishInfo;
+import com.skysport.interfaces.bean.info.WaterRepllentInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * Created by zhangjh on 2015/6/25.
  */
 @Repository("finishMapper")
-public interface FinishMapper extends CommonMapper<FinishInfo> {
+public interface FinishMapper extends CommonMapper<WaterRepllentInfo> {
 }
