@@ -79,22 +79,26 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
      */
     @Override
     public QuotedInfo updateOrAdd(QuotedInfo quotedInfo) {
-        //查询BOM是否有对应的报价表
-        QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
-        //查询项目和子项目id
-        ProjectPojectItemBomSpVo projectPojectItemBomSpVo = bomInfoMapper.queryIds(quotedInfo.getBomId(), quotedInfo.getSpId());
-        quotedInfo.setProjectId(projectPojectItemBomSpVo.getProjectId());
-        quotedInfo.setProjectItemId(projectPojectItemBomSpVo.getProjectItemId());
-        quotedInfo.setProjectName(projectPojectItemBomSpVo.getProjectName());
-        quotedInfo.setProjectItemName(projectPojectItemBomSpVo.getProjectItemName());
-        quotedInfo.setBomName(projectPojectItemBomSpVo.getBomName());
-        quotedInfo.setSpName(projectPojectItemBomSpVo.getSpName());
-        if (null == quotedInfoInDB) {
-            quotedInfoMapper.add(quotedInfo);
-        } else {
-            quotedInfoMapper.updateInfo(quotedInfo);
+        String spid = quotedInfo.getSpId();
+        if (StringUtils.isNotBlank(spid)) {
+            //查询BOM是否有对应的报价表
+            QuotedInfo quotedInfoInDB = queryInfoByNatrualKey(quotedInfo.getBomId());
+            //查询项目和子项目id
+            ProjectPojectItemBomSpVo projectPojectItemBomSpVo = bomInfoMapper.queryIds(quotedInfo.getBomId(), quotedInfo.getSpId());
+            quotedInfo.setProjectId(projectPojectItemBomSpVo.getProjectId());
+            quotedInfo.setProjectItemId(projectPojectItemBomSpVo.getProjectItemId());
+            quotedInfo.setProjectName(projectPojectItemBomSpVo.getProjectName());
+            quotedInfo.setProjectItemName(projectPojectItemBomSpVo.getProjectItemName());
+            quotedInfo.setBomName(projectPojectItemBomSpVo.getBomName());
+            quotedInfo.setSpName(projectPojectItemBomSpVo.getSpName());
+            if (null == quotedInfoInDB) {
+                quotedInfoMapper.add(quotedInfo);
+            } else {
+                quotedInfoMapper.updateInfo(quotedInfo);
+            }
+            return quotedInfo;
         }
-        return quotedInfo;
+        return null;
     }
 
     /**

@@ -8,7 +8,8 @@
     <title>新增/修改项目信息</title>
     <jsp:include page="../../base/hb-headc.jsp"></jsp:include>
     <jsp:include page="../../base/upload.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/ace.css" class="ace-main-stylesheet"
+          id="main-ace-style"/>
 </head>
 <body>
 <div class="breadcrumbs" id="breadcrumbs">
@@ -16,6 +17,8 @@
         <li><a href="#">开发</a></li>
         <li><a href="#">项目</a></li>
         <li class="active">新增/修改</li>
+        <span class="glyphicon glyphicon-repeat" id="{{accessoriesRepeatId}}"
+              onclick="javascript:$.refreshProjectSelect()"></span>
     </ol>
 </div>
 
@@ -35,7 +38,8 @@
                     </div>
                     <div id="projectDescDetail">
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="yearCode"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份 <a href="javascript:openChildW('<%=path%>/system/year_conf/list')" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="yearCode"> 年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份
+                                <a href="javascript:openChildW('<%=path%>/system/year_conf/list')" target="_blank">+</a></label>
 
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="yearCode" name="yearCode"
@@ -43,7 +47,8 @@
                                 </select>
                             </div>
 
-                            <label class="col-xs-2  control-label" for="customerId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户 <a href="javascript:openChildW('<%=path%>/system/customer/list')" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="customerId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户
+                                <a href="javascript:openChildW('<%=path%>/system/customer/list')" target="_blank">+</a></label>
 
                             <div class="col-xs-3">
                                 <select class="col-xs-12" data-style="btn-info" id="customerId" name="customerId"
@@ -56,16 +61,22 @@
                         <%-- <!-- #section:custom/extra.hr -->
                      <div class="hr hr32 hr-dotted"></div>--%>
                         <div class="form-group">
-                            <label class="col-xs-2  control-label" for="areaId"> 区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域 <a href="javascript:openChildW('<%=path%>/system/area/list')" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="areaId"> 区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域
+                                <a href="javascript:openChildW('<%=path%>/system/area/list')"
+                                   target="_blank">+</a></label>
 
                             <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"    placeholder="区域">
+                                <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"
+                                        placeholder="区域">
                                 </select>
                             </div>
 
-                            <label class="col-xs-2  control-label" for="seriesId"> 系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列 <a href="javascript:openChildW('<%=path%>/system/series/list')" target="_blank">+</a></label>
+                            <label class="col-xs-2  control-label" for="seriesId"> 系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列
+                                <a href="javascript:openChildW('<%=path%>/system/series/list')"
+                                   target="_blank">+</a></label>
                             <div class="col-xs-3">
-                                <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"      placeholder="系列">
+                                <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"
+                                        placeholder="系列">
                                 </select>
                             </div>
 
@@ -97,9 +108,11 @@
                     </h5>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label" for="categoryAid"> 品类一级名称 <a href="#" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-2  control-label" for="categoryAid"> 品类一级名称 <a href="#" target="_blank">
+                            &nbsp;</a></label>
                         <div class="col-xs-3">
-                            <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"    id="categoryAid" multiple placeholder="品类一级名称">"
+                            <select data-style="btn-info" class="selectpicker show-menu-arrow" data-width="100%"
+                                    id="categoryAid" multiple placeholder="品类一级名称">"
                             </select>
                             <a href="javascript:openChildW('<%=path%>/system/category/list')" target="_blank">+</a>
                         </div>
@@ -115,21 +128,23 @@
                     </h5>
 
                     <div class="form-group">
-                        <label class="col-xs-2  control-label"         for="sketchReceivedDate"> 产品描述收到时间 </label>
+                        <label class="col-xs-2  control-label" for="sketchReceivedDate"> 产品描述收到时间 </label>
 
                         <div class="col-xs-3">
-                            <input type="text" id="sketchReceivedDate" name="sketchReceivedDate"            placeholder="产品描述收到时间" class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>
+                            <input type="text" id="sketchReceivedDate" name="sketchReceivedDate" placeholder="产品描述收到时间"
+                                   class="col-xs-10 col-sm-12" onClick="WdatePicker()"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2  control-label"            for="fileLocation"> 附件上传 </label>
+                        <label class="col-xs-2  control-label" for="fileLocation"> 附件上传 </label>
                         <div class="col-xs-10">
-                            <input id="fileLocation" type="file" multiple class="file-loading col-xs-12"    name="fileLocation">
+                            <input id="fileLocation" type="file" multiple class="file-loading col-xs-12"
+                                   name="fileLocation">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-7  col-sm-4  control-label">文件列表</label>
-                        <div class="col-xs-12 col-sm-4" >
+                        <div class="col-xs-12 col-sm-4">
                             <ul id="filesList">
 
                             </ul>
@@ -139,7 +154,8 @@
 
                 <div id="projectBtnInfo">
                     <div class="col-xs-offset-6 col-xs-9">
-                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveProject()">保存</button>
+                        <button type="button" class="btn btn-info btn-md" onclick="javascript:$.saveProject()">保存
+                        </button>
                     </div>
                 </div>
             </form>
@@ -155,4 +171,5 @@
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput.js'></script>
 <script type="text/javascript" src='<%=path%>/resources/js/fileinput_locale_zh.js'></script>
-<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/project/project-add.js?v=<%=version%>"></script>
+<script type="text/javascript"
+        src="<%=path%>/resources/js/interfaces/development/project/project-add.js?v=<%=version%>"></script>

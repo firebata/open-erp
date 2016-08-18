@@ -300,10 +300,10 @@
                 categoryAidsSelect = [];
             }
 
-            var categoryAidsLen =  categoryAids.length;
-            if(categoryAidsLen == 0 ){
-                $( "[id^=categoryDivId]").remove();
-            }else{
+            var categoryAidsLen = categoryAids.length;
+            if (categoryAidsLen == 0) {
+                $("[id^=categoryDivId]").remove();
+            } else {
                 // var $categoryAidsArr = $("[id^=categoryAidChild]");
                 // for(var idx=0,len=$categoryAidsArr.length;idx<len;idx++){
                 //     if($.isEmptyObject($categoryAidsArr.val())){
@@ -575,6 +575,27 @@
             $.fileInputAddListenr($fileListLi, $fileInput, uploadFileInfos, doSaveAction, getIsSubmitAction);
         })
 
+
+        function refreshProjectSelect() {
+            var $yearCode = $("#yearCode");
+            var yearCode = $yearCode.val();
+            var $customerId = $("#customerId");
+            var customerId = $customerId.val();
+            var $areaId = $("#areaId");
+            var areaId = $areaId.val();
+            var $seriesId = $("#seriesId");
+            var seriesId = $seriesId.val();
+
+            reloadDetailSelectData();
+            $yearCode.val(yearCode);
+            $customerId.val(customerId);
+            $areaId.val(areaId);
+            $seriesId.val(seriesId);
+
+
+        }
+
         $.saveProject = saveProject;
+        $.refreshProjectSelect = refreshProjectSelect;
     }()
 );

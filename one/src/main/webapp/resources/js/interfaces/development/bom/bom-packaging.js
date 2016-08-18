@@ -144,6 +144,7 @@
                     "techRequiredP": "techRequiredP" + idNum,
                     "lengthP": "lengthP" + idNum,
                     "widthP": "widthP" + idNum,
+                    "remarkP":"remarkP"+idNum,
                     "unitIdP": "unitIdP" + idNum,
                     "positionIdsP": "positionIdsP" + idNum,
                     "positionIdBlP": "positionIdBlP" + idNum,
@@ -588,6 +589,7 @@
         kfPackaging.length = $("#lengthP" + idNum).val();
         kfPackaging.nameNum = idNum;
         kfPackaging.serialNumber = idNum;
+        kfPackaging.remark =$("#remarkP" + idNum).val();
         kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
         kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
         kfPackaging.orderCount = $("#orderCountP" + idNum).val();
@@ -650,6 +652,7 @@
         packagingInfo.packagingId = $("#packagingIdP" + idNum).val();
         packagingInfo.serialNumber = idNum;
         packagingInfo.packagingsName = $("#packagingsNameP" + idNum).val();
+        packagingInfo.remark = $("#remarkP" + idNum).val();
 
         var materialSpInfo = {};//包材用量信息
         materialSpInfo.orderCount = $("#orderCountP" + idNum).val();

@@ -69,8 +69,8 @@
 
     <insert id="add">
         INSERT INTO
-        t_jc_year_conf (year_id,year_code,year_name,level_id,remark)
-        VALUES (#{natrualkey},#{yearCode},#{name},#{levelId},#{remark})
+        t_jc_year_conf (year_id,year_code,year_name,remark)
+        VALUES (#{natrualkey},#{yearCode},#{name},#{remark})
     </insert>
 
     <update id="del">

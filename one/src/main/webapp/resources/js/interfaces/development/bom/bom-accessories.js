@@ -575,6 +575,7 @@
                     "techRequiredF": "techRequiredF" + idNum,
                     "lengthF": "lengthF" + idNum,
                     "widthF": "widthF" + idNum,
+                    "remarkF":"remarkF"+idNum,
                     "unitIdF": "unitIdF" + idNum,
                     "positionIdsF": "positionIdsF" + idNum,
                     "positionIdBlF": "positionIdBlF" + idNum,
@@ -640,6 +641,7 @@
         accessoriesInfo.serialNumber = idNum;
         accessoriesInfo.accessoriesName = $("#accessoriesNameF" + idNum).val();
         accessoriesInfo.name = $("#accessoriesNameF" + idNum).val();
+        accessoriesInfo.remark = $("#remarkF" + idNum).val();
 
         var materialSpInfo = {};//包材用量信息
         materialSpInfo.orderCount = $("#orderCountF" + idNum).val();
@@ -700,7 +702,7 @@
         accessoriesInfo.length = $("#lengthF" + idNum).val();
         accessoriesInfo.nameNum = idNum;
         accessoriesInfo.accessoriesId = $("#accessoriesIdF" + idNum).val();
-
+        accessoriesInfo.remark = $("#remarkF" + idNum).val();
         accessoriesInfo.orderCount = $("#orderCountF" + idNum).val();
         accessoriesInfo.attritionRate = $("#attritionRateF" + idNum).val();
         accessoriesInfo.unitPrice = $("#unitPriceF" + idNum).val();

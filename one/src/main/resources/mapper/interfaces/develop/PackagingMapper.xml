@@ -89,14 +89,15 @@
             length  = #{length},
             width  = #{width} ,
             del_flag  = #{delFlag},
-			position_id_bl=#{positionIdBl}
+			position_id_bl=#{positionIdBl},
+			remark=#{remark}
         WHERE
             packaging_id =#{packagingId}
     </update>
 
     <insert id="add">
         insert into  t_kf_packaging (packaging_id,packaging_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,tech_required,length,width,position_id_bl)
-        values (#{natrualkey},#{name},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width},#{positionIdBl})
+        values (#{natrualkey},#{packagingsName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{techRequired},#{length},#{width},#{positionIdBl})
     </insert>
 
     <update id="del">

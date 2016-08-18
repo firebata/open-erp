@@ -50,7 +50,6 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label  col-xs-1" for="{{materialTypeIdF}}"> 类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别 <a href="javascript:openChildW('<%=path%>/system/material_type/list')" target="_blank">+</a> </label>
-
                         <div class="col-xs-2">
                             <select class="col-xs-12" data-style="btn-info" id="{{materialTypeIdF}}"
                                     name="materialTypeId" placeholder="材料类别">
@@ -112,12 +111,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-1  control-label" for="{{widthF}}" data-toggle="tooltip" title="宽度(CM)">宽度(CM)<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-1  control-label" for="{{widthF}}" data-toggle="tooltip" title="宽度(CM)">宽度(CM)&nbsp;<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-2">
                             <input type="text" id="{{widthF}}" name="width" placeholder="宽度(CM)"  class="col-xs-10 col-sm-12"/>
                         </div>
 
-                        <label class="col-xs-1  control-label" for="{{remarkF}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-1  control-label" for="{{remarkF}}"> 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp; <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-2">
                             <input type="text" id="{{remarkF}}" name="remark" placeholder="备注" class="col-xs-10 col-sm-12"/>
                         </div>
@@ -141,7 +140,7 @@
                             </select>
                         </div>
 
-                        <label class="col-xs-1  control-label" for="{{unitAmountF}}"> 单位用量 <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-1  control-label" for="{{unitAmountF}}"> 单位用量&nbsp; <a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-2">
                             <input type="text" id="{{unitAmountF}}" name="unitAmount" placeholder="用量" class="col-xs-10 col-sm-12"/>
                         </div>
@@ -153,7 +152,7 @@
                             <a href="javascript:openChildW('<%=path%>/system/material/position/list')" target="_blank">+</a>
                         </div>
 
-                        <label class="col-xs-2  control-label " style="color: red" for="{{positionIdBlF}}"> 所属归类<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
+                        <label class="col-xs-1  control-label " style="color: red" for="{{positionIdBlF}}"> 所属归类<a href="javascript:openChildW('<%=path%>/system/product_type/list')" target="_blank">&nbsp;</a></label>
                         <div class="col-xs-2">
                             <select class="col-xs-12" data-style="btn-info" id="{{positionIdBlF}}" name="isShow"
                                     placeholder="">

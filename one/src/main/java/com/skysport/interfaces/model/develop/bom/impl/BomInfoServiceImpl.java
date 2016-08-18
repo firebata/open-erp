@@ -7,8 +7,8 @@ import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.interfaces.bean.develop.*;
 import com.skysport.interfaces.bean.form.develop.BomQueryForm;
 import com.skysport.interfaces.bean.relation.BomMaterialIdVo;
-import com.skysport.interfaces.constant.WebConstants;
 import com.skysport.interfaces.constant.ReturnCodeConstant;
+import com.skysport.interfaces.constant.WebConstants;
 import com.skysport.interfaces.engine.workflow.helper.TaskServiceHelper;
 import com.skysport.interfaces.mapper.info.BomInfoMapper;
 import com.skysport.interfaces.model.develop.accessories.service.IAccessoriesService;
@@ -23,7 +23,6 @@ import com.skysport.interfaces.model.develop.project.service.IProjectItemService
 import com.skysport.interfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.interfaces.model.develop.quoted.service.IFactoryQuoteService;
 import com.skysport.interfaces.model.develop.quoted.service.IQuotedService;
-import com.skysport.interfaces.model.permission.userinfo.service.IStaffService;
 import com.skysport.interfaces.model.relation.IRelationIdDealService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
@@ -67,9 +66,6 @@ public class BomInfoServiceImpl extends CommonServiceImpl<BomInfo> implements IB
 
     @Autowired
     private IRelationIdDealService bomMaterialServiceImpl;
-
-    @Resource
-    private IStaffService developStaffImpl;
 
     @Autowired
     private IWorkFlowService bomInfoTaskImpl;
