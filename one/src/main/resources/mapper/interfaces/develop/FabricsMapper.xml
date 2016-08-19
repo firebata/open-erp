@@ -101,7 +101,7 @@
         set
 			specfication_id = #{specificationId},
 			dye_id = #{dyeId},
-			finish_id = #{waterRepllentId},
+			water_repllent_id = #{waterRepllentId},
 			blc_id = #{blcId},
 			momc_id = #{momcId},
 			comoc_id = #{comocId},
@@ -110,7 +110,7 @@
 			woblc_id = #{woblcId},
 			composite_specfication_id = #{compositeSpecificationId},
 			composite_dye_id = #{compositeDyeId},
-            composite_finish_id = #{compositeWaterRepllentId},
+            composite_water_repllent_id = #{compositeWaterRepllentId},
 			composite_wvp_id = #{compositeWvpId},
 			water_proof_id = #{waterProofId},
 			permeability_id = #{permeabilityId},
@@ -120,7 +120,9 @@
 			ant_mosquitos_id = #{antMosquitosId},
 			composite_water_proof_id = #{compositeWaterProofId},
 			composite_permeability_id = #{compositePermeabilityId},
+			waterpressure_id = #{waterpressureId},
 			composite_waterpressure_id = #{compositeWaterpressureId},
+			composite_ultraviolet_protection_id = #{compositeUltravioletProtectionId},
 			composite_quick_dry_id = #{compositeQuickDryId},
 			composite_oil_proof_id = #{compositeOilProofId},
 			composite_ant_mosquitos_id = #{compositeAntMosquitosId}
@@ -135,8 +137,8 @@
     </insert>
 
     <insert id="addDetail">
-      insert into t_kf_fabrics_detail(fabrics_id,specfication_id,dye_id,finish_id,blc_id,momc_id,comoc_id,wvp_id,mt_id,woblc_id,composite_specfication_id,composite_dye_id,composite_finish_id,composite_wvp_id,water_proof_id,permeability_id,ultraviolet_protection_id,quick_dry_id,oil_proof_id,ant_mosquitos_id,composite_water_proof_id,composite_permeability_id,composite_waterpressure_id,composite_quick_dry_id,composite_oil_proof_id,composite_ant_mosquitos_id)
-      values (#{fabricId},#{specificationId},#{dyeId},#{waterRepllentId},#{blcId},#{momcId},#{comocId},#{wvpId},#{mtId},#{woblcId},#{compositeSpecificationId},#{compositeDyeId},#{compositeWaterRepllentId},#{compositeWvpId},#{waterProofId},#{permeabilityId},#{ultravioletProtectionId},#{quickDryId},#{oilProofId},#{antMosquitosId},#{compositeWaterProofId},#{compositePermeabilityId},#{compositeWaterpressureId},#{compositeQuickDryId},#{compositeOilProofId},#{compositeAntMosquitosId});
+      insert into t_kf_fabrics_detail(fabrics_id,specfication_id,dye_id,water_repllent_id,blc_id,momc_id,comoc_id,wvp_id,mt_id,woblc_id,composite_specfication_id,composite_dye_id,composite_water_repllent_id,composite_wvp_id,water_proof_id,permeability_id,ultraviolet_protection_id,quick_dry_id,oil_proof_id,ant_mosquitos_id,composite_water_proof_id,composite_permeability_id,composite_waterpressure_id,composite_quick_dry_id,composite_oil_proof_id,composite_ant_mosquitos_id,waterpressure_id,composite_ultraviolet_protection_id)
+      values (#{fabricId},#{specificationId},#{dyeId},#{waterRepllentId},#{blcId},#{momcId},#{comocId},#{wvpId},#{mtId},#{woblcId},#{compositeSpecificationId},#{compositeDyeId},#{compositeWaterRepllentId},#{compositeWvpId},#{waterProofId},#{permeabilityId},#{ultravioletProtectionId},#{quickDryId},#{oilProofId},#{antMosquitosId},#{compositeWaterProofId},#{compositePermeabilityId},#{compositeWaterpressureId},#{compositeQuickDryId},#{compositeOilProofId},#{compositeAntMosquitosId}, #{waterpressureId},#{compositeUltravioletProtectionId});
     </insert>
 
     <update id="del">
@@ -236,6 +238,9 @@
         <result column="compositeOilProofId" property="compositeOilProofId"/>
         <result column="compositeAntMosquitosId" property="compositeAntMosquitosId"/>
 
+        <result column="compositeUltravioletProtectionId" property="compositeUltravioletProtectionId"/>
+        <result column="waterpressureId" property="waterpressureId"/>
+
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
         <result column="delFlag" property="delFlag"/>
@@ -280,7 +285,7 @@
                 c.total_amount AS totalAmount,
                 c.total_price AS totalPrice,
                 d.dye_id AS dyeId,
-                d.finish_id AS waterRepllentId,
+                d.water_repllent_id AS waterRepllentId,
                 d.blc_id AS blcId,
                 d.momc_id AS momcId,
                 d.comoc_id AS comocId,
@@ -290,7 +295,7 @@
                 d.specfication_id AS specificationId,
                 d.composite_specfication_id AS compositeSpecificationId,
                 d.composite_dye_id AS compositeDyeId,
-                d.composite_finish_id AS compositeWaterRepllentId,
+                d.composite_water_repllent_id AS compositeWaterRepllentId,
                 d.composite_wvp_id AS compositeWvpId,
 			    d.water_proof_id AS waterProofId,
 			    d.permeability_id AS permeabilityId,
@@ -300,7 +305,9 @@
 			    d.ant_mosquitos_id AS antMosquitosId,
 			    d.composite_water_proof_id AS compositeWaterProofId,
 			    d.composite_permeability_id AS compositePermeabilityId,
+			    d.waterpressure_id AS waterpressureId,
 			    d.composite_waterpressure_id AS compositeWaterpressureId,
+			    d.composite_ultraviolet_protection_id AS compositeUltravioletProtectionId,
 			    d.composite_quick_dry_id AS compositeQuickDryId,
 			    d.composite_oil_proof_id AS compositeOilProofId,
 			    d.composite_ant_mosquitos_id AS compositeAntMosquitosId,
@@ -356,6 +363,8 @@
         <result column="compositeQuickDryId" property="compositeQuickDryId"/>
         <result column="compositeOilProofId" property="compositeOilProofId"/>
         <result column="compositeAntMosquitosId" property="compositeAntMosquitosId"/>
+        <result column="compositeUltravioletProtectionId" property="compositeUltravioletProtectionId"/>
+        <result column="waterpressureId" property="waterpressureId"/>
         <result column="positionIdBl" property="positionIdBl"/>
         <result column="momcId" property="momcId"/>
         <result column="comocId" property="comocId"/>
@@ -390,11 +399,11 @@
                 a.pantone_id AS pantoneId,
                 b.specfication_id AS specificationId,
                 b.dye_id AS dyeId,
-                b.finish_id AS waterRepllentId,
+                b.water_repllent_id AS waterRepllentId,
                 b.blc_id AS blcId,
                 b.composite_specfication_id AS compositeSpecificationId,
                 b.composite_dye_id AS compositeDyeId,
-                b.composite_finish_id AS compositeWaterRepllentId,
+                b.composite_water_repllent_id AS compositeWaterRepllentId,
 			    b.composite_wvp_id AS compositeWvpId,
 			    b.water_proof_id AS waterProofId,
 			    b.permeability_id AS permeabilityId,
@@ -404,7 +413,9 @@
 			    b.ant_mosquitos_id AS antMosquitosId,
 			    b.composite_water_proof_id AS compositeWaterProofId,
 			    b.composite_permeability_id AS compositePermeabilityId,
+			    b.waterpressure_id AS waterpressureId,
 			    b.composite_waterpressure_id AS compositeWaterpressureId,
+			    b.composite_ultraviolet_protection_id AS compositeUltravioletProtectionId,
 			    b.composite_quick_dry_id AS compositeQuickDryId,
 			    b.composite_oil_proof_id AS compositeOilProofId,
 			    b.composite_ant_mosquitos_id AS compositeAntMosquitosId,

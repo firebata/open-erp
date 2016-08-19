@@ -83,7 +83,7 @@ public interface WebConstants extends TableNameConstants {
     String PRODUCTTYPEITEMSSTRING = "productTypeItems";
     String SPECFICATIONITEMS = "specficationItems";
     String DYEITEMS = "dyeItems";
-    String FINISHITEMS = "finishItems";
+    String WATERREPLLENTS = "waterRepllentItems";//防泼水
     String BLCITEMS = "blcItems";
     String MOMCITEMS = "momcItems";
     String COMOCITEMS = "comocItems";

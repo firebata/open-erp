@@ -1,12 +1,10 @@
 package com.skysport.interfaces.bean.develop;
 
-import com.skysport.core.bean.CommonVo;
-
 /**
  * 类说明:面料详细
  * Created by zhangjh on 2015/7/2.
  */
-public class FabricsDetailInfo implements CommonVo {
+public class FabricsDetailInfo extends FabricsInfo {
 
     /**
      *
@@ -64,6 +62,19 @@ public class FabricsDetailInfo implements CommonVo {
      *
      */
     private int delFlag;
+
+    /**
+     * 材质
+     */
+    private String compositeClassicId;
+    /**
+     * 颜色
+     */
+    private String compositePantoneId;
+    /**
+     * 品名
+     */
+    private String compositeProductTypeId;
     /**
      * 纱支规格
      */
@@ -73,9 +84,17 @@ public class FabricsDetailInfo implements CommonVo {
      */
     private String compositeDyeId;
     /**
-     * 防泼水
+     * 复合防泼水
      */
     private String compositeWaterRepllentId;
+
+    /**
+     * 接缝水压
+     */
+    private String waterpressureId;
+
+
+
     /**
      * 复合透湿程度
      */
@@ -89,7 +108,7 @@ public class FabricsDetailInfo implements CommonVo {
      */
     private String permeabilityId;
     /**
-     * 接缝水压
+     * 抗紫外线
      */
     private String ultravioletProtectionId;
     /**
@@ -113,10 +132,7 @@ public class FabricsDetailInfo implements CommonVo {
      * 复合透气
      */
     private String compositePermeabilityId;
-    /**
-     * 复合接缝水压
-     */
-    private String compositeWaterpressureId;
+
     /**
      * 复合快干
      */
@@ -130,6 +146,107 @@ public class FabricsDetailInfo implements CommonVo {
      */
     private String compositeAntMosquitosId;
 
+    /**
+     * 复合抗紫外线
+     */
+    private String compositeUltravioletProtectionId;
+
+    /**
+     * 复合接缝水压
+     */
+    private String compositeWaterpressureId;
+
+    public String getCompositeClassicId() {
+        return compositeClassicId;
+    }
+
+    public void setCompositeClassicId(String compositeClassicId) {
+        this.compositeClassicId = compositeClassicId;
+    }
+
+    public String getCompositePantoneId() {
+        return compositePantoneId;
+    }
+
+    public void setCompositePantoneId(String compositePantoneId) {
+        this.compositePantoneId = compositePantoneId;
+    }
+
+    public String getCompositeProductTypeId() {
+        return compositeProductTypeId;
+    }
+
+    public void setCompositeProductTypeId(String compositeProductTypeId) {
+        this.compositeProductTypeId = compositeProductTypeId;
+    }
+
+    public String getWaterpressureId() {
+        return waterpressureId;
+    }
+
+    public void setWaterpressureId(String waterpressureId) {
+        this.waterpressureId = waterpressureId;
+    }
+
+    public String getCompositeWvpId() {
+        return compositeWvpId;
+    }
+
+    public String getWaterProofId() {
+        return waterProofId;
+    }
+
+    public String getPermeabilityId() {
+        return permeabilityId;
+    }
+
+    public String getUltravioletProtectionId() {
+        return ultravioletProtectionId;
+    }
+
+    public String getQuickDryId() {
+        return quickDryId;
+    }
+
+    public String getOilProofId() {
+        return oilProofId;
+    }
+
+    public String getAntMosquitosId() {
+        return antMosquitosId;
+    }
+
+    public String getCompositeWaterProofId() {
+        return compositeWaterProofId;
+    }
+
+    public String getCompositePermeabilityId() {
+        return compositePermeabilityId;
+    }
+
+    public String getCompositeQuickDryId() {
+        return compositeQuickDryId;
+    }
+
+    public String getCompositeOilProofId() {
+        return compositeOilProofId;
+    }
+
+    public String getCompositeAntMosquitosId() {
+        return compositeAntMosquitosId;
+    }
+
+    public String getCompositeUltravioletProtectionId() {
+        return compositeUltravioletProtectionId;
+    }
+
+    public void setCompositeUltravioletProtectionId(String compositeUltravioletProtectionId) {
+        this.compositeUltravioletProtectionId = compositeUltravioletProtectionId;
+    }
+
+    public String getCompositeWaterpressureId() {
+        return compositeWaterpressureId;
+    }
 
     public FabricsDetailInfo() {
         super();

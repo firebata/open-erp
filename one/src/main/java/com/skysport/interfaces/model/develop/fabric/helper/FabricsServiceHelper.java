@@ -97,9 +97,6 @@ public enum FabricsServiceHelper {
         chgDyeId(fabricsInfo, stringBuilder);
 
 
-        //防泼水列表
-        chgWaterRepllentId(fabricsInfo, stringBuilder);
-
         //复合或涂层列表
         String blcId = chgBlcId(fabricsInfo, stringBuilder);
 
@@ -110,9 +107,9 @@ public enum FabricsServiceHelper {
         if (WebConstants.BLC_TYPE_FUHE.equals(blcId) || WebConstants.BLE_TYPE_TIEMO.equals(blcId)) {
             //复合
             if (WebConstants.BLC_TYPE_FUHE.equals(blcId)) {
+
                 //材质列表
                 chgCompositeClassicId(fabricsInfo, stringBuilder);
-
 
                 //品名列表
                 chgCompositeProductTypeId(fabricsInfo, stringBuilder);
@@ -143,9 +140,6 @@ public enum FabricsServiceHelper {
             //膜或涂层的颜色列表
             chgComocId(fabricsInfo, stringBuilder);
 
-            chgWvpId(fabricsInfo, stringBuilder);
-
-
             chgMtId(fabricsInfo, stringBuilder);
 
 
@@ -160,13 +154,19 @@ public enum FabricsServiceHelper {
     }
 
     private void chgCompositeFunction(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+
         StringBuilder stringBuilder2 = new StringBuilder();
 
         chgCompositeWaterProofId(fabricsInfo, stringBuilder2);
 
+        chgCompositeWvpId(fabricsInfo, stringBuilder);
+
         chgCompositePermeabilityId(fabricsInfo, stringBuilder2);
 
         chgCompositeWaterpressureId(fabricsInfo, stringBuilder2);
+
+        //防泼水列表
+        chgCompositeWaterRepllentId(fabricsInfo, stringBuilder);
 
         chgCompositeUltravioletProtectionId(fabricsInfo, stringBuilder2);
 
@@ -188,10 +188,16 @@ public enum FabricsServiceHelper {
 
         chgWaterProofId(fabricsInfo, stringBuilder2);//水压
 
+        //透湿
+        chgWvpId(fabricsInfo, stringBuilder);
+
+
         chgPermeabilityId(fabricsInfo, stringBuilder2);//透气
 
         chgWaterpressureId(fabricsInfo, stringBuilder2);//接缝水压
 
+        //防泼水列表
+        chgWaterRepllentId(fabricsInfo, stringBuilder);
 
         chgUltravioletProtectionId(fabricsInfo, stringBuilder2);//抗紫外线
 
@@ -210,6 +216,7 @@ public enum FabricsServiceHelper {
 
     /**
      * 接缝水压
+     *
      * @param fabricsInfo
      * @param stringBuilder2
      */
@@ -218,8 +225,36 @@ public enum FabricsServiceHelper {
         appendId(stringBuilder2, waterpressureId, WebConstants.JcSeamWaterpressureItems);
     }
 
+
+    /**
+     * 防泼水
+     *
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgWaterRepllentId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+
+        String waterRepllentId = fabricsInfo.getWaterRepllentId();
+        appendId(stringBuilder, waterRepllentId, WebConstants.WATERREPLLENTS);
+    }
+
+
+    /**
+     * 防泼水
+     *
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeWaterRepllentId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+
+        String compositeWaterRepllentId = fabricsInfo.getCompositeWaterRepllentId();
+        appendId(stringBuilder, compositeWaterRepllentId, WebConstants.WATERREPLLENTS);
+    }
+
+
     /**
      * 接缝水压
+     *
      * @param fabricsInfo
      * @param stringBuilder2
      */
@@ -295,8 +330,6 @@ public enum FabricsServiceHelper {
      * 接缝水压
      */
     private void chgUltravioletProtectionId(FabricsInfo fabricsInfo, StringBuilder stringBuilder2) {
-
-
         String ultravioletProtectionId = fabricsInfo.getUltravioletProtectionId();
         appendId(stringBuilder2, ultravioletProtectionId, WebConstants.JcUltravioletProtectionItems);
     }
@@ -320,12 +353,38 @@ public enum FabricsServiceHelper {
     }
 
     /**
+     * //透湿列表
+     *
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgCompositeWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+        String wvpId = fabricsInfo.getWvpId();
+        appendId(stringBuilder, wvpId, WebConstants.WVPITEMS);
+    }
+
+
+    /**
+     * //透湿列表
+     *
+     * @param fabricsInfo
+     * @param stringBuilder
+     */
+    public void chgWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
+
+        String wvpId = fabricsInfo.getWvpId();
+        appendId(stringBuilder, wvpId, WebConstants.WVPITEMS);
+    }
+
+
+    /**
      * 水压
      */
     private void chgCompositeWaterProofId(FabricsInfo fabricsInfo, StringBuilder stringBuilder2) {
         String waterProofId = fabricsInfo.getCompositeWaterProofId();
         appendId(stringBuilder2, waterProofId, WebConstants.JcWaterProofItems);
     }
+
 
     /**
      * 水压
@@ -359,7 +418,7 @@ public enum FabricsServiceHelper {
             if (stringBuilder.length() == 0) {
                 stringBuilder.append(specificationId);
             } else {
-                stringBuilder.append(CharConstant.COMMA).append(specificationId);
+                stringBuilder.append(specificationId).append(CharConstant.COMMA);
             }
 
         }
@@ -391,20 +450,11 @@ public enum FabricsServiceHelper {
             List<SelectItem2> selectItem2s;
             selectItem2s = SystemBaseInfoCachedMap.SINGLETONE.popBom(items);
             id = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, id);
-            stringBuilder.append(CharConstant.COMMA).append(id);
+            stringBuilder.append(id).append(CharConstant.COMMA);
         }
         return id;
     }
 
-    /**
-     * @param fabricsInfo
-     * @param stringBuilder
-     */
-    public void chgWaterRepllentId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
-
-        String waterRepllentId = fabricsInfo.getWaterRepllentId();
-        appendId(stringBuilder, waterRepllentId, WebConstants.FINISHITEMS);
-    }
 
     /**
      * @param fabricsInfo
@@ -414,7 +464,7 @@ public enum FabricsServiceHelper {
     public String chgBlcId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
 
         String blcId = fabricsInfo.getBlcId();
-        blcId = appendId(stringBuilder, blcId, WebConstants.BLCITEMS);
+        appendId(stringBuilder, blcId, WebConstants.BLCITEMS);
         return blcId;
     }
 
@@ -473,15 +523,6 @@ public enum FabricsServiceHelper {
         appendId(stringBuilder, compositeDyeId, WebConstants.DYEITEMS);
     }
 
-    /**
-     * @param fabricsInfo
-     * @param stringBuilder
-     */
-    public void chgCompositeWaterRepllentId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
-
-        String compositeWaterRepllentId = fabricsInfo.getCompositeWaterRepllentId();
-        appendId(stringBuilder, compositeWaterRepllentId, WebConstants.FINISHITEMS);
-    }
 
     /**
      * @param fabricsInfo
@@ -504,17 +545,6 @@ public enum FabricsServiceHelper {
         appendId(stringBuilder, comocId, WebConstants.COMOCITEMS);
     }
 
-    /**
-     * //透湿列表
-     *
-     * @param fabricsInfo
-     * @param stringBuilder
-     */
-    public void chgWvpId(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
-
-        String wvpId = fabricsInfo.getWvpId();
-        appendId(stringBuilder, wvpId, WebConstants.WVPITEMS);
-    }
 
     /**
      * //膜的厚度列表

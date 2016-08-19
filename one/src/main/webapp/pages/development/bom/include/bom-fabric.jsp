@@ -132,7 +132,7 @@
                                 <option value="1">显示</option>
                             </select>
                         </div>
-                        <label class="col-xs-1  control-label" for="{{waterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/finish/list')" target="_blank">+</a></label>
+                        <label class="col-xs-1  control-label" for="{{waterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/water_repllent/list')" target="_blank">+</a></label>
                         <div class="col-xs-2">
                             <select class="col-xs-12" data-style="btn-info" id="{{waterRepllentId}}" name="waterRepllentId"
                                     placeholder="防泼水">
@@ -274,7 +274,7 @@
 
 
                         <div class="form-group">
-                            <label class="col-xs-1  control-label" for="{{compositeWaterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/finish/list')" target="_blank">+</a></label>
+                            <label class="col-xs-1  control-label" for="{{compositeWaterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/water_repllent/list')" target="_blank">+</a></label>
                             <div class="col-xs-2">
                                 <select class="col-xs-12" data-style="btn-info" id="{{compositeWaterRepllentId}}"
                                         name="compositeWaterRepllentId" placeholder="防泼水">

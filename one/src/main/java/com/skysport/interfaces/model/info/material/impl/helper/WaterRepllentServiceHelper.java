@@ -17,7 +17,7 @@ public enum  WaterRepllentServiceHelper {
 
     public void refreshSelect() {
         WaterRepllentInfoServiceImpl finishService = SpringContextHolder.getBean("waterRepllentInfoService");
-        List<SelectItem2> finishItems = finishService.querySelectList(null);
-        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.FINISHITEMS, finishItems);
+        List<SelectItem2> waterRepllentItems = finishService.querySelectList(null);
+        SystemBaseInfoCachedMap.SINGLETONE.pushBom(WebConstants.WATERREPLLENTS, waterRepllentItems);
     }
 }

@@ -2,7 +2,7 @@ package com.skysport.interfaces.model.info.material.impl;
 
 import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.interfaces.bean.info.WaterRepllentInfo;
-import com.skysport.interfaces.mapper.info.material.FinishMapper;
+import com.skysport.interfaces.mapper.info.material.WaterRepllentMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +14,8 @@ import javax.annotation.Resource;
  */
 @Service("waterRepllentInfoService")
 public class WaterRepllentInfoServiceImpl extends CommonServiceImpl<WaterRepllentInfo> implements InitializingBean {
-    @Resource(name = "finishMapper")
-    private FinishMapper finishMapper;
+    @Resource(name = "waterRepllentMapper")
+    private WaterRepllentMapper finishMapper;
 
     @Override
     public void afterPropertiesSet() {

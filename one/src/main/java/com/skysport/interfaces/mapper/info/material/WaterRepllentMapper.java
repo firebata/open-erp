@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * 类说明:
  * Created by zhangjh on 2015/6/25.
  */
-@Repository("finishMapper")
-public interface FinishMapper extends CommonMapper<WaterRepllentInfo> {
+@Repository("waterRepllentMapper")
+public interface WaterRepllentMapper extends CommonMapper<WaterRepllentInfo> {
 }

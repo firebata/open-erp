@@ -559,7 +559,7 @@
             });
 
             //防泼水列表
-            var waterRepllentIdItems = data["finishItems"];
+            var waterRepllentIdItems = data["waterRepllentItems"];
             var $waterRepllentId = $("#waterRepllentId" + idNum);
             $waterRepllentId.empty();
             $("<option></option>").val('').text("...请选择...").appendTo($waterRepllentId);
@@ -613,7 +613,6 @@
             });
 
             //防泼水列表-复合
-            // var waterRepllentIdItems = data["finishItems"];
             var $compositeWaterRepllentId = $("#compositeWaterRepllentId" + idNum);
             $compositeWaterRepllentId.empty();
             $("<option></option>").val('').text("...请选择...").appendTo($compositeWaterRepllentId);
@@ -652,18 +651,10 @@
             var $compositeWvpId = $("#compositeWvpId" + idNum);
             $compositeWvpId.empty();
             $("<option></option>").val('').text("...请选择...").appendTo($compositeWvpId);
-            $.each($compositeWvpId, function (i, item) {
+            $.each(wvpIdItems, function (i, item) {
                 $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($compositeWvpId);
             });
 
-            //透湿列表
-            var wvpIdItems = data["wvpItems"];
-            var $wvpId = $("#wvpId" + idNum);
-            $wvpId.empty();
-            $("<option></option>").val('').text("...请选择...").appendTo($wvpId);
-            $.each(wvpIdItems, function (i, item) {
-                $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($wvpId);
-            });
 
             <!---->
             //水压
@@ -1074,10 +1065,11 @@
         fabricsInfo.wvpId = $("#wvpId" + idNum).val();
         fabricsInfo.mtId = $("#mtId" + idNum).val();
         fabricsInfo.woblcId = $("#woblcId" + idNum).val();
-
+        fabricsInfo.waterpressureId = $("#waterpressureId" + idNum).val();
         fabricsInfo.compositeWaterProofId = $("#compositeWaterProofId" + idNum).val();
         fabricsInfo.compositePermeabilityId = $("#compositePermeabilityId" + idNum).val();
         fabricsInfo.compositeWaterpressureId = $("#compositeWaterpressureId" + idNum).val();
+        fabricsInfo.ultravioletProtectionId = $("#ultravioletProtectionId" + idNum).val();
         fabricsInfo.compositeUltravioletProtectionId = $("#compositeUltravioletProtectionId" + idNum).val();
         fabricsInfo.compositeQuickDryId = $("#compositeQuickDryId" + idNum).val();
         fabricsInfo.compositeOilProofId = $("#compositeOilProofId" + idNum).val();
@@ -1169,6 +1161,7 @@
         fabricsDetailInfo.compositeDyeId = $("#compositeDyeId" + idNum).val();
         fabricsDetailInfo.compositeWaterRepllentId = $("#compositeWaterRepllentId" + idNum).val();
         fabricsDetailInfo.compositeWvpId = $("#compositeWvpId" + idNum).val();
+        fabricsDetailInfo.waterpressureId = $("#waterpressureId" + idNum).val();
         fabricsDetailInfo.waterProofId = $("#waterProofId" + idNum).val();
         fabricsDetailInfo.permeabilityId = $("#permeabilityId" + idNum).val();
         fabricsDetailInfo.ultravioletProtectionId = $("#ultravioletProtectionId" + idNum).val();
@@ -1181,6 +1174,7 @@
         fabricsDetailInfo.compositeQuickDryId = $("#compositeQuickDryId" + idNum).val();
         fabricsDetailInfo.compositeOilProofId = $("#compositeOilProofId" + idNum).val();
         fabricsDetailInfo.compositeAntMosquitosId = $("#compositeAntMosquitosId" + idNum).val();
+        fabricsDetailInfo.compositeUltravioletProtectionId = $("#compositeUltravioletProtectionId" + idNum).val();
 
         var materialSpInfo = {};//面料用量信息
         materialSpInfo.attritionRate = $("#attritionRate" + idNum).val();
