@@ -408,6 +408,21 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
 
     }
 
+    @Override
+    public List<FabricsInfo> getFabricsInfos(String natrualKey) {
+        return getFabricsInfos(natrualKey, null);
+    }
+
+    @Override
+    public List<AccessoriesInfo> getAccessoriesInfos(String natrualKey) {
+        return getAccessoriesInfos(natrualKey, null);
+    }
+
+    @Override
+    public List<PackagingInfo> getPackagingInfos(String natrualKey) {
+        return getPackagingInfos(natrualKey, null);
+    }
+
 
     @Override
     public void addBatch(List<ProjectBomInfo> infos) {

@@ -23,13 +23,15 @@
 <div class="page-container">
     <h1>Supply Chain Management</h1>
     <form action="<%=path%>/login" method="post">
-        <% if (environment_current.equals(WebConstants.SDE)) {%>
+        <%--<% if (environment_current.equals(WebConstants.SDE)) {%>
         <input type="text" name="username" id="username" class="username" value="admin">
         <input type="password" name="password" class="password" value="123456">
         <%} else {%>
         <input type="text" name="username" id="username" class="username" placeholder="Skysport ID*">
         <input type="password" name="password" class="password" placeholder="Password*">
-        <%}%>
+        <%}%>--%>
+        <input type="text" name="username" id="username" class="username" placeholder="Skysport ID*">
+        <input type="password" name="password" class="password" placeholder="Password*">
         <button type="submit">Sign in</button>
         <div class="error">
             <span>${msg}</span>

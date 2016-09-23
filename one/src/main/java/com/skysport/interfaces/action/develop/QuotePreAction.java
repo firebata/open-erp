@@ -3,9 +3,13 @@ package com.skysport.interfaces.action.develop;
 import com.skysport.core.action.BaseAction;
 import com.skysport.core.annotation.SystemControllerLog;
 import com.skysport.core.model.workflow.IWorkFlowService;
+import com.skysport.interfaces.bean.develop.AccessoriesInfo;
+import com.skysport.interfaces.bean.develop.FabricsInfo;
+import com.skysport.interfaces.bean.develop.PackagingInfo;
 import com.skysport.interfaces.bean.develop.QuotedInfo;
 import com.skysport.interfaces.bean.form.develop.PreQuoteQueryForm;
 import com.skysport.interfaces.constant.WebConstants;
+import com.skysport.interfaces.model.develop.project.service.IProjectItemService;
 import com.skysport.interfaces.model.develop.quoted.helper.QuotedServiceHelper;
 import com.skysport.interfaces.model.develop.quoted.service.IQuotedService;
 import org.springframework.context.annotation.Scope;
@@ -15,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +31,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/development/quotepre")
 public class QuotePreAction extends BaseAction<QuotedInfo> {
-
+    @Resource(name = "projectItemManageService")
+    private IProjectItemService projectItemManageService;
     /**
      *
      */
@@ -86,8 +93,36 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
         mav.addObject("taskId", taskId);
         mav.addObject("processInstanceId", processInstanceId);
         mav.addObject("quotedInfo", quotedInfo);
+        List<FabricsInfo> fabricsInfos = projectItemManageService.getFabricsInfos(natrualKey);
+        List<AccessoriesInfo> accessoriesInfos = projectItemManageService.getAccessoriesInfos(natrualKey);
+        List<PackagingInfo> packagingInfos = projectItemManageService.getPackagingInfos(natrualKey);
+        mav.addObject("fabricsInfos", fabricsInfos);
+        mav.addObject("accessoriesInfos", accessoriesInfos);
+        mav.addObject("packagingInfos", packagingInfos);
         return mav;
     }
+
+
+    /**
+     * 此方法描述的是：
+     *
+     * @author: zhangjh
+     * @version: 2015年4月29日 下午5:34:53
+     */
+    @RequestMapping(value = "/qr_items_of_bom/{natrualKey}")
+    @ResponseBody
+    @SystemControllerLog(description = "查询BOM列表信息")
+    public Map<String, Object> qrItemsOfBom(@PathVariable String natrualKey, HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        List<FabricsInfo> fabricsInfos = projectItemManageService.getFabricsInfos(natrualKey);
+        List<AccessoriesInfo> accessoriesInfos = projectItemManageService.getAccessoriesInfos(natrualKey);
+        List<PackagingInfo> packagingInfos = projectItemManageService.getPackagingInfos(natrualKey);
+        resultMap.put("fabricsInfos", fabricsInfos);
+        resultMap.put("accessoriesInfos", accessoriesInfos);
+        resultMap.put("packagingInfos", packagingInfos);
+        return resultMap;
+    }
+
 
     /**
      * 此方法描述的是：

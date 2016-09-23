@@ -63,11 +63,18 @@ public class QuotedInfo extends ProjectPojectItemBomSpVo implements ApproveVo {
      * 佣金
      */
     private BigDecimal commission;
-
+    /**
+     *
+     */
+    private BigDecimal laborCost;
     /**
      * 换汇成本
      */
     private BigDecimal exchangeCosts;
+
+    /**
+     *
+     */
     private String stateCode;
 
     public String getApproveStatus() {
@@ -204,27 +211,35 @@ public class QuotedInfo extends ProjectPojectItemBomSpVo implements ApproveVo {
         this.step = step;
     }
 
-    @Override
-    public String toString() {
-        return "QuotedInfo{" +
-                "approveStatus='" + approveStatus + '\'' +
-                ", mainFabricIds='" + mainFabricIds + '\'' +
-                ", now='" + now + '\'' +
-                ", step=" + step +
-                ", mainFabricDescs='" + mainFabricDescs + '\'' +
-                ", euroExchangeRates=" + euroExchangeRates +
-                ", rates=" + rates +
-                ", euroPrice=" + euroPrice +
-                ", quotedPrice=" + quotedPrice +
-                ", factoryOffer=" + factoryOffer +
-                ", factoryMargins=" + factoryMargins +
-                ", costing=" + costing +
-                ", lpPrice=" + lpPrice +
-                ", commission=" + commission +
-                ", exchangeCosts=" + exchangeCosts +
-                ", fabricId='" + fabricId + '\'' +
-                '}';
+    public BigDecimal getLaborCost() {
+        return laborCost;
     }
+
+    public void setLaborCost(BigDecimal laborCost) {
+        this.laborCost = laborCost;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "QuotedInfo{" +
+//                "approveStatus='" + approveStatus + '\'' +
+//                ", mainFabricIds='" + mainFabricIds + '\'' +
+//                ", now='" + now + '\'' +
+//                ", step=" + step +
+//                ", mainFabricDescs='" + mainFabricDescs + '\'' +
+//                ", euroExchangeRates=" + euroExchangeRates +
+//                ", rates=" + rates +
+//                ", euroPrice=" + euroPrice +
+//                ", quotedPrice=" + quotedPrice +
+//                ", factoryOffer=" + factoryOffer +
+//                ", factoryMargins=" + factoryMargins +
+//                ", costing=" + costing +
+//                ", lpPrice=" + lpPrice +
+//                ", commission=" + commission +
+//                ", exchangeCosts=" + exchangeCosts +
+//                ", fabricId='" + fabricId + '\'' +
+//                '}';
+//    }
 
     @Override
     public String getStateCode() {

@@ -1,9 +1,7 @@
 package com.skysport.interfaces.model.develop.project.service;
 
 import com.skysport.core.model.common.ICommonService;
-import com.skysport.interfaces.bean.develop.BomInfo;
-import com.skysport.interfaces.bean.develop.ProjectBomInfo;
-import com.skysport.interfaces.bean.develop.ProjectInfo;
+import com.skysport.interfaces.bean.develop.*;
 import com.skysport.interfaces.bean.form.develop.ProjectQueryForm;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -43,4 +41,10 @@ public interface IProjectItemService extends ICommonService<ProjectBomInfo> {
     void setStatuCodeAlive(ProjectBomInfo info, String natrualKey);
 
     <T> T createBoms(String businessKey);
+
+    List<FabricsInfo> getFabricsInfos(String natrualKey);
+
+    List<AccessoriesInfo> getAccessoriesInfos(String natrualKey);
+
+    List<PackagingInfo> getPackagingInfos(String natrualKey);
 }
