@@ -4,6 +4,7 @@ import com.skysport.interfaces.bean.relation.ProjectPojectItemBomSpVo;
 import com.skysport.interfaces.bean.task.ApproveVo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 说明:
@@ -76,6 +77,34 @@ public class QuotedInfo extends ProjectPojectItemBomSpVo implements ApproveVo {
      *
      */
     private String stateCode;
+
+    private List<FabricsInfo> fabricsInfos;
+    private List<AccessoriesInfo> accessoriesInfos;
+    private List<PackagingInfo> packagingInfos;
+
+    public List<FabricsInfo> getFabricsInfos() {
+        return fabricsInfos;
+    }
+
+    public void setFabricsInfos(List<FabricsInfo> fabricsInfos) {
+        this.fabricsInfos = fabricsInfos;
+    }
+
+    public List<AccessoriesInfo> getAccessoriesInfos() {
+        return accessoriesInfos;
+    }
+
+    public void setAccessoriesInfos(List<AccessoriesInfo> accessoriesInfos) {
+        this.accessoriesInfos = accessoriesInfos;
+    }
+
+    public List<PackagingInfo> getPackagingInfos() {
+        return packagingInfos;
+    }
+
+    public void setPackagingInfos(List<PackagingInfo> packagingInfos) {
+        this.packagingInfos = packagingInfos;
+    }
 
     public String getApproveStatus() {
         return approveStatus;

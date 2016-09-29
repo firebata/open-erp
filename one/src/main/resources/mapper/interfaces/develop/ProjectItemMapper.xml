@@ -95,9 +95,10 @@
             update
             t_kf_project_item
             <set>
-                version =#{version},
-                remark=#{remark}
+                version =#{item.version},
+                remark=#{item.remark}
             </set>
+            where
             project_id =#{natrualkey}
         </foreach>
     </update>

@@ -93,12 +93,12 @@ public class QuotePreAction extends BaseAction<QuotedInfo> {
         mav.addObject("taskId", taskId);
         mav.addObject("processInstanceId", processInstanceId);
         mav.addObject("quotedInfo", quotedInfo);
-        List<FabricsInfo> fabricsInfos = projectItemManageService.getFabricsInfos(natrualKey);
-        List<AccessoriesInfo> accessoriesInfos = projectItemManageService.getAccessoriesInfos(natrualKey);
-        List<PackagingInfo> packagingInfos = projectItemManageService.getPackagingInfos(natrualKey);
-        mav.addObject("fabricsInfos", fabricsInfos);
-        mav.addObject("accessoriesInfos", accessoriesInfos);
-        mav.addObject("packagingInfos", packagingInfos);
+//        List<FabricsInfo> fabricsInfos = projectItemManageService.getFabricsInfos(natrualKey);
+//        List<AccessoriesInfo> accessoriesInfos = projectItemManageService.getAccessoriesInfos(natrualKey);
+//        List<PackagingInfo> packagingInfos = projectItemManageService.getPackagingInfos(natrualKey);
+//        mav.addObject("fabricsInfos", fabricsInfos);
+//        mav.addObject("accessoriesInfos", accessoriesInfos);
+//        mav.addObject("packagingInfos", packagingInfos);
         return mav;
     }
 

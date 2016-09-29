@@ -122,7 +122,7 @@ public interface WebConstants extends TableNameConstants {
     String BOM_DETAIL_CN_NAME = "面辅料详细";
     String BOM_QUOTE_CN_NAME = "报价表";
     String BOM_PI_CN_NAME = "翊凯生成指示单";
-
+    String BOM_PURCHASE_CN_NAME = "采购表";
     String AND = " and ";
     String OR = " or ";
 
@@ -236,6 +236,7 @@ public interface WebConstants extends TableNameConstants {
     String RESOURCE_PATH_PI = "conf/templates/pi-20160316.xlsx";//成衣生产指示单模板
     String RESOURCE_PATH_BOM = "conf/templates/bom-20160426.xlsx";//bom物料清单模板
     String RESOURCE_PATH_QUOTE = "conf/templates/quote-20160426.xlsx";//报价模板
+    String RESOURCE_PATH_PURCHASE = "conf/templates/purchase-20160426.xlsx";//bom物料采购清单模板
 
     int QUOTED_STEP_PRE = 0;//预报价
     int QUOTED_STEP_END = 1;//

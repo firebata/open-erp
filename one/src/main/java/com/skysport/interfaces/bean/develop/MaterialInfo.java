@@ -13,6 +13,7 @@ public class MaterialInfo extends SelectItem {
 
     private String id;
     private String customerName;
+    private String materialId;
     /**
      * 系列名称
      */
@@ -45,6 +46,13 @@ public class MaterialInfo extends SelectItem {
     private String remark;
     private String updateTime;
 
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
 
     public BigDecimal getColorPrice() {
         return colorPrice;

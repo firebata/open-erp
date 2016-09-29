@@ -600,7 +600,7 @@
      * @private
      */
     var _doSuccess_del = function ($table) {
-        $table.ajax.reload( null, false);
+        $table.ajax.reload(null, false);
     }
 
 
@@ -652,7 +652,14 @@
     }
 
     function submitBuss(_businessKey, _taskId) {
-        window.location.href = submitBusURL + "/" + _taskId + "/" + _businessKey;
+
+        bootbox.confirm("提交审核前，请先保存！", function (result) {
+            if (result) {
+                window.location.href = submitBusURL + "/" + _taskId + "/" + _businessKey;
+            }
+            // console.log('This was logged in the callback: ' + result);
+        });
+
         // $.sendJsonAjax(submitBusURL + "/" + _taskId + "/" + _businessKey, {}, function () {
         //     window.location.href = project_listURL;
         // })
@@ -743,12 +750,12 @@
 
 }(jQuery));
 
-function openChildW(src){
+function openChildW(src) {
 
-    var iWidth=1206; //弹出窗口的宽度;
-    var iHeight=666; //弹出窗口的高度;
-    var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
-    var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
-    var sFeatures = "top=+"+iTop+",left="+iLeft+",width="+iWidth+",height="+iHeight+",location=yes,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no "
-    window.open(src,"",sFeatures,false);
+    var iWidth = 1206; //弹出窗口的宽度;
+    var iHeight = 666; //弹出窗口的高度;
+    var iTop = (window.screen.availHeight - 30 - iHeight) / 2; //获得窗口的垂直位置;
+    var iLeft = (window.screen.availWidth - 10 - iWidth) / 2; //获得窗口的水平位置;
+    var sFeatures = "top=+" + iTop + ",left=" + iLeft + ",width=" + iWidth + ",height=" + iHeight + ",location=yes,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no "
+    window.open(src, "", sFeatures, false);
 }

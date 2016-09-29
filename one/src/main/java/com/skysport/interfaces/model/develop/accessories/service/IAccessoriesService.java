@@ -17,5 +17,9 @@ public interface IAccessoriesService extends ICommonService<AccessoriesInfo> {
     List<AccessoriesInfo> queryAccessoriesList(String bomId);
 
     List<AccessoriesInfo> queryAllAccessoriesByBomId(String bomId);
+
+    void updateBatchUnitAmount(List<AccessoriesInfo> accessoriesInfos);
+
+    void updateBatchColorPrice(List<AccessoriesInfo> accessoriesInfos);
 }
 

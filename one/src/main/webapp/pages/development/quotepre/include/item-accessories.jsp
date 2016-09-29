@@ -27,8 +27,8 @@
         <input type="hidden" name="fabricId" ng-model="item.fabricId"/>
         <td>{{item.productTypeId}}</td>
         <td>{{item.description}}</td>
-        <td><input type="text" ng-model="item.unitAmount" value="{{item.unitAmount}}"></td>
-        <td><input type="text" ng-model="item.unitPrice" value="{{item.unitPrice}}"></td>
+        <td><input type="text" ng-model="item.unitAmount" value="{{item.unitAmount}}" ng-change="change()"></td>
+        <td><input type="text" ng-model="item.unitPrice" value="{{item.unitPrice}}" ng-change="change()"></td>
         <td style="display:table-cell; vertical-align:middle">{{(item.unitAmount * item.unitPrice) | fixed:3}}</td>
     </tr>
     </tbody>

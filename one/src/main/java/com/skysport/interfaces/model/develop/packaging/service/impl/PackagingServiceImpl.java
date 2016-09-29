@@ -8,7 +8,7 @@ import com.skysport.interfaces.bean.develop.MaterialSpInfo;
 import com.skysport.interfaces.bean.develop.join.KFPackagingJoinInfo;
 import com.skysport.interfaces.mapper.develop.MaterialSpinfoMapper;
 import com.skysport.interfaces.mapper.develop.MaterialUnitDosageMapper;
-import com.skysport.interfaces.mapper.develop.PackagingMapper;
+import com.skysport.interfaces.mapper.info.PackagingMapper;
 import com.skysport.interfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.interfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.interfaces.model.develop.pantone.service.IKFMaterialPantoneService;
@@ -121,6 +121,22 @@ public class PackagingServiceImpl extends CommonServiceImpl<PackagingInfo> imple
     @Override
     public List<PackagingInfo> queryPackagingByBomId(String bomId) {
         return packagingMapper.queryPackagingByBomId(bomId);
+    }
+
+    @Override
+    public void updateBatchUnitAmount(List<PackagingInfo> packagingInfos) {
+        if (null != packagingInfos && packagingInfos.size() > 0) {
+            packagingMapper.updateBatchUnitAmount(packagingInfos);
+        }
+
+    }
+
+    @Override
+    public void updateBatchColorPrice(List<PackagingInfo> packagingInfos) {
+        if (null != packagingInfos && packagingInfos.size() > 0) {
+            packagingMapper.updateBatchColorPrice(packagingInfos);
+        }
+
     }
 
 //    private String buildKindName(BomInfo bomInfo, KFPackagingJoinInfo packagingJoinInfo) {

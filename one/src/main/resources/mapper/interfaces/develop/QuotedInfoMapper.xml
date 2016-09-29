@@ -31,6 +31,8 @@
             a.remark AS remark,
             a.costing AS costing,
             a.approve_status   AS   approveStatus,
+            a.commission AS commission,
+            a.labor_cost AS laborCost,
             DATE_FORMAT(NOW(),'%Y-%m-%d') AS now
 	</sql>
 
@@ -146,6 +148,9 @@
             </if>
             <if test="spName != null and spName != '' ">
                 a.sp_name =#{spName},
+            </if>
+            <if test="laborCost != null and laborCost != '' ">
+                a.labor_cost =#{laborCost},
             </if>
         </set>
 		WHERE a.bom_id =#{bomId}

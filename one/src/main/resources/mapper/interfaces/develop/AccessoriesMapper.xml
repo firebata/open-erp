@@ -7,6 +7,7 @@
     <sql id="searchInfoSql">
         id AS id,
         accessories_id AS natrualkey,
+        accessories_id AS materialId,
         accessories_name AS name,
         accessories_name AS accessoriesName,
         material_type_id AS materialTypeId,
@@ -128,8 +129,8 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-            accessories_id AS natrualkey,
-            accessories_name AS name
+        accessories_id AS natrualkey,
+        accessories_name AS name
         from t_kf_accessories
         where del_flag=0
         <if test="name!=null and name!=''">
@@ -139,6 +140,7 @@
 
     <resultMap id="infosMap" type="AccessoriesInfo">
         <result column="accessoriesId" property="accessoriesId"/>
+        <result column="materialId" property="materialId"/>
         <result column="accessoriesName" property="accessoriesName"/>
         <result column="materialTypeId" property="materialTypeId"/>
         <result column="classicId" property="classicId"/>
@@ -166,13 +168,16 @@
         <result column="colorAmount" property="colorAmount"/>
         <result column="bomName" property="bomName"/>
         <result column="positionIdBl" property="positionIdBl"/>
-        <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=accessoriesId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=accessoriesId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryAccessoriesList" resultMap="infosMap">
         SELECT
             a.accessories_id AS accessoriesId,
+            a.accessories_id AS materialId,
             a.accessories_name AS accessoriesName,
             a.material_type_id AS materialTypeId,
             a.classic_id AS classicId,
@@ -212,6 +217,7 @@
 
     <resultMap id="infosMap2" type="AccessoriesInfo">
         <result column="accessoriesId" property="accessoriesId"/>
+        <result column="materialId" property="materialId"/>
         <result column="accessoriesName" property="accessoriesName"/>
         <result column="bomName" property="bomName"/>
         <result column="spId" property="spId"/>
@@ -230,13 +236,16 @@
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
         <result column="positionIdBl" property="positionIdBl"/>
-        <collection property="positionIds" column="{materialId=accessoriesId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=accessoriesId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=accessoriesId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=accessoriesId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
-    <select id="queryAllAccessoriesByBomId"  resultMap="infosMap2">
+    <select id="queryAllAccessoriesByBomId" resultMap="infosMap2">
           SELECT
             a.accessories_id AS accessoriesId,
+            a.accessories_id AS materialId,
             a.accessories_name AS accessoriesName,
             a.classic_id AS classicId ,
             a.tech_required AS techRequired,
@@ -262,4 +271,31 @@
             LEFT JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
             LEFT JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
     </select>
+
+    <update id="updateBatchUnitAmount">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_unit_dosage
+            <set>
+                unit_amount=#{item.unitAmount}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
+
+    <update id="updateBatchColorPrice">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_spinfo
+            <set>
+                unit_price=#{item.unitPrice},
+                color_price=#{item.colorPrice}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
+
+
 </mapper>

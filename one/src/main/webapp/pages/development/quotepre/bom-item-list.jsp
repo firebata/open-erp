@@ -6,22 +6,19 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <label class="col-xs-2  control-label" for="quotedPrice"
+                <label class="col-xs-2  control-label"
                        style="font-size: 28px;color: #ff2013"> 面辅成本(￥):</label>
                 <div class="col-xs-3" style="vertical-align:middle;">
-                    <input type="text" id="costing" name="costing" placeholder="面辅成本(￥)" ng-model="costing"
-                           style="border:0px;font-size: 26px;color: #ff2013" class="col-xs-11 col-sm-10"/>
+                    <input type="number"  name="costing" placeholder="面辅成本(￥)" disabled="disabled" ng-model="costing" style="border:0px;font-size: 26px;color: #ff2013" class="col-xs-11 col-sm-10"/>
                 </div>
-                <label class="col-xs-2  control-label" for="quotedPrice"
+                <label class="col-xs-2  control-label"
                        style="font-size: 28px;color: #ff2013"> 最终报价(€):</label>
                 <div class="col-xs-3" style="vertical-align:middle;">
-                    <input type="text" id="quotedPrice" name="lpPrice" placeholder="最终报价(€) "
-                           style="border:0px;font-size: 26px;color: #ff2013" class="col-xs-10 col-sm-12" />
+                    <input type="number"  name="quotedPrice" placeholder="最终报价(€) "  value="{{(((costing+ laborCost +costing * factoryMargins + laborCost * factoryMargins) / exchangeCosts + lpPrice) * (1 + commission/100)).toFixed(3)}}" style="border:0px;font-size: 26px;color: #ff2013" class="col-xs-10 col-sm-12" />
                 </div>
             </div>
             <form id="defaultForm" method="post" class="form-horizontal" action="edit">
                 <div class="modal-body">
-
                     <div class="tabbable">
                         <ul class="nav nav-tabs" id="myBomTab">
                             <li class="active">

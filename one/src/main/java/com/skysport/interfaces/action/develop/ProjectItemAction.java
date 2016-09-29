@@ -98,12 +98,25 @@ public class ProjectItemAction extends BaseAction<ProjectBomInfo> {
     @RequestMapping("/export_materialdetail/{natrualkeys}")
     @SystemControllerLog(description = "导出面辅料详细")
     public ModelAndView exportMaterialDetail(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException, InvalidFormatException {
-
-        projectItemManageService.exportMaterialDetail(request, response, natrualkeys);
-
+        String resourcePath = WebConstants.RESOURCE_PATH_BOM;
+        String fileTypeName = WebConstants.BOM_DETAIL_CN_NAME;
+        projectItemManageService.exportMaterialDetail(request, response, natrualkeys,resourcePath,fileTypeName);
         return null;
     }
 
+    /**
+     * @return 导出采购表
+     * @throws IOException
+     */
+    @RequestMapping("/export_materialpurchasedetail/{natrualkeys}")
+    @SystemControllerLog(description = "导出采购详细")
+    public ModelAndView exportMaterialPurchaseDetail(@PathVariable String natrualkeys, HttpServletRequest request, HttpServletResponse response) throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException, InvalidFormatException {
+        String resourcePath = WebConstants.RESOURCE_PATH_PURCHASE;
+        String fileTypeName = WebConstants.BOM_PURCHASE_CN_NAME;
+        projectItemManageService.exportMaterialDetail(request, response, natrualkeys,resourcePath,fileTypeName);
+
+        return null;
+    }
 
     /**
      * 此方法描述的是：

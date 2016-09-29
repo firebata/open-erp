@@ -17,4 +17,8 @@ public interface IPackagingService extends ICommonService<PackagingInfo> {
     List<PackagingInfo> queryPackagingList(String bomId);
 
     List<PackagingInfo> queryPackagingByBomId(String bomId);
+
+    void updateBatchUnitAmount(List<PackagingInfo> packagingInfos);
+
+    void updateBatchColorPrice(List<PackagingInfo> packagingInfos);
 }

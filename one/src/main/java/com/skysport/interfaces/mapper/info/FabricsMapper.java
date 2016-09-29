@@ -3,6 +3,7 @@ package com.skysport.interfaces.mapper.info;
 import com.skysport.core.mapper.CommonMapper;
 import com.skysport.interfaces.bean.develop.FabricsDetailInfo;
 import com.skysport.interfaces.bean.develop.FabricsInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,4 +30,8 @@ public interface FabricsMapper extends CommonMapper<FabricsInfo> {
 
 
     List<FabricsInfo> queryAllFabricByBomId(String bomId);
+
+    void updateBatchUnitAmount(@Param(value = "infos") List<FabricsInfo> infos);
+
+    void updateBatchColorPrice(@Param(value = "infos") List<FabricsInfo> infos);
 }

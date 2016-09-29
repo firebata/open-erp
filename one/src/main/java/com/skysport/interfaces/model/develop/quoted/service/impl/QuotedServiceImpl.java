@@ -6,13 +6,15 @@ import com.skysport.core.model.common.impl.CommonServiceImpl;
 import com.skysport.core.utils.DateUtils;
 import com.skysport.core.utils.ExcelCreateUtils;
 import com.skysport.core.utils.UpDownUtils;
-import com.skysport.interfaces.bean.develop.BomInfo;
-import com.skysport.interfaces.bean.develop.QuotedInfo;
+import com.skysport.interfaces.bean.develop.*;
 import com.skysport.interfaces.bean.relation.ProjectPojectItemBomSpVo;
 import com.skysport.interfaces.constant.WebConstants;
 import com.skysport.interfaces.mapper.develop.QuotedInfoMapper;
 import com.skysport.interfaces.mapper.info.BomInfoMapper;
+import com.skysport.interfaces.model.develop.accessories.service.IAccessoriesService;
 import com.skysport.interfaces.model.develop.bom.IBomService;
+import com.skysport.interfaces.model.develop.fabric.IFabricsService;
+import com.skysport.interfaces.model.develop.packaging.service.IPackagingService;
 import com.skysport.interfaces.model.develop.quoted.service.IQuotedService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -44,7 +46,12 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
     @Autowired
     private BomInfoMapper bomInfoMapper;
 
-
+    @Resource(name = "fabricsManageService")
+    private IFabricsService fabricsManageService;
+    @Resource(name = "accessoriesService")
+    private IAccessoriesService accessoriesService;
+    @Resource(name = "packagingService")
+    private IPackagingService packagingService;
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
 
@@ -59,15 +66,41 @@ public class QuotedServiceImpl extends CommonServiceImpl<QuotedInfo> implements 
         //计算报价:欧元价+包装费+C% .Remark:150527 2015年度新开发项目 - 价格分析.xlsx
         //%C= (欧元价+包装费) * 0.05 （0.05是佣金）
         //所以报价=(欧元价+包装费) * 1.05
-        Float commissionValue = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
-        BigDecimal commission, quotedPrice;
-        if (null != info.getEuroPrice() && null != info.getLpPrice()) {
-            DecimalFormat df = new DecimalFormat("0.0000");
-            commission = (info.getEuroPrice().add(info.getLpPrice())).multiply(new BigDecimal(commissionValue));
-            quotedPrice = info.getEuroPrice().add(info.getLpPrice()).add(commission);
-            info.setCommission(new BigDecimal(df.format(commission)));
+//        Float commission = Float.parseFloat(DictionaryInfoCachedMap.SINGLETONE.getDictionaryValue(WebConstants.FINANCE_CONFIG, WebConstants.COMMISSION_RATE, String.valueOf(WebConstants.COMMISSION_RATE_DEFAULTVALUE)));
+
+//        BigDecimal commission, quotedPrice;
+        BigDecimal laborCost = info.getLaborCost();
+        BigDecimal costing = info.getCosting();
+        BigDecimal factoryMargins = info.getFactoryMargins();
+        BigDecimal commission = info.getCommission();
+
+        DecimalFormat df0 = new DecimalFormat("0.00");
+        BigDecimal factoryOffer = new BigDecimal(df0.format(laborCost.add(costing).multiply(new BigDecimal("1").add(factoryMargins))));
+        info.setFactoryOffer(factoryOffer);
+        BigDecimal exchangeCosts = info.getExchangeCosts();
+        BigDecimal lpPrice = info.getLpPrice();
+
+        if (null != exchangeCosts && exchangeCosts.compareTo(new BigDecimal("0")) == 1) {
+            DecimalFormat df = new DecimalFormat("0.000");
+            BigDecimal quotedPrice = ((costing.add(laborCost)).multiply(new BigDecimal("1").add(factoryMargins)).divide(exchangeCosts, 4).add(lpPrice)).multiply(new BigDecimal("1").add(commission.divide(new BigDecimal("100"))));
             info.setQuotedPrice(new BigDecimal(df.format(quotedPrice)));
         }
+
+        List<FabricsInfo> fabricsInfos = info.getFabricsInfos();
+        List<AccessoriesInfo> accessoriesInfos = info.getAccessoriesInfos();
+        List<PackagingInfo> packagingInfos = info.getPackagingInfos();
+
+        //更改面料用量信息
+        fabricsManageService.updateBatchUnitAmount(fabricsInfos);
+        fabricsManageService.updateBatchColorPrice(fabricsInfos);
+
+        //更改辅料信息
+        accessoriesService.updateBatchUnitAmount(accessoriesInfos);
+        accessoriesService.updateBatchColorPrice(accessoriesInfos);
+
+        //更改包材信息
+        packagingService.updateBatchUnitAmount(packagingInfos);
+        packagingService.updateBatchColorPrice(packagingInfos);
 
         quotedInfoMapper.updateInfo(info);
     }

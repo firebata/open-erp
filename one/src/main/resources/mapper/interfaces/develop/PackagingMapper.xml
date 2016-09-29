@@ -2,11 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skysport.interfaces.mapper.develop.PackagingMapper">
+<mapper namespace="com.skysport.interfaces.mapper.info.PackagingMapper">
 
     <sql id="searchInfoSql">
         id AS id,
         packaging_id AS natrualkey,
+        fabrics_id AS materialId,
         packaging_name AS name,
         packaging_name AS packagingsName,
         material_type_id AS materialTypeId,
@@ -139,6 +140,7 @@
 
     <resultMap id="infosMap" type="KFPackaging">
         <result column="packagingId" property="packagingId"/>
+        <result column="materialId" property="materialId"/>
         <result column="packagingsName" property="packagingsName"/>
         <result column="materialTypeId" property="materialTypeId"/>
         <result column="classicId" property="classicId"/>
@@ -181,6 +183,7 @@
     <select id="queryPackagingList" resultMap="infosMap">
       SELECT
         a.packaging_id AS packagingId,
+        a.packaging_id AS materialId,
         a.packaging_name AS packagingsName,
         a.material_type_id AS materialTypeId,
         a.classic_id AS classicId,
@@ -222,6 +225,7 @@
 
     <resultMap id="infosMap2" type="KFPackaging">
         <result column="packagingId" property="packagingId"/>
+        <result column="materialId" property="materialId"/>
         <result column="packagingsName" property="packagingsName"/>
         <result column="bomName" property="bomName"/>
         <result column="spId" property="spId"/>
@@ -243,13 +247,16 @@
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
 
-        <collection property="positionIds" column="{materialId=packagingId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=packagingId}"  select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=packagingId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=packagingId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
     <select id="queryPackagingByBomId" resultMap="infosMap2">
           SELECT
             a.packaging_id AS packagingId,
+            a.packaging_id AS materialId,
             a.packaging_name AS packagingsName,
             e.bom_name AS bomName,
             a.packaging_id AS packagingId,
@@ -276,4 +283,29 @@
             LEFT JOIN  t_kf_material_unit_dosage c ON  c.material_id = k.material_id
             LEFT JOIN t_kf_material_spinfo d ON d.material_id = k.material_id
     </select>
+
+
+    <update id="updateBatchUnitAmount">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_unit_dosage
+            <set>
+                unit_amount=#{item.unitAmount}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
+    <update id="updateBatchColorPrice">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_spinfo
+            <set>
+                unit_price=#{item.unitPrice},
+                color_price=#{item.colorPrice}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
 </mapper>

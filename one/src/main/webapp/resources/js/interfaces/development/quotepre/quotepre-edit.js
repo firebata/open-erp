@@ -36,18 +36,23 @@
     /**
      * 报价信息
      */
-    function buildBomQuoted() {
+    function buildBomQuoted(controllerScope) {
         var quotedInfo = {};
-        quotedInfo.factoryOffer = $("#factoryOffer").val();
-        quotedInfo.factoryMargins = $("#factoryMargins").val();
-        quotedInfo.costing = $("#costing").val();
-        quotedInfo.lpPrice = $("#lpPrice").val();
-        quotedInfo.euroPrice = $("#euroPrice").val();
-        quotedInfo.exchangeCosts = $("#exchangeCosts").val();
+        quotedInfo.laborCost = controllerScope.laborCost;
+        quotedInfo.factoryOffer = controllerScope.factoryOffer;
+        quotedInfo.commission = controllerScope.commission;
+        quotedInfo.factoryMargins = controllerScope.factoryMargins;
+        quotedInfo.costing = controllerScope.costing;
+        quotedInfo.lpPrice = controllerScope.lpPrice;
+        quotedInfo.euroPrice = controllerScope.euroPrice;
+        quotedInfo.exchangeCosts = controllerScope.exchangeCosts;
         quotedInfo.bomId = $("#natrualkey").val();
         quotedInfo.spId = $("#spId").val();
         quotedInfo.fabricId = $("#fabricId").val();
         quotedInfo.natrualkey = $("#natrualkey").val();
+        quotedInfo.fabricsInfos = controllerScope.fabricsInfos;
+        quotedInfo.accessoriesInfos = controllerScope.accessoriesInfos;
+        quotedInfo.packagingInfos = controllerScope.packagingInfos;
         return quotedInfo;
     }
 
@@ -56,9 +61,9 @@
         // var natrualKey = $("#natrualkey").val();
         // $.sendRestFulAjax(infoURL + natrualKey, null, 'GET', 'json', _doSuccess_info);
         $("#quotepreForm").on('click', '#saveBtn', tosave);
-        $("#quotepreForm").on('click', '#submitBtn', tosubmit);
+        // $("#quotepreForm").on('click', '#submitBtn', tosubmit);
         //监听价格变动
-        $("#quotepreForm").on("click", "input", cbOfferDescDetail);
+        // $("#quotepreForm").on("click", "input", cbOfferDescDetail);
         var $btnDIV = $("#btnInfo");
         var approveStatus = $("#approveStatus").val();
         var natrualkey = $("#natrualkey").val();
@@ -130,10 +135,15 @@
     // }
 
     function tosave() {
-        var info = buildBomQuoted();//$("#quotepreForm").serialize();
+        var controllerScope = $('body[ng-controller="preQuoteCtr"]').scope();  // Get controller's scope
+
+        var info = buildBomQuoted(controllerScope);//$("#quotepreForm").serialize();
+        // var info = controllerScope;
         $.sendJsonAjax(editURL, info, function () {
             window.location.href = listURL;
-        })
+        });
+
+
     }
 
     function tosubmit() {

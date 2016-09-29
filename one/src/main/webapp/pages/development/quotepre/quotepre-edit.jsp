@@ -24,7 +24,6 @@
     <div class="row">
         <div class="col-xs-12">
             <form class="form-horizontal" role="form" id="quotepreForm">
-
                 <div id="quotepreDesc">
                     <div id="quotepreDescTitle">
                         <h5 class="header smaller lighter blue">
@@ -61,19 +60,14 @@
                                 <input type="text" id="spName" name="spName" placeholder="成衣厂"
                                        class="col-xs-10 col-sm-12" value="${quotedInfo.spName}" disabled="disabled"/>
                             </div>
-
                             <label class="col-xs-2  control-label" for="costing">面辅成本(￥)</label>
                             <div class="col-xs-3">
                                 <input type="number" id="costing" name="costing" placeholder="面辅成本(￥)"
-                                       ng-model="costing"
-                                       class="col-xs-11 col-sm-10"
-                                />
+                                       ng-model="costing" class="col-xs-11 col-sm-10" disabled="disabled"/>
                                 <button type="button" id="editBomBtn" class="btn btn-info col-xs-1 col-sm-2"
-                                        data-toggle="modal"
-                                        data-target="#editBomItemModal">修改
+                                        data-toggle="modal" data-target="#editBomItemModal">修改
                                 </button>
                             </div>
-
                         </div>
                         <div class="form-group">
                             <label class="col-xs-2  control-label" for="laborCost">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</label>
@@ -87,7 +81,6 @@
                                        placeholder="工厂利润率，e.g.0.15" ng-model="factoryMargins"
                                        class="col-xs-10 col-sm-12"/>
                             </div>
-
                         </div>
                         <div class="form-group">
                             <label class="col-xs-2  control-label" for="factoryOffer"> 工厂报价(￥) </label>
@@ -97,7 +90,6 @@
                                        value="{{((laborCost + costing) * (1 + factoryMargins)).toFixed(2)}}"
                                        disabled="disabled"/>
                             </div>
-
                             <label class="col-xs-2  control-label" for="exchangeCosts">
                                 换&nbsp;&nbsp;汇成&nbsp;&nbsp;本</label>
                             <div class="col-xs-3">
@@ -120,7 +112,7 @@
 
                             <label class="col-xs-2  control-label" for="exchangeCosts"> 佣金百分比</label>
                             <div class="col-xs-3">
-                                <input type="number" id="commission" name="commission" placeholder="佣金，e.g.3"
+                                <input type="number" id="commission" name="commission" placeholder="佣金，例如:10 "
                                        ng-model="commission" class="col-xs-10 col-sm-12"/>
                             </div>
                         </div>
@@ -132,8 +124,9 @@
                             <div class="col-xs-3" style="vertical-align:middle;">
                                 <input type="text" id="quotedPrice" name="quotedPrice" placeholder="最终报价(€) "
                                        style="border:0px;font-size: 30px;color: #ff2013" class="col-xs-10 col-sm-12"
-                                       ng-model="quotedPrice"/>
-                                <%--value="{{(((costing + laborCost + costing * factoryMargins + laborCost * factoryMargins) / exchangeCosts + lpPrice) * (1 + commission/100)).toFixed(3)}}--%>
+                                <%--ng-model="quotedPrice"--%>
+                                <%--ng-model="quotedPrice" ng-model="(((costing+ laborCost +costing * factoryMargins + laborCost * factoryMargins) / exchangeCosts + lpPrice) * (1 + commission/100)).toFixed(3)" --%>
+                                       value="{{(((costing+ laborCost +costing * factoryMargins + laborCost * factoryMargins) / exchangeCosts + lpPrice) * (1 + commission/100)).toFixed(3)}}"/>
                             </div>
                         </div>
                     </div>
@@ -150,33 +143,49 @@
 <jsp:include page="bom-item-list.jsp"></jsp:include>
 <jsp:include page="../../base/hb-footj.jsp"></jsp:include>
 <script type="text/javascript" src="<%=path%>/resources/js/angular/angular.min.js"></script>
-<%--<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/quotepre/quotepre-edit.js"></script>--%>
+<script type="text/javascript" src="<%=path%>/resources/js/interfaces/development/quotepre/quotepre-edit.js"></script>
 <script type="text/javascript">
 
     var preQuoteApp = angular.module('preQuoteApp', []);
     preQuoteApp.controller('preQuoteCtr', function ($scope, $http) {
+
         $scope.costing = ${quotedInfo.costing==null?0:quotedInfo.costing};
         $scope.laborCost = ${quotedInfo.laborCost==null?0:quotedInfo.laborCost};
         $scope.factoryMargins = ${quotedInfo.factoryMargins==null?0:quotedInfo.factoryMargins};
         $scope.exchangeCosts = ${quotedInfo.exchangeCosts==null?0:quotedInfo.exchangeCosts};
         $scope.lpPrice = ${quotedInfo.lpPrice==null?0:quotedInfo.lpPrice};
         $scope.commission = ${quotedInfo.commission==null?0:quotedInfo.commission};
-        $scope.quotedPrice= ((($scope.costing + $scope.laborCost + $scope.costing * $scope.factoryMargins + $scope.laborCost * $scope.factoryMargins) / $scope.exchangeCosts + $scope.lpPrice) * (1 + $scope.commission/100)).toFixed(3);
+//        $scope.quotedPrice = parseFloat(((($scope.costing + $scope.laborCost + $scope.costing * $scope.factoryMargins + $scope.laborCost * $scope.factoryMargins) / $scope.exchangeCosts + $scope.lpPrice) * (1 + $scope.commission / 100)).toFixed(3));
         var url = "/development/quotepre/qr_items_of_bom/" + $("#natrualkey").val();
+
         $http.get(url).success(function (data) {
+            $scope.data = data;
             $scope.fabricsInfos = data.fabricsInfos;
             $scope.accessoriesInfos = data.accessoriesInfos;
             $scope.packagingInfos = data.packagingInfos;
         });
-        $scope.change = function (row,$event) {
 
+        //汇总
+        $scope.change = function () {
 
+//            jQ写法
+            var sum = 0;
+            $("table tbody tr").each(function () {
+                var unitAmount = $(this).find("td input:eq(0)").val();
+                var unitPrice = $(this).find("td input:eq(1)").val();
+                sum += parseFloat(unitAmount * unitPrice);
+            })
 
+            //ng写法,忘记dom
+//            var sum = 0;
+//            angular.forEach($scope.data, function (data, index, array) {
+//                sum += data.unitAmount * data.unitPrice;
+//            });
 
-            console.info($event);
-
-
+            $scope.costing = parseFloat(sum.toFixed(3));//一个坑：toFixed返回类型是字符串
+//            $scope.quotedPrice = parseFloat(((($scope.costing + $scope.laborCost + $scope.costing * $scope.factoryMargins + $scope.laborCost * $scope.factoryMargins) / $scope.exchangeCosts + $scope.lpPrice) * (1 + $scope.commission / 100)).toFixed(3));
         };
+
     });
     preQuoteApp.filter("fixed", function () {
         return function (input, len) {
@@ -184,32 +193,4 @@
             return input.toFixed(length);
         }
     });
-
-
-    /*$(function () {
-
-
-     $("table tr td").on("change", "input", function () {
-     var costingTemp = $("#costing").val();//最初的面辅料成本
-     var $tr = $(this).parent().parent();
-     var unitAmount = $tr.find("td:eq(2) input").val();
-     var $unitPrice = $tr.find("td:eq(3) input");
-     var $colorPrice = $tr.find("td:eq(4) input");
-
-     var unitPrice = $unitPrice.val();
-     var colorPriceTemp = $colorPrice.val();
-     var colorPrice = (unitAmount * unitPrice).toFixed(3);
-     $colorPrice.val(colorPrice);
-     var costing = (parseFloat(costingTemp) + (colorPrice - colorPriceTemp)).toFixed(3);
-     //            var scope = angular.element(document.querySelector('#costing')).scope();
-     var scope = $('#costing').scope();
-     scope.costing = costing;
-     //                $scope.costing = costing;
-     scope.$apply();
-     })
-
-
-     });*/
-
-
 </script>

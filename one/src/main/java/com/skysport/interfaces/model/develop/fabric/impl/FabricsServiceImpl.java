@@ -170,6 +170,20 @@ public class FabricsServiceImpl extends CommonServiceImpl<FabricsInfo> implement
         return fabricsMapper.queryAllFabricByBomId(bomId);
     }
 
+    @Override
+    public void updateBatchUnitAmount(List<FabricsInfo> infos) {
+        if (null != infos && infos.size() > 0) {
+            fabricsMapper.updateBatchUnitAmount(infos);
+        }
+    }
+
+    @Override
+    public void updateBatchColorPrice(List<FabricsInfo> infos) {
+        if (null != infos && infos.size() > 0) {
+            fabricsMapper.updateBatchColorPrice(infos);
+        }
+    }
+
     /**
      * @param fabricsJoinInfo FabricsJoinInfo
      * @param fabricId        String

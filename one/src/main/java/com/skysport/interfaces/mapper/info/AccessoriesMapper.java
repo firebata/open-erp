@@ -2,6 +2,7 @@ package com.skysport.interfaces.mapper.info;
 
 import com.skysport.core.mapper.CommonMapper;
 import com.skysport.interfaces.bean.develop.AccessoriesInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface AccessoriesMapper extends CommonMapper<AccessoriesInfo> {
     List<AccessoriesInfo> queryAccessoriesList(String bomId);
 
     List<AccessoriesInfo> queryAllAccessoriesByBomId(String bomId);
+
+    void updateBatchUnitAmount(@Param(value = "infos") List<AccessoriesInfo> infos);
+
+    void updateBatchColorPrice(@Param(value = "infos") List<AccessoriesInfo> infos);
 }

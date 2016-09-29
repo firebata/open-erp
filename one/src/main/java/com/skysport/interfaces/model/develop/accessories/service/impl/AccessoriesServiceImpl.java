@@ -131,6 +131,20 @@ public class AccessoriesServiceImpl extends CommonServiceImpl<AccessoriesInfo> i
         return accessoriesMapper.queryAllAccessoriesByBomId(bomId);
     }
 
+    @Override
+    public void updateBatchUnitAmount(List<AccessoriesInfo> infos) {
+        if (null != infos && infos.size() > 0) {
+            accessoriesMapper.updateBatchUnitAmount(infos);
+        }
+    }
+
+    @Override
+    public void updateBatchColorPrice(List<AccessoriesInfo> infos) {
+        if (null != infos && infos.size() > 0) {
+            accessoriesMapper.updateBatchColorPrice(infos);
+        }
+    }
+
 //    private String buildKindName(BomInfo bomInfo, AccessoriesJoinInfo accessoriesJoinInfo) {
 //
 //        String kind_name = CharConstant.EMPTY;

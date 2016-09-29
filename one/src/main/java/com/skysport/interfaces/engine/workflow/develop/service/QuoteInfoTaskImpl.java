@@ -3,6 +3,7 @@ package com.skysport.interfaces.engine.workflow.develop.service;
 import com.skysport.core.model.workflow.impl.WorkFlowServiceImpl;
 import com.skysport.interfaces.constant.WebConstants;
 import com.skysport.interfaces.mapper.develop.QuotedInfoMapper;
+import com.skysport.interfaces.mapper.info.BomInfoMapper;
 import com.skysport.interfaces.model.develop.bom.IBomService;
 import org.activiti.engine.task.Task;
 import org.apache.commons.collections.map.HashedMap;
@@ -23,6 +24,9 @@ public class QuoteInfoTaskImpl extends WorkFlowServiceImpl {
 
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
+
+    @Resource(name = "bomInfoMapper")
+    private BomInfoMapper bomInfoMapper;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -45,6 +49,9 @@ public class QuoteInfoTaskImpl extends WorkFlowServiceImpl {
 
     @Override
     public void updateApproveStatus(String businessKey, String status) {
+        if (WebConstants.APPROVE_STATUS_REJECT.equals(status)) {
+            bomInfoMapper.updateApproveStatus(businessKey, status);
+        }
         quotedInfoMapper.updateApproveStatus(businessKey, status);
     }
 

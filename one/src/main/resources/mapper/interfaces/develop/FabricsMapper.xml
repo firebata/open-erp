@@ -6,6 +6,7 @@
     <sql id="searchInfoSql">
         id AS id,
         fabrics_no AS fabricNo,
+        fabrics_id AS materialId,
         fabrics_id AS natrualkey,
         fabrics_id AS fabricId,
         fabrics_name AS name,
@@ -26,10 +27,9 @@
     </sql>
 
 
-
     <select id="queryInfo" resultType="FabricsInfo">
         select
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_kf_fabrics
         WHERE fabrics_id =#{natrualkey}
         limit 1
@@ -52,7 +52,7 @@
 
     <select id="searchInfos" resultType="FabricsInfo">
         SELECT
-          <include refid="searchInfoSql"/>
+        <include refid="searchInfoSql"/>
         FROM t_kf_fabrics
         WHERE del_flag=0
         <if test="searchValue!=null and searchValue != ''">
@@ -174,8 +174,8 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-            fabrics_id AS natrualkey,
-            fabrics_name AS name
+        fabrics_id AS natrualkey,
+        fabrics_name AS name
         from t_kf_fabrics
         where del_flag=0
         <if test="name!=null and name!=''">
@@ -185,6 +185,7 @@
 
     <resultMap id="infosMap" type="FabricsInfo">
         <result column="fabricId" property="fabricId"/>
+        <result column="materialId" property="materialId"/>
         <result column="fabricNo" property="fabricNo"/>
         <result column="fabricName" property="fabricName"/>
         <result column="materialTypeId" property="materialTypeId"/>
@@ -246,16 +247,20 @@
         <result column="delFlag" property="delFlag"/>
         <result column="updateTime" property="updateTime"/>
         <result column="remark" property="remark"/>
-        <result column="type" property="type" />
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <result column="type" property="type"/>
+        <collection property="positionIds" column="{materialId=fabricId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
 
     <select id="queryFabricList" resultMap="infosMap">
               SELECT
                 a.fabrics_id AS fabricId,
+                a.fabrics_id AS materialId,
                 a.fabrics_no AS fabricNo,
                 a.fabrics_name AS fabricName,
                 a.material_type_id AS materialTypeId,
@@ -328,6 +333,7 @@
     <resultMap id="infosMap2" type="FabricsInfo">
         <result column="fabricNo" property="fabricNo"/>
         <result column="fabricId" property="fabricId"/>
+        <result column="materialId" property="materialId"/>
         <result column="fabricName" property="fabricName"/>
         <result column="bomName" property="bomName"/>
         <result column="spId" property="spId"/>
@@ -377,14 +383,18 @@
         <result column="colorPrice" property="colorPrice"/>
         <result column="colorAmount" property="colorAmount"/>
         <result column="type" property="type"/>
-        <collection property="positionIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
-        <collection property="pantoneIds" column="{materialId=fabricId}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
-        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}" select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="positionIds" column="{materialId=fabricId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPositionMapper.queryIds"/>
+        <collection property="pantoneIds" column="{materialId=fabricId}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
+        <collection property="compositePantoneIds" column="{materialId=fabricId,type=type}"
+                    select="com.skysport.interfaces.mapper.develop.KFMaterialPantoneMapper.queryIds"/>
     </resultMap>
 
-    <select id="queryAllFabricByBomId"  resultMap="infosMap2">
+    <select id="queryAllFabricByBomId" resultMap="infosMap2">
            SELECT
                 a.fabrics_id AS fabricId,
+                a.fabrics_id AS materialId,
                 a.fabrics_no AS fabricNo,
                 a.fabrics_name AS fabricName,
                 a.composite_classic_id AS compositeClassicId,
@@ -442,6 +452,30 @@
             LEFT JOIN t_kf_material_unit_dosage c ON b.fabrics_id = c.material_id
             LEFT JOIN t_kf_material_spinfo d ON c.material_id = d.material_id
     </select>
+
+    <update id="updateBatchUnitAmount">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_unit_dosage
+            <set>
+                unit_amount=#{item.unitAmount}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
+    <update id="updateBatchColorPrice">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            update
+            t_kf_material_spinfo
+            <set>
+                unit_price=#{item.unitPrice},
+                color_price=#{item.colorPrice}
+            </set>
+            WHERE
+            material_id =#{item.materialId}
+        </foreach>
+    </update>
 
 
 </mapper>

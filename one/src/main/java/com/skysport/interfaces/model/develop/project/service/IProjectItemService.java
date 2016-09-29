@@ -28,7 +28,7 @@ public interface IProjectItemService extends ICommonService<ProjectBomInfo> {
 
     void addBatchBomInfo(List<ProjectBomInfo> info);
 
-    void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, InvalidFormatException;
+    void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys, String resourcePath, String fileTypeName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, InvalidFormatException;
 
     void updateMainColors(String sexId, String mainColor, String mainColorOld, String projectId);
 

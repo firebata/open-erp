@@ -62,13 +62,14 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     @Resource(name = "bomManageService")
     private IBomService bomManageService;
 
-    @Resource(name = "fabricsManageService")
-    private IFabricsService fabricsManageService;
+
     @Resource(name = "projectCategoryManageService")
     private IProjectCategoryManageService projectCategoryManageService;
+
+    @Resource(name = "fabricsManageService")
+    private IFabricsService fabricsManageService;
     @Resource(name = "accessoriesService")
     private IAccessoriesService accessoriesService;
-
     @Resource(name = "packagingService")
     private IPackagingService packagingService;
 
@@ -178,13 +179,13 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
      * @throws UnsupportedEncodingException
      */
     @Override
-    public void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, InvalidFormatException {
+    public void exportMaterialDetail(HttpServletRequest request, HttpServletResponse response, String natrualkeys,String resourcePath,String fileTypeName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException, InvalidFormatException {
 
         List<String> itemIds = Arrays.asList(natrualkeys.split(CharConstant.COMMA));
 
         StringBuilder bomDetailExcelName = new StringBuilder();
         bomDetailExcelName.append(DateUtils.SINGLETONE.getYyyyMmdd());
-        bomDetailExcelName.append(CharConstant.HORIZONTAL_LINE).append(WebConstants.BOM_DETAIL_CN_NAME);
+        bomDetailExcelName.append(CharConstant.HORIZONTAL_LINE).append(fileTypeName);
 
         Set<String> seriesNameSet = new HashSet<String>();
         Set<String> bomNameSet = new HashSet<>();
@@ -227,7 +228,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         bomDetailExcelName.append(WebConstants.SUFFIX_EXCEL_XLSX);
         String fileName = bomDetailExcelName.toString();
 
-        String resourcePath = WebConstants.RESOURCE_PATH_BOM;
+
         //创建文件
         String downLoadPath = ExcelCreateUtils.getInstance().create(bomInfoDetails, fileName, ctxPath, resourcePath);
         //下载

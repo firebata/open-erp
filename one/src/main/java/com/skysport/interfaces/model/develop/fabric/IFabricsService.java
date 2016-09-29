@@ -30,4 +30,8 @@ public interface IFabricsService extends ICommonService<FabricsInfo> {
      * @return
      */
     List<FabricsInfo> queryAllFabricByBomId(String bomId);
+
+    void updateBatchUnitAmount(List<FabricsInfo> fabricsInfos);
+
+    void updateBatchColorPrice(List<FabricsInfo> fabricsInfos);
 }

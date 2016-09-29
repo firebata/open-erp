@@ -150,6 +150,7 @@ public enum FabricsServiceHelper {
         chgUnitId(fabricsInfo);
 
 
+
         fabricsInfo.setDescription(stringBuilder.toString());
     }
 
