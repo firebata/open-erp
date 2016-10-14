@@ -16,12 +16,14 @@
         bomSave: bomSave,
         bomSubmit: bomSubmit,
         bomAutoBackup: bomAutoBackup,
-        mainColorEditInBom: mainColorEditInBom
+        mainColorEditInBom: mainColorEditInBom,
+        copyRefBomId: copyRefBomId
         // caculateCostingVal: caculateCostingVal
     });
 
     $(function () {
-        initBom();
+        var bomid = $("#natrualkey").val();
+        initBom(bomid);
         //赋值价格
         // $("#factoryItemInfo").on("change", "select", factoryItemInfoSelectChg);
 
@@ -170,12 +172,54 @@
         }
     }
 
-    function initBom() {
+    var copyBomInfoFromDb = function ($input) {
+        var bomid = $input.val();
+
+        bootbox.confirm({
+            message: "是否复制BOM编号为"+bomid+"的信息到本BOM中",
+            buttons: {
+                confirm: {
+                    label: '是的',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+               if(result){
+                   // var bomid = $("#natrualkey").val();
+                   initBom(bomid);
+               }
+            }
+        });
+
+    };
+
+    function copyRefBomId(_this, _idName) {
+        var $this = $(_this);
+        var classVal = $this.attr("class");
+        var editClassVal = 'glyphicon glyphicon-edit';
+        var okClassVal = 'glyphicon glyphicon-ok';
+        var $input = $('#' + _idName);
+        if (classVal == editClassVal) {
+            $input.removeAttr("disabled");
+            $this.removeClass(editClassVal).addClass(okClassVal);
+        } else if (classVal == okClassVal) {
+            $input.attr("disabled", "disabled");
+            $this.removeClass(okClassVal).addClass(editClassVal);
+            if(_idName == 'refBomId'){
+                copyBomInfoFromDb($input);
+            }
+
+        }
+    }
+
+    function initBom(bomid) {
+
         //初始化描述信息
-        //var natrualkey = $("#natrualkey").val();
-        $.initBomDesc(function (_data) {
-
-
+        $.initBomDesc(bomid, function (_data) {
 
             //初始化面料
             $.initFabric(_data.fabrics);
@@ -194,8 +238,10 @@
             //初始化报价信息
             $.iniBomQuotedInfo(_data.quotedInfo);
 
+
             showHandleBtn();
         });
+
 
     }
 
@@ -241,9 +287,9 @@
         //面料信息
         var fabricObj = $.buildFabricItems();
         var isOneShow = fabricObj.isOneShow;
-        if(!isOneShow){
+        if (!isOneShow) {
             bootbox.alert("保存失败，必须选择一种面料作为主面料显示在报价表.");
-            return ;
+            return;
         }
         var fabricItems = fabricObj.fabricItems;
         bominfo.fabricItems = fabricItems;

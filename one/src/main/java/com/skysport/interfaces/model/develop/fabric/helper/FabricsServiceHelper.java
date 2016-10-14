@@ -100,6 +100,8 @@ public enum FabricsServiceHelper {
         //复合或涂层列表
         String blcId = chgBlcId(fabricsInfo, stringBuilder);
 
+        stringBuilder.append(fabricsInfo.getComponent()).append(",");
+        stringBuilder.append(fabricsInfo.getGram()).append(",");
         //面料功能
         chgFunction(fabricsInfo, stringBuilder);
 
@@ -150,8 +152,24 @@ public enum FabricsServiceHelper {
         chgUnitId(fabricsInfo);
 
 
+        String desc = stringBuilder.toString();
+        desc = getDesc(desc);
 
-        fabricsInfo.setDescription(stringBuilder.toString());
+        fabricsInfo.setDescription(desc);
+
+
+    }
+
+    public String getDesc(String desc) {
+        if (StringUtils.isNotBlank(desc)) {
+            if (desc.endsWith(",")) {
+                desc = desc.substring(0, desc.length() - 1);
+            } else if (desc.startsWith(",")) {
+                desc = desc.substring(1);
+            }
+
+        }
+        return desc;
     }
 
     private void chgCompositeFunction(FabricsInfo fabricsInfo, StringBuilder stringBuilder) {
@@ -207,6 +225,7 @@ public enum FabricsServiceHelper {
         chgOilProofId(fabricsInfo, stringBuilder2);//防油
 
         chgAntMosquitosId(fabricsInfo, stringBuilder2);//防蚊虫
+
 
         if (stringBuilder2.length() != 0) {
             stringBuilder.append("功能:").append(stringBuilder2.toString());

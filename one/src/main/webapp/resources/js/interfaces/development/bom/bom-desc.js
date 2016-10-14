@@ -10,18 +10,18 @@
     var appURL = path + '/resources/js/i18n/app/';
     $.extend({
         initBomDesc: initDesc,
-        buildBomDesc:buildBomDesc
+        buildBomDesc: buildBomDesc
     })
 
     /**
      * 初始化描述信息
      */
-    function initDesc(callback) {
+    function initDesc(bomid, callback) {
 
         //初始化下拉列表
         reloadDescSelectData();
 
-        initDescFileds(callback);
+        initDescFileds(bomid, callback);
 
         //国际化
         i18nDesc();
@@ -60,29 +60,35 @@
 
 
     //赋初始值
-    function initDescFileds(callback) {
-
-        var natrualkey = $("#natrualkey").val();
-        if (natrualkey != '' && natrualkey != 'null') {
-            $.sendRestFulAjax(infoUrl + natrualkey, null, 'GET', 'json', function (_data) {
-                Object.keys(_data).map(function (key) {
-                    $('#bomDesc input').filter(function () {
-                        return key == this.name;
-                    }).val(_data[key]);
-                    $('#bomDesc select').filter(function () {
-                        return key == this.name;
-                    }).val(_data[key]);
-                    // $("#" + key).val(_data[key]);
-                });
-
-                callback(_data);
+    function initDescFileds(bomid, callback) {
+        if (bomid != '' && bomid != 'null') {
+            $.sendRestFulAjax(infoUrl + bomid, null, 'GET', 'json', function (_data) {
+                if (null != _data || "" != _data) {
+                    if ($("#curBomId").val() == $("#refBomId").val()) {
+                        Object.keys(_data).map(function (key) {
+                            $('#bomDesc input').filter(function () {
+                                return key == this.name;
+                            }).val(_data[key]);
+                            $('#bomDesc select').filter(function () {
+                                return key == this.name;
+                            }).val(_data[key]);
+                            // $("#" + key).val(_data[key]);
+                        });
+                    }
+                    callback(_data);
+                }
+                else{
+                    bootbox.alert("没有找到BOM编号为"+bomid+"的信息.");
+                }
             });
         }
     }
 
     //第一次初始化下拉列表 & 添加下拉列表监听事件
     var reloadDescSelectData = function () {
-        $.sendRestFulAjax(projectSelectUrl, null, 'GET', 'json', initDescSelect);
+        if ($("#curBomId").val() == $("#refBomId").val()) {
+            $.sendRestFulAjax(projectSelectUrl, null, 'GET', 'json', initDescSelect);
+        }
     }
 
     function initDescSelect(_data) {

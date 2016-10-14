@@ -202,10 +202,22 @@
 
                         <label class="col-xs-1  control-label" for="{{antMosquitosId}}"> 防&nbsp;&nbsp;蚊&nbsp;&nbsp;虫  <a href="javascript:openChildW('<%=path%>/system/function/anti_mosquitos/list')" target="_blank">+</a></label>
                         <div class="col-xs-2">
-                            <select class="col-xs-12" data-style="btn-info" id="{{antMosquitosId}}"
-                                    name="antMosquitosId"
-                                    placeholder="防蚊虫">
+                            <select class="col-xs-12" data-style="btn-info" id="{{antMosquitosId}}" name="antMosquitosId" placeholder="防蚊虫">
                             </select>
+                        </div>
+
+                        <label class="col-xs-1  control-label" for="{{gram}}"> 克&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重 </label>
+                        <div class="col-xs-2">
+                            <input type="text" id="{{gram}}" name="gram" placeholder="克重" class="col-xs-10 col-sm-12"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-1  control-label" for="{{component}}"> 成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分 </label>
+                        <div class="col-xs-2">
+                            <input type="text" id="{{component}}" name="component" placeholder="成分" class="col-xs-10 col-sm-12"/>
                         </div>
 
                     </div>
@@ -274,12 +286,14 @@
 
 
                         <div class="form-group">
+
                             <label class="col-xs-1  control-label" for="{{compositeWaterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/water_repllent/list')" target="_blank">+</a></label>
                             <div class="col-xs-2">
                                 <select class="col-xs-12" data-style="btn-info" id="{{compositeWaterRepllentId}}"
                                         name="compositeWaterRepllentId" placeholder="防泼水">
                                 </select>
                             </div>
+
                             <label class="col-xs-1  control-label" for="{{compositeWvpId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;湿  <a href="javascript:openChildW('<%=path%>/system/material/wvp/list')" target="_blank">+</a></label>
                             <div class="col-xs-2">
                                 <select class="col-xs-12" data-style="btn-info" id="{{compositeWvpId}}"
@@ -287,6 +301,7 @@
                                         placeholder="透湿">
                                 </select>
                             </div>
+
                             <label class="col-xs-1  control-label" for="{{compositeWaterProofId}}"> 水&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;压  <a href="javascript:openChildW('<%=path%>/system/function/water_proof/list')" target="_blank">+</a></label>
                             <div class="col-xs-2">
                                 <select class="col-xs-12" data-style="btn-info" id="{{compositeWaterProofId}}"
@@ -302,6 +317,8 @@
                                         placeholder="透气">
                                 </select>
                             </div>
+
+
                         </div>
 
 
@@ -350,6 +367,7 @@
                                         placeholder="防蚊虫">
                                 </select>
                             </div>
+
                         </div>
 
                     </div>

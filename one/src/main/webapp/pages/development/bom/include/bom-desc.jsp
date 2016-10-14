@@ -15,17 +15,15 @@
     </div>
     <div id="bomDescDetail">
         <div class="form-group">
-            <label class="col-xs-2  control-label" for="customerId" id="customerLableId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户 </label>
+            <label class="col-xs-2  control-label" for="customerId" id="customerLableId"> 客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户1 </label>
             <div class="col-xs-3">
-                <select class="col-xs-12" data-style="btn-info" id="customerId" name="customerId"
-                        placeholder="客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户" disabled="disabled">
+                <select class="col-xs-12" data-style="btn-info" id="customerId" name="customerId"   placeholder="客&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户" disabled="disabled">
                 </select>
             </div>
             <label class="col-xs-2  control-label" for="areaId"> 区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域 </label>
 
             <div class="col-xs-3">
-                <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"
-                        placeholder="区域" disabled="disabled">
+                <select class="col-xs-12" data-style="btn-info" id="areaId" name="areaId"   placeholder="区域" disabled="disabled">
                 </select>
             </div>
 
@@ -38,16 +36,14 @@
             <label class="col-xs-2  control-label" for="seriesId"> 系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列 </label>
 
             <div class="col-xs-3">
-                <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"
-                        placeholder="系列" disabled="disabled">
+                <select class="col-xs-12" data-style="btn-info" id="seriesId" name="seriesId"    placeholder="系列" disabled="disabled">
                 </select>
             </div>
 
             <label class="col-xs-2  control-label" for="collectionNum"> 款&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式 </label>
 
             <div class="col-xs-3">
-                <input type="text" id="collectionNum" name="collectionNum" placeholder="款式"
-                       class="col-xs-10 col-sm-12" disabled="disabled"/>
+                <input type="text" id="collectionNum" name="collectionNum" placeholder="款式" class="col-xs-10 col-sm-12" disabled="disabled"/>
             </div>
 
         </div>
@@ -55,20 +51,30 @@
         <div class="form-group">
 
             <label class="col-xs-2  control-label" for="mainColor"> 主&nbsp;&nbsp;颜&nbsp;&nbsp;色 </label>
-
             <div class="col-xs-3" align="center">
-                <input type="text" id="mainColor" name="mainColor" placeholder="主颜色"
-                       class="col-xs-10 col-sm-10" disabled="disabled"/>
-                <input type="hidden" name="mainColorOld" id="mainColorOld"/>
+                <input type="text" id="mainColor" name="mainColor" placeholder="主颜色" class="col-xs-10 col-sm-10" disabled="disabled"/>
                 <span class="glyphicon glyphicon-edit" id="mainColorEditBtnId"    onclick="javascript:$.mainColorEditInBom(this)"></span>
+                <input type="hidden" name="mainColorOld" id="mainColorOld"/>
             </div>
 
+
+            <label class="col-xs-2  control-label" for="curBomId"> BOM编号 </label>
+
+            <div class="col-xs-3">
+                <input type="text" id="curBomId" name="curBomId" placeholder="BOM编号" value="${natrualkey}" class="col-xs-10 col-sm-12" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2  control-label" for="refBomId"> 参考BOM </label>
+            <div class="col-xs-3"  align="center">
+                <input type="text" id="refBomId" name="refBomId" placeholder="参考BOM" value="${natrualkey}" class="col-xs-10 col-sm-110" disabled="disabled"/>
+                <span class="glyphicon glyphicon-edit" id="refBomIdEditBtnId"    onclick="javascript:$.copyRefBomId(this,'refBomId')"></span>
+            </div>
 
             <label class="col-xs-2  control-label" for="offerAmount"> 订单数量 </label>
 
             <div class="col-xs-3">
-                <input type="text" id="offerAmount" name="offerAmount" placeholder="订单数量"
-                       class="col-xs-10 col-sm-12"/>
+                <input type="text" id="offerAmount" name="offerAmount" placeholder="订单数量"       class="col-xs-10 col-sm-12"/>
             </div>
         </div>
     </div>

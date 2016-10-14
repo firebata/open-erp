@@ -84,6 +84,8 @@
             pantone_id = #{pantoneId},
             position_id = #{positionId},
             project_id = #{projectId},
+			gram = #{gram},
+			component = #{component},
             bom_id = #{bomId},
             is_show = #{isShow},
             composite_classic_id = #{compositeClassicId},
@@ -132,8 +134,8 @@
 
 
     <insert id="add">
-        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id,position_id_bl)
-        values (#{natrualkey},#{fabricNo},#{fabricName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{isShow},#{compositeClassicId},#{compositeProductTypeId},#{compositePantoneId},#{positionIdBl})
+        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id,position_id_bl,component,gram,)
+        values (#{natrualkey},#{fabricNo},#{fabricName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{isShow},#{compositeClassicId},#{compositeProductTypeId},#{compositePantoneId},#{positionIdBl},#{component},#{gram})
     </insert>
 
     <insert id="addDetail">
@@ -174,8 +176,8 @@
     <!--信息下拉列表-->
     <select id="querySelectList" resultType="CommonBean">
         select
-        fabrics_id AS natrualkey,
-        fabrics_name AS name
+          fabrics_id AS natrualkey,
+          fabrics_name AS name
         from t_kf_fabrics
         where del_flag=0
         <if test="name!=null and name!=''">
@@ -232,6 +234,8 @@
         <result column="quickDryId" property="quickDryId"/>
         <result column="oilProofId" property="oilProofId"/>
         <result column="antMosquitosId" property="antMosquitosId"/>
+        <result column="component" property="component"/>
+        <result column="gram" property="gram"/>
         <result column="compositeWaterProofId" property="compositeWaterProofId"/>
         <result column="compositePermeabilityId" property="compositePermeabilityId"/>
         <result column="compositeWaterpressureId" property="compositeWaterpressureId"/>
@@ -280,6 +284,8 @@
                 a.composite_classic_id AS compositeClassicId,
                 a.composite_product_type_id AS compositeProductTypeId,
                 a.composite_pantone_id AS compositePantoneId,
+			    a.component AS component,
+			    a.gram AS gram,
                 b.unit_id AS unitId,
                 b.unit_amount AS unitAmount,
                 c.sp_id AS spId,
@@ -363,6 +369,8 @@
         <result column="quickDryId" property="quickDryId"/>
         <result column="oilProofId" property="oilProofId"/>
         <result column="antMosquitosId" property="antMosquitosId"/>
+        <result column="component" property="component"/>
+        <result column="gram" property="gram"/>
         <result column="compositeWaterProofId" property="compositeWaterProofId"/>
         <result column="compositePermeabilityId" property="compositePermeabilityId"/>
         <result column="compositeWaterpressureId" property="compositeWaterpressureId"/>
@@ -407,6 +415,8 @@
                 a.bom_id AS bomId,
                 a.product_type_id AS productTypeId,
                 a.pantone_id AS pantoneId,
+			    a.component AS component,
+			    a.gram AS gram,
                 b.specfication_id AS specificationId,
                 b.dye_id AS dyeId,
                 b.water_repllent_id AS waterRepllentId,

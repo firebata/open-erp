@@ -286,7 +286,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
     @Override
     public void dealProjectItemsOnProjectChanged(ProjectInfo info) {
 
-
         String projectId = info.getNatrualkey();
 //        List<ProjectCategoryInfo> categoryInfosInDB = queryCategoryInfosInDB(projectId);
 
@@ -319,8 +318,6 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         //增加项目和子项目的关系
         List<ProjectItemProjectIdVo> relations = ProjectHelper.SINGLETONE.getProjectItemProjectIdVo(projectBomInfos);
         projectItemProjectServiceImpl.batchInsert(relations);
-
-
         projectItemTaskService.suspendProcessInstanceByIds(subtract);//终止流程
 
         List<String> needToStartFlowIds = new ArrayList<>();
@@ -332,9 +329,7 @@ public class ProjectItemServiceImpl extends CommonServiceImpl<ProjectBomInfo> im
         List<ProjectBomInfo> needToStartFlowList = getNeedToStartFlowList(needToStartFlowIds, projectBomInfos);//页面传入的子项目中，过滤掉已经启动流程实例的子项目
         List<TaskVo> taskVos = TaskServiceHelper.getInstance().changeToBusinessVo(needToStartFlowList);
 
-
 //        updateApproveStatusBatch(projectBomInfos);
-
 
         //启动流程
 //        startWorkFlow(addAnUpdates);

@@ -9,6 +9,7 @@ import com.skysport.interfaces.bean.develop.KFMaterialPosition;
 import com.skysport.interfaces.bean.develop.MaterialSpInfo;
 import com.skysport.interfaces.bean.develop.join.AccessoriesJoinInfo;
 import com.skysport.interfaces.constant.WebConstants;
+import com.skysport.interfaces.model.develop.fabric.helper.FabricsServiceHelper;
 import com.skysport.interfaces.model.develop.pantone.helper.MaterialPantoneServiceHelper;
 import com.skysport.interfaces.model.develop.position.helper.KFMaterialPositionServiceHelper;
 import com.skysport.interfaces.model.relation.material_sp.helper.MaterialSpServiceHelper;
@@ -108,7 +109,8 @@ public enum AccessoriesServiceHelper {
             unitId = SystemBaseInfoCachedMap.SINGLETONE.getName(selectItem2s, unitId);
             accessoriesInfo.setUnitId(unitId);
         }
-        accessoriesInfo.setDescription(stringBuilder.toString());
+        String desc = FabricsServiceHelper.SINGLETONE.getDesc(stringBuilder.toString());
+        accessoriesInfo.setDescription(desc);
     }
 
     /**

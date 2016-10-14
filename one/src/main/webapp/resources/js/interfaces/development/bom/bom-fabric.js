@@ -31,7 +31,6 @@
                 if (null != fabricId) {
                     $("#fabricId" + serialNumber).val(fabricId);
                 }
-
             }
         }
     }
@@ -50,11 +49,9 @@
             isOneShow = isOneShow || isShow==1;
             fabricItems.push(fabricItem);
         }
-
         if (fabricItems.length == 0) {
             isOneShow = true;
         }
-
         var fabricObj = {"isOneShow": isOneShow, "fabricItems": fabricItems};
         return fabricObj;
     }
@@ -112,7 +109,11 @@
      */
     function initFabric(fabrics) {
         for (var index = 0; index < fabrics.length; index++) {
-            addFabric(fabrics[index]);
+            var fabricInfo =fabrics[index];
+            if ($("#curBomId").val() != $("#refBomId").val()) {
+                fabricInfo.fabricId= null;
+            }
+            addFabric(fabricInfo);
         }
     }
 
@@ -990,6 +991,8 @@
                     "quickDryId": "quickDryId" + idNum,
                     "oilProofId": "oilProofId" + idNum,
                     "antMosquitosId": "antMosquitosId" + idNum,
+                    "component": "component" + idNum,
+                    "gram": "gram" + idNum,
 
                     "momcId": "momcId" + idNum,
                     "comocId": "comocId" + idNum,
@@ -1022,6 +1025,7 @@
         fabricsInfo.classicId = $("#classicId" + idNum).val();
         fabricsInfo.pantoneIds = $("#pantoneIds" + idNum).val();
         fabricsInfo.productTypeId = $("#productTypeId" + idNum).val();
+        fabricsInfo.fabricName = $("#fabricName" + idNum).val();
 
         //颜色多选
         var pantoneIds = $("#pantoneIds" + idNum).select2('data');
@@ -1084,6 +1088,9 @@
         fabricsInfo.unitId = $("#unitId" + idNum).val();
         fabricsInfo.unitAmount = $("#unitAmount" + idNum).val();
 
+        fabricsInfo.component = $("#component" + idNum).val();
+        fabricsInfo.gram = $("#gram" + idNum).val();
+
         return fabricsInfo;
     }
 
@@ -1144,7 +1151,8 @@
         fabricsInfo.isShow = $("#isShow" + idNum).val();
         fabricsInfo.compositeClassicId = $("#compositeClassicId" + idNum).val();
         fabricsInfo.compositeProductTypeId = $("#compositeProductTypeId" + idNum).val();
-
+        fabricsInfo.component = $("#component" + idNum).val();
+        fabricsInfo.gram = $("#gram" + idNum).val();
 
         var fabricsDetailInfo = {};//面料描述信息
         fabricsDetailInfo.specificationId = $("#specificationId" + idNum).val();
