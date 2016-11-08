@@ -104,10 +104,7 @@
                 caculatePriceAndAmout(idNum, materialType);
                 //caculateCostingVal();
             }
-
-
         }
-
     }
 
     function getInputVal(_name, idNum, materialType) {
@@ -148,8 +145,6 @@
 
 
         }
-
-
     }
 
 

@@ -48,7 +48,11 @@
 
     function initPackaging(packagings) {
         for (var idx = 0; idx < packagings.length; idx++) {
-            addPackaging(packagings[idx]);
+            var packaging = packagings[idx];
+            if ($("#curBomId").val() != $("#refBomId").val()) {
+                packaging.packagingId = null;
+            }
+            addPackaging(packaging);
         }
     }
 
@@ -144,7 +148,7 @@
                     "techRequiredP": "techRequiredP" + idNum,
                     "lengthP": "lengthP" + idNum,
                     "widthP": "widthP" + idNum,
-                    "remarkP":"remarkP"+idNum,
+                    "remarkP": "remarkP" + idNum,
                     "unitIdP": "unitIdP" + idNum,
                     "positionIdsP": "positionIdsP" + idNum,
                     "positionIdBlP": "positionIdBlP" + idNum,
@@ -408,7 +412,6 @@
         $(positionIdsPId).selectpicker('refresh');
 
 
-
         // 用量单位列表
         var unitIdItems = data["unitItems"];
         var unitIdPId = "#unitIdP" + idNum;
@@ -589,7 +592,7 @@
         kfPackaging.length = $("#lengthP" + idNum).val();
         kfPackaging.nameNum = idNum;
         kfPackaging.serialNumber = idNum;
-        kfPackaging.remark =$("#remarkP" + idNum).val();
+        kfPackaging.remark = $("#remarkP" + idNum).val();
         kfPackaging.packagingId = $("#packagingIdP" + idNum).val();
         kfPackaging.packagingsName = $("#packagingsNameP" + idNum).val();
         kfPackaging.orderCount = $("#orderCountP" + idNum).val();

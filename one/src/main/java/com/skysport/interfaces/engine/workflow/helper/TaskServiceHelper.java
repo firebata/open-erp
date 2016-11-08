@@ -1,18 +1,22 @@
 package com.skysport.interfaces.engine.workflow.helper;
 
+import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.bean.system.SelectItem;
 import com.skysport.core.cache.TaskHanlderCachedMap;
-import com.skysport.core.bean.SpringContextHolder;
 import com.skysport.core.model.workflow.IApproveService;
 import com.skysport.core.model.workflow.IWorkFlowService;
 import com.skysport.interfaces.bean.task.ApproveVo;
+import com.skysport.interfaces.bean.task.TaskHanlderVo;
 import com.skysport.interfaces.bean.task.TaskVo;
 import com.skysport.interfaces.constant.WebConstants;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明:
@@ -21,6 +25,7 @@ import java.util.List;
 public class TaskServiceHelper {
 
     private static TaskServiceHelper ourInstance = new TaskServiceHelper();
+    static Logger logger = LoggerFactory.getLogger(TaskServiceHelper.class);
 
     private TaskServiceHelper() {
     }
@@ -91,7 +96,14 @@ public class TaskServiceHelper {
      * @return
      */
     public IApproveService getApproveService(String taskDefinitionKey) {
-        String taskService = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey).getTaskService();
+        logger.info("===================>taskDefinitionKey:" + taskDefinitionKey);
+        Map<String, TaskHanlderVo> taskHanlderCachedMap = TaskHanlderCachedMap.SINGLETONE.taskHanlderCachedMap;
+        for (String key : taskHanlderCachedMap.keySet()) {
+            System.out.println("===================>key= " + key + " and value= " + taskHanlderCachedMap.get(key));
+        }
+        TaskHanlderVo vo = TaskHanlderCachedMap.SINGLETONE.queryValue(taskDefinitionKey);
+        logger.info("===================>vo:" + vo);
+        String taskService = vo.getTaskService();
         IApproveService approveService = SpringContextHolder.getBean(taskService);
         return approveService;
     }

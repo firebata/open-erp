@@ -12,6 +12,7 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,11 +40,15 @@ public enum TaskHanlderHelper {
      * @throws DocumentException
      */
     public List<TaskHanlderVo> parseList() throws IOException, DocumentException {
+        logger.debug("开始解析conf/task-handle.xml");
         SAXReader reader = new SAXReader();
-        org.springframework.core.io.Resource fileRource = new ClassPathResource("conf/task-handle.xml");
+        Resource fileRource = new ClassPathResource("conf/task-handle.xml");
         Document document = reader.read(fileRource.getFile());
+        logger.info("document:" + document);
         Element root = document.getRootElement();
+        logger.info("root:" + root);
         List<Element> childElements = root.elements();
+        logger.info("childElements:" + childElements);
         List<TaskHanlderVo> vos = new ArrayList<>();
         for (Element child : childElements) {
 
@@ -92,7 +97,9 @@ public enum TaskHanlderHelper {
                 logger.error("catch one exception when parsing task-handle.xml ");
             }
         }
+        logger.debug("解析conf/task-handle.xml完成,vos的大小" + vos.size());
         return vos;
+
     }
 
     /**
@@ -105,6 +112,9 @@ public enum TaskHanlderHelper {
     public Map<String, TaskHanlderVo> parseMap() throws IOException, DocumentException {
 
         List<TaskHanlderVo> vos = parseList();
+        for (TaskHanlderVo vo : vos) {
+            logger.info("**************************vo" + vo);
+        }
         Map<String, TaskHanlderVo> map = new HashedMap();
         for (TaskHanlderVo vo : vos) {
             String taskDefineKey = vo.getTaskDefineKey();

@@ -96,4 +96,20 @@ public class TaskHanlderVo {
     public void setUrlSave(String urlSave) {
         this.urlSave = urlSave;
     }
+
+    @Override
+    public String toString() {
+        return "TaskHanlderVo{" +
+                "taskDefineKey='" + taskDefineKey + '\'' +
+                ", name='" + name + '\'' +
+                ", businessController='" + businessController + '\'' +
+                ", businessService='" + businessService + '\'' +
+                ", taskService='" + taskService + '\'' +
+                ", urlInfo='" + urlInfo + '\'' +
+                ", urlPass='" + urlPass + '\'' +
+                ", urlReject='" + urlReject + '\'' +
+                ", urlSumit='" + urlSumit + '\'' +
+                ", urlSave='" + urlSave + '\'' +
+                '}';
+    }
 }

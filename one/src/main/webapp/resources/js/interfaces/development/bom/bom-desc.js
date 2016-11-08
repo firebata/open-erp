@@ -8,6 +8,7 @@
     var infoUrl = path + "/development/bom/info/";
     var projectSelectUrl = path + "/system/baseinfo/project_select";
     var appURL = path + '/resources/js/i18n/app/';
+
     $.extend({
         initBomDesc: initDesc,
         buildBomDesc: buildBomDesc
@@ -25,7 +26,6 @@
 
         //国际化
         i18nDesc();
-
 
     }
 
@@ -74,6 +74,8 @@
                             }).val(_data[key]);
                             // $("#" + key).val(_data[key]);
                         });
+                    }else{
+
                     }
                     callback(_data);
                 }
@@ -99,10 +101,7 @@
         $("#customerId").empty();
         $("<option></option>").val('').text("请选择...").appendTo($("#customerId"));
         $.each(yearCodeItems, function (i, item) {
-            $("<option></option>")
-                .val(item["natrualkey"])
-                .text(item["name"])
-                .appendTo($("#customerId"));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#customerId"));
         });
 
         //区域
@@ -110,10 +109,7 @@
         $("#areaId").empty();
         $("<option></option>").val('').text("请选择...").appendTo($("#areaId"));
         $.each(areaItems, function (i, item) {
-            $("<option></option>")
-                .val(item["natrualkey"])
-                .text(item["name"])
-                .appendTo($("#areaId"));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#areaId"));
         });
 
         //系列
@@ -121,10 +117,7 @@
         $("#seriesId").empty();
         $("<option></option>").val('').text("请选择...").appendTo($("#seriesId"));
         $.each(seriesItems, function (i, item) {
-            $("<option></option>")
-                .val(item["natrualkey"])
-                .text(item["name"])
-                .appendTo($("#seriesId"));
+            $("<option></option>").val(item["natrualkey"]).text(item["name"]).appendTo($("#seriesId"));
         });
 
 

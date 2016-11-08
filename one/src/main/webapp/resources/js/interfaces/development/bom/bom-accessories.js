@@ -45,7 +45,11 @@
 
     function initAccessories(accessories) {
         for (var idx = 0; idx < accessories.length; idx++) {
-            addAccessories(accessories[idx]);
+            var accessorie = accessories[idx];
+            if ($("#curBomId").val() != $("#refBomId").val()) {
+                accessorie.accessoriesId = null;
+            }
+            addAccessories(accessorie);
         }
     }
 
@@ -575,7 +579,7 @@
                     "techRequiredF": "techRequiredF" + idNum,
                     "lengthF": "lengthF" + idNum,
                     "widthF": "widthF" + idNum,
-                    "remarkF":"remarkF"+idNum,
+                    "remarkF": "remarkF" + idNum,
                     "unitIdF": "unitIdF" + idNum,
                     "positionIdsF": "positionIdsF" + idNum,
                     "positionIdBlF": "positionIdBlF" + idNum,

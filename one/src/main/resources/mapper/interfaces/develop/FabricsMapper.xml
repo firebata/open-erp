@@ -134,7 +134,7 @@
 
 
     <insert id="add">
-        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id,position_id_bl,component,gram,)
+        insert into  t_kf_fabrics (fabrics_id,fabrics_no,fabrics_name,material_type_id,classic_id,sp_id,year_code,product_type_id,serial_number,pantone_id,position_id,project_id,bom_id,remark,name_num,is_show,composite_classic_id,composite_product_type_id,composite_pantone_id,position_id_bl,component,gram)
         values (#{natrualkey},#{fabricNo},#{fabricName},#{materialTypeId},#{classicId},#{spId},#{yearCode},#{productTypeId},#{serialNumber},#{pantoneId},#{positionId},#{projectId},#{bomId},#{remark},#{nameNum},#{isShow},#{compositeClassicId},#{compositeProductTypeId},#{compositePantoneId},#{positionIdBl},#{component},#{gram})
     </insert>
 
@@ -327,7 +327,7 @@
                 '1' AS type,
                 a.position_id_bl AS positionIdBl
             FROM t_kf_fabrics a
-            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} and a.del_flag=0
+            INNER  JOIN  t_kf_bom_material k ON   a.fabrics_id = k.material_id AND k.bom_id = #{natrualkey} AND a.bom_id = #{natrualkey} and a.del_flag=0
             INNER  JOIN t_kf_bominfo e ON k.bom_id = e.bom_id AND e.del_flag=0
             LEFT JOIN t_kf_material_unit_dosage b ON a.fabrics_id = b.material_id
             LEFT JOIN t_kf_material_spinfo c ON a.fabrics_id = c.material_id
