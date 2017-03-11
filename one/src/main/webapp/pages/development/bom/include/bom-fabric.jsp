@@ -132,14 +132,14 @@
                                 <option value="1">显示</option>
                             </select>
                         </div>
-                        <label class="col-xs-1  control-label" for="{{waterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/material/water_repllent/list')" target="_blank">+</a></label>
+                        <label class="col-xs-1  control-label" for="{{waterRepllentId}}"> 防&nbsp;&nbsp;泼&nbsp;&nbsp;水  <a href="javascript:openChildW('<%=path%>/system/function/water_repllent/list')" target="_blank">+</a></label>
                         <div class="col-xs-2">
                             <select class="col-xs-12" data-style="btn-info" id="{{waterRepllentId}}" name="waterRepllentId"
                                     placeholder="防泼水">
                             </select>
                         </div>
 
-                        <label class="col-xs-1  control-label" for="{{wvpId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;湿  <a href="javascript:openChildW('<%=path%>/system/material/wvp/list')" target="_blank">+</a></label>
+                        <label class="col-xs-1  control-label" for="{{wvpId}}"> 透&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;湿  <a href="javascript:openChildW('<%=path%>/system/function/wvp/list')" target="_blank">+</a></label>
                         <div class="col-xs-2">
                             <select class="col-xs-12" data-style="btn-info" id="{{wvpId}}" name="wvpId"
                                     placeholder="透湿">

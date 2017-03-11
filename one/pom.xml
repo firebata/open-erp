@@ -4,7 +4,7 @@
     <groupId>com.skysport</groupId>
     <artifactId>sky</artifactId>
     <version>0.1</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <!--  <packaging>pom</packaging>-->
     <repositories>

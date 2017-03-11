@@ -33,8 +33,8 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-               <!-- <value>classpath:conf/jdbc.properties</value>-->
-                <value>file:/home/sky/conf/jdbc.properties</value>
+                <value>classpath:conf/jdbc.properties</value>
+                <!--<value>file:/home/sky/conf/jdbc.properties</value>-->
             </list>
         </property>
     </bean>
