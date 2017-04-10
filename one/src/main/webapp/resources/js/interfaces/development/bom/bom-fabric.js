@@ -333,7 +333,8 @@
         //重新生成面料
         var maxFabricId = fabricArrLength - 1;
         for (var index = curId; index <= maxFabricId; index++) {
-            addFabric();
+            console.info("bom.fabricItems[:",index,"]:",bom.fabricItems[index-1]);
+            addFabric(bom.fabricItems[index-1]);
         }
 
         $("div[id^=fabricAllInfoId]").hide(); //全部隐藏

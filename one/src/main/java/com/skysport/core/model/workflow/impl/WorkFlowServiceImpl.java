@@ -122,9 +122,15 @@ public abstract class WorkFlowServiceImpl implements IApproveService, Initializi
         if (null != tasks && !tasks.isEmpty()) {
             // 根据流程的业务ID查询实体并关联
             for (Task task : tasks) {
-
+                logger.info("task:" + task);
                 String processInstanceId = task.getProcessInstanceId();
-                ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
+                logger.info("processInstanceId:" + processInstanceId);
+                ProcessInstanceQuery processInstanceQuery = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId);
+                ProcessInstance processInstance = processInstanceQuery.active().singleResult();
+                logger.info("processInstance:" + processInstance);
+                if (null == processInstance) {
+                    continue;
+                }
                 String businessName = (String) task.getTaskLocalVariables().get(WebConstants.BUSINESS_NAME);
                 String taskId = task.getId();
                 String businessKey = processInstance.getBusinessKey();

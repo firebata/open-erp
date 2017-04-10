@@ -193,7 +193,7 @@
                             <ul class="dropdown-menu dropdown-navbar">
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="<%=path %>/resources/avatars/avatar.png" class="msg-photo"
+                                        <img src="<%=path%>/resources/avatars/avatar.png" class="msg-photo"
                                              alt="Alex's Avatar"/>
 												<span class="msg-body">
 													<span class="msg-title">
@@ -211,7 +211,7 @@
 
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="<%=path %>/resources/avatars/avatar3.png" class="msg-photo"
+                                        <img src="<%=path%>/resources/avatars/avatar3.png" class="msg-photo"
                                              alt="Susan's Avatar"/>
 												<span class="msg-body">
 													<span class="msg-title">
@@ -229,7 +229,7 @@
 
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="<%=path %>/resources/avatars/avatar4.png" class="msg-photo"
+                                        <img src="<%=path%>/resources/avatars/avatar4.png" class="msg-photo"
                                              alt="Bob's Avatar"/>
 												<span class="msg-body">
 													<span class="msg-title">
@@ -247,7 +247,7 @@
 
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="<%=path %>/resources/avatars/avatar2.png" class="msg-photo"
+                                        <img src="<%=path%>/resources/avatars/avatar2.png" class="msg-photo"
                                              alt="Kate's Avatar"/>
 												<span class="msg-body">
 													<span class="msg-title">
@@ -265,7 +265,7 @@
 
                                 <li>
                                     <a href="#" class="clearfix">
-                                        <img src="<%=path %>/resources/avatars/avatar5.png" class="msg-photo"
+                                        <img src="<%=path%>/resources/avatars/avatar5.png" class="msg-photo"
                                              alt="Fred's Avatar"/>
 												<span class="msg-body">
 													<span class="msg-title">
